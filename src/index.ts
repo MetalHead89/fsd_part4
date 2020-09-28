@@ -1,2 +1,2 @@
-const str: string = 'Hello';
-alert(str);
+import '@/style.scss';
+import '@/pug/modules/slider/slider.scss'
