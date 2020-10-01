@@ -2,12 +2,12 @@
 
 class Slider {
     slider: HTMLElement;
-    track: HTMLElement | null;
+    track: Track;
     thumb: Thumb;
 
     constructor(slider: HTMLElement) {
         this.slider = slider;
-        this.track = slider.querySelector('.slider__track');
+        this.track = new Track(slider.querySelector('.slider__track'));
         this.thumb = new Thumb(slider.querySelector('.slider__thumb'));
     }
 }
@@ -19,9 +19,31 @@ class Thumb {
     constructor(thumb: HTMLElement | null) {
         this.thumb = thumb;
 
-        if (this.thumb)
-            this.thumb.onclick = () => {alert('111')};
+        if (this.thumb) {
+            this.thumb.addEventListener('mousedown', presenter.onMouseDownThumb);
+            // this.thumb.onmousedown = function(event) {
+            //     moveAt(this.thumb, event.pageX, event.pageY);
+
+            //     function moveAt(thumb:HTMLElement, pageX: number, pageY:number) {
+            //         this.style.left = pageX - this.offsetWidth / 2 + 'px';
+            //         ball.style.top = pageY - ball.offsetHeight / 2 + 'px';
+            //     }
+            // }
+        }            
     }
+}
+
+class Track {
+    color: string = '';
+    track: HTMLElement | null;
+
+    constructor(track: HTMLElement | null) {
+        this.track = track;
+    }
+}
+
+class Scale {
+
 }
 
 
@@ -31,10 +53,12 @@ class Thumb {
 
 interface Presenter {
     initialize(): void;
+    onMouseDownThumb(): void;
 }
 
 interface View {
     getSliders(): NodeListOf<HTMLElement>;
+    moveThumb(thumb: Thumb): void;
 };
 
 interface Model {
@@ -53,7 +77,11 @@ const presenter: Presenter = {
         for (let slider of sliders) {
             model.createSlider(slider)
         }
+    },
+    onMouseDownThumb() {
+        console.log(this);
     }
+    
 };
 
 
@@ -64,6 +92,9 @@ const presenter: Presenter = {
 const view: View = {
     getSliders() {
         return document.querySelectorAll('.slider')
+    },
+    moveThumb(thumb) {
+        console.log(thumb)
     }
 };
 
