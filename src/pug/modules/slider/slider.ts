@@ -41,7 +41,7 @@ class Track {
 }
 
 class Observable {
-    observers: any; //********************************************************* */
+    observers: { [index:string] : Function[] };
 
     constructor() {
         this.observers = {};
@@ -49,7 +49,7 @@ class Observable {
 
     subscribe(type: string, func: Function) {
         this.observers[type] = this.observers[type] || [];
-        this.observers[type].push(func); //*********************************************** */
+        this.observers[type].push(func);
     }
 
     // unsubscribe(func: Function) {
@@ -58,7 +58,7 @@ class Observable {
 
     notify(type: string) {
         if (this.observers[type]) {
-            this.observers[type].forEach(function(listener: any) { //************************************************** */
+            this.observers[type].forEach(function(listener: Function) {
                 listener();
             });
         }
