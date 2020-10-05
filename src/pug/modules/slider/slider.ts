@@ -40,19 +40,47 @@ class Track {
     }
 }
 
-class View {
+class Observable {
+    observers: any; //********************************************************* */
 
     constructor() {
+        this.observers = {};
+    }
+
+    subscribe(type: string, func: Function) {
+        this.observers[type] = this.observers[type] || [];
+        this.observers[type].push(func); //*********************************************** */
+    }
+
+    // unsubscribe(func: Function) {
+    //     this.observers = this.observers.filter(subscriber => subscriber !== func);
+    // }
+
+    notify(type: string) {
+        if (this.observers[type]) {
+            this.observers[type].forEach(function(listener: any) { //************************************************** */
+                listener();
+            });
+        }
+    }
+}
+
+class View {
+
+    observer: Observable;
+
+    constructor(observer: Observable) {
+        this.observer = observer
         const sliders: NodeListOf<HTMLElement> = document.querySelectorAll('.slider');
 
         for (let sliderElement of sliders) {
+            observer.notify('type');
             const slider: Slider = new Slider(sliderElement);
-            // if (slider.thumb.element) {
-            //     slider.thumb.element.addEventListener('mousedown', () => {
-            //         this.style.left = pageX - this.offsetWidth / 2 + 'px';
-            //         slider.thumb.element.style.top = pageY - ball.offsetHeight / 2 + 'px';
-            //     })
-            // }
+            if (slider.thumb.element) {
+                slider.thumb.element.addEventListener('mousedown', () => {
+                    observer.notify('type');
+                })
+            }
         }
     }
 
@@ -80,11 +108,17 @@ class Model {
 class Presenter {
     view: View;
     model: Model;
+    observer: Observable;
 
-    constructor(view: View, model: Model) {
+    constructor(view: View, model: Model, observer: Observable) {
         this.view = view;
         this.model = model;
+        this.observer = observer;
+
+        this.observer.subscribe('type', () => {alert('Yeah!!')})
     }
+
+
 
     // initialize() {
     //     const sliders: NodeListOf<HTMLElement> = view.getSliders();
@@ -97,13 +131,14 @@ class Presenter {
     // onMouseDownThumb() {
     //     console.log(this);
     // }
-    
+
 }
 
 window.onload = () => {
+    const observer = new Observable();
     const model: Model = new Model();
-    const view: View = new View();
-    const presenter: Presenter = new Presenter(view, model);
+    const view: View = new View(observer);
+    const presenter: Presenter = new Presenter(view, model, observer);
 }
 
 
@@ -197,7 +232,7 @@ window.onload = () => {
 //     onMouseDownThumb() {
 //         console.log(this);
 //     }
-    
+
 // };
 
 
