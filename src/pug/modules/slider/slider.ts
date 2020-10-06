@@ -56,10 +56,10 @@ class Observable {
     //     this.observers = this.observers.filter(subscriber => subscriber !== func);
     // }
 
-    notify(type: string) {
+    notify(type: string, data: HTMLElement | null) {
         if (this.observers[type]) {
             this.observers[type].forEach(function(listener: Function) {
-                listener();
+                listener(data);
             });
         }
     }
@@ -68,19 +68,28 @@ class Observable {
 class View {
 
     observer: Observable;
+    // slidersElements: NodeListOf<HTMLElement>;
 
     constructor(observer: Observable) {
-        this.observer = observer
-        const sliders: NodeListOf<HTMLElement> = document.querySelectorAll('.slider');
+        this.observer = observer;
+        // this.slidersElements = document.querySelectorAll('.slider');
+        // const sliders: NodeListOf<HTMLElement> = document.querySelectorAll('.slider');
 
-        for (let sliderElement of sliders) {
-            observer.notify('type');
-            const slider: Slider = new Slider(sliderElement);
-            if (slider.thumb.element) {
-                slider.thumb.element.addEventListener('mousedown', () => {
-                    observer.notify('type');
-                })
-            }
+        // for (let sliderElement of sliders) {
+        //     // const slider: Slider = new Slider(sliderElement);
+        //     // if (slider.thumb.element) {
+        //     //     slider.thumb.element.addEventListener('mousedown', () => {
+        //     //         observer.notify('type');
+        //     //     })
+        //     // }
+        // }
+    }
+
+    searchSliders(): void {
+        let slidersElements: NodeListOf<HTMLElement> = document.querySelectorAll('.slider');
+
+        for (let slider of slidersElements) {
+            this.observer.notify('newSliderFound', slider);
         }
     }
 
@@ -96,13 +105,16 @@ class View {
 }
 
 class Model {
+    observer: Observable;
 
-    constructor() {
-
+    constructor(observer: Observable) {
+        this.observer = observer;
     }
-    // createSlider(sliderHTMLElement) {
-    //     const slider: Slider = new Slider(sliderHTMLElement);
-    // }
+
+    createSlider(sliderHTMLElement: HTMLElement) {
+        const slider: Slider = new Slider(sliderHTMLElement);
+        this.observer.notify('sliderCreated', null)
+    }
 }
 
 class Presenter {
@@ -115,7 +127,15 @@ class Presenter {
         this.model = model;
         this.observer = observer;
 
-        this.observer.subscribe('type', () => {alert('Yeah!!')})
+        // this.observer.subscribe('newSliderFound', (data:HTMLElement) => {console.log(data)});
+    }
+
+    initialize(): void {
+        this.observer.subscribe('newSliderFound', 
+            (sliderHTMLElement:HTMLElement) => {this.model.createSlider(sliderHTMLElement)});
+        this.observer.subscribe('sliderCreated', () => {});
+
+        this.view.searchSliders();
     }
 
 
@@ -136,9 +156,10 @@ class Presenter {
 
 window.onload = () => {
     const observer = new Observable();
-    const model: Model = new Model();
+    const model: Model = new Model(observer);
     const view: View = new View(observer);
     const presenter: Presenter = new Presenter(view, model, observer);
+    presenter.initialize();
 }
 
 
