@@ -16,18 +16,6 @@ class Thumb {
 
     constructor(thumb: HTMLElement | null) {
         this.element = thumb;
-
-        // if (this.element) {
-        //     this.element.addEventListener('mousedown', presenter.onMouseDownThumb);
-        //     // this.thumb.onmousedown = function(event) {
-        //     //     moveAt(this.thumb, event.pageX, event.pageY);
-
-        //     //     function moveAt(thumb:HTMLElement, pageX: number, pageY:number) {
-        //     //         this.style.left = pageX - this.offsetWidth / 2 + 'px';
-        //     //         ball.style.top = pageY - ball.offsetHeight / 2 + 'px';
-        //     //     }
-        //     // }
-        // }            
     }
 }
 
@@ -41,7 +29,7 @@ class Track {
 }
 
 class Observable {
-    observers: { [index:string] : Function[] };
+    observers: { [index: string]: Function[] };
 
     constructor() {
         this.observers = {};
@@ -58,7 +46,7 @@ class Observable {
 
     notify(type: string, data: HTMLElement | null) {
         if (this.observers[type]) {
-            this.observers[type].forEach(function(listener: Function) {
+            this.observers[type].forEach(function (listener: Function) {
                 listener(data);
             });
         }
@@ -72,36 +60,53 @@ class View {
 
     constructor(observer: Observable) {
         this.observer = observer;
-        // this.slidersElements = document.querySelectorAll('.slider');
-        // const sliders: NodeListOf<HTMLElement> = document.querySelectorAll('.slider');
-
-        // for (let sliderElement of sliders) {
-        //     // const slider: Slider = new Slider(sliderElement);
-        //     // if (slider.thumb.element) {
-        //     //     slider.thumb.element.addEventListener('mousedown', () => {
-        //     //         observer.notify('type');
-        //     //     })
-        //     // }
-        // }
     }
 
     searchSliders(): void {
         let slidersElements: NodeListOf<HTMLElement> = document.querySelectorAll('.slider');
 
         for (let slider of slidersElements) {
+            slider.onmousedown = event => { this.sliderOnMouseDown(slider, event) };
+
             this.observer.notify('newSliderFound', slider);
         }
     }
 
-    moveThumb(thumb: HTMLElement): void {
+    sliderOnMouseDown(slider: HTMLElement, event: MouseEvent): void {
+        const target: HTMLElement = event.target as HTMLElement;
 
+        if (target.classList.contains('slider__thumb')) {
+            this.moveThumb(slider, target, event);
+        }
     }
-    // getSliders() {
-    //     return document.querySelectorAll('.slider')
-    // },
-    // moveThumb(thumb) {
-    //     console.log(thumb)
-    // }
+
+    moveThumb(slider: HTMLElement, thumb: HTMLElement, event: MouseEvent): void {
+
+        let coords: {[index: string]: number} = this.getCoords(thumb);
+        let shiftX: number = event.pageX - coords.left;
+
+        moveAt(event);
+
+        function moveAt(event: MouseEvent) {
+            thumb.style.left = event.pageX - slider.offsetLeft - shiftX + 'px';
+        }
+
+        document.onmousemove = event => { moveAt(event) };
+
+        thumb.addEventListener('mouseup', () => {
+            console.log('asds')
+            document.onmousemove = null;
+            slider.onmouseup = null;
+        });
+    }
+
+    getCoords(elem: HTMLElement): {[index: string]: number} {
+        let box: DOMRect = elem.getBoundingClientRect();
+        return {
+            top: box.top + pageYOffset,
+            left: box.left + pageXOffset
+        };
+    }
 }
 
 class Model {
@@ -131,9 +136,9 @@ class Presenter {
     }
 
     initialize(): void {
-        this.observer.subscribe('newSliderFound', 
-            (sliderHTMLElement:HTMLElement) => {this.model.createSlider(sliderHTMLElement)});
-        this.observer.subscribe('sliderCreated', () => {});
+        this.observer.subscribe('newSliderFound',
+            (sliderHTMLElement: HTMLElement) => { this.model.createSlider(sliderHTMLElement) });
+        this.observer.subscribe('sliderCreated', () => { });
 
         this.view.searchSliders();
     }
