@@ -66,7 +66,7 @@ class View {
         let slidersElements: NodeListOf<HTMLElement> = document.querySelectorAll('.slider');
 
         for (let slider of slidersElements) {
-            slider.onmousedown = event => { this.sliderOnMouseDown(slider, event) };
+            slider.addEventListener('mousedown', event => { this.sliderOnMouseDown(slider, event) });
 
             this.observer.notify('newSliderFound', slider);
         }
@@ -82,25 +82,32 @@ class View {
 
     moveThumb(slider: HTMLElement, thumb: HTMLElement, event: MouseEvent): void {
 
-        let coords: {[index: string]: number} = this.getCoords(thumb);
+        let coords: { [index: string]: number } = this.getCoords(thumb);
         let shiftX: number = event.pageX - coords.left;
 
         moveAt(event);
+        
+        document.addEventListener('mousemove', moveAt);
+        document.addEventListener('mouseup', documentOnMouseUp);
+        thumb.ondragstart = function () { return false; };
 
         function moveAt(event: MouseEvent) {
             thumb.style.left = event.pageX - slider.offsetLeft - shiftX + 'px';
+
+            if (parseInt(thumb.style.left) < 0) {
+                thumb.style.left = '0px';
+            } else if (parseInt(thumb.style.left) > slider.offsetWidth - thumb.offsetWidth) {
+                thumb.style.left = slider.offsetWidth - thumb.offsetWidth + 'px';
+            }
         }
 
-        document.onmousemove = event => { moveAt(event) };
-
-        thumb.addEventListener('mouseup', () => {
-            console.log('asds')
-            document.onmousemove = null;
-            slider.onmouseup = null;
-        });
+        function documentOnMouseUp() {
+            document.removeEventListener('mousemove', moveAt)
+            document.removeEventListener('mouseup', documentOnMouseUp)
+        }
     }
 
-    getCoords(elem: HTMLElement): {[index: string]: number} {
+    getCoords(elem: HTMLElement): { [index: string]: number } {
         let box: DOMRect = elem.getBoundingClientRect();
         return {
             top: box.top + pageYOffset,
@@ -142,21 +149,6 @@ class Presenter {
 
         this.view.searchSliders();
     }
-
-
-
-    // initialize() {
-    //     const sliders: NodeListOf<HTMLElement> = view.getSliders();
-
-    //     for (let slider of sliders) {
-    //         model.createSlider(slider)
-    //     }
-    // }
-
-    // onMouseDownThumb() {
-    //     console.log(this);
-    // }
-
 }
 
 window.onload = () => {
@@ -166,129 +158,3 @@ window.onload = () => {
     const presenter: Presenter = new Presenter(view, model, observer);
     presenter.initialize();
 }
-
-
-
-
-
-
-
-
-
-// ////          Classes          ////
-
-// class Slider {
-//     slider: HTMLElement;
-//     track: Track;
-//     thumb: Thumb;
-
-//     constructor(slider: HTMLElement) {
-//         this.slider = slider;
-//         this.track = new Track(slider.querySelector('.slider__track'));
-//         this.thumb = new Thumb(slider.querySelector('.slider__thumb'));
-//     }
-// }
-
-// class Thumb {
-//     color: string = '';
-//     thumb: HTMLElement | null;
-
-//     constructor(thumb: HTMLElement | null) {
-//         this.thumb = thumb;
-
-//         if (this.thumb) {
-//             this.thumb.addEventListener('mousedown', presenter.onMouseDownThumb);
-//             // this.thumb.onmousedown = function(event) {
-//             //     moveAt(this.thumb, event.pageX, event.pageY);
-
-//             //     function moveAt(thumb:HTMLElement, pageX: number, pageY:number) {
-//             //         this.style.left = pageX - this.offsetWidth / 2 + 'px';
-//             //         ball.style.top = pageY - ball.offsetHeight / 2 + 'px';
-//             //     }
-//             // }
-//         }            
-//     }
-// }
-
-// class Track {
-//     color: string = '';
-//     track: HTMLElement | null;
-
-//     constructor(track: HTMLElement | null) {
-//         this.track = track;
-//     }
-// }
-
-// class Scale {
-
-// }
-
-
-
-
-// ////          Interfaces          ////
-
-// interface Presenter {
-//     initialize(): void;
-//     onMouseDownThumb(): void;
-// }
-
-// interface View {
-//     getSliders(): NodeListOf<HTMLElement>;
-//     moveThumb(thumb: Thumb): void;
-// };
-
-// interface Model {
-//     createSlider(slider: HTMLElement) :void;
-// }
-
-
-
-
-// ////          Presenter          ////
-
-// const presenter: Presenter = {
-//     initialize() {
-//         const sliders: NodeListOf<HTMLElement> = view.getSliders();
-
-//         for (let slider of sliders) {
-//             model.createSlider(slider)
-//         }
-//     },
-//     onMouseDownThumb() {
-//         console.log(this);
-//     }
-
-// };
-
-
-
-
-// ////          View          ////
-
-// const view: View = {
-//     getSliders() {
-//         return document.querySelectorAll('.slider')
-//     },
-//     moveThumb(thumb) {
-//         console.log(thumb)
-//     }
-// };
-
-
-
-
-// ////          Model          ////
-
-// const model: Model = {
-//     createSlider(sliderHTMLElement) {
-//         const slider: Slider = new Slider(sliderHTMLElement);
-//     }
-// }
-
-
-
-
-// ////          Start application          ////
-
-// presenter.initialize();
