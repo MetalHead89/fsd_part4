@@ -3,9 +3,9 @@ class Slider {
     track: Track;
     thumb: Thumb;
 
-    constructor(slider: HTMLElement) {
+    constructor(slider: HTMLElement, track: HTMLElement, thumb: HTMLElement) {
         this.element = slider;
-        this.track = new Track(slider.querySelector('.slider__track'));
-        this.thumb = new Thumb(slider.querySelector('.slider__thumb'));
+        this.track = new Track(track);
+        this.thumb = new Thumb(thumb);
     }
 }

@@ -12,14 +12,42 @@ export class Presenter {
         this.model = model;
         this.observer = observer;
 
-        // this.observer.subscribe('newSliderFound', (data:HTMLElement) => {console.log(data)});
+        this.observer.subscribe('addedNewSlider', 
+            (data:HTMLElement) => {console.log(data)});
     }
-
+    
     initialize(): void {
-        this.observer.subscribe('newSliderFound',
-            (sliderHTMLElement: HTMLElement) => { this.model.createSlider(sliderHTMLElement) });
-        this.observer.subscribe('sliderCreated', () => { });
-
-        this.view.searchSliders();
+        this.view.searchSlidersPositions();
     }
+
+    // createNewSlider(): void {
+    //     this.view.createSlider();
+    // }
+
+
+
+    
+
+
+
+
+    // view: View;
+    // model: Model;
+    // observer: Observable;
+
+    // constructor(view: View, model: Model, observer: Observable) {
+    //     this.view = view;
+    //     this.model = model;
+    //     this.observer = observer;
+
+    //     // this.observer.subscribe('newSliderFound', (data:HTMLElement) => {console.log(data)});
+    // }
+
+    // initialize(): void {
+    //     this.observer.subscribe('newSliderFound',
+    //         (sliderHTMLElement: HTMLElement) => { this.model.createSlider(sliderHTMLElement) });
+    //     this.observer.subscribe('sliderCreated', () => { });
+
+    //     this.view.searchSliders();
+    // }
 }
