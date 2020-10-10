@@ -1,20 +1,21 @@
 import {Observable} from '../slider/observable';
+import {Slider} from '../slider/slider';
 
 
 
 export class Model {
     observer: Observable;
+    sliders: Map<HTMLElement, Slider>;
 
     constructor(observer: Observable) {
         this.observer = observer;
+        this.sliders = new Map;
     }
 
-    createSlider(sliderHTMLElement: HTMLElement, 
-        trackHTMLElement: HTMLElement, 
-        thumbHTMLElement: HTMLElement) {
+    createSliderModel(sliderComponents: {[index: string]: HTMLElement}) {
 
-        const slider: Slider = new Slider(sliderHTMLElement, trackHTMLElement, thumbHTMLElement);
-        // this.observer.notify('sliderCreated', null)
+        const slider: Slider = new Slider(sliderComponents);
+        this.sliders.set(sliderComponents.slider, slider);
     }
 }
 

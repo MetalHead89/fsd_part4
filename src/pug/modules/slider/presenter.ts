@@ -12,17 +12,13 @@ export class Presenter {
         this.model = model;
         this.observer = observer;
 
-        this.observer.subscribe('addedNewSlider', 
-            (data:HTMLElement) => {console.log(data)});
+        this.observer.subscribe('addedNewSliderToDOM', 
+            (sliderComponents: {[index: string]: HTMLElement}) => {this.model.createSliderModel(sliderComponents)});
     }
     
     initialize(): void {
         this.view.searchSlidersPositions();
     }
-
-    // createNewSlider(): void {
-    //     this.view.createSlider();
-    // }
 
 
 

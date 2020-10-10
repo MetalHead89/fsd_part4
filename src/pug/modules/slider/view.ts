@@ -34,7 +34,7 @@ export class View {
 
         slider.addEventListener('mousedown', event => { this.sliderOnMouseDown(slider, event) });
 
-        this.observer.notify('addedNewSlider', 
+        this.observer.notify('addedNewSliderToDOM', 
             {'slider': slider, 'track': track,  'thumb': thumb});
     }
 

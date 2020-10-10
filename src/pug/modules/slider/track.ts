@@ -1,4 +1,4 @@
-class Track {
+export class Track {
     color: string = '';
     element: HTMLElement | null;
 
