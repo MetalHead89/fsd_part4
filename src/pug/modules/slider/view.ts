@@ -1,15 +1,16 @@
-import {Observable} from '../slider/observable';
+import { Observable } from '../slider/observable';
+import { Thumb } from './thumb';
 
 export class View {
 
     observer: Observable;
-    
+
     constructor(observer: Observable) {
         this.observer = observer;
     }
 
-    searchSlidersPositions():void {
-        let slidersPositions: NodeListOf<HTMLElement> = 
+    searchSlidersPositions(): void {
+        let slidersPositions: NodeListOf<HTMLElement> =
             document.querySelectorAll('.incredible-slider-plugin');
 
         for (let sliderPosition of slidersPositions) {
@@ -17,7 +18,7 @@ export class View {
         }
     }
 
-    createSlider(sliderPosition: HTMLElement){
+    createSlider(sliderPosition: HTMLElement) {
         let slider: HTMLElement = document.createElement('div');
         slider.className = 'slider';
 
@@ -32,116 +33,78 @@ export class View {
         document.body.append(slider);
         sliderPosition.replaceWith(slider);
 
-        slider.addEventListener('mousedown', event => { this.sliderOnMouseDown(slider, event) });
+        const sliderFunc = this.Slider(slider);
 
-        this.observer.notify('addedNewSliderToDOM', 
-            {'slider': slider, 'track': track,  'thumb': thumb});
+        this.observer.notify('addedNewSliderToDOM',
+            { 'slider': slider, 'track': track, 'thumb': thumb });
     }
 
-    sliderOnMouseDown(slider: HTMLElement, event: MouseEvent): void {
-        const target: HTMLElement = event.target as HTMLElement;
+    Slider(slider: HTMLElement) {
+        const thumbElem: HTMLElement | null = slider.querySelector('.slider__thumb');
 
-        if (target.classList.contains('slider__thumb')) {
-            this.moveThumb(slider, target, event);
-        }
-    }
+        let sliderCoords: any, thumbCoords: any, shiftX: any, shiftY: any;
 
-    moveThumb(slider: HTMLElement, thumb: HTMLElement, event: MouseEvent): void {
+        slider.ondragstart = function () {
+            return false;
+        };
 
-        let coords: { [index: string]: number } = this.getCoords(thumb);
-        let shiftX: number = event.pageX - coords.left;
+        slider.onmousedown = function (event) {
+            const target: HTMLElement = event.target as HTMLElement;
 
-        moveAt(event);
-        
-        document.addEventListener('mousemove', moveAt);
-        document.addEventListener('mouseup', documentOnMouseUp);
-        thumb.ondragstart = function () { return false; };
-
-        function moveAt(event: MouseEvent) {
-            thumb.style.left = event.pageX - slider.offsetLeft - shiftX + 'px';
-
-            if (parseInt(thumb.style.left) < 0) {
-                thumb.style.left = '0px';
-            } else if (parseInt(thumb.style.left) > slider.offsetWidth - thumb.offsetWidth) {
-                thumb.style.left = slider.offsetWidth - thumb.offsetWidth + 'px';
+            if (target.classList.contains('slider__thumb')) {
+                startDrag(event.clientX, event.clientY);
+                return false; // disable selection start (cursor change)
             }
         }
 
-        function documentOnMouseUp() {
-            document.removeEventListener('mousemove', moveAt)
-            document.removeEventListener('mouseup', documentOnMouseUp)
+        function startDrag(startClientX: number, startClientY: number) {
+            if (thumbElem) {
+                const thumbCoords: any = thumbElem.getBoundingClientRect();
+                shiftX = startClientX - thumbCoords.left;
+                shiftY = startClientY - thumbCoords.top;
+            }
+
+            sliderCoords = slider.getBoundingClientRect();
+
+            document.addEventListener('mousemove', onDocumentMouseMove);
+            document.addEventListener('mouseup', onDocumentMouseUp);
         }
-    }
 
-    getCoords(elem: HTMLElement): { [index: string]: number } {
-        let box: DOMRect = elem.getBoundingClientRect();
-        return {
-            top: box.top + pageYOffset,
-            left: box.left + pageXOffset
-        };
-    }
 
+
+        function moveTo(clientX: number) {
+            // вычесть координату родителя, т.к. position: relative
+            let newLeft: number = clientX - shiftX - sliderCoords.left;
+
+            // курсор ушёл вне слайдера
+            if (newLeft < 0) {
+                newLeft = 0;
+            }
+            let rightEdge: number = 0;
+            if (thumbElem) {
+                rightEdge = slider.offsetWidth - thumbElem.offsetWidth;
+            }
+            if (newLeft > rightEdge) {
+                newLeft = rightEdge;
+            }
+
+            if (thumbElem) {
+                thumbElem.style.left = newLeft + 'px';
+            }
+        }
+
+        function onDocumentMouseMove(e: MouseEvent) {
+            moveTo(e.clientX);
+        }
+
+        function onDocumentMouseUp() {
+            endDrag();
+        }
+
+        function endDrag() {
+            document.removeEventListener('mousemove', onDocumentMouseMove);
+            document.removeEventListener('mouseup', onDocumentMouseUp);
+        }
+
+    }
 }
-
-// export class View {
-
-//     observer: Observable;
-//     // slidersElements: NodeListOf<HTMLElement>;
-
-//     constructor(observer: Observable) {
-//         this.observer = observer;
-//     }
-
-//     searchSliders(): void {
-//         let slidersElements: NodeListOf<HTMLElement> = document.querySelectorAll('.slider');
-
-//         for (let slider of slidersElements) {
-//             slider.addEventListener('mousedown', event => { this.sliderOnMouseDown(slider, event) });
-
-//             this.observer.notify('newSliderFound', slider);
-//         }
-//     }
-
-//     sliderOnMouseDown(slider: HTMLElement, event: MouseEvent): void {
-//         const target: HTMLElement = event.target as HTMLElement;
-
-//         if (target.classList.contains('slider__thumb')) {
-//             this.moveThumb(slider, target, event);
-//         }
-//     }
-
-//     moveThumb(slider: HTMLElement, thumb: HTMLElement, event: MouseEvent): void {
-
-//         let coords: { [index: string]: number } = this.getCoords(thumb);
-//         let shiftX: number = event.pageX - coords.left;
-
-//         moveAt(event);
-        
-//         document.addEventListener('mousemove', moveAt);
-//         document.addEventListener('mouseup', documentOnMouseUp);
-//         thumb.ondragstart = function () { return false; };
-
-//         function moveAt(event: MouseEvent) {
-//             thumb.style.left = event.pageX - slider.offsetLeft - shiftX + 'px';
-
-//             if (parseInt(thumb.style.left) < 0) {
-//                 thumb.style.left = '0px';
-//             } else if (parseInt(thumb.style.left) > slider.offsetWidth - thumb.offsetWidth) {
-//                 thumb.style.left = slider.offsetWidth - thumb.offsetWidth + 'px';
-//             }
-//         }
-
-//         function documentOnMouseUp() {
-//             document.removeEventListener('mousemove', moveAt)
-//             document.removeEventListener('mouseup', documentOnMouseUp)
-//         }
-//     }
-
-//     getCoords(elem: HTMLElement): { [index: string]: number } {
-//         let box: DOMRect = elem.getBoundingClientRect();
-//         return {
-//             top: box.top + pageYOffset,
-//             left: box.left + pageXOffset
-//         };
-//     }
-// }
