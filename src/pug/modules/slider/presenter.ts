@@ -1,6 +1,6 @@
-import {Observable} from '../slider/observable';
-import {Model} from '../slider/model';
-import {View} from '../slider/view';
+import { Observable } from '../slider/observable';
+import { Model } from '../slider/model';
+import { View } from '../slider/view';
 
 export class Presenter {
     view: View;
@@ -12,17 +12,40 @@ export class Presenter {
         this.model = model;
         this.observer = observer;
 
-        this.observer.subscribe('addedNewSliderToDOM', 
-            (sliderComponents: {[index: string]: HTMLElement}) => {this.model.createSliderModel(sliderComponents)});
+        this.observer.subscribe('addedNewSliderToDOM',
+            (sliderComponents: { [index: string]: HTMLElement }) => this.sliderInit(sliderComponents));
     }
-    
-    initialize(): void {
+
+    init(): void {
         this.view.searchSlidersPositions();
     }
 
+    sliderInit(sliderComponents: { [index: string]: HTMLElement }): void {
+        const sliderElem: HTMLElement = sliderComponents.sliderElem;
+
+        sliderElem.ondragstart = function () {
+            return false;
+        };
+
+        sliderElem.onmousedown = event => {
+            
+            if (this.view.targetIsThumb(event)) {
+                this.view.startDrag(event.clientX, event.clientY);
+                return false; // disable selection start (cursor change)
+            }
+
+        }
+
+        this.model.createSliderModel(sliderComponents);
+    }
+
+    startThumbDrag() {
+        
+    }
 
 
-    
+
+
 
 
 

@@ -33,78 +33,100 @@ export class View {
         document.body.append(slider);
         sliderPosition.replaceWith(slider);
 
-        const sliderFunc = this.Slider(slider);
+        // const sliderFunc = this.Slider(slider);
 
         this.observer.notify('addedNewSliderToDOM',
-            { 'slider': slider, 'track': track, 'thumb': thumb });
+            { 'sliderElem': slider, 'trackElem': track, 'thumbElem': thumb });
     }
 
-    Slider(slider: HTMLElement) {
-        const thumbElem: HTMLElement | null = slider.querySelector('.slider__thumb');
+    targetIsThumb(event: MouseEvent): boolean {
+        const target: HTMLElement = event.target as HTMLElement;
 
-        let sliderCoords: any, thumbCoords: any, shiftX: any, shiftY: any;
-
-        slider.ondragstart = function () {
-            return false;
-        };
-
-        slider.onmousedown = function (event) {
-            const target: HTMLElement = event.target as HTMLElement;
-
-            if (target.classList.contains('slider__thumb')) {
-                startDrag(event.clientX, event.clientY);
-                return false; // disable selection start (cursor change)
-            }
+        if (target.classList.contains('slider__thumb')) {
+            return true;
         }
 
-        function startDrag(startClientX: number, startClientY: number) {
-            if (thumbElem) {
-                const thumbCoords: any = thumbElem.getBoundingClientRect();
-                shiftX = startClientX - thumbCoords.left;
-                shiftY = startClientY - thumbCoords.top;
-            }
-
-            sliderCoords = slider.getBoundingClientRect();
-
-            document.addEventListener('mousemove', onDocumentMouseMove);
-            document.addEventListener('mouseup', onDocumentMouseUp);
-        }
-
-
-
-        function moveTo(clientX: number) {
-            // вычесть координату родителя, т.к. position: relative
-            let newLeft: number = clientX - shiftX - sliderCoords.left;
-
-            // курсор ушёл вне слайдера
-            if (newLeft < 0) {
-                newLeft = 0;
-            }
-            let rightEdge: number = 0;
-            if (thumbElem) {
-                rightEdge = slider.offsetWidth - thumbElem.offsetWidth;
-            }
-            if (newLeft > rightEdge) {
-                newLeft = rightEdge;
-            }
-
-            if (thumbElem) {
-                thumbElem.style.left = newLeft + 'px';
-            }
-        }
-
-        function onDocumentMouseMove(e: MouseEvent) {
-            moveTo(e.clientX);
-        }
-
-        function onDocumentMouseUp() {
-            endDrag();
-        }
-
-        function endDrag() {
-            document.removeEventListener('mousemove', onDocumentMouseMove);
-            document.removeEventListener('mouseup', onDocumentMouseUp);
-        }
-
+        return false;
     }
+
+
+    startDrag(sliderElem:HTMLElement, thumbElem: HTMLElement, startClientX: number, startClientY: number) {
+        const thumbCoords: DOMRect = thumbElem.getBoundingClientRect();
+        let shiftX: number = startClientX - thumbCoords.left;
+        let shiftY: number = startClientY - thumbCoords.top;
+
+        const sliderCoords: DOMRect = sliderElem.getBoundingClientRect();
+
+        document.addEventListener('mousemove', onDocumentMouseMove);
+        document.addEventListener('mouseup', onDocumentMouseUp);
+    }
+
+    // Slider(slider: HTMLElement) {
+    //     const thumbElem: HTMLElement | null = slider.querySelector('.slider__thumb');
+
+    //     let sliderCoords: any, thumbCoords: any, shiftX: any, shiftY: any;
+
+    //     slider.ondragstart = function () {
+    //         return false;
+    //     };
+
+    //     slider.onmousedown = function (event) {
+    //         const target: HTMLElement = event.target as HTMLElement;
+
+    //         if (target.classList.contains('slider__thumb')) {
+    //             startDrag(event.clientX, event.clientY);
+    //             return false; // disable selection start (cursor change)
+    //         }
+    //     }
+
+    //     function startDrag(startClientX: number, startClientY: number) {
+    //         if (thumbElem) {
+    //             const thumbCoords: any = thumbElem.getBoundingClientRect();
+    //             shiftX = startClientX - thumbCoords.left;
+    //             shiftY = startClientY - thumbCoords.top;
+    //         }
+
+    //         sliderCoords = slider.getBoundingClientRect();
+
+    //         document.addEventListener('mousemove', onDocumentMouseMove);
+    //         document.addEventListener('mouseup', onDocumentMouseUp);
+    //     }
+
+
+
+    //     function moveTo(clientX: number) {
+    //         // вычесть координату родителя, т.к. position: relative
+    //         let newLeft: number = clientX - shiftX - sliderCoords.left;
+
+    //         // курсор ушёл вне слайдера
+    //         if (newLeft < 0) {
+    //             newLeft = 0;
+    //         }
+    //         let rightEdge: number = 0;
+    //         if (thumbElem) {
+    //             rightEdge = slider.offsetWidth - thumbElem.offsetWidth;
+    //         }
+    //         if (newLeft > rightEdge) {
+    //             newLeft = rightEdge;
+    //         }
+
+    //         if (thumbElem) {
+    //             thumbElem.style.left = newLeft + 'px';
+    //         }
+    //     }
+
+    //     function onDocumentMouseMove(e: MouseEvent) {
+    //         moveTo(e.clientX);
+    //     }
+
+    //     function onDocumentMouseUp() {
+    //         endDrag();
+    //     }
+
+    //     function endDrag() {
+    //         document.removeEventListener('mousemove', onDocumentMouseMove);
+    //         document.removeEventListener('mouseup', onDocumentMouseUp);
+    //     }
+
+    // }
 }
