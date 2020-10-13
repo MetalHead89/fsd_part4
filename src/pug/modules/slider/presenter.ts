@@ -1,6 +1,7 @@
 import { Observable } from '../slider/observable';
 import { Model } from '../slider/model';
 import { View } from '../slider/view';
+import { IMoveToArgs } from '../slider/interfaces';
 
 export class Presenter {
     view: View;
@@ -15,14 +16,14 @@ export class Presenter {
         this.observer.subscribe('addedNewSliderToDOM',
             (sliderComponents: { [index: string]: HTMLElement }) => this.sliderInit(sliderComponents));
 
-        this.observer.subscribe('dragStarted', () => {
-            document.addEventListener('mousemove', onDocumentMouseMove);
-            document.addEventListener('mouseup', onDocumentMouseUp);
+        this.observer.subscribe('dragStarted', (args: { [index: string]: HTMLElement }) => {
+            document.addEventListener('mousemove', this.onDocumentMouseMove.bind(this, args.thumbElem));/////////////////////////////////////////////
+            document.addEventListener('mouseup', this.onDocumentMouseUp.bind(this));
         });
 
         this.observer.subscribe('moveTo',
-            (args: { [index: string]: HTMLElement, [index: string]: number}) => {
-                this.view.moveThumb(args.thumbElem, args.newLeft)
+            (args: IMoveToArgs) => {
+                this.view.moveTo(args.thumbElem, args.newLeft)
             });
     }
 
@@ -38,7 +39,7 @@ export class Presenter {
         };
 
         sliderElem.onmousedown = event => {
-            
+
             if (this.view.targetIsThumb(event)) {
                 this.model.startDrag(sliderElem, event.clientX, event.clientY);
                 return false; // disable selection start (cursor change)
@@ -47,6 +48,19 @@ export class Presenter {
         }
 
         this.model.createSliderModel(sliderComponents);
+    }
+
+    onDocumentMouseMove(thumbElem: HTMLElement, event: MouseEvent): void {/////////////////////////////////////
+        this.view.moveTo(thumbElem, event.clientX);
+    }
+
+    onDocumentMouseUp(): void {
+        this.endDrag();
+    }
+
+    endDrag(): void {
+        document.removeEventListener('mousemove', this.onDocumentMouseMove);
+        document.removeEventListener('mouseup', this.onDocumentMouseUp);
     }
 
 

@@ -49,7 +49,7 @@ export class View {
         return false;
     }
 
-    moveThumb(thumbElem: HTMLElement, newLeft: number): void {
+    moveTo(thumbElem: HTMLElement, newLeft: number): void {
         thumbElem.style.left = newLeft + 'px';
     }
 

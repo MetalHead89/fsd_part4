@@ -13,10 +13,9 @@ export class Model {
         this.sliders = new Map;
     }
 
-    createSliderModel(sliderComponents: {[index: string]: HTMLElement}) {
-
+    createSliderModel(sliderComponents: {[index: string]: HTMLElement}) {        
         const slider: Slider = new Slider(sliderComponents);
-        this.sliders.set(sliderComponents.slider, slider);
+        this.sliders.set(sliderComponents.sliderElem, slider);
     }
 
     getSlider(sliderElem:HTMLElement): Slider | undefined {
@@ -24,7 +23,6 @@ export class Model {
     }
 
     startDrag(sliderElem:HTMLElement, startClientX: number, startClientY: number) {
-
         const slider = this.getSlider(sliderElem);
         if (slider) {
             const thumb: Thumb = slider.thumb;
@@ -32,11 +30,10 @@ export class Model {
                 thumb.coords = thumb.element.getBoundingClientRect();
                 thumb.shiftX = startClientX - thumb.coords.left;
                 thumb.shiftY = startClientY - thumb.coords.top;
+
+                slider.coords = sliderElem.getBoundingClientRect();
+                this.observer.notify('dragStarted', {'thumbElem': thumb.element});
             }
-
-            slider.coords = sliderElem.getBoundingClientRect();
-
-            this.observer.notify('dragStarted', null);
         }        
     }
 
