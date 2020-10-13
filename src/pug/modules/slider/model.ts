@@ -64,6 +64,38 @@ export class Model {
         }
     }
 
+    setOnMouseMoveHadler(sliderElem: HTMLElement, handler: Function) {
+        const slider: Slider | undefined = this.getSlider(sliderElem);
+
+        if (slider) {
+            slider.onMouseMoveHadler = handler;
+        }
+    }
+
+    getOnMouseMoveHadler(sliderElem: HTMLElement) {
+        const slider: Slider | undefined = this.getSlider(sliderElem);
+
+        if (slider) {
+            return slider.onMouseMoveHadler;
+        }
+    }
+
+    setOnMouseUpHadler(sliderElem: HTMLElement, handler: Function) {
+        const slider: Slider | undefined = this.getSlider(sliderElem);
+
+        if (slider) {
+            slider.onMouseUpHadler = handler;
+        }
+    }
+
+    getOnMouseUpHadler(sliderElem: HTMLElement) {
+        const slider: Slider | undefined = this.getSlider(sliderElem);
+
+        if (slider) {
+            return slider.onMouseUpHadler;
+        }
+    }
+
 
 }
 

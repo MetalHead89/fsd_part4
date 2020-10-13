@@ -6,6 +6,8 @@ export class Slider {
     track: Track;
     thumb: Thumb;
     coords: DOMRect | null = null;
+    onMouseMoveHadler: Function | null = null;
+    onMouseUpHadler: Function | null = null;
     
 
     constructor(sliderComponents: {[index: string]: HTMLElement}) {

@@ -17,8 +17,14 @@ export class Presenter {
             (sliderComponents: { [index: string]: HTMLElement }) => this.sliderInit(sliderComponents));
 
         this.observer.subscribe('dragStarted', (args: { [index: string]: HTMLElement }) => {
-            document.addEventListener('mousemove', this.onDocumentMouseMove.bind(this, args.thumbElem));/////////////////////////////////////////////
-            document.addEventListener('mouseup', this.onDocumentMouseUp.bind(this));
+            const onMouseMoveHandler: Function = this.onDocumentMouseMove.bind(this, args.thumbElem);
+            const onMouseUpHandler: Function = this.onDocumentMouseUp.bind(this, args.sliderElem);
+
+            this.model.setOnMouseMoveHadler(args.sliderElem, onMouseMoveHandler);
+            this.model.setOnMouseUpHadler(args.sliderElem, onMouseUpHandler);
+
+            document.addEventListener('mousemove', onMouseMoveHandler as EventListenerOrEventListenerObject);/////////////////////////////////////////////
+            document.addEventListener('mouseup', onMouseUpHandler as EventListenerOrEventListenerObject);
         });
 
         this.observer.subscribe('moveTo',
@@ -54,13 +60,13 @@ export class Presenter {
         this.view.moveTo(thumbElem, event.clientX);
     }
 
-    onDocumentMouseUp(): void {
-        this.endDrag();
+    onDocumentMouseUp(sliderElem: HTMLElement): void {
+        this.endDrag(sliderElem);
     }
 
-    endDrag(): void {
-        document.removeEventListener('mousemove', this.onDocumentMouseMove);
-        document.removeEventListener('mouseup', this.onDocumentMouseUp);
+    endDrag(sliderElem: HTMLElement): void {
+        document.removeEventListener('mousemove', this.model.getOnMouseMoveHadler(sliderElem) as EventListenerOrEventListenerObject);
+        document.removeEventListener('mouseup', this.model.getOnMouseUpHadler(sliderElem) as EventListenerOrEventListenerObject);
     }
 
 
