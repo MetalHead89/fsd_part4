@@ -14,7 +14,7 @@ export class Observable {
     //     this.observers = this.observers.filter(subscriber => subscriber !== func);
     // }
 
-    notify(type: string, data: {[index: string]: HTMLElement} | null) {
+    notify(type: string, data: {[index: string]: HTMLElement | number} | null) {
         if (this.observers[type]) {
             this.observers[type].forEach(function (listener: Function) {
                 listener(data);

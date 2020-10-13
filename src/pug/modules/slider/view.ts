@@ -49,17 +49,12 @@ export class View {
         return false;
     }
 
-
-    startDrag(sliderElem:HTMLElement, thumbElem: HTMLElement, startClientX: number, startClientY: number) {
-        const thumbCoords: DOMRect = thumbElem.getBoundingClientRect();
-        let shiftX: number = startClientX - thumbCoords.left;
-        let shiftY: number = startClientY - thumbCoords.top;
-
-        const sliderCoords: DOMRect = sliderElem.getBoundingClientRect();
-
-        document.addEventListener('mousemove', onDocumentMouseMove);
-        document.addEventListener('mouseup', onDocumentMouseUp);
+    moveThumb(thumbElem: HTMLElement, newLeft: number): void {
+        thumbElem.style.left = newLeft + 'px';
     }
+
+
+    
 
     // Slider(slider: HTMLElement) {
     //     const thumbElem: HTMLElement | null = slider.querySelector('.slider__thumb');

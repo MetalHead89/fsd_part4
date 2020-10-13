@@ -5,6 +5,7 @@ export class Slider {
     element: HTMLElement;
     track: Track;
     thumb: Thumb;
+    coords: DOMRect | null = null;
 
     constructor(sliderComponents: {[index: string]: HTMLElement}) {
         this.element = sliderComponents.slider;

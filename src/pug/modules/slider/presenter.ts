@@ -14,6 +14,16 @@ export class Presenter {
 
         this.observer.subscribe('addedNewSliderToDOM',
             (sliderComponents: { [index: string]: HTMLElement }) => this.sliderInit(sliderComponents));
+
+        this.observer.subscribe('dragStarted', () => {
+            document.addEventListener('mousemove', onDocumentMouseMove);
+            document.addEventListener('mouseup', onDocumentMouseUp);
+        });
+
+        this.observer.subscribe('moveTo',
+            (args: { [index: string]: HTMLElement, [index: string]: number}) => {
+                this.view.moveThumb(args.thumbElem, args.newLeft)
+            });
     }
 
     init(): void {
@@ -30,17 +40,13 @@ export class Presenter {
         sliderElem.onmousedown = event => {
             
             if (this.view.targetIsThumb(event)) {
-                this.view.startDrag(event.clientX, event.clientY);
+                this.model.startDrag(sliderElem, event.clientX, event.clientY);
                 return false; // disable selection start (cursor change)
             }
 
         }
 
         this.model.createSliderModel(sliderComponents);
-    }
-
-    startThumbDrag() {
-        
     }
 
 

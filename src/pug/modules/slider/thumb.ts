@@ -4,6 +4,9 @@ export class Thumb {
     minValue: number;
     maxValue: number;
     step: number;
+    coords: DOMRect | null = null;
+    shiftX: number = 0;
+    shiftY: number = 0;
 
     constructor(thumb: HTMLElement | null) {
         this.element = thumb;
