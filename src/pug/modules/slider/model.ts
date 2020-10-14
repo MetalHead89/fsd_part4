@@ -59,8 +59,6 @@ export class Model {
                 }
 
                 this.observer.notify('moveTo', {'thumbElem': thumb.element, 'newLeft': newLeft});
-                
-                // thumbElem.style.left = newLeft + 'px';
                     
             }
         }

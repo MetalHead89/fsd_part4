@@ -17,8 +17,7 @@ export class Presenter {
             (sliderComponents: { [index: string]: HTMLElement }) => this.sliderInit(sliderComponents));
 
         this.observer.subscribe('dragStarted', (args: { [index: string]: HTMLElement }) => {
-            console.log(args.sliderElem)
-            const onMouseMoveHandler: Function = this.onDocumentMouseMove.bind(this, args.thumbElem);
+            const onMouseMoveHandler: Function = this.onDocumentMouseMove.bind(this, args.sliderElem);
             const onMouseUpHandler: Function = this.onDocumentMouseUp.bind(this, args.sliderElem);
 
             this.model.setOnMouseMoveHadler(args.sliderElem, onMouseMoveHandler);
@@ -57,8 +56,8 @@ export class Presenter {
         this.model.createSliderModel(sliderComponents);
     }
 
-    onDocumentMouseMove(thumbElem: HTMLElement, event: MouseEvent): void {/////////////////////////////////////
-        this.view.moveTo(thumbElem, event.clientX);
+    onDocumentMouseMove(sliderElem: HTMLElement, event: MouseEvent): void {
+        this.model.moveTo(sliderElem, event.clientX);
     }
 
     onDocumentMouseUp(sliderElem: HTMLElement): void {
