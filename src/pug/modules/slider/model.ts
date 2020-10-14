@@ -58,6 +58,8 @@ export class Model {
                     newLeft = rightEdge;
                 }
 
+                console.log(this.positionToValue(thumb, newLeft))
+
                 this.observer.notify('moveTo', {'thumbElem': thumb.element, 'newLeft': newLeft});
                     
             }
@@ -95,6 +97,23 @@ export class Model {
             return slider.onMouseUpHadler;
         }
     }
+
+    setPixelsPerValue(sliderElem: HTMLElement) {
+        const slider: Slider | undefined = this.getSlider(sliderElem);
+
+        if(slider && slider.thumb.element) {
+            slider.thumb.pixelsPerValue = (sliderElem.clientWidth - 
+                slider.thumb.element.clientWidth) / slider.thumb.getMaxValue();
+        }
+    }
+
+    // valueToPosition(value: number) {
+    //     return pixelsPerValue * value;
+    //   }
+    
+    positionToValue(thumb: Thumb, left: number) {
+        return Math.round(left / thumb.pixelsPerValue);
+      }
 
 
 }

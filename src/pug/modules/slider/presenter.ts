@@ -48,6 +48,8 @@ export class Presenter {
 
             if (this.view.targetIsThumb(event)) {
                 this.model.startDrag(sliderElem, event.clientX, event.clientY);
+                this.model.setPixelsPerValue(sliderElem);
+
                 return false; // disable selection start (cursor change)
             }
 
