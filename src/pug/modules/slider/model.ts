@@ -32,7 +32,9 @@ export class Model {
                 thumb.shiftY = startClientY - thumb.coords.top;
 
                 slider.coords = sliderElem.getBoundingClientRect();
-                this.observer.notify('dragStarted', {'thumbElem': thumb.element});
+                this.observer.notify('dragStarted', {
+                    'sliderElem': slider.element, 'thumbElem': thumb.element
+                });
             }
         }        
     }
@@ -82,7 +84,7 @@ export class Model {
 
     setOnMouseUpHadler(sliderElem: HTMLElement, handler: Function) {
         const slider: Slider | undefined = this.getSlider(sliderElem);
-
+        
         if (slider) {
             slider.onMouseUpHadler = handler;
         }

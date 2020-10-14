@@ -17,6 +17,7 @@ export class Presenter {
             (sliderComponents: { [index: string]: HTMLElement }) => this.sliderInit(sliderComponents));
 
         this.observer.subscribe('dragStarted', (args: { [index: string]: HTMLElement }) => {
+            console.log(args.sliderElem)
             const onMouseMoveHandler: Function = this.onDocumentMouseMove.bind(this, args.thumbElem);
             const onMouseUpHandler: Function = this.onDocumentMouseUp.bind(this, args.sliderElem);
 
