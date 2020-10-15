@@ -1,5 +1,5 @@
-import {Observable} from '../slider/observable';
-import {Slider} from '../slider/slider';
+import { Observable } from '../slider/observable';
+import { Slider } from '../slider/slider';
 import { Thumb } from './thumb';
 
 
@@ -13,16 +13,16 @@ export class Model {
         this.sliders = new Map;
     }
 
-    createSliderModel(sliderComponents: {[index: string]: HTMLElement}) {        
+    createSliderModel(sliderComponents: { [index: string]: HTMLElement }) {
         const slider: Slider = new Slider(sliderComponents);
         this.sliders.set(sliderComponents.sliderElem, slider);
     }
 
-    getSlider(sliderElem:HTMLElement): Slider | undefined {
+    getSlider(sliderElem: HTMLElement): Slider | undefined {
         return this.sliders.get(sliderElem);
     }
 
-    startDrag(sliderElem:HTMLElement, startClientX: number, startClientY: number) {
+    startDrag(sliderElem: HTMLElement, startClientX: number, startClientY: number) {
         const slider = this.getSlider(sliderElem);
         if (slider) {
             const thumb: Thumb = slider.thumb;
@@ -36,7 +36,7 @@ export class Model {
                     'sliderElem': slider.element, 'thumbElem': thumb.element
                 });
             }
-        }        
+        }
     }
 
     moveTo(sliderElem: HTMLElement, clientX: number) {
@@ -58,10 +58,10 @@ export class Model {
                     newLeft = rightEdge;
                 }
 
-                console.log(this.positionToValue(thumb, newLeft))
+                console.log(this.positionToValue(thumb, newLeft))////////////////////////////////////
 
-                this.observer.notify('moveTo', {'thumbElem': thumb.element, 'newLeft': newLeft});
-                    
+                this.observer.notify('moveTo', { 'thumbElem': thumb.element, 'newLeft': newLeft });
+
             }
         }
     }
@@ -84,7 +84,7 @@ export class Model {
 
     setOnMouseUpHadler(sliderElem: HTMLElement, handler: Function) {
         const slider: Slider | undefined = this.getSlider(sliderElem);
-        
+
         if (slider) {
             slider.onMouseUpHadler = handler;
         }
@@ -101,19 +101,38 @@ export class Model {
     setPixelsPerValue(sliderElem: HTMLElement) {
         const slider: Slider | undefined = this.getSlider(sliderElem);
 
-        if(slider && slider.thumb.element) {
-            slider.thumb.pixelsPerValue = (sliderElem.clientWidth - 
-                slider.thumb.element.clientWidth) / slider.thumb.getMaxValue();
+        if (slider && slider.thumb.element) {
+            slider.thumb.pixelsPerValue = (sliderElem.clientWidth -
+                slider.thumb.element.clientWidth) / 100;
         }
     }
 
     // valueToPosition(value: number) {
     //     return pixelsPerValue * value;
     //   }
-    
+
     positionToValue(thumb: Thumb, left: number) {
-        return Math.round(left / thumb.pixelsPerValue);
-      }
+        // return (Math.round(left / thumb.pixelsPerValue));
+        return Math.round(thumb.getMinValue() + ((thumb.getMaxValue() - 
+            thumb.getMinValue()) / 100 * Math.round(left / thumb.pixelsPerValue)));
+    }
+
+    // setPixelsPerValue(sliderElem: HTMLElement) {
+    //     const slider: Slider | undefined = this.getSlider(sliderElem);
+
+    //     if (slider && slider.thumb.element) {
+    //         slider.thumb.pixelsPerValue = (sliderElem.clientWidth -
+    //             slider.thumb.element.clientWidth) / slider.thumb.getMaxValue();
+    //     }
+    // }
+
+    // // valueToPosition(value: number) {
+    // //     return pixelsPerValue * value;
+    // //   }
+
+    // positionToValue(thumb: Thumb, left: number) {
+    //     return (Math.round(left / thumb.pixelsPerValue));
+    // }
 
 
 }

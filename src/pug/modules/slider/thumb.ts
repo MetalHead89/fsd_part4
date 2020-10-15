@@ -12,11 +12,15 @@ export class Thumb {
     constructor(thumb: HTMLElement | null) {
         this.element = thumb;
         this.minValue = 0;
-        this.maxValue = 10;
+        this.maxValue = 100;
         this.step = 1;
     }
 
     getMaxValue(): number {
         return this.maxValue;
+    }
+
+    getMinValue(): number {
+        return this.minValue;
     }
 }
