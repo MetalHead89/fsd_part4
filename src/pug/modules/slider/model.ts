@@ -56,6 +56,10 @@ export class Model {
 
                 if (newLeft > rightEdge) {
                     newLeft = rightEdge;
+                } else {
+                    let stepCount = (thumb.getMaxValue() - thumb.getMinValue()) / thumb.step;
+                    let stepSize = (sliderElem.offsetWidth - thumb.element.offsetWidth) / stepCount;
+                    newLeft = Math.round(newLeft / stepSize) * stepSize;
                 }
 
                 console.log(this.positionToValue(thumb, newLeft))////////////////////////////////////
