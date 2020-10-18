@@ -33,8 +33,12 @@ export class Presenter {
             });
     }
 
-    init(): void {
-        this.view.searchSlidersPositions();
+    // init(): void {
+    //     this.view.searchSlidersPositions();
+    // }
+
+    init(sliderPosition: HTMLElement): void {
+        this.view.createSlider(sliderPosition);
     }
 
     sliderInit(sliderComponents: { [index: string]: HTMLElement }): void {

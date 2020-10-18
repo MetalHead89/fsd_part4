@@ -9,7 +9,11 @@ import { Presenter } from '../slider/presenter';
         const model: Model = new Model(observer);
         const view: View = new View(observer);
         const presenter: Presenter = new Presenter(view, model, observer);
+
+        for (const elem of this) {
+            presenter.init(elem);
+        }
     };
 })(jQuery);
 
-// presenter.init();
+($('.incredibleSliderPlugin') as any).incredibleSliderPlugin();
