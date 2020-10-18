@@ -1,6 +1,10 @@
+// Интерфейс настроек плагина
 export interface iPluginSettings {
     'orienation': String,
-    'type': String
+    'type': String,
+    'minValue': Number,
+    'maxValue': Number,
+    'step': Number
 }
 
 export interface IMoveToArgs {

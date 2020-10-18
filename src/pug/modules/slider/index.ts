@@ -15,7 +15,10 @@ import { iPluginSettings } from '../slider/interfaces';
         // Настройки плагина        
         let settings: iPluginSettings = {
             'orienation': 'horizontal',
-            'type': 'single'
+            'type': 'single',
+            'minValue': 0,
+            'maxValue': 100,
+            'step': 1
         }
 
         // Обновление настроек плагина в соответсвии с полученными параметрами
