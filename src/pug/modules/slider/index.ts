@@ -2,10 +2,10 @@ import { Observable } from '../slider/observable';
 import { Model } from '../slider/model';
 import { View } from '../slider/view';
 import { Presenter } from '../slider/presenter';
-import { iPluginSettings } from '../slider/interfaces';
+import { IPluginSettings } from '../slider/interfaces';
 
 (function ($) {
-    ($.fn as any).incredibleSliderPlugin = function (options: iPluginSettings) {
+    ($.fn as any).incredibleSliderPlugin = function (options: IPluginSettings) {
 
         const observer = new Observable();
         const model: Model = new Model(observer);
@@ -13,7 +13,7 @@ import { iPluginSettings } from '../slider/interfaces';
         const presenter: Presenter = new Presenter(view, model, observer);
 
         // Настройки плагина        
-        let settings: iPluginSettings = {
+        let settings: IPluginSettings = {
             'orienation': 'horizontal',
             'type': 'single',
             'minValue': 0,
@@ -24,9 +24,9 @@ import { iPluginSettings } from '../slider/interfaces';
         // Обновление настроек плагина в соответсвии с полученными параметрами
         settings = $.extend(settings, options);
 
-        // Инициализация слайдеров
-        for (const sliderElem of this) {
-            presenter.init(sliderElem);
+        // Добавление конфигурации новых слайдеров в модель
+        for (const sliderPosition of this) {
+            model.createNewSlider(sliderPosition, settings);
         }
 
     };

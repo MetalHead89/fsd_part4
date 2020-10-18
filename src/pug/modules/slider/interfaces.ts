@@ -1,5 +1,5 @@
 // Интерфейс настроек плагина
-export interface iPluginSettings {
+export interface IPluginSettings {
     'orienation': String,
     'type': String,
     'minValue': Number,
@@ -7,7 +7,15 @@ export interface iPluginSettings {
     'step': Number
 }
 
-export interface IMoveToArgs {
-    thumbElem: HTMLElement;
-    newLeft: number;
+// Интерфейс опций нового слайдера
+export interface INewSliderOptions {
+    'sliderPosition': HTMLElement,
+    'settings': IPluginSettings
 }
+
+
+
+// export interface IMoveToArgs {
+//     thumbElem: HTMLElement;
+//     newLeft: number;
+// }
