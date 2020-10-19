@@ -62,6 +62,23 @@ export class View {
 
         return {'sliderElem': sliderElem, 'trackElem': trackElem, 'thumbElem': thumbElem}
     }
+
+    startDrag(startClientX: number, startClientY: number) {
+        if (this.thumb) {
+            const thumbCoords: DOMRect = this.thumb.getElement().getBoundingClientRect()
+            this.thumb.setShiftX(startClientX - thumbCoords.left);
+            this.thumb.setShiftY(startClientY - thumbCoords.top);
+        }
+
+        if (this.slider) {
+            this.slider.setCoords(this.slider.getElement().getBoundingClientRect());
+        }
+
+        
+        // this.observer.notify('dragStarted', {
+        //     'sliderElem': slider.element, 'thumbElem': thumb.element
+        // });
+    }
 }
 
 

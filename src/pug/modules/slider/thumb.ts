@@ -5,6 +5,9 @@ export class Thumb {
     private minValue: Number;
     private maxValue: Number;
     private step: Number;
+    private coords: DOMRect | null = null;
+    private shiftX: Number = 0;
+    private shiftY: Number = 0;
 
     constructor(thumbArgs: IThumbArgs) {
         this.element = thumbArgs.thumbElem;
@@ -15,6 +18,22 @@ export class Thumb {
 
     getElement(): HTMLElement {
         return this.element;
+    }
+
+    setCoords(coords: DOMRect) {
+        this.coords = coords;
+    }
+
+    getCoords(): DOMRect | null {
+        return this.coords;
+    }
+
+    setShiftX(shift: Number) {
+        this.shiftX = shift;
+    }
+
+    setShiftY(shift: Number) {
+        this.shiftX = shift;
     }
 }
 
