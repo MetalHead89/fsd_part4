@@ -16,7 +16,7 @@ export class Presenter {
 
         this.observer.subscribe('addedNewSliderConfiguration', 
             (sliderOptions: INewSliderOptions) => 
-                this.view.createSlider(sliderOptions.sliderPosition));
+                this.view.createSlider(sliderOptions));
     }
 }
 

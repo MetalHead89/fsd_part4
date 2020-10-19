@@ -1,6 +1,6 @@
 export class Track {
-    color: string = '';
-    element: HTMLElement | null;
+    private color: string = '';
+    private element: HTMLElement | null;
 
     constructor(track: HTMLElement | null) {
         this.element = track;
