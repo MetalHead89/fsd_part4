@@ -4,7 +4,7 @@ export class Slider {
     private element: HTMLElement;
     private orienation: String;
     private type: String; 
-    private coords: DOMRect | null = null;
+    private coords: DOMRect = new DOMRect;
 
     constructor(sliderArgs: ISliderArgs) {
         this.element = sliderArgs.sliderElem;
@@ -14,6 +14,10 @@ export class Slider {
 
     setCoords(coords: DOMRect) {
         this.coords = coords;
+    }
+
+    getCoords(): DOMRect {
+        return this.coords;
     }
 
     getElement(): HTMLElement {

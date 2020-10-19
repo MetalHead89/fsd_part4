@@ -2,18 +2,30 @@ import { IThumbArgs } from '../slider/interfaces';
 
 export class Thumb {
     private element: HTMLElement;
-    private minValue: Number;
-    private maxValue: Number;
-    private step: Number;
+    private minValue: number;
+    private maxValue: number;
+    private step: number;
     private coords: DOMRect | null = null;
-    private shiftX: Number = 0;
-    private shiftY: Number = 0;
+    private shiftX: number = 0;
+    private shiftY: number = 0;
 
     constructor(thumbArgs: IThumbArgs) {
         this.element = thumbArgs.thumbElem;
         this.minValue = thumbArgs.minValue;
         this.maxValue = thumbArgs.maxValue;
         this.step = thumbArgs.step;
+    }
+
+    getMinValue(): number {
+        return this.minValue;
+    }
+
+    getMaxValue(): number {
+        return this.maxValue;
+    }
+
+    getStep(): number {
+        return this.step;
     }
 
     getElement(): HTMLElement {
@@ -28,11 +40,15 @@ export class Thumb {
         return this.coords;
     }
 
-    setShiftX(shift: Number) {
+    setShiftX(shift: number) {
         this.shiftX = shift;
     }
 
-    setShiftY(shift: Number) {
+    getShiftX(): number {
+        return this.shiftX;
+    }
+
+    setShiftY(shift: number) {
         this.shiftX = shift;
     }
 }

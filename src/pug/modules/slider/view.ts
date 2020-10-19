@@ -6,9 +6,12 @@ import { Thumb } from './thumb';
 
 export class View {
 
-    observer: Observable;
-    slider: Slider | null = null;
-    thumb: Thumb | null = null;
+    private observer: Observable;
+    private slider: Slider | null = null;
+    private thumb: Thumb | null = null;
+    private pixelsPerValue: Number = 0;
+    // private onMouseMoveHandler: Function | null = null;
+    // private onMouseUpHandler: Function | null = null;
 
     constructor(observer: Observable) {
         this.observer = observer;
@@ -37,22 +40,26 @@ export class View {
         };
 
         thumbElem.onmousedown = event => {
-            // this.model.startDrag(sliderElem, event.clientX, event.clientY);
-            // this.model.setPixelsPerValue(sliderElem);
+            if (this.slider && this.thumb) {
+                this.pixelsPerValue = (this.slider.getElement().clientWidth -
+                    this.thumb.getElement().clientWidth) / 100;
+                
+                this.startDrag(event.clientX, event.clientY);
+            }            
 
-            // return false; // disable selection start (cursor change)
+            return false; // disable selection start (cursor change)
         }
 
     }
 
     private addSliderToPage(sliderPosition: HTMLElement): ISliderComponents {
-        let sliderElem: HTMLElement = document.createElement('div');
+        const sliderElem: HTMLElement = document.createElement('div');
         sliderElem.className = 'slider';
     
-        let trackElem: HTMLElement = document.createElement('div');
+        const trackElem: HTMLElement = document.createElement('div');
         trackElem.className = 'slider__track';
     
-        let thumbElem: HTMLElement = document.createElement('div');
+        const thumbElem: HTMLElement = document.createElement('div');
         thumbElem.className = 'slider__thumb';
     
         sliderElem.append(trackElem);
@@ -64,20 +71,50 @@ export class View {
     }
 
     startDrag(startClientX: number, startClientY: number) {
-        if (this.thumb) {
+        if (this.thumb && this.slider) {
             const thumbCoords: DOMRect = this.thumb.getElement().getBoundingClientRect()
             this.thumb.setShiftX(startClientX - thumbCoords.left);
             this.thumb.setShiftY(startClientY - thumbCoords.top);
-        }
 
-        if (this.slider) {
             this.slider.setCoords(this.slider.getElement().getBoundingClientRect());
+
+            document.addEventListener('mousemove', this.moveTo.bind(this, startClientX));
+            // document.addEventListener('mouseup', onMouseUpHandler as EventListenerOrEventListenerObject);
         }
 
         
         // this.observer.notify('dragStarted', {
         //     'sliderElem': slider.element, 'thumbElem': thumb.element
         // });
+    }
+
+    moveTo(clientX: number) {
+
+        if (this.slider && this.thumb) {
+
+            // вычесть координату родителя, т.к. position: relative
+            let newLeft: number = clientX - this.thumb.getShiftX() - this.slider.getCoords().left;
+            
+            // курсор ушёл вне слайдера
+            if (newLeft < 0) {
+                newLeft = 0;
+            }
+
+            let rightEdge: number = 0;
+            rightEdge = this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth;
+
+            if (newLeft > rightEdge) {
+                newLeft = rightEdge;
+            } else {
+                let stepCount: number = (this.thumb.getMaxValue() - this.thumb.getMinValue()) / this.thumb.getStep();
+                let stepSize: number = (this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth) / stepCount;
+                newLeft = Math.round(newLeft / stepSize) * stepSize;
+            }
+
+            this.thumb.getElement().style.left = newLeft + 'px';
+
+            // console.log(this.positionToValue(thumb, newLeft))////////////////////////////////////
+        }
     }
 }
 

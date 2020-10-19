@@ -5,9 +5,9 @@ import {Thumb} from '../slider/thumb';
 export interface IPluginSettings {
     'orienation': String,
     'type': String,
-    'minValue': Number,
-    'maxValue': Number,
-    'step': Number
+    'minValue': number,
+    'maxValue': number,
+    'step': number
 }
 
 export interface INewSliderOptions {
@@ -29,9 +29,9 @@ export interface ISliderArgs {
 
 export interface IThumbArgs {
     'thumbElem': HTMLElement,
-    'minValue': Number,
-    'maxValue': Number,
-    'step': Number
+    'minValue': number,
+    'maxValue': number,
+    'step': number
 }
 
 // // Интерфейс компонентов слайдера
