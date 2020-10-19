@@ -1,17 +1,51 @@
 import { Observable } from '../slider/observable';
 import { INewSliderOptions } from '../slider/interfaces';
+import { ISliderComponents } from '../slider/interfaces';
 import { Slider } from '../slider/slider';
-// import { Thumb } from './thumb';
+import { Thumb } from './thumb';
 
 export class View {
 
     observer: Observable;
+    slider: Slider | null = null;
+    thumb: Thumb | null = null;
 
     constructor(observer: Observable) {
         this.observer = observer;
     }
 
     createSlider(sliderOptions: INewSliderOptions) {
+        const sliderComponents: ISliderComponents = this.addSliderToPage(sliderOptions.sliderPosition);
+
+        this.slider = new Slider({
+            'sliderElem': sliderComponents.sliderElem,
+            'orientation': sliderOptions.settings.orienation,
+            'type': sliderOptions.settings.type
+        });
+
+        this.thumb = new Thumb({
+            'thumbElem': sliderComponents.thumbElem,
+            'minValue': sliderOptions.settings.minValue,
+            'maxValue': sliderOptions.settings.maxValue,
+            'step': sliderOptions.settings.step
+        });
+
+        const thumbElem: HTMLElement = this.thumb.getElement();
+
+        thumbElem.ondragstart = function () {
+            return false;
+        };
+
+        thumbElem.onmousedown = event => {
+            // this.model.startDrag(sliderElem, event.clientX, event.clientY);
+            // this.model.setPixelsPerValue(sliderElem);
+
+            // return false; // disable selection start (cursor change)
+        }
+
+    }
+
+    private addSliderToPage(sliderPosition: HTMLElement): ISliderComponents {
         let sliderElem: HTMLElement = document.createElement('div');
         sliderElem.className = 'slider';
     
@@ -24,12 +58,9 @@ export class View {
         sliderElem.append(trackElem);
         sliderElem.append(thumbElem);
         document.body.append(sliderElem);
-        sliderOptions.sliderPosition.replaceWith(sliderElem);
-    
-        // const sliderFunc = this.Slider(slider);
-    
-        // this.observer.notify('addedNewSliderToDOM',
-        //     { 'sliderElem': slider, 'trackElem': track, 'thumbElem': thumb });
+        sliderPosition.replaceWith(sliderElem);
+
+        return {'sliderElem': sliderElem, 'trackElem': trackElem, 'thumbElem': thumbElem}
     }
 }
 

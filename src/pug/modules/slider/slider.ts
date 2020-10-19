@@ -1,29 +1,14 @@
-import {Track} from '../slider/track';
-import {Thumb} from '../slider/thumb';
-import { ISliderComponents } from '../slider/interfaces';
-import { IPluginSettings } from '../slider/interfaces';
-import { IThumbOptions } from '../slider/interfaces';
+import { ISliderArgs } from '../slider/interfaces';
 
 export class Slider {
     private element: HTMLElement;
     private orienation: String;
-    private type: String;
-    private track: Track;
-    private thumb: Thumb;    
+    private type: String; 
 
-    constructor(sliderComponents: ISliderComponents, settings: IPluginSettings) {
-        this.element = sliderComponents.slider;
-        this.orienation = settings.orienation;
-        this.type = settings.type;
-        this.track = new Track(sliderComponents.track);
-
-        const thumbOptions: IThumbOptions = {
-            'element': sliderComponents.thumb,
-            'minValue': settings.minValue,
-            'maxValue': settings.maxValue,
-            'step': settings.step
-        }
-        this.thumb = new Thumb(thumbOptions);
+    constructor(sliderArgs: ISliderArgs) {
+        this.element = sliderArgs.sliderElem;
+        this.orienation = sliderArgs.orientation;
+        this.type = sliderArgs.type;
     }
 }
 

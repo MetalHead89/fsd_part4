@@ -1,17 +1,20 @@
-import { IThumbOptions } from '../slider/interfaces';
+import { IThumbArgs } from '../slider/interfaces';
 
 export class Thumb {
-    private color: string = '';
     private element: HTMLElement;
     private minValue: Number;
     private maxValue: Number;
     private step: Number;
 
-    constructor(thumbOptions: IThumbOptions) {
-        this.element = thumbOptions.element;
-        this.minValue = thumbOptions.minValue;
-        this.maxValue = thumbOptions.maxValue;
-        this.step = thumbOptions.step;
+    constructor(thumbArgs: IThumbArgs) {
+        this.element = thumbArgs.thumbElem;
+        this.minValue = thumbArgs.minValue;
+        this.maxValue = thumbArgs.maxValue;
+        this.step = thumbArgs.step;
+    }
+
+    getElement(): HTMLElement {
+        return this.element;
     }
 }
 
