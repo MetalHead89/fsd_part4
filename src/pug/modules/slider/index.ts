@@ -7,11 +7,6 @@ import { IPluginSettings } from '../slider/interfaces';
 (function ($) {
     ($.fn as any).incredibleSliderPlugin = function (options: IPluginSettings) {
 
-        const observer = new Observable();
-        const model: Model = new Model(observer);
-        const view: View = new View(observer);
-        const presenter: Presenter = new Presenter(view, model, observer);
-
         // Настройки плагина        
         let settings: IPluginSettings = {
             'orienation': 'horizontal',
@@ -26,6 +21,11 @@ import { IPluginSettings } from '../slider/interfaces';
 
         // Добавление конфигурации новых слайдеров в модель
         for (const sliderPosition of this) {
+            const observer = new Observable();
+            const model: Model = new Model(observer);
+            const view: View = new View(observer);
+            const presenter: Presenter = new Presenter(view, model, observer);
+
             model.createNewSlider(sliderPosition, settings);
         }
 

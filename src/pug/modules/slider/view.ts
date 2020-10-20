@@ -10,8 +10,8 @@ export class View {
     private slider: Slider | null = null;
     private thumb: Thumb | null = null;
     private pixelsPerValue: Number = 0;
-    // private onMouseMoveHandler: Function | null = null;
-    // private onMouseUpHandler: Function | null = null;
+    private onMouseMoveHandler: Function | null = null;
+    private onMouseUpHandler: Function | null = null;
 
     constructor(observer: Observable) {
         this.observer = observer;
@@ -78,8 +78,13 @@ export class View {
 
             this.slider.setCoords(this.slider.getElement().getBoundingClientRect());
 
-            document.addEventListener('mousemove', this.moveTo.bind(this, startClientX));
-            // document.addEventListener('mouseup', onMouseUpHandler as EventListenerOrEventListenerObject);
+            this.onMouseMoveHandler = this.moveTo.bind(this);
+            this.onMouseUpHandler = this.endDrag.bind(this);
+
+            document.addEventListener('mousemove',
+                this.onMouseMoveHandler as EventListenerOrEventListenerObject);
+            document.addEventListener('mouseup',
+                this.onMouseUpHandler as EventListenerOrEventListenerObject);
         }
 
         
@@ -88,12 +93,12 @@ export class View {
         // });
     }
 
-    moveTo(clientX: number) {
+    moveTo(event: MouseEvent) {
 
         if (this.slider && this.thumb) {
 
             // вычесть координату родителя, т.к. position: relative
-            let newLeft: number = clientX - this.thumb.getShiftX() - this.slider.getCoords().left;
+            let newLeft: number = event.clientX - this.thumb.getShiftX() - this.slider.getCoords().left;
             
             // курсор ушёл вне слайдера
             if (newLeft < 0) {
@@ -115,6 +120,11 @@ export class View {
 
             // console.log(this.positionToValue(thumb, newLeft))////////////////////////////////////
         }
+    }
+
+    endDrag(): void {
+        document.removeEventListener('mousemove', this.onMouseMoveHandler as EventListenerOrEventListenerObject);
+        document.removeEventListener('mouseup', this.onMouseUpHandler as EventListenerOrEventListenerObject);
     }
 }
 

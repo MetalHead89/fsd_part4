@@ -49,7 +49,7 @@ export class Thumb {
     }
 
     setShiftY(shift: number) {
-        this.shiftX = shift;
+        this.shiftY = shift;
     }
 }
 
