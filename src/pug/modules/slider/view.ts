@@ -27,21 +27,12 @@ export class View {
     }
 
     private addSlider(sliderElem: HTMLElement, sliderSettings: ISliderSettings) {
-        this.slider = new Slider({
-            'sliderElem': sliderElem,
-            'orientation': sliderSettings.orientation,
-            'type': sliderSettings.type
-        });
+        this.slider = new Slider(sliderElem, sliderSettings);
     }
 
     private addThumb(thumbElem: HTMLElement, thumbSettings: IThumbSettings) {
 
-        this.thumb = new Thumb({
-            'thumbElem': thumbElem,
-            'minValue': thumbSettings.minValue,
-            'maxValue': thumbSettings.maxValue,
-            'step': thumbSettings.step
-        });
+        this.thumb = new Thumb(thumbElem, thumbSettings);
 
         // const thumbElem: HTMLElement = this.thumb.getElement();
 

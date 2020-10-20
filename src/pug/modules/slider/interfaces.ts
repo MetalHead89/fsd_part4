@@ -26,12 +26,6 @@ export interface ISliderComponents {
     'thumbElem': HTMLElement
 }
 
-// export interface ISliderArgs {
-//     'sliderElem': HTMLElement,
-//     'orientation': String,
-//     'type': String
-// }
-
 export interface IThumbSettings {
     'minValue': number,
     'maxValue': number,
@@ -42,32 +36,3 @@ export interface ISliderSettings {
     'orientation': string,
     'type': string
 }
-
-// export interface IThumbArgs {
-//     'thumbElem': HTMLElement,
-//     'minValue': number,
-//     'maxValue': number,
-//     'step': number
-// }
-
-// // Интерфейс компонентов слайдера
-// export interface ISliderComponents {
-//     'slider': HTMLElement,
-//     'track': HTMLElement,
-//     'thumb': HTMLElement
-// }
-
-// // Интерфейс опций бегунка
-// export interface IThumbOptions {
-//     'element': HTMLElement,
-//     'minValue': Number,
-//     'maxValue': Number,
-//     'step': Number
-// }
-
-
-
-// export interface IMoveToArgs {
-//     thumbElem: HTMLElement;
-//     newLeft: number;
-// }

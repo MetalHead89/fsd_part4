@@ -1,4 +1,4 @@
-import { ISliderArgs } from '../slider/interfaces';
+import { ISliderSettings } from '../slider/interfaces';
 
 export class Slider {
     private element: HTMLElement;
@@ -6,10 +6,10 @@ export class Slider {
     private type: String; 
     private coords: DOMRect = new DOMRect;
 
-    constructor(sliderArgs: ISliderArgs) {
-        this.element = sliderArgs.sliderElem;
-        this.orienation = sliderArgs.orientation;
-        this.type = sliderArgs.type;
+    constructor(sliderElem: HTMLElement, sliderSettings: ISliderSettings) {
+        this.element = sliderElem;
+        this.orienation = sliderSettings.orientation;
+        this.type = sliderSettings.type;
     }
 
     setCoords(coords: DOMRect) {

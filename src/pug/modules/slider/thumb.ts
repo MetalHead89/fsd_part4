@@ -1,4 +1,4 @@
-import { IThumbArgs } from '../slider/interfaces';
+import { IThumbSettings } from '../slider/interfaces';
 
 export class Thumb {
     private element: HTMLElement;
@@ -9,11 +9,11 @@ export class Thumb {
     private shiftX: number = 0;
     private shiftY: number = 0;
 
-    constructor(thumbArgs: IThumbArgs) {
-        this.element = thumbArgs.thumbElem;
-        this.minValue = thumbArgs.minValue;
-        this.maxValue = thumbArgs.maxValue;
-        this.step = thumbArgs.step;
+    constructor(thumbElem: HTMLElement, thumbSettings: IThumbSettings) {
+        this.element = thumbElem;
+        this.minValue = thumbSettings.minValue;
+        this.maxValue = thumbSettings.maxValue;
+        this.step = thumbSettings.step;
     }
 
     getMinValue(): number {
