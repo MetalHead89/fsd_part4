@@ -12,13 +12,13 @@ export class Slider {
         this.type = sliderSettings.type;
     }
 
-    setCoords(coords: DOMRect) {
-        this.coords = coords;
-    }
+    // setCoords(coords: DOMRect) {
+    //     this.coords = coords;
+    // }
 
-    getCoords(): DOMRect {
-        return this.coords;
-    }
+    // getCoords(): DOMRect {
+    //     return this.coords;
+    // }
 
     getElement(): HTMLElement {
         return this.element;

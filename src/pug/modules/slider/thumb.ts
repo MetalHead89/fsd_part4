@@ -32,13 +32,13 @@ export class Thumb {
         return this.element;
     }
 
-    setCoords(coords: DOMRect) {
-        this.coords = coords;
-    }
+    // setCoords(coords: DOMRect) {
+    //     this.coords = coords;
+    // }
 
-    getCoords(): DOMRect | null {
-        return this.coords;
-    }
+    // getCoords(): DOMRect | null {
+    //     return this.coords;
+    // }
 
     setShiftX(shift: number) {
         this.shiftX = shift;

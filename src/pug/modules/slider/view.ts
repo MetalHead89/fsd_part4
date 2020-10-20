@@ -72,11 +72,11 @@ export class View {
 
     private startDrag(startClientX: number, startClientY: number) {
         if (this.thumb && this.slider) {
-            const thumbCoords: DOMRect = this.thumb.getElement().getBoundingClientRect()
+
+            const thumbCoords: DOMRect = this.thumb.getElement().getBoundingClientRect();
+            
             this.thumb.setShiftX(startClientX - thumbCoords.left);
             this.thumb.setShiftY(startClientY - thumbCoords.top);
-
-            this.slider.setCoords(this.slider.getElement().getBoundingClientRect());
 
             this.onMouseMoveHandler = this.moveTo.bind(this);
             this.onMouseUpHandler = this.endDrag.bind(this);
@@ -86,19 +86,15 @@ export class View {
             document.addEventListener('mouseup',
                 this.onMouseUpHandler as EventListenerOrEventListenerObject);
         }
-
-        
-        // this.observer.notify('dragStarted', {
-        //     'sliderElem': slider.element, 'thumbElem': thumb.element
-        // });
     }
 
     private moveTo(event: MouseEvent) {
 
         if (this.slider && this.thumb) {
+            const sliderCoords: DOMRect = this.slider.getElement().getBoundingClientRect();
 
             // вычесть координату родителя, т.к. position: relative
-            let newLeft: number = event.clientX - this.thumb.getShiftX() - this.slider.getCoords().left;
+            let newLeft: number = event.clientX - this.thumb.getShiftX() - sliderCoords.left;
             
             // курсор ушёл вне слайдера
             if (newLeft < 0) {
