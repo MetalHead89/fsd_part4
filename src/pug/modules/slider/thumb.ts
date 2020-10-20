@@ -51,6 +51,10 @@ export class Thumb {
     setShiftY(shift: number) {
         this.shiftY = shift;
     }
+
+    moveTo(newLeft: number) {
+        this.element.style.left = newLeft + 'px';
+    }
 }
 
 

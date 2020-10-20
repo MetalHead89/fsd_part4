@@ -89,8 +89,8 @@ export class View {
     }
 
     private moveTo(event: MouseEvent) {
-
         if (this.slider && this.thumb) {
+
             const sliderCoords: DOMRect = this.slider.getElement().getBoundingClientRect();
 
             // вычесть координату родителя, т.к. position: relative
@@ -101,8 +101,7 @@ export class View {
                 newLeft = 0;
             }
 
-            let rightEdge: number = 0;
-            rightEdge = this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth;
+            let rightEdge: number = this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth;
 
             if (newLeft > rightEdge) {
                 newLeft = rightEdge;
@@ -112,7 +111,7 @@ export class View {
                 newLeft = Math.round(newLeft / stepSize) * stepSize;
             }
 
-            this.thumb.getElement().style.left = newLeft + 'px';
+            this.thumb.moveTo(newLeft);
 
             // console.log(this.positionToValue(thumb, newLeft))////////////////////////////////////
         }
