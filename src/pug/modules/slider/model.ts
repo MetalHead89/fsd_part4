@@ -1,6 +1,9 @@
 import { Observable } from '../slider/observable';
 import { IPluginSettings } from '../slider/interfaces';
+import { IThumbSettings } from '../slider/interfaces';
+import { ISliderSettings } from '../slider/interfaces';
 import { INewSliderOptions } from '../slider/interfaces';
+import { IGroupedSettings } from '../slider/interfaces';
 
 export class Model {
     private observer: Observable;
@@ -12,13 +15,29 @@ export class Model {
 
     createNewSlider(sliderPosition: HTMLElement, settings: IPluginSettings): void {
         this.settings = settings;
+        const groupedSettings: IGroupedSettings = this.splitSettingsIntoGroups(settings);        
 
-        const sliderOptions: INewSliderOptions = {
+        const newSliderOptions: INewSliderOptions = {
             'sliderPosition': sliderPosition,
-            'settings': settings
+            'settings': groupedSettings
         }
         
-        this.observer.notify('addedNewSliderConfiguration', sliderOptions);
+        this.observer.notify('addedNewSliderConfiguration', newSliderOptions);
+    }
+
+    splitSettingsIntoGroups(settings: IPluginSettings): IGroupedSettings {
+        const thumbSettings: IThumbSettings = {
+            'minValue': settings.minValue,
+            'maxValue': settings.maxValue,
+            'step': settings.step
+        }
+
+        const sliderSettings: ISliderSettings = {
+            'orientation': settings.orienation,
+            'type': settings.type
+        }
+
+        return {'sliderSettings': sliderSettings, 'thumbSettings': thumbSettings}
     }
 }
 

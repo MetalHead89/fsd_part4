@@ -3,16 +3,21 @@ import {Track} from '../slider/track';
 import {Thumb} from '../slider/thumb';
 
 export interface IPluginSettings {
-    'orienation': String,
-    'type': String,
+    'orienation': string,
+    'type': string,
     'minValue': number,
     'maxValue': number,
     'step': number
 }
 
+export interface IGroupedSettings {
+    'sliderSettings': ISliderSettings
+    'thumbSettings': IThumbSettings
+}
+
 export interface INewSliderOptions {
     'sliderPosition': HTMLElement,
-    'settings': IPluginSettings
+    'settings': IGroupedSettings
 }
 
 export interface ISliderComponents {
@@ -21,18 +26,29 @@ export interface ISliderComponents {
     'thumbElem': HTMLElement
 }
 
-export interface ISliderArgs {
-    'sliderElem': HTMLElement,
-    'orientation': String,
-    'type': String
-}
+// export interface ISliderArgs {
+//     'sliderElem': HTMLElement,
+//     'orientation': String,
+//     'type': String
+// }
 
-export interface IThumbArgs {
-    'thumbElem': HTMLElement,
+export interface IThumbSettings {
     'minValue': number,
     'maxValue': number,
     'step': number
 }
+
+export interface ISliderSettings {
+    'orientation': string,
+    'type': string
+}
+
+// export interface IThumbArgs {
+//     'thumbElem': HTMLElement,
+//     'minValue': number,
+//     'maxValue': number,
+//     'step': number
+// }
 
 // // Интерфейс компонентов слайдера
 // export interface ISliderComponents {

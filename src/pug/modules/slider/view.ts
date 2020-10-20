@@ -1,6 +1,8 @@
 import { Observable } from '../slider/observable';
 import { INewSliderOptions } from '../slider/interfaces';
 import { ISliderComponents } from '../slider/interfaces';
+import { ISliderSettings } from '../slider/interfaces';
+import { IThumbSettings } from '../slider/interfaces';
 import { Slider } from '../slider/slider';
 import { Thumb } from './thumb';
 
@@ -19,21 +21,29 @@ export class View {
 
     createSlider(sliderOptions: INewSliderOptions) {
         const sliderComponents: ISliderComponents = this.addSliderToPage(sliderOptions.sliderPosition);
+        
+        this.addSlider(sliderComponents.sliderElem, sliderOptions.settings.sliderSettings)
+        this.addThumb(sliderComponents.thumbElem, sliderOptions.settings.thumbSettings);
+    }
 
+    private addSlider(sliderElem: HTMLElement, sliderSettings: ISliderSettings) {
         this.slider = new Slider({
-            'sliderElem': sliderComponents.sliderElem,
-            'orientation': sliderOptions.settings.orienation,
-            'type': sliderOptions.settings.type
+            'sliderElem': sliderElem,
+            'orientation': sliderSettings.orientation,
+            'type': sliderSettings.type
         });
+    }
+
+    private addThumb(thumbElem: HTMLElement, thumbSettings: IThumbSettings) {
 
         this.thumb = new Thumb({
-            'thumbElem': sliderComponents.thumbElem,
-            'minValue': sliderOptions.settings.minValue,
-            'maxValue': sliderOptions.settings.maxValue,
-            'step': sliderOptions.settings.step
+            'thumbElem': thumbElem,
+            'minValue': thumbSettings.minValue,
+            'maxValue': thumbSettings.maxValue,
+            'step': thumbSettings.step
         });
 
-        const thumbElem: HTMLElement = this.thumb.getElement();
+        // const thumbElem: HTMLElement = this.thumb.getElement();
 
         thumbElem.ondragstart = function () {
             return false;
@@ -49,7 +59,6 @@ export class View {
 
             return false; // disable selection start (cursor change)
         }
-
     }
 
     private addSliderToPage(sliderPosition: HTMLElement): ISliderComponents {
@@ -70,7 +79,7 @@ export class View {
         return {'sliderElem': sliderElem, 'trackElem': trackElem, 'thumbElem': thumbElem}
     }
 
-    startDrag(startClientX: number, startClientY: number) {
+    private startDrag(startClientX: number, startClientY: number) {
         if (this.thumb && this.slider) {
             const thumbCoords: DOMRect = this.thumb.getElement().getBoundingClientRect()
             this.thumb.setShiftX(startClientX - thumbCoords.left);
@@ -93,7 +102,7 @@ export class View {
         // });
     }
 
-    moveTo(event: MouseEvent) {
+    private moveTo(event: MouseEvent) {
 
         if (this.slider && this.thumb) {
 
@@ -122,7 +131,7 @@ export class View {
         }
     }
 
-    endDrag(): void {
+    private endDrag(): void {
         document.removeEventListener('mousemove', this.onMouseMoveHandler as EventListenerOrEventListenerObject);
         document.removeEventListener('mouseup', this.onMouseUpHandler as EventListenerOrEventListenerObject);
     }
