@@ -1,4 +1,4 @@
-import '@/pug/modules/slider/index.ts'
+import '@/plugins/sliderPlugin/index.ts'
 
 import '@/style.scss';
-import '@/pug/modules/slider/slider.scss'
+import '@/plugins/sliderPlugin/styles/slider.scss'
