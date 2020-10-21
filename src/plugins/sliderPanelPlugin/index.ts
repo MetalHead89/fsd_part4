@@ -1,12 +1,11 @@
+import {Panel} from './panel'
+
 (function ($) {
     ($.fn as any).sliderControlPanel = function () {
 
         // Добавление конфигурации новых слайдеров в модель
         for (const panelPosition of this) {
-            const sliderPanel: HTMLElement = document.createElement('div');
-            sliderPanel.className = 'slider-panel';
-            
-            panelPosition.replaceWith(sliderPanel);
+            const panel: Panel = new Panel(panelPosition);
         }
 
     };
