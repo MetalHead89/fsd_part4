@@ -4,7 +4,7 @@ export class Panel {
     maxValue: HTMLElement | null = null;
     step: HTMLElement | null = null;
 
-    constructor(panelPosition: HTMLElement) {
+    constructor(slider: JQuery<HTMLElement>) {
         this.sliderPanel = document.createElement('div');
         this.sliderPanel.className = 'slider-panel';
 
@@ -15,8 +15,12 @@ export class Panel {
         this.sliderPanel.append(this.createInputControl(this.minValue, 'slider-panel__input', 'min'));
         this.sliderPanel.append(this.createInputControl(this.maxValue, 'slider-panel__input', 'max'));
         this.sliderPanel.append(this.createInputControl(this.step, 'slider-panel__input', 'step'));
+
+        const panelWrapper: HTMLElement = document.createElement('div');
+        panelWrapper.className = 'panel-wrapper';
+        panelWrapper.append(this.sliderPanel);
         
-        panelPosition.replaceWith(this.sliderPanel);
+        slider.after(panelWrapper);
     }
 
     private createInputControl(control:HTMLElement, controlClass: string, labelText: string): HTMLElement {

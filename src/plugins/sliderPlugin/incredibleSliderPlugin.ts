@@ -31,7 +31,7 @@ import { IPluginSettings } from './interfaces';
             });
         },
         show: function () {
-            console.log(this);
+            // console.log(this);
         }
     };
 
@@ -47,6 +47,6 @@ import { IPluginSettings } from './interfaces';
     };
 })(jQuery);
 
-// Поиск блоков с классом incredibleSliderPlugin и передача их плагину для добавления в них слайдеров
-$('.incredibleSliderPlugin').incredibleSliderPlugin();
-console.log($('.incredibleSliderPlugin').eq(0).incredibleSliderPlugin('show'))
+// // Поиск блоков с классом incredibleSliderPlugin и передача их плагину для добавления в них слайдеров
+// $('.incredibleSliderPlugin').incredibleSliderPlugin();
+// console.log($('.incredibleSliderPlugin').eq(0).incredibleSliderPlugin('show'))
