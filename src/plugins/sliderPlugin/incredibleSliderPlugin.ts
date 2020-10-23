@@ -16,33 +16,36 @@ import { IPluginSettings } from './interfaces';
     };
 
     const methods: any = {
-        init: function () {
+        init: function (options: IPluginSettings) {
             // Обновление настроек плагина в соответсвии с полученными параметрами
-            // const settings: any = $.extend(defaultSettings, options);
-            console.log(this)
+            const settings: any = $.extend(defaultSettings, options);
+
             // Добавление конфигурации новых слайдеров в модель
-            for (const sliderPosition of this) {
+            return this.each(function (i: number, elem: HTMLElement) {
                 const observer = new Observable();
                 const model: Model = new Model(observer);
                 const view: View = new View(observer);
                 const presenter: Presenter = new Presenter(view, model, observer);
 
-                // model.createNewSlider(sliderPosition, settings);
-                model.createNewSlider(sliderPosition, defaultSettings);
-            }
+                model.createNewSlider(elem, settings);
+            });
+        },
+        show: function () {
+            console.log(this);
         }
     };
 
-    ($.fn as any).incredibleSliderPlugin = function (action?: string | IPluginSettings) {
+    $.fn.incredibleSliderPlugin = function (action?: string | IPluginSettings): JQuery<HTMLElement> {
         if (typeof action === 'object' || !action) {
             return methods.init.apply(this, arguments);
         } else if (methods[action]) {
             return methods[action].apply(this, Array.prototype.slice.call(arguments, 1));
         } else {
             $.error('Метод с именем ' + action + ' не существует для jQuery.incredibleSliderPlugin');
+            return this;
         }
     };
 })(jQuery);
 
 // Поиск блоков с классом incredibleSliderPlugin и передача их плагину для добавления в них слайдеров
-($('.incredibleSliderPlugin') as any).incredibleSliderPlugin();
+$('.incredibleSliderPlugin').incredibleSliderPlugin();
