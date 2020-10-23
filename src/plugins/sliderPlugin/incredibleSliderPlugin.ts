@@ -49,3 +49,4 @@ import { IPluginSettings } from './interfaces';
 
 // Поиск блоков с классом incredibleSliderPlugin и передача их плагину для добавления в них слайдеров
 $('.incredibleSliderPlugin').incredibleSliderPlugin();
+console.log($('.incredibleSliderPlugin').eq(0).incredibleSliderPlugin('show'))

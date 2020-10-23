@@ -64,8 +64,7 @@ export class View {
     
         sliderElem.append(trackElem);
         sliderElem.append(thumbElem);
-        document.body.append(sliderElem);
-        sliderPosition.replaceWith(sliderElem);
+        sliderPosition.append(sliderElem);
 
         return {'sliderElem': sliderElem, 'trackElem': trackElem, 'thumbElem': thumbElem}
     }
