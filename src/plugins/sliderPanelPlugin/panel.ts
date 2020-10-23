@@ -9,6 +9,8 @@ export class Panel {
         this.sliderPanel.className = 'slider-panel';
 
         this.minValue = document.createElement('input');
+        this.minValue.addEventListener('input', () => {slider.incredibleSliderPlugin('show')})
+
         this.maxValue = document.createElement('input');
         this.step = document.createElement('input');
 

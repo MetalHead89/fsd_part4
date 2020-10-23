@@ -21,17 +21,23 @@ import { IPluginSettings } from './interfaces';
             const settings: any = $.extend(defaultSettings, options);
 
             // Добавление конфигурации новых слайдеров в модель
-            return this.each(function (i: number, elem: HTMLElement) {
+            return this.each(function (this: any) {
+                console.log($(this))
                 const observer = new Observable();
                 const model: Model = new Model(observer);
                 const view: View = new View(observer);
                 const presenter: Presenter = new Presenter(view, model, observer);
 
-                model.createNewSlider(elem, settings);
+                model.createNewSlider(this, settings);
+
+                $(this).data('slider', {
+                    target: $(this),
+                    m: model
+                });
             });
         },
         show: function () {
-            // console.log(this);
+            console.log(this.data().slider.m)
         }
     };
 
