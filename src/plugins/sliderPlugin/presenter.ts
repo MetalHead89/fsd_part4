@@ -19,7 +19,10 @@ export class Presenter {
                 this.view.createSlider(sliderOptions));
 
         this.observer.subscribe('updatedMinValue', 
-                (value: number) => this.view.changeMinValue(value));
+            (value: number) => this.view.changeMinValue(value));
+
+        this.observer.subscribe('updatedMaxValue', 
+            (value: number) => this.view.changeMaxValue(value));
         
                 
     }

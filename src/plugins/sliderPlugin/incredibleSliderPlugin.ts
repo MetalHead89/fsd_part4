@@ -41,7 +41,8 @@ import { IgnorePlugin } from 'webpack';
         setMinValue: function(value: number) {
             $(this).data().model.setMinValue(value);
         },
-        show: function () {
+        setMaxValue: function(value: number) {
+            $(this).data().model.setMaxValue(value);
         }
     };
 

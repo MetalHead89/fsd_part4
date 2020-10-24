@@ -127,6 +127,12 @@ export class View {
         }
     }
 
+    changeMaxValue(value: number) {
+        if (this.thumb) {
+            this.thumb.setMaxValue(value);
+        }
+    }
+
     private positionToValue(thumb: Thumb, left: number) {
         // return (Math.round(left / thumb.pixelsPerValue));
         return Math.round(thumb.getMinValue() + ((thumb.getMaxValue() - 

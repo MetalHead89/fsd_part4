@@ -24,6 +24,10 @@ export class Thumb {
         return this.minValue;
     }
 
+    setMaxValue(value: number) {
+        this.maxValue = value;
+    }
+
     getMaxValue(): number {
         return this.maxValue;
     }

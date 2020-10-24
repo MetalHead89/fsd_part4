@@ -17,6 +17,10 @@ export class Model {
         this.observer.notify('updatedMinValue', newValue);
     }
 
+    setMaxValue(newValue: number) {
+        this.observer.notify('updatedMaxValue', newValue);
+    }
+
     createNewSlider(sliderPosition: HTMLElement, settings: IPluginSettings): void {
         this.settings = settings;
         const groupedSettings: IGroupedSettings = this.splitSettingsIntoGroups(settings);        
