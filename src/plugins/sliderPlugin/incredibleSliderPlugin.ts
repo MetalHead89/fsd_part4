@@ -43,6 +43,9 @@ import { IgnorePlugin } from 'webpack';
         },
         setMaxValue: function(value: number) {
             $(this).data().model.setMaxValue(value);
+        },
+        setStepValue: function(value: number) {
+            $(this).data().model.setStepValue(value);
         }
     };
 

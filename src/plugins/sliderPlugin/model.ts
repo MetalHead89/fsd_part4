@@ -21,6 +21,10 @@ export class Model {
         this.observer.notify('updatedMaxValue', newValue);
     }
 
+    setStepValue(newValue: number) {
+        this.observer.notify('updatedStepValue', newValue);
+    }
+
     createNewSlider(sliderPosition: HTMLElement, settings: IPluginSettings): void {
         this.settings = settings;
         const groupedSettings: IGroupedSettings = this.splitSettingsIntoGroups(settings);        

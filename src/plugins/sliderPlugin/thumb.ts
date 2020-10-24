@@ -32,6 +32,10 @@ export class Thumb {
         return this.maxValue;
     }
 
+    setStepValue(value: number) {
+        this.step = value;
+    }
+
     getStep(): number {
         return this.step;
     }

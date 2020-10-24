@@ -24,6 +24,9 @@ export class Presenter {
         this.observer.subscribe('updatedMaxValue', 
             (value: number) => this.view.changeMaxValue(value));
         
+        this.observer.subscribe('updatedStepValue', 
+            (value: number) => this.view.changeStepValue(value))
+        
                 
     }
 }

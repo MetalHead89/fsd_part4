@@ -15,6 +15,7 @@ export class Panel {
         this.maxValue.addEventListener('input', () => {this.setMaxValueSlider(slider)});
 
         this.step = document.createElement('input');
+        this.step.addEventListener('input', () => {this.setStepValueSlider(slider)});
 
         this.sliderPanel.append(this.createInputControl(this.minValue, 'slider-panel__input', 'min'));
         this.sliderPanel.append(this.createInputControl(this.maxValue, 'slider-panel__input', 'max'));
@@ -59,6 +60,16 @@ export class Panel {
             
             if (!isNaN(maxValue)) {
                 slider.incredibleSliderPlugin('setMaxValue', maxValue);
+            }
+        }
+    }
+    
+    setStepValueSlider(slider: JQuery<HTMLElement>) {
+        if (this.step) {
+            const step = parseInt(this.step.value);
+            
+            if (!isNaN(step)) {
+                slider.incredibleSliderPlugin('setStepValue', step);
             }
         }
     }

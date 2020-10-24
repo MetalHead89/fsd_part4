@@ -133,6 +133,12 @@ export class View {
         }
     }
 
+    changeStepValue(value: number) {
+        if (this.thumb) {
+            this.thumb.setStepValue(value);
+        }
+    }
+
     private positionToValue(thumb: Thumb, left: number) {
         // return (Math.round(left / thumb.pixelsPerValue));
         return Math.round(thumb.getMinValue() + ((thumb.getMaxValue() - 
