@@ -17,6 +17,11 @@ export class Presenter {
         this.observer.subscribe('addedNewSliderConfiguration', 
             (sliderOptions: INewSliderOptions) => 
                 this.view.createSlider(sliderOptions));
+
+        this.observer.subscribe('updatedMinValue', 
+                (value: number) => this.view.changeMinValue(value));
+        
+                
     }
 }
 

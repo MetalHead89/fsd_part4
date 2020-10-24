@@ -16,6 +16,10 @@ export class Thumb {
         this.step = thumbSettings.step;
     }
 
+    setMinValue(value: number) {
+        this.minValue = value;
+    }
+
     getMinValue(): number {
         return this.minValue;
     }

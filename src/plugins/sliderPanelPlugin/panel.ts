@@ -1,6 +1,6 @@
 export class Panel {
     sliderPanel: HTMLElement | null = null;
-    minValue: HTMLElement | null = null;
+    minValue: HTMLInputElement | null = null;
     maxValue: HTMLElement | null = null;
     step: HTMLElement | null = null;
 
@@ -9,7 +9,7 @@ export class Panel {
         this.sliderPanel.className = 'slider-panel';
 
         this.minValue = document.createElement('input');
-        this.minValue.addEventListener('input', () => {slider.incredibleSliderPlugin('show')})
+        this.minValue.addEventListener('input', () => {this.setMinValueSlider(slider)});
 
         this.maxValue = document.createElement('input');
         this.step = document.createElement('input');
@@ -39,5 +39,15 @@ export class Panel {
         wrapper.append(control);
 
         return wrapper;
+    }
+
+    setMinValueSlider(slider: JQuery<HTMLElement>) {
+        if (this.minValue) {
+            const minValue = parseInt(this.minValue.value);
+            
+            if (!isNaN(minValue)) {
+                slider.incredibleSliderPlugin('setMinValue', minValue);
+            }
+        }
     }
 }

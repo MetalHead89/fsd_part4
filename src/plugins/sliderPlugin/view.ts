@@ -11,7 +11,7 @@ export class View {
     private observer: Observable;
     private slider: Slider | null = null;
     private thumb: Thumb | null = null;
-    private pixelsPerValue: Number = 0;
+    private pixelsPerValue: number = 0;
     private onMouseMoveHandler: Function | null = null;
     private onMouseUpHandler: Function | null = null;
 
@@ -112,13 +112,25 @@ export class View {
 
             this.thumb.moveTo(newLeft);
 
-            // console.log(this.positionToValue(thumb, newLeft))////////////////////////////////////
+            console.log(this.positionToValue(this.thumb, newLeft))////////////////////////////////////
         }
     }
 
     private endDrag(): void {
         document.removeEventListener('mousemove', this.onMouseMoveHandler as EventListenerOrEventListenerObject);
         document.removeEventListener('mouseup', this.onMouseUpHandler as EventListenerOrEventListenerObject);
+    }
+
+    changeMinValue(value: number) {
+        if (this.thumb) {
+            this.thumb.setMinValue(value);
+        }
+    }
+
+    private positionToValue(thumb: Thumb, left: number) {
+        // return (Math.round(left / thumb.pixelsPerValue));
+        return Math.round(thumb.getMinValue() + ((thumb.getMaxValue() - 
+            thumb.getMinValue()) / 100 * Math.round(left / this.pixelsPerValue)));
     }
 }
 

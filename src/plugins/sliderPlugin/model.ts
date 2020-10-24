@@ -13,6 +13,10 @@ export class Model {
         this.observer = observer;
     }
 
+    setMinValue(newValue: number) {
+        this.observer.notify('updatedMinValue', newValue);
+    }
+
     createNewSlider(sliderPosition: HTMLElement, settings: IPluginSettings): void {
         this.settings = settings;
         const groupedSettings: IGroupedSettings = this.splitSettingsIntoGroups(settings);        
