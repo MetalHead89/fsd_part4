@@ -3,17 +3,22 @@ import { INewSliderOptions } from './interfaces';
 import { ISliderComponents } from './interfaces';
 import { ISliderSettings } from './interfaces';
 import { IThumbSettings } from './interfaces';
+import { IScaleSettings } from './interfaces';
 import { Slider } from './slider';
 import { Thumb } from './thumb';
+import { Scale } from './scale';
 
 export class View {
 
     private observer: Observable;
     private slider: Slider | null = null;
     private thumb: Thumb | null = null;
+    private scale: Scale | null = null;
     private pixelsPerValue: number = 0;
     private onMouseMoveHandler: Function | null = null;
     private onMouseUpHandler: Function | null = null;
+    private stepsCount: number = 0;
+    private stepSize: number = 0;
 
     constructor(observer: Observable) {
         this.observer = observer;
@@ -24,6 +29,27 @@ export class View {
         
         this.addSlider(sliderComponents.sliderElem, sliderOptions.settings.sliderSettings)
         this.addThumb(sliderComponents.thumbElem, sliderOptions.settings.thumbSettings);
+
+        this.stepsCount = this.calculateStepsNumber();
+        this.stepSize = this.calculateStepSize();
+
+        this.addScale(sliderComponents.scaleElem, sliderOptions.settings.scaleSettings);
+    }
+
+    private calculateStepsNumber(): number{
+        if (this.thumb) {
+            return (this.thumb.getMaxValue() - this.thumb.getMinValue()) / this.thumb.getStep();
+        }
+
+        return 0;
+    }
+
+    private calculateStepSize(): number{
+        if (this.thumb && this.slider) {
+            return (this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth) / this.stepsCount;
+        }
+
+        return 0;
     }
 
     private addSlider(sliderElem: HTMLElement, sliderSettings: ISliderSettings) {
@@ -52,6 +78,10 @@ export class View {
         }
     }
 
+    private addScale(scaleElem: HTMLElement, scaleSettings: IScaleSettings) {
+        this.scale = new Scale(scaleElem, scaleSettings, this.stepsCount + 1, this.stepSize);
+    }
+
     private addSliderToPage(sliderPosition: HTMLElement): ISliderComponents {
         const sliderElem: HTMLElement = document.createElement('div');
         sliderElem.className = 'slider';
@@ -61,12 +91,16 @@ export class View {
     
         const thumbElem: HTMLElement = document.createElement('div');
         thumbElem.className = 'slider__thumb';
+
+        const scaleElem: HTMLElement = document.createElement('div');
+        scaleElem.className = 'slider__scale';
     
         sliderElem.append(trackElem);
         sliderElem.append(thumbElem);
+        sliderElem.append(scaleElem);
         sliderPosition.append(sliderElem);
 
-        return {'sliderElem': sliderElem, 'trackElem': trackElem, 'thumbElem': thumbElem}
+        return {'sliderElem': sliderElem, 'trackElem': trackElem, 'thumbElem': thumbElem, 'scaleElem': scaleElem}
     }
 
     private startDrag(startClientX: number, startClientY: number) {
@@ -105,9 +139,14 @@ export class View {
             if (newLeft > rightEdge) {
                 newLeft = rightEdge;
             } else {
-                let stepCount: number = (this.thumb.getMaxValue() - this.thumb.getMinValue()) / this.thumb.getStep();
-                let stepSize: number = (this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth) / stepCount;
-                newLeft = Math.round(newLeft / stepSize) * stepSize;
+                // this.stepsCount = (this.thumb.getMaxValue() - this.thumb.getMinValue()) / this.thumb.getStep();
+                // let stepSize: number = (this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth) / this.stepsCount;
+                newLeft = Math.round(newLeft / this.stepSize) * this.stepSize;
+
+
+                // let stepCount: number = (this.thumb.getMaxValue() - this.thumb.getMinValue()) / this.thumb.getStep();
+                // let stepSize: number = (this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth) / stepCount;
+                // newLeft = Math.round(newLeft / stepSize) * stepSize;
             }
 
             this.thumb.moveTo(newLeft);

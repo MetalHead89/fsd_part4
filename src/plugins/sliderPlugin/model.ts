@@ -4,6 +4,7 @@ import { IThumbSettings } from './interfaces';
 import { ISliderSettings } from './interfaces';
 import { INewSliderOptions } from './interfaces';
 import { IGroupedSettings } from './interfaces';
+import { IScaleSettings } from './interfaces';
 
 export class Model {
     private observer: Observable;
@@ -46,10 +47,14 @@ export class Model {
 
         const sliderSettings: ISliderSettings = {
             'orientation': settings.orienation,
-            'type': settings.type
+            'type': settings.type,
         }
 
-        return {'sliderSettings': sliderSettings, 'thumbSettings': thumbSettings}
+        const scaleSettings: IScaleSettings = {
+            'displayed': settings.scale
+        }
+
+        return {'sliderSettings': sliderSettings, 'thumbSettings': thumbSettings, 'scaleSettings': scaleSettings}
     }
 }
 

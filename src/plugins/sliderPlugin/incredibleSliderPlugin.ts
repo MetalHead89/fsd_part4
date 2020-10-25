@@ -11,8 +11,9 @@ import { IgnorePlugin } from 'webpack';
     const defaultSettings: any = {
         'orienation': 'horizontal',
         'type': 'single',
-        'minValue': 0,
-        'maxValue': 100,
+        'scale': true,
+        'minValue': 1,
+        'maxValue': 4,
         'step': 1
     };
 

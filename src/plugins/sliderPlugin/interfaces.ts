@@ -1,6 +1,7 @@
 export interface IPluginSettings {
     'orienation': string,
     'type': string,
+    'scale': boolean,
     'minValue': number,
     'maxValue': number,
     'step': number
@@ -8,7 +9,8 @@ export interface IPluginSettings {
 
 export interface IGroupedSettings {
     'sliderSettings': ISliderSettings
-    'thumbSettings': IThumbSettings
+    'thumbSettings': IThumbSettings,
+    'scaleSettings': IScaleSettings
 }
 
 export interface INewSliderOptions {
@@ -19,7 +21,8 @@ export interface INewSliderOptions {
 export interface ISliderComponents {
     'sliderElem': HTMLElement,
     'trackElem': HTMLElement,
-    'thumbElem': HTMLElement
+    'thumbElem': HTMLElement,
+    'scaleElem': HTMLElement
 }
 
 export interface IThumbSettings {
@@ -30,5 +33,9 @@ export interface IThumbSettings {
 
 export interface ISliderSettings {
     'orientation': string,
-    'type': string
+    'type': string,
+}
+
+export interface IScaleSettings {
+    'displayed': boolean
 }
