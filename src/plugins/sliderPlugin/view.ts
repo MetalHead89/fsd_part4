@@ -79,7 +79,9 @@ export class View {
     }
 
     private addScale(scaleElem: HTMLElement, scaleSettings: IScaleSettings) {
-        this.scale = new Scale(scaleElem, scaleSettings, this.stepsCount + 1, this.stepSize);
+        if (this.thumb) {
+            this.scale = new Scale(scaleElem, scaleSettings, this.stepsCount + 1, this.stepSize, this.thumb.getElement().clientWidth / 2);
+        }
     }
 
     private addSliderToPage(sliderPosition: HTMLElement): ISliderComponents {
