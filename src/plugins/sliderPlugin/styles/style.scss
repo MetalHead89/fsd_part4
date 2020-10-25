@@ -21,9 +21,8 @@
 }
 
 .slider__scale {
+    position: relative;
     margin-top: 10px;
-    display: flex;
-    justify-content: space-between;
     // width: 100%;
     // height: 20px;
     // border: 1px solid gray;
@@ -31,6 +30,7 @@
 }
 
 .slider__scale-segment {
+    position: absolute;
     border-radius: 50%;
     background: green;
 }

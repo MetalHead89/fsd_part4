@@ -6,7 +6,7 @@ export class Scale {
     private segmentsCount: number = 2;
     private stepSize: number = 0;
     private displayed: boolean;
-    private startPosition: number = 0;
+    // private startPosition: number = 0;
     private segmentWidh: number = 10;
     private segmentHeight: number = 10;
 
@@ -15,21 +15,33 @@ export class Scale {
         this.displayed = setings.displayed;
         this.segmentsCount = segmentsCount;
         this.stepSize = stepSize;
-        this.startPosition = startPosition - this.segmentWidh / 2;
+        // this.startPosition = startPosition - this.segmentWidh / 2;
 
-        this.addSegments();
+        this.addSegments(startPosition - this.segmentWidh / 2);
     }
 
-    private addSegments() {
+    private addSegments(startPosition: number) {
         if (this.scaleElem) {
-            const segment: HTMLElement = document.createElement('div');
-            segment.className = 'slider__scale-segment';
-            segment.style.width = this.segmentWidh + 'px';
-            segment.style.height = this.segmentHeight + 'px';
+            for (let i = 0; i < this.segmentsCount; i++) {
+                const segment: HTMLElement = document.createElement('div');
+                segment.className = 'slider__scale-segment';
 
-            segment.style.marginLeft = this.startPosition + 'px';
+                segment.style.width = this.segmentWidh + 'px';
+                segment.style.height = this.segmentHeight + 'px';
+                
+                segment.style.left = startPosition + 'px';
+                startPosition += this.stepSize;
 
-            this.scaleElem.append(segment);
+                this.scaleElem.append(segment);
+            }
+            // const segment: HTMLElement = document.createElement('div');
+            // segment.className = 'slider__scale-segment';
+            // segment.style.width = this.segmentWidh + 'px';
+            // segment.style.height = this.segmentHeight + 'px';
+
+            // segment.style.marginLeft = this.startPosition + 'px';
+
+            // this.scaleElem.append(segment);
         }
 
         // if (this.scaleElem) {

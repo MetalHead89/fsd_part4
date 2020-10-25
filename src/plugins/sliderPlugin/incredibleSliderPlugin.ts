@@ -13,8 +13,8 @@ import { IgnorePlugin } from 'webpack';
         'type': 'single',
         'scale': true,
         'minValue': 1,
-        'maxValue': 4,
-        'step': 1
+        'maxValue': 9,
+        'step': 3
     };
 
     const methods: any = {
