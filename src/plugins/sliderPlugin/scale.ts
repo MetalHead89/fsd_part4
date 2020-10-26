@@ -10,17 +10,19 @@ export class Scale {
     private segmentWidh: number = 10;
     private segmentHeight: number = 10;
 
-    constructor(scaleElem: HTMLElement, setings: IScaleSettings, segmentsCount: number, stepSize: number, startPosition: number) {
+    constructor(scaleElem: HTMLElement, setings: IScaleSettings, segmentsCount: number, stepSize: number, thumbSize: number) {
         this.scaleElem = scaleElem;
         this.displayed = setings.displayed;
         this.segmentsCount = segmentsCount;
         this.stepSize = stepSize;
-        // this.startPosition = startPosition - this.segmentWidh / 2;
+        
+        let startPosition: number = thumbSize / 2 - this.segmentWidh / 2;
+        let endPosition: number = scaleElem.clientWidth - thumbSize / 2 - this.segmentWidh / 2;
 
-        this.addSegments(startPosition - this.segmentWidh / 2);
+        this.addSegments(startPosition, endPosition);
     }
 
-    private addSegments(startPosition: number) {
+    private addSegments(startPosition: number, endPosition: number) {
         if (this.scaleElem) {
             for (let i = 0; i < this.segmentsCount; i++) {
                 const segment: HTMLElement = document.createElement('div');
@@ -30,9 +32,16 @@ export class Scale {
                 segment.style.height = this.segmentHeight + 'px';
                 
                 segment.style.left = startPosition + 'px';
-                startPosition += this.stepSize;
 
                 this.scaleElem.append(segment);
+                console.log(this.segmentsCount)
+
+                if (i == this.segmentsCount - 2) {
+                    startPosition = endPosition;
+                    console.log('d')
+                } else {
+                    startPosition += this.stepSize;
+                }
             }
             // const segment: HTMLElement = document.createElement('div');
             // segment.className = 'slider__scale-segment';

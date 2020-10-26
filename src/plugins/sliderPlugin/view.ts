@@ -80,7 +80,7 @@ export class View {
 
     private addScale(scaleElem: HTMLElement, scaleSettings: IScaleSettings) {
         if (this.thumb) {
-            this.scale = new Scale(scaleElem, scaleSettings, this.stepsCount + 1, this.stepSize, this.thumb.getElement().clientWidth / 2);
+            this.scale = new Scale(scaleElem, scaleSettings, Math.round(this.stepsCount + 1), this.stepSize, this.thumb.getElement().clientWidth);
         }
     }
 
