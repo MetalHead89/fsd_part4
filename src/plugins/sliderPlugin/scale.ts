@@ -34,11 +34,9 @@ export class Scale {
                 segment.style.left = startPosition + 'px';
 
                 this.scaleElem.append(segment);
-                console.log(this.segmentsCount)
 
                 if (i == this.segmentsCount - 2) {
                     startPosition = endPosition;
-                    console.log('d')
                 } else {
                     startPosition += this.stepSize;
                 }

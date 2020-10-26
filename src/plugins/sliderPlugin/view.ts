@@ -137,8 +137,11 @@ export class View {
             }
 
             let rightEdge: number = this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth;
+            console.log(newLeft)
+            
+            newLeft = Math.round(newLeft / this.stepSize) * this.stepSize;
 
-            if (newLeft > rightEdge) {
+            if (newLeft >= rightEdge) {
                 newLeft = rightEdge;
             } else {
                 // this.stepsCount = (this.thumb.getMaxValue() - this.thumb.getMinValue()) / this.thumb.getStep();
@@ -153,7 +156,7 @@ export class View {
 
             this.thumb.moveTo(newLeft);
 
-            console.log(this.positionToValue(this.thumb, newLeft))////////////////////////////////////
+            // console.log(this.positionToValue(this.thumb, newLeft))////////////////////////////////////
         }
     }
 
