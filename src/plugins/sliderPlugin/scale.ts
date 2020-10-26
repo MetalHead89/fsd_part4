@@ -15,11 +15,17 @@ export class Scale {
         this.displayed = setings.displayed;
         this.segmentsCount = segmentsCount;
         this.stepSize = stepSize;
+
+        this.scaleElem.style.height = this.segmentHeight + 'px';
         
         let startPosition: number = thumbSize / 2 - this.segmentWidh / 2;
         let endPosition: number = scaleElem.clientWidth - thumbSize / 2 - this.segmentWidh / 2;
 
         this.addSegments(startPosition, endPosition);
+    }
+
+    getScaleElem(): HTMLElement | null {
+        return this.scaleElem;
     }
 
     private addSegments(startPosition: number, endPosition: number) {
