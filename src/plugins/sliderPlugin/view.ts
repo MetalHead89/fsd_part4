@@ -141,7 +141,6 @@ export class View {
             }
 
             let rightEdge: number = this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth;
-            console.log(newLeft)
             
             newLeft = Math.round(newLeft / this.stepSize) * this.stepSize;
 
