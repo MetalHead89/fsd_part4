@@ -5,6 +5,7 @@ import { ISliderSettings } from './interfaces';
 import { IThumbSettings } from './interfaces';
 import { IScaleSettings } from './interfaces';
 import { Slider } from './slider';
+import { Track } from './track';
 import { Thumb } from './thumb';
 import { Scale } from './scale';
 
@@ -12,6 +13,7 @@ export class View {
 
     private observer: Observable;
     private slider: Slider | null = null;
+    private track: Track | null = null;
     private thumb: Thumb | null = null;
     private scale: Scale | null = null;
     private pixelsPerValue: number = 0;
@@ -27,7 +29,8 @@ export class View {
     createSlider(sliderOptions: INewSliderOptions) {
         const sliderComponents: ISliderComponents = this.addSliderToPage(sliderOptions.sliderPosition);
         
-        this.addSlider(sliderComponents.sliderElem, sliderOptions.settings.sliderSettings)
+        this.addSlider(sliderComponents.sliderElem, sliderOptions.settings.sliderSettings);
+        this.addTrack(sliderComponents.trackElem);
         this.addThumb(sliderComponents.thumbElem, sliderOptions.settings.thumbSettings);
 
         this.stepsCount = this.calculateStepsNumber();
@@ -50,6 +53,14 @@ export class View {
         }
 
         return 0;
+    }
+
+    private addTrack(trackElem: HTMLElement) {
+        this.track = new Track(trackElem);
+
+        trackElem.addEventListener('click', (event) => {
+            this.moveTo(event);
+        })
     }
 
     private addSlider(sliderElem: HTMLElement, sliderSettings: ISliderSettings) {
@@ -83,7 +94,6 @@ export class View {
             this.scale = new Scale(scaleElem, scaleSettings, Math.round(this.stepsCount + 1), this.stepSize, this.thumb.getElement().clientWidth);
             scaleElem.addEventListener('click', (event) => {
                 this.moveTo(event)
-                console.log(event);
             })
         }
     }
