@@ -5,31 +5,39 @@ export class Scale {
     private scaleElem: HTMLElement | null;
     private divisionsCount: number = 2;
     private stepSize: number = 0;
+    private minValue: number = 1;
+    private maxValue: number = 10;
     private displayed: boolean;
-    // private startPosition: number = 0;
-    private segmentWidh: number = 10;
-    private segmentHeight: number = 10;
+    private divisionWidh: number = 10;
+    private divisionHeight: number = 10;
+    private pixelsPerValue: number = 0;
 
-    constructor(scaleElem: HTMLElement, setings: IScaleSettings, divisionsCount: number, stepSize: number, thumbSize: number) {
-        this.scaleElem = scaleElem;
-        this.displayed = setings.displayed;
-        this.divisionsCount = divisionsCount;
-        this.stepSize = stepSize;
+    constructor(scaleElem: HTMLElement, setings: IScaleSettings, 
+        divisionsCount: number, stepSize: number, thumbSize: number, pixelsPerValue: number) {
+            this.scaleElem = scaleElem;
+            this.displayed = setings.displayed;
+            this.divisionsCount = divisionsCount;
+            this.stepSize = stepSize;
+            this.maxValue = setings.maxValue;
+            this.minValue = setings.minValue;
+            this.pixelsPerValue = pixelsPerValue;
 
-        this.scaleElem.style.height = this.segmentHeight + 'px';
+            this.scaleElem.style.height = this.divisionHeight + 'px';
 
-        let startPosition: number = thumbSize / 2 - this.segmentWidh / 2;
-        let endPosition: number = scaleElem.clientWidth - thumbSize / 2 - this.segmentWidh / 2;
+            // let startPosition: number = thumbSize / 2 - this.divisionWidh / 2;
+            // let endPosition: number = scaleElem.clientWidth - thumbSize / 2 - this.divisionWidh / 2;
 
-        this.addSegments(startPosition, endPosition);
+            this.addDivisions(thumbSize);
     }
 
     getScaleElem(): HTMLElement | null {
         return this.scaleElem;
     }
 
-    private addSegments(startPosition: number, endPosition: number) {
+    private addDivisions(thumbSize: number) {
         if (this.scaleElem) {
+            let divisionPosition: number = thumbSize / 2;
+
             let visibleDivisions: number = 1;
 
             if (this.divisionsCount > 10) {
@@ -37,41 +45,39 @@ export class Scale {
             }
 
             for (let i = 0; i < this.divisionsCount; i++) {
-                const segment: HTMLElement = document.createElement('div');
-                segment.className = 'slider__scale-segment';
+                const division: HTMLElement = document.createElement('div');
+                division.className = 'slider__scale-division';
 
-                segment.style.width = this.segmentWidh + 'px';
-                segment.style.height = this.segmentHeight + 'px';
+                const divisionMarker: HTMLElement = document.createElement('div')
+                divisionMarker.className = ('slider__divisionMarker')
+                divisionMarker.style.width = this.divisionWidh + 'px';
+                divisionMarker.style.height = this.divisionHeight + 'px';
 
-                segment.style.left = startPosition + 'px';
+                const divisionLabel: HTMLElement = document.createElement('div')
+                divisionLabel.className = ('slider__divisionLabel')   
+                divisionLabel.innerText = this.positionToValue(divisionPosition).toString();             
+
+                division.append(divisionMarker);
+                division.append(divisionLabel);
 
                 if (i == 0 || i % visibleDivisions == 0 || i == this.divisionsCount - 1) {
-                    this.scaleElem.append(segment);
+                    this.scaleElem.append(division);
                 }
+
+                division.style.left = divisionPosition - division.clientWidth / 2 + 'px';
 
                 if (i == this.divisionsCount - 2) {
-                    startPosition = endPosition;
+                    divisionPosition = this.scaleElem.clientWidth - thumbSize / 2;
                 } else {
-                    startPosition += this.stepSize;
+                    divisionPosition += this.stepSize;
                 }
             }
-            // const segment: HTMLElement = document.createElement('div');
-            // segment.className = 'slider__scale-segment';
-            // segment.style.width = this.segmentWidh + 'px';
-            // segment.style.height = this.segmentHeight + 'px';
-
-            // segment.style.marginLeft = this.startPosition + 'px';
-
-            // this.scaleElem.append(segment);
         }
+    }
 
-        // if (this.scaleElem) {
-        //     for (let i = 0; i < this.divisionsCount; i++) {
-        //         const segment: HTMLElement = document.createElement('div');
-        //         segment.className = 'slider__scale-segment';
-
-        //         this.scaleElem.append(segment);
-        //     }
-        // }
+    private positionToValue(position: number) {
+        console.log(this.pixelsPerValue)
+        return Math.round(this.minValue + ((this.maxValue - 
+            this.minValue) / 100 * Math.round(position / this.pixelsPerValue)));
     }
 }

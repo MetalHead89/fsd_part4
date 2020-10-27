@@ -51,7 +51,9 @@ export class Model {
         }
 
         const scaleSettings: IScaleSettings = {
-            'displayed': settings.scale
+            'displayed': settings.scale,
+            'minValue': settings.minValue,
+            'maxValue': settings.maxValue,
         }
 
         return {'sliderSettings': sliderSettings, 'thumbSettings': thumbSettings, 'scaleSettings': scaleSettings}

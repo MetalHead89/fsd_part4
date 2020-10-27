@@ -30,8 +30,18 @@
     // border-bottom: 0px;
 }
 
-.slider__scale-segment {
+.slider__scale-division {
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.slider__divisionMarker {
     border-radius: 50%;
     background: rgb(224, 224, 224);
+}
+
+.slider__divisionLabel {
+    display: block;
 }

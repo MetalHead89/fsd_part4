@@ -37,5 +37,7 @@ export interface ISliderSettings {
 }
 
 export interface IScaleSettings {
-    'displayed': boolean
+    'displayed': boolean,
+    'minValue': number,
+    'maxValue': number,
 }

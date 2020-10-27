@@ -36,6 +36,11 @@ export class View {
         this.stepsCount = this.calculateStepsNumber();
         this.stepSize = this.calculateStepSize();
 
+        if (this.slider && this.thumb) {
+            this.pixelsPerValue = (this.slider.getElement().clientWidth -
+                        this.thumb.getElement().clientWidth) / 100;
+        }
+
         this.addScale(sliderComponents.scaleElem, sliderOptions.settings.scaleSettings);
     }
 
@@ -79,8 +84,8 @@ export class View {
 
         thumbElem.onmousedown = event => {
             if (this.slider && this.thumb) {
-                this.pixelsPerValue = (this.slider.getElement().clientWidth -
-                    this.thumb.getElement().clientWidth) / 100;
+                // this.pixelsPerValue = (this.slider.getElement().clientWidth -
+                //     this.thumb.getElement().clientWidth) / 100;
                 
                 this.startDrag(event.clientX, event.clientY);
             }            
@@ -91,7 +96,7 @@ export class View {
 
     private addScale(scaleElem: HTMLElement, scaleSettings: IScaleSettings) {
         if (this.thumb) {
-            this.scale = new Scale(scaleElem, scaleSettings, Math.round(this.stepsCount + 1), this.stepSize, this.thumb.getElement().clientWidth);
+            this.scale = new Scale(scaleElem, scaleSettings, Math.round(this.stepsCount + 1), this.stepSize, this.thumb.getElement().clientWidth, this.pixelsPerValue);
             scaleElem.addEventListener('click', (event) => {
                 this.moveTo(event)
             })
