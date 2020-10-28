@@ -58,7 +58,7 @@ export class Scale {
 
                 const divisionLabel: HTMLElement = document.createElement('div')
                 divisionLabel.className = ('slider__divisionLabel')   
-                divisionLabel.innerText = this.positionToValue(divisionPosition).toString();             
+                divisionLabel.innerText = this.positionToValue(divisionPosition - thumbSize / 2).toString();             
 
                 division.append(divisionMarker);
                 division.append(divisionLabel);
