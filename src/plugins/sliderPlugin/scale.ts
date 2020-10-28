@@ -62,7 +62,8 @@ export class Scale {
 
                 const divisionLabel: HTMLElement = document.createElement('div')
                 divisionLabel.className = ('slider__divisionLabel')   
-                divisionLabel.innerText = this.positionToValue(divisionPosition - thumbSize / 2).toString();             
+                divisionLabel.innerText = this.positionToValue(divisionPosition - thumbSize / 2).toString();
+                console.log(divisionLabel.offsetWidth)
 
                 division.append(divisionMarker);
                 division.append(divisionLabel);
@@ -70,9 +71,12 @@ export class Scale {
                 if (i == 0 || newLeft - leftPrevElement >= this.divisionWidth + 10 || i == this.divisionsCount - 1) {
                     this.scaleElem.append(division);
                     leftPrevElement = newLeft;
-                }
 
-                
+                    if (divisionLabel.offsetWidth > division.offsetWidth) {
+                        // divisionLabel.style.transform = "rotate(45deg)";
+                        divisionLabel.classList.add('slider__divisionLabel_rotate');
+                    }
+                }
 
                 if (i == this.divisionsCount - 2) {
                     divisionPosition = this.scaleElem.clientWidth - thumbSize / 2;

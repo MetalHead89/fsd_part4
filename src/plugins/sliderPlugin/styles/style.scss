@@ -40,4 +40,10 @@
 
 .slider__divisionLabel {
     display: block;
+    margin-top: 5px;
+}
+
+.slider__divisionLabel_rotate {
+    // transform-origin: left top;
+    transform: rotate(45deg);
 }
