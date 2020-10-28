@@ -174,7 +174,7 @@ export class View {
 
             this.thumb.moveTo(newLeft);
 
-            console.log(this.positionToValue(this.thumb, newLeft))////////////////////////////////////
+            // console.log(this.positionToValue(this.thumb, newLeft))////////////////////////////////////
         }
     }
 

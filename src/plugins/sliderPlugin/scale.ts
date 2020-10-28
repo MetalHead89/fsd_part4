@@ -22,7 +22,7 @@ export class Scale {
             this.maxValue = setings.maxValue;
             this.minValue = setings.minValue;
             this.pixelsPerValue = pixelsPerValue;
-            this.divisionWidth = 50;
+            this.divisionWidth = 20;
 
             this.scaleElem.style.height = this.markerHeight + 'px';
 
@@ -39,6 +39,7 @@ export class Scale {
     private addDivisions(thumbSize: number) {
         if (this.scaleElem) {
             let divisionPosition: number = thumbSize / 2;
+            let leftPrevElement = 0;
 
             let visibleDivisions: number = 1;
 
@@ -47,6 +48,8 @@ export class Scale {
             }
 
             for (let i = 0; i < this.divisionsCount; i++) {
+                const newLeft: number = divisionPosition - this.divisionWidth / 2;
+
                 const division: HTMLElement = document.createElement('div');
                 division.className = 'slider__scale-division';
                 division.style.width = this.divisionWidth + 'px';
@@ -55,6 +58,7 @@ export class Scale {
                 divisionMarker.className = ('slider__divisionMarker')
                 divisionMarker.style.width = this.markerWidh + 'px';
                 divisionMarker.style.height = this.markerHeight + 'px';
+                division.style.left = newLeft + 'px';
 
                 const divisionLabel: HTMLElement = document.createElement('div')
                 divisionLabel.className = ('slider__divisionLabel')   
@@ -63,11 +67,12 @@ export class Scale {
                 division.append(divisionMarker);
                 division.append(divisionLabel);
 
-                if (i == 0 || i % visibleDivisions == 0 || i == this.divisionsCount - 1) {
+                if (i == 0 || newLeft - leftPrevElement >= this.divisionWidth + 10 || i == this.divisionsCount - 1) {
                     this.scaleElem.append(division);
+                    leftPrevElement = newLeft;
                 }
 
-                division.style.left = divisionPosition - division.clientWidth / 2 + 'px';
+                
 
                 if (i == this.divisionsCount - 2) {
                     divisionPosition = this.scaleElem.clientWidth - thumbSize / 2;
@@ -79,7 +84,6 @@ export class Scale {
     }
 
     private positionToValue(position: number) {
-        console.log(this.pixelsPerValue)
         return Math.round(this.minValue + ((this.maxValue - 
             this.minValue) / 100 * Math.round(position / this.pixelsPerValue)));
     }
