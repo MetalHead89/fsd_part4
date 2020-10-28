@@ -8,9 +8,10 @@ export class Scale {
     private minValue: number = 1;
     private maxValue: number = 10;
     private displayed: boolean;
-    private divisionWidh: number = 10;
-    private divisionHeight: number = 10;
+    private markerWidh: number = 10;
+    private markerHeight: number = 10;
     private pixelsPerValue: number = 0;
+    private divisionWidth: number = 10;
 
     constructor(scaleElem: HTMLElement, setings: IScaleSettings, 
         divisionsCount: number, stepSize: number, thumbSize: number, pixelsPerValue: number) {
@@ -21,11 +22,12 @@ export class Scale {
             this.maxValue = setings.maxValue;
             this.minValue = setings.minValue;
             this.pixelsPerValue = pixelsPerValue;
+            this.divisionWidth = 50;
 
-            this.scaleElem.style.height = this.divisionHeight + 'px';
+            this.scaleElem.style.height = this.markerHeight + 'px';
 
-            // let startPosition: number = thumbSize / 2 - this.divisionWidh / 2;
-            // let endPosition: number = scaleElem.clientWidth - thumbSize / 2 - this.divisionWidh / 2;
+            // let startPosition: number = thumbSize / 2 - this.markerWidh / 2;
+            // let endPosition: number = scaleElem.clientWidth - thumbSize / 2 - this.markerWidh / 2;
 
             this.addDivisions(thumbSize);
     }
@@ -47,11 +49,12 @@ export class Scale {
             for (let i = 0; i < this.divisionsCount; i++) {
                 const division: HTMLElement = document.createElement('div');
                 division.className = 'slider__scale-division';
+                division.style.width = this.divisionWidth + 'px';
 
                 const divisionMarker: HTMLElement = document.createElement('div')
                 divisionMarker.className = ('slider__divisionMarker')
-                divisionMarker.style.width = this.divisionWidh + 'px';
-                divisionMarker.style.height = this.divisionHeight + 'px';
+                divisionMarker.style.width = this.markerWidh + 'px';
+                divisionMarker.style.height = this.markerHeight + 'px';
 
                 const divisionLabel: HTMLElement = document.createElement('div')
                 divisionLabel.className = ('slider__divisionLabel')   
