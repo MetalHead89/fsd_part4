@@ -29,54 +29,20 @@ export class Scale {
             // let startPosition: number = thumbSize / 2 - this.markerWidh / 2;
             // let endPosition: number = scaleElem.clientWidth - thumbSize / 2 - this.markerWidh / 2;
 
-            this.addDivisions(thumbSize);
+            this.generateScale(thumbSize);
     }
 
     getScaleElem(): HTMLElement | null {
         return this.scaleElem;
     }
 
-    private addDivisions(thumbSize: number) {
-        if (this.scaleElem) {
-            let divisionPosition: number = thumbSize / 2;
-            let leftPrevElement = 0;
+    private generateScale(thumbSize: number) {
+        let divisionPosition: number = thumbSize / 2;
+        let leftPrevElement: number = 0;
 
-            let visibleDivisions: number = 1;
-
-            if (this.divisionsCount > 10) {
-                visibleDivisions = Math.ceil(this.divisionsCount / 10);
-            }
-
-            for (let i = 0; i < this.divisionsCount; i++) {
-                const newLeft: number = divisionPosition - this.divisionWidth / 2;
-
-                const division: HTMLElement = document.createElement('div');
-                division.className = 'slider__scale-division';
-                division.style.width = this.divisionWidth + 'px';
-
-                const divisionMarker: HTMLElement = document.createElement('div')
-                divisionMarker.className = ('slider__divisionMarker')
-                divisionMarker.style.width = this.markerWidh + 'px';
-                divisionMarker.style.height = this.markerHeight + 'px';
-                division.style.left = newLeft + 'px';
-
-                const divisionLabel: HTMLElement = document.createElement('div')
-                divisionLabel.className = ('slider__divisionLabel')   
-                divisionLabel.innerText = this.positionToValue(divisionPosition - thumbSize / 2).toString();
-                console.log(divisionLabel.offsetWidth)
-
-                division.append(divisionMarker);
-                division.append(divisionLabel);
-
-                if (i == 0 || newLeft - leftPrevElement >= this.divisionWidth + 10 || i == this.divisionsCount - 1) {
-                    this.scaleElem.append(division);
-                    leftPrevElement = newLeft;
-
-                    if (divisionLabel.offsetWidth > division.offsetWidth) {
-                        // divisionLabel.style.transform = "rotate(45deg)";
-                        divisionLabel.classList.add('slider__divisionLabel_rotate');
-                    }
-                }
+        for (let i = 0; i < this.divisionsCount - 1; i++) {
+            if (this.scaleElem) {
+                leftPrevElement = this.addDivision(thumbSize, divisionPosition, leftPrevElement);
 
                 if (i == this.divisionsCount - 2) {
                     divisionPosition = this.scaleElem.clientWidth - thumbSize / 2;
@@ -85,6 +51,42 @@ export class Scale {
                 }
             }
         }
+    }
+
+    private addDivision(thumbSize: number, position: number, leftPrevElement: number): number {
+        if (this.scaleElem) {            
+            const newLeft: number = position - this.divisionWidth / 2;
+
+            const division: HTMLElement = document.createElement('div');
+            division.className = 'slider__scale-division';
+            division.style.width = this.divisionWidth + 'px';
+
+            const divisionMarker: HTMLElement = document.createElement('div')
+            divisionMarker.className = ('slider__divisionMarker')
+            divisionMarker.style.width = this.markerWidh + 'px';
+            divisionMarker.style.height = this.markerHeight + 'px';
+            division.style.left = newLeft + 'px';
+
+            const divisionLabel: HTMLElement = document.createElement('div')
+            divisionLabel.className = ('slider__divisionLabel')   
+            divisionLabel.innerText = this.positionToValue(position - thumbSize / 2).toString();
+            console.log(divisionLabel.offsetWidth)
+
+            division.append(divisionMarker);
+            division.append(divisionLabel);
+
+            if (leftPrevElement == 0 || newLeft - leftPrevElement >= this.divisionWidth + 10) {
+                this.scaleElem.append(division);
+                leftPrevElement = newLeft;
+
+                if (divisionLabel.offsetWidth > division.offsetWidth) {
+                    // divisionLabel.style.transform = "rotate(45deg)";
+                    divisionLabel.classList.add('slider__divisionLabel_rotate');
+                }
+            }
+        }
+
+        return leftPrevElement;
     }
 
     private positionToValue(position: number) {
