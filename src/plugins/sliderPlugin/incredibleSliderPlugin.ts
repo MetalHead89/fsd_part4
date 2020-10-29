@@ -12,7 +12,7 @@ import { IgnorePlugin } from 'webpack';
         'orienation': 'horizontal',
         'type': 'single',
         'scale': true,
-        'minValue': 10,
+        'minValue': 1,
         'maxValue': 10000,
         'step': 1
     };

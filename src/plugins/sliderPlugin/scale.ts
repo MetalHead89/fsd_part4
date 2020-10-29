@@ -11,7 +11,7 @@ export class Scale {
     private markerWidh: number = 10;
     private markerHeight: number = 10;
     private pixelsPerValue: number = 0;
-    private divisionWidth: number = 10;
+    private divisionWidth: number = 50;
     private labelIsRotated: boolean = false;
 
     constructor(scaleElem: HTMLElement, setings: IScaleSettings,
@@ -23,7 +23,7 @@ export class Scale {
         this.maxValue = setings.maxValue;
         this.minValue = setings.minValue;
         this.pixelsPerValue = pixelsPerValue;
-        this.divisionWidth = 20;
+        // this.divisionWidth = 40;
 
         this.scaleElem.style.height = this.markerHeight + 'px';
 
@@ -42,57 +42,65 @@ export class Scale {
         let lastDivision: HTMLElement | null = null;
 
         if (this.scaleElem) {
-            const endDivision: HTMLElement | null = this.addDivision(thumbSize, this.scaleElem.clientWidth - thumbSize / 2, lastDivision);
-            if (endDivision) {
-                const divisionLabel: HTMLElement = endDivision.children[endDivision.children.length - 1] as HTMLElement;
+            const endPosition: number = this.scaleElem.clientWidth - thumbSize / 2;
+            const endDivision: HTMLElement | null = this.addDivision(thumbSize, endPosition, lastDivision, true);
 
-                if (divisionLabel.offsetWidth > endDivision.offsetWidth) {
-                    divisionLabel.classList.add('slider__divisionLabel_rotate');
-                    this.labelIsRotated = true;
-                }
+            if (endDivision) {
+                this.divisionWidth = endDivision.offsetWidth;
+                endDivision.style.left = endPosition - this.divisionWidth / 2 + 'px';
             }
+            // if (endDivision) {
+            //     const divisionLabel: HTMLElement = endDivision.children[endDivision.children.length - 1] as HTMLElement;
+
+            //     if (divisionLabel.offsetWidth > endDivision.offsetWidth) {
+            //         divisionLabel.classList.add('slider__divisionLabel_rotate');
+            //         divisionLabel.style.marginLeft = this.divisionWidth / 2 + 'px';
+            //         this.labelIsRotated = true;
+            //     }
+            // }
 
             for (let i = 0; i < this.divisionsCount - 1; i++) {
-                lastDivision = this.addDivision(thumbSize, divisionPosition, lastDivision);
+                lastDivision = this.addDivision(thumbSize, divisionPosition, lastDivision, false);
                 divisionPosition += this.stepSize;
             }
         }
     }
 
-    private addDivision(thumbSize: number, position: number, lastDivision: HTMLElement | null): HTMLElement | null {
-        if (this.scaleElem) {
-            const newLeft: number = position - this.divisionWidth / 2;
+    private addDivision(thumbSize: number, position: number, lastDivision: HTMLElement | null, isEndDivision: boolean): HTMLElement | null {
 
+        if (this.scaleElem) {
+
+            const newLeft: number = position - this.divisionWidth / 2
+            
             const division: HTMLElement = document.createElement('div');
             division.className = 'slider__scale-division';
-            division.style.width = this.divisionWidth + 'px';
 
             const divisionMarker: HTMLElement = document.createElement('div')
             divisionMarker.className = ('slider__divisionMarker')
             divisionMarker.style.width = this.markerWidh + 'px';
             divisionMarker.style.height = this.markerHeight + 'px';
-            division.style.left = newLeft + 'px';
 
             const divisionLabel: HTMLElement = document.createElement('div')
             divisionLabel.className = ('slider__divisionLabel')
             divisionLabel.innerText = this.positionToValue(position - thumbSize / 2).toString();
 
+            if (!isEndDivision) {
+                division.style.width = this.divisionWidth + 'px';
+                division.style.left = newLeft + 'px';
+            }
+
             division.append(divisionMarker);
             division.append(divisionLabel);
-
+            
             if (!(lastDivision) || newLeft - parseInt(lastDivision.style.left) >= this.divisionWidth + 10) {
                 this.scaleElem.append(division);
 
-                if (this.labelIsRotated) {
-                    divisionLabel.classList.add('slider__divisionLabel_rotate');
-                }
+                // if (!lastDivision) {
+                //     this.divisionWidth = division.offsetWidth;
+                //     division.style.left = position - this.divisionWidth / 2 + 'px';
+                // }
 
                 return division;
-
-                // if (divisionLabel.offsetWidth > division.offsetWidth) {
-                //     // divisionLabel.style.transform = "rotate(45deg)";
-                //     divisionLabel.classList.add('slider__divisionLabel_rotate');
-                // }
             }
         }
 
