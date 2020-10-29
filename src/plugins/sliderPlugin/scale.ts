@@ -39,16 +39,14 @@ export class Scale {
     private generateScale(thumbSize: number) {
         let divisionPosition: number = thumbSize / 2;
         let leftPrevElement: number = 0;
+        
+        if (this.scaleElem) {
+            this.addDivision(thumbSize, this.scaleElem.clientWidth - thumbSize / 2, leftPrevElement);
 
-        for (let i = 0; i < this.divisionsCount - 1; i++) {
-            if (this.scaleElem) {
-                leftPrevElement = this.addDivision(thumbSize, divisionPosition, leftPrevElement);
+            for (let i = 0; i < this.divisionsCount - 1; i++) {
+                    leftPrevElement = this.addDivision(thumbSize, divisionPosition, leftPrevElement);
 
-                if (i == this.divisionsCount - 2) {
-                    divisionPosition = this.scaleElem.clientWidth - thumbSize / 2;
-                } else {
                     divisionPosition += this.stepSize;
-                }
             }
         }
     }
