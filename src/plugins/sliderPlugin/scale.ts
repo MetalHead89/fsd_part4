@@ -12,7 +12,6 @@ export class Scale {
     private markerHeight: number = 10;
     private pixelsPerValue: number = 0;
     private divisionWidth: number = 50;
-    private labelIsRotated: boolean = false;
 
     constructor(scaleElem: HTMLElement, setings: IScaleSettings,
         divisionsCount: number, stepSize: number, thumbSize: number, pixelsPerValue: number) {

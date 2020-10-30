@@ -6,7 +6,7 @@
 .slider__track {
     width: 100%;
     height: 10px;
-    background: rgb(224, 224, 224);
+    background: rgb(236, 236, 236);
     border-radius: 25px;
 }
 
@@ -17,7 +17,7 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: rgb(255, 62, 62);
+    background: rgb(85, 196, 153);
 }
 
 .slider__scale {
@@ -35,18 +35,14 @@
 
 .slider__divisionMarker {
     border-radius: 50%;
-    background: rgb(224, 224, 224);
+    background: rgb(211, 211, 211);
 }
 
 .slider__divisionLabel {
+    margin-top: 3px;
     display: block;
-    // margin-top: 5px;
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 1.3rem;
+    color: rgb(211, 211, 211);
 }
-
-// .slider__divisionLabel_rotate {
-//     align-self: flex-start;
-//     justify-self: right;
-//     transform-origin: left top;
-//     transform: rotate(30deg);
-//     // margin-left: 10px;
-// }
