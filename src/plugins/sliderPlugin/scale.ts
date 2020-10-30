@@ -93,12 +93,15 @@ export class Scale {
             division.append(divisionLabel);
             
             if (!(lastDivision) || newLeft - parseInt(lastDivision.style.left) >= this.divisionWidth + 10) {
+                
+                // Не выводить предпоследнее деление шкалы, если оно накладывается на последнее
+                if (lastDivision && 
+                    this.scaleElem.clientWidth - thumbSize / 2 - 
+                    this.divisionWidth / 2 - newLeft < this.divisionWidth) {
+                        return lastDivision;
+                }
+                
                 this.scaleElem.append(division);
-
-                // if (!lastDivision) {
-                //     this.divisionWidth = division.offsetWidth;
-                //     division.style.left = position - this.divisionWidth / 2 + 'px';
-                // }
 
                 return division;
             }

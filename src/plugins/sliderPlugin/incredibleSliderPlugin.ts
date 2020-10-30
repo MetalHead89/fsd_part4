@@ -13,7 +13,7 @@ import { IgnorePlugin } from 'webpack';
         'type': 'single',
         'scale': true,
         'minValue': 1,
-        'maxValue': 10000,
+        'maxValue': 100,
         'step': 1
     };
 
