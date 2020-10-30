@@ -6,6 +6,7 @@ import { IThumbSettings } from './interfaces';
 import { IScaleSettings } from './interfaces';
 import { Slider } from './slider';
 import { Track } from './track';
+import { ProgressBar } from './progressBar';
 import { Thumb } from './thumb';
 import { Scale } from './scale';
 
@@ -14,6 +15,7 @@ export class View {
     private observer: Observable;
     private slider: Slider | null = null;
     private track: Track | null = null;
+    private progressBar: ProgressBar | null = null;
     private thumb: Thumb | null = null;
     private scale: Scale | null = null;
     private pixelsPerValue: number = 0;
@@ -31,6 +33,7 @@ export class View {
         
         this.addSlider(sliderComponents.sliderElem, sliderOptions.settings.sliderSettings);
         this.addTrack(sliderComponents.trackElem);
+        this.addProgressBar(sliderComponents.progressBar);
         this.addThumb(sliderComponents.thumbElem, sliderOptions.settings.thumbSettings);
 
         this.stepsCount = this.calculateStepsNumber();
@@ -66,6 +69,10 @@ export class View {
         trackElem.addEventListener('click', (event) => {
             this.moveTo(event);
         })
+    }
+
+    private addProgressBar(progressBarElem: HTMLElement) {
+        this.progressBar = new ProgressBar(progressBarElem, 0);
     }
 
     private addSlider(sliderElem: HTMLElement, sliderSettings: ISliderSettings) {
@@ -109,6 +116,9 @@ export class View {
     
         const trackElem: HTMLElement = document.createElement('div');
         trackElem.className = 'slider__track';
+
+        const progressBarElem: HTMLElement = document.createElement('div');
+        progressBarElem.className = 'slider__progress-bar';
     
         const thumbElem: HTMLElement = document.createElement('div');
         thumbElem.className = 'slider__thumb';
@@ -117,11 +127,12 @@ export class View {
         scaleElem.className = 'slider__scale';
     
         sliderElem.append(trackElem);
+        sliderElem.append(progressBarElem);
         sliderElem.append(thumbElem);
         sliderElem.append(scaleElem);
         sliderPosition.append(sliderElem);
 
-        return {'sliderElem': sliderElem, 'trackElem': trackElem, 'thumbElem': thumbElem, 'scaleElem': scaleElem}
+        return {'sliderElem': sliderElem, 'trackElem': trackElem, 'progressBar': progressBarElem, 'thumbElem': thumbElem, 'scaleElem': scaleElem}
     }
 
     private startDrag(startClientX: number, startClientY: number) {
@@ -172,6 +183,7 @@ export class View {
                 // newLeft = Math.round(newLeft / stepSize) * stepSize;
             }
 
+            this.progressBar?.setWidth(newLeft + this.thumb.getElement().offsetWidth);
             this.thumb.moveTo(newLeft);
 
             // console.log(this.positionToValue(this.thumb, newLeft))////////////////////////////////////

@@ -21,6 +21,7 @@ export interface INewSliderOptions {
 export interface ISliderComponents {
     'sliderElem': HTMLElement,
     'trackElem': HTMLElement,
+    'progressBar': HTMLElement,
     'thumbElem': HTMLElement,
     'scaleElem': HTMLElement
 }
