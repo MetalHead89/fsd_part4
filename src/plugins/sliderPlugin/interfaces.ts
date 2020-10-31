@@ -7,6 +7,11 @@ export interface ISliderSettings {
     'step': number
 }
 
+export interface IViewSliderOptions {
+    'sliderType': string,
+    'sliderOrientation': string
+}
+
 // export interface IGroupedSettings {
 //     'sliderSettings': ISliderSettings
 //     'thumbSettings': IThumbSettings,

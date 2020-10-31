@@ -29,10 +29,8 @@ import { ISliderSettings } from './interfaces';
             return this.each(function (this: any) { ///////////////////////////////////////////// ТИП ANY /////////////////////////////////////////////
                 const observer = new Observable();
                 const model: Model = new Model(observer, settings);
-                const view: View = new View(observer);
+                const view: View = new View(this, observer);
                 const presenter: Presenter = new Presenter(view, model, observer);
-
-                presenter.createNewSlider(this);
 
                 // $(this).data('settings', settings); ///////////////////////// добавить проверку на существование объекта
                 // $(this).data('model', model);
@@ -54,7 +52,7 @@ import { ISliderSettings } from './interfaces';
         
     };
 
-    $.fn.incredibleSliderPlugin = function (action?: string | IPluginSettings, args?): JQuery<HTMLElement> {
+    $.fn.incredibleSliderPlugin = function (action?: string | ISliderSettings, args?): JQuery<HTMLElement> {
 
         if (typeof action === 'string' && methods[action]) {
             return methods[action].call(this, args);

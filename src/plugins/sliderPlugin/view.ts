@@ -1,4 +1,5 @@
 import Observable from './observable';
+import {IViewSliderOptions} from './interfaces'
 // import { INewSliderOptions } from './interfaces';
 // import { ISliderComponents } from './interfaces';
 // import { ISliderSettings } from './interfaces';
@@ -13,6 +14,18 @@ import Observable from './observable';
 export class View {
 
     private observer: Observable;
+    private sliderWrapper: HTMLElement;
+    private slider: HTMLElement | null = null;
+    private track: HTMLElement | null = null;
+    private progressBar: HTMLElement | null = null;
+    private leftThumb: HTMLElement | null = null;
+    private rightThumb: HTMLElement | null = null;
+    private scale: HTMLElement | null = null;
+
+
+
+
+
     // private slider: Slider | null = null;
     // private track: Track | null = null;
     // private progressBar: ProgressBar | null = null;
@@ -24,8 +37,57 @@ export class View {
     // private stepsCount: number = 0;
     // private stepSize: number = 0;
 
-    constructor(observer: Observable) {
+    constructor(sliderWrapper: HTMLElement, observer: Observable) {
         this.observer = observer;
+        this.sliderWrapper = sliderWrapper;
+
+        // this.slider = this.createSliderElement('div', 'slider');
+        // this.track = this.createSliderElement('div', 'slider__track');
+        // this.progressBar = this.createSliderElement('div', 'slider__progress-bar');
+        // this.thumb = this.createSliderElement('div', 'slider__thumb');
+        // this.scale = this.createSliderElement('div', 'slider__scale');
+
+
+
+
+        //     const sliderElem: HTMLElement = document.createElement('div');
+        //     sliderElem.className = 'slider';
+        
+        //     const trackElem: HTMLElement = document.createElement('div');
+        //     trackElem.className = 'slider__track';
+
+        //     const progressBarElem: HTMLElement = document.createElement('div');
+        //     progressBarElem.className = 'slider__progress-bar';
+        
+        //     const thumbElem: HTMLElement = document.createElement('div');
+        //     thumbElem.className = 'slider__thumb';
+
+        //     const scaleElem: HTMLElement = document.createElement('div');
+        //     scaleElem.className = 'slider__scale';
+        
+        //     sliderElem.append(trackElem);
+        //     sliderElem.append(progressBarElem);
+        //     sliderElem.append(thumbElem);
+        //     sliderElem.append(scaleElem);
+        //     sliderPosition.append(sliderElem);
+    }
+
+    addSliderToPage(sliderOptions: IViewSliderOptions) {
+        this.slider = this.createSliderElement('div', 'slider');
+        this.track = this.createSliderElement('div', 'slider__track');
+        this.progressBar = this.createSliderElement('div', 'slider__progress-bar');
+        this.leftThumb = this.createSliderElement('div', 'slider__thumb');
+        if (sliderOptions.sliderType == 'range') {
+            this.rightThumb = this.createSliderElement('div', 'slider__thumb');
+        }
+        this.scale = this.createSliderElement('div', 'slider__scale');
+    }
+
+    private createSliderElement(elem: string, className: string): HTMLElement {
+        const newElem: HTMLElement = document.createElement(elem);
+        newElem.className = className;
+
+        return newElem;
     }
 
     // createSlider(sliderOptions: INewSliderOptions) {

@@ -1,3 +1,5 @@
+import {IViewSliderOptions} from './interfaces'
+
 import Observable from './observable';
 import { Model } from './model';
 import { View } from './view';
@@ -14,6 +16,10 @@ class Presenter {
         this.model = model;
         this.observer = observer;
 
+        this.observer.subscribe('sliderInitialized', 
+            (sliderOptions: IViewSliderOptions) => this.view.addSliderToPage(sliderOptions));
+
+
         // this.observer.subscribe('addedNewSliderConfiguration', 
         //     (sliderOptions: INewSliderOptions) => 
         //         this.view.createSlider(sliderOptions));
@@ -27,10 +33,6 @@ class Presenter {
         // this.observer.subscribe('updatedStepValue', 
         //     (value: number) => this.view.changeStepValue(value))        
                 
-    }
-
-    createNewSlider(sliderPosition: HTMLElement) {
-
     }
 }
 

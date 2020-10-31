@@ -27,6 +27,9 @@ export class Model {
         this.progressBar = new ProgressBar();
         this.thumb = new Thumb(settings.minValue, settings.maxValue, settings.step);
         this.scale = new Scale();
+
+        this.observer.notify('sliderInitialized', 
+            {'sliderType': settings.type, 'sliderOrientation': settings.orienation});
     }
 
     // setMinValue(newValue: number) {
