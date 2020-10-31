@@ -1,15 +1,35 @@
-export class ProgressBar {
+class ProgressBar {
 
-    element: HTMLElement;
+    // element: HTMLElement;
 
-    constructor(element: HTMLElement, startWidth: number) {
-        this.element = element
+    constructor() {
+        // this.element = element
 
-        this.setWidth(startWidth)
+        // this.setWidth(startWidth)
     }
 
-    setWidth(width: number) {
-        this.element.style.width = width + 'px';
-    }
+    // setWidth(width: number) {
+    //     this.element.style.width = width + 'px';
+    // }
 
 }
+
+export default ProgressBar
+
+
+
+// export class ProgressBar {
+
+//     element: HTMLElement;
+
+//     constructor(element: HTMLElement, startWidth: number) {
+//         this.element = element
+
+//         this.setWidth(startWidth)
+//     }
+
+//     setWidth(width: number) {
+//         this.element.style.width = width + 'px';
+//     }
+
+// }

@@ -2,6 +2,7 @@ import Observable from './observable';
 import { ISliderSettings } from './interfaces';
 import Slider from './slider';
 import Track from './track';
+import ProgressBar from './progressBar';
 import Thumb from './thumb';
 import Scale from './scale';
 // import { IThumbSettings } from './interfaces';
@@ -14,6 +15,7 @@ export class Model {
     private observer: Observable;
     private slider: Slider;
     private track: Track;
+    private progressBar: ProgressBar;
     private thumb: Thumb;
     private scale: Scale;
 
@@ -22,6 +24,7 @@ export class Model {
         
         this.slider = new Slider(settings.type, settings.orienation);
         this.track = new Track();
+        this.progressBar = new ProgressBar();
         this.thumb = new Thumb(settings.minValue, settings.maxValue, settings.step);
         this.scale = new Scale();
     }
