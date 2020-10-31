@@ -1,6 +1,7 @@
 import Observable from './observable';
 import { ISliderSettings } from './interfaces';
 import Slider from './slider';
+import Track from './track';
 // import { IThumbSettings } from './interfaces';
 // import { ISliderSettings } from './interfaces';
 // import { INewSliderOptions } from './interfaces';
@@ -10,11 +11,13 @@ import Slider from './slider';
 export class Model {
     private observer: Observable;
     private slider: Slider;
+    private track: Track;
 
     constructor(observer: Observable, settings: ISliderSettings) {
         this.observer = observer;
         
         this.slider = new Slider(settings.type, settings.orienation);
+        this.track = new Track();
     }
 
     // setMinValue(newValue: number) {
