@@ -2,6 +2,7 @@ import Observable from './observable';
 import { ISliderSettings } from './interfaces';
 import Slider from './slider';
 import Track from './track';
+import Thumb from './thumb';
 // import { IThumbSettings } from './interfaces';
 // import { ISliderSettings } from './interfaces';
 // import { INewSliderOptions } from './interfaces';
@@ -12,12 +13,14 @@ export class Model {
     private observer: Observable;
     private slider: Slider;
     private track: Track;
-
+    private thumb: Thumb
     constructor(observer: Observable, settings: ISliderSettings) {
         this.observer = observer;
         
         this.slider = new Slider(settings.type, settings.orienation);
         this.track = new Track();
+        this.thumb = new Thumb(settings.minValue, settings.maxValue, settings.step);
+        
     }
 
     // setMinValue(newValue: number) {

@@ -1,73 +1,161 @@
-import { IThumbSettings } from './interfaces';
-
-export class Thumb {
-    private element: HTMLElement;
+class Thumb {
+    // private element: HTMLElement;
     private minValue: number;
     private maxValue: number;
     private step: number;
-    private coords: DOMRect | null = null;
-    private shiftX: number = 0;
-    private shiftY: number = 0;
+    // private coords: DOMRect | null = null;
+    // private shiftX: number = 0;
+    // private shiftY: number = 0;
 
-    constructor(thumbElem: HTMLElement, thumbSettings: IThumbSettings) {
-        this.element = thumbElem;
-        this.minValue = thumbSettings.minValue;
-        this.maxValue = thumbSettings.maxValue;
-        this.step = thumbSettings.step;
+    constructor(minValue: number, maxValue: number, step: number) {
+        // this.element = thumbElem;
+        this.minValue = minValue;
+        this.maxValue = maxValue;
+        this.step = step;
     }
 
-    setMinValue(value: number) {
-        this.minValue = value;
-    }
-
-    getMinValue(): number {
-        return this.minValue;
-    }
-
-    setMaxValue(value: number) {
-        this.maxValue = value;
-    }
-
-    getMaxValue(): number {
-        return this.maxValue;
-    }
-
-    setStepValue(value: number) {
-        this.step = value;
-    }
-
-    getStep(): number {
-        return this.step;
-    }
-
-    getElement(): HTMLElement {
-        return this.element;
-    }
-
-    // setCoords(coords: DOMRect) {
-    //     this.coords = coords;
+    // setMinValue(value: number) {
+    //     this.minValue = value;
     // }
 
-    // getCoords(): DOMRect | null {
-    //     return this.coords;
+    // getMinValue(): number {
+    //     return this.minValue;
     // }
 
-    setShiftX(shift: number) {
-        this.shiftX = shift;
-    }
+    // setMaxValue(value: number) {
+    //     this.maxValue = value;
+    // }
 
-    getShiftX(): number {
-        return this.shiftX;
-    }
+    // getMaxValue(): number {
+    //     return this.maxValue;
+    // }
 
-    setShiftY(shift: number) {
-        this.shiftY = shift;
-    }
+    // setStepValue(value: number) {
+    //     this.step = value;
+    // }
 
-    moveTo(newLeft: number) {
-        this.element.style.left = newLeft + 'px';
-    }
+    // getStep(): number {
+    //     return this.step;
+    // }
+
+    // getElement(): HTMLElement {
+    //     return this.element;
+    // }
+
+    // // setCoords(coords: DOMRect) {
+    // //     this.coords = coords;
+    // // }
+
+    // // getCoords(): DOMRect | null {
+    // //     return this.coords;
+    // // }
+
+    // setShiftX(shift: number) {
+    //     this.shiftX = shift;
+    // }
+
+    // getShiftX(): number {
+    //     return this.shiftX;
+    // }
+
+    // setShiftY(shift: number) {
+    //     this.shiftY = shift;
+    // }
+
+    // moveTo(newLeft: number) {
+    //     this.element.style.left = newLeft + 'px';
+    // }
 }
+
+export default Thumb;
+
+
+
+
+
+
+
+
+
+
+// import { IThumbSettings } from './interfaces';
+
+// export class Thumb {
+//     private element: HTMLElement;
+//     private minValue: number;
+//     private maxValue: number;
+//     private step: number;
+//     private coords: DOMRect | null = null;
+//     private shiftX: number = 0;
+//     private shiftY: number = 0;
+
+//     constructor(thumbElem: HTMLElement, thumbSettings: IThumbSettings) {
+//         this.element = thumbElem;
+//         this.minValue = thumbSettings.minValue;
+//         this.maxValue = thumbSettings.maxValue;
+//         this.step = thumbSettings.step;
+//     }
+
+//     setMinValue(value: number) {
+//         this.minValue = value;
+//     }
+
+//     getMinValue(): number {
+//         return this.minValue;
+//     }
+
+//     setMaxValue(value: number) {
+//         this.maxValue = value;
+//     }
+
+//     getMaxValue(): number {
+//         return this.maxValue;
+//     }
+
+//     setStepValue(value: number) {
+//         this.step = value;
+//     }
+
+//     getStep(): number {
+//         return this.step;
+//     }
+
+//     getElement(): HTMLElement {
+//         return this.element;
+//     }
+
+//     // setCoords(coords: DOMRect) {
+//     //     this.coords = coords;
+//     // }
+
+//     // getCoords(): DOMRect | null {
+//     //     return this.coords;
+//     // }
+
+//     setShiftX(shift: number) {
+//         this.shiftX = shift;
+//     }
+
+//     getShiftX(): number {
+//         return this.shiftX;
+//     }
+
+//     setShiftY(shift: number) {
+//         this.shiftY = shift;
+//     }
+
+//     moveTo(newLeft: number) {
+//         this.element.style.left = newLeft + 'px';
+//     }
+// }
+
+
+
+
+
+
+
+
 
 
 // export class Thumb {
