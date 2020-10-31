@@ -1,4 +1,4 @@
-export class Observable {
+class Observable {
     observers: { [index: string]: Function[] };
 
     constructor() {
@@ -22,3 +22,5 @@ export class Observable {
         }
     }
 }
+
+export default Observable;

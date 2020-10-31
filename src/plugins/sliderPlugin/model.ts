@@ -1,63 +1,68 @@
-import { Observable } from './observable';
+import Observable from './observable';
 import { IPluginSettings } from './interfaces';
-import { IThumbSettings } from './interfaces';
-import { ISliderSettings } from './interfaces';
-import { INewSliderOptions } from './interfaces';
-import { IGroupedSettings } from './interfaces';
-import { IScaleSettings } from './interfaces';
+// import { IThumbSettings } from './interfaces';
+// import { ISliderSettings } from './interfaces';
+// import { INewSliderOptions } from './interfaces';
+// import { IGroupedSettings } from './interfaces';
+// import { IScaleSettings } from './interfaces';
 
 export class Model {
     private observer: Observable;
-    private settings: IPluginSettings | null = null;
+    private settings: IPluginSettings;
 
-    constructor(observer: Observable) {
+    constructor(observer: Observable, settings: IPluginSettings) {
         this.observer = observer;
-    }
-
-    setMinValue(newValue: number) {
-        this.observer.notify('updatedMinValue', newValue);
-    }
-
-    setMaxValue(newValue: number) {
-        this.observer.notify('updatedMaxValue', newValue);
-    }
-
-    setStepValue(newValue: number) {
-        this.observer.notify('updatedStepValue', newValue);
-    }
-
-    createNewSlider(sliderPosition: HTMLElement, settings: IPluginSettings): void {
         this.settings = settings;
-        const groupedSettings: IGroupedSettings = this.splitSettingsIntoGroups(settings);        
+    }
 
-        const newSliderOptions: INewSliderOptions = {
-            'sliderPosition': sliderPosition,
-            'settings': groupedSettings
-        }
+    private initSliderModel() {
         
-        this.observer.notify('addedNewSliderConfiguration', newSliderOptions);
     }
 
-    splitSettingsIntoGroups(settings: IPluginSettings): IGroupedSettings {
-        const thumbSettings: IThumbSettings = {
-            'minValue': settings.minValue,
-            'maxValue': settings.maxValue,
-            'step': settings.step
-        }
+    // setMinValue(newValue: number) {
+    //     this.observer.notify('updatedMinValue', newValue);
+    // }
 
-        const sliderSettings: ISliderSettings = {
-            'orientation': settings.orienation,
-            'type': settings.type,
-        }
+    // setMaxValue(newValue: number) {
+    //     this.observer.notify('updatedMaxValue', newValue);
+    // }
 
-        const scaleSettings: IScaleSettings = {
-            'displayed': settings.scale,
-            'minValue': settings.minValue,
-            'maxValue': settings.maxValue,
-        }
+    // setStepValue(newValue: number) {
+    //     this.observer.notify('updatedStepValue', newValue);
+    // }
 
-        return {'sliderSettings': sliderSettings, 'thumbSettings': thumbSettings, 'scaleSettings': scaleSettings}
-    }
+    // createNewSlider(sliderPosition: HTMLElement, settings: IPluginSettings): void {
+    //     this.settings = settings;
+    //     const groupedSettings: IGroupedSettings = this.splitSettingsIntoGroups(settings);        
+
+    //     const newSliderOptions: INewSliderOptions = {
+    //         'sliderPosition': sliderPosition,
+    //         'settings': groupedSettings
+    //     }
+        
+    //     this.observer.notify('addedNewSliderConfiguration', newSliderOptions);
+    // }
+
+    // splitSettingsIntoGroups(settings: IPluginSettings): IGroupedSettings {
+    //     const thumbSettings: IThumbSettings = {
+    //         'minValue': settings.minValue,
+    //         'maxValue': settings.maxValue,
+    //         'step': settings.step
+    //     }
+
+    //     const sliderSettings: ISliderSettings = {
+    //         'orientation': settings.orienation,
+    //         'type': settings.type,
+    //     }
+
+    //     const scaleSettings: IScaleSettings = {
+    //         'displayed': settings.scale,
+    //         'minValue': settings.minValue,
+    //         'maxValue': settings.maxValue,
+    //     }
+
+    //     return {'sliderSettings': sliderSettings, 'thumbSettings': thumbSettings, 'scaleSettings': scaleSettings}
+    // }
 }
 
 

@@ -1,4 +1,4 @@
-import { Observable } from './observable';
+import Observable from './observable';
 import { Model } from './model';
 import { View } from './view';
 import Presenter from './presenter';
@@ -28,7 +28,7 @@ import { IPluginSettings } from './interfaces';
             // Создание слайдеров
             return this.each(function (this: any) { ///////////////////////////////////////////// ТИП ANY /////////////////////////////////////////////
                 const observer = new Observable();
-                const model: Model = new Model(observer);
+                const model: Model = new Model(observer, settings);
                 const view: View = new View(observer);
                 const presenter: Presenter = new Presenter(view, model, observer);
 

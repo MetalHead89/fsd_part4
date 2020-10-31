@@ -1,4 +1,4 @@
-import { Observable } from './observable';
+import Observable from './observable';
 import { Model } from './model';
 import { View } from './view';
 // import { INewSliderOptions } from './interfaces';
@@ -30,7 +30,7 @@ class Presenter {
     }
 
     createNewSlider(sliderPosition: HTMLElement) {
-        
+
     }
 }
 
