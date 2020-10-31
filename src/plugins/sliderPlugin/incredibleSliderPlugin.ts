@@ -2,13 +2,13 @@ import Observable from './observable';
 import { Model } from './model';
 import { View } from './view';
 import Presenter from './presenter';
-import { IPluginSettings } from './interfaces';
+import { ISliderSettings } from './interfaces';
 // import { IgnorePlugin } from 'webpack';
 
 (function ($) {
 
     // Настройки плагина по умолчанию
-    const defaultSettings: IPluginSettings = { ///////////////////////////////////////////// ТИП ANY /////////////////////////////////////////////
+    const defaultSettings: ISliderSettings = {
         'orienation': 'horizontal',
         'type': 'single',
         'scale': true,        
@@ -20,7 +20,7 @@ import { IPluginSettings } from './interfaces';
     // API мотоды плагина
     const methods: any = {  ///////////////////////////////////////////// ТИП ANY /////////////////////////////////////////////
 
-        init: function (options: IPluginSettings) {
+        init: function (options: ISliderSettings) {
 
             // Обновление настроек плагина в соответсвии с полученными параметрами
             const settings: any = $.extend(defaultSettings, options);

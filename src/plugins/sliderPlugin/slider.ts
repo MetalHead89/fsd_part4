@@ -1,29 +1,58 @@
 import { ISliderSettings } from './interfaces';
 
-export class Slider {
-    private element: HTMLElement;
-    private orienation: String;
-    private type: String; 
-    private coords: DOMRect = new DOMRect;
+class Slider {
 
-    constructor(sliderElem: HTMLElement, sliderSettings: ISliderSettings) {
-        this.element = sliderElem;
-        this.orienation = sliderSettings.orientation;
-        this.type = sliderSettings.type;
+    // private element: HTMLElement;
+    private type: string; 
+    private orienation: string;    
+    // private coords: DOMRect = new DOMRect;
+
+    constructor(type: string, orientation: string) {
+        // this.element = sliderElem;
+        this.type = type;
+        this.orienation = orientation;
     }
-
-    // setCoords(coords: DOMRect) {
-    //     this.coords = coords;
-    // }
-
-    // getCoords(): DOMRect {
-    //     return this.coords;
-    // }
-
-    getElement(): HTMLElement {
-        return this.element;
-    }
+    
 }
+
+export default Slider;
+
+
+
+
+
+
+
+
+
+
+
+// import { ISliderSettings } from './interfaces';
+
+// export class Slider {
+//     private element: HTMLElement;
+//     private orienation: String;
+//     private type: String; 
+//     private coords: DOMRect = new DOMRect;
+
+//     constructor(sliderElem: HTMLElement, sliderSettings: ISliderSettings) {
+//         this.element = sliderElem;
+//         this.orienation = sliderSettings.orientation;
+//         this.type = sliderSettings.type;
+//     }
+
+//     // setCoords(coords: DOMRect) {
+//     //     this.coords = coords;
+//     // }
+
+//     // getCoords(): DOMRect {
+//     //     return this.coords;
+//     // }
+
+//     getElement(): HTMLElement {
+//         return this.element;
+//     }
+// }
 
 
 

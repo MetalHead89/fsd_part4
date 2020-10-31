@@ -1,5 +1,6 @@
 import Observable from './observable';
-import { IPluginSettings } from './interfaces';
+import { ISliderSettings } from './interfaces';
+import Slider from './slider';
 // import { IThumbSettings } from './interfaces';
 // import { ISliderSettings } from './interfaces';
 // import { INewSliderOptions } from './interfaces';
@@ -8,15 +9,12 @@ import { IPluginSettings } from './interfaces';
 
 export class Model {
     private observer: Observable;
-    private settings: IPluginSettings;
+    private slider: Slider;
 
-    constructor(observer: Observable, settings: IPluginSettings) {
+    constructor(observer: Observable, settings: ISliderSettings) {
         this.observer = observer;
-        this.settings = settings;
-    }
-
-    private initSliderModel() {
         
+        this.slider = new Slider(settings.type, settings.orienation);
     }
 
     // setMinValue(newValue: number) {

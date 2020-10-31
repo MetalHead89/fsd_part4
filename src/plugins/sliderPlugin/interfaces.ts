@@ -1,4 +1,4 @@
-export interface IPluginSettings {
+export interface ISliderSettings {
     'orienation': string,
     'type': string,
     'scale': boolean,
