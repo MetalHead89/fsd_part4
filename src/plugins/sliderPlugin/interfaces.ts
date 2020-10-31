@@ -1,16 +1,11 @@
-// export interface IdefaultSettings {
-    
-// }
-
-
-// export interface IPluginSettings {
-//     'orienation': string,
-//     'type': string,
-//     'scale': boolean,
-//     'minValue': number,
-//     'maxValue': number,
-//     'step': number
-// }
+export interface IPluginSettings {
+    'orienation': string,
+    'type': string,
+    'scale': boolean,
+    'minValue': number,
+    'maxValue': number,
+    'step': number
+}
 
 // export interface IGroupedSettings {
 //     'sliderSettings': ISliderSettings
