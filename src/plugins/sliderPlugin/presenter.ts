@@ -1,3 +1,51 @@
+import { Observable } from './observable';
+import { Model } from './model';
+import { View } from './view';
+// import { INewSliderOptions } from './interfaces';
+// import { INewSliderOptions } from '../slider/interfaces';
+
+class Presenter {
+    view: View;
+    model: Model;
+    observer: Observable;
+
+    constructor(view: View, model: Model, observer: Observable) {
+        this.view = view;
+        this.model = model;
+        this.observer = observer;
+
+        // this.observer.subscribe('addedNewSliderConfiguration', 
+        //     (sliderOptions: INewSliderOptions) => 
+        //         this.view.createSlider(sliderOptions));
+
+        // this.observer.subscribe('updatedMinValue', 
+        //     (value: number) => this.view.changeMinValue(value));
+
+        // this.observer.subscribe('updatedMaxValue', 
+        //     (value: number) => this.view.changeMaxValue(value));
+        
+        // this.observer.subscribe('updatedStepValue', 
+        //     (value: number) => this.view.changeStepValue(value))        
+                
+    }
+
+    createNewSlider(sliderPosition: HTMLElement) {
+        
+    }
+}
+
+export default Presenter;
+
+
+
+
+
+
+
+
+
+
+
 // import { Observable } from './observable';
 // import { Model } from './model';
 // import { View } from './view';

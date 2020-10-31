@@ -1,7 +1,7 @@
 import { Observable } from './observable';
 import { Model } from './model';
 import { View } from './view';
-import { Presenter } from './presenter';
+import Presenter from './presenter';
 import { IPluginSettings } from './interfaces';
 // import { IgnorePlugin } from 'webpack';
 
@@ -32,7 +32,7 @@ import { IPluginSettings } from './interfaces';
                 const view: View = new View(observer);
                 const presenter: Presenter = new Presenter(view, model, observer);
 
-                presenter.createNewSlider(this, settings);
+                presenter.createNewSlider(this);
 
                 // $(this).data('settings', settings); ///////////////////////// добавить проверку на существование объекта
                 // $(this).data('model', model);
