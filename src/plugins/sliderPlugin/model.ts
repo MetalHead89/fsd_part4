@@ -28,8 +28,8 @@ export class Model {
         this.thumb = new Thumb(settings.minValue, settings.maxValue, settings.step);
         this.scale = new Scale();
 
-        this.observer.notify('sliderInitialized', 
-            {'sliderType': settings.type, 'sliderOrientation': settings.orienation});
+        // this.observer.notify('sliderInitialized', 
+        //     {'sliderType': settings.type, 'sliderOrientation': settings.orienation});
     }
 
     // setMinValue(newValue: number) {

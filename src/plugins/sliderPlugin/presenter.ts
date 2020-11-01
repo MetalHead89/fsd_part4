@@ -16,8 +16,7 @@ class Presenter {
         this.model = model;
         this.observer = observer;
 
-        this.observer.subscribe('sliderInitialized', 
-            (sliderOptions: IViewSliderOptions) => this.view.addSliderToPage(sliderOptions));
+        // this.observer.subscribe('sliderInitialized', (sliderOptions: IViewSliderOptions) => this.view.addSliderToPage(sliderOptions));
 
 
         // this.observer.subscribe('addedNewSliderConfiguration', 

@@ -15,72 +15,67 @@ export class View {
 
     private observer: Observable;
     private sliderWrapper: HTMLElement;
-    private slider: HTMLElement | null = null;
-    private track: HTMLElement | null = null;
-    private progressBar: HTMLElement | null = null;
-    private leftThumb: HTMLElement | null = null;
+    private slider: HTMLElement;
+    private track: HTMLElement;
+    private progressBar: HTMLElement;
+    private leftThumb: HTMLElement;
     private rightThumb: HTMLElement | null = null;
-    private scale: HTMLElement | null = null;
+    private scale: HTMLElement;
 
+    constructor(observer: Observable, sliderWrapper: HTMLElement, 
 
+        sliderOptions: IViewSliderOptions) {
 
+            this.observer = observer;
+            this.sliderWrapper = sliderWrapper;
+            this.slider = this.sliderInit(`slider slider_${sliderOptions.sliderType}`);
+            this.track = this.trackInit();
+            this.leftThumb = this.thumbInit();
+            if (this.slider.classList.contains('slider_range')) {
+                this.rightThumb = this.thumbInit();
+            }
+            this.progressBar = this.progressBarInit();
+            this.scale = this.scaleInit();
 
+            this.sliderWrapper.append(this.slider);
 
-    // private slider: Slider | null = null;
-    // private track: Track | null = null;
-    // private progressBar: ProgressBar | null = null;
-    // private thumb: Thumb | null = null;
-    // private scale: Scale | null = null;
-    // private pixelsPerValue: number = 0;
-    // private onMouseMoveHandler: Function | null = null;
-    // private onMouseUpHandler: Function | null = null;
-    // private stepsCount: number = 0;
-    // private stepSize: number = 0;
-
-    constructor(sliderWrapper: HTMLElement, observer: Observable) {
-        this.observer = observer;
-        this.sliderWrapper = sliderWrapper;
-
-        // this.slider = this.createSliderElement('div', 'slider');
-        // this.track = this.createSliderElement('div', 'slider__track');
-        // this.progressBar = this.createSliderElement('div', 'slider__progress-bar');
-        // this.thumb = this.createSliderElement('div', 'slider__thumb');
-        // this.scale = this.createSliderElement('div', 'slider__scale');
-
-
-
-
-        //     const sliderElem: HTMLElement = document.createElement('div');
-        //     sliderElem.className = 'slider';
-        
-        //     const trackElem: HTMLElement = document.createElement('div');
-        //     trackElem.className = 'slider__track';
-
-        //     const progressBarElem: HTMLElement = document.createElement('div');
-        //     progressBarElem.className = 'slider__progress-bar';
-        
-        //     const thumbElem: HTMLElement = document.createElement('div');
-        //     thumbElem.className = 'slider__thumb';
-
-        //     const scaleElem: HTMLElement = document.createElement('div');
-        //     scaleElem.className = 'slider__scale';
-        
-        //     sliderElem.append(trackElem);
-        //     sliderElem.append(progressBarElem);
-        //     sliderElem.append(thumbElem);
-        //     sliderElem.append(scaleElem);
-        //     sliderPosition.append(sliderElem);
     }
 
-    addSliderToPage(sliderOptions: IViewSliderOptions) {
-        this.slider = this.createSliderElement('div', 'slider');
-        this.track = this.createSliderElement('div', 'slider__track');
-        this.progressBar = this.createSliderElement('div', 'slider__progress-bar');
-        this.leftThumb = this.createSliderElement('div', 'slider__thumb');
-        if (sliderOptions.sliderType == 'range') {
-            this.rightThumb = this.createSliderElement('div', 'slider__thumb');
-        }
-        this.scale = this.createSliderElement('div', 'slider__scale');
+    private sliderInit(styles: string): HTMLElement {
+        return this.createSliderElement('div', styles);
+    }
+
+    private trackInit(): HTMLElement {
+        const track: HTMLElement = this.createSliderElement('div', 'slider__track');
+        this.slider.append(track);
+
+        return track;
+    }
+
+    private progressBarInit(): HTMLElement {
+        const progressBar: HTMLElement = this.createSliderElement('div', 'slider__progress-bar');
+        const progressWidth = parseFloat(this.leftThumb.style.left) + parseFloat(this.leftThumb.style.width);
+        progressBar.style.width = progressWidth + 'px';
+        this.slider.append(progressBar);
+        
+        return progressBar;
+    }
+
+    private thumbInit(startPosition: number = 0, width: number = 20, height: number = 20): HTMLElement {
+        const thumb: HTMLElement = this.createSliderElement('div', 'slider__thumb');
+        thumb.style.left = `${startPosition}px`;
+        thumb.style.width = `${width}px`;
+        thumb.style.height = `${height}px`;
+        this.slider.append(thumb);
+
+        return thumb;
+    }
+
+    private scaleInit(): HTMLElement {
+        const scale: HTMLElement = this.createSliderElement('div', 'slider__scale');
+        this.slider.append(scale);
+        
+        return scale;
     }
 
     private createSliderElement(elem: string, className: string): HTMLElement {
@@ -89,6 +84,15 @@ export class View {
 
         return newElem;
     }
+
+    private progressBarSetWidth(newWidth: number): void {
+        this.progressBar.style.width = newWidth + 'px';
+    }
+
+
+
+
+
 
     // createSlider(sliderOptions: INewSliderOptions) {
     //     const sliderComponents: ISliderComponents = this.addSliderToPage(sliderOptions.sliderPosition);
