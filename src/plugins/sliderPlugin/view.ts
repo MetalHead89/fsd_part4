@@ -1,10 +1,11 @@
-import Observable from './observable';
 import {IViewSliderOptions} from './interfaces'
+import Observable from './observable';
+import Slider from './slider'
 
 class View {
 
     private observer: Observable;
-    // private slider: Slider;
+    private slider: Slider;
     // private track: Track;
     // private progressBar: ProgressBar;
     // private leftThumb: Thumb;
@@ -15,7 +16,7 @@ class View {
         sliderOptions: IViewSliderOptions) {
 
             this.observer = observer;
-            // this.slider = this.sliderInit(`slider slider_${sliderOptions.sliderType}`);
+            // this.slider = this.sliderInit('slider');
             // this.track = this.trackInit();
             // this.leftThumb = this.thumbInit();
             // if (this.slider.classList.contains('slider_range')) {

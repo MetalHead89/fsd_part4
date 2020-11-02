@@ -1,18 +1,13 @@
-import { ISliderSettings } from './interfaces';
-
 class Slider {
+    private elem: HTMLElement;
 
-    // private element: HTMLElement;
-    private type: string; 
-    private orienation: string;    
-    // private coords: DOMRect = new DOMRect;
-
-    constructor(type: string, orientation: string) {
-        // this.element = sliderElem;
-        this.type = type;
-        this.orienation = orientation;
+    constructor(sliderElem: HTMLElement) {
+        this.elem = sliderElem;
     }
-    
+
+    getElement(): HTMLElement {
+        return this.elem;
+    }
 }
 
 export default Slider;
