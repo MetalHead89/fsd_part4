@@ -1,9 +1,8 @@
 class Track {
-    // private color: string = '';
-    // private element: HTMLElement | null;
+    private elem: HTMLElement;
 
-    constructor() {
-        // this.element = track;
+    constructor(trackElem: HTMLElement) {
+        this.elem = trackElem;
     }
 }
 
