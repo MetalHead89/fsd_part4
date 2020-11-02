@@ -20,51 +20,67 @@ class View {
         sliderOptions: IViewSliderOptions) {
 
             this.observer = observer;
-            this.slider = this.sliderInit('slider ' +
+            // this.slider = this.init(sliderWrapper, 'slider ' +
+            //     `slider_${sliderOptions.orientation} slider_${sliderOptions.type}`,
+            //     (obj: HTMLElement) => {return new Slider(obj)});
+            this.slider = this.sliderInit(sliderWrapper, 'slider ' +
                 `slider_${sliderOptions.orientation} slider_${sliderOptions.type}`);
-            this.track = this.trackInit();
-            this.thumbOne = this.thumbInit();
+            this.track = this.trackInit(this.slider.getElement(), 'slider__track');
+            this.thumbOne = this.thumbInit(this.slider.getElement(), 'slider__thumb');
             if (sliderOptions.type === 'slider_range') {
-                this.thumbTwo = this.thumbInit();
+                this.thumbTwo = this.thumbInit(this.slider.getElement(), 'slider__thumb');
             }
-            this.progressBar = this.progressBarInit();
-            this.scale = this.scaleInit();
-
-            // sliderWrapper.append(this.slider);
+            this.progressBar = this.progressBarInit(this.slider.getElement(), 'slider__progress-bar');
+            this.scale = this.scaleInit(this.slider.getElement(), 'slider__scale');
 
     }
 
-    private sliderInit(styles: string): Slider {
+    //////////////////// Инициализация элементов ////////////////////
+
+    // private init(parrent:HTMLElement, styles: string, f: Function): any {
+    //     const elem: HTMLElement = this.createSliderElement('div', styles);
+    //     const obj = f(elem);
+    //     parrent.append(elem);
+
+    //     return obj;
+    // }
+
+    private sliderInit(parrent:HTMLElement, styles: string): Slider {
         const sliderElem: HTMLElement = this.createSliderElement('div', styles);
         const slider: Slider = new Slider(sliderElem);
+        parrent.append(sliderElem);
 
         return slider;
     }
 
-    private trackInit(): Track {
-        const trackElem: HTMLElement = this.createSliderElement('div', 'slider__track');
+    private trackInit(parrent:HTMLElement, styles: string): Track {
+        const trackElem: HTMLElement = this.createSliderElement('div', styles);
         const track: Track = new Track(trackElem);
+        parrent.append(trackElem);
 
         return track;
     }
 
-    private thumbInit(): Thumb {
-        const thumbElem: HTMLElement = this.createSliderElement('div', 'slider__thumb');
+    private thumbInit(parrent:HTMLElement, styles: string): Thumb {
+        const thumbElem: HTMLElement = this.createSliderElement('div', styles);
         const thumb: Thumb = new Thumb(thumbElem);
+        parrent.append(thumbElem);
 
         return thumb;
     }
 
-    private progressBarInit(): ProgressBar {
-        const progressBarElem: HTMLElement = this.createSliderElement('div', 'slider__progress-bar');
+    private progressBarInit(parrent:HTMLElement, styles: string): ProgressBar {
+        const progressBarElem: HTMLElement = this.createSliderElement('div', styles);
         const progressBar = new ProgressBar(progressBarElem);
+        parrent.append(progressBarElem);
         
         return progressBar;
     }
 
-    private scaleInit(): Scale {
-        const scaleElem: HTMLElement = this.createSliderElement('div', 'slider__scale');
+    private scaleInit(parrent:HTMLElement, styles: string): Scale {
+        const scaleElem: HTMLElement = this.createSliderElement('div', styles);
         const scale = new Scale(scaleElem);
+        parrent.append(scaleElem);
         
         return scale;
     }
@@ -77,6 +93,8 @@ class View {
     }
 
 }
+
+export default View;
 
 
 
@@ -406,9 +424,6 @@ class View {
     //     return Math.round(thumb.getMinValue() + ((thumb.getMaxValue() - 
     //         thumb.getMinValue()) / 100 * Math.round(left / this.pixelsPerValue)));
     // }
-}
-
-export default View;
 
 
 
