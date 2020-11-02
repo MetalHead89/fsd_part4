@@ -3,6 +3,7 @@ import Observable from './observable';
 import Slider from './slider';
 import Track from './track';
 import Thumb from './thumb';
+import ProgressBar from './progressBar'
 
 class View {
 
@@ -11,7 +12,7 @@ class View {
     private track: Track;
     private thumbOne: Thumb;
     private thumbTwo: Thumb | null = null;
-    // private progressBar: ProgressBar;
+    private progressBar: ProgressBar;
     
     // private scale: Scale;
 
@@ -54,6 +55,13 @@ class View {
         return thumb;
     }
 
+    private progressBarInit(): ProgressBar {
+        const progressBarElem: HTMLElement = this.createSliderElement('div', 'slider__progress-bar');
+        const progressBar = new ProgressBar(progressBarElem);
+        
+        return progressBar;
+    }
+
     private createSliderElement(elem: string, className: string): HTMLElement {
         const newElem: HTMLElement = document.createElement(elem);
         newElem.className = className;
@@ -94,14 +102,7 @@ class View {
 
 
 
-//     private progressBarInit(): HTMLElement {
-//         const progressBar: HTMLElement = this.createSliderElement('div', 'slider__progress-bar');
-//         const progressWidth = parseFloat(this.leftThumb.style.left) + parseFloat(this.leftThumb.style.width);
-//         progressBar.style.width = progressWidth + 'px';
-//         this.slider.append(progressBar);
-        
-//         return progressBar;
-//     }
+
 
 //     private thumbInit(startPosition: number = 0, width: number = 20, height: number = 20): HTMLElement {
 //         const thumb: HTMLElement = this.createSliderElement('div', 'slider__thumb');
