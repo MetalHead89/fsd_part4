@@ -13,20 +13,21 @@ import Scale from './scale';
 
 export class Model {
     private observer: Observable;
-    private slider: Slider;
-    private track: Track;
-    private progressBar: ProgressBar;
-    private thumb: Thumb;
-    private scale: Scale;
+    private orienation: string;
+    private type: string;
+    private scale: boolean;        
+    private minValue: number;
+    private maxValue: number;
+    private step: number
 
     constructor(observer: Observable, settings: ISliderSettings) {
         this.observer = observer;
-        
-        this.slider = new Slider(settings.type, settings.orienation);
-        this.track = new Track();
-        this.progressBar = new ProgressBar();
-        this.thumb = new Thumb(settings.minValue, settings.maxValue, settings.step);
-        this.scale = new Scale();
+        this.orienation = settings.orienation;
+        this.type = settings.type;
+        this.scale = settings.scale;
+        this.minValue = settings.minValue;
+        this.maxValue = settings.maxValue
+        this.step = settings.step;
 
         // this.observer.notify('sliderInitialized', 
         //     {'sliderType': settings.type, 'sliderOrientation': settings.orienation});
