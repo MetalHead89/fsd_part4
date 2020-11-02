@@ -21,6 +21,9 @@ export class View {
     private leftThumb: HTMLElement;
     private rightThumb: HTMLElement | null = null;
     private scale: HTMLElement;
+    private thumbShift: number = 0;
+    private onMouseMoveHandler;
+    private onMouseUpHandler;
 
     constructor(observer: Observable, sliderWrapper: HTMLElement, 
 
@@ -68,6 +71,24 @@ export class View {
         thumb.style.height = `${height}px`;
         this.slider.append(thumb);
 
+        thumb.ondragstart = function () {
+            return false;
+        };
+
+        thumb.onmousedown = event => {
+
+            let cursorPosition: number = 0;
+
+            if (this.slider.classList.contains('horizontal')) {
+                cursorPosition = event.clientX;
+            } else if (this.slider.classList.contains('vertical')) {
+                cursorPosition = event.clientY;
+            }
+            this.startDrag(event.target as HTMLElement, cursorPosition);
+
+            return false; // disable selection start (cursor change)
+        }
+
         return thumb;
     }
 
@@ -87,6 +108,65 @@ export class View {
 
     private progressBarSetWidth(newWidth: number): void {
         this.progressBar.style.width = newWidth + 'px';
+    }
+
+    private startDrag(thumb: HTMLElement, cursorPosition: number) {
+
+        let thumbCoords: DOMRect = thumb.getBoundingClientRect();
+        let shift: number = 0;
+
+        if (this.slider.classList.contains('horizontal')) {
+            this.thumbShift = cursorPosition - thumbCoords.left;
+        } else if (this.slider.classList.contains('vertical')) {
+            this.thumbShift = cursorPosition - thumbCoords.top;
+        }
+
+        this.onMouseMoveHandler = this.moveTo.bind(this);
+        this.onMouseUpHandler = this.endDrag.bind(this);
+
+        document.addEventListener('mousemove',
+            this.onMouseMoveHandler as EventListenerOrEventListenerObject);
+        document.addEventListener('mouseup',
+            this.onMouseUpHandler as EventListenerOrEventListenerObject);
+
+    }
+
+
+
+    private moveTo(event: MouseEvent) {
+
+            const sliderCoords: DOMRect = this.slider.getBoundingClientRect();
+
+            // вычесть координату родителя, т.к. position: relative
+            let newLeft: number = event.clientX - this.thumb.getShiftX() - sliderCoords.left;
+            
+            // курсор ушёл вне слайдера
+            if (newLeft < 0) {
+                newLeft = 0;
+            }
+
+            let rightEdge: number = this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth;
+            
+            newLeft = Math.round(newLeft / this.stepSize) * this.stepSize;
+
+            if (newLeft >= rightEdge) {
+                newLeft = rightEdge;
+            } else {
+                // this.stepsCount = (this.thumb.getMaxValue() - this.thumb.getMinValue()) / this.thumb.getStep();
+                // let stepSize: number = (this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth) / this.stepsCount;
+                newLeft = Math.round(newLeft / this.stepSize) * this.stepSize;
+
+
+                // let stepCount: number = (this.thumb.getMaxValue() - this.thumb.getMinValue()) / this.thumb.getStep();
+                // let stepSize: number = (this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth) / stepCount;
+                // newLeft = Math.round(newLeft / stepSize) * stepSize;
+            }
+
+            this.progressBar?.setWidth(newLeft + this.thumb.getElement().offsetWidth);
+            this.thumb.moveTo(newLeft);
+
+            // console.log(this.positionToValue(this.thumb, newLeft))////////////////////////////////////
+
     }
 
 
