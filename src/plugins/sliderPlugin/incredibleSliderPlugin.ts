@@ -1,6 +1,6 @@
 import Observable from './observable';
-import { Model } from './model';
-import { View } from './view';
+import Model from './model';
+import View from './view';
 import Presenter from './presenter';
 import { ISliderSettings } from './interfaces';
 // import { IgnorePlugin } from 'webpack';

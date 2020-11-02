@@ -1,8 +1,8 @@
 import {IViewSliderOptions} from './interfaces'
 
 import Observable from './observable';
-import { Model } from './model';
-import { View } from './view';
+import Model from './model';
+import View from './view';
 // import { INewSliderOptions } from './interfaces';
 // import { INewSliderOptions } from '../slider/interfaces';
 

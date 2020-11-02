@@ -1,102 +1,35 @@
 import Observable from './observable';
 import {IViewSliderOptions} from './interfaces'
-// import { INewSliderOptions } from './interfaces';
-// import { ISliderComponents } from './interfaces';
-// import { ISliderSettings } from './interfaces';
-// import { IThumbSettings } from './interfaces';
-// import { IScaleSettings } from './interfaces';
-// import { Slider } from './slider';
-// import { Track } from './track';
-// import { ProgressBar } from './progressBar';
-// import { Thumb } from './thumb';
-// import { Scale } from './scale';
 
-export class View {
+class View {
 
     private observer: Observable;
-    private sliderWrapper: HTMLElement;
-    private slider: HTMLElement;
-    private track: HTMLElement;
-    private progressBar: HTMLElement;
-    private leftThumb: HTMLElement;
-    private rightThumb: HTMLElement | null = null;
-    private scale: HTMLElement;
-    private thumbShift: number = 0;
-    private onMouseMoveHandler;
-    private onMouseUpHandler;
+    // private slider: Slider;
+    // private track: Track;
+    // private progressBar: ProgressBar;
+    // private leftThumb: Thumb;
+    // private rightThumb: Thumb | null = null;
+    // private scale: Scale;
 
-    constructor(observer: Observable, sliderWrapper: HTMLElement, 
-
+    constructor(observer: Observable, sliderWrapper: HTMLElement,
         sliderOptions: IViewSliderOptions) {
 
             this.observer = observer;
-            this.sliderWrapper = sliderWrapper;
-            this.slider = this.sliderInit(`slider slider_${sliderOptions.sliderType}`);
-            this.track = this.trackInit();
-            this.leftThumb = this.thumbInit();
-            if (this.slider.classList.contains('slider_range')) {
-                this.rightThumb = this.thumbInit();
-            }
-            this.progressBar = this.progressBarInit();
-            this.scale = this.scaleInit();
+            // this.slider = this.sliderInit(`slider slider_${sliderOptions.sliderType}`);
+            // this.track = this.trackInit();
+            // this.leftThumb = this.thumbInit();
+            // if (this.slider.classList.contains('slider_range')) {
+            //     this.rightThumb = this.thumbInit();
+            // }
+            // this.progressBar = this.progressBarInit();
+            // this.scale = this.scaleInit();
 
-            this.sliderWrapper.append(this.slider);
+            // sliderWrapper.append(this.slider);
 
     }
 
     private sliderInit(styles: string): HTMLElement {
         return this.createSliderElement('div', styles);
-    }
-
-    private trackInit(): HTMLElement {
-        const track: HTMLElement = this.createSliderElement('div', 'slider__track');
-        this.slider.append(track);
-
-        return track;
-    }
-
-    private progressBarInit(): HTMLElement {
-        const progressBar: HTMLElement = this.createSliderElement('div', 'slider__progress-bar');
-        const progressWidth = parseFloat(this.leftThumb.style.left) + parseFloat(this.leftThumb.style.width);
-        progressBar.style.width = progressWidth + 'px';
-        this.slider.append(progressBar);
-        
-        return progressBar;
-    }
-
-    private thumbInit(startPosition: number = 0, width: number = 20, height: number = 20): HTMLElement {
-        const thumb: HTMLElement = this.createSliderElement('div', 'slider__thumb');
-        thumb.style.left = `${startPosition}px`;
-        thumb.style.width = `${width}px`;
-        thumb.style.height = `${height}px`;
-        this.slider.append(thumb);
-
-        thumb.ondragstart = function () {
-            return false;
-        };
-
-        thumb.onmousedown = event => {
-
-            let cursorPosition: number = 0;
-
-            if (this.slider.classList.contains('horizontal')) {
-                cursorPosition = event.clientX;
-            } else if (this.slider.classList.contains('vertical')) {
-                cursorPosition = event.clientY;
-            }
-            this.startDrag(event.target as HTMLElement, cursorPosition);
-
-            return false; // disable selection start (cursor change)
-        }
-
-        return thumb;
-    }
-
-    private scaleInit(): HTMLElement {
-        const scale: HTMLElement = this.createSliderElement('div', 'slider__scale');
-        this.slider.append(scale);
-        
-        return scale;
     }
 
     private createSliderElement(elem: string, className: string): HTMLElement {
@@ -106,68 +39,162 @@ export class View {
         return newElem;
     }
 
-    private progressBarSetWidth(newWidth: number): void {
-        this.progressBar.style.width = newWidth + 'px';
-    }
-
-    private startDrag(thumb: HTMLElement, cursorPosition: number) {
-
-        let thumbCoords: DOMRect = thumb.getBoundingClientRect();
-        let shift: number = 0;
-
-        if (this.slider.classList.contains('horizontal')) {
-            this.thumbShift = cursorPosition - thumbCoords.left;
-        } else if (this.slider.classList.contains('vertical')) {
-            this.thumbShift = cursorPosition - thumbCoords.top;
-        }
-
-        this.onMouseMoveHandler = this.moveTo.bind(this);
-        this.onMouseUpHandler = this.endDrag.bind(this);
-
-        document.addEventListener('mousemove',
-            this.onMouseMoveHandler as EventListenerOrEventListenerObject);
-        document.addEventListener('mouseup',
-            this.onMouseUpHandler as EventListenerOrEventListenerObject);
-
-    }
+}
 
 
 
-    private moveTo(event: MouseEvent) {
 
-            const sliderCoords: DOMRect = this.slider.getBoundingClientRect();
 
-            // вычесть координату родителя, т.к. position: relative
-            let newLeft: number = event.clientX - this.thumb.getShiftX() - sliderCoords.left;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//     }
+
+//     private sliderInit(styles: string): HTMLElement {
+//         return this.createSliderElement('div', styles);
+//     }
+
+//     private trackInit(): HTMLElement {
+//         const track: HTMLElement = this.createSliderElement('div', 'slider__track');
+//         this.slider.append(track);
+
+//         return track;
+//     }
+
+//     private progressBarInit(): HTMLElement {
+//         const progressBar: HTMLElement = this.createSliderElement('div', 'slider__progress-bar');
+//         const progressWidth = parseFloat(this.leftThumb.style.left) + parseFloat(this.leftThumb.style.width);
+//         progressBar.style.width = progressWidth + 'px';
+//         this.slider.append(progressBar);
+        
+//         return progressBar;
+//     }
+
+//     private thumbInit(startPosition: number = 0, width: number = 20, height: number = 20): HTMLElement {
+//         const thumb: HTMLElement = this.createSliderElement('div', 'slider__thumb');
+//         thumb.style.left = `${startPosition}px`;
+//         thumb.style.width = `${width}px`;
+//         thumb.style.height = `${height}px`;
+//         this.slider.append(thumb);
+
+//         thumb.ondragstart = function () {
+//             return false;
+//         };
+
+//         thumb.onmousedown = event => {
+
+//             let cursorPosition: number = 0;
+
+//             if (this.slider.classList.contains('horizontal')) {
+//                 cursorPosition = event.clientX;
+//             } else if (this.slider.classList.contains('vertical')) {
+//                 cursorPosition = event.clientY;
+//             }
+//             this.startDrag(event.target as HTMLElement, cursorPosition);
+
+//             return false; // disable selection start (cursor change)
+//         }
+
+//         return thumb;
+//     }
+
+//     private scaleInit(): HTMLElement {
+//         const scale: HTMLElement = this.createSliderElement('div', 'slider__scale');
+//         this.slider.append(scale);
+        
+//         return scale;
+//     }
+
+//     private createSliderElement(elem: string, className: string): HTMLElement {
+//         const newElem: HTMLElement = document.createElement(elem);
+//         newElem.className = className;
+
+//         return newElem;
+//     }
+
+//     private progressBarSetWidth(newWidth: number): void {
+//         this.progressBar.style.width = newWidth + 'px';
+//     }
+
+//     private startDrag(thumb: HTMLElement, cursorPosition: number) {
+
+//         let thumbCoords: DOMRect = thumb.getBoundingClientRect();
+//         let shift: number = 0;
+
+//         if (this.slider.classList.contains('horizontal')) {
+//             this.thumbShift = cursorPosition - thumbCoords.left;
+//         } else if (this.slider.classList.contains('vertical')) {
+//             this.thumbShift = cursorPosition - thumbCoords.top;
+//         }
+
+//         this.onMouseMoveHandler = this.moveTo.bind(this);
+//         this.onMouseUpHandler = this.endDrag.bind(this);
+
+//         document.addEventListener('mousemove',
+//             this.onMouseMoveHandler as EventListenerOrEventListenerObject);
+//         document.addEventListener('mouseup',
+//             this.onMouseUpHandler as EventListenerOrEventListenerObject);
+
+//     }
+
+
+
+//     private moveTo(event: MouseEvent) {
+
+//             const sliderCoords: DOMRect = this.slider.getBoundingClientRect();
+
+//             // вычесть координату родителя, т.к. position: relative
+//             let newLeft: number = event.clientX - this.thumb.getShiftX() - sliderCoords.left;
             
-            // курсор ушёл вне слайдера
-            if (newLeft < 0) {
-                newLeft = 0;
-            }
+//             // курсор ушёл вне слайдера
+//             if (newLeft < 0) {
+//                 newLeft = 0;
+//             }
 
-            let rightEdge: number = this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth;
+//             let rightEdge: number = this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth;
             
-            newLeft = Math.round(newLeft / this.stepSize) * this.stepSize;
+//             newLeft = Math.round(newLeft / this.stepSize) * this.stepSize;
 
-            if (newLeft >= rightEdge) {
-                newLeft = rightEdge;
-            } else {
-                // this.stepsCount = (this.thumb.getMaxValue() - this.thumb.getMinValue()) / this.thumb.getStep();
-                // let stepSize: number = (this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth) / this.stepsCount;
-                newLeft = Math.round(newLeft / this.stepSize) * this.stepSize;
+//             if (newLeft >= rightEdge) {
+//                 newLeft = rightEdge;
+//             } else {
+//                 // this.stepsCount = (this.thumb.getMaxValue() - this.thumb.getMinValue()) / this.thumb.getStep();
+//                 // let stepSize: number = (this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth) / this.stepsCount;
+//                 newLeft = Math.round(newLeft / this.stepSize) * this.stepSize;
 
 
-                // let stepCount: number = (this.thumb.getMaxValue() - this.thumb.getMinValue()) / this.thumb.getStep();
-                // let stepSize: number = (this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth) / stepCount;
-                // newLeft = Math.round(newLeft / stepSize) * stepSize;
-            }
+//                 // let stepCount: number = (this.thumb.getMaxValue() - this.thumb.getMinValue()) / this.thumb.getStep();
+//                 // let stepSize: number = (this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth) / stepCount;
+//                 // newLeft = Math.round(newLeft / stepSize) * stepSize;
+//             }
 
-            this.progressBar?.setWidth(newLeft + this.thumb.getElement().offsetWidth);
-            this.thumb.moveTo(newLeft);
+//             this.progressBar?.setWidth(newLeft + this.thumb.getElement().offsetWidth);
+//             this.thumb.moveTo(newLeft);
 
-            // console.log(this.positionToValue(this.thumb, newLeft))////////////////////////////////////
+//             // console.log(this.positionToValue(this.thumb, newLeft))////////////////////////////////////
 
-    }
+//     }
 
 
 
@@ -365,6 +392,8 @@ export class View {
     //         thumb.getMinValue()) / 100 * Math.round(left / this.pixelsPerValue)));
     // }
 }
+
+export default View;
 
 
 

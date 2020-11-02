@@ -11,7 +11,7 @@ import Scale from './scale';
 // import { IGroupedSettings } from './interfaces';
 // import { IScaleSettings } from './interfaces';
 
-export class Model {
+class Model {
     private observer: Observable;
     private orienation: string;
     private type: string;
@@ -32,6 +32,7 @@ export class Model {
         // this.observer.notify('sliderInitialized', 
         //     {'sliderType': settings.type, 'sliderOrientation': settings.orienation});
     }
+    
 
     // setMinValue(newValue: number) {
     //     this.observer.notify('updatedMinValue', newValue);
@@ -78,6 +79,8 @@ export class Model {
     //     return {'sliderSettings': sliderSettings, 'thumbSettings': thumbSettings, 'scaleSettings': scaleSettings}
     // }
 }
+
+export default Model;
 
 
 
