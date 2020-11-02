@@ -4,6 +4,7 @@ import Slider from './slider';
 import Track from './track';
 import Thumb from './thumb';
 import ProgressBar from './progressBar'
+import Scale from './scale';
 
 class View {
 
@@ -12,9 +13,8 @@ class View {
     private track: Track;
     private thumbOne: Thumb;
     private thumbTwo: Thumb | null = null;
-    private progressBar: ProgressBar;
-    
-    // private scale: Scale;
+    private progressBar: ProgressBar;    
+    private scale: Scale;
 
     constructor(observer: Observable, sliderWrapper: HTMLElement,
         sliderOptions: IViewSliderOptions) {
@@ -27,8 +27,8 @@ class View {
             if (sliderOptions.type === 'slider_range') {
                 this.thumbTwo = this.thumbInit();
             }
-            // this.progressBar = this.progressBarInit();
-            // this.scale = this.scaleInit();
+            this.progressBar = this.progressBarInit();
+            this.scale = this.scaleInit();
 
             // sliderWrapper.append(this.slider);
 
@@ -60,6 +60,13 @@ class View {
         const progressBar = new ProgressBar(progressBarElem);
         
         return progressBar;
+    }
+
+    private scaleInit(): Scale {
+        const scaleElem: HTMLElement = this.createSliderElement('div', 'slider__scale');
+        const scale = new Scale(scaleElem);
+        
+        return scale;
     }
 
     private createSliderElement(elem: string, className: string): HTMLElement {
@@ -132,12 +139,7 @@ class View {
 //         return thumb;
 //     }
 
-//     private scaleInit(): HTMLElement {
-//         const scale: HTMLElement = this.createSliderElement('div', 'slider__scale');
-//         this.slider.append(scale);
-        
-//         return scale;
-//     }
+
 
 //     private createSliderElement(elem: string, className: string): HTMLElement {
 //         const newElem: HTMLElement = document.createElement(elem);
