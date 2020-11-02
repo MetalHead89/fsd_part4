@@ -29,7 +29,8 @@ import { ISliderSettings } from './interfaces';
             return this.each(function (this: any) { ///////////////////////////////////////////// ТИП ANY /////////////////////////////////////////////
                 const observer = new Observable();
                 const model: Model = new Model(observer, settings);
-                const view: View = new View(observer, this, {'sliderType': settings.orienation, 'sliderOrientation': settings.orienation});
+                const view: View = new View(observer, this,
+                    {'type': settings.type, 'orientation': settings.orienation});
                 const presenter: Presenter = new Presenter(view, model, observer);
 
                 // $(this).data('settings', settings); ///////////////////////// добавить проверку на существование объекта

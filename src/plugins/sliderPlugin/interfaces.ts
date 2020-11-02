@@ -8,8 +8,8 @@ export interface ISliderSettings {
 }
 
 export interface IViewSliderOptions {
-    'sliderType': string,
-    'sliderOrientation': string
+    'type': string,
+    'orientation': string
 }
 
 // export interface IGroupedSettings {

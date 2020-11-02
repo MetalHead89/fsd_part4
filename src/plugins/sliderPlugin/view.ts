@@ -1,28 +1,31 @@
-import {IViewSliderOptions} from './interfaces'
+import {IViewSliderOptions} from './interfaces';
 import Observable from './observable';
-import Slider from './slider'
-import Track from './track'
+import Slider from './slider';
+import Track from './track';
+import Thumb from './thumb';
 
 class View {
 
     private observer: Observable;
     private slider: Slider;
     private track: Track;
+    private thumbOne: Thumb;
+    private thumbTwo: Thumb | null = null;
     // private progressBar: ProgressBar;
-    // private leftThumb: Thumb;
-    // private rightThumb: Thumb | null = null;
+    
     // private scale: Scale;
 
     constructor(observer: Observable, sliderWrapper: HTMLElement,
         sliderOptions: IViewSliderOptions) {
 
             this.observer = observer;
-            this.slider = this.sliderInit('slider');
+            this.slider = this.sliderInit('slider ' +
+                `slider_${sliderOptions.orientation} slider_${sliderOptions.type}`);
             this.track = this.trackInit();
-            // this.leftThumb = this.thumbInit();
-            // if (this.slider.classList.contains('slider_range')) {
-            //     this.rightThumb = this.thumbInit();
-            // }
+            this.thumbOne = this.thumbInit();
+            if (sliderOptions.type === 'slider_range') {
+                this.thumbTwo = this.thumbInit();
+            }
             // this.progressBar = this.progressBarInit();
             // this.scale = this.scaleInit();
 
@@ -40,9 +43,15 @@ class View {
     private trackInit(): Track {
         const trackElem: HTMLElement = this.createSliderElement('div', 'slider__track');
         const track: Track = new Track(trackElem);
-        // this.slider.append(track);
 
         return track;
+    }
+
+    private thumbInit(): Thumb {
+        const thumbElem: HTMLElement = this.createSliderElement('div', 'slider__thumb');
+        const thumb: Thumb = new Thumb(thumbElem);
+
+        return thumb;
     }
 
     private createSliderElement(elem: string, className: string): HTMLElement {
@@ -84,12 +93,6 @@ class View {
 
 
 
-//     private trackInit(): HTMLElement {
-//         const track: HTMLElement = this.createSliderElement('div', 'slider__track');
-//         this.slider.append(track);
-
-//         return track;
-//     }
 
 //     private progressBarInit(): HTMLElement {
 //         const progressBar: HTMLElement = this.createSliderElement('div', 'slider__progress-bar');
