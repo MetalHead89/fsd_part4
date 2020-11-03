@@ -34,7 +34,7 @@ class View {
 
     //////////////////// Инициализация элементов ////////////////////
 
-    private init(parrent: HTMLElement, styles: string, createObj: Function): any {
+    private init(parrent: HTMLElement, styles: string, createObj: Function): any {  ///////////////////////////////////////////// ТИП ANY /////////////////////////////////////////////
         
         const elem: HTMLElement = document.createElement('div');
         elem.className = styles;
@@ -67,6 +67,22 @@ class View {
 
         const createObj = (obj: HTMLElement) => { return new Thumb(obj) }
         const thumb: Thumb = this.init(parrent, styles, createObj);
+        const thumbElem: HTMLElement = thumb.getElement();
+
+        thumbElem.ondragstart = function () {
+            return false;
+        };
+
+        thumbElem.addEventListener('mousedown', (event: MouseEvent) => {
+            // this.pixelsPerValue = (this.slider.getElement().clientWidth -
+            //     this.thumb.getElement().clientWidth) / 100;
+            this.observer.notify('thumbTaked',
+                { 'cursorX': event.clientX, 'cursorY': event.clientY });
+
+            // this.startDrag(event.clientX, event.clientY);
+            return false; // disable selection start (cursor change)
+        });
+        
 
         return thumb;
 

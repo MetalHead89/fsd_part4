@@ -1,8 +1,12 @@
 class Thumb {
-    private elem: HTMLElement;
+    private element: HTMLElement;
 
     constructor(thumbElem: HTMLElement) {
-        this.elem = thumbElem;
+        this.element = thumbElem;
+    }
+
+    getElement(): HTMLElement {
+        return this.element;
     }
 }
 
