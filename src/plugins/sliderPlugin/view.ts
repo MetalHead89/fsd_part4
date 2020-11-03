@@ -1,4 +1,4 @@
-import {IViewSliderOptions} from './interfaces';
+import { IViewSliderOptions } from './interfaces';
 import Observable from './observable';
 import Slider from './slider';
 import Track from './track';
@@ -13,84 +13,129 @@ class View {
     private track: Track;
     private thumbOne: Thumb;
     private thumbTwo: Thumb | null = null;
-    private progressBar: ProgressBar;    
+    private progressBar: ProgressBar;
     private scale: Scale;
 
     constructor(observer: Observable, sliderWrapper: HTMLElement,
         sliderOptions: IViewSliderOptions) {
 
-            this.observer = observer;
-            // this.slider = this.init(sliderWrapper, 'slider ' +
-            //     `slider_${sliderOptions.orientation} slider_${sliderOptions.type}`,
-            //     (obj: HTMLElement) => {return new Slider(obj)});
-            this.slider = this.sliderInit(sliderWrapper, 'slider ' +
-                `slider_${sliderOptions.orientation} slider_${sliderOptions.type}`);
-            this.track = this.trackInit(this.slider.getElement(), 'slider__track');
-            this.thumbOne = this.thumbInit(this.slider.getElement(), 'slider__thumb');
-            if (sliderOptions.type === 'slider_range') {
-                this.thumbTwo = this.thumbInit(this.slider.getElement(), 'slider__thumb');
-            }
-            this.progressBar = this.progressBarInit(this.slider.getElement(), 'slider__progress-bar');
-            this.scale = this.scaleInit(this.slider.getElement(), 'slider__scale');
+        this.observer = observer;
+        this.slider = this.sliderInit(sliderWrapper, 'slider ' +
+            `slider_${sliderOptions.orientation} slider_${sliderOptions.type}`);
+        this.track = this.trackInit(this.slider.getElement(), 'slider__track');
+        this.thumbOne = this.thumbInit(this.slider.getElement(), 'slider__thumb');
+        if (sliderOptions.type === 'slider_range') {
+            this.thumbTwo = this.thumbInit(this.slider.getElement(), 'slider__thumb');
+        }
+        this.progressBar = this.progressBarInit(this.slider.getElement(), 'slider__progress-bar');
+        this.scale = this.scaleInit(this.slider.getElement(), 'slider__scale');
 
     }
 
     //////////////////// Инициализация элементов ////////////////////
 
-    // private init(parrent:HTMLElement, styles: string, f: Function): any {
-    //     const elem: HTMLElement = this.createSliderElement('div', styles);
-    //     const obj = f(elem);
-    //     parrent.append(elem);
+    private init(parrent: HTMLElement, styles: string, createObj: Function): any {
+        
+        const elem: HTMLElement = document.createElement('div');
+        elem.className = styles;
+        const obj = createObj(elem);
+        parrent.append(elem);
 
-    //     return obj;
-    // }
+        return obj;
 
-    private sliderInit(parrent:HTMLElement, styles: string): Slider {
-        const sliderElem: HTMLElement = this.createSliderElement('div', styles);
-        const slider: Slider = new Slider(sliderElem);
-        parrent.append(sliderElem);
+    }
+
+    private sliderInit(parrent: HTMLElement, styles: string): Slider {
+
+        const createObj = (obj: HTMLElement) => { return new Slider(obj) }
+        const slider: Slider = this.init(parrent, styles, createObj);
 
         return slider;
+
     }
 
-    private trackInit(parrent:HTMLElement, styles: string): Track {
-        const trackElem: HTMLElement = this.createSliderElement('div', styles);
-        const track: Track = new Track(trackElem);
-        parrent.append(trackElem);
+    private trackInit(parrent: HTMLElement, styles: string): Track {
+
+        const createObj = (obj: HTMLElement) => { return new Track(obj) }
+        const track: Track = this.init(parrent, styles, createObj);
 
         return track;
+
     }
 
-    private thumbInit(parrent:HTMLElement, styles: string): Thumb {
-        const thumbElem: HTMLElement = this.createSliderElement('div', styles);
-        const thumb: Thumb = new Thumb(thumbElem);
-        parrent.append(thumbElem);
+    private thumbInit(parrent: HTMLElement, styles: string): Thumb {
+
+        const createObj = (obj: HTMLElement) => { return new Thumb(obj) }
+        const thumb: Thumb = this.init(parrent, styles, createObj);
 
         return thumb;
+
     }
 
-    private progressBarInit(parrent:HTMLElement, styles: string): ProgressBar {
-        const progressBarElem: HTMLElement = this.createSliderElement('div', styles);
-        const progressBar = new ProgressBar(progressBarElem);
-        parrent.append(progressBarElem);
-        
+    private progressBarInit(parrent: HTMLElement, styles: string): ProgressBar {
+
+        const createObj = (obj: HTMLElement) => { return new ProgressBar(obj) }
+        const progressBar: ProgressBar = this.init(parrent, styles, createObj);
+
         return progressBar;
+
     }
 
-    private scaleInit(parrent:HTMLElement, styles: string): Scale {
-        const scaleElem: HTMLElement = this.createSliderElement('div', styles);
-        const scale = new Scale(scaleElem);
-        parrent.append(scaleElem);
-        
+    private scaleInit(parrent: HTMLElement, styles: string): Scale {
+
+        const createObj = (obj: HTMLElement) => { return new Scale(obj) }
+        const scale: Scale = this.init(parrent, styles, createObj);
+
         return scale;
+        
     }
 
-    private createSliderElement(elem: string, className: string): HTMLElement {
-        const newElem: HTMLElement = document.createElement(elem);
-        newElem.className = className;
+    // private sliderInit(parrent:HTMLElement, styles: string): Slider {
+    //     const sliderElem: HTMLElement = this.createSliderElement('div', styles);
+    //     const slider: Slider = new Slider(sliderElem);
+    //     parrent.append(sliderElem);
 
-        return newElem;
-    }
+    //     return slider;
+    // }
+
+    // private trackInit(parrent:HTMLElement, styles: string): Track {
+    //     const trackElem: HTMLElement = this.createSliderElement('div', styles);
+    //     const track: Track = new Track(trackElem);
+    //     parrent.append(trackElem);
+
+    //     return track;
+    // }
+
+    // private thumbInit(parrent:HTMLElement, styles: string): Thumb {
+    //     const thumbElem: HTMLElement = this.createSliderElement('div', styles);
+    //     const thumb: Thumb = new Thumb(thumbElem);
+    //     parrent.append(thumbElem);
+
+    //     return thumb;
+    // }
+
+    // private progressBarInit(parrent:HTMLElement, styles: string): ProgressBar {
+    //     const progressBarElem: HTMLElement = this.createSliderElement('div', styles);
+    //     const progressBar = new ProgressBar(progressBarElem);
+    //     parrent.append(progressBarElem);
+
+    //     return progressBar;
+    // }
+
+    // private scaleInit(parrent:HTMLElement, styles: string): Scale {
+    //     const scaleElem: HTMLElement = this.createSliderElement('div', styles);
+    //     const scale = new Scale(scaleElem);
+    //     parrent.append(scaleElem);
+
+    //     return scale;
+    // }
+
+    // private createSliderElement(elem: string, className: string): HTMLElement {
+    //     const newElem: HTMLElement = document.createElement(elem);
+    //     newElem.className = className;
+
+    //     return newElem;
+    // }
 
 }
 
@@ -199,14 +244,14 @@ export default View;
 
 //             // вычесть координату родителя, т.к. position: relative
 //             let newLeft: number = event.clientX - this.thumb.getShiftX() - sliderCoords.left;
-            
+
 //             // курсор ушёл вне слайдера
 //             if (newLeft < 0) {
 //                 newLeft = 0;
 //             }
 
 //             let rightEdge: number = this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth;
-            
+
 //             newLeft = Math.round(newLeft / this.stepSize) * this.stepSize;
 
 //             if (newLeft >= rightEdge) {
@@ -236,7 +281,7 @@ export default View;
 
     // createSlider(sliderOptions: INewSliderOptions) {
     //     const sliderComponents: ISliderComponents = this.addSliderToPage(sliderOptions.sliderPosition);
-        
+
     //     this.addSlider(sliderComponents.sliderElem, sliderOptions.settings.sliderSettings);
     //     this.addTrack(sliderComponents.trackElem);
     //     this.addProgressBar(sliderComponents.progressBar);
@@ -299,7 +344,7 @@ export default View;
     //         if (this.slider && this.thumb) {
     //             // this.pixelsPerValue = (this.slider.getElement().clientWidth -
     //             //     this.thumb.getElement().clientWidth) / 100;
-                
+
     //             this.startDrag(event.clientX, event.clientY);
     //         }            
 
@@ -319,19 +364,19 @@ export default View;
     // private addSliderToPage(sliderPosition: HTMLElement): ISliderComponents {
     //     const sliderElem: HTMLElement = document.createElement('div');
     //     sliderElem.className = 'slider';
-    
+
     //     const trackElem: HTMLElement = document.createElement('div');
     //     trackElem.className = 'slider__track';
 
     //     const progressBarElem: HTMLElement = document.createElement('div');
     //     progressBarElem.className = 'slider__progress-bar';
-    
+
     //     const thumbElem: HTMLElement = document.createElement('div');
     //     thumbElem.className = 'slider__thumb';
 
     //     const scaleElem: HTMLElement = document.createElement('div');
     //     scaleElem.className = 'slider__scale';
-    
+
     //     sliderElem.append(trackElem);
     //     sliderElem.append(progressBarElem);
     //     sliderElem.append(thumbElem);
@@ -345,7 +390,7 @@ export default View;
     //     if (this.thumb && this.slider) {
 
     //         const thumbCoords: DOMRect = this.thumb.getElement().getBoundingClientRect();
-            
+
     //         this.thumb.setShiftX(startClientX - thumbCoords.left);
     //         this.thumb.setShiftY(startClientY - thumbCoords.top);
 
@@ -366,14 +411,14 @@ export default View;
 
     //         // вычесть координату родителя, т.к. position: relative
     //         let newLeft: number = event.clientX - this.thumb.getShiftX() - sliderCoords.left;
-            
+
     //         // курсор ушёл вне слайдера
     //         if (newLeft < 0) {
     //             newLeft = 0;
     //         }
 
     //         let rightEdge: number = this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth;
-            
+
     //         newLeft = Math.round(newLeft / this.stepSize) * this.stepSize;
 
     //         if (newLeft >= rightEdge) {
@@ -472,7 +517,7 @@ export default View;
 
 //     createSlider(sliderOptions: INewSliderOptions) {
 //         const sliderComponents: ISliderComponents = this.addSliderToPage(sliderOptions.sliderPosition);
-        
+
 //         this.addSlider(sliderComponents.sliderElem, sliderOptions.settings.sliderSettings);
 //         this.addTrack(sliderComponents.trackElem);
 //         this.addProgressBar(sliderComponents.progressBar);
@@ -535,7 +580,7 @@ export default View;
 //             if (this.slider && this.thumb) {
 //                 // this.pixelsPerValue = (this.slider.getElement().clientWidth -
 //                 //     this.thumb.getElement().clientWidth) / 100;
-                
+
 //                 this.startDrag(event.clientX, event.clientY);
 //             }            
 
@@ -555,19 +600,19 @@ export default View;
 //     private addSliderToPage(sliderPosition: HTMLElement): ISliderComponents {
 //         const sliderElem: HTMLElement = document.createElement('div');
 //         sliderElem.className = 'slider';
-    
+
 //         const trackElem: HTMLElement = document.createElement('div');
 //         trackElem.className = 'slider__track';
 
 //         const progressBarElem: HTMLElement = document.createElement('div');
 //         progressBarElem.className = 'slider__progress-bar';
-    
+
 //         const thumbElem: HTMLElement = document.createElement('div');
 //         thumbElem.className = 'slider__thumb';
 
 //         const scaleElem: HTMLElement = document.createElement('div');
 //         scaleElem.className = 'slider__scale';
-    
+
 //         sliderElem.append(trackElem);
 //         sliderElem.append(progressBarElem);
 //         sliderElem.append(thumbElem);
@@ -581,7 +626,7 @@ export default View;
 //         if (this.thumb && this.slider) {
 
 //             const thumbCoords: DOMRect = this.thumb.getElement().getBoundingClientRect();
-            
+
 //             this.thumb.setShiftX(startClientX - thumbCoords.left);
 //             this.thumb.setShiftY(startClientY - thumbCoords.top);
 
@@ -602,14 +647,14 @@ export default View;
 
 //             // вычесть координату родителя, т.к. position: relative
 //             let newLeft: number = event.clientX - this.thumb.getShiftX() - sliderCoords.left;
-            
+
 //             // курсор ушёл вне слайдера
 //             if (newLeft < 0) {
 //                 newLeft = 0;
 //             }
 
 //             let rightEdge: number = this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth;
-            
+
 //             newLeft = Math.round(newLeft / this.stepSize) * this.stepSize;
 
 //             if (newLeft >= rightEdge) {
