@@ -46,7 +46,7 @@ class Thumb {
         this.shift.shiftX = cursorX - thumbCoords.left;
         this.shift.shiftY = cursorY - thumbCoords.top;
         
-        this.onMouseMoveHandler = () => {this.observer.notify('startDrag', this.getPosition({'x': cursorX, 'y': cursorY}))};
+        this.onMouseMoveHandler = this.drag.bind(this);
         this.onMouseUpHandler = this.endDrag.bind(this);
 
         document.addEventListener('mousemove',
@@ -56,19 +56,23 @@ class Thumb {
                 
     }
 
+    private drag(event: MouseEvent): void {
+        this.observer.notify('startDrag', this.getPosition({'x': event.clientX, 'y': event.clientY}))
+    }
+
     private getPosition(cursorPosition: ICursorPsition): IThumbPosition {
 
         const parrent: HTMLElement | null = this.element.parentElement;
-
+        
         if (!parrent) {
             return {'left': 0, 'top': 0}
         }
-
+        
         const parrentCoords: DOMRect = parrent.getBoundingClientRect();
-
+        console.log(cursorPosition.x)
         return {
             'left': cursorPosition.x - this.shift.shiftX - parrentCoords.left,
-            'top': cursorPosition.x - this.shift.shiftX - parrentCoords.left
+            'top': cursorPosition.y - this.shift.shiftY - parrentCoords.left
         }
     }
 

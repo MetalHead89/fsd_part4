@@ -104,6 +104,11 @@ class View {
     getThumbSize(): ISliderSize {
         return this.thumbOne.getSize();
     }
+
+    moveThumb(value: number) {
+        this.thumbOne.moveTo(value);
+    }
+    
 }
 
 export default View;

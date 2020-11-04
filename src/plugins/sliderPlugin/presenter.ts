@@ -1,5 +1,6 @@
 import { IViewSliderOptions } from './interfaces'
 import { ISliderSize } from './interfaces';
+import {IThumbPosition} from './interfaces'
 
 import Observable from './observable';
 import Model from './model';
@@ -20,8 +21,13 @@ class Presenter {
         this.model.setSliderSize(this.view.getSliderSize());
         this.model.setThumbSize(this.view.getThumbSize());
 
-        // this.observer.subscribe('sliderInitialized',
-        //     (sliderSize: ISliderSize) => { this.model.setSliderSize(sliderSize) });
+        this.observer.subscribe('startDrag',
+            (thumbPosition: IThumbPosition) => { this.model.thumbDrag(thumbPosition) });
+        
+        this.observer.subscribe('thumbDraged',
+            (value: number) => { this.view.moveThumb(value) });
+
+            
 
 
 
