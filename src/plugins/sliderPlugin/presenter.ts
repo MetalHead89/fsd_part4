@@ -18,6 +18,7 @@ class Presenter {
         this.observer = observer;
 
         this.model.setSliderSize(this.view.getSliderSize());
+        this.model.setThumbSize(this.view.getThumbSize());
 
         // this.observer.subscribe('sliderInitialized',
         //     (sliderSize: ISliderSize) => { this.model.setSliderSize(sliderSize) });

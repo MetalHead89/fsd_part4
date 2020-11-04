@@ -1,11 +1,13 @@
 import { ISliderSettings } from './interfaces';
 import { ISliderSize } from './interfaces';
+import { IThumbSize } from './interfaces';
+
 import Observable from './observable';
-import Slider from './slider';
-import Track from './track';
-import ProgressBar from './progressBar';
-import Thumb from './thumb';
-import Scale from './scale';
+// import Slider from './slider';
+// import Track from './track';
+// import ProgressBar from './progressBar';
+// import Thumb from './thumb';
+// import Scale from './scale';
 // import { IThumbSettings } from './interfaces';
 // import { ISliderSettings } from './interfaces';
 // import { INewSliderOptions } from './interfaces';
@@ -22,6 +24,8 @@ class Model {
     private step: number
     private sliderWidth: number = 0;
     private sliderHeight: number = 0;
+    private thumbWidth: number = 0;
+    private thumbHeight: number = 0;
 
     constructor(observer: Observable, settings: ISliderSettings) {
         this.observer = observer;
@@ -36,10 +40,42 @@ class Model {
     setSliderSize(size: ISliderSize): void {
         this.sliderWidth = size.width;
         this.sliderHeight = size.height;
-
-        console.log(this.sliderWidth)
-        console.log(this.sliderHeight)
     }
+
+    setThumbSize(size: IThumbSize) {
+        this.thumbWidth = size.width;
+        this.thumbHeight = size.height;
+    }
+
+//     // вычесть координату родителя, т.к. position: relative
+//     let newLeft: number = event.clientX - this.thumb.getShiftX() - sliderCoords.left;
+        
+//     // курсор ушёл вне слайдера
+//     if (newLeft < 0) {
+//         newLeft = 0;
+//     }
+
+//     let rightEdge: number = this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth;
+    
+//     newLeft = Math.round(newLeft / this.stepSize) * this.stepSize;
+
+//     if (newLeft >= rightEdge) {
+//         newLeft = rightEdge;
+//     } else {
+//         // this.stepsCount = (this.thumb.getMaxValue() - this.thumb.getMinValue()) / this.thumb.getStep();
+//         // let stepSize: number = (this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth) / this.stepsCount;
+//         newLeft = Math.round(newLeft / this.stepSize) * this.stepSize;
+
+
+//         // let stepCount: number = (this.thumb.getMaxValue() - this.thumb.getMinValue()) / this.thumb.getStep();
+//         // let stepSize: number = (this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth) / stepCount;
+//         // newLeft = Math.round(newLeft / stepSize) * stepSize;
+//     }
+
+// //     this.progressBar?.setWidth(newLeft + this.thumb.getElement().offsetWidth);
+// //     this.thumb.moveTo(newLeft);
+
+// //     // console.log(this.positionToValue(this.thumb, newLeft))////////////////////////////////////
 
 
 

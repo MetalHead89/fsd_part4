@@ -1,5 +1,6 @@
 import { IViewSliderOptions } from './interfaces';
 import { ISliderSize } from './interfaces';
+import { IThumbSize } from './interfaces';
 
 import Observable from './observable';
 import Slider from './slider';
@@ -98,6 +99,10 @@ class View {
 
     getSliderSize(): ISliderSize {
         return this.slider.getSize();
+    }
+
+    getThumbSize(): ISliderSize {
+        return this.thumbOne.getSize();
     }
 }
 

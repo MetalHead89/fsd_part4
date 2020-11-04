@@ -22,9 +22,19 @@ export interface IThumbShift {
     'shiftY': number
 }
 
+export interface IThumbSize {
+    'width': number,
+    'height': number
+}
+
 export interface IThumbPosition {
     'left': number,
     'top': number
+}
+
+export interface ICursorPsition {
+    'x': number,
+    'y': number
 }
 
 // export interface IGroupedSettings {

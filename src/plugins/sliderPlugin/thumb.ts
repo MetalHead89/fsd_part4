@@ -1,4 +1,8 @@
 import {IThumbShift} from './interfaces'
+import {IThumbPosition} from './interfaces'
+import {ICursorPsition} from './interfaces'
+import { IThumbSize } from './interfaces';
+
 import Observable from './observable';
 
 class Thumb {
@@ -28,6 +32,13 @@ class Thumb {
         return this.element;
     }
 
+    getSize(): IThumbSize {
+        return {
+            'width': this.element.offsetWidth,
+            'height': this.element.offsetHeight
+        };
+    }
+
     private startDrag(startClientX: number, startClientY: number): void {
 
         const thumbCoords: DOMRect = this.element.getBoundingClientRect();
@@ -36,7 +47,7 @@ class Thumb {
         this.shift.shiftY = startClientY - thumbCoords.top;
         
         // this.onMouseMoveHandler = this.moveTo.bind(this);
-        this.onMouseUpHandler = this.endDrag.bind(this);
+        // this.onMouseUpHandler = this.endDrag.bind(this);
 
         document.addEventListener('mousemove',
             this.onMouseMoveHandler as EventListenerOrEventListenerObject);
@@ -45,57 +56,26 @@ class Thumb {
                 
     }
 
-    // private getPosition() {
-    //     const parrent: HTMLElement | null = this.element.parentElement;
+    private getPosition(cursorPosition: ICursorPsition): IThumbPosition {
 
-    //     if (!parrent) {
-    //         return {'left': 0, 'top': 0}
-    //     }
+        const parrent: HTMLElement | null = this.element.parentElement;
 
-    //     const parrentCoords: DOMRect = parrent.getBoundingClientRect();
+        if (!parrent) {
+            return {'left': 0, 'top': 0}
+        }
 
-    // }
+        const parrentCoords: DOMRect = parrent.getBoundingClientRect();
 
-    // private Drag() {
-
-    //     const parrentCoords: DOMRect = this.slider.getElement().getBoundingClientRect();
-
-    //     // вычесть координату родителя, т.к. position: relative
-    //     let newLeft: number = event.clientX - this.thumb.getShiftX() - sliderCoords.left;
-        
-    //     // курсор ушёл вне слайдера
-    //     if (newLeft < 0) {
-    //         newLeft = 0;
-    //     }
-
-    //     let rightEdge: number = this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth;
-        
-    //     newLeft = Math.round(newLeft / this.stepSize) * this.stepSize;
-
-    //     if (newLeft >= rightEdge) {
-    //         newLeft = rightEdge;
-    //     } else {
-    //         // this.stepsCount = (this.thumb.getMaxValue() - this.thumb.getMinValue()) / this.thumb.getStep();
-    //         // let stepSize: number = (this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth) / this.stepsCount;
-    //         newLeft = Math.round(newLeft / this.stepSize) * this.stepSize;
-
-
-    //         // let stepCount: number = (this.thumb.getMaxValue() - this.thumb.getMinValue()) / this.thumb.getStep();
-    //         // let stepSize: number = (this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth) / stepCount;
-    //         // newLeft = Math.round(newLeft / stepSize) * stepSize;
-    //     }
-
-    //     this.progressBar?.setWidth(newLeft + this.thumb.getElement().offsetWidth);
-    //     this.thumb.moveTo(newLeft);
-
-    //     // console.log(this.positionToValue(this.thumb, newLeft))////////////////////////////////////
-
-    // }
-
-    private endDrag(): void {
-        document.removeEventListener('mousemove', this.onMouseMoveHandler as EventListenerOrEventListenerObject);
-        document.removeEventListener('mouseup', this.onMouseUpHandler as EventListenerOrEventListenerObject);
+        return {
+            'left': cursorPosition.x - this.shift.shiftX - parrentCoords.left,
+            'top': cursorPosition.x - this.shift.shiftX - parrentCoords.left
+        }
     }
+
+    // private endDrag(): void {
+    //     document.removeEventListener('mousemove', this.onMouseMoveHandler as EventListenerOrEventListenerObject);
+    //     document.removeEventListener('mouseup', this.onMouseUpHandler as EventListenerOrEventListenerObject);
+    // }
 }
 
 export default Thumb;
