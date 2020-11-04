@@ -39,15 +39,15 @@ class Thumb {
         };
     }
 
-    private startDrag(startClientX: number, startClientY: number): void {
+    private startDrag(cursorX: number, cursorY: number): void {
 
         const thumbCoords: DOMRect = this.element.getBoundingClientRect();
         
-        this.shift.shiftX = startClientX - thumbCoords.left;
-        this.shift.shiftY = startClientY - thumbCoords.top;
+        this.shift.shiftX = cursorX - thumbCoords.left;
+        this.shift.shiftY = cursorY - thumbCoords.top;
         
-        // this.onMouseMoveHandler = this.moveTo.bind(this);
-        // this.onMouseUpHandler = this.endDrag.bind(this);
+        this.onMouseMoveHandler = () => {this.observer.notify('startDrag', this.getPosition({'x': cursorX, 'y': cursorY}))};
+        this.onMouseUpHandler = this.endDrag.bind(this);
 
         document.addEventListener('mousemove',
             this.onMouseMoveHandler as EventListenerOrEventListenerObject);
@@ -72,10 +72,14 @@ class Thumb {
         }
     }
 
-    // private endDrag(): void {
-    //     document.removeEventListener('mousemove', this.onMouseMoveHandler as EventListenerOrEventListenerObject);
-    //     document.removeEventListener('mouseup', this.onMouseUpHandler as EventListenerOrEventListenerObject);
-    // }
+    private endDrag(): void {
+        document.removeEventListener('mousemove', this.onMouseMoveHandler as EventListenerOrEventListenerObject);
+        document.removeEventListener('mouseup', this.onMouseUpHandler as EventListenerOrEventListenerObject);
+    }
+
+    moveTo(value: number) {
+        this.element.style.left = value + 'px';
+    }
 }
 
 export default Thumb;

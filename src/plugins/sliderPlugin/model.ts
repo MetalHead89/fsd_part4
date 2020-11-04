@@ -1,6 +1,7 @@
 import { ISliderSettings } from './interfaces';
 import { ISliderSize } from './interfaces';
 import { IThumbSize } from './interfaces';
+import {IThumbPosition} from './interfaces'
 
 import Observable from './observable';
 // import Slider from './slider';
@@ -22,10 +23,12 @@ class Model {
     private minValue: number;
     private maxValue: number;
     private step: number
-    private sliderWidth: number = 0;
-    private sliderHeight: number = 0;
-    private thumbWidth: number = 0;
-    private thumbHeight: number = 0;
+    private sliderWidth: number = 340;
+    private sliderHeight: number = 20;
+    private thumbWidth: number = 20;
+    private thumbHeight: number = 20;
+    private stepsCount: number = 0;
+    private stepSize: number = 0;
 
     constructor(observer: Observable, settings: ISliderSettings) {
         this.observer = observer;
@@ -35,6 +38,16 @@ class Model {
         this.minValue = settings.minValue;
         this.maxValue = settings.maxValue
         this.step = settings.step;
+        this.stepsCount = this.calculateStepsNumber();
+        this.stepSize = this.calculateStepSize();
+    }
+
+    private calculateStepsNumber(): number{
+        return (this.maxValue - this.minValue) / this.step;
+    }
+
+    private calculateStepSize(): number{
+        return (this.sliderWidth - this.thumbWidth) / this.stepsCount;
     }
 
     setSliderSize(size: ISliderSize): void {
@@ -47,35 +60,39 @@ class Model {
         this.thumbHeight = size.height;
     }
 
-//     // вычесть координату родителя, т.к. position: relative
-//     let newLeft: number = event.clientX - this.thumb.getShiftX() - sliderCoords.left;
+    thumbDrag(thumbPosition: IThumbPosition) {    
+
+        let left: number = thumbPosition.left;
         
-//     // курсор ушёл вне слайдера
-//     if (newLeft < 0) {
-//         newLeft = 0;
-//     }
+        // курсор ушёл вне слайдера
+        if (left < 0) {
+            left = 0;
+        }
 
-//     let rightEdge: number = this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth;
-    
-//     newLeft = Math.round(newLeft / this.stepSize) * this.stepSize;
+        let rightEdge: number = this.sliderWidth - this.thumbWidth;
+        
+        left = Math.round(left / this.stepSize) * this.stepSize;
 
-//     if (newLeft >= rightEdge) {
-//         newLeft = rightEdge;
-//     } else {
-//         // this.stepsCount = (this.thumb.getMaxValue() - this.thumb.getMinValue()) / this.thumb.getStep();
-//         // let stepSize: number = (this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth) / this.stepsCount;
-//         newLeft = Math.round(newLeft / this.stepSize) * this.stepSize;
+        if (left >= rightEdge) {
+            left = rightEdge;
+        } else {
+            // this.stepsCount = (this.thumb.getMaxValue() - this.thumb.getMinValue()) / this.thumb.getStep();
+            // let stepSize: number = (this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth) / this.stepsCount;
+            left = Math.round(left / this.stepSize) * this.stepSize;
 
 
-//         // let stepCount: number = (this.thumb.getMaxValue() - this.thumb.getMinValue()) / this.thumb.getStep();
-//         // let stepSize: number = (this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth) / stepCount;
-//         // newLeft = Math.round(newLeft / stepSize) * stepSize;
-//     }
+            // let stepCount: number = (this.thumb.getMaxValue() - this.thumb.getMinValue()) / this.thumb.getStep();
+            // let stepSize: number = (this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth) / stepCount;
+            // newLeft = Math.round(newLeft / stepSize) * stepSize;
+        }
 
-// //     this.progressBar?.setWidth(newLeft + this.thumb.getElement().offsetWidth);
-// //     this.thumb.moveTo(newLeft);
+    //     this.progressBar?.setWidth(newLeft + this.thumb.getElement().offsetWidth);
+        this.observer.notify('thumbDraged', left);
+    //     this.thumb.moveTo(newLeft);
 
-// //     // console.log(this.positionToValue(this.thumb, newLeft))////////////////////////////////////
+
+    //     // console.log(this.positionToValue(this.thumb, newLeft))////////////////////////////////////
+    }
 
 
 
