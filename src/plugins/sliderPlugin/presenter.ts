@@ -1,4 +1,5 @@
-import {IViewSliderOptions} from './interfaces'
+import { IViewSliderOptions } from './interfaces'
+import { ISliderSize } from './interfaces';
 
 import Observable from './observable';
 import Model from './model';
@@ -16,6 +17,14 @@ class Presenter {
         this.model = model;
         this.observer = observer;
 
+        this.model.setSliderSize(this.view.getSliderSize());
+
+        // this.observer.subscribe('sliderInitialized',
+        //     (sliderSize: ISliderSize) => { this.model.setSliderSize(sliderSize) });
+
+
+
+
         // this.observer.subscribe('sliderInitialized', (sliderOptions: IViewSliderOptions) => this.view.addSliderToPage(sliderOptions));
 
 
@@ -28,10 +37,10 @@ class Presenter {
 
         // this.observer.subscribe('updatedMaxValue', 
         //     (value: number) => this.view.changeMaxValue(value));
-        
+
         // this.observer.subscribe('updatedStepValue', 
         //     (value: number) => this.view.changeStepValue(value))        
-                
+
     }
 }
 
@@ -72,11 +81,11 @@ export default Presenter;
 
 //         this.observer.subscribe('updatedMaxValue', 
 //             (value: number) => this.view.changeMaxValue(value));
-        
+
 //         this.observer.subscribe('updatedStepValue', 
 //             (value: number) => this.view.changeStepValue(value))
-        
-                
+
+
 //     }
 // }
 

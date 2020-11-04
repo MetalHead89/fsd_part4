@@ -1,5 +1,6 @@
-import Observable from './observable';
 import { ISliderSettings } from './interfaces';
+import { ISliderSize } from './interfaces';
+import Observable from './observable';
 import Slider from './slider';
 import Track from './track';
 import ProgressBar from './progressBar';
@@ -19,6 +20,8 @@ class Model {
     private minValue: number;
     private maxValue: number;
     private step: number
+    private sliderWidth: number = 0;
+    private sliderHeight: number = 0;
 
     constructor(observer: Observable, settings: ISliderSettings) {
         this.observer = observer;
@@ -28,10 +31,26 @@ class Model {
         this.minValue = settings.minValue;
         this.maxValue = settings.maxValue
         this.step = settings.step;
-
-        // this.observer.notify('sliderInitialized', 
-        //     {'sliderType': settings.type, 'sliderOrientation': settings.orienation});
     }
+
+    setSliderSize(size: ISliderSize): void {
+        this.sliderWidth = size.width;
+        this.sliderHeight = size.height;
+
+        console.log(this.sliderWidth)
+        console.log(this.sliderHeight)
+    }
+
+
+
+
+
+
+
+
+
+
+
     
 
     // setMinValue(newValue: number) {

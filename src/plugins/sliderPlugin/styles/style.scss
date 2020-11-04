@@ -17,6 +17,7 @@
     height: 10px;
     border-radius: 25px;
     background: rgb(85, 196, 153);
+    z-index: 1;
 }
 
 .slider__thumb {
@@ -27,6 +28,7 @@
     height: 20px;
     border-radius: 50%;
     background: rgb(85, 196, 153);
+    z-index: 2;
 }
 
 .slider__scale {

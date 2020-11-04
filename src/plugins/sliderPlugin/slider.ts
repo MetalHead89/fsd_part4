@@ -1,12 +1,21 @@
+import {ISliderSize} from './interfaces'
+
 class Slider {
-    private elem: HTMLElement;
+    private element: HTMLElement;
 
     constructor(sliderElem: HTMLElement) {
-        this.elem = sliderElem;
+        this.element = sliderElem;
     }
 
     getElement(): HTMLElement {
-        return this.elem;
+        return this.element;
+    }
+
+    getSize(): ISliderSize {
+        return {
+            'width': this.element.offsetWidth,
+            'height': this.element.offsetHeight
+        };
     }
 }
 

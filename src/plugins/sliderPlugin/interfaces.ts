@@ -12,6 +12,21 @@ export interface IViewSliderOptions {
     'orientation': string
 }
 
+export interface ISliderSize {
+    'width': number,
+    'height': number
+}
+
+export interface IThumbShift {
+    'shiftX': number,
+    'shiftY': number
+}
+
+export interface IThumbPosition {
+    'left': number,
+    'top': number
+}
+
 // export interface IGroupedSettings {
 //     'sliderSettings': ISliderSettings
 //     'thumbSettings': IThumbSettings,

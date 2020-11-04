@@ -1,4 +1,6 @@
 import { IViewSliderOptions } from './interfaces';
+import { ISliderSize } from './interfaces';
+
 import Observable from './observable';
 import Slider from './slider';
 import Track from './track';
@@ -15,6 +17,8 @@ class View {
     private thumbTwo: Thumb | null = null;
     private progressBar: ProgressBar;
     private scale: Scale;
+    private onMouseMoveHandler: Function = () => {};
+    private onMouseUpHandler: Function = () => {};
 
     constructor(observer: Observable, sliderWrapper: HTMLElement,
         sliderOptions: IViewSliderOptions) {
@@ -49,6 +53,7 @@ class View {
 
         const createObj = (obj: HTMLElement) => { return new Slider(obj) }
         const slider: Slider = this.init(parrent, styles, createObj);
+        this.observer.notify('sliderInitialized', slider.getSize());
 
         return slider;
 
@@ -65,24 +70,9 @@ class View {
 
     private thumbInit(parrent: HTMLElement, styles: string): Thumb {
 
-        const createObj = (obj: HTMLElement) => { return new Thumb(obj) }
+        const createObj = (obj: HTMLElement) => { return new Thumb(obj, this.observer) }
         const thumb: Thumb = this.init(parrent, styles, createObj);
-        const thumbElem: HTMLElement = thumb.getElement();
-
-        thumbElem.ondragstart = function () {
-            return false;
-        };
-
-        thumbElem.addEventListener('mousedown', (event: MouseEvent) => {
-            // this.pixelsPerValue = (this.slider.getElement().clientWidth -
-            //     this.thumb.getElement().clientWidth) / 100;
-            this.observer.notify('thumbTaked',
-                { 'cursorX': event.clientX, 'cursorY': event.clientY });
-
-            // this.startDrag(event.clientX, event.clientY);
-            return false; // disable selection start (cursor change)
-        });
-        
+        const thumbElem: HTMLElement = thumb.getElement();       
 
         return thumb;
 
@@ -106,53 +96,9 @@ class View {
         
     }
 
-    // private sliderInit(parrent:HTMLElement, styles: string): Slider {
-    //     const sliderElem: HTMLElement = this.createSliderElement('div', styles);
-    //     const slider: Slider = new Slider(sliderElem);
-    //     parrent.append(sliderElem);
-
-    //     return slider;
-    // }
-
-    // private trackInit(parrent:HTMLElement, styles: string): Track {
-    //     const trackElem: HTMLElement = this.createSliderElement('div', styles);
-    //     const track: Track = new Track(trackElem);
-    //     parrent.append(trackElem);
-
-    //     return track;
-    // }
-
-    // private thumbInit(parrent:HTMLElement, styles: string): Thumb {
-    //     const thumbElem: HTMLElement = this.createSliderElement('div', styles);
-    //     const thumb: Thumb = new Thumb(thumbElem);
-    //     parrent.append(thumbElem);
-
-    //     return thumb;
-    // }
-
-    // private progressBarInit(parrent:HTMLElement, styles: string): ProgressBar {
-    //     const progressBarElem: HTMLElement = this.createSliderElement('div', styles);
-    //     const progressBar = new ProgressBar(progressBarElem);
-    //     parrent.append(progressBarElem);
-
-    //     return progressBar;
-    // }
-
-    // private scaleInit(parrent:HTMLElement, styles: string): Scale {
-    //     const scaleElem: HTMLElement = this.createSliderElement('div', styles);
-    //     const scale = new Scale(scaleElem);
-    //     parrent.append(scaleElem);
-
-    //     return scale;
-    // }
-
-    // private createSliderElement(elem: string, className: string): HTMLElement {
-    //     const newElem: HTMLElement = document.createElement(elem);
-    //     newElem.className = className;
-
-    //     return newElem;
-    // }
-
+    getSliderSize(): ISliderSize {
+        return this.slider.getSize();
+    }
 }
 
 export default View;
