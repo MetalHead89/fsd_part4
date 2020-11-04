@@ -21,8 +21,6 @@ class Thumb {
         };
 
         this.element.addEventListener('mousedown', (event: MouseEvent) => {
-            // this.pixelsPerValue = (this.slider.getElement().clientWidth -
-            //     this.thumb.getElement().clientWidth) / 100;
             this.startDrag(event.clientX, event.clientY);
             return false; // disable selection start (cursor change)
         });
@@ -53,6 +51,8 @@ class Thumb {
             this.onMouseMoveHandler as EventListenerOrEventListenerObject);
         document.addEventListener('mouseup',
             this.onMouseUpHandler as EventListenerOrEventListenerObject);
+
+        this.observer.notify('setActiveThumb', this)
                 
     }
 

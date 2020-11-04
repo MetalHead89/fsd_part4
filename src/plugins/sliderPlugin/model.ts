@@ -63,7 +63,7 @@ class Model {
     thumbDrag(thumbPosition: IThumbPosition) {
 
         let left: number = thumbPosition.left;
-        console.log(thumbPosition)/////////////////////////////////////////////////////////
+        
         // курсор ушёл вне слайдера
         if (left < 0) {
             left = 0;
@@ -92,6 +92,7 @@ class Model {
 
 
     //     // console.log(this.positionToValue(this.thumb, newLeft))////////////////////////////////////
+    
     }
 
 

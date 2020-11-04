@@ -20,6 +20,7 @@ class View {
     private scale: Scale;
     private onMouseMoveHandler: Function = () => {};
     private onMouseUpHandler: Function = () => {};
+    private activeThumb: Thumb;
 
     constructor(observer: Observable, sliderWrapper: HTMLElement,
         sliderOptions: IViewSliderOptions) {
@@ -34,7 +35,11 @@ class View {
         }
         this.progressBar = this.progressBarInit(this.slider.getElement(), 'slider__progress-bar');
         this.scale = this.scaleInit(this.slider.getElement(), 'slider__scale');
+        this.activeThumb = this.thumbOne;
 
+        this.observer.subscribe('setActiveThumb',
+            (thumb: Thumb) => { this.setActiveThumb(thumb) });
+        
     }
 
     //////////////////// Инициализация элементов ////////////////////
@@ -97,6 +102,12 @@ class View {
         
     }
 
+    //////////////////// Set/Get ////////////////////
+
+    private setActiveThumb(thumb: Thumb): void {
+        this.activeThumb = thumb;
+    }
+
     getSliderSize(): ISliderSize {
         return this.slider.getSize();
     }
@@ -105,8 +116,8 @@ class View {
         return this.thumbOne.getSize();
     }
 
-    moveThumb(value: number) {
-        this.thumbOne.moveTo(value);
+    moveThumb(value: number): void {
+        this.activeThumb.moveTo(value);
     }
     
 }
