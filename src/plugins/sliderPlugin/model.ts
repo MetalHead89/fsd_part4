@@ -30,6 +30,9 @@ class Model {
     private stepsCount: number = 0;
     private stepSize: number = 0;
 
+    private scalePointWidth: number = 10;
+    private scalePointHight: number = 10;//////////////////////////////////////////////////////
+
     constructor(observer: Observable, settings: ISliderSettings) {
         this.observer = observer;
         this.orienation = settings.orienation;
@@ -76,23 +79,36 @@ class Model {
         if (left >= rightEdge) {
             left = rightEdge;
         } else {
-            // this.stepsCount = (this.thumb.getMaxValue() - this.thumb.getMinValue()) / this.thumb.getStep();
-            // let stepSize: number = (this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth) / this.stepsCount;
             left = Math.round(left / this.stepSize) * this.stepSize;
-
-
-            // let stepCount: number = (this.thumb.getMaxValue() - this.thumb.getMinValue()) / this.thumb.getStep();
-            // let stepSize: number = (this.slider.getElement().offsetWidth - this.thumb.getElement().offsetWidth) / stepCount;
-            // newLeft = Math.round(newLeft / stepSize) * stepSize;
         }
-
-    //     this.progressBar?.setWidth(newLeft + this.thumb.getElement().offsetWidth);
+        
         this.observer.notify('thumbDraged', left);
-    //     this.thumb.moveTo(newLeft);
-
 
     //     // console.log(this.positionToValue(this.thumb, newLeft))////////////////////////////////////
     
+    }
+
+    generateScale() {
+        if (this.scalePointWidth === 0) {
+            const lastPosition: number = this.sliderWidth - this.thumbWidth / 2;
+            this.observer.notify('addScalePoint', lastPosition);
+        }
+        // let scalePointPosition: number = this.thumbWidth / 2;
+        // // let lastScalePoint: HTMLElement | null = null;
+
+        // const scalePointEndPosition: number = this.sliderWidth - scalePointPosition;
+        // const endDivision: HTMLElement | null = this.addDivision(thumbSize, endPosition, lastDivision, true);
+
+        // if (endDivision) {
+        //     this.divisionWidth = endDivision.offsetWidth;
+        //     endDivision.style.left = endPosition - this.divisionWidth / 2 + 'px';
+        // }
+
+        // for (let i = 0; i < this.divisionsCount - 1; i++) {
+        //     lastDivision = this.addDivision(thumbSize, scalePointPosition, lastDivision, false);
+        //     scalePointPosition += this.stepSize;
+        // }
+
     }
 
 

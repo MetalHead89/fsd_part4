@@ -30,6 +30,11 @@ class Presenter {
         this.observer.subscribe('thumbDraged',
             (value: number) => { this.view.setProgressWidth(value) });
 
+        this.observer.subscribe('addScalePoint',
+            (value: number) => { this.view.addScalePoint(value) });
+
+        this.model.generateScale();
+
 
 
 

@@ -120,6 +120,10 @@ class View {
         this.progressBar.setWidth(value + this.thumbOne.getSize().width);
     }
 
+    addScalePoint(position: number) {
+        this.scale.addScalePoint(position);
+    }
+
     moveThumb(value: number): void {
         this.activeThumb.moveTo(value);
     }

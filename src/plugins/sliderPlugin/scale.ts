@@ -6,6 +6,27 @@ class Scale {
         this.scaleElem = scaleElem;
     }
 
+    addScalePoint(position: number): void {
+
+        const scalePoint: HTMLElement = document.createElement('div');
+        scalePoint.className = 'slider__scale-point';
+
+        const divisionMarker: HTMLElement = document.createElement('div')
+        divisionMarker.className = ('slider__scale-point-marker')
+        // divisionMarker.style.width = this.markerWidh + 'px';
+        // divisionMarker.style.height = this.markerHeight + 'px';
+
+        const divisionLabel: HTMLElement = document.createElement('div')
+        divisionLabel.className = ('slider__scale-point-label')
+        divisionLabel.innerText = '666';
+
+        scalePoint.style.left = position + 'px';
+
+        scalePoint.append(divisionMarker);
+        scalePoint.append(divisionLabel);
+        this.scaleElem.append(scalePoint);
+    }
+
 }
 
 export default Scale;
