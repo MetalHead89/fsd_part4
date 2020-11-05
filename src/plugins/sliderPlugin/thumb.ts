@@ -69,7 +69,7 @@ class Thumb {
         }
         
         const parrentCoords: DOMRect = parrent.getBoundingClientRect();
-        console.log(cursorPosition.x)
+        
         return {
             'left': cursorPosition.x - this.shift.shiftX - parrentCoords.left,
             'top': cursorPosition.y - this.shift.shiftY - parrentCoords.left

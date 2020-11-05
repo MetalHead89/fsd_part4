@@ -116,6 +116,10 @@ class View {
         return this.thumbOne.getSize();
     }
 
+    setProgressWidth(value: number) {
+        this.progressBar.setWidth(value + this.thumbOne.getSize().width);
+    }
+
     moveThumb(value: number): void {
         this.activeThumb.moveTo(value);
     }

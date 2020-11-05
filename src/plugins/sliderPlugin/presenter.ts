@@ -1,6 +1,6 @@
 import { IViewSliderOptions } from './interfaces'
 import { ISliderSize } from './interfaces';
-import {IThumbPosition} from './interfaces'
+import { IThumbPosition } from './interfaces'
 
 import Observable from './observable';
 import Model from './model';
@@ -23,11 +23,14 @@ class Presenter {
 
         this.observer.subscribe('startDrag',
             (thumbPosition: IThumbPosition) => { this.model.thumbDrag(thumbPosition) });
-        
+
         this.observer.subscribe('thumbDraged',
             (value: number) => { this.view.moveThumb(value) });
 
-            
+        this.observer.subscribe('thumbDraged',
+            (value: number) => { this.view.setProgressWidth(value) });
+
+
 
 
 
