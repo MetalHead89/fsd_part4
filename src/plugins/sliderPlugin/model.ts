@@ -29,9 +29,10 @@ class Model {
     private thumbHeight: number = 20;
     private stepsCount: number = 0;
     private stepSize: number = 0;
+    private pixelsPerValue: number = 0;
 
-    private scalePointWidth: number = 10;
-    private scalePointHight: number = 10;//////////////////////////////////////////////////////
+    private scalePointWidth: number = 0;
+    private scalePointHight: number = 0;
 
     constructor(observer: Observable, settings: ISliderSettings) {
         this.observer = observer;
@@ -41,12 +42,12 @@ class Model {
         this.minValue = settings.minValue;
         this.maxValue = settings.maxValue
         this.step = settings.step;
-        this.stepsCount = this.calculateStepsNumber();
+        this.stepsCount = this.calculateStepsCount();
         this.stepSize = this.calculateStepSize();
     }
 
-    private calculateStepsNumber(): number{
-        return (this.maxValue - this.minValue) / this.step;
+    private calculateStepsCount(): number{
+        return Math.round((this.maxValue - this.minValue) / this.step); ////////////////////////////////////////////////////// Добавил округление
     }
 
     private calculateStepSize(): number{
@@ -61,6 +62,18 @@ class Model {
     setThumbSize(size: IThumbSize) {
         this.thumbWidth = size.width;
         this.thumbHeight = size.height;
+    }
+
+    setScalePointWidth(width: number) {
+        this.scalePointWidth = width;
+    }
+
+    setPixelsPerValue() {
+        this.pixelsPerValue = (this.sliderWidth - this.thumbWidth) / 100;
+    }
+
+    getMaxValue() {
+        return this.maxValue;
     }
 
     thumbDrag(thumbPosition: IThumbPosition) {
@@ -89,26 +102,21 @@ class Model {
     }
 
     generateScale() {
-        if (this.scalePointWidth === 0) {
-            const lastPosition: number = this.sliderWidth - this.thumbWidth / 2;
-            this.observer.notify('addScalePoint', lastPosition);
+
+        let scalePointPosition: number = this.thumbWidth / 2 - this.scalePointWidth / 2;
+        const scalePointsCount = this.stepsCount + 1;
+        
+        for (let i = 0; i <= scalePointsCount - 1; i++) {
+            const pointValue: number = this.positionToValue(scalePointPosition - this.thumbWidth / 2); ////////////////// попробовать округлить scalePointPosition
+            this.observer.notify('addScalePoint', 
+                {'position': scalePointPosition, 'scalePointWidth': this.scalePointWidth, 'scalePointValue': pointValue});
+            scalePointPosition += this.stepSize;
         }
-        // let scalePointPosition: number = this.thumbWidth / 2;
-        // // let lastScalePoint: HTMLElement | null = null;
 
-        // const scalePointEndPosition: number = this.sliderWidth - scalePointPosition;
-        // const endDivision: HTMLElement | null = this.addDivision(thumbSize, endPosition, lastDivision, true);
+    }
 
-        // if (endDivision) {
-        //     this.divisionWidth = endDivision.offsetWidth;
-        //     endDivision.style.left = endPosition - this.divisionWidth / 2 + 'px';
-        // }
-
-        // for (let i = 0; i < this.divisionsCount - 1; i++) {
-        //     lastDivision = this.addDivision(thumbSize, scalePointPosition, lastDivision, false);
-        //     scalePointPosition += this.stepSize;
-        // }
-
+    private positionToValue(position: number): number {
+        return Math.round(this.minValue + ((this.maxValue - this.minValue) / 100 * Math.round(position / this.pixelsPerValue)));
     }
 
 

@@ -1,6 +1,7 @@
 import { IViewSliderOptions } from './interfaces'
 import { ISliderSize } from './interfaces';
-import { IThumbPosition } from './interfaces'
+import { IThumbPosition } from './interfaces';
+import { IScalePointSettings } from './interfaces';
 
 import Observable from './observable';
 import Model from './model';
@@ -18,9 +19,6 @@ class Presenter {
         this.model = model;
         this.observer = observer;
 
-        this.model.setSliderSize(this.view.getSliderSize());
-        this.model.setThumbSize(this.view.getThumbSize());
-
         this.observer.subscribe('startDrag',
             (thumbPosition: IThumbPosition) => { this.model.thumbDrag(thumbPosition) });
 
@@ -31,8 +29,13 @@ class Presenter {
             (value: number) => { this.view.setProgressWidth(value) });
 
         this.observer.subscribe('addScalePoint',
-            (value: number) => { this.view.addScalePoint(value) });
+            (pointSettings: IScalePointSettings) => { this.view.addScalePoint(pointSettings) });
 
+        this.model.setSliderSize(this.view.getSliderSize());
+        this.model.setThumbSize(this.view.getThumbSize());
+
+        this.model.setScalePointWidth(this.getMaxScalePointWidth());
+        this.model.setPixelsPerValue();
         this.model.generateScale();
 
 
@@ -56,6 +59,11 @@ class Presenter {
         // this.observer.subscribe('updatedStepValue', 
         //     (value: number) => this.view.changeStepValue(value))        
 
+    }
+
+    private getMaxScalePointWidth() {
+        const sliderMaxValue: number = this.model.getMaxValue();
+        return this.view.getScalePointMaxWidth(sliderMaxValue);
     }
 }
 

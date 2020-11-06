@@ -1,3 +1,5 @@
+import { IScalePointSize } from './interfaces';
+
 class Scale {
 
     private scaleElem: HTMLElement;
@@ -6,27 +8,36 @@ class Scale {
         this.scaleElem = scaleElem;
     }
 
-    addScalePoint(position: number): void {
+    addScalePoint(position: number, scalePointWidth: number, pointValue: number): HTMLElement {
 
         const scalePoint: HTMLElement = document.createElement('div');
         scalePoint.className = 'slider__scale-point';
+        scalePoint.style.width = scalePointWidth + 'px';
 
         const divisionMarker: HTMLElement = document.createElement('div')
         divisionMarker.className = ('slider__scale-point-marker')
-        // divisionMarker.style.width = this.markerWidh + 'px';
-        // divisionMarker.style.height = this.markerHeight + 'px';
 
         const divisionLabel: HTMLElement = document.createElement('div')
         divisionLabel.className = ('slider__scale-point-label')
-        divisionLabel.innerText = '666';
+        divisionLabel.innerText = pointValue.toString();
 
         scalePoint.style.left = position + 'px';
 
         scalePoint.append(divisionMarker);
         scalePoint.append(divisionLabel);
         this.scaleElem.append(scalePoint);
+
+        return scalePoint
     }
 
+    getScalePointMaxWidth(maxValue: number): number {
+        const scalePoint = this.addScalePoint(0, 0, maxValue);
+        const scalePointWidth = scalePoint.offsetWidth;
+        scalePoint.remove();
+        return scalePointWidth;
+    }
+
+    
 }
 
 export default Scale;

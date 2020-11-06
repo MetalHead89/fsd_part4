@@ -37,6 +37,17 @@ export interface ICursorPsition {
     'y': number
 }
 
+export interface IScalePointSize {
+    'width': number,
+    'height': number
+}
+
+export interface IScalePointSettings {
+    'position': number,
+    'scalePointWidth': number,
+    'scalePointValue': number
+}
+
 // export interface IGroupedSettings {
 //     'sliderSettings': ISliderSettings
 //     'thumbSettings': IThumbSettings,
