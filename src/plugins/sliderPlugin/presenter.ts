@@ -32,6 +32,9 @@ class Presenter {
         this.observer.subscribe('addScalePoint',
             (pointSettings: IScalePointSettings) => { this.view.addScalePoint(pointSettings) });
 
+        this.observer.subscribe('clickOnTheScale',
+            (cursorPosition: ICursorPsition) => { this.model.moveThumb(cursorPosition) });
+
         this.observer.subscribe('clickOnTheTrack',
             (cursorPosition: ICursorPsition) => { this.model.moveThumb(cursorPosition) });
 

@@ -96,7 +96,7 @@ class View {
 
     private scaleInit(parrent: HTMLElement, styles: string): Scale {
 
-        const createObj = (obj: HTMLElement) => { return new Scale(obj) }
+        const createObj = (obj: HTMLElement) => { return new Scale(obj, this.observer) }
         const scale: Scale = this.init(parrent, styles, createObj);
 
         return scale;

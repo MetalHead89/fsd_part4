@@ -1,11 +1,18 @@
-import { IScalePointSize } from './interfaces';
+import Observable from "./observable";
+import {ICursorPsition} from './interfaces'
 
 class Scale {
 
-    private scaleElem: HTMLElement;
+    private element: HTMLElement;
+    private observer: Observable;
 
-    constructor(scaleElem: HTMLElement) {
-        this.scaleElem = scaleElem;
+    constructor(element: HTMLElement, observer: Observable) {
+        this.element = element;
+        this.observer = observer;
+
+        this.element.addEventListener('click', (event) => {
+            this.observer.notify('clickOnTheScale', this.getPosition({'x': event.clientX, 'y': event.clientY}));
+        });
     }
 
     addScalePoint(position: number, scalePointWidth: number, pointValue: number): HTMLElement {
@@ -27,7 +34,7 @@ class Scale {
 
         scalePoint.append(divisionMarker);
         scalePoint.append(divisionLabel);
-        this.scaleElem.append(scalePoint);
+        this.element.append(scalePoint);
 
         return scalePoint
     }
@@ -37,6 +44,22 @@ class Scale {
         const scalePointWidth = scalePoint.offsetWidth;
         scalePoint.remove();
         return scalePointWidth;
+    }
+
+    private getPosition(cursorPosition: ICursorPsition): ICursorPsition {
+
+        const parrent: HTMLElement | null = this.element.parentElement;
+        
+        if (!parrent) {
+            return {'x': 0, 'y': 0}
+        }
+        
+        const parrentCoords: DOMRect = parrent.getBoundingClientRect();
+        
+        return {
+            'x': cursorPosition.x - parrentCoords.left,
+            'y': cursorPosition.y - parrentCoords.top
+        }
     }
 
     
