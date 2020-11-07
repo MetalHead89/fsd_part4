@@ -39,6 +39,9 @@ class Presenter {
         this.observer.subscribe('clickOnTheTrack',
             (cursorPosition: ICursorPsition) => { this.model.moveThumb(cursorPosition) });
 
+        this.observer.subscribe('scaleCreated',
+            (value: number) => { this.view.setScaleHeight(value) });
+
         this.model.setSliderSize(this.view.getSliderSize());
         this.model.setThumbSize(this.view.getThumbSize());
 

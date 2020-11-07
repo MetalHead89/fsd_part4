@@ -126,6 +126,10 @@ class View {
         return this.scale.getScalePointMaxSize(value);
     }
 
+    setScaleHeight(value: number): void {
+        this.scale.setScaleHeight(value);
+    }
+
     addScalePoint(pointSettings: IScalePointSettings) {
         this.scale.addScalePoint(pointSettings.position, pointSettings.scalePointWidth, pointSettings.scalePointValue);
     }
