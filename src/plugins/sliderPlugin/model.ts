@@ -2,6 +2,7 @@ import { ISliderSettings } from './interfaces';
 import { ISliderSize } from './interfaces';
 import { IThumbSize } from './interfaces';
 import {IThumbPosition} from './interfaces'
+import {ICursorPsition} from './interfaces'
 
 import Observable from './observable';
 // import Slider from './slider';
@@ -76,6 +77,11 @@ class Model {
         return this.maxValue;
     }
 
+    moveThumb(cursorPosition: ICursorPsition): void {
+        const newThumbPosition = this.calculateNewThumbPosition(cursorPosition.x - this.thumbWidth / 2);
+        this.observer.notify('thumbDraged', newThumbPosition);
+    }
+
     thumbDrag(thumbPosition: IThumbPosition) {
 
         let left: number = thumbPosition.left;
@@ -87,7 +93,7 @@ class Model {
 
         let rightEdge: number = this.sliderWidth - this.thumbWidth;
         
-        left = Math.round(left / this.stepSize) * this.stepSize;
+        left = this.calculateNewThumbPosition(left);
 
         if (left >= rightEdge) {
             left = rightEdge;
@@ -97,6 +103,10 @@ class Model {
 
         // console.log(this.positionToValue(left))////////////////////////////////////
     
+    }
+
+    private calculateNewThumbPosition(value: number) {
+        return Math.round(value / this.stepSize) * this.stepSize
     }
 
     generateScale() {

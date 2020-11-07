@@ -68,7 +68,7 @@ class View {
 
     private trackInit(parrent: HTMLElement, styles: string): Track {
 
-        const createObj = (obj: HTMLElement) => { return new Track(obj) }
+        const createObj = (obj: HTMLElement) => { return new Track(obj, this.observer) }
         const track: Track = this.init(parrent, styles, createObj);
 
         return track;

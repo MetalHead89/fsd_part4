@@ -72,7 +72,7 @@ class Thumb {
         
         return {
             'left': cursorPosition.x - this.shift.shiftX - parrentCoords.left,
-            'top': cursorPosition.y - this.shift.shiftY - parrentCoords.left
+            'top': cursorPosition.y - this.shift.shiftY - parrentCoords.top
         }
     }
 

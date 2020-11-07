@@ -1,8 +1,33 @@
-class Track {
-    private elem: HTMLElement;
+import Observable from "./observable";
+import {ICursorPsition} from './interfaces'
 
-    constructor(trackElem: HTMLElement) {
-        this.elem = trackElem;
+class Track {
+    private element: HTMLElement;
+    private observer: Observable;
+
+    constructor(trackElem: HTMLElement, observer: Observable) {
+        this.element = trackElem;
+        this.observer = observer;
+
+        this.element.addEventListener('click', (event) => {
+            this.observer.notify('clickOnTheTrack', this.getPosition({'x': event.clientX, 'y': event.clientY}));
+        });
+    }
+
+    private getPosition(cursorPosition: ICursorPsition): ICursorPsition {
+
+        const parrent: HTMLElement | null = this.element.parentElement;
+        
+        if (!parrent) {
+            return {'x': 0, 'y': 0}
+        }
+        
+        const parrentCoords: DOMRect = parrent.getBoundingClientRect();
+        
+        return {
+            'x': cursorPosition.x - parrentCoords.left,
+            'y': cursorPosition.y - parrentCoords.top
+        }
     }
 }
 
