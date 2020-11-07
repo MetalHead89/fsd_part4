@@ -13,8 +13,8 @@ import { ISliderSettings } from './interfaces';
         'type': 'single',
         'scale': true,        
         'minValue': 1,
-        'maxValue': 40,
-        'step': 1
+        'maxValue': 100,
+        'step': 5
     };
 
     // API мотоды плагина

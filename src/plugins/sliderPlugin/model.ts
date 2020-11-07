@@ -47,7 +47,7 @@ class Model {
     }
 
     private calculateStepsCount(): number{
-        return Math.round((this.maxValue - this.minValue) / this.step); ////////////////////////////////////////////////////// Добавил округление
+        return (this.maxValue - this.minValue) / this.step;
     }
 
     private calculateStepSize(): number{
@@ -91,13 +91,11 @@ class Model {
 
         if (left >= rightEdge) {
             left = rightEdge;
-        } else {
-            left = Math.round(left / this.stepSize) * this.stepSize;
         }
         
         this.observer.notify('thumbDraged', left);
 
-    //     // console.log(this.positionToValue(this.thumb, newLeft))////////////////////////////////////
+        // console.log(this.positionToValue(left))////////////////////////////////////
     
     }
 
@@ -106,16 +104,23 @@ class Model {
         let prevScalePointPosition: number = 0;
         const scalePointsCount = this.stepsCount + 1;
         
-        for (let i = 0; i <= scalePointsCount - 1; i++) {
-            const pointValue: number = this.positionToValue(scalePointPosition + this.scalePointWidth / 2 - this.thumbWidth / 2); ////////////////// попробовать округлить scalePointPosition
+        for (let i = 0; i <= Math.round(scalePointsCount - 1); i++) {
+            let pointValue: number = this.positionToValue(scalePointPosition - this.thumbWidth / 2 + this.scalePointWidth / 2);
             
-            if (i === 0 || this.isPointFits(scalePointPosition, prevScalePointPosition) || i === scalePointsCount - 1) {
+            if (i === 0 || this.isPointFits(scalePointPosition, prevScalePointPosition) || i === Math.round(scalePointsCount - 1)) {
+
                 this.observer.notify('addScalePoint', 
                     {'position': scalePointPosition, 'scalePointWidth': this.scalePointWidth, 'scalePointValue': pointValue});
+
                 prevScalePointPosition = scalePointPosition;
+
             }
             
             scalePointPosition += this.stepSize;
+
+            if (i === Math.round(scalePointsCount - 2)) {
+                scalePointPosition = this.sliderWidth - this.thumbWidth / 2 - this.scalePointWidth / 2;
+            }
         }
 
     }
@@ -125,7 +130,12 @@ class Model {
     }
 
     private isPointFits(scalePointPosition: number, prevScalePointPosition: number): boolean {
-        return scalePointPosition - prevScalePointPosition - 2 > this.scalePointWidth;
+
+        return (
+            (scalePointPosition - prevScalePointPosition - 2 > this.scalePointWidth) &&
+            (this.sliderWidth - this.thumbWidth / 2 - this.scalePointWidth / 2 - scalePointPosition - 2 > this.scalePointWidth)
+        );
+
     }
 
 
