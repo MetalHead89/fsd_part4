@@ -13,7 +13,7 @@ import { ISliderSettings } from './interfaces';
         'type': 'single',
         'scale': true,        
         'minValue': 1,
-        'maxValue': 10,
+        'maxValue': 40,
         'step': 1
     };
 

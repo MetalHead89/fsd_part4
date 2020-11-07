@@ -102,14 +102,19 @@ class Model {
     }
 
     generateScale() {
-
         let scalePointPosition: number = this.thumbWidth / 2 - this.scalePointWidth / 2;
+        let prevScalePointPosition: number = 0;
         const scalePointsCount = this.stepsCount + 1;
         
         for (let i = 0; i <= scalePointsCount - 1; i++) {
-            const pointValue: number = this.positionToValue(scalePointPosition - this.thumbWidth / 2); ////////////////// попробовать округлить scalePointPosition
-            this.observer.notify('addScalePoint', 
-                {'position': scalePointPosition, 'scalePointWidth': this.scalePointWidth, 'scalePointValue': pointValue});
+            const pointValue: number = this.positionToValue(scalePointPosition + this.scalePointWidth / 2 - this.thumbWidth / 2); ////////////////// попробовать округлить scalePointPosition
+            
+            if (i === 0 || this.isPointFits(scalePointPosition, prevScalePointPosition) || i === scalePointsCount - 1) {
+                this.observer.notify('addScalePoint', 
+                    {'position': scalePointPosition, 'scalePointWidth': this.scalePointWidth, 'scalePointValue': pointValue});
+                prevScalePointPosition = scalePointPosition;
+            }
+            
             scalePointPosition += this.stepSize;
         }
 
@@ -117,6 +122,10 @@ class Model {
 
     private positionToValue(position: number): number {
         return Math.round(this.minValue + ((this.maxValue - this.minValue) / 100 * Math.round(position / this.pixelsPerValue)));
+    }
+
+    private isPointFits(scalePointPosition: number, prevScalePointPosition: number): boolean {
+        return scalePointPosition - prevScalePointPosition - 2 > this.scalePointWidth;
     }
 
 

@@ -12,7 +12,9 @@ class Scale {
 
         const scalePoint: HTMLElement = document.createElement('div');
         scalePoint.className = 'slider__scale-point';
-        scalePoint.style.width = scalePointWidth + 'px';
+        if (scalePointWidth > 0) {
+            scalePoint.style.width = scalePointWidth + 'px';
+        }
 
         const divisionMarker: HTMLElement = document.createElement('div')
         divisionMarker.className = ('slider__scale-point-marker')
