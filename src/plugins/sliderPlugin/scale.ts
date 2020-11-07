@@ -1,5 +1,6 @@
 import Observable from "./observable";
-import {ICursorPsition} from './interfaces'
+import { ICursorPsition } from './interfaces';
+import { IScalePointSize } from './interfaces';
 
 class Scale {
 
@@ -11,7 +12,7 @@ class Scale {
         this.observer = observer;
 
         this.element.addEventListener('click', (event) => {
-            this.observer.notify('clickOnTheScale', this.getPosition({'x': event.clientX, 'y': event.clientY}));
+            this.observer.notify('clickOnTheScale', this.getPosition({ 'x': event.clientX, 'y': event.clientY }));
         });
     }
 
@@ -39,30 +40,32 @@ class Scale {
         return scalePoint
     }
 
-    getScalePointMaxWidth(maxValue: number): number {
+    getScalePointMaxSize(maxValue: number): IScalePointSize {
         const scalePoint = this.addScalePoint(0, 0, maxValue);
-        const scalePointWidth = scalePoint.offsetWidth;
+        const width = scalePoint.offsetWidth;
+        const height = scalePoint.offsetHeight;
         scalePoint.remove();
-        return scalePointWidth;
+
+        return { 'width': width, 'height': height };
     }
 
     private getPosition(cursorPosition: ICursorPsition): ICursorPsition {
 
         const parrent: HTMLElement | null = this.element.parentElement;
-        
+
         if (!parrent) {
-            return {'x': 0, 'y': 0}
+            return { 'x': 0, 'y': 0 }
         }
-        
+
         const parrentCoords: DOMRect = parrent.getBoundingClientRect();
-        
+
         return {
             'x': cursorPosition.x - parrentCoords.left,
             'y': cursorPosition.y - parrentCoords.top
         }
     }
 
-    
+
 }
 
 export default Scale;
@@ -172,7 +175,7 @@ export default Scale;
 //         if (this.scaleElem) {
 
 //             const newLeft: number = position - this.divisionWidth / 2
-            
+
 //             const division: HTMLElement = document.createElement('div');
 //             division.className = 'slider__scale-division';
 
@@ -192,16 +195,16 @@ export default Scale;
 
 //             division.append(divisionMarker);
 //             division.append(divisionLabel);
-            
+
 //             if (!(lastDivision) || newLeft - parseInt(lastDivision.style.left) >= this.divisionWidth + 10) {
-                
+
 //                 // Не выводить предпоследнее деление шкалы, если оно накладывается на последнее
 //                 if (lastDivision && 
 //                     this.scaleElem.clientWidth - thumbSize / 2 - 
 //                     this.divisionWidth / 2 - newLeft < this.divisionWidth) {
 //                         return lastDivision;
 //                 }
-                
+
 //                 this.scaleElem.append(division);
 
 //                 return division;

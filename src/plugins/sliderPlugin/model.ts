@@ -1,8 +1,9 @@
 import { ISliderSettings } from './interfaces';
 import { ISliderSize } from './interfaces';
 import { IThumbSize } from './interfaces';
-import {IThumbPosition} from './interfaces'
-import {ICursorPsition} from './interfaces'
+import { IThumbPosition } from './interfaces'
+import { ICursorPsition } from './interfaces'
+import { IScalePointSize } from './interfaces'
 
 import Observable from './observable';
 // import Slider from './slider';
@@ -20,7 +21,7 @@ class Model {
     private observer: Observable;
     private orienation: string;
     private type: string;
-    private scale: boolean;        
+    private scale: boolean;
     private minValue: number;
     private maxValue: number;
     private step: number
@@ -32,8 +33,7 @@ class Model {
     private stepSize: number = 0;
     private pixelsPerValue: number = 0;
 
-    private scalePointWidth: number = 0;
-    private scalePointHight: number = 0;
+    private scalePointSize: IScalePointSize = { 'width': 0, 'height': 0 }
 
     constructor(observer: Observable, settings: ISliderSettings) {
         this.observer = observer;
@@ -47,11 +47,11 @@ class Model {
         this.stepSize = this.calculateStepSize();
     }
 
-    private calculateStepsCount(): number{
+    private calculateStepsCount(): number {
         return (this.maxValue - this.minValue) / this.step;
     }
 
-    private calculateStepSize(): number{
+    private calculateStepSize(): number {
         return (this.sliderWidth - this.thumbWidth) / this.stepsCount;
     }
 
@@ -65,8 +65,8 @@ class Model {
         this.thumbHeight = size.height;
     }
 
-    setScalePointWidth(width: number) {
-        this.scalePointWidth = width;
+    setScalePointSize(scalePointSize: IScalePointSize) {
+        this.scalePointSize = scalePointSize;
     }
 
     setPixelsPerValue() {
@@ -85,24 +85,24 @@ class Model {
     thumbDrag(thumbPosition: IThumbPosition) {
 
         let left: number = thumbPosition.left;
-        
+
         // курсор ушёл вне слайдера
         if (left < 0) {
             left = 0;
         }
 
         let rightEdge: number = this.sliderWidth - this.thumbWidth;
-        
+
         left = this.calculateNewThumbPosition(left);
 
         if (left >= rightEdge) {
             left = rightEdge;
         }
-        
+
         this.observer.notify('thumbDraged', left);
 
         // console.log(this.positionToValue(left))////////////////////////////////////
-    
+
     }
 
     private calculateNewThumbPosition(value: number) {
@@ -110,26 +110,27 @@ class Model {
     }
 
     generateScale() {
-        let scalePointPosition: number = this.thumbWidth / 2 - this.scalePointWidth / 2;
+        let scalePointPosition: number = this.thumbWidth / 2 - this.scalePointSize.width / 2;
         let prevScalePointPosition: number = 0;
         const scalePointsCount = this.stepsCount + 1;
-        
+
         for (let i = 0; i <= Math.round(scalePointsCount - 1); i++) {
-            let pointValue: number = this.positionToValue(scalePointPosition - this.thumbWidth / 2 + this.scalePointWidth / 2);
-            
+            let pointValue: number = this.positionToValue(scalePointPosition - this.thumbWidth / 2 + this.scalePointSize.width / 2);
+
             if (i === 0 || this.isPointFits(scalePointPosition, prevScalePointPosition) || i === Math.round(scalePointsCount - 1)) {
 
-                this.observer.notify('addScalePoint', 
-                    {'position': scalePointPosition, 'scalePointWidth': this.scalePointWidth, 'scalePointValue': pointValue});
+                this.observer.notify('addScalePoint',
+                    { 'position': scalePointPosition, 'scalePointWidth': this.scalePointSize.width, 'scalePointValue': pointValue });
 
                 prevScalePointPosition = scalePointPosition;
 
             }
-            
+
             scalePointPosition += this.stepSize;
 
             if (i === Math.round(scalePointsCount - 2)) {
-                scalePointPosition = this.sliderWidth - this.thumbWidth / 2 - this.scalePointWidth / 2;
+                scalePointPosition = this.sliderWidth - this.thumbWidth / 2 - this.scalePointSize.width / 2;
+                this.observer.notify('scaleCreated', this.scalePointSize.height);
             }
         }
 
@@ -142,8 +143,8 @@ class Model {
     private isPointFits(scalePointPosition: number, prevScalePointPosition: number): boolean {
 
         return (
-            (scalePointPosition - prevScalePointPosition - 2 > this.scalePointWidth) &&
-            (this.sliderWidth - this.thumbWidth / 2 - this.scalePointWidth / 2 - scalePointPosition - 2 > this.scalePointWidth)
+            (scalePointPosition - prevScalePointPosition - 2 > this.scalePointSize.width) &&
+            (this.sliderWidth - this.thumbWidth / 2 - this.scalePointSize.width / 2 - scalePointPosition - 2 > this.scalePointSize.width)
         );
 
     }
@@ -158,7 +159,7 @@ class Model {
 
 
 
-    
+
 
     // setMinValue(newValue: number) {
     //     this.observer.notify('updatedMinValue', newValue);
@@ -180,7 +181,7 @@ class Model {
     //         'sliderPosition': sliderPosition,
     //         'settings': groupedSettings
     //     }
-        
+
     //     this.observer.notify('addedNewSliderConfiguration', newSliderOptions);
     // }
 

@@ -2,7 +2,8 @@ import { IViewSliderOptions } from './interfaces'
 import { ISliderSize } from './interfaces';
 import { IThumbPosition } from './interfaces';
 import { IScalePointSettings } from './interfaces';
-import { ICursorPsition } from './interfaces'
+import { ICursorPsition } from './interfaces';
+import { IScalePointSize } from './interfaces';
 
 import Observable from './observable';
 import Model from './model';
@@ -41,7 +42,7 @@ class Presenter {
         this.model.setSliderSize(this.view.getSliderSize());
         this.model.setThumbSize(this.view.getThumbSize());
 
-        this.model.setScalePointWidth(this.getMaxScalePointWidth());
+        this.model.setScalePointSize(this.getScalePointMaxSize());
         this.model.setPixelsPerValue();
         this.model.generateScale();
 
@@ -68,9 +69,9 @@ class Presenter {
 
     }
 
-    private getMaxScalePointWidth() {
+    private getScalePointMaxSize(): IScalePointSize {
         const sliderMaxValue: number = this.model.getMaxValue();
-        return this.view.getScalePointMaxWidth(sliderMaxValue);
+        return this.view.getScalePointMaxSize(sliderMaxValue);
     }
 }
 

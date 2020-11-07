@@ -1,6 +1,7 @@
 import { IViewSliderOptions } from './interfaces';
 import { ISliderSize } from './interfaces';
 import { IScalePointSettings } from './interfaces';
+import { IScalePointSize } from './interfaces';
 import { IThumbSize } from './interfaces';
 
 import Observable from './observable';
@@ -19,8 +20,8 @@ class View {
     private thumbTwo: Thumb | null = null;
     private progressBar: ProgressBar;
     private scale: Scale;
-    private onMouseMoveHandler: Function = () => {};
-    private onMouseUpHandler: Function = () => {};
+    private onMouseMoveHandler: Function = () => { };
+    private onMouseUpHandler: Function = () => { };
     private activeThumb: Thumb;
 
     constructor(observer: Observable, sliderWrapper: HTMLElement,
@@ -40,13 +41,13 @@ class View {
 
         this.observer.subscribe('setActiveThumb',
             (thumb: Thumb) => { this.setActiveThumb(thumb) });
-        
+
     }
 
     //////////////////// Инициализация элементов ////////////////////
 
     private init(parrent: HTMLElement, styles: string, createObj: Function): any {  ///////////////////////////////////////////// ТИП ANY /////////////////////////////////////////////
-        
+
         const elem: HTMLElement = document.createElement('div');
         elem.className = styles;
         const obj = createObj(elem);
@@ -79,7 +80,7 @@ class View {
 
         const createObj = (obj: HTMLElement) => { return new Thumb(obj, this.observer) }
         const thumb: Thumb = this.init(parrent, styles, createObj);
-        const thumbElem: HTMLElement = thumb.getElement();       
+        const thumbElem: HTMLElement = thumb.getElement();
 
         return thumb;
 
@@ -100,7 +101,7 @@ class View {
         const scale: Scale = this.init(parrent, styles, createObj);
 
         return scale;
-        
+
     }
 
     //////////////////// Set/Get ////////////////////
@@ -121,8 +122,8 @@ class View {
         this.progressBar.setWidth(value + this.thumbOne.getSize().width);
     }
 
-    getScalePointMaxWidth(value: number): number {
-        return this.scale.getScalePointMaxWidth(value);
+    getScalePointMaxSize(value: number): IScalePointSize {
+        return this.scale.getScalePointMaxSize(value);
     }
 
     addScalePoint(pointSettings: IScalePointSettings) {
@@ -132,7 +133,7 @@ class View {
     moveThumb(value: number): void {
         this.activeThumb.moveTo(value);
     }
-    
+
 }
 
 export default View;
