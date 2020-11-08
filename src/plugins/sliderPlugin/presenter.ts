@@ -25,6 +25,7 @@ class Presenter {
 
         this.model.setSliderSize(this.view.getSliderSize());
         this.model.setThumbSize(this.view.getThumbSize());
+        this.model.changeThumbTwoDisplay();
 
         this.model.setScalePointSize(this.getScalePointMaxSize());
         this.model.setPixelsPerValue();
@@ -32,12 +33,20 @@ class Presenter {
 
     }
 
-    private addObserverListeners() {
-        this.observer.subscribe('startDrag',
-            (thumbPosition: IThumbPosition) => { this.model.thumbDrag(thumbPosition) });
 
-        this.observer.subscribe('thumbDraged',
-            (value: number) => { this.view.moveThumb(value) });
+    private addObserverListeners() {
+
+        this.observer.subscribe('startDragThumbOne',
+            (thumbPosition: IThumbPosition) => { this.model.thumbOneDrag(thumbPosition) });
+
+        this.observer.subscribe('startDragThumbTwo',
+            (thumbPosition: IThumbPosition) => { this.model.thumbTwoDrag(thumbPosition) });
+
+        this.observer.subscribe('thumbOneDraged',
+            (value: number) => { this.view.moveThumbOne(value) });
+
+        this.observer.subscribe('thumbTwoDraged',
+            (value: number) => { this.view.moveThumbTwo(value) });
 
         this.observer.subscribe('thumbDraged',
             (value: number) => { this.view.setProgressWidth(value) });
@@ -53,6 +62,11 @@ class Presenter {
 
         this.observer.subscribe('scaleCreated',
             (value: number) => { this.view.setScaleHeight(value) });
+
+        this.observer.subscribe('showThumbTwo', () => { this.view.showThumb() });
+
+        this.observer.subscribe('hideThumbTwo', () => { this.view.hideThumb() });
+        
     }
 
     private getScalePointMaxSize(): IScalePointSize {

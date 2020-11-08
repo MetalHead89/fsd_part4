@@ -82,7 +82,15 @@ class Model {
         this.observer.notify('thumbDraged', newThumbPosition);
     }
 
-    thumbDrag(thumbPosition: IThumbPosition) {
+    thumbOneDrag(thumbPosition: IThumbPosition) {
+        this.thumbDrag(thumbPosition, 'thumbOneDraged');
+    }
+
+    thumbTwoDrag(thumbPosition: IThumbPosition) {
+        this.thumbDrag(thumbPosition, 'thumbTwoDraged');
+    }
+
+    thumbDrag(thumbPosition: IThumbPosition, notyfyMessage: string) {
 
         let left: number = thumbPosition.left;
 
@@ -99,10 +107,18 @@ class Model {
             left = rightEdge;
         }
 
-        this.observer.notify('thumbDraged', left);
+        this.observer.notify(notyfyMessage, left);
 
         // console.log(this.positionToValue(left))////////////////////////////////////
 
+    }
+
+    changeThumbTwoDisplay(): void {
+        if (this.type === 'single') {
+            this.observer.notify('hideThumbTwo', null);
+        } else if (this.type === 'range'){
+            this.observer.notify('showThumbTwo', null);
+        }
     }
 
     private calculateNewThumbPosition(value: number) {

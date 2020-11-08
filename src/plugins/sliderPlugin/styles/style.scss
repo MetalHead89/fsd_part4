@@ -32,6 +32,18 @@
     z-index: 2;
 }
 
+.slider__thumb-one {
+    left: 0;
+}
+
+.slider__thumb-two {
+    right: 0;
+}
+
+.slider__thumb_hide {
+    display: none;
+}
+
 .slider__scale {
     user-select: none;
     position: relative;

@@ -1,6 +1,6 @@
-import {IThumbShift} from './interfaces'
-import {IThumbPosition} from './interfaces'
-import {ICursorPsition} from './interfaces'
+import { IThumbShift } from './interfaces'
+import { IThumbPosition } from './interfaces'
+import { ICursorPsition } from './interfaces'
 import { IThumbSize } from './interfaces';
 
 import Observable from './observable';
@@ -8,14 +8,14 @@ import Observable from './observable';
 class Thumb {
     private element: HTMLElement;
     private observer: Observable;
-    private shift: IThumbShift = {'shiftX': 0, 'shiftY': 0};
-    private onMouseMoveHandler: Function = () => {};
-    private onMouseUpHandler: Function = () => {};
+    private shift: IThumbShift = { 'shiftX': 0, 'shiftY': 0 };
+    private onMouseMoveHandler: Function = () => { };
+    private onMouseUpHandler: Function = () => { };
 
     constructor(thumbElem: HTMLElement, observer: Observable) {
         this.element = thumbElem;
         this.observer = observer;
-        
+
         this.element.ondragstart = function () {
             return false;
         };
@@ -40,10 +40,10 @@ class Thumb {
     private startDrag(cursorX: number, cursorY: number): void {
 
         const thumbCoords: DOMRect = this.element.getBoundingClientRect();
-        
+
         this.shift.shiftX = cursorX - thumbCoords.left;
         this.shift.shiftY = cursorY - thumbCoords.top;
-        
+
         this.onMouseMoveHandler = this.drag.bind(this);
         this.onMouseUpHandler = this.endDrag.bind(this);
 
@@ -52,24 +52,30 @@ class Thumb {
         document.addEventListener('mouseup',
             this.onMouseUpHandler as EventListenerOrEventListenerObject);
 
-        this.observer.notify('setActiveThumb', this)
-                
     }
 
     private drag(event: MouseEvent): void {
-        this.observer.notify('startDrag', this.getPosition({'x': event.clientX, 'y': event.clientY}))
+        let notifyMessage = 'startDragThumbOne';
+
+        if (this.element.classList.contains('slider__thumb-two')) {
+            notifyMessage = 'startDragThumbTwo';
+        }
+
+        this.observer.notify(notifyMessage, this.getPosition({ 'x': event.clientX, 'y': event.clientY }))
+
+        // this.observer.notify('startDrag', this.getPosition({ 'x': event.clientX, 'y': event.clientY }))
     }
 
     private getPosition(cursorPosition: ICursorPsition): IThumbPosition {
 
         const parrent: HTMLElement | null = this.element.parentElement;
-        
+
         if (!parrent) {
-            return {'left': 0, 'top': 0}
+            return { 'left': 0, 'top': 0 }
         }
-        
+
         const parrentCoords: DOMRect = parrent.getBoundingClientRect();
-        
+
         return {
             'left': cursorPosition.x - this.shift.shiftX - parrentCoords.left,
             'top': cursorPosition.y - this.shift.shiftY - parrentCoords.top
@@ -83,6 +89,14 @@ class Thumb {
 
     moveTo(value: number) {
         this.element.style.left = value + 'px';
+    }
+
+    show() {
+        this.element.classList.remove('slider__thumb_hide');
+    }
+
+    hide() {
+        this.element.classList.add('slider__thumb_hide');
     }
 }
 
