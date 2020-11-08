@@ -12,9 +12,10 @@ class Thumb {
     private onMouseMoveHandler: Function = () => { };
     private onMouseUpHandler: Function = () => { };
 
-    constructor(thumbElem: HTMLElement, observer: Observable) {
+    constructor(thumbElem: HTMLElement, observer: Observable, zIndex: number) {
         this.element = thumbElem;
         this.observer = observer;
+        this.element.style.zIndex = zIndex.toString();
 
         this.element.ondragstart = function () {
             return false;
@@ -37,7 +38,14 @@ class Thumb {
         };
     }
 
+    setZIndex(value: number) {
+        this.element.style.zIndex = value.toString();
+    }
+
     private startDrag(cursorX: number, cursorY: number): void {
+
+        this.setZIndex(3);
+        this.observer.notify('changeZIndexToAnotherThumb', this.element);
 
         const thumbCoords: DOMRect = this.element.getBoundingClientRect();
 
@@ -61,7 +69,7 @@ class Thumb {
             notifyMessage = 'startDragThumbTwo';
         }
 
-        this.observer.notify(notifyMessage, this.getPosition({ 'x': event.clientX, 'y': event.clientY }))
+        this.observer.notify(notifyMessage, this.getPosition({ 'x': event.clientX, 'y': event.clientY }));
 
         // this.observer.notify('startDrag', this.getPosition({ 'x': event.clientX, 'y': event.clientY }))
     }

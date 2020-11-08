@@ -32,6 +32,8 @@ class Model {
     private stepsCount: number = 0;
     private stepSize: number = 0;
     private pixelsPerValue: number = 0;
+    private thumbOnePosition: IThumbPosition = {'left': 0, 'top': 0}
+    private thumbTwoPosition: IThumbPosition = {'left': this.sliderWidth - this.thumbWidth, 'top': 0}
 
     private scalePointSize: IScalePointSize = { 'width': 0, 'height': 0 }
 
@@ -83,14 +85,20 @@ class Model {
     }
 
     thumbOneDrag(thumbPosition: IThumbPosition) {
-        this.thumbDrag(thumbPosition, 'thumbOneDraged');
+        if (this.type == 'range' && thumbPosition.left >= this.thumbTwoPosition.left) {
+            thumbPosition = this.thumbOnePosition;
+        }
+        this.thumbOnePosition.left = this.thumbDrag(thumbPosition, 'thumbOneDraged');
     }
 
     thumbTwoDrag(thumbPosition: IThumbPosition) {
-        this.thumbDrag(thumbPosition, 'thumbTwoDraged');
+        if (this.type == 'range' && thumbPosition.left <= this.thumbOnePosition.left) {
+            thumbPosition = this.thumbTwoPosition;
+        }
+        this.thumbTwoPosition.left = this.thumbDrag(thumbPosition, 'thumbTwoDraged');
     }
 
-    thumbDrag(thumbPosition: IThumbPosition, notyfyMessage: string) {
+    private thumbDrag(thumbPosition: IThumbPosition, notyfyMessage: string): number {
 
         let left: number = thumbPosition.left;
 
@@ -108,6 +116,8 @@ class Model {
         }
 
         this.observer.notify(notyfyMessage, left);
+
+        return left;
 
         // console.log(this.positionToValue(left))////////////////////////////////////
 

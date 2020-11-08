@@ -28,11 +28,20 @@ class View {
         this.slider = this.sliderInit(sliderWrapper, 'slider ' +
             `slider_${sliderOptions.orientation} slider_${sliderOptions.type}`);
         this.track = this.trackInit(this.slider.getElement(), 'slider__track');
-        this.thumbOne = this.thumbInit(this.slider.getElement(), 'slider__thumb slider__thumb-one');
-        this.thumbTwo = this.thumbInit(this.slider.getElement(), 'slider__thumb slider__thumb-two');
+        this.thumbOne = this.thumbInit(this.slider.getElement(), 'slider__thumb slider__thumb-one', 3);
+        this.thumbTwo = this.thumbInit(this.slider.getElement(), 'slider__thumb slider__thumb-two', 2);
         this.progressBar = this.progressBarInit(this.slider.getElement(), 'slider__progress-bar');
         this.scale = this.scaleInit(this.slider.getElement(), 'slider__scale');
 
+        this.observer.subscribe('changeZIndexToAnotherThumb', (thumbElem: HTMLElement) => { 
+
+            if (thumbElem.isEqualNode(this.thumbOne.getElement())) {
+                this.thumbTwo.setZIndex(2)
+            } else {
+                this.thumbOne.setZIndex(2);
+            }
+
+         });
     }
 
     //////////////////// Инициализация элементов ////////////////////
@@ -67,9 +76,9 @@ class View {
 
     }
 
-    private thumbInit(parrent: HTMLElement, styles: string): Thumb {
+    private thumbInit(parrent: HTMLElement, styles: string, zIndex: number): Thumb {
 
-        const createObj = (obj: HTMLElement) => { return new Thumb(obj, this.observer) }
+        const createObj = (obj: HTMLElement) => { return new Thumb(obj, this.observer, zIndex) }
         const thumb: Thumb = this.init(parrent, styles, createObj);
         const thumbElem: HTMLElement = thumb.getElement();
 
