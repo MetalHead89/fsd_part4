@@ -21,6 +21,18 @@ class Presenter {
         this.model = model;
         this.observer = observer;
 
+        this.addObserverListeners();
+
+        this.model.setSliderSize(this.view.getSliderSize());
+        this.model.setThumbSize(this.view.getThumbSize());
+
+        this.model.setScalePointSize(this.getScalePointMaxSize());
+        this.model.setPixelsPerValue();
+        this.model.generateScale();     
+
+    }
+
+    private addObserverListeners() {
         this.observer.subscribe('startDrag',
             (thumbPosition: IThumbPosition) => { this.model.thumbDrag(thumbPosition) });
 
@@ -41,35 +53,6 @@ class Presenter {
 
         this.observer.subscribe('scaleCreated',
             (value: number) => { this.view.setScaleHeight(value) });
-
-        this.model.setSliderSize(this.view.getSliderSize());
-        this.model.setThumbSize(this.view.getThumbSize());
-
-        this.model.setScalePointSize(this.getScalePointMaxSize());
-        this.model.setPixelsPerValue();
-        this.model.generateScale();
-
-
-
-
-
-
-        // this.observer.subscribe('sliderInitialized', (sliderOptions: IViewSliderOptions) => this.view.addSliderToPage(sliderOptions));
-
-
-        // this.observer.subscribe('addedNewSliderConfiguration', 
-        //     (sliderOptions: INewSliderOptions) => 
-        //         this.view.createSlider(sliderOptions));
-
-        // this.observer.subscribe('updatedMinValue', 
-        //     (value: number) => this.view.changeMinValue(value));
-
-        // this.observer.subscribe('updatedMaxValue', 
-        //     (value: number) => this.view.changeMaxValue(value));
-
-        // this.observer.subscribe('updatedStepValue', 
-        //     (value: number) => this.view.changeStepValue(value))        
-
     }
 
     private getScalePointMaxSize(): IScalePointSize {

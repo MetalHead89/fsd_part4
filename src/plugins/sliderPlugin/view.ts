@@ -10,6 +10,7 @@ import Track from './track';
 import Thumb from './thumb';
 import ProgressBar from './progressBar'
 import Scale from './scale';
+import Tooltip from './tooltip';
 
 class View {
 
@@ -20,8 +21,7 @@ class View {
     private thumbTwo: Thumb | null = null;
     private progressBar: ProgressBar;
     private scale: Scale;
-    private onMouseMoveHandler: Function = () => { };
-    private onMouseUpHandler: Function = () => { };
+    private tooltip: Tooltip;
     private activeThumb: Thumb;
 
     constructor(observer: Observable, sliderWrapper: HTMLElement,
@@ -31,12 +31,16 @@ class View {
         this.slider = this.sliderInit(sliderWrapper, 'slider ' +
             `slider_${sliderOptions.orientation} slider_${sliderOptions.type}`);
         this.track = this.trackInit(this.slider.getElement(), 'slider__track');
+        this.tooltip = this.toolTipInit(this.slider.getElement(), 'slider__tooltip');
         this.thumbOne = this.thumbInit(this.slider.getElement(), 'slider__thumb');
         if (sliderOptions.type === 'slider_range') {
             this.thumbTwo = this.thumbInit(this.slider.getElement(), 'slider__thumb');
         }
         this.progressBar = this.progressBarInit(this.slider.getElement(), 'slider__progress-bar');
         this.scale = this.scaleInit(this.slider.getElement(), 'slider__scale');
+
+
+
         this.activeThumb = this.thumbOne;
 
         this.observer.subscribe('setActiveThumb',
@@ -101,6 +105,15 @@ class View {
         const scale: Scale = this.init(parrent, styles, createObj);
 
         return scale;
+
+    }
+
+    private toolTipInit(parrent: HTMLElement, styles: string): Tooltip {
+
+        const createObj = (obj: HTMLElement) => { return new Tooltip(obj) }
+        const toolTip: Tooltip = this.init(parrent, styles, createObj);
+
+        return toolTip;
 
     }
 

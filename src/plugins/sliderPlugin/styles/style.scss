@@ -61,3 +61,11 @@
     font-size: 1.3rem;
     color: rgb(211, 211, 211);
 }
+
+.slider__tooltip {
+    position: absolute;
+    width: 50px;
+    height: 10px;
+    background-color: red;
+    top: -20px;
+}
