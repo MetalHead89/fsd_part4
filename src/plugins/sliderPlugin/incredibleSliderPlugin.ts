@@ -10,7 +10,7 @@ import { ISliderSettings } from './interfaces';
     // Настройки плагина по умолчанию
     const defaultSettings: ISliderSettings = {
         'orienation': 'horizontal',
-        'type': 'range',
+        'type': 'single',
         'scale': true,        
         'minValue': 1,
         'maxValue': 10,

@@ -2,6 +2,7 @@ import { IViewSliderOptions } from './interfaces';
 import { ISliderSize } from './interfaces';
 import { IScalePointSettings } from './interfaces';
 import { IScalePointSize } from './interfaces';
+import { IProgressBarPosition } from './interfaces';
 import { IThumbSize } from './interfaces';
 
 import Observable from './observable';
@@ -114,8 +115,12 @@ class View {
         return this.thumbOne.getSize();
     }
 
-    setProgressWidth(value: number) {
-        this.progressBar.setWidth(value + this.thumbOne.getSize().width);
+    // setProgressWidth(value: number) {
+    //     this.progressBar.setWidth(value + this.thumbOne.getSize().width);
+    // }  IProgressBarPosition
+
+    setProgressBarPosition(progressPosition: IProgressBarPosition) {
+        this.progressBar.setPosition(progressPosition);
     }
 
     getScalePointMaxSize(value: number): IScalePointSize {

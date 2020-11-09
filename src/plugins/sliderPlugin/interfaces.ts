@@ -48,6 +48,11 @@ export interface IScalePointSettings {
     'scalePointValue': number
 }
 
+export interface IProgressBarPosition {
+    'start': {'x': number, 'y':number},
+    'size': {'width': number, 'height':number}
+}
+
 // export interface IGroupedSettings {
 //     'sliderSettings': ISliderSettings
 //     'thumbSettings': IThumbSettings,

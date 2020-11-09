@@ -4,6 +4,7 @@ import { IThumbPosition } from './interfaces';
 import { IScalePointSettings } from './interfaces';
 import { ICursorPsition } from './interfaces';
 import { IScalePointSize } from './interfaces';
+import { IProgressBarPosition } from './interfaces';
 
 import Observable from './observable';
 import Model from './model';
@@ -48,8 +49,12 @@ class Presenter {
         this.observer.subscribe('thumbTwoDraged',
             (value: number) => { this.view.moveThumbTwo(value) });
 
-        this.observer.subscribe('thumbDraged',
-            (value: number) => { this.view.setProgressWidth(value) });
+        this.observer.subscribe('progressBarDraged',
+            (progressBarPosition: IProgressBarPosition) => 
+                { this.view.setProgressBarPosition(progressBarPosition) });
+
+        // this.observer.subscribe('thumbDraged',
+        //     (value: number) => { this.view.setProgressWidth(value) });
 
         this.observer.subscribe('addScalePoint',
             (pointSettings: IScalePointSettings) => { this.view.addScalePoint(pointSettings) });

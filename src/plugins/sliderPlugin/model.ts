@@ -4,6 +4,7 @@ import { IThumbSize } from './interfaces';
 import { IThumbPosition } from './interfaces'
 import { ICursorPsition } from './interfaces'
 import { IScalePointSize } from './interfaces'
+import { IProgressBarPosition } from './interfaces'
 
 import Observable from './observable';
 // import Slider from './slider';
@@ -88,7 +89,9 @@ class Model {
         if (this.type == 'range' && thumbPosition.left >= this.thumbTwoPosition.left) {
             thumbPosition = this.thumbOnePosition;
         }
+
         this.thumbOnePosition.left = this.thumbDrag(thumbPosition, 'thumbOneDraged');
+        this.observer.notify('progressBarDraged', this.calcProgressBarPosition());
     }
 
     thumbTwoDrag(thumbPosition: IThumbPosition) {
@@ -96,6 +99,7 @@ class Model {
             thumbPosition = this.thumbTwoPosition;
         }
         this.thumbTwoPosition.left = this.thumbDrag(thumbPosition, 'thumbTwoDraged');
+        this.observer.notify('progressBarDraged', this.calcProgressBarPosition());
     }
 
     private thumbDrag(thumbPosition: IThumbPosition, notyfyMessage: string): number {
@@ -173,6 +177,27 @@ class Model {
             (this.sliderWidth - this.thumbWidth / 2 - this.scalePointSize.width / 2 - scalePointPosition - 2 > this.scalePointSize.width)
         );
 
+    }
+
+    private calcProgressBarPosition(): IProgressBarPosition {
+
+        const progress: IProgressBarPosition = {
+            'start': {'x': 0, 'y': 0}, 
+            'size': {'width': 0, 'height': 0}};
+        
+        if (this.type === 'single') {
+            progress.start.x = 0;
+            progress.start.y = 0;
+            progress.size.width = this.thumbOnePosition.left + this.thumbWidth;
+            progress.size.height = this.thumbOnePosition.top + this.thumbHeight;
+        } else if (this.type === 'range') {
+            progress.start.x = this.thumbOnePosition.left;
+            progress.start.y = this.thumbOnePosition.top;
+            progress.size.width = this.thumbTwoPosition.left - this.thumbOnePosition.left + this.thumbWidth;
+            progress.size.height = this.thumbTwoPosition.top - this.thumbOnePosition.top + this.thumbHeight;
+        }
+
+        return progress;
     }
 
 

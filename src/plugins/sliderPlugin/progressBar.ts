@@ -1,3 +1,5 @@
+import { IProgressBarPosition } from './interfaces';
+
 class ProgressBar {
 
     private element: HTMLElement;
@@ -6,8 +8,13 @@ class ProgressBar {
         this.element = element
     }
 
-    setWidth(value: number) {
-        this.element.style.width = value + 'px';
+    // setWidth(value: number) {
+    //     this.element.style.width = value + 'px';
+    // }
+
+    setPosition(progressPosition: IProgressBarPosition) {
+        this.element.style.left = progressPosition.start.x + 'px';
+        this.element.style.width = progressPosition.size.width + 'px';
     }
 
 }
