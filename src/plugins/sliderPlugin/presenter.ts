@@ -53,9 +53,6 @@ class Presenter {
             (progressBarPosition: IProgressBarPosition) => 
                 { this.view.setProgressBarPosition(progressBarPosition) });
 
-        // this.observer.subscribe('thumbDraged',
-        //     (value: number) => { this.view.setProgressWidth(value) });
-
         this.observer.subscribe('addScalePoint',
             (pointSettings: IScalePointSettings) => { this.view.addScalePoint(pointSettings) });
 

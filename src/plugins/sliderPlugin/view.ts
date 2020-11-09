@@ -115,10 +115,6 @@ class View {
         return this.thumbOne.getSize();
     }
 
-    // setProgressWidth(value: number) {
-    //     this.progressBar.setWidth(value + this.thumbOne.getSize().width);
-    // }  IProgressBarPosition
-
     setProgressBarPosition(progressPosition: IProgressBarPosition) {
         this.progressBar.setPosition(progressPosition);
     }
@@ -150,10 +146,6 @@ class View {
     hideThumb() {
         this.thumbTwo.hide();
     }
-
-    // moveThumb(value: number): void {
-    //     this.activeThumb.moveTo(value);
-    // }
 
 }
 

@@ -15,7 +15,7 @@ class Track {
     }
 
     private getPosition(cursorPosition: ICursorPsition): ICursorPsition {
-
+        
         const parrent: HTMLElement | null = this.element.parentElement;
         
         if (!parrent) {

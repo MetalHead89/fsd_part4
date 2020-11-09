@@ -81,8 +81,34 @@ class Model {
     }
 
     moveThumb(cursorPosition: ICursorPsition): void {
-        const newThumbPosition = this.calculateNewThumbPosition(cursorPosition.x - this.thumbWidth / 2);
-        this.observer.notify('thumbDraged', newThumbPosition);
+        // let message = 'thumbOneDraged';
+
+        const position: IThumbPosition = {
+            'left': cursorPosition.x,
+            'top': cursorPosition.y
+        }
+
+        if (this.type === 'range' && 
+            Math.abs(position.left - this.thumbOnePosition.left) > 
+            Math.abs(position.left - this.thumbTwoPosition.left)) {
+                this.thumbTwoDrag(position)
+            } else (
+                this.thumbOneDrag(position)
+            )
+
+        // if (this.type === 'range') {
+        //     console.log(Math.abs(cursorPosition.x - this.thumbOnePosition.left))
+        //     if (Math.abs(cursorPosition.x - this.thumbOnePosition.left) > 
+        //         Math.abs(cursorPosition.x - this.thumbTwoPosition.left)) {
+        //             message = 'thumbTwoDraged';
+        //     }
+        // }
+
+        // const newThumbPosition = this.calculateNewThumbPosition(cursorPosition.x - this.thumbWidth / 2);
+        // this.observer.notify(message, newThumbPosition);
+        
+        // const newThumbPosition = this.calculateNewThumbPosition(cursorPosition.x - this.thumbWidth / 2);
+        // this.observer.notify('thumbDraged', newThumbPosition);
     }
 
     thumbOneDrag(thumbPosition: IThumbPosition) {
