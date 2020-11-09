@@ -22,16 +22,18 @@ class Presenter {
         this.model = model;
         this.observer = observer;
 
-        this.addObserverListeners();
+        this.addObserverListeners();    
+        this.init();
+    }
 
+    private init() {
         this.model.setSliderSize(this.view.getSliderSize());
         this.model.setThumbSize(this.view.getThumbSize());
         this.model.changeThumbTwoDisplay();
 
         this.model.setScalePointSize(this.getScalePointMaxSize());
         this.model.setPixelsPerValue();
-        this.model.generateScale();     
-
+        this.model.generateScale(); 
     }
 
 
