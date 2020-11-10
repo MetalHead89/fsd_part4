@@ -169,8 +169,6 @@ class Model {
 
         return left;
 
-        // console.log(this.positionToValue(left))////////////////////////////////////
-
     }
 
     changeThumbTwoDisplay(): void {

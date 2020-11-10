@@ -29,6 +29,10 @@ class Presenter {
     private init() {
         this.model.setSliderSize(this.view.getSliderSize());
         this.model.setThumbSize(this.view.getThumbSize());
+        this.model.setPixelsPerValue();
+        this.model.changeThumbTwoDisplay();
+        this.model.setScalePointSize(this.getScalePointMaxSize());        
+        this.model.generateScale();
 
         const thumbOnePos: IThumbPosition = this.model.getThumbOnePosition();
         const thumbTwoPos: IThumbPosition = this.model.getThumbTwoPosition();
@@ -40,12 +44,6 @@ class Presenter {
         if (thumbOnePos.left === -1 && thumbOnePos.top === -1) {
             this.model.setThumbOneToStartingPosition();
         }
-
-        this.model.changeThumbTwoDisplay();
-
-        this.model.setScalePointSize(this.getScalePointMaxSize());
-        this.model.setPixelsPerValue();
-        this.model.generateScale(); 
     }
 
 
