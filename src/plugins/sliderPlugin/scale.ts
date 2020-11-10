@@ -69,6 +69,10 @@ class Scale {
         this.element.style.height = value + 'px';
     }
 
+    remove() {
+        this.element.remove();
+    }
+
 }
 
 export default Scale;

@@ -22,17 +22,22 @@ class Presenter {
         this.model = model;
         this.observer = observer;
 
-        this.addObserverListeners();    
+        this.addObserverListeners();
         this.init();
     }
 
     private init() {
         this.model.setSliderSize(this.view.getSliderSize());
         this.model.setThumbSize(this.view.getThumbSize());
+        this.model.calculateStepsCount();
+        this.model.calculateStepSize();
         this.model.setPixelsPerValue();
         this.model.changeThumbTwoDisplay();
-        this.model.setScalePointSize(this.getScalePointMaxSize());        
+        this.view.scaleRemove();
+        this.view.createScale();
+        this.model.setScalePointSize(this.getScalePointMaxSize());
         this.model.generateScale();
+
 
         const thumbOnePos: IThumbPosition = this.model.getThumbOnePosition();
         const thumbTwoPos: IThumbPosition = this.model.getThumbTwoPosition();
@@ -62,8 +67,7 @@ class Presenter {
             (value: number) => { this.view.moveThumbTwo(value) });
 
         this.observer.subscribe('progressBarDraged',
-            (progressBarPosition: IProgressBarPosition) => 
-                { this.view.setProgressBarPosition(progressBarPosition) });
+            (progressBarPosition: IProgressBarPosition) => { this.view.setProgressBarPosition(progressBarPosition) });
 
         this.observer.subscribe('addScalePoint',
             (pointSettings: IScalePointSettings) => { this.view.addScalePoint(pointSettings) });
@@ -81,11 +85,12 @@ class Presenter {
 
         this.observer.subscribe('hideThumbTwo', () => { this.view.hideThumb() });
 
-        this.observer.subscribe('tooltipOneDraged', (value: number) => 
-            { this.view.setTooltipOneText(value) });
-        this.observer.subscribe('tooltipTwoDraged', (value: number) => 
-            { this.view.setTooltipTwoText(value) });
-        
+        this.observer.subscribe('tooltipOneDraged', (value: number) => { this.view.setTooltipOneText(value) });
+
+        this.observer.subscribe('tooltipTwoDraged', (value: number) => { this.view.setTooltipTwoText(value) });
+
+        this.observer.subscribe('updatedMinValue', () => { this.init() });
+
     }
 
     private getScalePointMaxSize(): IScalePointSize {

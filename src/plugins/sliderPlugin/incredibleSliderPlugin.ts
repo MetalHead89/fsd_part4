@@ -33,17 +33,17 @@ import { ISliderSettings } from './interfaces';
                     {'type': settings.type, 'orientation': settings.orienation});
                 const presenter: Presenter = new Presenter(view, model, observer);
 
-                // $(this).data('settings', settings); ///////////////////////// добавить проверку на существование объекта
-                // $(this).data('model', model);
-                // // $(this).data('slider', {
-                // //     target: $(this),
-                // //     m: model
-                // // });
+                $(this).data('settings', settings); ///////////////////////// добавить проверку на существование объекта
+                $(this).data('model', model);
+                // $(this).data('slider', {
+                //     target: $(this),
+                //     m: model
+                // });
             });
         },
-        // setMinValue: function(value: number) {
-        //     $(this).data().model.setMinValue(value);
-        // },
+        setMinValue: function(value: number) {
+            $(this).data().model.setMinValue(value);
+        },
         // setMaxValue: function(value: number) {
         //     $(this).data().model.setMaxValue(value);
         // },

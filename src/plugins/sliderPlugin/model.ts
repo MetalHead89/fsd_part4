@@ -46,16 +46,27 @@ class Model {
         this.minValue = settings.minValue;
         this.maxValue = settings.maxValue
         this.step = settings.step;
-        this.stepsCount = this.calculateStepsCount();
-        this.stepSize = this.calculateStepSize();
+        this.stepsCount = 0;
+        this.stepSize = 0;
     }
 
-    private calculateStepsCount(): number {
-        return (this.maxValue - this.minValue) / this.step;
+    //////////////////// Методы API ////////////////////
+
+    setMinValue(newValue: number): void {
+        this.minValue = newValue;
+        this.observer.notify('updatedMinValue', null);
     }
 
-    private calculateStepSize(): number {
-        return (this.sliderWidth - this.thumbWidth) / this.stepsCount;
+
+
+
+
+    calculateStepsCount(): void {
+        this.stepsCount = (this.maxValue - this.minValue) / this.step;
+    }
+
+    calculateStepSize(): void {
+        this.stepSize = (this.sliderWidth - this.thumbWidth) / this.stepsCount;
     }
 
     setThumbOneToStartingPosition() {

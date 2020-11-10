@@ -52,6 +52,10 @@ class View {
          });
     }
 
+    createScale() {
+        this.scale = this.scaleInit(this.slider.getElement(), 'slider__scale');
+    }
+
     //////////////////// Инициализация элементов ////////////////////
 
     private init(parrent: HTMLElement, styles: string, createObj: Function): any {  ///////////////////////////////////////////// ТИП ANY /////////////////////////////////////////////
@@ -170,6 +174,10 @@ class View {
 
     setTooltipTwoText(value: number): void {
         this.tooltipTwo.setText(value.toString());
+    }
+
+    scaleRemove() {
+        this.scale.remove();
     }
 }
 
