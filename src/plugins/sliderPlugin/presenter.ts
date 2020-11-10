@@ -82,6 +82,11 @@ class Presenter {
         this.observer.subscribe('showThumbTwo', () => { this.view.showThumb() });
 
         this.observer.subscribe('hideThumbTwo', () => { this.view.hideThumb() });
+
+        this.observer.subscribe('tooltipOneDraged', (value: number) => 
+            { this.view.setTooltipOneText(value) });
+        this.observer.subscribe('tooltipTwoDraged', (value: number) => 
+            { this.view.setTooltipTwoText(value) });
         
     }
 

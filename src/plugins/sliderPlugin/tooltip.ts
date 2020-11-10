@@ -6,6 +6,14 @@ class Tooltip {
         this.element = element;
     }
 
+    getElement(): HTMLElement {
+        return this.element;
+    }
+
+    setText(text: string): void {
+        this.element.innerText = text;
+    }
+
     moveTo(value: number) {
         this.element.style.left = value + 'px';
     }

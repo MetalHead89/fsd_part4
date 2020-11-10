@@ -11,12 +11,15 @@ import Track from './track';
 import Thumb from './thumb';
 import ProgressBar from './progressBar'
 import Scale from './scale';
+import Tooltip from './tooltip';
 
 class View {
 
     private observer: Observable;
     private slider: Slider;
     private track: Track;
+    private tooltipOne: Tooltip;
+    private tooltipTwo: Tooltip;
     private thumbOne: Thumb;
     private thumbTwo: Thumb;
     private progressBar: ProgressBar;
@@ -31,6 +34,10 @@ class View {
         this.track = this.trackInit(this.slider.getElement(), 'slider__track');
         this.thumbOne = this.thumbInit(this.slider.getElement(), 'slider__thumb slider__thumb-one', 3);
         this.thumbTwo = this.thumbInit(this.slider.getElement(), 'slider__thumb slider__thumb-two', 2);
+        this.tooltipOne = this.tooltipInit(this.thumbOne.getElement(), 
+            'slider__tooltip slider__tooltip-one', 2);
+        this.tooltipTwo = this.tooltipInit(this.thumbTwo.getElement(), 
+            'slider__tooltip slider__tooltip-two', 2);
         this.progressBar = this.progressBarInit(this.slider.getElement(), 'slider__progress-bar');
         this.scale = this.scaleInit(this.slider.getElement(), 'slider__scale');
 
@@ -86,6 +93,16 @@ class View {
         return thumb;
 
     }
+
+    private tooltipInit(parrent: HTMLElement, styles: string, zIndex: number): Tooltip {
+
+        const createObj = (obj: HTMLElement) => { return new Tooltip(obj) }
+        const tooltip: Tooltip = this.init(parrent, styles, createObj);
+
+        return tooltip;
+
+    }
+
 
     private progressBarInit(parrent: HTMLElement, styles: string): ProgressBar {
 
@@ -147,6 +164,13 @@ class View {
         this.thumbTwo.hide();
     }
 
+    setTooltipOneText(value: number): void {
+        this.tooltipOne.setText(value.toString());
+    }
+
+    setTooltipTwoText(value: number): void {
+        this.tooltipTwo.setText(value.toString());
+    }
 }
 
 export default View;

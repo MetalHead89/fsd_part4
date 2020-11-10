@@ -114,7 +114,6 @@ class Model {
     }
 
     moveThumb(cursorPosition: ICursorPsition): void {
-        // let message = 'thumbOneDraged';
 
         const position: IThumbPosition = {
             'left': cursorPosition.x,
@@ -128,20 +127,6 @@ class Model {
             } else (
                 this.thumbOneDrag(position)
             )
-
-        // if (this.type === 'range') {
-        //     console.log(Math.abs(cursorPosition.x - this.thumbOnePosition.left))
-        //     if (Math.abs(cursorPosition.x - this.thumbOnePosition.left) > 
-        //         Math.abs(cursorPosition.x - this.thumbTwoPosition.left)) {
-        //             message = 'thumbTwoDraged';
-        //     }
-        // }
-
-        // const newThumbPosition = this.calculateNewThumbPosition(cursorPosition.x - this.thumbWidth / 2);
-        // this.observer.notify(message, newThumbPosition);
-        
-        // const newThumbPosition = this.calculateNewThumbPosition(cursorPosition.x - this.thumbWidth / 2);
-        // this.observer.notify('thumbDraged', newThumbPosition);
     }
 
     thumbOneDrag(thumbPosition: IThumbPosition) {
@@ -151,6 +136,7 @@ class Model {
 
         this.thumbOnePosition.left = this.thumbDrag(thumbPosition, 'thumbOneDraged');
         this.observer.notify('progressBarDraged', this.calcProgressBarPosition());
+        this.observer.notify('tooltipOneDraged', this.positionToValue(this.thumbOnePosition.left));
     }
 
     thumbTwoDrag(thumbPosition: IThumbPosition) {
@@ -159,6 +145,7 @@ class Model {
         }
         this.thumbTwoPosition.left = this.thumbDrag(thumbPosition, 'thumbTwoDraged');
         this.observer.notify('progressBarDraged', this.calcProgressBarPosition());
+        this.observer.notify('tooltipTwoDraged', this.positionToValue(this.thumbTwoPosition.left));
     }
 
     private thumbDrag(thumbPosition: IThumbPosition, notyfyMessage: string): number {
