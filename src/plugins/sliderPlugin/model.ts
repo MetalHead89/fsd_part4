@@ -33,8 +33,8 @@ class Model {
     private stepsCount: number = 0;
     private stepSize: number = 0;
     private pixelsPerValue: number = 0;
-    private thumbOnePosition: IThumbPosition = {'left': 0, 'top': 0}
-    private thumbTwoPosition: IThumbPosition = {'left': this.sliderWidth - this.thumbWidth, 'top': 0}
+    private thumbOnePosition: IThumbPosition = {'left': -1, 'top': -1}
+    private thumbTwoPosition: IThumbPosition = {'left': -1, 'top': -1}
 
     private scalePointSize: IScalePointSize = { 'width': 0, 'height': 0 }
 
@@ -58,6 +58,31 @@ class Model {
         return (this.sliderWidth - this.thumbWidth) / this.stepsCount;
     }
 
+    setThumbOneToStartingPosition() {
+        if (this.orienation === 'horizontal') {
+            if (this.type === 'single') {
+                this.thumbOneDrag({
+                    'left': this.sliderWidth / 2,
+                    'top': 0
+                });
+            } else if (this.type === 'range') {
+                this.thumbOneDrag({
+                    'left': this.sliderWidth * 0.3,
+                    'top': 0
+                });
+            }
+        }
+    }
+
+    setThumbTwoToStartingPosition() {
+        if (this.orienation === 'horizontal') {
+            this.thumbTwoDrag({
+                'left': this.sliderWidth * 0.7,
+                'top': 0
+            });
+        }
+    }
+
     setSliderSize(size: ISliderSize): void {
         this.sliderWidth = size.width;
         this.sliderHeight = size.height;
@@ -78,6 +103,14 @@ class Model {
 
     getMaxValue() {
         return this.maxValue;
+    }
+
+    getThumbOnePosition(): IThumbPosition {
+        return this.thumbOnePosition;
+    }
+
+    getThumbTwoPosition(): IThumbPosition {
+        return this.thumbTwoPosition;
     }
 
     moveThumb(cursorPosition: ICursorPsition): void {

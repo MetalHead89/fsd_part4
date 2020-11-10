@@ -12,7 +12,7 @@ import { ISliderSettings } from './interfaces';
         'orienation': 'horizontal',
         'type': 'range',
         'scale': true,        
-        'minValue': 1,
+        'minValue': 0,
         'maxValue': 10,
         'step': 1
     };
