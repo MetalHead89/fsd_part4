@@ -57,6 +57,11 @@ class Model {
         this.observer.notify('updatedMinValue', null);
     }
 
+    setMaxValue(newValue: number): void {
+        this.maxValue = newValue;
+        this.observer.notify('updatedMaxValue', null);
+    }
+
 
 
 

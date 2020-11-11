@@ -91,6 +91,8 @@ class Presenter {
 
         this.observer.subscribe('updatedMinValue', () => { this.init() });
 
+        this.observer.subscribe('updatedMaxValue', () => { this.init() });
+
     }
 
     private getScalePointMaxSize(): IScalePointSize {

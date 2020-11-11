@@ -44,9 +44,9 @@ import { ISliderSettings } from './interfaces';
         setMinValue: function(value: number) {
             $(this).data().model.setMinValue(value);
         },
-        // setMaxValue: function(value: number) {
-        //     $(this).data().model.setMaxValue(value);
-        // },
+        setMaxValue: function(value: number) {
+            $(this).data().model.setMaxValue(value);
+        },
         // setStepValue: function(value: number) {
         //     $(this).data().model.setStepValue(value);
         // }
