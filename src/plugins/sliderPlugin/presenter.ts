@@ -44,10 +44,14 @@ class Presenter {
 
         if (thumbTwoPos.left === -1 && thumbTwoPos.top === -1) {
             this.model.setThumbTwoToStartingPosition();
+        } else {
+            this.model.thumbOneDrag(this.model.getThumbOnePosition())
         }
 
         if (thumbOnePos.left === -1 && thumbOnePos.top === -1) {
             this.model.setThumbOneToStartingPosition();
+        } else {
+            this.model.thumbTwoDrag(this.model.getThumbOnePosition())
         }
     }
 

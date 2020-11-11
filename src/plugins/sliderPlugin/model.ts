@@ -33,8 +33,10 @@ class Model {
     private stepsCount: number = 0;
     private stepSize: number = 0;
     private pixelsPerValue: number = 0;
-    private thumbOnePosition: IThumbPosition = {'left': -1, 'top': -1}
-    private thumbTwoPosition: IThumbPosition = {'left': -1, 'top': -1}
+    private thumbOnePosition: IThumbPosition = {'left': -1, 'top': -1};
+    private thumbTwoPosition: IThumbPosition = {'left': -1, 'top': -1};
+    private thumbOneValue: number = 0;
+    private thumbTwoValue: number = 0;
 
     private scalePointSize: IScalePointSize = { 'width': 0, 'height': 0 }
 
@@ -157,7 +159,8 @@ class Model {
 
         this.thumbOnePosition.left = this.thumbDrag(thumbPosition, 'thumbOneDraged');
         this.observer.notify('progressBarDraged', this.calcProgressBarPosition());
-        this.observer.notify('tooltipOneDraged', this.positionToValue(this.thumbOnePosition.left));
+        this.thumbOneValue = this.positionToValue(this.thumbOnePosition.left);
+        this.observer.notify('tooltipOneDraged', this.thumbOneValue);
     }
 
     thumbTwoDrag(thumbPosition: IThumbPosition) {
@@ -166,7 +169,8 @@ class Model {
         }
         this.thumbTwoPosition.left = this.thumbDrag(thumbPosition, 'thumbTwoDraged');
         this.observer.notify('progressBarDraged', this.calcProgressBarPosition());
-        this.observer.notify('tooltipTwoDraged', this.positionToValue(this.thumbTwoPosition.left));
+        this.thumbTwoValue = this.positionToValue(this.thumbTwoPosition.left);
+        this.observer.notify('tooltipTwoDraged', this.thumbTwoValue);
     }
 
     private thumbDrag(thumbPosition: IThumbPosition, notyfyMessage: string): number {
