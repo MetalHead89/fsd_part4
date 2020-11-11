@@ -62,6 +62,11 @@ class Model {
         this.observer.notify('updatedMaxValue', null);
     }
 
+    setStep(newValue: number): void {
+        this.step = newValue;
+        this.observer.notify('updatedStep', null);
+    }
+
 
 
 
