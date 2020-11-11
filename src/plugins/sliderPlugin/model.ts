@@ -33,8 +33,8 @@ class Model {
     private stepsCount: number = 0;
     private stepSize: number = 0;
     private pixelsPerValue: number = 0;
-    private thumbOnePosition: IThumbPosition = {'left': -1, 'top': -1};
-    private thumbTwoPosition: IThumbPosition = {'left': -1, 'top': -1};
+    private thumbOnePosition: IThumbPosition = { 'left': -1, 'top': -1 };
+    private thumbTwoPosition: IThumbPosition = { 'left': -1, 'top': -1 };
     private thumbOneValue: number = 0;
     private thumbTwoValue: number = 0;
 
@@ -55,18 +55,24 @@ class Model {
     //////////////////// Методы API ////////////////////
 
     setMinValue(newValue: number): void {
-        this.minValue = newValue;
-        this.observer.notify('updatedMinValue', null);
+        if (newValue < this.maxValue) {
+            this.minValue = newValue;
+            this.observer.notify('updatedMinValue', null);
+        }
     }
 
     setMaxValue(newValue: number): void {
-        this.maxValue = newValue;
-        this.observer.notify('updatedMaxValue', null);
+        if (newValue > this.minValue) {
+            this.maxValue = newValue;
+            this.observer.notify('updatedMaxValue', null);
+        }
     }
 
     setStep(newValue: number): void {
-        this.step = newValue;
-        this.observer.notify('updatedStep', null);
+        if (newValue < this.maxValue - this.minValue) {
+            this.step = newValue;
+            this.observer.notify('updatedStep', null);
+        }
     }
 
 
@@ -143,13 +149,13 @@ class Model {
             'top': cursorPosition.y
         }
 
-        if (this.type === 'range' && 
-            Math.abs(position.left - this.thumbOnePosition.left) > 
+        if (this.type === 'range' &&
+            Math.abs(position.left - this.thumbOnePosition.left) >
             Math.abs(position.left - this.thumbTwoPosition.left)) {
-                this.thumbTwoDrag(position)
-            } else (
-                this.thumbOneDrag(position)
-            )
+            this.thumbTwoDrag(position)
+        } else (
+            this.thumbOneDrag(position)
+        )
     }
 
     thumbOneDrag(thumbPosition: IThumbPosition) {
@@ -199,7 +205,7 @@ class Model {
     changeThumbTwoDisplay(): void {
         if (this.type === 'single') {
             this.observer.notify('hideThumbTwo', null);
-        } else if (this.type === 'range'){
+        } else if (this.type === 'range') {
             this.observer.notify('showThumbTwo', null);
         }
     }
@@ -251,9 +257,10 @@ class Model {
     private calcProgressBarPosition(): IProgressBarPosition {
 
         const progress: IProgressBarPosition = {
-            'start': {'x': 0, 'y': 0}, 
-            'size': {'width': 0, 'height': 0}};
-        
+            'start': { 'x': 0, 'y': 0 },
+            'size': { 'width': 0, 'height': 0 }
+        };
+
         if (this.type === 'single') {
             progress.start.x = 0;
             progress.start.y = 0;
