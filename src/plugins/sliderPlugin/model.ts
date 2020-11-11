@@ -7,16 +7,6 @@ import { IScalePointSize } from './interfaces'
 import { IProgressBarPosition } from './interfaces'
 
 import Observable from './observable';
-// import Slider from './slider';
-// import Track from './track';
-// import ProgressBar from './progressBar';
-// import Thumb from './thumb';
-// import Scale from './scale';
-// import { IThumbSettings } from './interfaces';
-// import { ISliderSettings } from './interfaces';
-// import { INewSliderOptions } from './interfaces';
-// import { IGroupedSettings } from './interfaces';
-// import { IScaleSettings } from './interfaces';
 
 class Model {
     private observer: Observable;
@@ -35,9 +25,6 @@ class Model {
     private pixelsPerValue: number = 0;
     private thumbOnePosition: IThumbPosition = { 'left': -1, 'top': -1 };
     private thumbTwoPosition: IThumbPosition = { 'left': -1, 'top': -1 };
-    private thumbOneValue: number = 0;
-    private thumbTwoValue: number = 0;
-
     private scalePointSize: IScalePointSize = { 'width': 0, 'height': 0 }
 
     constructor(observer: Observable, settings: ISliderSettings) {
@@ -48,46 +35,68 @@ class Model {
         this.minValue = settings.minValue;
         this.maxValue = settings.maxValue
         this.step = settings.step;
-        this.stepsCount = 0;
-        this.stepSize = 0;
     }
 
-    //////////////////// Методы API ////////////////////
+
+
+
+
+    //////////////////////////////////////////////////// Методы API ////////////////////////////////////////////////////
 
     setMinValue(newValue: number): void {
+
+        /**
+         * Устанавливает минимальное значение слайдера, но только если оно меньше максимального значения
+         *  
+         * @param {number} newValue - новое минимальное значение слайдера
+         */
+
         if (newValue < this.maxValue) {
             this.minValue = newValue;
             this.observer.notify('updatedMinValue', null);
         }
+
     }
 
     setMaxValue(newValue: number): void {
+
+        /**
+         * Устанавливает максимальное значение слайдера, но только если оно больше минимального значения
+         *  
+         * @param {number} newValue - новое максимальное значение слайдера
+         */
+
         if (newValue > this.minValue) {
             this.maxValue = newValue;
             this.observer.notify('updatedMaxValue', null);
         }
+
     }
 
     setStep(newValue: number): void {
+
+        /**
+         * Устанавливает размер шага бегунка, но только если параметр newValue 
+         * меньше количества шагов в заданном диапазоне
+         * 
+         * @param {number} newValue - новое значение размера шага бегунка
+         */
+
         if (newValue < this.maxValue - this.minValue) {
             this.step = newValue;
             this.observer.notify('updatedStep', null);
         }
+
     }
 
 
 
 
 
-    calculateStepsCount(): void {
-        this.stepsCount = (this.maxValue - this.minValue) / this.step;
-    }
-
-    calculateStepSize(): void {
-        this.stepSize = (this.sliderWidth - this.thumbWidth) / this.stepsCount;
-    }
+    //////////////////////////////////////////////////// Set/Get ////////////////////////////////////////////////////
 
     setThumbOneToStartingPosition() {
+
         if (this.orienation === 'horizontal') {
             if (this.type === 'single') {
                 this.thumbOneDrag({
@@ -101,15 +110,18 @@ class Model {
                 });
             }
         }
+        
     }
 
     setThumbTwoToStartingPosition() {
+
         if (this.orienation === 'horizontal') {
             this.thumbTwoDrag({
                 'left': this.sliderWidth * 0.7,
                 'top': 0
             });
         }
+
     }
 
     setSliderSize(size: ISliderSize): void {
@@ -142,6 +154,18 @@ class Model {
         return this.thumbTwoPosition;
     }
 
+
+
+
+
+    calculateStepsCount(): void {
+        this.stepsCount = (this.maxValue - this.minValue) / this.step;
+    }
+
+    calculateStepSize(): void {
+        this.stepSize = (this.sliderWidth - this.thumbWidth) / this.stepsCount;
+    }
+
     moveThumb(cursorPosition: ICursorPsition): void {
 
         const position: IThumbPosition = {
@@ -165,8 +189,7 @@ class Model {
 
         this.thumbOnePosition.left = this.thumbDrag(thumbPosition, 'thumbOneDraged');
         this.observer.notify('progressBarDraged', this.calcProgressBarPosition());
-        this.thumbOneValue = this.positionToValue(this.thumbOnePosition.left);
-        this.observer.notify('tooltipOneDraged', this.thumbOneValue);
+        this.observer.notify('tooltipOneDraged', this.positionToValue(this.thumbOnePosition.left));
     }
 
     thumbTwoDrag(thumbPosition: IThumbPosition) {
@@ -175,8 +198,7 @@ class Model {
         }
         this.thumbTwoPosition.left = this.thumbDrag(thumbPosition, 'thumbTwoDraged');
         this.observer.notify('progressBarDraged', this.calcProgressBarPosition());
-        this.thumbTwoValue = this.positionToValue(this.thumbTwoPosition.left);
-        this.observer.notify('tooltipTwoDraged', this.thumbTwoValue);
+        this.observer.notify('tooltipTwoDraged', this.positionToValue(this.thumbTwoPosition.left));
     }
 
     private thumbDrag(thumbPosition: IThumbPosition, notyfyMessage: string): number {
