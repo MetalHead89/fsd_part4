@@ -3,51 +3,63 @@ export class Panel {
     minValue: HTMLInputElement | null = null;
     maxValue: HTMLInputElement | null = null;
     step: HTMLInputElement | null = null;
+    scaleChBox: HTMLInputElement | null = null;
 
     constructor(slider: JQuery<HTMLElement>) {
         this.sliderPanel = document.createElement('div');
         this.sliderPanel.className = 'slider-panel';
 
         this.minValue = document.createElement('input');
-        this.minValue.addEventListener('input', () => {this.setMinValueSlider(slider)});
+        this.minValue.addEventListener('input', () => { this.setMinValueSlider(slider) });
 
         this.maxValue = document.createElement('input');
-        this.maxValue.addEventListener('input', () => {this.setMaxValueSlider(slider)});
+        this.maxValue.addEventListener('input', () => { this.setMaxValueSlider(slider) });
 
         this.step = document.createElement('input');
-        this.step.addEventListener('input', () => {this.setStepValueSlider(slider)});
+        this.step.addEventListener('input', () => { this.setStepValueSlider(slider) });
 
-        this.sliderPanel.append(this.createInputControl(this.minValue, 'slider-panel__input', 'min'));
-        this.sliderPanel.append(this.createInputControl(this.maxValue, 'slider-panel__input', 'max'));
-        this.sliderPanel.append(this.createInputControl(this.step, 'slider-panel__input', 'step'));
+        this.scaleChBox = document.createElement('input');
+        // this.step.addEventListener('input', () => { this.setStepValueSlider(slider) });
+
+        this.sliderPanel.append(this.createInputControl(this.minValue, 'text', 'slider-panel__input', 'min',
+            'slider-panel__input-text-wrapper'));
+        this.sliderPanel.append(this.createInputControl(this.maxValue, 'text', 'slider-panel__input', 'max',
+            'slider-panel__input-text-wrapper'));
+        this.sliderPanel.append(this.createInputControl(this.step, 'text', 'slider-panel__input', 'step',
+            'slider-panel__input-text-wrapper'));
+        this.sliderPanel.append(this.createInputControl(this.scaleChBox, 'checkbox', 'slider-panel__checkbox', 'Scale',
+            'slider-panel__input-checkbox-wrapper'));
 
         const panelWrapper: HTMLElement = document.createElement('div');
         panelWrapper.className = 'panel-wrapper';
         panelWrapper.append(this.sliderPanel);
-        
+
         slider.after(panelWrapper);
     }
 
-    private createInputControl(control:HTMLElement, controlClass: string, labelText: string): HTMLElement {
-        control.setAttribute('type', 'text');
+    private createInputControl(control: HTMLInputElement, controlType: string, controlClass: string,
+        labelText: string, wrapperClass: string): HTMLElement {
+
+        control.type = controlType;
         control.className = controlClass;
 
         const controlLabel: HTMLElement = document.createElement('label');
         controlLabel.textContent = labelText;
 
         const wrapper: HTMLElement = document.createElement('div');
-        wrapper.className = 'slider-panel__control-wrapper';
+        wrapper.className = wrapperClass;
 
         wrapper.append(controlLabel)
         wrapper.append(control);
 
         return wrapper;
+
     }
 
     setMinValueSlider(slider: JQuery<HTMLElement>) {
         if (this.minValue) {
             const minValue = parseInt(this.minValue.value);
-            
+
             if (!isNaN(minValue)) {
                 slider.incredibleSliderPlugin('setMinValue', minValue);
             }
@@ -57,17 +69,17 @@ export class Panel {
     setMaxValueSlider(slider: JQuery<HTMLElement>) {
         if (this.maxValue) {
             const maxValue = parseInt(this.maxValue.value);
-            
+
             if (!isNaN(maxValue)) {
                 slider.incredibleSliderPlugin('setMaxValue', maxValue);
             }
         }
     }
-    
+
     setStepValueSlider(slider: JQuery<HTMLElement>) {
         if (this.step) {
             const step = parseInt(this.step.value);
-            
+
             if (!isNaN(step)) {
                 slider.incredibleSliderPlugin('setStepValue', step);
             }

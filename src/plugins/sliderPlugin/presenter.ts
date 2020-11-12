@@ -1,5 +1,3 @@
-import { IViewSliderOptions } from './interfaces'
-import { ISliderSize } from './interfaces';
 import { IThumbPosition } from './interfaces';
 import { IScalePointSettings } from './interfaces';
 import { ICursorPsition } from './interfaces';
@@ -9,8 +7,6 @@ import { IProgressBarPosition } from './interfaces';
 import Observable from './observable';
 import Model from './model';
 import View from './view';
-// import { INewSliderOptions } from './interfaces';
-// import { INewSliderOptions } from '../slider/interfaces';
 
 class Presenter {
     view: View;

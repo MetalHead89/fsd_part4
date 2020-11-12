@@ -14,7 +14,13 @@
     border-radius: 3px;
 }
 
-.slider-panel__control-wrapper {
+.slider-panel__input-text-wrapper {
     display: flex;
     flex-direction: column;
+}
+
+.slider-panel__input-checkbox-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
