@@ -41,12 +41,13 @@ class Model {
 
 
 
-    //////////////////////////////////////////////////// Методы API ////////////////////////////////////////////////////
+    //////////////////////////////////////// Методы API ////////////////////////////////////////
 
     setMinValue(newValue: number): void {
 
         /**
-         * Устанавливает минимальное значение слайдера, но только если оно меньше максимального значения
+         * Устанавливает минимальное значение слайдера, но только если оно меньше 
+         * максимального значения
          *  
          * @param {number} newValue - новое минимальное значение слайдера
          */
@@ -61,7 +62,8 @@ class Model {
     setMaxValue(newValue: number): void {
 
         /**
-         * Устанавливает максимальное значение слайдера, но только если оно больше минимального значения
+         * Устанавливает максимальное значение слайдера, но только если оно больше 
+         * минимального значения
          *  
          * @param {number} newValue - новое максимальное значение слайдера
          */
@@ -93,9 +95,11 @@ class Model {
 
 
 
-    //////////////////////////////////////////////////// Set/Get ////////////////////////////////////////////////////
+    ////////////////////////// Возврат/установка значений слайдера //////////////////////////
 
     setThumbOneToStartingPosition() {
+
+        /** Устанавливает первый бегунок на стартовую позицию */
 
         if (this.orienation === 'horizontal') {
             if (this.type === 'single') {
@@ -109,11 +113,12 @@ class Model {
                     'top': 0
                 });
             }
-        }
-        
+        }        
     }
 
     setThumbTwoToStartingPosition() {
+
+        /** Устанавливает второй бегунок на стартовую позицию */
 
         if (this.orienation === 'horizontal') {
             this.thumbTwoDrag({
@@ -121,36 +126,58 @@ class Model {
                 'top': 0
             });
         }
-
     }
 
     setSliderSize(size: ISliderSize): void {
+
+        /** Устанавливает ширину и высоту слайдера */
+
         this.sliderWidth = size.width;
         this.sliderHeight = size.height;
     }
 
     setThumbSize(size: IThumbSize) {
+
+        /** Устанавливает ширину и высоту бегунка */
+
         this.thumbWidth = size.width;
         this.thumbHeight = size.height;
     }
 
     setScalePointSize(scalePointSize: IScalePointSize) {
+
+        /** Устанавливает размер шкалы */
+
         this.scalePointSize = scalePointSize;
     }
 
     setPixelsPerValue() {
+
+        /** Устанавливает количество пикселей в единице ширины слайдера, с вычетом крайних 
+         * (тупиковых) зон
+         */
+
         this.pixelsPerValue = (this.sliderWidth - this.thumbWidth) / 100;
     }
 
     getMaxValue() {
+
+    /** Возвращает максимальное значение слайдера */
+
         return this.maxValue;
     }
 
     getThumbOnePosition(): IThumbPosition {
+
+    /** Возвращает позицию первого бегунка */
+
         return this.thumbOnePosition;
     }
 
     getThumbTwoPosition(): IThumbPosition {
+
+        /** Возвращает позицию второго бегунка */
+
         return this.thumbTwoPosition;
     }
 
