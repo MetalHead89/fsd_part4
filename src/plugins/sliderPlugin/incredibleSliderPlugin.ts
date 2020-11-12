@@ -49,6 +49,9 @@ import { ISliderSettings } from './interfaces';
         },
         setStepValue: function(value: number) {
             $(this).data().model.setStep(value);
+        },
+        setScaleVisibility: function(flag: boolean) {
+            $(this).data().model.setScaleVisibility(flag);
         }
         
     };

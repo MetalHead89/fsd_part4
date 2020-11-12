@@ -95,6 +95,8 @@ class Presenter {
 
         this.observer.subscribe('updatedStep', () => { this.init() });
 
+        this.observer.subscribe('updatedScaleFlag', () => { this.view.showHideScale(this.model.getScaleFlag()) });
+
     }
 
     private getScalePointMaxSize(): IScalePointSize {

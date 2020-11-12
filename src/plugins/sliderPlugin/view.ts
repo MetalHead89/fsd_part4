@@ -179,6 +179,14 @@ class View {
     scaleRemove() {
         this.scale.remove();
     }
+
+    showHideScale(flag: boolean): void {
+        if (flag) {
+            this.scale.showScale();
+        } else {
+            this.scale.hideScale();
+        }
+    }
 }
 
 export default View;

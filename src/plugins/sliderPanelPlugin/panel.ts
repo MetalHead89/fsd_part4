@@ -3,7 +3,7 @@ export class Panel {
     minValue: HTMLInputElement | null = null;
     maxValue: HTMLInputElement | null = null;
     step: HTMLInputElement | null = null;
-    scaleChBox: HTMLInputElement | null = null;
+    scaleChBox: HTMLInputElement = document.createElement('input');
 
     constructor(slider: JQuery<HTMLElement>) {
         this.sliderPanel = document.createElement('div');
@@ -19,7 +19,7 @@ export class Panel {
         this.step.addEventListener('input', () => { this.setStepValueSlider(slider) });
 
         this.scaleChBox = document.createElement('input');
-        // this.step.addEventListener('input', () => { this.setStepValueSlider(slider) });
+            this.scaleChBox.addEventListener('click', () => { this.showHideScale(slider, this.scaleChBox.checked) });
 
         this.sliderPanel.append(this.createInputControl(this.minValue, 'text', 'slider-panel__input', 'min',
             'slider-panel__input-text-wrapper'));
@@ -84,5 +84,10 @@ export class Panel {
                 slider.incredibleSliderPlugin('setStepValue', step);
             }
         }
+    }
+
+    showHideScale(slider: JQuery<HTMLElement>, flag: boolean): void {
+        console.log(flag)
+        slider.incredibleSliderPlugin('setScaleVisibility', flag);
     }
 }

@@ -73,6 +73,14 @@ class Scale {
         this.element.remove();
     }
 
+    hideScale() {
+        this.element.classList.add('slider__scale_hide');
+    }
+
+    showScale() {
+        this.element.classList.remove('slider__scale_hide');
+    }
+
 }
 
 export default Scale;

@@ -91,6 +91,11 @@ class Model {
 
     }
 
+    setScaleVisibility(flag: boolean): void {
+        this.scale = flag;
+        this.observer.notify('updatedScaleFlag', null);
+    }
+
 
 
 
@@ -180,6 +185,10 @@ class Model {
         /** Возвращает позицию второго бегунка */
 
         return this.thumbTwoPosition;
+    }
+
+    getScaleFlag(): boolean {
+        return this.scale;
     }
 
 

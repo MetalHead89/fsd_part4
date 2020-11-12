@@ -52,6 +52,10 @@
     box-sizing: content-box;
 }
 
+.slider__scale_hide {
+   display: none;
+}
+
 .slider__scale-point {
     position: absolute;
     display: flex;
