@@ -94,11 +94,25 @@ class Model {
     }
 
     setScaleVisibility(flag: boolean): void {
+
+        /**
+         * Устанавливает флаг скрытия/отобажения шкалы
+         * 
+         * @param {boolean} flag - флаг для отображения/скрытия шкалы
+         */
+
         this.scale = flag;
         this.observer.notify('updatedScaleFlag', null);
     }
 
     setTooltipsVisibility(flag: boolean): void {
+
+        /**
+         * Устанавливает флаг скрытия/отобажения значений над бегунками
+         * 
+         * @param {boolean} flag - флаг для отображения/скрытия значений над бегунками
+         */
+
         this.tooltip = flag;
         this.observer.notify('updatedTooltipFlag', null);
     }
@@ -195,10 +209,20 @@ class Model {
     }
 
     getScaleFlag(): boolean {
+
+        /**
+         * Возвращает флаг скрытия/отображения шкалы
+         */
+
         return this.scale;
     }
 
     getTooltipFlag(): boolean {
+
+        /**
+         * Возвращает флаг скрытия/отображения значений над бегунками
+         */
+
         return this.tooltip;
     }
 
