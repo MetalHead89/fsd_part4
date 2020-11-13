@@ -121,7 +121,7 @@ class Model {
 
 
 
-    ////////////////////////// Возврат/установка значений слайдера //////////////////////////
+    /////////////////////////// Возврат/установка значений слайдера ///////////////////////////
 
     setThumbOneToStartingPosition() {
 
@@ -139,7 +139,7 @@ class Model {
                     'top': 0
                 });
             }
-        }        
+        }
     }
 
     setThumbTwoToStartingPosition() {
@@ -177,7 +177,7 @@ class Model {
         this.scalePointSize = scalePointSize;
     }
 
-    setPixelsPerValue() {
+    setPixelsPerValue(): void {
 
         /** 
          * Устанавливает количество пикселей в единице ширины слайдера, с вычетом крайних 
@@ -187,16 +187,16 @@ class Model {
         this.pixelsPerValue = (this.sliderWidth - this.thumbWidth) / 100;
     }
 
-    getMaxValue() {
+    getMaxValue(): number {
 
-    /** Возвращает максимальное значение слайдера */
+        /** Возвращает максимальное значение слайдера */
 
         return this.maxValue;
     }
 
     getThumbOnePosition(): IThumbPosition {
 
-    /** Возвращает позицию первого бегунка */
+        /** Возвращает позицию первого бегунка */
 
         return this.thumbOnePosition;
     }
@@ -230,13 +230,74 @@ class Model {
 
 
 
+    ///////////////////////////////// Расчёт значений слайдера /////////////////////////////////
+
     calculateStepsCount(): void {
+
+        /** 
+         * Считает количество шагов бегунка исходя из заданных значений и величины шага
+         */
+
         this.stepsCount = (this.maxValue - this.minValue) / this.step;
     }
 
     calculateStepSize(): void {
+
+        /**
+         * Считает размер одного шага бегунка в пикселях
+         */
+
         this.stepSize = (this.sliderWidth - this.thumbWidth) / this.stepsCount;
     }
+
+    private calculateNewThumbPosition(value: number) {
+
+        /**
+         * Высчитывает новую позицию бегунка в соответствии с заданным шагом 
+         */
+
+        return Math.round(value / this.stepSize) * this.stepSize
+    }
+
+    private positionToValue(position: number): number {
+
+        /**
+         * Возвращает значение бегунка исходя из его позиции
+         */
+
+        return Math.round(this.minValue + ((this.maxValue - this.minValue) /
+            100 * Math.round(position / this.pixelsPerValue)));
+    }
+
+    private calcProgressBarPosition(): IProgressBarPosition {
+
+        /**
+         * Возвращает размер и точку начала прогрессбара в зависимости от текущего положения бегунков
+         */
+
+        const progress: IProgressBarPosition = {
+            'start': { 'x': 0, 'y': 0 },
+            'size': { 'width': 0, 'height': 0 }
+        };
+
+        if (this.type === 'single') {
+            progress.start.x = 0;
+            progress.start.y = 0;
+            progress.size.width = this.thumbOnePosition.left + this.thumbWidth;
+            progress.size.height = this.thumbOnePosition.top + this.thumbHeight;
+        } else if (this.type === 'range') {
+            progress.start.x = this.thumbOnePosition.left;
+            progress.start.y = this.thumbOnePosition.top;
+            progress.size.width = this.thumbTwoPosition.left - this.thumbOnePosition.left + this.thumbWidth;
+            progress.size.height = this.thumbTwoPosition.top - this.thumbOnePosition.top + this.thumbHeight;
+        }
+
+        return progress;
+    }
+
+
+
+
 
     moveThumb(cursorPosition: ICursorPsition): void {
 
@@ -304,10 +365,6 @@ class Model {
         }
     }
 
-    private calculateNewThumbPosition(value: number) {
-        return Math.round(value / this.stepSize) * this.stepSize
-    }
-
     generateScale() {
         let scalePointPosition: number = this.thumbWidth / 2 - this.scalePointSize.width / 2;
         let prevScalePointPosition: number = 0;
@@ -335,10 +392,6 @@ class Model {
 
     }
 
-    private positionToValue(position: number): number {
-        return Math.round(this.minValue + ((this.maxValue - this.minValue) / 100 * Math.round(position / this.pixelsPerValue)));
-    }
-
     private isPointFits(scalePointPosition: number, prevScalePointPosition: number): boolean {
 
         return (
@@ -348,27 +401,7 @@ class Model {
 
     }
 
-    private calcProgressBarPosition(): IProgressBarPosition {
-
-        const progress: IProgressBarPosition = {
-            'start': { 'x': 0, 'y': 0 },
-            'size': { 'width': 0, 'height': 0 }
-        };
-
-        if (this.type === 'single') {
-            progress.start.x = 0;
-            progress.start.y = 0;
-            progress.size.width = this.thumbOnePosition.left + this.thumbWidth;
-            progress.size.height = this.thumbOnePosition.top + this.thumbHeight;
-        } else if (this.type === 'range') {
-            progress.start.x = this.thumbOnePosition.left;
-            progress.start.y = this.thumbOnePosition.top;
-            progress.size.width = this.thumbTwoPosition.left - this.thumbOnePosition.left + this.thumbWidth;
-            progress.size.height = this.thumbTwoPosition.top - this.thumbOnePosition.top + this.thumbHeight;
-        }
-
-        return progress;
-    }
+    
 
 
 
