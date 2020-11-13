@@ -11,7 +11,8 @@ import { ISliderSettings } from './interfaces';
     const defaultSettings: ISliderSettings = {
         'orienation': 'horizontal',
         'type': 'range',
-        'scale': true,        
+        'scale': true,
+        'tooltip': true,       
         'minValue': 0,
         'maxValue': 10,
         'step': 1
@@ -52,6 +53,9 @@ import { ISliderSettings } from './interfaces';
         },
         setScaleVisibility: function(flag: boolean) {
             $(this).data().model.setScaleVisibility(flag);
+        },
+        setTooltipsVisibility: function(flag: boolean) {
+            $(this).data().model.setTooltipsVisibility(flag);
         }
         
     };

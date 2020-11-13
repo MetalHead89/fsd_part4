@@ -97,6 +97,8 @@ class Presenter {
 
         this.observer.subscribe('updatedScaleFlag', () => { this.view.showHideScale(this.model.getScaleFlag()) });
 
+        this.observer.subscribe('updatedTooltipFlag', () => { this.view.showHideTooltips(this.model.getTooltipFlag()) });
+
     }
 
     private getScalePointMaxSize(): IScalePointSize {

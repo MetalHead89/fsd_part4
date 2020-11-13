@@ -18,6 +18,14 @@ class Tooltip {
         this.element.style.left = value + 'px';
     }
 
+    hide() {
+        this.element.classList.add('slider__tooltip_hide');
+    }
+
+    show() {
+        this.element.classList.remove('slider__tooltip_hide');
+    }
+
 }
 
 export default Tooltip;

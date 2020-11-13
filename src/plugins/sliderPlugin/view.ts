@@ -182,9 +182,19 @@ class View {
 
     showHideScale(flag: boolean): void {
         if (flag) {
-            this.scale.showScale();
+            this.scale.show();
         } else {
-            this.scale.hideScale();
+            this.scale.hide();
+        }
+    }
+
+    showHideTooltips(flag: boolean): void {
+        if (flag) {
+            this.tooltipOne.show();
+            this.tooltipTwo.show();
+        } else {
+            this.tooltipOne.hide();
+            this.tooltipTwo.hide();
         }
     }
 }

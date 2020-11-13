@@ -73,11 +73,11 @@ class Scale {
         this.element.remove();
     }
 
-    hideScale() {
+    hide() {
         this.element.classList.add('slider__scale_hide');
     }
 
-    showScale() {
+    show() {
         this.element.classList.remove('slider__scale_hide');
     }
 

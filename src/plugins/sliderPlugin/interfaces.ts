@@ -2,6 +2,7 @@ export interface ISliderSettings {
     'orienation': string,
     'type': string,
     'scale': boolean,
+    'tooltip': boolean,
     'minValue': number,
     'maxValue': number,
     'step': number

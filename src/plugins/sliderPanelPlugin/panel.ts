@@ -4,6 +4,7 @@ export class Panel {
     maxValue: HTMLInputElement | null = null;
     step: HTMLInputElement | null = null;
     scaleChBox: HTMLInputElement = document.createElement('input');
+    tooltipChBox: HTMLInputElement = document.createElement('input');
 
     constructor(slider: JQuery<HTMLElement>) {
         this.sliderPanel = document.createElement('div');
@@ -19,7 +20,12 @@ export class Panel {
         this.step.addEventListener('input', () => { this.setStepValueSlider(slider) });
 
         this.scaleChBox = document.createElement('input');
-            this.scaleChBox.addEventListener('click', () => { this.showHideScale(slider, this.scaleChBox.checked) });
+        this.scaleChBox.addEventListener('click', () => 
+            { slider.incredibleSliderPlugin('setScaleVisibility', this.scaleChBox.checked) });
+    
+        this.tooltipChBox = document.createElement('input');
+        this.tooltipChBox.addEventListener('click', () => 
+            { slider.incredibleSliderPlugin('setTooltipsVisibility', this.tooltipChBox.checked) });
 
         this.sliderPanel.append(this.createInputControl(this.minValue, 'text', 'slider-panel__input', 'min',
             'slider-panel__input-text-wrapper'));
@@ -28,6 +34,8 @@ export class Panel {
         this.sliderPanel.append(this.createInputControl(this.step, 'text', 'slider-panel__input', 'step',
             'slider-panel__input-text-wrapper'));
         this.sliderPanel.append(this.createInputControl(this.scaleChBox, 'checkbox', 'slider-panel__checkbox', 'Scale',
+            'slider-panel__input-checkbox-wrapper'));
+        this.sliderPanel.append(this.createInputControl(this.tooltipChBox, 'checkbox', 'slider-panel__checkbox', 'Tooltips',
             'slider-panel__input-checkbox-wrapper'));
 
         const panelWrapper: HTMLElement = document.createElement('div');
@@ -84,10 +92,5 @@ export class Panel {
                 slider.incredibleSliderPlugin('setStepValue', step);
             }
         }
-    }
-
-    showHideScale(slider: JQuery<HTMLElement>, flag: boolean): void {
-        console.log(flag)
-        slider.incredibleSliderPlugin('setScaleVisibility', flag);
     }
 }

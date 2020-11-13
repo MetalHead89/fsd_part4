@@ -13,6 +13,7 @@ class Model {
     private orienation: string;
     private type: string;
     private scale: boolean;
+    private tooltip: boolean;
     private minValue: number;
     private maxValue: number;
     private step: number
@@ -32,6 +33,7 @@ class Model {
         this.orienation = settings.orienation;
         this.type = settings.type;
         this.scale = settings.scale;
+        this.tooltip = settings.tooltip;
         this.minValue = settings.minValue;
         this.maxValue = settings.maxValue
         this.step = settings.step;
@@ -94,6 +96,11 @@ class Model {
     setScaleVisibility(flag: boolean): void {
         this.scale = flag;
         this.observer.notify('updatedScaleFlag', null);
+    }
+
+    setTooltipsVisibility(flag: boolean): void {
+        this.tooltip = flag;
+        this.observer.notify('updatedTooltipFlag', null);
     }
 
 
@@ -189,6 +196,10 @@ class Model {
 
     getScaleFlag(): boolean {
         return this.scale;
+    }
+
+    getTooltipFlag(): boolean {
+        return this.tooltip;
     }
 
 
