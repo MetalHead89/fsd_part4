@@ -20,6 +20,10 @@ export class Panel {
 
     private init() {
 
+        /**
+         * Создаёт панель управления и вставляет её после слайдера, который она будет контролировать
+         */
+
         this.minValue.addEventListener('input', () => { this.setMinValueSlider(this.sliderElem) });
         this.maxValue.addEventListener('input', () => { this.setMaxValueSlider(this.sliderElem) });
         this.step.addEventListener('input', () => { this.setStepValueSlider(this.sliderElem) });
@@ -60,6 +64,16 @@ export class Panel {
 
     private createInputText(control: HTMLInputElement, labelText: string, prefix: string): HTMLElement {
 
+        /**
+         * Создает группу с текстовым полем и лейблом
+         * 
+         * @param {HTMLInputElement} control - текстовое поле
+         * @param {string} labelText - текст лейбла
+         * @param {string} prefix - префикс, который вместе с случайно сгенерированным числом будет образовывать уникальный id
+         * 
+         * @returns {HTMLElement} - текстовое поле и лейбл обернутые в div
+         */
+
         const controlParams: IInputControl = {
             'control': control,
             'id': this.generateID(prefix),
@@ -75,6 +89,16 @@ export class Panel {
 
     private createInputCheckbox(control: HTMLInputElement, labelText: string, prefix: string): HTMLElement {
 
+        /**
+         * Создает группу с чекбоксом и лейблом
+         * 
+         * @param {HTMLInputElement} control - чекбокс
+         * @param {string} labelText - текст лейбла
+         * @param {string} prefix - префикс, который вместе с случайно сгенерированным числом будет образовывать уникальный id
+         * 
+         * @returns {HTMLElement} - чекбокс и лейбл обернутые в div
+         */
+
         const controlParams: IInputControl = {
             'control': control,
             'id': this.generateID(prefix),
@@ -89,9 +113,9 @@ export class Panel {
     }
 
     private createRadioGroup(radio: HTMLInputElement[], radioParams: IRadioParams[], name: string): HTMLElement {
-        
+
         name = this.generateName(name);
-        
+
         const wrapper: HTMLElement = document.createElement('div');
         wrapper.className = 'slider-panel__radio-group';
 
@@ -115,24 +139,24 @@ export class Panel {
         }
 
         return wrapper;
-        
+
     }
 
     private generateID(prefix: string): string {
-        while(true) {
+        while (true) {
             const id = prefix + this.generateRandNumber()
 
-            if(!document.getElementById(id)) {
+            if (!document.getElementById(id)) {
                 return id;
             }
         }
     }
 
     private generateName(prefix: string): string {
-        while(true) {
+        while (true) {
             const name = prefix + this.generateRandNumber()
 
-            if(document.getElementsByName(name).length == 0) {
+            if (document.getElementsByName(name).length == 0) {
                 return name;
             }
         }
