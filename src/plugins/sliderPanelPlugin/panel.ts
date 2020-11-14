@@ -20,10 +20,12 @@ export class Panel {
         this.step.addEventListener('input', () => { this.setStepValueSlider(slider) });
 
         this.scaleChBox = document.createElement('input');
+        this.scaleChBox.checked = Boolean(slider.incredibleSliderPlugin('isScale'));
         this.scaleChBox.addEventListener('click', () => 
             { slider.incredibleSliderPlugin('setScaleVisibility', this.scaleChBox.checked) });
     
         this.tooltipChBox = document.createElement('input');
+        this.tooltipChBox.checked = Boolean(slider.incredibleSliderPlugin('isTooltips'));
         this.tooltipChBox.addEventListener('click', () => 
             { slider.incredibleSliderPlugin('setTooltipsVisibility', this.tooltipChBox.checked) });
 

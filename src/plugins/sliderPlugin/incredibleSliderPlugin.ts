@@ -56,6 +56,12 @@ import { ISliderSettings } from './interfaces';
         },
         setTooltipsVisibility: function(flag: boolean) {
             $(this).data().model.setTooltipsVisibility(flag);
+        },
+        isScale: function(): boolean {
+            return $(this).data().model.isScale();
+        },
+        isTooltips: function(): boolean {
+            return $(this).data().model.isTooltips();
         }
         
     };

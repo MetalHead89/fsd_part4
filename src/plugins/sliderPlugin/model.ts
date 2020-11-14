@@ -117,6 +117,28 @@ class Model {
         this.observer.notify('updatedTooltipFlag', null);
     }
 
+    isScale(): boolean {
+
+         /**
+         * Возвращает флаг скрытия/отображения шкалы
+         * 
+         * @return {boolean} Флаг скрытия/отображения шкалы
+         */
+
+        return this.getScaleFlag();
+    }
+
+    isTooltips(): boolean {
+
+        /**
+        * Возвращает флаг скрытия/отображения значений над бегунками
+        * 
+        * @return {boolean} Флаг скрытия/отображения значений над бегунками
+        */
+
+       return this.getTooltipFlag();
+   }
+
 
 
 
