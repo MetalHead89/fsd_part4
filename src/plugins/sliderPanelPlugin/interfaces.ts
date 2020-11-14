@@ -10,6 +10,5 @@ export interface IInputControl {
 
 export interface IRadioParams { 
     'id': string,
-    'name': string,
     'label': string
 }
