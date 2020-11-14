@@ -7,3 +7,9 @@ export interface IInputControl {
     'labelText': string,
     'wrapperClass': string
 }
+
+export interface IRadioParams { 
+    'id': string,
+    'name': string,
+    'label': string
+}

@@ -1,14 +1,15 @@
 import { IInputControl } from './interfaces'
+import { IRadioParams } from './interfaces'
 
 export class Panel {
-    sliderPanel: HTMLElement | null = null;
+    sliderPanel: HTMLElement = document.createElement('div');
     minValue: HTMLInputElement | null = null;
     maxValue: HTMLInputElement | null = null;
     step: HTMLInputElement | null = null;
     scaleChBox: HTMLInputElement = document.createElement('input');
     tooltipChBox: HTMLInputElement = document.createElement('input');
-    sliderTypeRadioBtn: object = {};
-    orientationRadioBtn: object = {};
+    sliderTypeRadioBtn: HTMLInputElement[] = [];
+    orientationRadioBtn: HTMLInputElement[] = [];
 
     constructor(slider: JQuery<HTMLElement>) {
         this.sliderPanel = document.createElement('div');
@@ -32,10 +33,10 @@ export class Panel {
         this.tooltipChBox.addEventListener('click', () => { slider.incredibleSliderPlugin('setTooltipsVisibility', this.tooltipChBox.checked) });
 
         const radioParams = [
-            { 'id': 'single', 'name': 'sliderType' },
-            { 'id': 'range', 'name': 'sliderType' }
+            { 'id': 'single', 'name': 'sliderType', 'label': 'single' },
+            { 'id': 'range', 'name': 'sliderType', 'label': 'range' }
         ];
-        this.sliderTypeRadioBtn = this.createRadioGroup(this.sliderTypeRadioBtn, radioParams);
+        this.sliderPanel.append(this.createRadioGroup(this.sliderTypeRadioBtn, radioParams));
 
         this.sliderPanel.append(this.createInputControl({
             'control': this.minValue, 'id': 'minValue', 'controlType': 'text',
@@ -65,9 +66,29 @@ export class Panel {
         slider.after(panelWrapper);
     }
 
-    private createRadioGroup(radioObj: object, radioParams: object[]): object {
+    private createRadioGroup(radio: HTMLInputElement[], radioParams: IRadioParams[]): HTMLElement {
+        const wrapper: HTMLElement = document.createElement('div');
+        wrapper.className = 'slider-panel__radio-group';
 
-        return {};
+        for (const params of radioParams) {
+            const radioGroup: HTMLInputElement = document.createElement('input');
+
+            const wrappedRadio: HTMLElement = this.createInputControl({
+                'control': radioGroup, 'id': params.id, 'name': params.name, 'controlType': 'radio',
+                'controlClass': 'slider-panel__radio-group', 'labelText': params.label, 'wrapperClass': 'slider-panel__input-radio-wrapper'
+            });
+
+            radio.push(radioGroup);
+            wrapper.append(wrappedRadio);
+            console.log(radioGroup)
+        }
+
+        return wrapper;
+
+        // wrapper.append(this.createInputControl({
+        //     'control': radioGroup, 'id': 'tooltips', 'controlType': 'checkbox',
+        //     'controlClass': 'slider-panel__checkbox', 'labelText': 'tooltips', 'wrapperClass': 'slider-panel__input-checkbox-wrapper'
+        // }));
     }
 
     private createInputControl(params: IInputControl): HTMLElement {
