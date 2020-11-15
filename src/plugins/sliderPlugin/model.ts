@@ -10,7 +10,7 @@ import Observable from './observable';
 
 class Model {
     private observer: Observable;
-    private orienation: string;
+    private orientation: string;
     private type: string;
     private scale: boolean;
     private tooltip: boolean;
@@ -30,7 +30,7 @@ class Model {
 
     constructor(observer: Observable, settings: ISliderSettings) {
         this.observer = observer;
-        this.orienation = settings.orienation;
+        this.orientation = settings.orienation;
         this.type = settings.type;
         this.scale = settings.scale;
         this.tooltip = settings.tooltip;
@@ -161,7 +161,7 @@ class Model {
 
         /** Устанавливает первый бегунок на стартовую позицию */
 
-        if (this.orienation === 'horizontal') {
+        if (this.orientation === 'horizontal') {
             if (this.type === 'single') {
                 this.thumbOneDrag({
                     'left': this.sliderWidth / 2,
@@ -180,7 +180,7 @@ class Model {
 
         /** Устанавливает второй бегунок на стартовую позицию */
 
-        if (this.orienation === 'horizontal') {
+        if (this.orientation === 'horizontal') {
             this.thumbTwoDrag({
                 'left': this.sliderWidth * 0.7,
                 'top': 0
@@ -362,6 +362,10 @@ class Model {
     thumbTwoDrag(thumbPosition: IThumbPosition) {
         if (this.type == 'range' && thumbPosition.left <= this.thumbOnePosition.left) {
             thumbPosition = this.thumbTwoPosition;
+
+            if (this.orientation == 'horizontal' && thumbPosition.left < this.thumbOnePosition.left) {
+                thumbPosition.left = this.sliderWidth;
+            }
         }
         this.thumbTwoPosition.left = this.thumbDrag(thumbPosition, 'thumbTwoDraged');
         this.observer.notify('progressBarDraged', this.calcProgressBarPosition());

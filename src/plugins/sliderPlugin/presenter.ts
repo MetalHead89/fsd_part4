@@ -47,7 +47,7 @@ class Presenter {
         if (thumbOnePos.left === -1 && thumbOnePos.top === -1) {
             this.model.setThumbOneToStartingPosition();
         } else {
-            this.model.thumbTwoDrag(this.model.getThumbOnePosition())
+            this.model.thumbTwoDrag(this.model.getThumbTwoPosition())
         }
     }
 
