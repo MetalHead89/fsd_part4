@@ -119,11 +119,11 @@ class Model {
 
     isScale(): boolean {
 
-         /**
-         * Возвращает флаг скрытия/отображения шкалы
-         * 
-         * @return {boolean} Флаг скрытия/отображения шкалы
-         */
+        /**
+        * Возвращает флаг скрытия/отображения шкалы
+        * 
+        * @return {boolean} Флаг скрытия/отображения шкалы
+        */
 
         return this.getScaleFlag();
     }
@@ -136,20 +136,32 @@ class Model {
         * @return {boolean} Флаг скрытия/отображения значений над бегунками
         */
 
-       return this.getTooltipFlag();
-   }
+        return this.getTooltipFlag();
+    }
 
-   setSliderType(type: string): void {
+    setSliderType(type: string): void {
 
-    /**
-     * Устанавливает тип слайдера
-     * 
-     * @param {string} type - тип слайдера (горизонтальный или вертикальный)
-     */
+        /**
+         * Устанавливает тип слайдера
+         * 
+         * @param {string} type - тип слайдера (горизонтальный или вертикальный)
+         */
 
-    this.type = type;
-    this.observer.notify('updatedSliderType', null);
-}
+        this.type = type;
+        this.observer.notify('updatedSliderType', null);
+
+    }
+
+    getSliderType(): string {
+
+        /**
+         * Возвращает тип слайдера
+         * 
+         * @returns {string} - тип слайдера (горизонтальный или вертикальный)
+         */
+
+        return this.type;
+    }
 
 
 
@@ -439,7 +451,7 @@ class Model {
 
     }
 
-    
+
 
 
 

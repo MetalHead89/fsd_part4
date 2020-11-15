@@ -65,6 +65,9 @@ import { ISliderSettings } from './interfaces';
         },
         setSliderType: function(type: string) {
             return $(this).data().model.setSliderType(type);
+        },
+        getSliderType: function(): string {
+            return $(this).data().model.getSliderType();
         }
         
     };

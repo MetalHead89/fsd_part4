@@ -38,9 +38,6 @@ export class Panel {
         this.singleRadioBtn.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setSliderType', this.singleRadioBtn.value) });
         this.rangeRadioButton.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setSliderType', this.rangeRadioButton.value) });
 
-        this.scaleChBox.checked = Boolean(this.sliderElem.incredibleSliderPlugin('isScale'));
-        this.tooltipChBox.checked = Boolean(this.sliderElem.incredibleSliderPlugin('isTooltips'));
-
         this.sliderPanel.className = 'slider-panel';
         this.sliderPanel.append(this.createInputText(this.minValue, 'min', 'min'));
         this.sliderPanel.append(this.createInputText(this.maxValue, 'max', 'max'));
@@ -62,6 +59,16 @@ export class Panel {
             { 'control': this.verticalRadioButton, 'id': 'vertical', 'label': 'vertical', 'value': 'vertical' }
         ];
         this.sliderPanel.append(this.createRadioGroup(sliderOrientationRadioParams, 'sliderType'));
+
+        this.scaleChBox.checked = Boolean(this.sliderElem.incredibleSliderPlugin('isScale'));
+        this.tooltipChBox.checked = Boolean(this.sliderElem.incredibleSliderPlugin('isTooltips'));
+
+        const sliderType: string = String(this.sliderElem.incredibleSliderPlugin('getSliderType'));
+        if (sliderType == 'single') {
+            this.singleRadioBtn.checked = true;
+        } else if (sliderType == 'range') {
+            this.rangeRadioButton.checked = true;
+        }
 
         // const sliderOrientatiobRadioParams = [
         //     { 'id': 'horizontal', 'label': 'single' },
