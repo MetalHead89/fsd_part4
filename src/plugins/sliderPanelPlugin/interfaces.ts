@@ -1,7 +1,8 @@
 export interface IInputControl {
     'control': HTMLInputElement,
     'id'?: string,
-    'name'?: string
+    'name'?: string,
+    'value'?: string,
     'controlType': string,
     'controlClass': string,
     'labelText': string,
@@ -9,6 +10,8 @@ export interface IInputControl {
 }
 
 export interface IRadioParams { 
+    'control': HTMLInputElement,
     'id': string,
-    'label': string
+    'label': string,
+    'value': string
 }

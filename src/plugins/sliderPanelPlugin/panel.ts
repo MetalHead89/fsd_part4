@@ -9,8 +9,12 @@ export class Panel {
     step: HTMLInputElement = document.createElement('input');
     scaleChBox: HTMLInputElement = document.createElement('input');
     tooltipChBox: HTMLInputElement = document.createElement('input');
-    sliderTypeRadioBtn: HTMLInputElement[] = [];
-    orientationRadioBtn: HTMLInputElement[] = [];
+    singleRadioBtn: HTMLInputElement = document.createElement('input');
+    rangeRadioButton: HTMLInputElement = document.createElement('input');
+    horizontalRadioButton: HTMLInputElement = document.createElement('input');
+    verticalRadioButton: HTMLInputElement = document.createElement('input');
+    // sliderTypeRadioBtn: HTMLInputElement[] = [];
+    // orientationRadioBtn: HTMLInputElement[] = [];
 
     constructor(slider: JQuery<HTMLElement>) {
         this.sliderElem = slider;
@@ -42,17 +46,26 @@ export class Panel {
         this.sliderPanel.append(this.createInputCheckbox(this.scaleChBox, 'scale', 'scale'));
         this.sliderPanel.append(this.createInputCheckbox(this.tooltipChBox, 'tooltips', 'tooltips'));
 
-        const sliderTypeRadioParams = [
-            { 'id': 'single', 'label': 'single' },
-            { 'id': 'range', 'label': 'range' }
-        ];
-        this.sliderPanel.append(this.createRadioGroup(this.sliderTypeRadioBtn, sliderTypeRadioParams, 'sliderType'));
+        // const nameRadioBtnType = this.generateName('sliderType');
+        // this.sliderPanel.append(this.createInputRadio(this.singleRadioBtn, 'single', 'sliderType', nameRadioBtnType, 'single'));
 
-        const sliderOrientatiobRadioParams = [
-            { 'id': 'horizontal', 'label': 'single' },
-            { 'id': 'vertical', 'label': 'range' }
+        const sliderTypeRadioParams = [
+            { 'control': this.singleRadioBtn, 'id': 'single', 'label': 'single', 'value': 'single' },
+            { 'control': this.rangeRadioButton, 'id': 'range', 'label': 'range', 'value': 'range' }
         ];
-        this.sliderPanel.append(this.createRadioGroup(this.sliderTypeRadioBtn, sliderOrientatiobRadioParams, 'sliderOrientation'));
+        this.sliderPanel.append(this.createRadioGroup(sliderTypeRadioParams, 'sliderType'));
+
+        const sliderOrientationRadioParams = [
+            { 'control': this.horizontalRadioButton, 'id': 'horizontal', 'label': 'horizontal', 'value': 'horizontal' },
+            { 'control': this.verticalRadioButton, 'id': 'vertical', 'label': 'vertical', 'value': 'vertical' }
+        ];
+        this.sliderPanel.append(this.createRadioGroup(sliderOrientationRadioParams, 'sliderType'));
+
+        // const sliderOrientatiobRadioParams = [
+        //     { 'id': 'horizontal', 'label': 'single' },
+        //     { 'id': 'vertical', 'label': 'range' }
+        // ];
+        // this.sliderPanel.append(this.createRadioGroup(this.sliderTypeRadioBtn, sliderOrientatiobRadioParams, 'sliderOrientation'));
 
         const panelWrapper: HTMLElement = document.createElement('div');
         panelWrapper.className = 'panel-wrapper';
@@ -112,19 +125,46 @@ export class Panel {
 
     }
 
-    private createRadioGroup(radio: HTMLInputElement[], radioParams: IRadioParams[], name: string): HTMLElement {
+    // private createInputRadio(control: HTMLInputElement, labelText: string, prefix: string,
+    //     name: string, value: string): HTMLElement {
 
-        name = this.generateName(name);
+    //     /**
+    //      * Создает группу с радиокнопкой и лейблом
+    //      * 
+    //      * @param {HTMLInputElement} control - радиокнопка
+    //      * @param {string} labelText - текст лейбла
+    //      * @param {string} prefix - префикс, который вместе с случайно сгенерированным числом будет образовывать уникальный id
+    //      * 
+    //      * @returns {HTMLElement} - радиокнопка и лейбл обернутые в div
+    //      */
+
+    //     const controlParams: IInputControl = {
+    //         'control': control,
+    //         'id': this.generateID(prefix),
+    //         'name': name,
+    //         'value': value,
+    //         'controlType': 'checkbox',
+    //         'controlClass': 'slider-panel__checkbox',
+    //         'labelText': labelText,
+    //         'wrapperClass': 'slider-panel__input-checkbox-wrapper'
+    //     }
+
+    //     return this.createInputControl(controlParams)
+
+    // }
+
+    private createRadioGroup(radioParams: IRadioParams[], namePprefix: string): HTMLElement {
+
+        const name = this.generateName(namePprefix);
 
         const wrapper: HTMLElement = document.createElement('div');
         wrapper.className = 'slider-panel__radio-group';
 
         for (const params of radioParams) {
-            const radioGroup: HTMLInputElement = document.createElement('input');
 
             const controlParams: IInputControl = {
-                'control': radioGroup,
-                'id': this.generateID(name),
+                'control': params.control,
+                'id': this.generateID(params.id),
                 'name': name,
                 'controlType': 'radio',
                 'controlClass': 'slider-panel__radio-group',
@@ -133,8 +173,6 @@ export class Panel {
             }
 
             const wrappedRadio: HTMLElement = this.createInputControl(controlParams);
-
-            radio.push(radioGroup);
             wrapper.append(wrappedRadio);
         }
 
@@ -184,6 +222,10 @@ export class Panel {
 
         if (params.name) {
             params.control.name = params.name;
+        }
+
+        if (params.value) {
+            params.control.value = params.value;
         }
 
         const wrapper: HTMLElement = document.createElement('div');
