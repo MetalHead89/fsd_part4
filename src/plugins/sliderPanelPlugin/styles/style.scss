@@ -5,6 +5,7 @@
     padding: 20px;
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 .slider-panel__input {
@@ -20,6 +21,17 @@
 }
 
 .slider-panel__input-checkbox-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.slider-panel__radio-group {
+    display: flex;
+    flex-direction: row;
+}
+
+.slider-panel__input-radio-wrapper {
     display: flex;
     flex-direction: row;
     align-items: center;
