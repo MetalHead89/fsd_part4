@@ -99,6 +99,8 @@ class Presenter {
 
         this.observer.subscribe('updatedTooltipFlag', () => { this.view.showHideTooltips(this.model.getTooltipFlag()) });
 
+        this.observer.subscribe('updatedSliderType', () => { this.init() });
+
     }
 
     private getScalePointMaxSize(): IScalePointSize {

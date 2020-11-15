@@ -62,6 +62,9 @@ import { ISliderSettings } from './interfaces';
         },
         isTooltips: function(): boolean {
             return $(this).data().model.isTooltips();
+        },
+        setSliderType: function(type: string) {
+            return $(this).data().model.setSliderType(type);
         }
         
     };

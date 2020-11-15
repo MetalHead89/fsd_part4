@@ -35,6 +35,8 @@ export class Panel {
         this.tooltipChBox.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setTooltipsVisibility', this.tooltipChBox.checked) });
         this.scaleChBox.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setScaleVisibility', this.scaleChBox.checked) });
         this.tooltipChBox.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setTooltipsVisibility', this.tooltipChBox.checked) });
+        this.singleRadioBtn.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setSliderType', this.singleRadioBtn.value) });
+        this.rangeRadioButton.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setSliderType', this.rangeRadioButton.value) });
 
         this.scaleChBox.checked = Boolean(this.sliderElem.incredibleSliderPlugin('isScale'));
         this.tooltipChBox.checked = Boolean(this.sliderElem.incredibleSliderPlugin('isTooltips'));
@@ -166,8 +168,9 @@ export class Panel {
                 'control': params.control,
                 'id': this.generateID(params.id),
                 'name': name,
+                'value': params.value,
                 'controlType': 'radio',
-                'controlClass': 'slider-panel__radio-group',
+                'controlClass': 'slider-panel__radio-button',
                 'labelText': params.label,
                 'wrapperClass': 'slider-panel__input-radio-wrapper'
             }

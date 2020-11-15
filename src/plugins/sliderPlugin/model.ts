@@ -139,6 +139,18 @@ class Model {
        return this.getTooltipFlag();
    }
 
+   setSliderType(type: string): void {
+
+    /**
+     * Устанавливает тип слайдера
+     * 
+     * @param {string} type - тип слайдера (горизонтальный или вертикальный)
+     */
+
+    this.type = type;
+    this.observer.notify('updatedSliderType', null);
+}
+
 
 
 
