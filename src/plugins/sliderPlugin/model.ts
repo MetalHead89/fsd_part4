@@ -270,6 +270,15 @@ class Model {
         return this.tooltip;
     }
 
+    getThumbSize(): IThumbSize {
+
+        /**
+         * Возвращает размер бегунка
+         */
+
+         return this.thumbSize;
+    }
+
 
 
 
@@ -346,8 +355,8 @@ class Model {
     moveThumb(cursorPosition: ICursorPsition): void {
 
         const position: IThumbPosition = {
-            'left': cursorPosition.x,
-            'top': cursorPosition.y
+            'left': cursorPosition.x - this.thumbSize.width / 2,
+            'top': cursorPosition.y - this.thumbSize.height / 2
         }
 
         if (this.type === 'range' &&
