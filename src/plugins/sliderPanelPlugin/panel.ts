@@ -134,6 +134,27 @@ export class Panel {
 
     }
 
+    private vrapElements(wrapperClass: string, ...elements: HTMLElement[]): HTMLDivElement {
+
+        /**
+         * Оборачивает полученные элементы в div с заданным классом
+         * 
+         * @param {string} wrapperClass - класс, который будет назначен обёртке
+         * @param {HTMLElement[]} - массив элементов, которые требуется обернуть
+         * 
+         * @returns {HTMLDivElement} - элементы в обёртке
+         */
+
+        const wrapper: HTMLDivElement = document.createElement('div');
+        wrapper.className = wrapperClass;
+
+        for (const element in elements) {
+            wrapper.append(element);
+        }
+
+        return wrapper;
+    }
+
     // private createInputRadio(control: HTMLInputElement, labelText: string, prefix: string,
     //     name: string, value: string): HTMLElement {
 
