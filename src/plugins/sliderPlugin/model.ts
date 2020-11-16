@@ -19,8 +19,7 @@ class Model {
     private step: number
     private sliderWidth: number = 340;
     private sliderHeight: number = 20;
-    private thumbWidth: number = 20;
-    private thumbHeight: number = 20;
+    private thumbSize: IThumbSize = {'width': 0, 'height': 0};
     private stepsCount: number = 0;
     private stepSize: number = 0;
     private pixelsPerValue: number = 0;
@@ -212,8 +211,7 @@ class Model {
 
         /** Устанавливает ширину и высоту бегунка */
 
-        this.thumbWidth = size.width;
-        this.thumbHeight = size.height;
+        this.thumbSize = size;
     }
 
     setScalePointSize(scalePointSize: IScalePointSize) {
@@ -230,7 +228,7 @@ class Model {
          * (тупиковых) зон
          */
 
-        this.pixelsPerValue = (this.sliderWidth - this.thumbWidth) / 100;
+        this.pixelsPerValue = (this.sliderWidth - this.thumbSize.width) / 100;
     }
 
     getMaxValue(): number {
@@ -293,7 +291,7 @@ class Model {
          * Считает размер одного шага бегунка в пикселях
          */
 
-        this.stepSize = (this.sliderWidth - this.thumbWidth) / this.stepsCount;
+        this.stepSize = (this.sliderWidth - this.thumbSize.width) / this.stepsCount;
     }
 
     private calculateNewThumbPosition(value: number) {
@@ -329,13 +327,13 @@ class Model {
         if (this.type === 'single') {
             progress.start.x = 0;
             progress.start.y = 0;
-            progress.size.width = this.thumbOnePosition.left + this.thumbWidth;
-            progress.size.height = this.thumbOnePosition.top + this.thumbHeight;
+            progress.size.width = this.thumbOnePosition.left + this.thumbSize.width;
+            progress.size.height = this.thumbOnePosition.top + this.thumbSize.height;
         } else if (this.type === 'range') {
             progress.start.x = this.thumbOnePosition.left;
             progress.start.y = this.thumbOnePosition.top;
-            progress.size.width = this.thumbTwoPosition.left - this.thumbOnePosition.left + this.thumbWidth;
-            progress.size.height = this.thumbTwoPosition.top - this.thumbOnePosition.top + this.thumbHeight;
+            progress.size.width = this.thumbTwoPosition.left - this.thumbOnePosition.left + this.thumbSize.width;
+            progress.size.height = this.thumbTwoPosition.top - this.thumbOnePosition.top + this.thumbSize.height;
         }
 
         return progress;
@@ -393,7 +391,7 @@ class Model {
             left = 0;
         }
 
-        let rightEdge: number = this.sliderWidth - this.thumbWidth;
+        let rightEdge: number = this.sliderWidth - this.thumbSize.width;
 
         left = this.calculateNewThumbPosition(left);
 
@@ -416,12 +414,12 @@ class Model {
     }
 
     generateScale() {
-        let scalePointPosition: number = this.thumbWidth / 2 - this.scalePointSize.width / 2;
+        let scalePointPosition: number = this.thumbSize.width / 2 - this.scalePointSize.width / 2;
         let prevScalePointPosition: number = 0;
         const scalePointsCount = this.stepsCount + 1;
 
         for (let i = 0; i <= Math.round(scalePointsCount - 1); i++) {
-            let pointValue: number = this.positionToValue(scalePointPosition - this.thumbWidth / 2 + this.scalePointSize.width / 2);
+            let pointValue: number = this.positionToValue(scalePointPosition - this.thumbSize.width / 2 + this.scalePointSize.width / 2);
 
             if (i === 0 || this.isPointFits(scalePointPosition, prevScalePointPosition) || i === Math.round(scalePointsCount - 1)) {
 
@@ -435,7 +433,7 @@ class Model {
             scalePointPosition += this.stepSize;
 
             if (i === Math.round(scalePointsCount - 2)) {
-                scalePointPosition = this.sliderWidth - this.thumbWidth / 2 - this.scalePointSize.width / 2;
+                scalePointPosition = this.sliderWidth - this.thumbSize.width / 2 - this.scalePointSize.width / 2;
                 this.observer.notify('scaleCreated', this.scalePointSize.height);
             }
         }
@@ -446,7 +444,7 @@ class Model {
 
         return (
             (scalePointPosition - prevScalePointPosition - 2 > this.scalePointSize.width) &&
-            (this.sliderWidth - this.thumbWidth / 2 - this.scalePointSize.width / 2 - scalePointPosition - 2 > this.scalePointSize.width)
+            (this.sliderWidth - this.thumbSize.height / 2 - this.scalePointSize.width / 2 - scalePointPosition - 2 > this.scalePointSize.width)
         );
 
     }
