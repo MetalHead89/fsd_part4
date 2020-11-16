@@ -134,7 +134,7 @@ export class Panel {
 
     }
 
-    private vrapElements(wrapperClass: string, ...elements: HTMLElement[]): HTMLDivElement {
+    private wrapElements(wrapperClass: string, ...elements: HTMLElement[]): HTMLDivElement {
 
         /**
          * Оборачивает полученные элементы в div с заданным классом
@@ -148,7 +148,7 @@ export class Panel {
         const wrapper: HTMLDivElement = document.createElement('div');
         wrapper.className = wrapperClass;
 
-        for (const element in elements) {
+        for (const element of elements) {
             wrapper.append(element);
         }
 
@@ -259,13 +259,7 @@ export class Panel {
             params.control.value = params.value;
         }
 
-        const wrapper: HTMLElement = document.createElement('div');
-        wrapper.className = params.wrapperClass;
-
-        wrapper.append(controlLabel)
-        wrapper.append(params.control);
-
-        return wrapper;
+        return this.wrapElements(params.wrapperClass, params.control, controlLabel);
 
     }
 
