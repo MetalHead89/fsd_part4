@@ -4,6 +4,7 @@
     border-radius: 5px;
     padding: 20px;
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
     flex-wrap: wrap;
 }
@@ -18,21 +19,36 @@
 .slider-panel__input-text-wrapper {
     display: flex;
     flex-direction: column;
+    padding: 3px 0;
 }
 
 .slider-panel__input-checkbox-wrapper {
     display: flex;
     flex-direction: row;
     align-items: center;
+    padding: 3px 0;
 }
 
 .slider-panel__radio-group {
     display: flex;
     flex-direction: row;
+    padding: 3px 0;
 }
 
 .slider-panel__input-radio-wrapper {
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+.slider-panel__input-text-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.slider-panel__checkboxes-and-radio-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }

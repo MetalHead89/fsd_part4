@@ -13,8 +13,6 @@ export class Panel {
     rangeRadioButton: HTMLInputElement = document.createElement('input');
     horizontalRadioButton: HTMLInputElement = document.createElement('input');
     verticalRadioButton: HTMLInputElement = document.createElement('input');
-    // sliderTypeRadioBtn: HTMLInputElement[] = [];
-    // orientationRadioBtn: HTMLInputElement[] = [];
 
     constructor(slider: JQuery<HTMLElement>) {
         this.sliderElem = slider;
