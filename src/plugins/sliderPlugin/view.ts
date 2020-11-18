@@ -52,8 +52,13 @@ class View {
          });
     }
 
-    createScale() {
-        this.scale = this.scaleInit(this.slider.getElement(), 'slider__scale');
+    createScale(scaleVisible: boolean) {
+        let scaleStyle = 'slider__scale';
+        if (!scaleVisible) {
+            scaleStyle += ' slider__scale_hide';
+        }
+
+        this.scale = this.scaleInit(this.slider.getElement(), scaleStyle);
     }
 
     //////////////////// Инициализация элементов ////////////////////
