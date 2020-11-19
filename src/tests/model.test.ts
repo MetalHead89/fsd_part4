@@ -92,6 +92,30 @@ describe('Get slider maximum value', () => {
 
 });
 
+describe(`Set slider maximum value`, () => {
+    test('Should be 541', () => {
+        _this.setMaxValue(541);
+        expect(_this.getMaxValue()).toBe(541);
+    });
+    test('Should be 100', () => {
+        _this.setMaxValue(0);
+        expect(_this.getMaxValue()).toBe(100);
+    });
+    test('Should be 100', () => {
+        _this.setMaxValue(-1);
+        expect(_this.getMaxValue()).toBe(100);
+    });
+    test('Should be 100', () => {
+        _this.setMaxValue(-108);
+        expect(_this.getMaxValue()).toBe(100);
+    });
+    test('Should be 1', () => {
+        _this.setMaxValue(1);
+        expect(_this.getMaxValue()).toBe(1);
+    });
+
+});
+
 // describe(`Setting the slider's minimum value`, () => {
 
 //     const _this = new Model(observer, settings);
