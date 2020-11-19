@@ -1,5 +1,6 @@
 import { IViewSliderOptions } from './interfaces';
 import { ISliderSize } from './interfaces';
+import { IScaleSize } from './interfaces';
 import { IScalePointSettings } from './interfaces';
 import { IScalePointSize } from './interfaces';
 import { IProgressBarPosition } from './interfaces';
@@ -149,8 +150,8 @@ class View {
         return this.scale.getScalePointMaxSize(value);
     }
 
-    setScaleHeight(value: number): void {
-        this.scale.setScaleHeight(value);
+    setScaleSize(scaleSize: IScaleSize): void {
+        this.scale.setScaleSize(scaleSize.width, scaleSize.height);
     }
 
     addScalePoint(pointSettings: IScalePointSettings) {
