@@ -236,6 +236,13 @@ class Model {
         return this.maxValue;
     }
 
+    getMinValue(): number {
+
+        /** Возвращает минимальное значение слайдера */
+
+        return this.minValue;
+    }
+
     getThumbOnePosition(): IThumbPosition {
 
         /** Возвращает позицию первого бегунка */
