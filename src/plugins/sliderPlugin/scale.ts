@@ -65,8 +65,9 @@ class Scale {
         }
     }
 
-    setScaleHeight(value: number): void {
-        this.element.style.height = value + 'px';
+    setScaleSize(width: number, height: number): void {
+        this.element.style.width = width + 'px';
+        this.element.style.height = height + 'px';
     }
 
     remove() {

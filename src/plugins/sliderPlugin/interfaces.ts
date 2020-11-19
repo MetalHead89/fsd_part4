@@ -18,6 +18,11 @@ export interface ISliderSize {
     'height': number
 }
 
+export interface IScaleSize {
+    'width': number,
+    'height': number
+}
+
 export interface IThumbShift {
     'shiftX': number,
     'shiftY': number

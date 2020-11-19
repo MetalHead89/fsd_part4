@@ -3,6 +3,8 @@ import { IScalePointSettings } from './interfaces';
 import { ICursorPsition } from './interfaces';
 import { IScalePointSize } from './interfaces';
 import { IProgressBarPosition } from './interfaces';
+import { IScaleSize } from './interfaces';
+import { ISliderSize } from './interfaces';
 
 import Observable from './observable';
 import Model from './model';
@@ -79,7 +81,7 @@ class Presenter {
             (cursorPosition: ICursorPsition) => { this.model.moveThumb(cursorPosition) });
 
         this.observer.subscribe('scaleCreated',
-            (value: number) => { this.view.setScaleHeight(value) });
+            (scaleSize: IScaleSize) => { this.view.setScaleSize(scaleSize) });
 
         this.observer.subscribe('showThumbTwo', () => { this.view.showThumb() });
 

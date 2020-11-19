@@ -18,7 +18,7 @@ class Model {
     private maxValue: number;
     private step: number
     private sliderSize: ISliderSize = {'width': 340, 'height': 20}
-    private thumbSize: IThumbSize = {'width': 0, 'height': 0};
+    private thumbSize: IThumbSize = {'width': 20, 'height': 20};
     private stepsCount: number = 0;
     private stepSize: number = 0;
     private pixelsPerValue: number = 0;
@@ -441,7 +441,7 @@ class Model {
 
             if (i === Math.round(scalePointsCount - 2)) {
                 scalePointPosition = this.sliderSize.width - this.thumbSize.width / 2 - this.scalePointSize.width / 2;
-                this.observer.notify('scaleCreated', this.scalePointSize.height);
+                this.observer.notify('scaleCreated', {'width': this.sliderSize.width, 'height': this.scalePointSize.height});
             }
         }
 
@@ -515,6 +515,8 @@ class Model {
     //     return {'sliderSettings': sliderSettings, 'thumbSettings': thumbSettings, 'scaleSettings': scaleSettings}
     // }
 }
+
+// module.exports = {Model};
 
 export default Model;
 
