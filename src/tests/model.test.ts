@@ -70,7 +70,27 @@ describe(`Set slider minimum value`, () => {
         expect(_this.getMinValue()).toBe(99);
     });
 
-})
+});
+
+describe('Get slider maximum value', () => {
+
+    test('Should be 100', () => {
+        expect(_this.getMaxValue()).toBe(100);
+    });
+    test('Should be 15', () => {
+        settings.maxValue = 15;
+        _this = new Model(observer, settings);
+
+        expect(_this.getMaxValue()).toBe(15);
+    });
+    test('Should be 59486484', () => {
+        settings.maxValue = 59486484;
+        _this = new Model(observer, settings);
+
+        expect(_this.getMaxValue()).toBe(59486484);
+    });
+
+});
 
 // describe(`Setting the slider's minimum value`, () => {
 
