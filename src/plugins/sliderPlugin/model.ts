@@ -17,8 +17,7 @@ class Model {
     private minValue: number;
     private maxValue: number;
     private step: number
-    private sliderWidth: number = 340;
-    private sliderHeight: number = 20;
+    private sliderSize: ISliderSize = {'width': 340, 'height': 20}
     private thumbSize: IThumbSize = {'width': 0, 'height': 0};
     private stepsCount: number = 0;
     private stepSize: number = 0;
@@ -175,12 +174,12 @@ class Model {
         if (this.orientation === 'horizontal') {
             if (this.type === 'single') {
                 this.thumbOneDrag({
-                    'left': this.sliderWidth / 2,
+                    'left': this.sliderSize.width / 2,
                     'top': 0
                 });
             } else if (this.type === 'range') {
                 this.thumbOneDrag({
-                    'left': this.sliderWidth * 0.3,
+                    'left': this.sliderSize.width * 0.3,
                     'top': 0
                 });
             }
@@ -193,7 +192,7 @@ class Model {
 
         if (this.orientation === 'horizontal') {
             this.thumbTwoDrag({
-                'left': this.sliderWidth * 0.7,
+                'left': this.sliderSize.width * 0.7,
                 'top': 0
             });
         }
@@ -203,8 +202,7 @@ class Model {
 
         /** Устанавливает ширину и высоту слайдера */
 
-        this.sliderWidth = size.width;
-        this.sliderHeight = size.height;
+        this.sliderSize = size;
     }
 
     setThumbSize(size: IThumbSize) {
@@ -228,7 +226,7 @@ class Model {
          * (тупиковых) зон
          */
 
-        this.pixelsPerValue = (this.sliderWidth - this.thumbSize.width) / 100;
+        this.pixelsPerValue = (this.sliderSize.width - this.thumbSize.width) / 100;
     }
 
     getMaxValue(): number {
@@ -300,7 +298,7 @@ class Model {
          * Считает размер одного шага бегунка в пикселях
          */
 
-        this.stepSize = (this.sliderWidth - this.thumbSize.width) / this.stepsCount;
+        this.stepSize = (this.sliderSize.width - this.thumbSize.width) / this.stepsCount;
     }
 
     private calculateNewThumbPosition(value: number) {
@@ -383,7 +381,7 @@ class Model {
             thumbPosition = this.thumbTwoPosition;
 
             if (this.orientation == 'horizontal' && thumbPosition.left < this.thumbOnePosition.left) {
-                thumbPosition.left = this.sliderWidth;
+                thumbPosition.left = this.sliderSize.width;
             }
         }
         this.thumbTwoPosition.left = this.thumbDrag(thumbPosition, 'thumbTwoDraged');
@@ -400,7 +398,7 @@ class Model {
             left = 0;
         }
 
-        let rightEdge: number = this.sliderWidth - this.thumbSize.width;
+        let rightEdge: number = this.sliderSize.width - this.thumbSize.width;
 
         left = this.calculateNewThumbPosition(left);
 
@@ -442,7 +440,7 @@ class Model {
             scalePointPosition += this.stepSize;
 
             if (i === Math.round(scalePointsCount - 2)) {
-                scalePointPosition = this.sliderWidth - this.thumbSize.width / 2 - this.scalePointSize.width / 2;
+                scalePointPosition = this.sliderSize.width - this.thumbSize.width / 2 - this.scalePointSize.width / 2;
                 this.observer.notify('scaleCreated', this.scalePointSize.height);
             }
         }
@@ -453,7 +451,7 @@ class Model {
 
         return (
             (scalePointPosition - prevScalePointPosition - 2 > this.scalePointSize.width) &&
-            (this.sliderWidth - this.thumbSize.height / 2 - this.scalePointSize.width / 2 - scalePointPosition - 2 > this.scalePointSize.width)
+            (this.sliderSize.width - this.thumbSize.height / 2 - this.scalePointSize.width / 2 - scalePointPosition - 2 > this.scalePointSize.width)
         );
 
     }
