@@ -163,3 +163,15 @@ describe('Get slider tooltips visiblity', () => {
     });
 
 });
+
+describe(`Set slider tooltips visiblity`, () => {
+
+    test('Should be false', () => {
+        _this.setTooltipsVisibility(false);
+        expect(_this.getTooltipsVisiblity()).toBe(false);
+    });test('Should be true', () => {
+        _this.setTooltipsVisibility(true);
+        expect(_this.getTooltipsVisiblity()).toBe(true);
+    });
+
+});
