@@ -49,6 +49,7 @@ describe('Get slider minimum value', () => {
 });
 
 describe(`Set slider minimum value`, () => {
+
     test('Should be 97', () => {
         _this.setMinValue(97);
         expect(_this.getMinValue()).toBe(97);
@@ -93,6 +94,7 @@ describe('Get slider maximum value', () => {
 });
 
 describe(`Set slider maximum value`, () => {
+
     test('Should be 541', () => {
         _this.setMaxValue(541);
         expect(_this.getMaxValue()).toBe(541);
@@ -133,12 +135,14 @@ describe('Get slider scale visiblity', () => {
 
 });
 
-// describe(`Setting the slider's minimum value`, () => {
+describe(`Set slider scale visiblity`, () => {
 
-//     const _this = new Model(observer, settings);
+    test('Should be false', () => {
+        _this.setScaleVisibility(false);
+        expect(_this.getScaleVisiblity()).toBe(false);
+    });test('Should be true', () => {
+        _this.setScaleVisibility(true);
+        expect(_this.getScaleVisiblity()).toBe(true);
+    });
 
-//     test('Should be true', () => {
-//         expect(_this.isScale()).toBe(true);
-//     });
-
-// })
+});
