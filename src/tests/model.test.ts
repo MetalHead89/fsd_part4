@@ -166,12 +166,25 @@ describe(`Set slider step`, () => {
         expect(_this.getStep()).toBe(3);
     });
     test('Should be 1', () => {
-        _this.setMaxValue(500);
+        _this.setStep(500);
         expect(_this.getStep()).toBe(1);
     });
-    test('Should be 100', () => {
-        _this.setMaxValue(100);
-        expect(_this.getMaxValue()).toBe(100);
+    test('Should be 500', () => {
+        _this.setMaxValue(501);
+        _this.setStep(500);
+        expect(_this.getStep()).toBe(500);
+    });
+    test('Should be 1', () => {
+        _this.setStep(100);
+        expect(_this.getStep()).toBe(1);
+    });
+    test('Should be 1', () => {
+        _this.setStep(0);
+        expect(_this.getStep()).toBe(1);
+    });
+    test('Should be 1', () => {
+        _this.setStep(-8);
+        expect(_this.getStep()).toBe(1);
     });
 
 });
