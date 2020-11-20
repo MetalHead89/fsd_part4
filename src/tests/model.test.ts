@@ -118,6 +118,26 @@ describe(`Set slider maximum value`, () => {
 
 });
 
+describe('Get slider step', () => {
+
+    test('Should be 1', () => {
+        expect(_this.getStep()).toBe(1);
+    });
+    test('Should be 50', () => {
+        settings.step = 50;
+        _this = new Model(observer, settings);
+
+        expect(_this.getStep()).toBe(50);
+    });
+    test('Should be 59840', () => {
+        settings.step = 59840;
+        _this = new Model(observer, settings);
+
+        expect(_this.getStep()).toBe(59840);
+    });
+
+});
+
 describe('Get slider scale visiblity', () => {
 
     test('Should be true', () => {

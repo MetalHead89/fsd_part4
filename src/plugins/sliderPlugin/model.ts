@@ -91,6 +91,18 @@ class Model {
 
     }
 
+    getStep(): number {
+
+        /**
+         * Возвращает размер шага бегунка
+         * 
+         * @returns {boolean} - размер шага бегунка
+         */
+
+        return this.step;
+
+    }
+
     setScaleVisibility(flag: boolean): void {
 
         /**
@@ -120,7 +132,7 @@ class Model {
         /**
         * Возвращает флаг скрытия/отображения шкалы
         * 
-        * @return {boolean} Флаг скрытия/отображения шкалы
+        * @returns {boolean} - флаг скрытия/отображения шкалы
         */
 
         return this.scale;
@@ -131,7 +143,7 @@ class Model {
         /**
         * Возвращает флаг скрытия/отображения значений над бегунками
         * 
-        * @return {boolean} Флаг скрытия/отображения значений над бегунками
+        * @return {boolean} - флаг скрытия/отображения значений над бегунками
         */
 
         return this.tooltip;
