@@ -84,7 +84,7 @@ class Model {
          * @param {number} newValue - новое значение размера шага бегунка
          */
 
-        if (newValue < this.maxValue - this.minValue) {
+        if (newValue < this.maxValue - this.minValue && newValue > 0) {
             this.step = newValue;
             this.observer.notify('updatedStep', null);
         }
