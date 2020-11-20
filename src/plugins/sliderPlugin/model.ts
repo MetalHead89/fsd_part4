@@ -126,7 +126,7 @@ class Model {
         return this.scale;
     }
 
-    isTooltips(): boolean {
+    getTooltipsVisiblity(): boolean {
 
         /**
         * Возвращает флаг скрытия/отображения значений над бегунками
@@ -134,7 +134,7 @@ class Model {
         * @return {boolean} Флаг скрытия/отображения значений над бегунками
         */
 
-        return this.getTooltipFlag();
+        return this.tooltip;
     }
 
     setSliderType(type: string): void {
@@ -255,15 +255,6 @@ class Model {
         /** Возвращает позицию второго бегунка */
 
         return this.thumbTwoPosition;
-    }
-
-    getTooltipFlag(): boolean {
-
-        /**
-         * Возвращает флаг скрытия/отображения значений над бегунками
-         */
-
-        return this.tooltip;
     }
 
     getThumbSize(): IThumbSize {

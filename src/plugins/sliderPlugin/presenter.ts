@@ -99,7 +99,7 @@ class Presenter {
 
         this.observer.subscribe('updatedScaleFlag', () => { this.init() });
 
-        this.observer.subscribe('updatedTooltipFlag', () => { this.view.showHideTooltips(this.model.getTooltipFlag()) });
+        this.observer.subscribe('updatedTooltipFlag', () => { this.view.showHideTooltips(this.model.getTooltipsVisiblity()) });
 
         this.observer.subscribe('updatedSliderType', () => { this.init() });
 

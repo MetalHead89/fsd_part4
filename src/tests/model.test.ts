@@ -146,3 +146,20 @@ describe(`Set slider scale visiblity`, () => {
     });
 
 });
+
+describe('Get slider tooltips visiblity', () => {
+
+    test('Should be true', () => {
+        expect(_this.getTooltipsVisiblity()).toBe(true);
+    });
+    test('Should be not false', () => {
+        expect(_this.getTooltipsVisiblity()).not.toBe(false);
+    });
+    test('Should be false', () => {
+        settings.tooltip = false;
+        _this = new Model(observer, settings);
+
+        expect(_this.getTooltipsVisiblity()).toBe(false);
+    });
+
+});
