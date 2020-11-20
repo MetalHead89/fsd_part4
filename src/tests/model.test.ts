@@ -116,6 +116,23 @@ describe(`Set slider maximum value`, () => {
 
 });
 
+describe('Get slider scale visiblity', () => {
+
+    test('Should be true', () => {
+        expect(_this.getScaleVisiblity()).toBe(true);
+    });
+    test('Should be not false', () => {
+        expect(_this.getScaleVisiblity()).not.toBe(false);
+    });
+    test('Should be false', () => {
+        settings.scale = false;
+        _this = new Model(observer, settings);
+
+        expect(_this.getScaleVisiblity()).toBe(false);
+    });
+
+});
+
 // describe(`Setting the slider's minimum value`, () => {
 
 //     const _this = new Model(observer, settings);

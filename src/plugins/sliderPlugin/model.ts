@@ -115,7 +115,7 @@ class Model {
         this.observer.notify('updatedTooltipFlag', null);
     }
 
-    isScale(): boolean {
+    getScaleVisiblity(): boolean {
 
         /**
         * Возвращает флаг скрытия/отображения шкалы
@@ -123,7 +123,7 @@ class Model {
         * @return {boolean} Флаг скрытия/отображения шкалы
         */
 
-        return this.getScaleFlag();
+        return this.scale;
     }
 
     isTooltips(): boolean {
@@ -255,15 +255,6 @@ class Model {
         /** Возвращает позицию второго бегунка */
 
         return this.thumbTwoPosition;
-    }
-
-    getScaleFlag(): boolean {
-
-        /**
-         * Возвращает флаг скрытия/отображения шкалы
-         */
-
-        return this.scale;
     }
 
     getTooltipFlag(): boolean {

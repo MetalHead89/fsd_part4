@@ -57,8 +57,8 @@ import Presenter from './presenter';
         setTooltipsVisibility: function(flag: boolean) {
             $(this).data().model.setTooltipsVisibility(flag);
         },
-        isScale: function(): boolean {
-            return $(this).data().model.isScale();
+        getScaleVisiblity: function(): boolean {
+            return $(this).data().model.getScaleVisiblity();
         },
         isTooltips: function(): boolean {
             return $(this).data().model.isTooltips();

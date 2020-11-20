@@ -75,7 +75,7 @@ export class Panel {
         this.sliderPanel.append(inputTextsGroup);
         this.sliderPanel.append(checkboxesAndRadioWrapper);        
 
-        this.scaleChBox.checked = Boolean(this.sliderElem.incredibleSliderPlugin('isScale'));
+        this.scaleChBox.checked = Boolean(this.sliderElem.incredibleSliderPlugin('getScaleVisiblity'));
         this.tooltipChBox.checked = Boolean(this.sliderElem.incredibleSliderPlugin('isTooltips'));
 
         const sliderType: string = String(this.sliderElem.incredibleSliderPlugin('getSliderType'));

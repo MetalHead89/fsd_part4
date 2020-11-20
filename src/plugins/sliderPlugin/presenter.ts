@@ -32,7 +32,7 @@ class Presenter {
         this.model.setPixelsPerValue();
         this.model.changeThumbTwoDisplay();
         this.view.scaleRemove();
-        this.view.createScale(this.model.getScaleFlag());
+        this.view.createScale(this.model.getScaleVisiblity());
         this.model.setScalePointSize(this.getScalePointMaxSize());
         this.model.generateScale();
 
