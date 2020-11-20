@@ -155,6 +155,27 @@ describe('Get slider scale visiblity', () => {
 
 });
 
+describe(`Set slider step`, () => {
+
+    test('Should be 6', () => {
+        _this.setStep(6);
+        expect(_this.getStep()).toBe(6);
+    });
+    test('Should be 3', () => {
+        _this.setStep(3);
+        expect(_this.getStep()).toBe(3);
+    });
+    test('Should be 1', () => {
+        _this.setMaxValue(500);
+        expect(_this.getStep()).toBe(1);
+    });
+    test('Should be 100', () => {
+        _this.setMaxValue(100);
+        expect(_this.getMaxValue()).toBe(100);
+    });
+
+});
+
 describe(`Set slider scale visiblity`, () => {
 
     test('Should be false', () => {
