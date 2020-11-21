@@ -487,7 +487,7 @@ class Model {
                 } else if (this.orientation === 'vertical') {
                     scalePointPosition = this.sliderSize.height - this.thumbSize.height / 2 - this.scalePointSize.height / 2;
                 }
-                
+
                 this.observer.notify('scaleCreated', {'width': this.sliderSize.width, 'height': this.scalePointSize.height});
             }
         }
@@ -496,9 +496,16 @@ class Model {
 
     private isPointFits(scalePointPosition: number, prevScalePointPosition: number): boolean {
 
+        if (this.orientation === 'vertical') {
+            return (
+                (scalePointPosition - prevScalePointPosition - 2 > this.scalePointSize.height) &&
+                (this.sliderSize.height - this.thumbSize.height / 2 - this.scalePointSize.height / 2 - scalePointPosition - 2 > this.scalePointSize.height)
+            );
+        }
+
         return (
             (scalePointPosition - prevScalePointPosition - 2 > this.scalePointSize.width) &&
-            (this.sliderSize.width - this.thumbSize.height / 2 - this.scalePointSize.width / 2 - scalePointPosition - 2 > this.scalePointSize.width)
+            (this.sliderSize.width - this.thumbSize.width / 2 - this.scalePointSize.width / 2 - scalePointPosition - 2 > this.scalePointSize.width)
         );
 
     }
