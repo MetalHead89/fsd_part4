@@ -7,6 +7,16 @@ class Slider {
         this.element = sliderElem;
     }
 
+    setHorizontalOrientation() {
+        this.element.classList.remove('slider_vertical');
+        this.element.classList.add('slider_horizontal');
+    }
+
+    setVerticalOrientation() {
+        this.element.classList.remove('slider_horizontal');
+        this.element.classList.add('slider_vertical');
+    }
+
     getElement(): HTMLElement {
         return this.element;
     }

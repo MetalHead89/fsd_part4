@@ -14,6 +14,16 @@ class Track {
         });
     }
 
+    setHorizontalOrientation() {
+        this.element.classList.remove('slider__track_vertical')
+        this.element.classList.add('slider__track_horizontal')
+    }
+
+    setVerticalOrientation() {
+        this.element.classList.remove('slider__track_horizontal')
+        this.element.classList.add('slider__track_vertical')
+    }
+
     private getPosition(cursorPosition: ICursorPsition): ICursorPsition {
         
         const parrent: HTMLElement | null = this.element.parentElement;

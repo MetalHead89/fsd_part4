@@ -134,6 +134,19 @@ class View {
 
     //////////////////// Set/Get ////////////////////
 
+    setSliderOrientation(orientation: string) {
+        if (orientation === 'horizontal') {
+            this.slider.setHorizontalOrientation();
+            this.track.setHorizontalOrientation();
+            this.progressBar.setHorizontalOrientation();
+        } else if (orientation === 'vertical') {
+            this.slider.setVerticalOrientation();
+            this.track.setVerticalOrientation();
+            this.progressBar.setVerticalOrientation();
+        }
+        
+    }
+
     getSliderSize(): ISliderSize {
         return this.slider.getSize();
     }

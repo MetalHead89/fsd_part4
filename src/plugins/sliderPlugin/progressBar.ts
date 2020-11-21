@@ -8,9 +8,15 @@ class ProgressBar {
         this.element = element
     }
 
-    // setWidth(value: number) {
-    //     this.element.style.width = value + 'px';
-    // }
+    setHorizontalOrientation() {
+        this.element.classList.remove('slider__progress-bar_vertical')
+        this.element.classList.add('slider__progress-bar_horizontal')
+    }
+
+    setVerticalOrientation() {
+        this.element.classList.remove('slider__progress-bar_horizontal')
+        this.element.classList.add('slider__progress-bar_vertical')
+    }
 
     setPosition(progressPosition: IProgressBarPosition) {
         this.element.style.left = progressPosition.start.x + 'px';
