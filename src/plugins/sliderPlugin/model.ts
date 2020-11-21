@@ -447,17 +447,33 @@ class Model {
     }
 
     generateScale() {
-        let scalePointPosition: number = this.thumbSize.width / 2 - this.scalePointSize.width / 2;
+        let scalePointPosition: number = 0;
+        if (this.orientation === 'horizontal') {
+            scalePointPosition = this.thumbSize.width / 2 - this.scalePointSize.width / 2;
+        } else if (this.orientation === 'vertical') {
+            scalePointPosition = this.thumbSize.height / 2 - this.scalePointSize.height / 2;
+        }
+
         let prevScalePointPosition: number = 0;
         const scalePointsCount = this.stepsCount + 1;
 
         for (let i = 0; i <= Math.round(scalePointsCount - 1); i++) {
-            let pointValue: number = this.positionToValue(scalePointPosition - this.thumbSize.width / 2 + this.scalePointSize.width / 2);
+            let pointValue: number = 0;
+            if (this.orientation === 'horizontal') {
+                pointValue = this.positionToValue(scalePointPosition - this.thumbSize.width / 2 + this.scalePointSize.width / 2);
+            } else if (this.orientation === 'vertical') {
+                pointValue = this.positionToValue(scalePointPosition - this.thumbSize.height / 2 + this.scalePointSize.height / 2);
+            }
 
             if (i === 0 || this.isPointFits(scalePointPosition, prevScalePointPosition) || i === Math.round(scalePointsCount - 1)) {
 
-                this.observer.notify('addScalePoint',
-                    { 'position': scalePointPosition, 'scalePointWidth': this.scalePointSize.width, 'scalePointValue': pointValue });
+                if (this.orientation === 'horizontal') {
+                    this.observer.notify('addScalePoint',
+                        { 'position': scalePointPosition, 'scalePointSize': this.scalePointSize.width, 'scalePointValue': pointValue });
+                } else if (this.orientation === 'vertical') {
+                    this.observer.notify('addScalePoint',
+                        { 'position': scalePointPosition, 'scalePointSize': this.scalePointSize.height, 'scalePointValue': pointValue });
+                }
 
                 prevScalePointPosition = scalePointPosition;
 
@@ -466,7 +482,12 @@ class Model {
             scalePointPosition += this.stepSize;
 
             if (i === Math.round(scalePointsCount - 2)) {
-                scalePointPosition = this.sliderSize.width - this.thumbSize.width / 2 - this.scalePointSize.width / 2;
+                if (this.orientation === 'horizontal') {
+                    scalePointPosition = this.sliderSize.width - this.thumbSize.width / 2 - this.scalePointSize.width / 2;
+                } else if (this.orientation === 'vertical') {
+                    scalePointPosition = this.sliderSize.height - this.thumbSize.height / 2 - this.scalePointSize.height / 2;
+                }
+                
                 this.observer.notify('scaleCreated', {'width': this.sliderSize.width, 'height': this.scalePointSize.height});
             }
         }

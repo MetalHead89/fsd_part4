@@ -50,7 +50,7 @@ export interface IScalePointSize {
 
 export interface IScalePointSettings {
     'position': number,
-    'scalePointWidth': number,
+    'scalePointSize': number,
     'scalePointValue': number
 }
 

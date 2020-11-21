@@ -168,7 +168,7 @@ class View {
     }
 
     addScalePoint(pointSettings: IScalePointSettings) {
-        this.scale.addScalePoint(pointSettings.position, pointSettings.scalePointWidth, pointSettings.scalePointValue);
+        this.scale.addScalePoint(pointSettings.position, pointSettings.scalePointSize, pointSettings.scalePointValue);
     }
 
     moveThumbOne(value: number): void {
