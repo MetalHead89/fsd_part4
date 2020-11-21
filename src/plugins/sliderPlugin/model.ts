@@ -195,6 +195,18 @@ class Model {
                     'top': 0
                 });
             }
+        } else if (this.orientation === 'vertical') {
+            if (this.type === 'single') {
+                this.thumbOneDrag({
+                    'left': 0,
+                    'top': this.sliderSize.height / 2
+                });
+            } else if (this.type === 'range') {
+                this.thumbOneDrag({
+                    'left': 0,
+                    'top': this.sliderSize.height * 0.3
+                });
+            }
         }
     }
 
@@ -206,6 +218,11 @@ class Model {
             this.thumbTwoDrag({
                 'left': this.sliderSize.width * 0.7,
                 'top': 0
+            });
+        } else if (this.orientation === 'vertical') {
+            this.thumbTwoDrag({
+                'left': 0,
+                'top': this.sliderSize.height * 0.7
             });
         }
     }
@@ -299,7 +316,11 @@ class Model {
          * Считает размер одного шага бегунка в пикселях
          */
 
-        this.stepSize = (this.sliderSize.width - this.thumbSize.width) / this.stepsCount;
+        if (this.orientation === 'horizontal') {
+            this.stepSize = (this.sliderSize.width - this.thumbSize.width) / this.stepsCount;
+        } else if (this.orientation === 'vertical') {
+            this.stepSize = (this.sliderSize.height - this.thumbSize.height) / this.stepsCount;
+        }
     }
 
     private calculateNewThumbPosition(value: number) {
