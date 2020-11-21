@@ -25,6 +25,7 @@ class Presenter {
     }
 
     private init() {
+        this.view.setSliderOrientation('horizontal')
         this.model.setSliderSize(this.view.getSliderSize());
         this.model.setThumbSize(this.view.getThumbSize());
         this.model.calculateStepsCount();
