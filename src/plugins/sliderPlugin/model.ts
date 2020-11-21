@@ -1,4 +1,4 @@
-import { ISliderSettings } from './interfaces';
+import { IScaleSize, ISliderSettings } from './interfaces';
 import { ISliderSize } from './interfaces';
 import { IThumbSize } from './interfaces';
 import { IThumbPosition } from './interfaces'
@@ -297,6 +297,14 @@ class Model {
          */
 
          return this.thumbSize;
+    }
+
+    private getElementSize(element: ISliderSize | IThumbSize | IScalePointSize): number {
+        if (this.orientation === 'vertical') {
+            return element.width;
+        }
+
+        return element.width
     }
 
 
