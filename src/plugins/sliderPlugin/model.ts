@@ -17,8 +17,8 @@ class Model {
     private minValue: number;
     private maxValue: number;
     private step: number
-    private sliderSize: ISliderSize = {'width': 340, 'height': 20}
-    private thumbSize: IThumbSize = {'width': 20, 'height': 20};
+    private sliderSize: ISliderSize = { 'width': 340, 'height': 20 }
+    private thumbSize: IThumbSize = { 'width': 20, 'height': 20 };
     private stepsCount: number = 0;
     private stepSize: number = 0;
     private pixelsPerValue: number = 0;
@@ -255,11 +255,7 @@ class Model {
          * (тупиковых) зон
          */
 
-        if (this.orientation === 'horizontal') {
-            this.pixelsPerValue = (this.sliderSize.width - this.thumbSize.width) / 100;
-        } else if (this.orientation === 'vertical') {
-            this.pixelsPerValue = (this.sliderSize.height - this.thumbSize.height) / 100;
-        }
+        this.pixelsPerValue = (this.getElementSizeByOrientation(this.sliderSize) - this.getElementSizeByOrientation(this.thumbSize)) / 100;
     }
 
     getMaxValue(): number {
@@ -296,15 +292,18 @@ class Model {
          * Возвращает размер бегунка
          */
 
-         return this.thumbSize;
+        return this.thumbSize;
+
     }
 
-    private getElementSize(element: ISliderSize | IThumbSize | IScalePointSize): number {
+    private getElementSizeByOrientation(element: ISliderSize | IThumbSize | IScalePointSize): number {
+
         if (this.orientation === 'vertical') {
             return element.width;
         }
 
         return element.width
+
     }
 
 
@@ -328,11 +327,7 @@ class Model {
          * Считает размер одного шага бегунка в пикселях
          */
 
-        if (this.orientation === 'horizontal') {
-            this.stepSize = (this.sliderSize.width - this.thumbSize.width) / this.stepsCount;
-        } else if (this.orientation === 'vertical') {
-            this.stepSize = (this.sliderSize.height - this.thumbSize.height) / this.stepsCount;
-        }
+        this.stepSize = (this.getElementSizeByOrientation(this.sliderSize) - this.getElementSizeByOrientation(this.thumbSize)) / this.stepsCount;
     }
 
     private calculateNewThumbPosition(value: number) {
@@ -455,33 +450,20 @@ class Model {
     }
 
     generateScale() {
-        let scalePointPosition: number = 0;
-        if (this.orientation === 'horizontal') {
-            scalePointPosition = this.thumbSize.width / 2 - this.scalePointSize.width / 2;
-        } else if (this.orientation === 'vertical') {
-            scalePointPosition = this.thumbSize.height / 2 - this.scalePointSize.height / 2;
-        }
+        let scalePointPosition = this.getElementSizeByOrientation(this.thumbSize) / 2 - this.getElementSizeByOrientation(this.scalePointSize) / 2;
 
         let prevScalePointPosition: number = 0;
         const scalePointsCount = this.stepsCount + 1;
 
         for (let i = 0; i <= Math.round(scalePointsCount - 1); i++) {
-            let pointValue: number = 0;
-            if (this.orientation === 'horizontal') {
-                pointValue = this.positionToValue(scalePointPosition - this.thumbSize.width / 2 + this.scalePointSize.width / 2);
-            } else if (this.orientation === 'vertical') {
-                pointValue = this.positionToValue(scalePointPosition - this.thumbSize.height / 2 + this.scalePointSize.height / 2);
-            }
+            const pointValue = this.positionToValue(scalePointPosition - this.getElementSizeByOrientation(this.thumbSize) / 2
+                + this.getElementSizeByOrientation(this.scalePointSize) / 2);
 
             if (i === 0 || this.isPointFits(scalePointPosition, prevScalePointPosition) || i === Math.round(scalePointsCount - 1)) {
 
-                if (this.orientation === 'horizontal') {
-                    this.observer.notify('addScalePoint',
-                        { 'position': scalePointPosition, 'scalePointSize': this.scalePointSize.width, 'scalePointValue': pointValue });
-                } else if (this.orientation === 'vertical') {
-                    this.observer.notify('addScalePoint',
-                        { 'position': scalePointPosition, 'scalePointSize': this.scalePointSize.height, 'scalePointValue': pointValue });
-                }
+                this.observer.notify('addScalePoint',
+                    { 'position': scalePointPosition, 'scalePointSize': this.getElementSizeByOrientation(this.scalePointSize),
+                        'scalePointValue': pointValue });
 
                 prevScalePointPosition = scalePointPosition;
 
@@ -490,30 +472,21 @@ class Model {
             scalePointPosition += this.stepSize;
 
             if (i === Math.round(scalePointsCount - 2)) {
-                if (this.orientation === 'horizontal') {
-                    scalePointPosition = this.sliderSize.width - this.thumbSize.width / 2 - this.scalePointSize.width / 2;
-                } else if (this.orientation === 'vertical') {
-                    scalePointPosition = this.sliderSize.height - this.thumbSize.height / 2 - this.scalePointSize.height / 2;
-                }
+                scalePointPosition = this.getElementSizeByOrientation(this.sliderSize)
+                    - this.getElementSizeByOrientation(this.thumbSize) / 2 - this.getElementSizeByOrientation(this.scalePointSize) / 2;
 
-                this.observer.notify('scaleCreated', {'width': this.sliderSize.width, 'height': this.scalePointSize.height});
+                this.observer.notify('scaleCreated', { 'width': this.sliderSize.width, 'height': this.scalePointSize.height });
             }
         }
 
     }
 
     private isPointFits(scalePointPosition: number, prevScalePointPosition: number): boolean {
-
-        if (this.orientation === 'vertical') {
-            return (
-                (scalePointPosition - prevScalePointPosition - 2 > this.scalePointSize.height) &&
-                (this.sliderSize.height - this.thumbSize.height / 2 - this.scalePointSize.height / 2 - scalePointPosition - 2 > this.scalePointSize.height)
-            );
-        }
-
+        
         return (
-            (scalePointPosition - prevScalePointPosition - 2 > this.scalePointSize.width) &&
-            (this.sliderSize.width - this.thumbSize.width / 2 - this.scalePointSize.width / 2 - scalePointPosition - 2 > this.scalePointSize.width)
+            (scalePointPosition - prevScalePointPosition - 2 > this.getElementSizeByOrientation(this.scalePointSize)) &&
+            (this.getElementSizeByOrientation(this.sliderSize) - this.getElementSizeByOrientation(this.thumbSize) / 2
+            - this.getElementSizeByOrientation(this.scalePointSize) / 2 - scalePointPosition - 2 > this.getElementSizeByOrientation(this.scalePointSize))
         );
 
     }
