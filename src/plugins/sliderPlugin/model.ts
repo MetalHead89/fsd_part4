@@ -255,7 +255,11 @@ class Model {
          * (тупиковых) зон
          */
 
-        this.pixelsPerValue = (this.sliderSize.width - this.thumbSize.width) / 100;
+        if (this.orientation === 'horizontal') {
+            this.pixelsPerValue = (this.sliderSize.width - this.thumbSize.width) / 100;
+        } else if (this.orientation === 'vertical') {
+            this.pixelsPerValue = (this.sliderSize.height - this.thumbSize.height) / 100;
+        }
     }
 
     getMaxValue(): number {
