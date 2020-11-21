@@ -225,6 +225,7 @@ class Model {
                 'top': this.sliderSize.height * 0.7
             });
         }
+
     }
 
     setSliderSize(size: ISliderSize): void {
@@ -299,10 +300,20 @@ class Model {
     private getElementSizeByOrientation(element: ISliderSize | IThumbSize | IScalePointSize): number {
 
         if (this.orientation === 'vertical') {
-            return element.width;
+            return element.height;
         }
 
         return element.width
+
+    }
+
+    private getElementPosByOrientation(element: IThumbPosition): number {
+
+        if (this.orientation === 'vertical') {
+            return element.top;
+        }
+
+        return element.left
 
     }
 
@@ -327,7 +338,8 @@ class Model {
          * Считает размер одного шага бегунка в пикселях
          */
 
-        this.stepSize = (this.getElementSizeByOrientation(this.sliderSize) - this.getElementSizeByOrientation(this.thumbSize)) / this.stepsCount;
+        this.stepSize = (this.getElementSizeByOrientation(this.sliderSize) -
+            this.getElementSizeByOrientation(this.thumbSize)) / this.stepsCount;
     }
 
     private calculateNewThumbPosition(value: number) {
@@ -387,8 +399,8 @@ class Model {
         }
 
         if (this.type === 'range' &&
-            Math.abs(position.left - this.thumbOnePosition.left) >
-            Math.abs(position.left - this.thumbTwoPosition.left)) {
+            Math.abs(this.getElementPosByOrientation(position) - this.getElementPosByOrientation(this.thumbOnePosition)) >
+            Math.abs(this.getElementPosByOrientation(position) - this.getElementPosByOrientation(this.thumbTwoPosition))) {
             this.thumbTwoDrag(position)
         } else (
             this.thumbOneDrag(position)
@@ -396,48 +408,62 @@ class Model {
     }
 
     thumbOneDrag(thumbPosition: IThumbPosition) {
-        if (this.type == 'range' && thumbPosition.left >= this.thumbTwoPosition.left) {
+        if (this.type == 'range' &&
+            this.getElementPosByOrientation(thumbPosition) >= this.getElementPosByOrientation(this.thumbTwoPosition)) {
             thumbPosition = this.thumbOnePosition;
         }
 
-        this.thumbOnePosition.left = this.thumbDrag(thumbPosition, 'thumbOneDraged');
+        this.thumbOnePosition = this.thumbDrag(thumbPosition, 'thumbOneDraged');
         this.observer.notify('progressBarDraged', this.calcProgressBarPosition());
-        this.observer.notify('tooltipOneDraged', this.positionToValue(this.thumbOnePosition.left));
+        this.observer.notify('tooltipOneDraged', this.positionToValue(this.getElementPosByOrientation(this.thumbOnePosition)));
     }
 
     thumbTwoDrag(thumbPosition: IThumbPosition) {
         if (this.type == 'range' && thumbPosition.left <= this.thumbOnePosition.left) {
             thumbPosition = this.thumbTwoPosition;
 
-            if (this.orientation == 'horizontal' && thumbPosition.left < this.thumbOnePosition.left) {
-                thumbPosition.left = this.sliderSize.width;
+            if (this.getElementPosByOrientation(thumbPosition) < this.getElementPosByOrientation(this.thumbOnePosition)) {
+                if (this.orientation === 'horizontal') {
+                    thumbPosition.left = this.sliderSize.width;
+                } else if (this.orientation === 'vertical') {
+                    thumbPosition.top = this.sliderSize.height;
+                }
             }
         }
-        this.thumbTwoPosition.left = this.thumbDrag(thumbPosition, 'thumbTwoDraged');
+        this.thumbTwoPosition = this.thumbDrag(thumbPosition, 'thumbTwoDraged');
         this.observer.notify('progressBarDraged', this.calcProgressBarPosition());
-        this.observer.notify('tooltipTwoDraged', this.positionToValue(this.thumbTwoPosition.left));
+        this.observer.notify('tooltipTwoDraged', this.positionToValue(this.getElementPosByOrientation(this.thumbTwoPosition)));
     }
 
-    private thumbDrag(thumbPosition: IThumbPosition, notyfyMessage: string): number {
+    private thumbDrag(thumbPosition: IThumbPosition, notyfyMessage: string): IThumbPosition {
 
-        let left: number = thumbPosition.left;
+        const newThumbPosition = Object.assign({}, thumbPosition);
+        let newPos: number = this.getElementPosByOrientation(newThumbPosition);
 
         // курсор ушёл вне слайдера
-        if (left < 0) {
-            left = 0;
+        if (newPos < 0) {
+            newPos = 0;
         }
 
-        let rightEdge: number = this.sliderSize.width - this.thumbSize.width;
+        let endEdge: number = this.getElementSizeByOrientation(this.sliderSize) - this.getElementSizeByOrientation(this.thumbSize);
 
-        left = this.calculateNewThumbPosition(left);
+        newPos = this.calculateNewThumbPosition(newPos);
 
-        if (left >= rightEdge) {
-            left = rightEdge;
+        if (newPos >= endEdge) {
+            newPos = endEdge;
         }
 
-        this.observer.notify(notyfyMessage, left);
+        if (this.orientation === 'horizontal') {
+            newThumbPosition.left = newPos;
+            newThumbPosition.top = 0;
+        } else if (this.orientation === 'vertical') {
+            newThumbPosition.top = newPos;
+            newThumbPosition.left = 0;
+        }
 
-        return left;
+        this.observer.notify(notyfyMessage, newThumbPosition);
+
+        return newThumbPosition;
 
     }
 
@@ -462,8 +488,10 @@ class Model {
             if (i === 0 || this.isPointFits(scalePointPosition, prevScalePointPosition) || i === Math.round(scalePointsCount - 1)) {
 
                 this.observer.notify('addScalePoint',
-                    { 'position': scalePointPosition, 'scalePointSize': this.getElementSizeByOrientation(this.scalePointSize),
-                        'scalePointValue': pointValue });
+                    {
+                        'position': scalePointPosition, 'scalePointSize': this.getElementSizeByOrientation(this.scalePointSize),
+                        'scalePointValue': pointValue
+                    });
 
                 prevScalePointPosition = scalePointPosition;
 
@@ -482,11 +510,11 @@ class Model {
     }
 
     private isPointFits(scalePointPosition: number, prevScalePointPosition: number): boolean {
-        
+
         return (
             (scalePointPosition - prevScalePointPosition - 2 > this.getElementSizeByOrientation(this.scalePointSize)) &&
             (this.getElementSizeByOrientation(this.sliderSize) - this.getElementSizeByOrientation(this.thumbSize) / 2
-            - this.getElementSizeByOrientation(this.scalePointSize) / 2 - scalePointPosition - 2 > this.getElementSizeByOrientation(this.scalePointSize))
+                - this.getElementSizeByOrientation(this.scalePointSize) / 2 - scalePointPosition - 2 > this.getElementSizeByOrientation(this.scalePointSize))
         );
 
     }

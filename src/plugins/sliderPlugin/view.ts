@@ -1,4 +1,4 @@
-import { IViewSliderOptions } from './interfaces';
+import { IThumbPosition, IViewSliderOptions } from './interfaces';
 import { ISliderSize } from './interfaces';
 import { IScaleSize } from './interfaces';
 import { IScalePointSettings } from './interfaces';
@@ -171,12 +171,12 @@ class View {
         this.scale.addScalePoint(pointSettings.position, pointSettings.scalePointSize, pointSettings.scalePointValue);
     }
 
-    moveThumbOne(value: number): void {
-        this.thumbOne.moveTo(value);
+    moveThumbOne(position: IThumbPosition): void {
+        this.thumbOne.moveTo(position);
     }
 
-    moveThumbTwo(value: number): void {
-        this.thumbTwo.moveTo(value);
+    moveThumbTwo(position: IThumbPosition): void {
+        this.thumbTwo.moveTo(position);
     }
 
     showThumb() {

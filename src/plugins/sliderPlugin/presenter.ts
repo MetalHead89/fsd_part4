@@ -64,10 +64,10 @@ class Presenter {
             (thumbPosition: IThumbPosition) => { this.model.thumbTwoDrag(thumbPosition) });
 
         this.observer.subscribe('thumbOneDraged',
-            (value: number) => { this.view.moveThumbOne(value) });
+            (position: IThumbPosition) => { this.view.moveThumbOne(position) });
 
         this.observer.subscribe('thumbTwoDraged',
-            (value: number) => { this.view.moveThumbTwo(value) });
+            (position: IThumbPosition) => { this.view.moveThumbTwo(position) });
 
         this.observer.subscribe('progressBarDraged',
             (progressBarPosition: IProgressBarPosition) => { this.view.setProgressBarPosition(progressBarPosition) });
