@@ -25,7 +25,6 @@ class Presenter {
     }
 
     private init() {
-        this.view.setSliderOrientation(this.model.getSliderOrientation());
         this.model.setSliderSize(this.view.getSliderSize());
         this.model.setThumbSize(this.view.getThumbSize());
         this.model.calculateStepsCount();
@@ -33,7 +32,7 @@ class Presenter {
         this.model.setPixelsPerValue();
         this.model.changeThumbTwoDisplay();
         this.view.scaleRemove();
-        this.view.createScale(this.model.getScaleVisiblity());
+        this.view.createScale(this.model.getScaleVisiblity(), this.model.getSliderOrientation());
         this.model.setScalePointSize(this.getScalePointMaxSize());
         this.model.generateScale();
 
@@ -52,6 +51,8 @@ class Presenter {
         } else {
             this.model.thumbTwoDrag(this.model.getThumbTwoPosition())
         }
+
+        this.view.setSliderOrientation(this.model.getSliderOrientation());
     }
 
 

@@ -40,7 +40,7 @@ class View {
         this.tooltipTwo = this.tooltipInit(this.thumbTwo.getElement(), 
             'slider__tooltip slider__tooltip-two', 2);
         this.progressBar = this.progressBarInit(this.slider.getElement(), 'slider__progress-bar');
-        this.scale = this.scaleInit(this.slider.getElement(), 'slider__scale');
+        this.scale = this.scaleInit(this.slider.getElement(), 'slider__scale', 'horizontal');
 
         this.observer.subscribe('changeZIndexToAnotherThumb', (thumbElem: HTMLElement) => { 
 
@@ -53,13 +53,13 @@ class View {
          });
     }
 
-    createScale(scaleVisible: boolean) {
+    createScale(scaleVisible: boolean, orientation: string) {
         let scaleStyle = 'slider__scale';
         if (!scaleVisible) {
             scaleStyle += ' slider__scale_hide';
         }
 
-        this.scale = this.scaleInit(this.slider.getElement(), scaleStyle);
+        this.scale = this.scaleInit(this.slider.getElement(), scaleStyle, orientation);
     }
 
     //////////////////// Инициализация элементов ////////////////////
@@ -123,9 +123,9 @@ class View {
 
     }
 
-    private scaleInit(parrent: HTMLElement, styles: string): Scale {
+    private scaleInit(parrent: HTMLElement, styles: string, orientation: string): Scale {
 
-        const createObj = (obj: HTMLElement) => { return new Scale(obj, this.observer) }
+        const createObj = (obj: HTMLElement) => { return new Scale(obj, this.observer, orientation) }
         const scale: Scale = this.init(parrent, styles, createObj);
 
         return scale;
@@ -141,12 +141,14 @@ class View {
             this.progressBar.setHorizontalOrientation();
             this.thumbOne.setHorizontalOrientation();
             this.thumbTwo.setHorizontalOrientation();
+            this.scale.setHorizontalOrientation();
         } else if (orientation === 'vertical') {
             this.slider.setVerticalOrientation();
             this.track.setVerticalOrientation();
             this.progressBar.setVerticalOrientation();
             this.thumbOne.setVerticalOrientation();
             this.thumbTwo.setVerticalOrientation();
+            this.scale.setVerticalOrientation();
         }
         
     }

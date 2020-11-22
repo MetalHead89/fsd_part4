@@ -1,13 +1,16 @@
 .slider {
     position: relative;
+    display: flex;
 }
 
 .slider_horizontal {
     width: 100%;
+    flex-direction: column;
 }
 
 .slider_vertical {
     height: 320px;
+    flex-direction: row;
 }
 
 .slider__track {
@@ -72,8 +75,15 @@
 .slider__scale {
     user-select: none;
     position: absolute;
-    padding-top: 10px;
     box-sizing: content-box;
+}
+
+.slider__scale_horizontal {
+    padding-top: 20px;
+}
+
+.slider__scale_vertical {
+    padding-left: 20px;
 }
 
 .slider__scale_hide {
@@ -83,7 +93,15 @@
 .slider__scale-point {
     position: absolute;
     display: flex;
+}
+
+.slider__scale-point_horizontal {
     flex-direction: column;
+    align-items: center;
+}
+
+.slider__scale-point_vertical {
+    flex-direction: row;
     align-items: center;
 }
 

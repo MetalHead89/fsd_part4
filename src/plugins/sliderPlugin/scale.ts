@@ -6,10 +6,13 @@ class Scale {
 
     private element: HTMLElement;
     private observer: Observable;
+    private orientation: string;
 
-    constructor(element: HTMLElement, observer: Observable) {
+    constructor(element: HTMLElement, observer: Observable, orientation: string) {
         this.element = element;
         this.observer = observer;
+        this.orientation = orientation;
+
 
         this.element.addEventListener('click', (event) => {
             this.observer.notify('clickOnTheScale', this.getPosition({ 'x': event.clientX, 'y': event.clientY }));
@@ -19,7 +22,12 @@ class Scale {
     addScalePoint(position: number, scalePointWidth: number, pointValue: number): HTMLElement {
 
         const scalePoint: HTMLElement = document.createElement('div');
-        scalePoint.className = 'slider__scale-point';
+        if (this.orientation === 'horizontal') {
+            scalePoint.className = 'slider__scale-point slider__scale-point_horizontal';
+        } else if (this.orientation === 'vertical') {
+            scalePoint.className = 'slider__scale-point slider__scale-point_vertical';
+        }
+        
         if (scalePointWidth > 0) {
             scalePoint.style.width = scalePointWidth + 'px';
         }
@@ -31,7 +39,11 @@ class Scale {
         divisionLabel.className = ('slider__scale-point-label')
         divisionLabel.innerText = pointValue.toString();
 
-        scalePoint.style.left = position + 'px';
+        if (this.orientation === 'horizontal') {
+            scalePoint.style.left = position + 'px';
+        } else if (this.orientation === 'vertical') {
+            scalePoint.style.top = position + 'px';
+        }
 
         scalePoint.append(divisionMarker);
         scalePoint.append(divisionLabel);
@@ -80,6 +92,16 @@ class Scale {
 
     show() {
         this.element.classList.remove('slider__scale_hide');
+    }
+
+    setHorizontalOrientation() {
+        this.element.classList.remove('slider__scale_vertical')
+        this.element.classList.add('slider__scale_horizontal')
+    }
+
+    setVerticalOrientation() {
+        this.element.classList.remove('slider__scale_horizontal')
+        this.element.classList.add('slider__scale_vertical')
     }
 
 }

@@ -505,7 +505,11 @@ class Model {
                 scalePointPosition = this.getElementSizeByOrientation(this.sliderSize)
                     - this.getElementSizeByOrientation(this.thumbSize) / 2 - this.getElementSizeByOrientation(this.scalePointSize) / 2;
 
-                this.observer.notify('scaleCreated', { 'width': this.sliderSize.width, 'height': this.scalePointSize.height });
+                if (this.orientation === 'horizontal') {
+                    this.observer.notify('scaleCreated', { 'width': this.sliderSize.width, 'height': this.scalePointSize.height });
+                } else if (this.orientation === 'vertical') {
+                    this.observer.notify('scaleCreated', { 'width': this.scalePointSize.width, 'height': this.sliderSize.height });
+                }
             }
         }
 
