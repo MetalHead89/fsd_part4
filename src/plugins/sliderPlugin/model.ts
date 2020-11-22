@@ -173,6 +173,10 @@ class Model {
         return this.type;
     }
 
+    getSliderOrientation(): string {
+        return this.orientation;
+    }
+
 
 
 
