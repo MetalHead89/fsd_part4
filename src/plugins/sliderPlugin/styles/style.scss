@@ -47,14 +47,22 @@
 
 .slider__thumb {
     position: absolute;
-    top: 0;
-    transform: translate(0, -25%);
     width: 20px;
     height: 20px;
     border-radius: 50%;
     background: rgb(85, 196, 153);
     display: flex;
     justify-content: center;
+}
+
+.slider__thumb_horizontal {
+    top: 0;
+    transform: translate(0, -25%);
+}
+
+.slider__thumb_vertical {
+    left: 0;
+    transform: translate(-25%, 0);
 }
 
 .slider__thumb_hide {

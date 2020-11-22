@@ -139,10 +139,14 @@ class View {
             this.slider.setHorizontalOrientation();
             this.track.setHorizontalOrientation();
             this.progressBar.setHorizontalOrientation();
+            this.thumbOne.setHorizontalOrientation();
+            this.thumbTwo.setHorizontalOrientation();
         } else if (orientation === 'vertical') {
             this.slider.setVerticalOrientation();
             this.track.setVerticalOrientation();
             this.progressBar.setVerticalOrientation();
+            this.thumbOne.setVerticalOrientation();
+            this.thumbTwo.setVerticalOrientation();
         }
         
     }

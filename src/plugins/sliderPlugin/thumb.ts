@@ -107,6 +107,16 @@ class Thumb {
     hide() {
         this.element.classList.add('slider__thumb_hide');
     }
+
+    setHorizontalOrientation() {
+        this.element.classList.remove('slider__thumb_vertical')
+        this.element.classList.add('slider__thumb_horizontal')
+    }
+
+    setVerticalOrientation() {
+        this.element.classList.remove('slider__thumb_horizontal')
+        this.element.classList.add('slider__thumb_vertical')
+    }
 }
 
 export default Thumb;
