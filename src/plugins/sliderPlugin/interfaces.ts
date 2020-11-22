@@ -55,8 +55,9 @@ export interface IScalePointSettings {
 }
 
 export interface IProgressBarPosition {
-    'start': {'x': number, 'y':number},
-    'size': {'width': number, 'height':number}
+    'orientation': string,
+    'start': number,
+    'end': number
 }
 
 // export interface IGroupedSettings {

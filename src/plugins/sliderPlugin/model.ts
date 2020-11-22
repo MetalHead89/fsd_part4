@@ -372,20 +372,18 @@ class Model {
          */
 
         const progress: IProgressBarPosition = {
-            'start': { 'x': 0, 'y': 0 },
-            'size': { 'width': 0, 'height': 0 }
+            'orientation': this.orientation,
+            'start': 0,
+            'end': 0
         };
 
         if (this.type === 'single') {
-            progress.start.x = 0;
-            progress.start.y = 0;
-            progress.size.width = this.thumbOnePosition.left + this.thumbSize.width;
-            progress.size.height = this.thumbOnePosition.top + this.thumbSize.height;
+            progress.start = 0;
+            progress.end = this.getElementPosByOrientation(this.thumbOnePosition) + this.getElementSizeByOrientation(this.thumbSize);
         } else if (this.type === 'range') {
-            progress.start.x = this.thumbOnePosition.left;
-            progress.start.y = this.thumbOnePosition.top;
-            progress.size.width = this.thumbTwoPosition.left - this.thumbOnePosition.left + this.thumbSize.width;
-            progress.size.height = this.thumbTwoPosition.top - this.thumbOnePosition.top + this.thumbSize.height;
+            progress.start = this.getElementPosByOrientation(this.thumbOnePosition);
+            progress.end = this.getElementPosByOrientation(this.thumbTwoPosition) -
+                this.getElementPosByOrientation(this.thumbOnePosition) + this.getElementSizeByOrientation(this.thumbSize);
         }
 
         return progress;

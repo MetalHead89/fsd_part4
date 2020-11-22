@@ -19,8 +19,14 @@ class ProgressBar {
     }
 
     setPosition(progressPosition: IProgressBarPosition) {
-        this.element.style.left = progressPosition.start.x + 'px';
-        this.element.style.width = progressPosition.size.width + 'px';
+        if (progressPosition.orientation === 'horizontal') {
+            this.element.style.left = progressPosition.start + 'px';
+            this.element.style.width = progressPosition.end + 'px';
+        } else if (progressPosition.orientation === 'vertical') {
+            this.element.style.top = progressPosition.start + 'px';
+            this.element.style.height = progressPosition.end + 'px';
+        }
+        
     }
 
 }
