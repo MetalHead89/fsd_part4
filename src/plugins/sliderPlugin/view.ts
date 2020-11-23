@@ -141,6 +141,8 @@ class View {
             this.progressBar.setHorizontalOrientation();
             this.thumbOne.setHorizontalOrientation();
             this.thumbTwo.setHorizontalOrientation();
+            this.tooltipOne.setHorizontalOrientation();
+            this.tooltipTwo.setHorizontalOrientation();
             this.scale.setHorizontalOrientation();
         } else if (orientation === 'vertical') {
             this.slider.setVerticalOrientation();
@@ -148,6 +150,8 @@ class View {
             this.progressBar.setVerticalOrientation();
             this.thumbOne.setVerticalOrientation();
             this.thumbTwo.setVerticalOrientation();
+            this.tooltipOne.setVerticalOrientation();
+            this.tooltipTwo.setVerticalOrientation();
             this.scale.setVerticalOrientation();
         }
         

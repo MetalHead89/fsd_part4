@@ -14,16 +14,22 @@ class Tooltip {
         this.element.innerText = text;
     }
 
-    moveTo(value: number) {
-        this.element.style.left = value + 'px';
-    }
-
     hide() {
         this.element.classList.add('slider__tooltip_hide');
     }
 
     show() {
         this.element.classList.remove('slider__tooltip_hide');
+    }
+
+    setHorizontalOrientation() {
+        this.element.classList.remove('slider__tooltip_vertical')
+        this.element.classList.add('slider__tooltip_horizontal')
+    }
+
+    setVerticalOrientation() {
+        this.element.classList.remove('slider__tooltip_horizontal')
+        this.element.classList.add('slider__tooltip_vertical')
     }
 
 }
