@@ -9,11 +9,11 @@
 }
 
 .slider-panel_horizontal {
-    margin-top: 30px;
+    margin-top: 60px;
 }
 
 .slider-panel_vertical {
-    margin-left: 30px;
+    margin-left: 60px;
 }
 
 .slider-panel__input {
@@ -54,10 +54,24 @@
     padding: 3px 0;
 }
 
+.slider-panel__input-checkboxes-group {
+    padding: 5px 0;
+}
+
+.slider-panel__input-radio-buttons-group {
+    padding: 5px 0;
+}
+
 .slider-panel__radio-group {
     display: flex;
     flex-direction: row;
-    padding: 3px 0;
+    padding: 4px 0;
+    & .slider-panel__input-radio-wrapper {
+        margin-right: 10px;
+    }
+    & .slider-panel__input-radio-wrapper:last-child {
+        margin-left: 0px;
+    }
 }
 
 .slider-panel__input-radio-wrapper {
@@ -70,6 +84,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    padding: 5px 0;
 }
 
 .slider-panel__checkboxes-and-radio-wrapper {
@@ -77,6 +92,150 @@
     flex-direction: row;
     justify-content: space-evenly;
     flex-wrap: wrap;
+}
+
+
+
+
+
+// Checkbox
+
+.slider-panel__checkbox {
+    display: none;
+    &:checked + .slider-panel__input-checkbox-label {
+        color: rgb(87, 87, 87);
+    }
+    &:checked + .slider-panel__input-checkbox-label:before {
+        border-color: rgb(87, 87, 87);
+    }
+    &:checked + .slider-panel__input-checkbox-label:after {
+        transform: rotate(45deg) scale(1);
+        animation: jumpUp 0.2s ease;
+    }
+}
+
+.slider-panel__input-checkbox-label {
+    font-family: 'Roboto';
+    position: relative;
+    font-size: 1.2rem;
+    display: block;
+    color: rgb(155, 155, 155);
+    transition: color 0.5s ease;
+    margin-left: 20px;
+    &:hover {
+        color: rgb(87, 87, 87);
+    }
+    &:before {
+        content: "";
+        width: 13px;
+        height: 13px;
+        border: 1px solid rgb(155, 155, 155);
+        position: absolute;
+        left: -20px;
+        top: 2px;
+        border-radius: 2px;
+        transition: border-color 0.5s ease;
+    }
+    &:hover::before {
+        border-color: rgb(87, 87, 87);
+    }
+    &:after {
+        content: "";
+        position: absolute;
+        left: -15px;
+        top: 4px;
+        width: 3px;
+        height: 7px;
+        border-right: 2px solid;
+        border-bottom: 2px solid;
+        transition: 0.2s ease;
+        transform: rotate(45deg) scale(0);
+        border-image-source: rgb(87, 87, 87);
+        border-image-slice: 1;
+    }
+}
+
+
+
+
+// Radio
+
+.slider-panel__radio-button {
+    display: none;
+    &:checked + .slider-panel__input-radio-label {
+        color: rgb(87, 87, 87);
+    }
+    &:checked + .slider-panel__input-radio-label:before {
+        border-color: rgb(87, 87, 87);
+    }
+    &:checked + .slider-panel__input-radio-label:after {
+        transform: translate(0, -50%) scale(1);
+        animation: radioJump 0.2s ease;
+        visibility: visible;
+    }
+}
+
+.slider-panel__input-radio-label {
+    font-family: 'Roboto';
+    font-size: 1.2rem;
+    color: rgb(155, 155, 155);
+    position: relative;
+    margin-left: 20px;
+    transition: 0.5s ease;
+    &:hover {
+        color: rgb(87, 87, 87);
+    }
+    &:hover::before {
+        border-color: rgb(87, 87, 87);
+    }
+    &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: -20px;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        transform: translate(0, -50%);
+        background-color: white;
+        border: 1px solid rgb(87, 87, 87);
+        transition: border-color 0.5s ease;
+    }
+    &:after {
+        transition: 0.2s ease;
+        content: "";
+        transform: translate(0, -50%) scale(0);
+        visibility: hidden;
+        position: absolute;
+        top: 50%;
+        left: -16px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgb(87, 87, 87);
+    }
+}
+
+
+
+
+
+@keyframes radioJump {
+    50% {
+        -webkit-transform: translate(0, -50%) scale(1.2);
+    }
+    100% {
+        -webkit-transform: translate(0, -50%) scale(1);
+    }
+}
+
+@keyframes jumpUp {
+    50% {
+        -webkit-transform: scale(1.2) rotate(45deg);
+    }
+    100% {
+        -webkit-transform: scale(1) rotate(45deg);
+    }
 }
 
 @media screen and (max-width: 250px) {
