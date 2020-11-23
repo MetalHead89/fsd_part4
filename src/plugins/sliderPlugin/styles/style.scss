@@ -106,6 +106,7 @@
 }
 
 .slider__scale-point-marker {
+    flex: none;
     border-radius: 50%;
     width: 10px;
     height: 10px;
@@ -113,12 +114,19 @@
 }
 
 .slider__scale-point-label {
-    margin-top: 3px;
     display: block;
     font-family: 'Roboto';
     font-weight: 400;
     font-size: 1.3rem;
     color: rgb(211, 211, 211);
+}
+
+.slider__scale-point-label_horizontal {
+    margin-top: 3px;
+}
+
+.slider__scale-point-label_vertical {
+    margin-left: 3px;
 }
 
 .slider__tooltip {

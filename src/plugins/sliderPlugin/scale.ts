@@ -36,7 +36,13 @@ class Scale {
         divisionMarker.className = ('slider__scale-point-marker')
 
         const divisionLabel: HTMLElement = document.createElement('div')
-        divisionLabel.className = ('slider__scale-point-label')
+        if (this.orientation === 'horizontal') {
+            divisionLabel.className = 
+                ('slider__scale-point-label slider__scale-point-label_horizontal')
+        } else if (this.orientation === 'vertical') {
+            divisionLabel.className = 
+                ('slider__scale-point-label slider__scale-point-label_vertical')
+        }
         divisionLabel.innerText = pointValue.toString();
 
         if (this.orientation === 'horizontal') {
