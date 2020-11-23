@@ -77,8 +77,13 @@ export class Panel {
             this.createRadioGroup(sliderOrientationRadioParams, 'sliderType')
         );
 
+        const checkboxesGroupLabel = document.createElement('label');
+        checkboxesGroupLabel.innerText = 'on/off elements';
+        checkboxesGroupLabel.classList.add('slider-panel__checkboxes-group-label');
+
         const inputCheckboxesGroup: HTMLDivElement = this.wrapElements(
             'slider-panel__input-checkboxes-group',
+            checkboxesGroupLabel,
             this.createInputCheckbox(this.scaleChBox, 'scale', 'scale'),
             this.createInputCheckbox(this.tooltipChBox, 'tooltips', 'tooltips')
         );
