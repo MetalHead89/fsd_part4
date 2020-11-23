@@ -1,5 +1,5 @@
 .slider-panel {
-    width: 100%;
+    box-sizing: border-box;
     border: 1px solid rgb(199, 199, 199);
     border-radius: 5px;
     padding: 20px;
@@ -25,6 +25,7 @@
     border: 1px solid rgb(199, 199, 199);
     border-radius: 2px;
     order: 1;
+    transition: border-color 0.5s ease;
     outline: none;
     &:hover {
         border-color: rgb(155, 155, 155);
@@ -65,7 +66,7 @@
 .slider-panel__radio-group {
     display: flex;
     flex-direction: row;
-    padding: 4px 0;
+    padding: 0 0 5px;
     & .slider-panel__input-radio-wrapper {
         margin-right: 10px;
     }
@@ -91,6 +92,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    align-items: center;
     flex-wrap: wrap;
 }
 
@@ -122,6 +124,7 @@
     color: rgb(155, 155, 155);
     transition: color 0.5s ease;
     margin-left: 20px;
+    cursor: pointer;
     &:hover {
         color: rgb(87, 87, 87);
     }
@@ -160,6 +163,15 @@
 
 // Radio
 
+.slider-panel__radio-group-label {
+    display: block;
+    font-family: 'Roboto';
+    color: rgb(87, 87, 87);
+    font-size: 1rem;
+    text-transform: uppercase;
+    margin: 5px 0 2px;
+}
+
 .slider-panel__radio-button {
     display: none;
     &:checked + .slider-panel__input-radio-label {
@@ -182,6 +194,7 @@
     position: relative;
     margin-left: 20px;
     transition: 0.5s ease;
+    cursor: pointer;
     &:hover {
         color: rgb(87, 87, 87);
     }

@@ -61,22 +61,32 @@ export class Panel {
             this.createInputText(this.step, 'step', 'step')
         );
 
+        const typeRadioGroupLabel = document.createElement('label');
+        typeRadioGroupLabel.innerText = 'type';
+        typeRadioGroupLabel.classList.add('slider-panel__radio-group-label');
+
+        const orientationRadioGroupLabel = document.createElement('label');
+        orientationRadioGroupLabel.innerText = 'orientation';
+        orientationRadioGroupLabel.classList.add('slider-panel__radio-group-label');
+
+        const inputRadioButtonsGroup: HTMLDivElement = this.wrapElements(
+            'slider-panel__input-radio-buttons-group',
+            typeRadioGroupLabel,
+            this.createRadioGroup(sliderTypeRadioParams, 'sliderType'),
+            orientationRadioGroupLabel,
+            this.createRadioGroup(sliderOrientationRadioParams, 'sliderType')
+        );
+
         const inputCheckboxesGroup: HTMLDivElement = this.wrapElements(
             'slider-panel__input-checkboxes-group',
             this.createInputCheckbox(this.scaleChBox, 'scale', 'scale'),
             this.createInputCheckbox(this.tooltipChBox, 'tooltips', 'tooltips')
         );
 
-        const inputRadioButtonsGroup: HTMLDivElement = this.wrapElements(
-            'slider-panel__input-radio-buttons-group',
-            this.createRadioGroup(sliderTypeRadioParams, 'sliderType'),
-            this.createRadioGroup(sliderOrientationRadioParams, 'sliderType')
-        );
-
         const checkboxesAndRadioWrapper: HTMLDivElement = this.wrapElements(
             'slider-panel__checkboxes-and-radio-wrapper',
-            inputCheckboxesGroup,
-            inputRadioButtonsGroup
+            inputRadioButtonsGroup,
+            inputCheckboxesGroup
         );
 
         this.sliderPanel.className = 'slider-panel';

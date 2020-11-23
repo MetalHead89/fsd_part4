@@ -20,6 +20,10 @@ html {
 
 .slider-wrapper_vertical {
     flex-direction: row;
+    align-items: center;
+    & .slider-panel__checkboxes-and-radio-wrapper {
+        justify-content: start;
+    }
 }
 
 .panel-wrapper {
