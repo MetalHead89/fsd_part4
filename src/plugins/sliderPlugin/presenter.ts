@@ -4,7 +4,6 @@ import { ICursorPsition } from './interfaces';
 import { IScalePointSize } from './interfaces';
 import { IProgressBarPosition } from './interfaces';
 import { IScaleSize } from './interfaces';
-import { ISliderSize } from './interfaces';
 
 import Observable from './observable';
 import Model from './model';
@@ -25,6 +24,7 @@ class Presenter {
     }
 
     private init() {
+        this.view.setSliderOrientation(this.model.getSliderOrientation());
         this.model.setSliderSize(this.view.getSliderSize());
         this.model.setThumbSize(this.view.getThumbSize());
         this.model.calculateStepsCount();
@@ -43,16 +43,14 @@ class Presenter {
         if (thumbTwoPos.left === -1 && thumbTwoPos.top === -1) {
             this.model.setThumbTwoToStartingPosition();
         } else {
-            this.model.thumbOneDrag(this.model.getThumbOnePosition())
+            this.model.thumbTwoDrag(this.model.getThumbTwoPosition())
         }
 
         if (thumbOnePos.left === -1 && thumbOnePos.top === -1) {
             this.model.setThumbOneToStartingPosition();
         } else {
-            this.model.thumbTwoDrag(this.model.getThumbTwoPosition())
+            this.model.thumbOneDrag(this.model.getThumbOnePosition())
         }
-
-        this.view.setSliderOrientation(this.model.getSliderOrientation());
     }
 
 
@@ -104,6 +102,11 @@ class Presenter {
         this.observer.subscribe('updatedTooltipFlag', () => { this.view.showHideTooltips(this.model.getTooltipsVisiblity()) });
 
         this.observer.subscribe('updatedSliderType', () => { this.init() });
+
+        this.observer.subscribe('updatedSliderOrientation', (orientation: string) => { 
+            this.view.setProgressBarOrientation(orientation);
+            this.init(); 
+        });
 
     }
 

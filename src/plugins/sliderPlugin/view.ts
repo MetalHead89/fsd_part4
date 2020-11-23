@@ -54,7 +54,7 @@ class View {
     }
 
     createScale(scaleVisible: boolean, orientation: string) {
-        let scaleStyle = 'slider__scale';
+        let scaleStyle = `slider__scale slider__scale_${orientation}`;
         if (!scaleVisible) {
             scaleStyle += ' slider__scale_hide';
         }
@@ -138,23 +138,29 @@ class View {
         if (orientation === 'horizontal') {
             this.slider.setHorizontalOrientation();
             this.track.setHorizontalOrientation();
-            this.progressBar.setHorizontalOrientation();
+            // this.progressBar.setHorizontalOrientation();
             this.thumbOne.setHorizontalOrientation();
             this.thumbTwo.setHorizontalOrientation();
             this.tooltipOne.setHorizontalOrientation();
             this.tooltipTwo.setHorizontalOrientation();
-            this.scale.setHorizontalOrientation();
         } else if (orientation === 'vertical') {
             this.slider.setVerticalOrientation();
             this.track.setVerticalOrientation();
-            this.progressBar.setVerticalOrientation();
+            // this.progressBar.setVerticalOrientation();
             this.thumbOne.setVerticalOrientation();
             this.thumbTwo.setVerticalOrientation();
             this.tooltipOne.setVerticalOrientation();
             this.tooltipTwo.setVerticalOrientation();
-            this.scale.setVerticalOrientation();
         }
         
+    }
+
+    setProgressBarOrientation(orientation: string) {
+        if (orientation === 'horizontal') {
+            this.progressBar.setHorizontalOrientation();
+        } else if (orientation === 'vertical') {
+            this.progressBar.setVerticalOrientation();
+        }
     }
 
     getSliderSize(): ISliderSize {

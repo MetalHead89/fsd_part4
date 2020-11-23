@@ -177,6 +177,13 @@ class Model {
         return this.orientation;
     }
 
+    setSliderOrientation(orienation: string): void {
+        this.orientation = orienation;
+        this.thumbOnePosition = {'left': this.thumbOnePosition.top, 'top': this.thumbOnePosition.left};
+        this.thumbTwoPosition = {'left': this.thumbTwoPosition.top, 'top': this.thumbTwoPosition.left};
+        this.observer.notify('updatedSliderOrientation', this.orientation);
+    }
+
 
 
 

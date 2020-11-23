@@ -68,6 +68,12 @@ import Presenter from './presenter';
         },
         getSliderType: function(): string {
             return $(this).data().model.getSliderType();
+        },
+        getSliderOrientation: function(): string {
+            return $(this).data().model.getSliderOrientation();
+        },
+        setSliderOrientation: function(orientation: string): void {
+            return $(this).data().model.setSliderOrientation(orientation);
         }
         
     };
