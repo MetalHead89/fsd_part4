@@ -11,6 +11,15 @@ html {
     width: 100%;
     max-width:  400px;
     margin: 0 auto;
+    display: flex;
+}
+
+.slider-wrapper_horizontal {
+    flex-direction: column;
+}
+
+.slider-wrapper_vertical {
+    flex-direction: row;
 }
 
 .panel-wrapper {

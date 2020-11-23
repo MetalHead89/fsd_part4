@@ -34,8 +34,14 @@ export class Panel {
         this.scaleChBox.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setScaleVisibility', this.scaleChBox.checked) });
         this.tooltipChBox.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setTooltipsVisibility', this.tooltipChBox.checked) });
         this.singleRadioBtn.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setSliderType', this.singleRadioBtn.value) });
-        this.horizontalRadioButton.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setSliderOrientation', this.horizontalRadioButton.value) });
-        this.verticalRadioButton.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setSliderOrientation', this.verticalRadioButton.value) });
+        this.horizontalRadioButton.addEventListener('click', () => {
+            this.setSliderWrapperHorizontalOrientation();
+            this.sliderElem.incredibleSliderPlugin('setSliderOrientation', this.horizontalRadioButton.value)
+        });
+        this.verticalRadioButton.addEventListener('click', () => {
+            this.setSliderWrapperVerticalOrientation();
+            this.sliderElem.incredibleSliderPlugin('setSliderOrientation', this.verticalRadioButton.value)
+        });
 
         const sliderTypeRadioParams = [
             { 'control': this.singleRadioBtn, 'id': 'single', 'label': 'single', 'value': 'single' },
@@ -46,7 +52,7 @@ export class Panel {
             { 'control': this.horizontalRadioButton, 'id': 'horizontal', 'label': 'horizontal', 'value': 'horizontal' },
             { 'control': this.verticalRadioButton, 'id': 'vertical', 'label': 'vertical', 'value': 'vertical' }
         ];
-        
+
         const inputTextsGroup: HTMLDivElement = this.wrapElements(
             'slider-panel__input-text-group',
             this.createInputText(this.minValue, 'min', 'min'),
@@ -74,7 +80,7 @@ export class Panel {
 
         this.sliderPanel.className = 'slider-panel';
         this.sliderPanel.append(inputTextsGroup);
-        this.sliderPanel.append(checkboxesAndRadioWrapper);        
+        this.sliderPanel.append(checkboxesAndRadioWrapper);
 
         this.scaleChBox.checked = Boolean(this.sliderElem.incredibleSliderPlugin('getScaleVisiblity'));
         this.tooltipChBox.checked = Boolean(this.sliderElem.incredibleSliderPlugin('getTooltipsVisiblity'));
@@ -88,8 +94,10 @@ export class Panel {
 
         const sliderOrientation: string = String(this.sliderElem.incredibleSliderPlugin('getSliderOrientation'));
         if (sliderOrientation == 'horizontal') {
+            this.setSliderWrapperHorizontalOrientation();
             this.horizontalRadioButton.checked = true;
         } else if (sliderOrientation == 'vertical') {
+            this.setSliderWrapperVerticalOrientation();
             this.verticalRadioButton.checked = true;
         }
 
@@ -97,8 +105,30 @@ export class Panel {
         panelWrapper.className = 'panel-wrapper';
         panelWrapper.append(this.sliderPanel);
 
-        this.sliderElem.after(panelWrapper);
+        this.sliderElem.append(panelWrapper);
 
+    }
+
+    private setSliderWrapperHorizontalOrientation() {
+        this.sliderElem.removeClass('slider-wrapper_vertical');
+        this.sliderElem.addClass('slider-wrapper_horizontal');
+        this.setPanelHorizontalOrientation();
+    }
+
+    private setSliderWrapperVerticalOrientation() {
+        this.sliderElem.removeClass('slider-wrapper_horizontal');
+        this.sliderElem.addClass('slider-wrapper_vertical');
+        this.setPanelVerticalOrientation();
+    }
+
+    private setPanelHorizontalOrientation() {
+        this.sliderPanel.classList.remove('slider-panel_vertical');
+        this.sliderPanel.classList.add('slider-panel_horizontal');
+    }
+
+    private setPanelVerticalOrientation() {
+        this.sliderPanel.classList.remove('slider-panel_horizontal');
+        this.sliderPanel.classList.add('slider-panel_vertical');
     }
 
     private createInputText(control: HTMLInputElement, labelText: string, prefix: string): HTMLElement {
