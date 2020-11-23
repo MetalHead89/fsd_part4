@@ -421,7 +421,8 @@ class Model {
     }
 
     thumbTwoDrag(thumbPosition: IThumbPosition) {
-        if (this.type == 'range' && thumbPosition.left <= this.thumbOnePosition.left) {
+        if (this.type == 'range' &&
+            this.getElementPosByOrientation(thumbPosition) <= this.getElementPosByOrientation(this.thumbOnePosition)) {
             thumbPosition = this.thumbTwoPosition;
 
             if (this.getElementPosByOrientation(thumbPosition) < this.getElementPosByOrientation(this.thumbOnePosition)) {
