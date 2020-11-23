@@ -9,7 +9,7 @@ export class Panel {
     step: HTMLInputElement = document.createElement('input');
     scaleChBox: HTMLInputElement = document.createElement('input');
     tooltipChBox: HTMLInputElement = document.createElement('input');
-    singleRadioBtn: HTMLInputElement = document.createElement('input');
+    singleRadioButton: HTMLInputElement = document.createElement('input');
     rangeRadioButton: HTMLInputElement = document.createElement('input');
     horizontalRadioButton: HTMLInputElement = document.createElement('input');
     verticalRadioButton: HTMLInputElement = document.createElement('input');
@@ -33,7 +33,8 @@ export class Panel {
         this.tooltipChBox.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setTooltipsVisibility', this.tooltipChBox.checked) });
         this.scaleChBox.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setScaleVisibility', this.scaleChBox.checked) });
         this.tooltipChBox.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setTooltipsVisibility', this.tooltipChBox.checked) });
-        this.singleRadioBtn.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setSliderType', this.singleRadioBtn.value) });
+        this.singleRadioButton.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setSliderType', this.singleRadioButton.value) });
+        this.rangeRadioButton.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setSliderType', this.rangeRadioButton.value) });
         this.horizontalRadioButton.addEventListener('click', () => {
             this.setSliderWrapperHorizontalOrientation();
             this.sliderElem.incredibleSliderPlugin('setSliderOrientation', this.horizontalRadioButton.value)
@@ -44,7 +45,7 @@ export class Panel {
         });
 
         const sliderTypeRadioParams = [
-            { 'control': this.singleRadioBtn, 'id': 'single', 'label': 'single', 'value': 'single' },
+            { 'control': this.singleRadioButton, 'id': 'single', 'label': 'single', 'value': 'single' },
             { 'control': this.rangeRadioButton, 'id': 'range', 'label': 'range', 'value': 'range' }
         ];
 
@@ -87,7 +88,7 @@ export class Panel {
 
         const sliderType: string = String(this.sliderElem.incredibleSliderPlugin('getSliderType'));
         if (sliderType == 'single') {
-            this.singleRadioBtn.checked = true;
+            this.singleRadioButton.checked = true;
         } else if (sliderType == 'range') {
             this.rangeRadioButton.checked = true;
         }
