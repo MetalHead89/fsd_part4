@@ -1,4 +1,4 @@
-import { IScaleSize, ISliderSettings } from './interfaces';
+import { ISliderSettings } from './interfaces';
 import { ISliderSize } from './interfaces';
 import { IThumbSize } from './interfaces';
 import { IThumbPosition } from './interfaces'

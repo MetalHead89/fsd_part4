@@ -150,6 +150,7 @@ export class Panel {
             'controlType': 'text',
             'controlClass': 'slider-panel__input',
             'labelText': labelText,
+            'labelClass': 'slider-panel__input-text-label',
             'wrapperClass': 'slider-panel__input-text-wrapper'
         }
 
@@ -175,6 +176,7 @@ export class Panel {
             'controlType': 'checkbox',
             'controlClass': 'slider-panel__checkbox',
             'labelText': labelText,
+            'labelClass': 'slider-panel__input-checkbox-label',
             'wrapperClass': 'slider-panel__input-checkbox-wrapper'
         }
 
@@ -220,6 +222,7 @@ export class Panel {
                 'controlType': 'radio',
                 'controlClass': 'slider-panel__radio-button',
                 'labelText': params.label,
+                'labelClass': 'slider-panel__input-radio-label',
                 'wrapperClass': 'slider-panel__input-radio-wrapper'
             }
 
@@ -264,6 +267,7 @@ export class Panel {
         params.control.className = params.controlClass;
 
         const controlLabel: HTMLLabelElement = document.createElement('label');
+        controlLabel.classList.add(params.labelClass);
         controlLabel.textContent = params.labelText;
 
         if (params.id) {

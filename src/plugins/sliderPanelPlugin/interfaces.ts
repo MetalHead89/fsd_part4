@@ -6,6 +6,7 @@ export interface IInputControl {
     'controlType': string,
     'controlClass': string,
     'labelText': string,
+    'labelClass': string,
     'wrapperClass': string
 }
 
