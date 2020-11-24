@@ -1,13 +1,15 @@
+import { IObservable } from '../interfaces';
+
 class Observable {
-    observers: { [index: string]: Function[] };
+    observables: IObservable;
 
     constructor() {
-        this.observers = {};
+        this.observables = {};
     }
 
     subscribe(type: string, func: Function) {
-        this.observers[type] = this.observers[type] || [];
-        this.observers[type].push(func);
+        this.observables[type] = this.observables[type] || [];
+        this.observables[type].push(func);
     }
 
     // unsubscribe(func: Function) {
@@ -15,8 +17,8 @@ class Observable {
     // }
 
     notify(type: string, data: any) {
-        if (this.observers[type]) {
-            this.observers[type].forEach(function (listener: Function) {
+        if (this.observables[type]) {
+            this.observables[type].forEach(function (listener: Function) {
                 listener(data);
             });
         }

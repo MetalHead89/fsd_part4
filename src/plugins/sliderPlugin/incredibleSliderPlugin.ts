@@ -1,9 +1,9 @@
 import { ISliderSettings } from './interfaces';
 
-import Observable from './observable';
-import Model from './model';
-import View from './view';
-import Presenter from './presenter';
+// import Observable from './observable';
+// import Model from './model';
+// import View from './view';
+import Presenter from './presenter/presenter';
 
 (function ($) {
 
@@ -13,8 +13,8 @@ import Presenter from './presenter';
         'type': 'single',
         'scale': true,
         'tooltip': true,       
-        'minValue': 0,
-        'maxValue': 10,
+        'min': 0,
+        'max': 10,
         'step': 1
     };
 
@@ -28,53 +28,53 @@ import Presenter from './presenter';
 
             // Создание слайдеров
             return this.each(function (this: any) { ///////////////////////////////////////////// ТИП ANY /////////////////////////////////////////////
-                const observer = new Observable();
-                const model: Model = new Model(observer, settings);
-                const view: View = new View(observer, this,
-                    {'type': settings.type, 'orientation': settings.orienation});
-                const presenter: Presenter = new Presenter(view, model, observer);
+                // const observer = new Observable();
+                // const model: Model = new Model(observer, settings);
+                // const view: View = new View(observer, this,
+                //     {'type': settings.type, 'orientation': settings.orienation});
+                const sliderPresenter: Presenter = new Presenter(settings, this);
 
                 $(this).data('settings', settings); ///////////////////////// добавить проверку на существование объекта
-                $(this).data('model', model);
+                $(this).data('sliderPresenter', sliderPresenter);
                 // $(this).data('slider', {
                 //     target: $(this),
                 //     m: model
                 // });
             });
         },
-        setMinValue: function(value: number) {
-            $(this).data().model.setMinValue(value);
-        },
-        setMaxValue: function(value: number) {
-            $(this).data().model.setMaxValue(value);
-        },
-        setStepValue: function(value: number) {
-            $(this).data().model.setStep(value);
-        },
-        setScaleVisibility: function(flag: boolean) {
-            $(this).data().model.setScaleVisibility(flag);
-        },
-        setTooltipsVisibility: function(flag: boolean) {
-            $(this).data().model.setTooltipsVisibility(flag);
-        },
-        getScaleVisiblity: function(): boolean {
-            return $(this).data().model.getScaleVisiblity();
-        },
-        getTooltipsVisiblity: function(): boolean {
-            return $(this).data().model.getTooltipsVisiblity();
-        },
-        setSliderType: function(type: string) {
-            return $(this).data().model.setSliderType(type);
-        },
-        getSliderType: function(): string {
-            return $(this).data().model.getSliderType();
-        },
-        getSliderOrientation: function(): string {
-            return $(this).data().model.getSliderOrientation();
-        },
-        setSliderOrientation: function(orientation: string): void {
-            return $(this).data().model.setSliderOrientation(orientation);
-        }
+        // setMinValue: function(value: number) {
+        //     $(this).data().sliderPresenter.setMinValue(value);
+        // },
+        // setMaxValue: function(value: number) {
+        //     $(this).data().sliderPresenter.setMaxValue(value);
+        // },
+        // setStepValue: function(value: number) {
+        //     $(this).data().sliderPresenter.setStep(value);
+        // },
+        // setScaleVisibility: function(flag: boolean) {
+        //     $(this).data().sliderPresenter.setScaleVisibility(flag);
+        // },
+        // setTooltipsVisibility: function(flag: boolean) {
+        //     $(this).data().sliderPresenter.setTooltipsVisibility(flag);
+        // },
+        // getScaleVisiblity: function(): boolean {
+        //     return $(this).data().sliderPresenter.getScaleVisiblity();
+        // },
+        // getTooltipsVisiblity: function(): boolean {
+        //     return $(this).data().sliderPresenter.getTooltipsVisiblity();
+        // },
+        // setSliderType: function(type: string) {
+        //     return $(this).data().sliderPresenter.setSliderType(type);
+        // },
+        // getSliderType: function(): string {
+        //     return $(this).data().sliderPresenter.getSliderType();
+        // },
+        // getSliderOrientation: function(): string {
+        //     return $(this).data().sliderPresenter.getSliderOrientation();
+        // },
+        // setSliderOrientation: function(orientation: string): void {
+        //     return $(this).data().sliderPresenter.setSliderOrientation(orientation);
+        // }
         
     };
 
@@ -92,92 +92,3 @@ import Presenter from './presenter';
     };
 
 })(jQuery);
-
-
-
-
-
-
-
-
-
-// // Поиск блоков с классом incredibleSliderPlugin и передача их плагину для добавления в них слайдеров
-// $('.incredibleSliderPlugin').incredibleSliderPlugin();
-// console.log($('.incredibleSliderPlugin').eq(0).incredibleSliderPlugin('show'))
-
-
-// import { Observable } from './observable';
-// import { Model } from './model';
-// import { View } from './view';
-// import { Presenter } from './presenter';
-// import { IPluginSettings } from './interfaces';
-// import { IgnorePlugin } from 'webpack';
-
-// (function ($) {
-
-//     // Настройки плагина
-//     const defaultSettings: any = {
-//         'orienation': 'horizontal',
-//         'type': 'single',
-//         'scale': true,
-//         'minValue': 1,
-//         'maxValue': 100,
-//         'step': 1
-//     };
-
-//     const methods: any = {
-//         init: function (options: IPluginSettings) {
-//             // Обновление настроек плагина в соответсвии с полученными параметрами
-//             const settings: any = $.extend(defaultSettings, options);/////////////////////////////////////////////////////////////////
-
-//             // Добавление конфигурации новых слайдеров в модель
-//             return this.each(function (this: any) { //////////////////////////////////////////////////////////////////////////////////
-//                 const observer = new Observable();
-//                 const model: Model = new Model(observer);
-//                 const view: View = new View(observer);
-//                 const presenter: Presenter = new Presenter(view, model, observer);
-
-//                 model.createNewSlider(this, settings);
-
-//                 $(this).data('settings', settings); ///////////////////////// добавить проверку на существование объекта
-//                 $(this).data('model', model);
-//                 // $(this).data('slider', {
-//                 //     target: $(this),
-//                 //     m: model
-//                 // });
-//             });
-//         },
-//         setMinValue: function(value: number) {
-//             $(this).data().model.setMinValue(value);
-//         },
-//         setMaxValue: function(value: number) {
-//             $(this).data().model.setMaxValue(value);
-//         },
-//         setStepValue: function(value: number) {
-//             $(this).data().model.setStepValue(value);
-//         }
-//     };
-
-//     $.fn.incredibleSliderPlugin = function (action?: string | IPluginSettings, args?): JQuery<HTMLElement> {
-//         if (typeof action === 'string' && methods[action]) {
-//             return methods[action].call(this, args);
-//         } else if (typeof action === 'object' || !action) {
-//             return methods.init.call(this, args);
-//         } else {
-//             $.error('Метод с именем ' + action + ' не существует для jQuery.incredibleSliderPlugin');
-//             return this;
-//         }
-//         // if (typeof action === 'object' || !action) {
-//         //     return methods.init.apply(this, arguments);
-//         // } else if (methods[action]) {
-//         //     return methods[action].apply(this, Array.prototype.slice.call(arguments, 1));
-//         // } else {
-//         //     $.error('Метод с именем ' + action + ' не существует для jQuery.incredibleSliderPlugin');
-//         //     return this;
-//         // }
-//     };
-// })(jQuery);
-
-// // // Поиск блоков с классом incredibleSliderPlugin и передача их плагину для добавления в них слайдеров
-// // $('.incredibleSliderPlugin').incredibleSliderPlugin();
-// // console.log($('.incredibleSliderPlugin').eq(0).incredibleSliderPlugin('show'))
