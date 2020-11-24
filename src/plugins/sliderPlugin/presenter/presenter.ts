@@ -2,18 +2,22 @@ import { ISliderSettings } from '../interfaces';
 
 import Observer from '../observer/observer';
 import Model from '../model/model';
-// import View from './view';
+import View from '../view/view';
 
 class Presenter {
-    observer: Observer;
-    model: Model;
-    // view: View;
+    private observer: Observer;
+    private model: Model;
+    private view: View;
     
 
     constructor(settings: ISliderSettings, sliderWrapper: HTMLElement) {
         this.observer = new Observer();
-        this.model = new Model(this.observer, settings)
-        // this.view = view;
+        this.model = new Model(this.observer, settings);
+        this.view = new View(this.observer, sliderWrapper);
+    }
+
+    sliderInit(): void {
+        this.view.createSlider();
     }
 }
 

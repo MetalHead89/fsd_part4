@@ -1,3 +1,15 @@
+// export default Scale;
+
+
+
+
+
+
+
+
+
+
+
 // import Observable from "./observable";
 // import { ICursorPsition } from './interfaces';
 // import { IScalePointSize } from './interfaces';

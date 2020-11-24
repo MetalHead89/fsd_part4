@@ -1,3 +1,57 @@
+import Observer from '../observer/observer';
+import Slider from './slider';
+import ElementFactory from './elementFactory';
+// import Track from './track';
+// import Thumb from './thumb';
+// import ProgressBar from './progressBar'
+// import Scale from './scale';
+// import Tooltip from './tooltip';
+
+class View {
+
+    private observer: Observer;
+    private slider: Slider | null = null;
+    private elementFacory: ElementFactory;
+    // private track: Track;
+    // private tooltipOne: Tooltip;
+    // private tooltipTwo: Tooltip;
+    // private thumbOne: Thumb;
+    // private thumbTwo: Thumb;
+    // private progressBar: ProgressBar;
+    // private scale: Scale;
+    private sliderWrapper: HTMLElement;
+
+    constructor(observer: Observer, sliderWrapper: HTMLElement) {
+        this.observer = observer;
+        this.sliderWrapper = sliderWrapper;
+        this.elementFacory = new ElementFactory();
+    }
+
+    createSlider() {
+        this.slider = this.elementFacory.createSlider(this.sliderWrapper, 'slider')
+    }
+
+    
+
+}
+
+export default View;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // import { IThumbPosition, IViewSliderOptions } from './interfaces';
 // import { ISliderSize } from './interfaces';
 // import { IScaleSize } from './interfaces';
@@ -152,7 +206,7 @@
 //             this.tooltipOne.setVerticalOrientation();
 //             this.tooltipTwo.setVerticalOrientation();
 //         }
-        
+
 //     }
 
 //     setProgressBarOrientation(orientation: string) {

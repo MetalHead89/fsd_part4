@@ -1,3 +1,12 @@
+// export default Tooltip;
+
+
+
+
+
+
+
+
 // class Tooltip {
 
 //     private element: HTMLElement;

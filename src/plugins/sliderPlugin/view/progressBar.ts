@@ -1,3 +1,10 @@
+// export default ProgressBar
+
+
+
+
+
+
 // import { IProgressBarPosition } from './interfaces';
 
 // class ProgressBar {

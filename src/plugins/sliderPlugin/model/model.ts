@@ -2,15 +2,18 @@ import { ISliderSettings } from '../interfaces';
 
 import Observer from '../observer/observer';
 import ModelData from './modelData';
+import ModelCalculator from './modelCalculator';
 
 class Model {
 
     private observer: Observer;
     private data: ModelData;
+    private calculator: ModelCalculator
     
     constructor(observer: Observer, settings: ISliderSettings) {
         this.observer = observer;
         this.data = new ModelData(settings);
+        this.calculator = new ModelCalculator();
     }
 
 }

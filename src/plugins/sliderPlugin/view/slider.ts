@@ -1,3 +1,19 @@
+class Slider {
+
+    private element: HTMLElement;
+
+    constructor(sliderElement: HTMLElement) {
+        this.element = sliderElement;
+    }
+
+}
+
+export default Slider;
+
+
+
+
+
 // import {ISliderSize} from './interfaces'
 
 // class Slider {

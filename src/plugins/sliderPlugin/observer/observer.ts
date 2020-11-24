@@ -1,7 +1,8 @@
 import { IObservable } from '../interfaces';
 
 class Observable {
-    observables: IObservable;
+
+    private observables: IObservable;
 
     constructor() {
         this.observables = {};
@@ -23,6 +24,7 @@ class Observable {
             });
         }
     }
+    
 }
 
 export default Observable;

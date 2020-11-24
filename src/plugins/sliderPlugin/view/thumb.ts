@@ -1,3 +1,12 @@
+// export default Thumb;
+
+
+
+
+
+
+
+
 // import { IThumbShift } from './interfaces'
 // import { IThumbPosition } from './interfaces'
 // import { ICursorPsition } from './interfaces'
