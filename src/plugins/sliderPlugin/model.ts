@@ -180,8 +180,8 @@ class Model {
     setSliderOrientation(orienation: string): void {
         if (orienation !== this.orientation) {
             this.orientation = orienation;
-            this.thumbOnePosition = {'left': this.thumbOnePosition.top, 'top': this.thumbOnePosition.left};
-            this.thumbTwoPosition = {'left': this.thumbTwoPosition.top, 'top': this.thumbTwoPosition.left};
+            this.thumbOnePosition = { 'left': this.thumbOnePosition.top, 'top': this.thumbOnePosition.left };
+            this.thumbTwoPosition = { 'left': this.thumbTwoPosition.top, 'top': this.thumbTwoPosition.left };
             this.observer.notify('updatedSliderOrientation', this.orientation);
         }
     }
@@ -497,7 +497,8 @@ class Model {
             const pointValue = this.positionToValue(scalePointPosition - this.getElementSizeByOrientation(this.thumbSize) / 2
                 + this.getElementSizeByOrientation(this.scalePointSize) / 2);
 
-            if (i === 0 || this.isPointFits(scalePointPosition, prevScalePointPosition) || i === Math.round(scalePointsCount - 1)) {
+            // if (i === 0 || this.isPointFits(scalePointPosition, prevScalePointPosition) || i === Math.round(scalePointsCount - 1)) {
+            if (i === 0 || this.isPointFits(scalePointPosition, prevScalePointPosition)) {
 
                 this.observer.notify('addScalePoint',
                     {
@@ -527,11 +528,14 @@ class Model {
 
     private isPointFits(scalePointPosition: number, prevScalePointPosition: number): boolean {
 
-        return (
-            (scalePointPosition - prevScalePointPosition - 2 > this.getElementSizeByOrientation(this.scalePointSize)) &&
-            (this.getElementSizeByOrientation(this.sliderSize) - this.getElementSizeByOrientation(this.thumbSize) / 2
-                - this.getElementSizeByOrientation(this.scalePointSize) / 2 - scalePointPosition - 2 > this.getElementSizeByOrientation(this.scalePointSize))
-        );
+        return (scalePointPosition - prevScalePointPosition - 2 >
+            this.getElementSizeByOrientation(this.scalePointSize));
+
+        // return (
+        //     (scalePointPosition - prevScalePointPosition - 2 > this.getElementSizeByOrientation(this.scalePointSize)) &&
+        //     (this.getElementSizeByOrientation(this.sliderSize) - this.getElementSizeByOrientation(this.thumbSize) / 2
+        //         - this.getElementSizeByOrientation(this.scalePointSize) / 2 - scalePointPosition - 2 > this.getElementSizeByOrientation(this.scalePointSize))
+        // );
 
     }
 }
