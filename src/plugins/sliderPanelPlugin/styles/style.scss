@@ -61,6 +61,7 @@
 
 .slider-panel__input-radio-buttons-group {
     padding: 5px 0;
+    margin-right: 20px;
 }
 
 .slider-panel__radio-group {
@@ -267,9 +268,13 @@
     }
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 485px) {
     .slider-panel__checkboxes-and-radio-wrapper {
         flex-direction: column;
         justify-content: start;
+    }
+
+    .slider-panel__input-radio-buttons-group {
+        margin: 0;
     }
 }
