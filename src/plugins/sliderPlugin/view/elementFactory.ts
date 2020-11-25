@@ -2,7 +2,7 @@ import Slider from './slider';
 
 class ElementFactory {
 
-    createSlider(parrent: HTMLDivElement, styles: string): Slider {
+    createSlider(parrent: HTMLDivElement, styleClasses: string): Slider {
 
         /**
          * Возвращает объект класса Slider
@@ -14,19 +14,19 @@ class ElementFactory {
          * 3. Возвращает в вызывающий код объект класса Slider
          * 
          * @param {HTMLDivElement} parrent - контейнер, в который будет добавлен создаваемый элемент
-         * @param {string} styles - классы для создаваемого элемента
+         * @param {string} styleClasses - классы для создаваемого элемента
          * 
          * @returns {Slider} - объект класса Slider
          */
 
         const createSliderObj = (obj: HTMLElement) => { return new Slider(obj) }
-        const slider = this.createElement(parrent, styles, createSliderObj);
+        const slider = this.createElement(parrent, styleClasses, createSliderObj);
 
         return slider
 
     }
 
-    private createElement(parrent: HTMLDivElement, styles: string, createObj: Function): Slider {
+    private createElement(parrent: HTMLDivElement, styleClasses: string, createObj: Function): Slider {
 
         /**
          * Метод для создания объектов различных классов.
@@ -40,14 +40,14 @@ class ElementFactory {
          * 4. Возвращает в вызывающий код объект класса созданного функцией creteObj
          * 
          * @param {HTMLDivElement} parrent - родительский контейнер, в который будет добавлен созданный HTML элемент
-         * @param {string} styles - строка со стилями для создаваемого элемента
+         * @param {string} styleClasses - строка с классами для создаваемого элемента
          * @param {Function} createObj - функция создающая и возвращающая новый объект с заданным классом
          * 
          * @returns {Styles |} - объект класса созданного функцией creteObj
          */
 
         const element: HTMLDivElement = document.createElement('div');
-        element.className = styles;
+        element.className = styleClasses;
         const obj = createObj(element);
         parrent.append(element);
 

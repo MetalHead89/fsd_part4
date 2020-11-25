@@ -11,7 +11,7 @@ class View {
 
     private observer: Observer;
     private slider: Slider | null = null;
-    private elementFacory: ElementFactory;
+    private elementFactory: ElementFactory;
     // private track: Track;
     // private tooltipOne: Tooltip;
     // private tooltipTwo: Tooltip;
@@ -22,13 +22,26 @@ class View {
     private sliderWrapper: HTMLDivElement;
 
     constructor(observer: Observer, sliderWrapper: HTMLElement) {
+
         this.observer = observer;
         this.sliderWrapper = sliderWrapper as HTMLDivElement;
-        this.elementFacory = new ElementFactory();
+        this.elementFactory = new ElementFactory();
+        
     }
 
-    createSlider() {
-        this.slider = this.elementFacory.createSlider(this.sliderWrapper, 'slider')
+    createSlider(styleClasses: string) {
+
+        /**
+         * Метод выполняет следующие действия:
+         * 1. Создаёт объект класса Slider
+         * 2. Создаёт div контейнер с классами styleClasses для компоновки элементов слайдера и размещает его в DOM
+         * 3. Уведомляет своих слушателей о том, что создан контейнер слайдера и передаёт в сообщении его размеры
+         * 
+         * @param {string} styleClasses - классы для контейнера элементов слайдера
+         */
+
+        this.slider = this.elementFactory.createSlider(this.sliderWrapper, styleClasses);
+        this.observer.notify('sliderElementIsCreated', this.slider.getSize());
     }
 
     

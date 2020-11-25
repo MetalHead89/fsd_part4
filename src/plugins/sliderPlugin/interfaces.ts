@@ -12,6 +12,20 @@ export interface IObservable {
     [index: string]: Function[]
 }
 
+export interface ISliderSize {
+    'width': number,
+    'height': number
+}
+
+
+
+
+
+
+
+
+
+
 // export interface IViewSliderOptions {
 //     'type': string,
 //     'orientation': string

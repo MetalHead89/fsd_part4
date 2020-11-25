@@ -1,19 +1,58 @@
 import { ISliderSettings } from '../interfaces';
+import { ISliderSize } from '../interfaces';
 
 import Observer from '../observer/observer';
-import ModelData from './modelData';
 import ModelCalculator from './modelCalculator';
 
 class Model {
 
     private observer: Observer;
-    private data: ModelData;
     private calculator: ModelCalculator
-    
+    private orientation: string;
+    private type: string;
+    private scaleVisible: boolean;
+    private tooltipVisible: boolean;
+    private min: number;
+    private max: number;
+    private step: number;
+    private sliderSize: ISliderSize = { 'width': 0, 'height': 0 };
+
     constructor(observer: Observer, settings: ISliderSettings) {
+
         this.observer = observer;
-        this.data = new ModelData(settings);
         this.calculator = new ModelCalculator();
+        this.orientation = settings.orienation;
+        this.type = settings.type;
+        this.scaleVisible = settings.scale;
+        this.tooltipVisible = settings.tooltip;
+        this.min = settings.min;
+        this.max = settings.max;
+        this.step = settings.step;
+        
+    }
+
+    getOrientation(): string {
+
+        /**
+         * Возвращает ориентацию слайдера
+         * 
+         * @returns {string} - ориентация слайдера
+         */
+
+        return this.orientation;
+
+    }
+
+    setSliderSize(sliderSize: ISliderSize) {
+
+        /**
+         * Устанавливает размер слайдера
+         * 
+         * @param {ISliderSize} sliderSize - объект с шириной и высотой слайдера
+         */
+
+        this.sliderSize = sliderSize;
+
     }
 
 }

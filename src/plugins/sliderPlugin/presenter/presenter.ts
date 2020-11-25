@@ -1,4 +1,5 @@
 import { ISliderSettings } from '../interfaces';
+import { ISliderSize } from '../interfaces'
 
 import Observer from '../observer/observer';
 import Model from '../model/model';
@@ -8,20 +9,59 @@ class Presenter {
     private observer: Observer;
     private model: Model;
     private view: View;
-    
+
 
     constructor(settings: ISliderSettings, sliderWrapper: HTMLElement) {
+
         this.observer = new Observer();
         this.model = new Model(this.observer, settings);
         this.view = new View(this.observer, sliderWrapper);
+
+        this.addObserverListeners();
+        this.createNewSlider();
+
     }
 
-    sliderInit(): void {
-        this.view.createSlider();
+    private addObserverListeners(): void {
+
+        /**
+         * Подписывает Presenter на прослушивание уведомлений от Model и View
+         */
+
+        this.observer.subscribe('sliderElementIsCreated',
+            (sliderSize: ISliderSize) => { this.model.setSliderSize(sliderSize) });
+
     }
+
+    createNewSlider(): void {
+
+        /**
+         * Создаёт слайдер слайдер исходя из настроек, хранящихся в Model
+         */
+
+        const orientation = this.model.getOrientation();
+        this.view.createSlider(`slider slider_${orientation}`);
+
+    }
+
 }
 
 export default Presenter;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

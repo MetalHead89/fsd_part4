@@ -1,9 +1,28 @@
+import {ISliderSize} from '../interfaces'
+
 class Slider {
 
     private element: HTMLElement;
 
     constructor(sliderElement: HTMLElement) {
         this.element = sliderElement;
+    }
+
+    getSize(): ISliderSize {
+
+        /**
+         * Возвращает ширину и высоту контейнера для элементов слайдера
+         * 
+         * @returns {ISliderSize} - ширина и высота контейнера для элементов слайдера
+         */
+
+        const sliderSize: ISliderSize = {
+            'width': this.element.offsetWidth,
+            'height': this.element.offsetHeight
+        }
+
+        return sliderSize;
+
     }
 
 }
