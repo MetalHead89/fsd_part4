@@ -1,3 +1,65 @@
+import { ISliderSettings } from '../plugins/sliderPlugin/interfaces';
+
+import Model from '../plugins/sliderPlugin/model/model';
+import Observable from '../plugins/sliderPlugin/observer/observer';
+
+const observer = new Observable();
+let settings: ISliderSettings = {
+    'orienation': 'horizontal',
+    'type': 'range',
+    'scale': true,
+    'tooltip': true,
+    'min': 0,
+    'max': 100,
+    'step': 1
+};
+let _this: Model;
+
+beforeEach( () => {
+    settings = {
+        'orienation': 'horizontal',
+        'type': 'range',
+        'scale': true,
+        'tooltip': true,
+        'min': 0,
+        'max': 100,
+        'step': 1
+    };
+    _this = new Model(observer, settings);
+});
+
+describe('Get slider orientation', () => {
+
+    test('Should be horizontal', () => {
+        expect(_this.getOrientation()).toBe('horizontal');
+    });
+    test('Should be vertical', () => {
+        settings.orienation = 'vertical';
+        _this = new Model(observer, settings);
+
+        expect(_this.getOrientation()).toBe('vertical');
+    });
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // import { ISliderSettings } from '../plugins/sliderPlugin/interfaces';
 
 // import Model from '../plugins/sliderPlugin/model';
