@@ -52,18 +52,21 @@ class Model {
          */
 
          return this.sliderSize;
-         
+
     }
 
     setSliderSize(sliderSize: ISliderSize): void {
 
         /**
-         * Устанавливает ширину и высоту слайдера
+         * Устанавливает ширину и высоту слайдера. Отрицательные значения приравниваются к 0
          * 
          * @param {ISliderSize} sliderSize - объект с шириной и высотой слайдера
          */
 
-        this.sliderSize = sliderSize;
+        const width: number = (sliderSize.width >= 0) ? sliderSize.width : 0;
+        const height: number = (sliderSize.height >= 0) ? sliderSize.height : 0;
+
+        this.sliderSize = {'width': width, 'height': height};
 
     }
 

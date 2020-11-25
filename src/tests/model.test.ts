@@ -42,6 +42,55 @@ describe('Get slider orientation', () => {
 
 });
 
+describe('Get slider size', () => {
+
+    test('Should be {width: 0, height: 0}', () => {
+        expect(_this.getSliderSize().width).toBe(0);
+        expect(_this.getSliderSize().height).toBe(0);
+    });
+    test('Should be {width: 500, height: 700}', () => {
+        _this.setSliderSize({'width': 500, 'height': 700});
+        expect(_this.getSliderSize().width).toBe(500);
+        expect(_this.getSliderSize().height).toBe(700);
+    });
+    test('Should be {width: 1508, height: 91888}', () => {
+        _this.setSliderSize({'width': 1508, 'height': 91888});
+        expect(_this.getSliderSize().width).toBe(1508);
+        expect(_this.getSliderSize().height).toBe(91888);
+    });
+
+});
+
+describe('Set slider size', () => {
+
+    test('Should be {width: 10, height: 26}', () => {
+        _this.setSliderSize({'width': 10, 'height': 26});
+        expect(_this.getSliderSize().width).toBe(10);
+        expect(_this.getSliderSize().height).toBe(26);
+    });
+    test('Should be {width: 0, height: 0}', () => {
+        _this.setSliderSize({'width': 0, 'height': 0});
+        expect(_this.getSliderSize().width).toBe(0);
+        expect(_this.getSliderSize().height).toBe(0);
+    });
+    test('Should be {width: 0, height: 89}', () => {
+        _this.setSliderSize({'width': -1, 'height': 89});
+        expect(_this.getSliderSize().width).toBe(0);
+        expect(_this.getSliderSize().height).toBe(89);
+    });
+    test('Should be {width: 69, height: 0}', () => {
+        _this.setSliderSize({'width': 69, 'height': -1});
+        expect(_this.getSliderSize().width).toBe(69);
+        expect(_this.getSliderSize().height).toBe(0);
+    });
+    test('Should be {width: 0, height: 0}', () => {
+        _this.setSliderSize({'width': -911, 'height': -5});
+        expect(_this.getSliderSize().width).toBe(0);
+        expect(_this.getSliderSize().height).toBe(0);
+    });
+
+});
+
 
 
 
