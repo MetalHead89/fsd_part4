@@ -19,11 +19,11 @@ class View {
     // private thumbTwo: Thumb;
     // private progressBar: ProgressBar;
     // private scale: Scale;
-    private sliderWrapper: HTMLElement;
+    private sliderWrapper: HTMLDivElement;
 
     constructor(observer: Observer, sliderWrapper: HTMLElement) {
         this.observer = observer;
-        this.sliderWrapper = sliderWrapper;
+        this.sliderWrapper = sliderWrapper as HTMLDivElement;
         this.elementFacory = new ElementFactory();
     }
 
