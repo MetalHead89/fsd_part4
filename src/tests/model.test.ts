@@ -1,9 +1,9 @@
 import { ISliderSettings } from '../plugins/sliderPlugin/interfaces';
 
 import Model from '../plugins/sliderPlugin/model/model';
-import Observable from '../plugins/sliderPlugin/observer/observer';
+import Observer from '../plugins/sliderPlugin/observer/observer';
 
-const observer = new Observable();
+const observer = new Observer();
 let settings: ISliderSettings = {
     'orienation': 'horizontal',
     'type': 'range',

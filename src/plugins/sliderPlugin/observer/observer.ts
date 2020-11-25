@@ -13,9 +13,9 @@ class Observable {
         this.observables[type].push(func);
     }
 
-    // unsubscribe(func: Function) {
-    //     this.observers = this.observers.filter(subscriber => subscriber !== func);
-    // }
+    unsubscribe(type: string, func: Function) {
+        this.observables[type] = this.observables[type].filter(subscriberfunc => subscriberfunc !== func);
+    }
 
     notify(type: string, data: any) {
         if (this.observables[type]) {
