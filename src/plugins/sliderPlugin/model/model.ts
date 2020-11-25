@@ -43,10 +43,22 @@ class Model {
 
     }
 
-    setSliderSize(sliderSize: ISliderSize) {
+    getSliderSize(): ISliderSize {
 
         /**
-         * Устанавливает размер слайдера
+         * Возвращает объект с шириной и высотой слайдера
+         * 
+         * @returns {ISliderSize} объект с шириной и высотой слайдера
+         */
+
+         return this.sliderSize;
+         
+    }
+
+    setSliderSize(sliderSize: ISliderSize): void {
+
+        /**
+         * Устанавливает ширину и высоту слайдера
          * 
          * @param {ISliderSize} sliderSize - объект с шириной и высотой слайдера
          */
