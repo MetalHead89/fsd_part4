@@ -1,3 +1,4 @@
+import Observer from '../observer/observer';
 import Slider from './slider';
 import Track from './track';
 import Thumb from './thumb';
@@ -53,7 +54,7 @@ class ElementFactory {
 
     }
 
-    createThumb(parrent: HTMLDivElement, styleClasses: string): Thumb {
+    createThumb(parrent: HTMLDivElement, styleClasses: string, observer: Observer): Thumb {
 
         /**
          * Возвращает объект класса Thumb
@@ -70,7 +71,7 @@ class ElementFactory {
          * @returns {Thumb} - объект класса Thumb
          */
 
-        const createThumbObj = (obj: HTMLDivElement) => { return new Thumb(obj) }
+        const createThumbObj = (obj: HTMLDivElement) => { return new Thumb(obj, observer) }
         const thumb = this.createElement(parrent, styleClasses, createThumbObj);
 
         return thumb;

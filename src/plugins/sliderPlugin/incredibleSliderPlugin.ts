@@ -10,7 +10,7 @@ import Presenter from './presenter/presenter';
     // Настройки плагина по умолчанию
     const defaultSettings: ISliderSettings = {
         'orienation': 'horizontal',
-        'type': 'single',
+        'type': 'range',
         'scale': true,
         'tooltips': true,       
         'min': 0,

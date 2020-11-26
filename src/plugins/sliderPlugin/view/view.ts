@@ -1,14 +1,11 @@
+import { IThumbPosition } from '../interfaces'
+
 import Observer from '../observer/observer';
 import Slider from './slider';
 import Track from './track';
 import Thumb from './thumb';
 import Tooltip from './tooltip';
 import ElementFactory from './elementFactory';
-// import Track from './track';
-// import Thumb from './thumb';
-// import ProgressBar from './progressBar'
-// import Scale from './scale';
-// import Tooltip from './tooltip';
 
 class View {
 
@@ -20,13 +17,6 @@ class View {
     private tooltipOne: Tooltip | null = null;
     private tooltipTwo: Tooltip | null = null;
     private elementFactory: ElementFactory;
-    // private track: Track;
-    // private tooltipOne: Tooltip;
-    // private tooltipTwo: Tooltip;
-    // private thumbOne: Thumb;
-    // private thumbTwo: Thumb;
-    // private progressBar: ProgressBar;
-    // private scale: Scale;
     private sliderWrapper: HTMLDivElement;
 
     constructor(observer: Observer, sliderWrapper: HTMLElement) {
@@ -62,11 +52,11 @@ class View {
          * 
          * @param {string} styleClasses - классы для контейнера элементов слайдера
          */
-        
+
         if (this.slider != null) {
             this.track = this.elementFactory.createTrack(this.slider.getElement(), styleClasses);
         }
-        
+
     }
 
     createThumbOne(styleClasses: string) {
@@ -79,13 +69,13 @@ class View {
          * 
          * @param {string} styleClasses - классы для бегунка
          */
-        
+
         if (this.slider != null) {
-            this.thumbOne = this.elementFactory.createThumb(this.slider.getElement(), styleClasses);
-            this.observer.notify('thumbElementIsCreated', this.thumbOne.getSize());
+            this.thumbOne = this.elementFactory.createThumb(this.slider.getElement(), styleClasses, this.observer);
+            this.observer.notify('thumbOneIsCreated', this.thumbOne.getSize());
         }
-        
-    } 
+
+    }
 
     createThumbTwo(styleClasses: string) {
 
@@ -93,15 +83,16 @@ class View {
          * Метод выполняет следующие действия:
          * 1. Создаёт объект класса Thumb
          * 2. Создаёт бегунок в виде div контейнера с классами styleClasses
-         * 3. Уведомляет своих слушателей о том, что создан бегунок и передаёт в сообщении его размеры
+         * 3. Уведомляет своих слушателей о том, что создан бегунок
          * 
          * @param {string} styleClasses - классы для бегунка
          */
-        
+
         if (this.slider != null) {
-            this.thumbTwo = this.elementFactory.createThumb(this.slider.getElement(), styleClasses);
+            this.thumbTwo = this.elementFactory.createThumb(this.slider.getElement(), styleClasses, this.observer);
+            this.observer.notify('thumbTwoIsCreated', null);
         }
-        
+
     }
 
     createTooltipOne(styleClasses: string) {
@@ -134,6 +125,18 @@ class View {
             this.tooltipTwo = this.elementFactory.createTooltip(this.thumbTwo.getElement(), styleClasses);
         }
 
+    }
+
+    moveThumbOne(position: IThumbPosition): void {
+        if (this.thumbOne !== null) {
+            this.thumbOne.moveTo(position);
+        }
+    }
+
+    moveThumbTwo(position: IThumbPosition): void {
+        if (this.thumbTwo != null) {
+            this.thumbTwo.moveTo(position);
+        }
     }
 
 }

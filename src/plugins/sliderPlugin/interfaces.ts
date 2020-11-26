@@ -22,6 +22,25 @@ export interface IThumbSize {
     'height': number
 }
 
+export interface IThumbShift {
+    'shiftX': number,
+    'shiftY': number
+}
+
+export interface IThumbPosition {
+    'left': number,
+    'top': number
+}
+
+export interface ICursorPsition {
+    'x': number,
+    'y': number
+}
+
+export interface IScalePointSize {
+    'width': number,
+    'height': number
+}
 
 
 

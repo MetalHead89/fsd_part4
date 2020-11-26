@@ -1,114 +1,152 @@
 import { ISliderSettings } from '../interfaces';
 import { ISliderSize } from '../interfaces';
 import { IThumbSize } from '../interfaces'
+import { IThumbPosition } from '../interfaces'
 
 import Observer from '../observer/observer';
 import ModelCalculator from './modelCalculator';
+import ModelData from './modelData';
 
 class Model {
 
     private observer: Observer;
+    private data: ModelData;
     private calculator: ModelCalculator
-    private orientation: string;
-    private type: string;
-    private scaleVisible: boolean;
-    private tooltipsVisible: boolean;
-    private min: number;
-    private max: number;
-    private step: number;
-    private sliderSize: ISliderSize = { 'width': 0, 'height': 0 };
-    private thumbSize: IThumbSize = { 'width': 0, 'height': 0 };
+    
+
 
     constructor(observer: Observer, settings: ISliderSettings) {
 
         this.observer = observer;
-        this.calculator = new ModelCalculator();
-        this.orientation = settings.orienation;
-        this.type = settings.type;
-        this.scaleVisible = settings.scale;
-        this.tooltipsVisible = settings.tooltips;
-        this.min = settings.min;
-        this.max = settings.max;
-        this.step = settings.step;
-
-    }
-
-    getOrientation(): string {
-
-        /**
-         * Возвращает ориентацию слайдера
-         * 
-         * @returns {string} - ориентация слайдера
-         */
-
-        return this.orientation;
-
-    }
-
-    getSliderType(): string {
-
-        /**
-         * Возвращает тип слайдера
-         * 
-         * @returns {string} - тип слайдера
-         */
-
-        return this.type;;
-
-    }
-
-    getSliderSize(): ISliderSize {
-
-        /**
-         * Возвращает объект с шириной и высотой слайдера
-         * 
-         * @returns {ISliderSize} - объект с шириной и высотой слайдера
-         */
-
-        return this.sliderSize;
+        this.data = new ModelData(settings);
+        this.calculator = new ModelCalculator(this.observer, this.data);
 
     }
 
     setSliderSize(sliderSize: ISliderSize): void {
 
-        /**
-         * Устанавливает ширину и высоту слайдера. Отрицательные значения приравниваются к 0
-         * 
-         * @param {ISliderSize} sliderSize - объект с шириной и высотой слайдера
-         */
-
-        const width: number = (sliderSize.width >= 0) ? sliderSize.width : 0;
-        const height: number = (sliderSize.height >= 0) ? sliderSize.height : 0;
-
-        this.sliderSize = { 'width': width, 'height': height };
+        this.data.setSliderSize(sliderSize);
 
     }
 
     setThumbSize(thumbSize: IThumbSize): void {
 
-        /**
-         * Устанавливает ширину и высоту бегунка. Отрицательные значения приравниваются к 0
-         * 
-         * @param {IThumbSize} thumbSize - объект с шириной и высотой бегунка
-         */
+        this.data.setThumbSize(thumbSize);
 
-        const width: number = (thumbSize.width >= 0) ? thumbSize.width : 0;
-        const height: number = (thumbSize.height >= 0) ? thumbSize.height : 0;
+    }
 
-        this.thumbSize = { 'width': width, 'height': height };
+    getOrientation(): string {
+
+        return this.data.getOrientation();
+
+    }
+
+    getSliderType(): string {
+
+        return this.data.getSliderType();;
 
     }
 
     getTooltipsVisible(): boolean {
 
-        /**
-         * Возвращает флаг видимости значений над бегунками
-         * 
-         * @returns {boolean} - флаг видимости значений над бегунками
-         */
+        return this.data.getTooltipsVisible();
 
-        return this.tooltipsVisible;
+    }
 
+    // getOrientation(): string {
+
+    //     /**
+    //      * Возвращает ориентацию слайдера
+    //      * 
+    //      * @returns {string} - ориентация слайдера
+    //      */
+
+    //     return this.orientation;
+
+    // }
+
+    // getSliderType(): string {
+
+    //     /**
+    //      * Возвращает тип слайдера
+    //      * 
+    //      * @returns {string} - тип слайдера
+    //      */
+
+    //     return this.type;;
+
+    // }
+
+    // getSliderSize(): ISliderSize {
+
+    //     /**
+    //      * Возвращает объект с шириной и высотой слайдера
+    //      * 
+    //      * @returns {ISliderSize} - объект с шириной и высотой слайдера
+    //      */
+
+    //     return this.sliderSize;
+
+    // }
+
+    // setSliderSize(sliderSize: ISliderSize): void {
+
+    //     /**
+    //      * Устанавливает ширину и высоту слайдера. Отрицательные значения приравниваются к 0
+    //      * 
+    //      * @param {ISliderSize} sliderSize - объект с шириной и высотой слайдера
+    //      */
+
+    //     const width: number = (sliderSize.width >= 0) ? sliderSize.width : 0;
+    //     const height: number = (sliderSize.height >= 0) ? sliderSize.height : 0;
+
+    //     this.sliderSize = { 'width': width, 'height': height };
+
+    // }
+
+    // setThumbSize(thumbSize: IThumbSize): void {
+
+    //     /**
+    //      * Устанавливает ширину и высоту бегунка. Отрицательные значения приравниваются к 0
+    //      * 
+    //      * @param {IThumbSize} thumbSize - объект с шириной и высотой бегунка
+    //      */
+
+    //     const width: number = (thumbSize.width >= 0) ? thumbSize.width : 0;
+    //     const height: number = (thumbSize.height >= 0) ? thumbSize.height : 0;
+
+    //     this.thumbSize = { 'width': width, 'height': height };
+
+    // }
+
+    // getTooltipsVisible(): boolean {
+
+    //     /**
+    //      * Возвращает флаг видимости значений над бегунками
+    //      * 
+    //      * @returns {boolean} - флаг видимости значений над бегунками
+    //      */
+
+    //     return this.tooltipsVisible;
+
+    // }
+
+    dragthumbOne(thumbPosition: IThumbPosition) {
+    }
+
+    dragThumbTwo(thumbPosition: IThumbPosition) {
+    }
+
+    setThumbOneToStartingPosition() {
+
+        this.calculator.setThumbOneToStartingPosition();
+        
+    }
+
+    setThumbTwoToStartingPosition() {
+
+        this.calculator.setThumbTwoToStartingPosition();
+        
     }
 
 }

@@ -1,11 +1,32 @@
 import { IThumbSize } from '../interfaces'
+import { IThumbShift } from '../interfaces'
+import { IThumbPosition } from '../interfaces'
+import { ICursorPsition } from '../interfaces'
+
+import Observer from '../observer/observer';
 
 class Thumb {
 
     private element: HTMLDivElement;
+    private observer: Observer;
+    private shift: IThumbShift = { 'shiftX': 0, 'shiftY': 0 };
+    private onMouseMoveHandler: Function = () => { };
+    private onMouseUpHandler: Function = () => { };
 
-    constructor(thumbElement: HTMLDivElement) {
+    constructor(thumbElement: HTMLDivElement, observer: Observer) {
+
         this.element = thumbElement;
+        this.observer = observer;
+
+        this.element.ondragstart = function () {
+            return false;
+        };
+
+        this.element.addEventListener('mousedown', (event: MouseEvent) => {
+            this.startDrag(event.clientX, event.clientY);
+            return false; // disable selection start (cursor change)
+        });
+
     }
 
     getElement(): HTMLDivElement {
@@ -34,6 +55,64 @@ class Thumb {
 
         return thumbSize;
 
+    }
+
+    private startDrag(cursorX: number, cursorY: number): void {
+
+        // this.setZIndex(3);
+        // this.observer.notify('changeZIndexToAnotherThumb', this.element);
+
+        const thumbCoords: DOMRect = this.element.getBoundingClientRect();
+
+        this.shift.shiftX = cursorX - thumbCoords.left;
+        this.shift.shiftY = cursorY - thumbCoords.top;
+
+        this.onMouseMoveHandler = this.drag.bind(this);
+        this.onMouseUpHandler = this.endDrag.bind(this);
+        /////////////////////////////////////////////////////////////////////////////////////// <= Увеличить z-index, аа зетем уменьшить в endDrag()
+        document.addEventListener('mousemove',
+            this.onMouseMoveHandler as EventListenerOrEventListenerObject);
+        document.addEventListener('mouseup',
+            this.onMouseUpHandler as EventListenerOrEventListenerObject);
+
+    }
+
+    private drag(event: MouseEvent): void {
+
+        let notifyMessage = 'thumbOneIsDragged';
+
+        if (this.element.classList.contains('slider__thumb-two')) {
+            notifyMessage = 'startDragThumbTwo';
+        }
+
+        this.observer.notify(notifyMessage, this.getPosition({ 'x': event.clientX, 'y': event.clientY }));
+
+    }
+
+    private getPosition(cursorPosition: ICursorPsition): IThumbPosition {
+
+        const parrent: HTMLElement | null = this.element.parentElement;
+
+        if (!parrent) {
+            return { 'left': 0, 'top': 0 }
+        }
+
+        const parrentCoords: DOMRect = parrent.getBoundingClientRect();
+
+        return {
+            'left': cursorPosition.x - this.shift.shiftX - parrentCoords.left,
+            'top': cursorPosition.y - this.shift.shiftY - parrentCoords.top
+        }
+    }
+
+    private endDrag(): void {
+        document.removeEventListener('mousemove', this.onMouseMoveHandler as EventListenerOrEventListenerObject);
+        document.removeEventListener('mouseup', this.onMouseUpHandler as EventListenerOrEventListenerObject);
+    }
+
+    moveTo(position: IThumbPosition) {
+        this.element.style.left = position.left + 'px';
+        this.element.style.top = position.top + 'px';
     }
 
 }
