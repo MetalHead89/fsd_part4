@@ -39,4 +39,40 @@ describe('Checking operability of the observer', () => {
 
     });
 
+    test('Should be "This is test 4"', () => {
+
+        const observerFunc = (someData: number) => { testFunc(someData) };
+
+        observer.subscribe('test4', observerFunc);
+        observer.notify('test4', 'This is test 4');
+        expect(testData).toBe('This is test 4');
+
+        observer.unsubscribe('test4', observerFunc);
+        observer.notify('test4', 'This notification must not be intercepted');
+        expect(testData).toBe('This is test 4');
+
+    });
+
+    test('Should be 389', () => {
+        
+        const observerFunc = (someData: number) => { testFunc(someData) };
+        
+        observer.subscribe('test5', observerFunc);
+        observer.notify('test5', 389);
+        expect(testData).toBe(389);
+
+        observer.unsubscribe('test5', observerFunc);
+        observer.notify('test5', 'This notification must not be intercepted');
+        expect(testData).toBe(389);
+
+    });
+
+    test('Should be "null"', () => {
+
+        observer.subscribe('test6', (someData: number) => { testFunc(someData) });
+        observer.notify('testWithoutListeners', 'This is test 6');
+        expect(testData).toBe('null');
+
+    });
+
 });
