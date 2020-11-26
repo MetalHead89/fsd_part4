@@ -1,5 +1,6 @@
 import Observer from '../observer/observer';
 import Slider from './slider';
+import Track from './track';
 import ElementFactory from './elementFactory';
 // import Track from './track';
 // import Thumb from './thumb';
@@ -11,6 +12,7 @@ class View {
 
     private observer: Observer;
     private slider: Slider | null = null;
+    private track: Track | null = null;
     private elementFactory: ElementFactory;
     // private track: Track;
     // private tooltipOne: Tooltip;
@@ -26,7 +28,7 @@ class View {
         this.observer = observer;
         this.sliderWrapper = sliderWrapper as HTMLDivElement;
         this.elementFactory = new ElementFactory();
-        
+
     }
 
     createSlider(styleClasses: string) {
@@ -42,9 +44,24 @@ class View {
 
         this.slider = this.elementFactory.createSlider(this.sliderWrapper, styleClasses);
         this.observer.notify('sliderElementIsCreated', this.slider.getSize());
+
     }
 
-    
+    createTrack(styleClasses: string) {
+
+        /**
+         * Метод выполняет следующие действия:
+         * 1. Создаёт объект класса Track
+         * 2. Создаёт дорожку слайдера в виде div контейнера с классами styleClasses
+         * 
+         * @param {string} styleClasses - классы для контейнера элементов слайдера
+         */
+        
+        if (this.slider != null) {
+            this.track = this.elementFactory.createTrack(this.slider.getElement(), styleClasses);
+        }
+        
+    }    
 
 }
 

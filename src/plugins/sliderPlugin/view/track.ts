@@ -1,4 +1,14 @@
-// export default Track;
+class Track {
+
+    private element: HTMLDivElement;
+
+    constructor(sliderElement: HTMLDivElement) {
+        this.element = sliderElement;
+    }
+
+}
+
+export default Track;
 
 
 

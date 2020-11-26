@@ -1,11 +1,22 @@
-import {ISliderSize} from '../interfaces'
+import { ISliderSize } from '../interfaces'
 
 class Slider {
 
-    private element: HTMLElement;
+    private element: HTMLDivElement;
 
-    constructor(sliderElement: HTMLElement) {
+    constructor(sliderElement: HTMLDivElement) {
         this.element = sliderElement;
+    }
+
+    getElement(): HTMLDivElement {
+
+        /**
+         * Возвращает div контейнер для элементов слайдера
+         * 
+         * @returns {HTMLDivElement} - div контейнер для элементов слайдера
+         */
+
+        return this.element
     }
 
     setSize(size: ISliderSize): void {
@@ -130,7 +141,7 @@ export default Slider;
 // //     coords: DOMRect | null = null;
 // //     onMouseMoveHadler: Function | null = null;
 // //     onMouseUpHadler: Function | null = null;
-    
+
 
 // //     constructor(sliderComponents: {[index: string]: HTMLElement}) {
 // //         this.element = sliderComponents.sliderElem;

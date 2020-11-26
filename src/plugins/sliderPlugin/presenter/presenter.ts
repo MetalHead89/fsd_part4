@@ -25,7 +25,7 @@ class Presenter {
     private addObserverListeners(): void {
 
         /**
-         * Подписывает Presenter на прослушивание уведомлений от Model и View
+         * Подписывает наблюдателя на прослушивание уведомлений от Model и View
          */
 
         this.observer.subscribe('sliderElementIsCreated',
@@ -36,11 +36,13 @@ class Presenter {
     createNewSlider(): void {
 
         /**
-         * Создаёт слайдер слайдер исходя из настроек, хранящихся в Model
+         * Создаёт слайдер исходя из настроек, хранящихся в Model
          */
 
         const orientation = this.model.getOrientation();
+
         this.view.createSlider(`slider slider_${orientation}`);
+        this.view.createTrack(`slider__track slider__track_${orientation}`)
 
     }
 
