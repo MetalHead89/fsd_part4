@@ -8,6 +8,19 @@ class Slider {
         this.element = sliderElement;
     }
 
+    setSize(size: ISliderSize): void {
+
+        /**
+         * Устанавливает ширину и высоту контейнера для элементов слайдера
+         * 
+         * @param {ISliderSize} size - объект со значениями ширины и высоты
+         */
+
+        this.element.style.width = `${size.width}px`;
+        this.element.style.height = `${size.height}px`;
+
+    }
+
     getSize(): ISliderSize {
 
         /**
