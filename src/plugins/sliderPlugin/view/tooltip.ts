@@ -1,4 +1,13 @@
-// export default Tooltip;
+class Tooltip {
+
+    private element: HTMLDivElement;
+
+    constructor(tooltipElement: HTMLDivElement) {
+        this.element = tooltipElement;
+    }
+}
+
+export default Tooltip;
 
 
 

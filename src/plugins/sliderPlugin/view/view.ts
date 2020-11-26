@@ -2,6 +2,7 @@ import Observer from '../observer/observer';
 import Slider from './slider';
 import Track from './track';
 import Thumb from './thumb';
+import Tooltip from './tooltip';
 import ElementFactory from './elementFactory';
 // import Track from './track';
 // import Thumb from './thumb';
@@ -16,6 +17,8 @@ class View {
     private track: Track | null = null;
     private thumbOne: Thumb | null = null;
     private thumbTwo: Thumb | null = null;
+    private tooltipOne: Tooltip | null = null;
+    private tooltipTwo: Tooltip | null = null;
     private elementFactory: ElementFactory;
     // private track: Track;
     // private tooltipOne: Tooltip;
@@ -79,11 +82,12 @@ class View {
         
         if (this.slider != null) {
             this.thumbOne = this.elementFactory.createThumb(this.slider.getElement(), styleClasses);
+            this.observer.notify('thumbElementIsCreated', this.thumbOne.getSize());
         }
         
     } 
 
-    createThumbTeo(styleClasses: string) {
+    createThumbTwo(styleClasses: string) {
 
         /**
          * Метод выполняет следующие действия:
@@ -98,7 +102,39 @@ class View {
             this.thumbTwo = this.elementFactory.createThumb(this.slider.getElement(), styleClasses);
         }
         
-    } 
+    }
+
+    createTooltipOne(styleClasses: string) {
+
+        /**
+         * Метод выполняет следующие действия:
+         * 1. Создаёт объект класса Tooltip
+         * 2. Создаёт div контейнер с классами styleClasses для оображения значений над бегунками
+         * 
+         * @param {string} styleClasses - классы для создаваемого элемента
+         */
+
+        if (this.slider != null && this.thumbOne != null) {
+            this.tooltipOne = this.elementFactory.createTooltip(this.thumbOne.getElement(), styleClasses);
+        }
+
+    }
+
+    createTooltipTwo(styleClasses: string) {
+
+        /**
+         * Метод выполняет следующие действия:
+         * 1. Создаёт объект класса Tooltip
+         * 2. Создаёт div контейнер с классами styleClasses для оображения значений над бегунками
+         * 
+         * @param {string} styleClasses - классы для создаваемого элемента
+         */
+
+        if (this.slider != null && this.thumbTwo != null) {
+            this.tooltipTwo = this.elementFactory.createTooltip(this.thumbTwo.getElement(), styleClasses);
+        }
+
+    }
 
 }
 

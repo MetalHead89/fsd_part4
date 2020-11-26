@@ -12,7 +12,7 @@ import Presenter from './presenter/presenter';
         'orienation': 'horizontal',
         'type': 'single',
         'scale': true,
-        'tooltip': true,       
+        'tooltips': true,       
         'min': 0,
         'max': 10,
         'step': 1

@@ -1,9 +1,39 @@
+import { IThumbSize } from '../interfaces'
+
 class Thumb {
 
     private element: HTMLDivElement;
 
     constructor(thumbElement: HTMLDivElement) {
         this.element = thumbElement;
+    }
+
+    getElement(): HTMLDivElement {
+
+        /**
+         * Возвращает div элемент бегунка
+         * 
+         * @returns {HTMLDivElement} - div элемент бегунка
+         */
+
+        return this.element
+    }
+
+    getSize(): IThumbSize {
+
+        /**
+         * Возвращает ширину и высоту бегунка
+         * 
+         * @returns {ISliderSize} - ширина и высота бегунка
+         */
+
+        const thumbSize: IThumbSize = {
+            'width': this.element.offsetWidth,
+            'height': this.element.offsetHeight
+        }
+
+        return thumbSize;
+
     }
 
 }

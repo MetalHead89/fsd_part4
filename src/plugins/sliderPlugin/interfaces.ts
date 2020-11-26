@@ -2,7 +2,7 @@ export interface ISliderSettings {
     'orienation': string,
     'type': string,
     'scale': boolean,
-    'tooltip': boolean,
+    'tooltips': boolean,
     'min': number,
     'max': number,
     'step': number
@@ -13,6 +13,11 @@ export interface IObservable {
 }
 
 export interface ISliderSize {
+    'width': number,
+    'height': number
+}
+
+export interface IThumbSize {
     'width': number,
     'height': number
 }

@@ -1,5 +1,6 @@
 import { ISliderSettings } from '../interfaces';
 import { ISliderSize } from '../interfaces'
+import { IThumbSize } from '../interfaces'
 
 import Observer from '../observer/observer';
 import Model from '../model/model';
@@ -30,6 +31,8 @@ class Presenter {
 
         this.observer.subscribe('sliderElementIsCreated',
             (sliderSize: ISliderSize) => { this.model.setSliderSize(sliderSize) });
+        this.observer.subscribe('thumbElementIsCreated',
+            (thumbSize: IThumbSize) => { this.model.setThumbSize(thumbSize) });
 
     }
 
@@ -41,13 +44,21 @@ class Presenter {
 
         const orientation = this.model.getOrientation();
         const sliderType: string = this.model.getSliderType();
+        const tooltipsVisible: boolean = this.model.getTooltipsVisible();
 
         this.view.createSlider(`slider slider_${orientation}`);
         this.view.createTrack(`slider__track slider__track_${orientation}`);
         this.view.createThumbOne(`slider__thumb slider__thumb_${orientation}`);
-        if (sliderType === 'range') {
-            this.view.createThumbOne(`slider__thumb slider__thumb_${orientation}`);
+        if (tooltipsVisible) {
+            this.view.createTooltipOne(`slider__tooltip slider__tooltip_${orientation}`);
         }
+        if (sliderType === 'range') {
+            this.view.createThumbTwo(`slider__thumb slider__thumb_${orientation}`);
+            if (tooltipsVisible) {
+                this.view.createTooltipTwo(`slider__tooltip slider__tooltip_${orientation}`);
+            }
+        }
+        
         
         
 

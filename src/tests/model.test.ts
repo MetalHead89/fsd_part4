@@ -8,7 +8,7 @@ let settings: ISliderSettings = {
     'orienation': 'horizontal',
     'type': 'range',
     'scale': true,
-    'tooltip': true,
+    'tooltips': true,
     'min': 0,
     'max': 100,
     'step': 1
@@ -20,7 +20,7 @@ beforeEach( () => {
         'orienation': 'horizontal',
         'type': 'range',
         'scale': true,
-        'tooltip': true,
+        'tooltips': true,
         'min': 0,
         'max': 100,
         'step': 1

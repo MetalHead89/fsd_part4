@@ -1,5 +1,6 @@
 import { ISliderSettings } from '../interfaces';
 import { ISliderSize } from '../interfaces';
+import { IThumbSize } from '../interfaces'
 
 import Observer from '../observer/observer';
 import ModelCalculator from './modelCalculator';
@@ -11,11 +12,12 @@ class Model {
     private orientation: string;
     private type: string;
     private scaleVisible: boolean;
-    private tooltipVisible: boolean;
+    private tooltipsVisible: boolean;
     private min: number;
     private max: number;
     private step: number;
     private sliderSize: ISliderSize = { 'width': 0, 'height': 0 };
+    private thumbSize: IThumbSize = { 'width': 0, 'height': 0 };
 
     constructor(observer: Observer, settings: ISliderSettings) {
 
@@ -24,7 +26,7 @@ class Model {
         this.orientation = settings.orienation;
         this.type = settings.type;
         this.scaleVisible = settings.scale;
-        this.tooltipVisible = settings.tooltip;
+        this.tooltipsVisible = settings.tooltips;
         this.min = settings.min;
         this.max = settings.max;
         this.step = settings.step;
@@ -60,7 +62,7 @@ class Model {
         /**
          * Возвращает объект с шириной и высотой слайдера
          * 
-         * @returns {ISliderSize} объект с шириной и высотой слайдера
+         * @returns {ISliderSize} - объект с шириной и высотой слайдера
          */
 
         return this.sliderSize;
@@ -79,6 +81,33 @@ class Model {
         const height: number = (sliderSize.height >= 0) ? sliderSize.height : 0;
 
         this.sliderSize = { 'width': width, 'height': height };
+
+    }
+
+    setThumbSize(thumbSize: IThumbSize): void {
+
+        /**
+         * Устанавливает ширину и высоту бегунка. Отрицательные значения приравниваются к 0
+         * 
+         * @param {IThumbSize} thumbSize - объект с шириной и высотой бегунка
+         */
+
+        const width: number = (thumbSize.width >= 0) ? thumbSize.width : 0;
+        const height: number = (thumbSize.height >= 0) ? thumbSize.height : 0;
+
+        this.thumbSize = { 'width': width, 'height': height };
+
+    }
+
+    getTooltipsVisible(): boolean {
+
+        /**
+         * Возвращает флаг видимости значений над бегунками
+         * 
+         * @returns {boolean} - флаг видимости значений над бегунками
+         */
+
+        return this.tooltipsVisible;
 
     }
 

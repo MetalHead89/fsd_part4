@@ -1,6 +1,7 @@
 import Slider from './slider';
 import Track from './track';
 import Thumb from './thumb';
+import Tooltip from './tooltip';
 
 class ElementFactory {
 
@@ -73,6 +74,30 @@ class ElementFactory {
         const thumb = this.createElement(parrent, styleClasses, createThumbObj);
 
         return thumb;
+
+    }
+
+    createTooltip(parrent: HTMLDivElement, styleClasses: string): Tooltip {
+
+        /**
+         * Возвращает объект класса Tooltip
+         * 
+         * Метод выполняет следующие действия:
+         * 1. Создаёт callback функцию, которая создаёт и возвращает новый объект класса Tooltip
+         * 2. Вызывает метод createElement в котором создаётся объект класса Tooltip и div элемент tooltip, с классами из
+         * параметра styles, помещённый в контейнер из параметра parrent
+         * 3. Возвращает в вызывающий код объект класса Tooltip
+         * 
+         * @param {HTMLDivElement} parrent - контейнер, в который будет добавлен создаваемый элемент
+         * @param {string} styleClasses - классы для создаваемого элемента
+         * 
+         * @returns {Thumb} - объект класса Tooltip
+         */
+
+        const createTooltipObj = (obj: HTMLDivElement) => { return new Tooltip(obj) }
+        const tooltip = this.createElement(parrent, styleClasses, createTooltipObj);
+
+        return tooltip;
 
     }
 
