@@ -1,5 +1,6 @@
 import Slider from './slider';
 import Track from './track';
+import Thumb from './thumb';
 
 class ElementFactory {
 
@@ -48,6 +49,30 @@ class ElementFactory {
         const track = this.createElement(parrent, styleClasses, createTrackrObj);
 
         return track;
+
+    }
+
+    createThumb(parrent: HTMLDivElement, styleClasses: string): Thumb {
+
+        /**
+         * Возвращает объект класса Thumb
+         * 
+         * Метод выполняет следующие действия:
+         * 1. Создаёт callback функцию, которая создаёт и возвращает новый объект класса Thumb
+         * 2. Вызывает метод createElement в котором создаётся объект класса Thumb и div элемент thumb, с классами из
+         * параметра styles, помещённый в контейнер из параметра parrent
+         * 3. Возвращает в вызывающий код объект класса Thumb
+         * 
+         * @param {HTMLDivElement} parrent - контейнер, в который будет добавлен создаваемый элемент
+         * @param {string} styleClasses - классы для создаваемого элемента
+         * 
+         * @returns {Thumb} - объект класса Thumb
+         */
+
+        const createThumbObj = (obj: HTMLDivElement) => { return new Thumb(obj) }
+        const thumb = this.createElement(parrent, styleClasses, createThumbObj);
+
+        return thumb;
 
     }
 

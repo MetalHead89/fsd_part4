@@ -1,4 +1,14 @@
-// export default Thumb;
+class Thumb {
+
+    private element: HTMLDivElement;
+
+    constructor(thumbElement: HTMLDivElement) {
+        this.element = thumbElement;
+    }
+
+}
+
+export default Thumb;
 
 
 

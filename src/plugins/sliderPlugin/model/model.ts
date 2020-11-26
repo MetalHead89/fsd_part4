@@ -28,7 +28,7 @@ class Model {
         this.min = settings.min;
         this.max = settings.max;
         this.step = settings.step;
-        
+
     }
 
     getOrientation(): string {
@@ -43,6 +43,18 @@ class Model {
 
     }
 
+    getSliderType(): string {
+
+        /**
+         * Возвращает тип слайдера
+         * 
+         * @returns {string} - тип слайдера
+         */
+
+        return this.type;;
+
+    }
+
     getSliderSize(): ISliderSize {
 
         /**
@@ -51,7 +63,7 @@ class Model {
          * @returns {ISliderSize} объект с шириной и высотой слайдера
          */
 
-         return this.sliderSize;
+        return this.sliderSize;
 
     }
 
@@ -66,7 +78,7 @@ class Model {
         const width: number = (sliderSize.width >= 0) ? sliderSize.width : 0;
         const height: number = (sliderSize.height >= 0) ? sliderSize.height : 0;
 
-        this.sliderSize = {'width': width, 'height': height};
+        this.sliderSize = { 'width': width, 'height': height };
 
     }
 

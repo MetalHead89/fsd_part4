@@ -1,6 +1,7 @@
 import Observer from '../observer/observer';
 import Slider from './slider';
 import Track from './track';
+import Thumb from './thumb';
 import ElementFactory from './elementFactory';
 // import Track from './track';
 // import Thumb from './thumb';
@@ -13,6 +14,8 @@ class View {
     private observer: Observer;
     private slider: Slider | null = null;
     private track: Track | null = null;
+    private thumbOne: Thumb | null = null;
+    private thumbTwo: Thumb | null = null;
     private elementFactory: ElementFactory;
     // private track: Track;
     // private tooltipOne: Tooltip;
@@ -61,7 +64,41 @@ class View {
             this.track = this.elementFactory.createTrack(this.slider.getElement(), styleClasses);
         }
         
-    }    
+    }
+
+    createThumbOne(styleClasses: string) {
+
+        /**
+         * Метод выполняет следующие действия:
+         * 1. Создаёт объект класса Thumb
+         * 2. Создаёт бегунок в виде div контейнера с классами styleClasses
+         * 3. Уведомляет своих слушателей о том, что создан бегунок и передаёт в сообщении его размеры
+         * 
+         * @param {string} styleClasses - классы для бегунка
+         */
+        
+        if (this.slider != null) {
+            this.thumbOne = this.elementFactory.createThumb(this.slider.getElement(), styleClasses);
+        }
+        
+    } 
+
+    createThumbTeo(styleClasses: string) {
+
+        /**
+         * Метод выполняет следующие действия:
+         * 1. Создаёт объект класса Thumb
+         * 2. Создаёт бегунок в виде div контейнера с классами styleClasses
+         * 3. Уведомляет своих слушателей о том, что создан бегунок и передаёт в сообщении его размеры
+         * 
+         * @param {string} styleClasses - классы для бегунка
+         */
+        
+        if (this.slider != null) {
+            this.thumbTwo = this.elementFactory.createThumb(this.slider.getElement(), styleClasses);
+        }
+        
+    } 
 
 }
 

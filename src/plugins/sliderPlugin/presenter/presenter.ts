@@ -40,9 +40,16 @@ class Presenter {
          */
 
         const orientation = this.model.getOrientation();
+        const sliderType: string = this.model.getSliderType();
 
         this.view.createSlider(`slider slider_${orientation}`);
-        this.view.createTrack(`slider__track slider__track_${orientation}`)
+        this.view.createTrack(`slider__track slider__track_${orientation}`);
+        this.view.createThumbOne(`slider__thumb slider__thumb_${orientation}`);
+        if (sliderType === 'range') {
+            this.view.createThumbOne(`slider__thumb slider__thumb_${orientation}`);
+        }
+        
+        
 
     }
 
