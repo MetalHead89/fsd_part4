@@ -223,3 +223,90 @@ describe('Get and set tooltips visible', () => {
     });
 
 });
+
+describe('Get and set min value', () => {
+
+    test('Should be 0', () => {
+        expect(_this.getMin()).toBe(0);
+    });
+    
+    test('Should be 6', () => {
+
+        _this.setMin(6);
+        expect(_this.getMin()).toBe(6);
+
+    });
+
+    test('Should be 0', () => {
+
+        _this.setMin(264);
+        expect(_this.getMin()).toBe(0);
+
+    });
+
+    test('Should be -26', () => {
+
+        _this.setMin(-26);
+        expect(_this.getMin()).toBe(-26);
+
+    });
+
+});
+
+describe('Get and set max value', () => {
+
+    test('Should be 100', () => {
+        expect(_this.getMax()).toBe(100);
+    });
+    
+    test('Should be 6', () => {
+
+        _this.setMax(6);
+        expect(_this.getMax()).toBe(6);
+
+    });
+
+    test('Should be 0', () => {
+
+        _this.setMax(0);
+        expect(_this.getMax()).toBe(0);
+
+    });
+
+    test('Should be 100', () => {
+
+        _this.setMax(-26);
+        expect(_this.getMax()).toBe(100);
+
+    });
+
+});
+
+describe('Get and set step', () => {
+
+    test('Should be 1', () => {
+        expect(_this.getStep()).toBe(1);
+    });
+    
+    test('Should be 6', () => {
+
+        _this.setStep(6);
+        expect(_this.getStep()).toBe(6);
+
+    });
+
+    test('Should be 1', () => {
+
+        _this.setStep(0);
+        expect(_this.getStep()).toBe(1);
+
+    });
+
+    test('Should be 1', () => {
+
+        _this.setStep(-26);
+        expect(_this.getStep()).toBe(1);
+
+    });
+
+});

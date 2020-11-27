@@ -159,25 +159,87 @@ class ModelData {
 
     }
 
+    setMin(newMin: number): void {
 
+        /**
+         * Устанавливает минимальное значение. Если новое значение превышает максимальное, то оно не устанавливается
+         * 
+         * @param {number} newMin - новое минимальное значение слайдера
+         */
 
+        if (newMin <= this.max) {
+            this.min = newMin;
+        }
 
+    }
 
+    getMin(): number {
 
+        /**
+         * Возвращает минимальное значение
+         * 
+         * @returns {number} - минимальное значение слайдера
+         */
 
+        return this.min;
 
+    }
 
+    setMax(newMax: number): void {
 
+        /**
+         * Устанавливает максимальное значение. Если новое значение меньше минимального, то оно не устанавливается
+         * 
+         * @param {number} newMax - новое максимальное значение слайдера
+         */
+
+        if (newMax >= this.min) {
+            this.max = newMax;
+        }
+
+    }
 
     getMax(): number {
+
+        /**
+         * Возвращает максимальное значение
+         * 
+         * @returns {number} - максимальное значение слайдера
+         */
+
         return this.max;
+
     }
-    getMin(): number {
-        return this.min;
+
+    setStep(newStep: number): void {
+
+        /**
+         * Устанавливает шаг бегунка. Если шаг отрицательный или равен 0, то он не устанавливается
+         * 
+         * @param {number} newStep - новое значение шага слайдера
+         */
+
+        if (newStep > 0) {
+            this.step = newStep;
+        }
+
     }
+
     getStep(): number {
+
+        /**
+         * Возвращает максимальное значение
+         * 
+         * @returns {number} - максимальное значение слайдера
+         */
+
         return this.step;
+
     }
+
+
+
+
 
     getThumbOnePosition(): IThumbPosition {
         return this.thumbOnePosition;
