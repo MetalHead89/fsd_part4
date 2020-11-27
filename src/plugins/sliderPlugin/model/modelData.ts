@@ -27,6 +27,21 @@ class ModelData {
         this.step = settings.step;
     }
 
+    setOrientation(orientation: string): void {
+
+        /**
+         * Устанавливает ориентацию слайдера. Если в параметре передана строка не равная "horizontal"
+         * или "vertical", то значение остаётся прежним
+         * 
+         * @param {string} orientation - ориентация слайдера
+         */
+
+        if (orientation === 'horizontal' || orientation === 'vertical') {
+            this.orientation = orientation;
+        }
+
+    }
+
     getOrientation(): string {
 
         /**
@@ -39,6 +54,21 @@ class ModelData {
 
     }
 
+    setSliderType(type: string): void {
+
+        /**
+         * Устанавливает тип слайдера. Если в параметре передана строка не равная "single"
+         * или "range", то значение остаётся прежним
+         * 
+         * @param {string} type - ориентация слайдера
+         */
+
+        if (type === 'single' || type === 'range') {
+            this.type = type;
+        }
+
+    }
+
     getSliderType(): string {
 
         /**
@@ -47,19 +77,7 @@ class ModelData {
          * @returns {string} - тип слайдера
          */
 
-        return this.type;;
-
-    }
-
-    getSliderSize(): ISliderSize {
-
-        /**
-         * Возвращает объект с шириной и высотой слайдера
-         * 
-         * @returns {ISliderSize} - объект с шириной и высотой слайдера
-         */
-
-        return this.sliderSize;
+        return this.type;
 
     }
 
@@ -75,6 +93,18 @@ class ModelData {
         const height: number = (sliderSize.height >= 0) ? sliderSize.height : 0;
 
         this.sliderSize = { 'width': width, 'height': height };
+
+    }
+
+    getSliderSize(): ISliderSize {
+
+        /**
+         * Возвращает объект с шириной и высотой слайдера
+         * 
+         * @returns {ISliderSize} - объект с шириной и высотой слайдера
+         */
+
+        return this.sliderSize;
 
     }
 
