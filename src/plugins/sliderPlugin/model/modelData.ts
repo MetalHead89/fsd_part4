@@ -123,6 +123,30 @@ class ModelData {
 
     }
 
+    getThumbSize(): ISliderSize {
+
+        /**
+         * Возвращает объект с шириной и высотой бегунка
+         * 
+         * @returns {ISliderSize} - объект с шириной и высотой бегунка
+         */
+
+        return this.thumbSize;
+
+    }
+
+    setTooltipsVisible(visible: boolean): void {
+
+        /**
+         * Устанавливает флаг видимости значений над бегунками
+         * 
+         * @param {boolean} visible - флаг видимости значений над бегунками
+         */
+
+        this.tooltipsVisible = visible;
+
+    }
+
     getTooltipsVisible(): boolean {
 
         /**
@@ -153,10 +177,6 @@ class ModelData {
     }
     getStep(): number {
         return this.step;
-    }
-
-    getThumbSize(): IThumbSize {
-        return this.thumbSize;
     }
 
     getThumbOnePosition(): IThumbPosition {
