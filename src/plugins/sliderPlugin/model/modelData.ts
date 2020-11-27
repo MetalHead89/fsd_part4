@@ -237,25 +237,59 @@ class ModelData {
 
     }
 
+    setThumbOnePosition(position: IThumbPosition): void {
 
+        /**
+         * Устанавливает позицию бегунка относительно левого и верхнего края родительского контейнера.
+         * Если одно из свойств переданного объекта имеет отрицательное значение, то соответствующее ему текущее значение остаётся неизменным
+         * 
+         * @param {IThumbPosition} position - объект содержащий новую позицию бегунка относительно левого и правого края родительского контейнера
+         */
 
+        const left: number = (position.left >= 0) ? position.left : 0;
+        const top: number = (position.top >= 0) ? position.top : 0;
 
+        this.thumbOnePosition = { 'left': left, 'top': top };
+    }
 
     getThumbOnePosition(): IThumbPosition {
+
+        /**
+         * Возвращает позицию бегунка относительно левого и верхнего края родительского контейнера
+         * 
+         * @returns {IThumbPosition} - объект содержащий позицию бегунка относительно левого и правого края родительского контейнера
+         */
+
         return this.thumbOnePosition;
     }
 
+    setThumbTwoPosition(position: IThumbPosition): void {
+
+        /**
+         * Устанавливает позицию бегунка относительно левого и верхнего края родительского контейнера.
+         * Если одно из свойств переданного объекта имеет отрицательное значение, то соответствующее ему текущее значение остаётся неизменным
+         * 
+         * @param {IThumbPosition} position - объект содержащий новую позицию бегунка относительно левого и правого края родительского контейнера
+         */
+
+        const left: number = (position.left >= 0) ? position.left : 0;
+        const top: number = (position.top >= 0) ? position.top : 0;
+
+        this.thumbTwoPosition = { 'left': left, 'top': top };
+
+    }
+
     getThumbTwoPosition(): IThumbPosition {
+
+         /**
+         * Возвращает позицию бегунка относительно левого и верхнего края родительского контейнера
+         * 
+         * @returns {IThumbPosition} - объект содержащий позицию бегунка относительно левого и правого края родительского контейнера
+         */
+
         return this.thumbTwoPosition;
     }
-
-    setThumbOnePosition(position: IThumbPosition): void {
-        this.thumbOnePosition = position;
-    }
-
-    setThumbTwoPosition(position: IThumbPosition): void {
-        this.thumbTwoPosition = position;
-    }
+    
 }
 
 export default ModelData;
