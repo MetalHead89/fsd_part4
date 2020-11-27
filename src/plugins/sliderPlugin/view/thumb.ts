@@ -61,7 +61,7 @@ class Thumb {
 
         // this.setZIndex(3);
         // this.observer.notify('changeZIndexToAnotherThumb', this.element);
-
+        
         const thumbCoords: DOMRect = this.element.getBoundingClientRect();
 
         this.shift.shiftX = cursorX - thumbCoords.left;
@@ -78,11 +78,11 @@ class Thumb {
     }
 
     private drag(event: MouseEvent): void {
-
+        
         let notifyMessage = 'thumbOneIsDragged';
 
         if (this.element.classList.contains('slider__thumb-two')) {
-            notifyMessage = 'startDragThumbTwo';
+            notifyMessage = 'thumbTwoIsDragged';
         }
 
         this.observer.notify(notifyMessage, this.getPosition({ 'x': event.clientX, 'y': event.clientY }));

@@ -14,8 +14,8 @@ class ModelData {
     private step: number;
     private sliderSize: ISliderSize = { 'width': 0, 'height': 0 };
     private thumbSize: IThumbSize = { 'width': 0, 'height': 0 };
-    private thumbOnePosition: IThumbPosition = { 'left': -1, 'top': -1 };
-    private thumbTwoPosition: IThumbPosition = { 'left': -1, 'top': -1 };
+    private thumbOnePosition: IThumbPosition = { 'left': 0, 'top': 0 };
+    private thumbTwoPosition: IThumbPosition = { 'left': 0, 'top': 0 };
 
     constructor(settings: ISliderSettings) {
         this.orientation = settings.orienation;

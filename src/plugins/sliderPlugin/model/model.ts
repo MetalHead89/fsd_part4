@@ -132,9 +132,11 @@ class Model {
     // }
 
     dragthumbOne(thumbPosition: IThumbPosition) {
+        this.calculator.dragThumbOne(thumbPosition);
     }
 
     dragThumbTwo(thumbPosition: IThumbPosition) {
+        this.calculator.dragThumbTwo(thumbPosition);
     }
 
     setThumbOneToStartingPosition() {

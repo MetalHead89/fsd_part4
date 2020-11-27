@@ -22,7 +22,7 @@ class ModelCalculator {
             this.getElementPosByOrientation(thumbPosition) >= this.getElementPosByOrientation(this.data.getThumbTwoPosition())) {
             thumbPosition = this.data.getThumbOnePosition();
         }
-
+        
         this.data.setThumbOnePosition(this.thumbDrag(thumbPosition, 'thumbOneDragged'));
 
         // this.observer.notify('progressBarDraged', this.calcProgressBarPosition());
@@ -31,21 +31,21 @@ class ModelCalculator {
     }
 
     dragThumbTwo(thumbPosition: IThumbPosition) {
-
+        
         if (this.data.getSliderType() == 'range' &&
             this.getElementPosByOrientation(thumbPosition) <= this.getElementPosByOrientation(this.data.getThumbOnePosition())) {
             thumbPosition = this.data.getThumbTwoPosition();
 
-            if (this.getElementPosByOrientation(thumbPosition) < this.getElementPosByOrientation(this.data.getThumbOnePosition())) {
-                if (this.data.getOrientation() === 'horizontal') {
-                    thumbPosition.left = this.data.getSliderSize().width;
-                } else if (this.data.getOrientation() === 'vertical') {
-                    thumbPosition.top = this.data.getSliderSize().height;
-                }
-            }
+            // if (this.getElementPosByOrientation(thumbPosition) < this.getElementPosByOrientation(this.data.getThumbOnePosition())) {
+            //     if (this.data.getOrientation() === 'horizontal') {
+            //         thumbPosition.left = this.data.getSliderSize().width - this.data.getThumbSize().width;
+            //     } else if (this.data.getOrientation() === 'vertical') {
+            //         thumbPosition.top = this.data.getSliderSize().height - this.data.getThumbSize().height;
+            //     }
+            // }
         }
-
-        this.data.setThumbOnePosition(this.thumbDrag(thumbPosition, 'thumbTwoDragged'));
+        
+        this.data.setThumbTwoPosition(this.thumbDrag(thumbPosition, 'thumbTwoDragged'));
         // this.observer.notify('progressBarDraged', this.calcProgressBarPosition());
         // this.observer.notify('tooltipTwoDraged', this.positionToValue(this.getElementPosByOrientation(this.thumbTwoPosition)));
 
@@ -63,7 +63,7 @@ class ModelCalculator {
         let endEdge: number = this.getElementSizeByOrientation(this.data.getSliderSize()) - this.getElementSizeByOrientation(this.data.getThumbSize());
 
         newPos = this.calculateNewThumbPosition(newPos);
-
+        
         if (newPos >= endEdge) {
             newPos = endEdge;
         }
@@ -126,23 +126,25 @@ class ModelCalculator {
         /**
          * Высчитывает новую позицию бегунка в соответствии с заданным шагом 
          */
-
+        console.log(this.data.getThumbSize())
         return Math.round(value / this.calculateStepSize()) * this.calculateStepSize()
     }
 
     setThumbOneToStartingPosition() {
-
+        
         /** Устанавливает первый бегунок на стартовую позицию */
+
+        this.data.setThumbTwoPosition({'left': this.data.getSliderSize().width, 'top': this.data.getSliderSize().height})
 
         if (this.data.getOrientation() === 'horizontal') {
             if (this.data.getSliderType() === 'single') {
                 this.dragThumbOne({
-                    'left': this.data.getSliderSize().width / 2,
+                    'left': this.data.getSliderSize().width / 2 - this.data.getThumbSize().width / 2,
                     'top': 0
                 });
             } else if (this.data.getSliderType() === 'range') {
                 this.dragThumbOne({
-                    'left': this.data.getSliderSize().width * 0.3,
+                    'left': this.data.getSliderSize().width * 0.3 - this.data.getThumbSize().width / 2,
                     'top': 0
                 });
             }
@@ -150,12 +152,12 @@ class ModelCalculator {
             if (this.data.getSliderType() === 'single') {
                 this.dragThumbOne({
                     'left': 0,
-                    'top': this.data.getSliderSize().height / 2
+                    'top': this.data.getSliderSize().height / 2 - this.data.getThumbSize().height / 2
                 });
             } else if (this.data.getSliderType() === 'range') {
                 this.dragThumbOne({
                     'left': 0,
-                    'top': this.data.getSliderSize().height * 0.3
+                    'top': this.data.getSliderSize().height * 0.3 - this.data.getThumbSize().height / 2
                 });
             }
         }
@@ -168,13 +170,13 @@ class ModelCalculator {
 
         if (this.data.getOrientation() === 'horizontal') {
             this.dragThumbTwo({
-                'left': this.data.getSliderSize().width * 0.7,
+                'left': this.data.getSliderSize().width * 0.7 - this.data.getThumbSize().width / 2,
                 'top': 0
             });
         } else if (this.data.getOrientation() === 'vertical') {
             this.dragThumbTwo({
                 'left': 0,
-                'top': this.data.getSliderSize().height * 0.7
+                'top': this.data.getSliderSize().height * 0.7 - this.data.getThumbSize().height / 2
             });
         }
 

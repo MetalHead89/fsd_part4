@@ -45,7 +45,6 @@ class Presenter {
             (thumbPosition: IThumbPosition) => { this.model.dragthumbOne(thumbPosition) });
         this.observer.subscribe('thumbTwoIsDragged',
             (thumbPosition: IThumbPosition) => { this.model.dragThumbTwo(thumbPosition) });
-
         this.observer.subscribe('thumbOneDragged',
             (thumbPosition: IThumbPosition) => { this.view.moveThumbOne(thumbPosition) });
         this.observer.subscribe('thumbTwoDragged',
@@ -70,15 +69,11 @@ class Presenter {
             this.view.createTooltipOne(`slider__tooltip slider__tooltip_${orientation}`);
         }
         if (sliderType === 'range') {
-            this.view.createThumbTwo(`slider__thumb slider__thumb-one slider__thumb_${orientation}`);
+            this.view.createThumbTwo(`slider__thumb slider__thumb-two slider__thumb_${orientation}`);
             if (tooltipsVisible) {
                 this.view.createTooltipTwo(`slider__tooltip slider__tooltip_${orientation}`);
             }
         }
-
-
-
-
     }
 
 }
