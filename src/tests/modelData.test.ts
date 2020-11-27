@@ -31,40 +31,30 @@ beforeEach(() => {
 describe('Get and set slider orientation', () => {
 
     test('Should be horizontal', () => {
-
         expect(_this.getOrientation()).toBe('horizontal');
-
     });
 
     test('Should be vertical', () => {
-
         settings.orienation = 'vertical';
         _this = new ModelData(settings);
 
         expect(_this.getOrientation()).toBe('vertical');
-
     });
 
     test('Should be vertical', () => {
-
         _this.setOrientation('vertical');
         expect(_this.getOrientation()).toBe('vertical');
-
     });
 
     test('Should be horizontal', () => {
-
         _this.setOrientation('someText');
         expect(_this.getOrientation()).toBe('horizontal');
-
     });
 
     test('Should be vertical', () => {
-
         _this.setOrientation('vertical');
         _this.setOrientation('someText');
         expect(_this.getOrientation()).toBe('vertical');
-
     });
 
 });
@@ -72,46 +62,88 @@ describe('Get and set slider orientation', () => {
 describe('Get and set slider type', () => {
 
     test('Should be single', () => {
-
         settings.type = 'single';
         _this = new ModelData(settings);
 
         expect(_this.getSliderType()).toBe('single');
-
     });
 
     test('Should be range', () => {
-
         settings.type = 'range';
         _this = new ModelData(settings);
 
         expect(_this.getSliderType()).toBe('range');
-
     });
 
     test('Should be range', () => {
-
         _this.setSliderType('range');
         expect(_this.getSliderType()).toBe('range');
-
     });
 
     test('Should be single', () => {
-
         settings.type = 'single';
         _this = new ModelData(settings);
-
         _this.setOrientation('someText');
-        expect(_this.getSliderType()).toBe('single');
 
+        expect(_this.getSliderType()).toBe('single');
     });
 
     test('Should be range', () => {
-
         _this.setSliderType('range');
         _this.setSliderType('someText');
-        expect(_this.getSliderType()).toBe('range');
 
+        expect(_this.getSliderType()).toBe('range');
+    });
+
+});
+
+describe('Get and set slider size', () => {
+
+    test('Should be {width: 0, height: 0}', () => {
+        expect(_this.getSliderSize().width).toBe(0);
+        expect(_this.getSliderSize().height).toBe(0);
+    });
+
+    test('Should be {width: 500, height: 700}', () => {
+        _this.setSliderSize({'width': 500, 'height': 700});
+
+        expect(_this.getSliderSize().width).toBe(500);
+        expect(_this.getSliderSize().height).toBe(700);
+    });
+
+    test('Should be {width: 1508, height: 91888}', () => {
+        _this.setSliderSize({'width': 1508, 'height': 91888});
+
+        expect(_this.getSliderSize().width).toBe(1508);
+        expect(_this.getSliderSize().height).toBe(91888);
+    });
+
+    test('Should be {width: 0, height: 0}', () => {
+        _this.setSliderSize({'width': 0, 'height': 0});
+
+        expect(_this.getSliderSize().width).toBe(0);
+        expect(_this.getSliderSize().height).toBe(0);
+    });
+
+    test('Should be {width: 0, height: 89}', () => {
+        _this.setSliderSize({'width': -1, 'height': 89});
+
+        expect(_this.getSliderSize().width).toBe(0);
+        expect(_this.getSliderSize().height).toBe(89);
+    });
+
+    test('Should be {width: 69, height: 0}', () => {
+        _this.setSliderSize({'width': 69, 'height': -1});
+
+        expect(_this.getSliderSize().width).toBe(69);
+        expect(_this.getSliderSize().height).toBe(0);
+    });
+
+    test('Should be {width: 0, height: 0}', () => {
+        _this.setSliderSize({'width': -911, 'height': -5});
+
+        expect(_this.getSliderSize().width).toBe(0);
+        expect(_this.getSliderSize().height).toBe(0);
     });
 
 });
