@@ -379,4 +379,12 @@ describe('Get and set position of the second thumb', () => {
         expect(_this.getThumbTwoPosition().top).toBe(58);
     });
 
+    test('Should be left: 0 and top: 0', () => {
+        _this.setSliderSize({'width': 450, 'height': 450});
+        _this.setThumbTwoPosition({ 'left': 0, 'top': 0 })
+
+        expect(_this.getThumbTwoPosition().left).toBe(0);
+        expect(_this.getThumbTwoPosition().top).toBe(0);
+    });
+
 });
