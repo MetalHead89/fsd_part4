@@ -229,7 +229,7 @@ describe('Get and set min value', () => {
     test('Should be 0', () => {
         expect(_this.getMin()).toBe(0);
     });
-    
+
     test('Should be 6', () => {
 
         _this.setMin(6);
@@ -258,7 +258,7 @@ describe('Get and set max value', () => {
     test('Should be 100', () => {
         expect(_this.getMax()).toBe(100);
     });
-    
+
     test('Should be 6', () => {
 
         _this.setMax(6);
@@ -287,7 +287,7 @@ describe('Get and set step', () => {
     test('Should be 1', () => {
         expect(_this.getStep()).toBe(1);
     });
-    
+
     test('Should be 6', () => {
 
         _this.setStep(6);
@@ -307,6 +307,76 @@ describe('Get and set step', () => {
         _this.setStep(-26);
         expect(_this.getStep()).toBe(1);
 
+    });
+
+});
+
+describe('Get and set position of the first thumb', () => {
+
+    test('Should be left: 25 and top: 58', () => {
+        _this.setSliderSize({'width': 450, 'height': 450})
+        _this.setThumbTwoPosition({ 'left': 100, 'top': 100 });
+        _this.setThumbOnePosition({ 'left': 25, 'top': 58 })
+
+        expect(_this.getThumbOnePosition().left).toBe(25);
+        expect(_this.getThumbOnePosition().top).toBe(58);
+    });
+
+    test('Should be left: 100 and top: 100', () => {
+        _this.setSliderSize({'width': 450, 'height': 450})
+        _this.setThumbTwoPosition({ 'left': 100, 'top': 100 });
+        _this.setThumbOnePosition({ 'left': 100, 'top': 100 })
+
+        expect(_this.getThumbOnePosition().left).toBe(100);
+        expect(_this.getThumbOnePosition().top).toBe(100);
+    });
+
+    test('Should be left: 0 and top: 50', () => {
+        _this.setSliderSize({'width': 450, 'height': 450})
+        _this.setThumbTwoPosition({ 'left': 100, 'top': 100 });
+        _this.setThumbOnePosition({ 'left': 101, 'top': 50 })
+
+        expect(_this.getThumbOnePosition().left).toBe(0);
+        expect(_this.getThumbOnePosition().top).toBe(50);
+    });
+
+    test('Should be left: 50 and top: 0', () => {
+        _this.setSliderSize({'width': 450, 'height': 450})
+        _this.setThumbTwoPosition({ 'left': 100, 'top': 100 });
+        _this.setThumbOnePosition({ 'left': 50, 'top': 101 })
+
+        expect(_this.getThumbOnePosition().left).toBe(50);
+        expect(_this.getThumbOnePosition().top).toBe(0);
+    });
+
+    test('Should be left: 0 and top: 50', () => {
+        _this.setSliderSize({'width': 450, 'height': 450})
+        _this.setThumbTwoPosition({ 'left': 100, 'top': 100 });
+        _this.setThumbOnePosition({ 'left': -1, 'top': 50 })
+
+        expect(_this.getThumbOnePosition().left).toBe(0);
+        expect(_this.getThumbOnePosition().top).toBe(50);
+    });
+
+    test('Should be left: 50 and top: 0', () => {
+        _this.setSliderSize({'width': 450, 'height': 450})
+        _this.setThumbTwoPosition({ 'left': 100, 'top': 100 });
+        _this.setThumbOnePosition({ 'left': 50, 'top': -8 })
+
+        expect(_this.getThumbOnePosition().left).toBe(50);
+        expect(_this.getThumbOnePosition().top).toBe(0);
+    });
+
+});
+
+describe('Get and set position of the second thumb', () => {
+
+    test('Should be left: 25 and top: 58', () => {
+        _this.setSliderSize({'width': 450, 'height': 450});
+        _this.setThumbTwoPosition({ 'left': 25, 'top': 58 })
+
+        expect(_this.getThumbTwoPosition().left).toBe(25);
+        expect(_this.getThumbTwoPosition().top).toBe(58);
     });
 
 });

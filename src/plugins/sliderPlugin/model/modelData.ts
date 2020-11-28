@@ -241,13 +241,20 @@ class ModelData {
 
         /**
          * Устанавливает позицию бегунка относительно левого и верхнего края родительского контейнера.
-         * Если одно из свойств переданного объекта имеет отрицательное значение, то соответствующее ему текущее значение остаётся неизменным
+         * Если одно из свойств переданного объекта имеет отрицательное значение, то соответствующее ему текущее значение приравнивается к 0
          * 
          * @param {IThumbPosition} position - объект содержащий новую позицию бегунка относительно левого и правого края родительского контейнера
          */
 
-        const left: number = (position.left >= 0) ? position.left : 0;
-        const top: number = (position.top >= 0) ? position.top : 0;
+        let left: number = this.getThumbOnePosition().left;
+        let top: number = this.getThumbOnePosition().top;
+
+        if (position.left <= this.getThumbTwoPosition().left) {
+            left = (position.left >= 0) ? position.left : 0;
+        };
+        if (position.top <= this.getThumbTwoPosition().top) {
+            top = (position.top >= 0) ? position.top : 0;
+        };
 
         this.thumbOnePosition = { 'left': left, 'top': top };
     }
@@ -267,13 +274,19 @@ class ModelData {
 
         /**
          * Устанавливает позицию бегунка относительно левого и верхнего края родительского контейнера.
-         * Если одно из свойств переданного объекта имеет отрицательное значение, то соответствующее ему текущее значение остаётся неизменным
          * 
          * @param {IThumbPosition} position - объект содержащий новую позицию бегунка относительно левого и правого края родительского контейнера
          */
 
-        const left: number = (position.left >= 0) ? position.left : 0;
-        const top: number = (position.top >= 0) ? position.top : 0;
+        let left: number = this.getThumbTwoPosition().left;
+        let top: number = this.getThumbTwoPosition().top;
+
+        if (position.left >= this.getThumbOnePosition().left) {
+            left = (position.left <= (this.getSliderSize().width - this.getThumbSize().width)) ? position.left : (this.getSliderSize().width - this.getThumbSize().width);
+        };
+        if (position.top >= this.getThumbOnePosition().top) {
+            top = (position.top <= (this.getSliderSize().height - this.getThumbSize().height)) ? position.top : (this.getSliderSize().height - this.getThumbSize().height);
+        };
 
         this.thumbTwoPosition = { 'left': left, 'top': top };
 
@@ -281,15 +294,15 @@ class ModelData {
 
     getThumbTwoPosition(): IThumbPosition {
 
-         /**
-         * Возвращает позицию бегунка относительно левого и верхнего края родительского контейнера
-         * 
-         * @returns {IThumbPosition} - объект содержащий позицию бегунка относительно левого и правого края родительского контейнера
-         */
+        /**
+        * Возвращает позицию бегунка относительно левого и верхнего края родительского контейнера
+        * 
+        * @returns {IThumbPosition} - объект содержащий позицию бегунка относительно левого и правого края родительского контейнера
+        */
 
         return this.thumbTwoPosition;
     }
-    
+
 }
 
 export default ModelData;
