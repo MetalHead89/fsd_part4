@@ -3,6 +3,7 @@ import { ISliderSize } from '../interfaces'
 import { IThumbSize } from '../interfaces'
 import { IThumbPosition } from '../interfaces'
 import { IDragThumbArgs } from '../interfaces'
+import { IProgressBarPosition } from '../interfaces';
 
 import Observer from '../observer/observer';
 import Model from '../model/model';
@@ -49,7 +50,8 @@ class Presenter {
                 this.view.moveThumbTwo(args.thumbPosition) ;
                 this.view.tooltipTwoSetValue(args.tooltipValue);
             });
-
+        this.observer.subscribe('progressBarDraged',
+            (progressBarPosition: IProgressBarPosition) => { this.view.setProgressBarPosition(progressBarPosition) });
     }
 
     createNewSlider(): void {
@@ -64,6 +66,7 @@ class Presenter {
 
         this.view.createSlider(`slider slider_${orientation}`);
         this.view.createTrack(`slider__track slider__track_${orientation}`);
+        this.view.createProgressBar(`slider__progress-bar slider__progress-bar_${orientation}`)
         this.view.createThumbOne(`slider__thumb slider__thumb-one slider__thumb_${orientation}`);
         if (tooltipsVisible) {
             this.view.createTooltipOne(`slider__tooltip slider__tooltip_${orientation}`);

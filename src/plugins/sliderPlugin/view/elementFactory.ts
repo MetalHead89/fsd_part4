@@ -3,6 +3,7 @@ import Slider from './slider';
 import Track from './track';
 import Thumb from './thumb';
 import Tooltip from './tooltip';
+import ProgressBar from './progressBar';
 
 class ElementFactory {
 
@@ -128,6 +129,15 @@ class ElementFactory {
         parrent.append(element);
 
         return obj;
+
+    }
+
+    createProgressBar(parrent: HTMLDivElement, styleClasses: string): ProgressBar {
+
+        const createProgressBarObj = (obj: HTMLDivElement) => { return new ProgressBar(obj) }
+        const progressBar = this.createElement(parrent, styleClasses, createProgressBarObj);
+
+        return progressBar;
 
     }
 

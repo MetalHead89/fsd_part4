@@ -1,4 +1,46 @@
-// export default ProgressBar
+import { IProgressBarPosition } from '../interfaces';
+
+class ProgressBar {
+    private element: HTMLDivElement
+
+    constructor(element: HTMLDivElement) {
+        this.element = element;
+    }
+
+
+    getElement(): HTMLDivElement {
+        return this.element;
+    }
+
+
+    setPosition(progressPosition: IProgressBarPosition) {
+        if (progressPosition.orientation === 'horizontal') {
+            this.setHorizontalOrientation();
+            this.element.style.left = progressPosition.start + 'px';
+            this.element.style.width = progressPosition.end + 'px';
+        } else if (progressPosition.orientation === 'vertical') {
+            this.setVerticalOrientation();
+            this.element.style.top = progressPosition.start + 'px';
+            this.element.style.height = progressPosition.end + 'px';
+        }        
+    }
+
+
+    setHorizontalOrientation() {
+        this.element.removeAttribute('style');
+        this.element.classList.remove('slider__progress-bar_vertical')
+        this.element.classList.add('slider__progress-bar_horizontal')
+    }
+    
+
+    setVerticalOrientation() {
+        this.element.removeAttribute('style');
+        this.element.classList.remove('slider__progress-bar_horizontal')
+        this.element.classList.add('slider__progress-bar_vertical')
+    }
+}
+
+export default ProgressBar
 
 
 

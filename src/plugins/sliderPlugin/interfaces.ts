@@ -47,6 +47,12 @@ export interface IDragThumbArgs {
     'tooltipValue': number
 }
 
+export interface IProgressBarPosition {
+    'orientation': string,
+    'start': number,
+    'end': number
+}
+
 
 
 

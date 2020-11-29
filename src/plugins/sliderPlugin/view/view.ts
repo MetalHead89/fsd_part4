@@ -1,10 +1,12 @@
-import { IThumbPosition } from '../interfaces'
+import { IThumbPosition } from '../interfaces';
+import { IProgressBarPosition } from '../interfaces';
 
 import Observer from '../observer/observer';
 import Slider from './slider';
 import Track from './track';
 import Thumb from './thumb';
 import Tooltip from './tooltip';
+import ProgressBar from './progressBar';
 import ElementFactory from './elementFactory';
 
 class View {
@@ -16,6 +18,7 @@ class View {
     private thumbTwo: Thumb | null = null;
     private tooltipOne: Tooltip | null = null;
     private tooltipTwo: Tooltip | null = null;
+    private progressBar: ProgressBar | null = null;
     private elementFactory: ElementFactory;
     private sliderWrapper: HTMLDivElement;
 
@@ -125,6 +128,14 @@ class View {
 
     }
 
+    createProgressBar(styleClasses: string) {
+
+        if (this.slider != null) {
+            this.progressBar = this.elementFactory.createProgressBar(this.slider.getElement(), styleClasses);
+        }
+
+    }
+
     moveThumbOne(position: IThumbPosition): void {
         if (this.thumbOne !== null) {
             this.thumbOne.moveTo(position);
@@ -146,6 +157,12 @@ class View {
     tooltipTwoSetValue(newValue: number) {
         if (this.tooltipTwo !== null) {
             this.tooltipTwo.setValue(newValue)
+        }
+    }
+
+    setProgressBarPosition(progressPosition: IProgressBarPosition) {
+        if (this.progressBar !== null) {
+            this.progressBar.setPosition(progressPosition);
         }
     }
 

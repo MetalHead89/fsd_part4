@@ -2,6 +2,7 @@ import { IThumbPosition } from '../interfaces'
 import { ISliderSize } from '../interfaces';
 import { IThumbSize } from '../interfaces'
 import { IScalePointSize } from '../interfaces'
+import { IProgressBarPosition } from '../interfaces';
 
 import Observer from '../observer/observer';
 import ModelData from './modelData';
@@ -78,6 +79,7 @@ class ModelCalculator {
         }
 
         this.observer.notify(notyfyMessage, {'thumbPosition': newThumbPosition, 'tooltipValue': thumbValue});
+        this.observer.notify('progressBarDraged', this.calcProgressBarPosition());
     }
 
     private getElementSizeByOrientation(element: ISliderSize | IThumbSize | IScalePointSize): number {
@@ -210,6 +212,30 @@ class ModelCalculator {
          */
 
         return(this.getElementSizeByOrientation(this.data.getSliderSize()) - this.getElementSizeByOrientation(this.data.getThumbSize())) / 100;
+    }
+
+    private calcProgressBarPosition(): IProgressBarPosition {
+
+        /**
+         * Возвращает размер и точку начала прогрессбара в зависимости от текущего положения бегунков
+         */
+
+        const progress: IProgressBarPosition = {
+            'orientation': this.data.getOrientation(),
+            'start': 0,
+            'end': 0
+        };
+
+        if (this.data.getSliderType() === 'single') {
+            progress.start = 0;
+            progress.end = this.getElementPosByOrientation(this.data.getThumbOnePosition()) + this.getElementSizeByOrientation(this.data.getThumbSize());
+        } else if (this.data.getSliderType() === 'range') {
+            progress.start = this.getElementPosByOrientation(this.data.getThumbOnePosition());
+            progress.end = this.getElementPosByOrientation(this.data.getThumbTwoPosition()) -
+                this.getElementPosByOrientation(this.data.getThumbOnePosition()) + this.getElementSizeByOrientation(this.data.getThumbSize());
+        }
+
+        return progress;
     }
 
 }
