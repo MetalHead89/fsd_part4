@@ -6,8 +6,11 @@ import { IScalePointSize } from '../interfaces'
 import Observer from '../observer/observer';
 import ModelData from './modelData';
 
-class ModelCalculator {
 
+/**
+ * Класс обеспечивает расчёт бизнес-логики слайдера
+ */
+class ModelCalculator {
     private observer: Observer;
     private data: ModelData;
 
@@ -16,70 +19,63 @@ class ModelCalculator {
         this.data = data;
     }
 
-    dragThumbOne(thumbPosition: IThumbPosition) {
 
-        if (this.data.getSliderType() == 'range' &&
-            this.getElementPosByOrientation(thumbPosition) >= this.getElementPosByOrientation(this.data.getThumbTwoPosition())) {
-            thumbPosition = this.data.getThumbOnePosition();
-        }
-        
-        this.data.setThumbOnePosition(this.thumbDrag(thumbPosition, 'thumbOneDragged'));
+    /**
+     * Получает объект с позицией первого бегунка, приравнивает его свойства к допустимым значениям и передаёт его в метод thumbDrag,
+     * который осуществляет передвижение бегунка в соответствии с полученными данными
+     * 
+     * @param {IThumbPosition} thumbPosition - сырая позиция бегунка, может выходить за пределы слайдера или второго бегунка
+     */
+    dragThumbOne(thumbPosition: IThumbPosition) {
+        this.data.setThumbOnePosition(this.changePositionAccordingToStep(thumbPosition));
+        const correctThumOnePosition: IThumbPosition = this.data.getThumbOnePosition();
+
+        this.thumbDrag(correctThumOnePosition, 'thumbOneDragged');
 
         // this.observer.notify('progressBarDraged', this.calcProgressBarPosition());
         // this.observer.notify('tooltipOneDraged', this.positionToValue(this.getElementPosByOrientation(this.thumbOnePosition)));
-
     }
 
-    dragThumbTwo(thumbPosition: IThumbPosition) {
-        
-        if (this.data.getSliderType() == 'range' &&
-            this.getElementPosByOrientation(thumbPosition) <= this.getElementPosByOrientation(this.data.getThumbOnePosition())) {
-            thumbPosition = this.data.getThumbTwoPosition();
 
-            // if (this.getElementPosByOrientation(thumbPosition) < this.getElementPosByOrientation(this.data.getThumbOnePosition())) {
-            //     if (this.data.getOrientation() === 'horizontal') {
-            //         thumbPosition.left = this.data.getSliderSize().width - this.data.getThumbSize().width;
-            //     } else if (this.data.getOrientation() === 'vertical') {
-            //         thumbPosition.top = this.data.getSliderSize().height - this.data.getThumbSize().height;
-            //     }
-            // }
-        }
-        
-        this.data.setThumbTwoPosition(this.thumbDrag(thumbPosition, 'thumbTwoDragged'));
+    /**
+     * Получает объект с позицией вторго бегунка, приравнивает его свойства к допустимым значениям и передаёт его в метод thumbDrag,
+     * который осуществляет передвижение бегунка в соответствии с полученными данными
+     * 
+     * @param {IThumbPosition} thumbPosition - сырая позиция бегунка, может выходить за пределы слайдера или первого бегунка
+     */
+    dragThumbTwo(thumbPosition: IThumbPosition) {
+        // if (this.data.getSliderType() == 'range' &&
+        //     this.getElementPosByOrientation(thumbPosition) <= this.getElementPosByOrientation(this.data.getThumbOnePosition())) {
+        //     thumbPosition = this.data.getThumbTwoPosition();
+
+        //     // if (this.getElementPosByOrientation(thumbPosition) < this.getElementPosByOrientation(this.data.getThumbOnePosition())) {
+        //     //     if (this.data.getOrientation() === 'horizontal') {
+        //     //         thumbPosition.left = this.data.getSliderSize().width - this.data.getThumbSize().width;
+        //     //     } else if (this.data.getOrientation() === 'vertical') {
+        //     //         thumbPosition.top = this.data.getSliderSize().height - this.data.getThumbSize().height;
+        //     //     }
+        //     // }
+        // }
+        this.data.setThumbTwoPosition(this.changePositionAccordingToStep(thumbPosition));
+        const correctThumTwoPosition: IThumbPosition = this.data.getThumbTwoPosition();
+
+        this.thumbDrag(correctThumTwoPosition, 'thumbTwoDragged');
         // this.observer.notify('progressBarDraged', this.calcProgressBarPosition());
         // this.observer.notify('tooltipTwoDraged', this.positionToValue(this.getElementPosByOrientation(this.thumbTwoPosition)));
 
     }
 
-    private thumbDrag(thumbPosition: IThumbPosition, notyfyMessage: string): IThumbPosition {
+    private thumbDrag(thumbPosition: IThumbPosition, notyfyMessage: string): void {
 
         const newThumbPosition = Object.assign({}, thumbPosition);
-        let newPos: number = this.getElementPosByOrientation(newThumbPosition);
-
-        if (newPos < 0) {
-            newPos = 0;
-        }
-
-        let endEdge: number = this.getElementSizeByOrientation(this.data.getSliderSize()) - this.getElementSizeByOrientation(this.data.getThumbSize());
-
-        newPos = this.calculateNewThumbPosition(newPos);
-        
-        if (newPos >= endEdge) {
-            newPos = endEdge;
-        }
 
         if (this.data.getOrientation() === 'horizontal') {
-            newThumbPosition.left = newPos;
             newThumbPosition.top = 0;
         } else if (this.data.getOrientation() === 'vertical') {
-            newThumbPosition.top = newPos;
             newThumbPosition.left = 0;
         }
 
         this.observer.notify(notyfyMessage, newThumbPosition);
-
-        return newThumbPosition;
-
     }
 
     private getElementSizeByOrientation(element: ISliderSize | IThumbSize | IScalePointSize): number {
@@ -121,6 +117,17 @@ class ModelCalculator {
             this.getElementSizeByOrientation(this.data.getThumbSize())) / this.calculateStepsCount();
     }
 
+    private changePositionAccordingToStep(position: IThumbPosition): IThumbPosition {
+
+        /**
+         * Высчитывает новую позицию бегунка в соответствии с заданным шагом 
+         */
+        position.left = Math.round(position.left / this.calculateStepSize()) * this.calculateStepSize();
+        position.top = Math.round(position.top / this.calculateStepSize()) * this.calculateStepSize();
+
+        return position;
+    }
+
     private calculateNewThumbPosition(value: number) {
 
         /**
@@ -131,10 +138,10 @@ class ModelCalculator {
     }
 
     setThumbOneToStartingPosition() {
-        
+
         /** Устанавливает первый бегунок на стартовую позицию */
 
-        this.data.setThumbTwoPosition({'left': this.data.getSliderSize().width, 'top': this.data.getSliderSize().height})
+        this.data.setThumbTwoPosition({ 'left': this.data.getSliderSize().width, 'top': this.data.getSliderSize().height })
 
         if (this.data.getOrientation() === 'horizontal') {
             if (this.data.getSliderType() === 'single') {
@@ -161,7 +168,7 @@ class ModelCalculator {
                 });
             }
         }
-        
+
     }
 
     setThumbTwoToStartingPosition() {
