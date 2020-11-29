@@ -1,4 +1,67 @@
-// export default Scale;
+import { IScalePointSize } from '../interfaces';
+import Observer from "../observer/observer";
+
+class Scale {
+    private element: HTMLDivElement;
+    private observer: Observer;
+    private orientation: string;
+
+    constructor(element: HTMLDivElement, observer: Observer, orientation: string) {
+        this.element = element;
+        this.observer = observer;
+        this.orientation = orientation;
+    }
+
+    getScalePointMaxSize(maxValue: number): IScalePointSize {
+        const scalePoint = this.addScalePoint(0, 0, maxValue);
+        const width = scalePoint.offsetWidth;
+        const height = scalePoint.offsetHeight;
+        scalePoint.remove();
+
+        return { 'width': width, 'height': height };
+    }
+
+    addScalePoint(position: number, scalePointWidth: number, pointValue: number): HTMLElement {
+
+        const scalePoint: HTMLElement = document.createElement('div');
+        if (this.orientation === 'horizontal') {
+            scalePoint.className = 'slider__scale-point slider__scale-point_horizontal';
+        } else if (this.orientation === 'vertical') {
+            scalePoint.className = 'slider__scale-point slider__scale-point_vertical';
+        }
+        
+        if (scalePointWidth > 0) {
+            scalePoint.style.width = scalePointWidth + 'px';
+        }
+
+        const divisionMarker: HTMLElement = document.createElement('div')
+        divisionMarker.className = ('slider__scale-point-marker')
+
+        const divisionLabel: HTMLElement = document.createElement('div')
+        if (this.orientation === 'horizontal') {
+            divisionLabel.className = 
+                ('slider__scale-point-label slider__scale-point-label_horizontal')
+        } else if (this.orientation === 'vertical') {
+            divisionLabel.className = 
+                ('slider__scale-point-label slider__scale-point-label_vertical')
+        }
+        divisionLabel.innerText = pointValue.toString();
+
+        if (this.orientation === 'horizontal') {
+            scalePoint.style.left = position + 'px';
+        } else if (this.orientation === 'vertical') {
+            scalePoint.style.top = position + 'px';
+        }
+
+        scalePoint.append(divisionMarker);
+        scalePoint.append(divisionLabel);
+        this.element.append(scalePoint);
+
+        return scalePoint
+    }
+}
+
+export default Scale;
 
 
 
@@ -70,14 +133,14 @@
 //         return scalePoint
 //     }
 
-//     getScalePointMaxSize(maxValue: number): IScalePointSize {
-//         const scalePoint = this.addScalePoint(0, 0, maxValue);
-//         const width = scalePoint.offsetWidth;
-//         const height = scalePoint.offsetHeight;
-//         scalePoint.remove();
+    // getScalePointMaxSize(maxValue: number): IScalePointSize {
+    //     const scalePoint = this.addScalePoint(0, 0, maxValue);
+    //     const width = scalePoint.offsetWidth;
+    //     const height = scalePoint.offsetHeight;
+    //     scalePoint.remove();
 
-//         return { 'width': width, 'height': height };
-//     }
+    //     return { 'width': width, 'height': height };
+    // }
 
 //     private getPosition(cursorPosition: ICursorPsition): ICursorPsition {
 

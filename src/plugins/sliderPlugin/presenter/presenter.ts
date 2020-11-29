@@ -4,6 +4,8 @@ import { IThumbSize } from '../interfaces'
 import { IThumbPosition } from '../interfaces'
 import { IDragThumbArgs } from '../interfaces'
 import { IProgressBarPosition } from '../interfaces';
+import { IScalePointSize } from '../interfaces';
+import { IScalePointSettings } from '../interfaces';
 
 import Observer from '../observer/observer';
 import Model from '../model/model';
@@ -19,7 +21,7 @@ class Presenter {
 
         this.observer = new Observer();
         this.model = new Model(this.observer, settings);
-        this.view = new View(this.observer, sliderWrapper);
+        this.view = new View(this.observer, sliderWrapper, this.model.getOrientation());
 
         this.addObserverListeners();
         this.createNewSlider();
@@ -52,6 +54,12 @@ class Presenter {
             });
         this.observer.subscribe('progressBarDraged',
             (progressBarPosition: IProgressBarPosition) => { this.view.setProgressBarPosition(progressBarPosition) });
+        this.observer.subscribe('scaleIsCreated', () => { 
+            this.model.setScalePointSize(this.getScalePointMaxSize());
+            this.model.generateScale() 
+        });
+        this.observer.subscribe('addScalePoint',
+            (pointSettings: IScalePointSettings) => { this.view.addScalePoint(pointSettings) });
     }
 
     createNewSlider(): void {
@@ -78,7 +86,14 @@ class Presenter {
                 this.view.createTooltipTwo(`slider__tooltip slider__tooltip_${orientation}`);
             }
         }
-        this.model.setThumbTwoToStartingPosition()
+        this.model.setThumbTwoToStartingPosition();
+        // this.model.setScalePointSize(this.getScalePointMaxSize());
+        this.view.createScale(`slider__scale slider__scale_${orientation}`);
+    }
+
+    private getScalePointMaxSize(): IScalePointSize{
+        const sliderMaxValue: number = this.model.getMax();
+        return this.view.getScalePointMaxSize(sliderMaxValue);
     }
 
 }
@@ -175,8 +190,8 @@ export default Presenter;
 //         this.observer.subscribe('progressBarDraged',
 //             (progressBarPosition: IProgressBarPosition) => { this.view.setProgressBarPosition(progressBarPosition) });
 
-//         this.observer.subscribe('addScalePoint',
-//             (pointSettings: IScalePointSettings) => { this.view.addScalePoint(pointSettings) });
+        // this.observer.subscribe('addScalePoint',
+        //     (pointSettings: IScalePointSettings) => { this.view.addScalePoint(pointSettings) });
 
 //         this.observer.subscribe('clickOnTheScale',
 //             (cursorPosition: ICursorPsition) => { this.model.moveThumb(cursorPosition) });
@@ -214,10 +229,10 @@ export default Presenter;
 
 //     }
 
-//     private getScalePointMaxSize(): IScalePointSize {
-//         const sliderMaxValue: number = this.model.getMaxValue();
-//         return this.view.getScalePointMaxSize(sliderMaxValue);
-//     }
+    // private getScalePointMaxSize(): IScalePointSize {
+    //     const sliderMaxValue: number = this.model.getMaxValue();
+    //     return this.view.getScalePointMaxSize(sliderMaxValue);
+    // }
 // }
 
 // export default Presenter;

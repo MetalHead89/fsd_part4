@@ -53,6 +53,12 @@ export interface IProgressBarPosition {
     'end': number
 }
 
+export interface IScalePointSettings {
+    'position': number,
+    'scalePointSize': number,
+    'scalePointValue': number
+}
+
 
 
 

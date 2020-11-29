@@ -2,6 +2,7 @@ import { ISliderSettings } from '../interfaces';
 import { ISliderSize } from '../interfaces';
 import { IThumbSize } from '../interfaces'
 import { IThumbPosition } from '../interfaces'
+import { IScalePointSize } from '../interfaces'
 
 import Observer from '../observer/observer';
 import ModelCalculator from './modelCalculator';
@@ -51,6 +52,18 @@ class Model {
 
         return this.data.getTooltipsVisible();
 
+    }
+
+    setScalePointSize(scalePointSize: IScalePointSize) {
+        this.data.setScalePointSize(scalePointSize);
+    }
+
+    getMax(): number {
+        return this.data.getMax();
+    }
+
+    generateScale() {
+        this.calculator.generateScale();
     }
 
     // getOrientation(): string {
@@ -420,12 +433,12 @@ export default Model;
 //         this.thumbSize = size;
 //     }
 
-//     setScalePointSize(scalePointSize: IScalePointSize) {
+    // setScalePointSize(scalePointSize: IScalePointSize) {
 
-//         /** Устанавливает размер шкалы */
+    //     /** Устанавливает размер шкалы */
 
-//         this.scalePointSize = scalePointSize;
-//     }
+    //     this.scalePointSize = scalePointSize;
+    // }
 
 //     setPixelsPerValue(): void {
 

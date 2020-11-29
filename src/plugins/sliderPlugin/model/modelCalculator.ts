@@ -238,6 +238,55 @@ class ModelCalculator {
         return progress;
     }
 
+
+    generateScale() {
+        let scalePointPosition = this.getElementSizeByOrientation(this.data.getThumbSize()) / 2 - this.getElementSizeByOrientation(this.data.getScalePointSize()) / 2;
+        const stepsCount: number = this.calculateStepsCount();
+        const stepSize: number = this.calculateStepSize();
+
+        let prevScalePointPosition: number = 0;
+        const scalePointsCount = stepsCount + 1;
+
+        for (let i = 0; i <= Math.round(scalePointsCount - 1); i++) {
+            const pointValue = this.positionToValue(scalePointPosition - this.getElementSizeByOrientation(this.data.getThumbSize()) / 2
+                + this.getElementSizeByOrientation(this.data.getScalePointSize()) / 2);
+
+            // if (i === 0 || this.isPointFits(scalePointPosition, prevScalePointPosition) || i === Math.round(scalePointsCount - 1)) {
+            if (i === 0 || this.isPointFits(scalePointPosition, prevScalePointPosition)) {
+
+                this.observer.notify('addScalePoint',
+                    {
+                        'position': scalePointPosition, 'scalePointSize': this.getElementSizeByOrientation(this.data.getScalePointSize()),
+                        'scalePointValue': pointValue
+                    });
+
+                prevScalePointPosition = scalePointPosition;
+
+            }
+
+            scalePointPosition += stepSize;
+
+            if (i === Math.round(scalePointsCount - 2)) {
+                scalePointPosition = this.getElementSizeByOrientation(this.data.getSliderSize())
+                    - this.getElementSizeByOrientation(this.data.getThumbSize()) / 2 - this.getElementSizeByOrientation(this.data.getScalePointSize()) / 2;
+
+                if (this.data.getOrientation() === 'horizontal') {
+                    this.observer.notify('scaleCreated', { 'width': this.data.getSliderSize().width, 'height': this.data.getScalePointSize().height });
+                } else if (this.data.getOrientation() === 'vertical') {
+                    this.observer.notify('scaleCreated', { 'width': this.data.getScalePointSize().width, 'height': this.data.getSliderSize().height });
+                }
+            }
+        }
+
+    }
+
+    private isPointFits(scalePointPosition: number, prevScalePointPosition: number): boolean {
+
+        return (scalePointPosition - prevScalePointPosition - 2 >
+            this.getElementSizeByOrientation(this.data.getScalePointSize()));
+
+    }
+
 }
 
 export default ModelCalculator;

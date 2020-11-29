@@ -2,6 +2,7 @@ import { ISliderSettings } from '../interfaces';
 import { ISliderSize } from '../interfaces';
 import { IThumbSize } from '../interfaces';
 import { IThumbPosition } from '../interfaces'
+import { IScalePointSize } from '../interfaces'
 
 
 /**
@@ -19,6 +20,7 @@ class ModelData {
     private thumbSize: IThumbSize = { 'width': 0, 'height': 0 };
     private thumbOnePosition: IThumbPosition = { 'left': 0, 'top': 0 };
     private thumbTwoPosition: IThumbPosition = { 'left': 0, 'top': 0 };
+    private scalePointSize: IScalePointSize = { 'width': 0, 'height': 0 };
 
 
     constructor(settings: ISliderSettings) {
@@ -272,6 +274,14 @@ class ModelData {
     */
     getThumbTwoPosition(): IThumbPosition {
         return this.thumbTwoPosition;
+    }
+
+    setScalePointSize(scalePointSize: IScalePointSize) {
+        this.scalePointSize = scalePointSize;
+    }
+
+    getScalePointSize(): IScalePointSize {
+        return this.scalePointSize;
     }
 
 }

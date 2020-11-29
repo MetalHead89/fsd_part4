@@ -4,6 +4,7 @@ import Track from './track';
 import Thumb from './thumb';
 import Tooltip from './tooltip';
 import ProgressBar from './progressBar';
+import Scale from './scale';
 
 class ElementFactory {
 
@@ -138,6 +139,15 @@ class ElementFactory {
         const progressBar = this.createElement(parrent, styleClasses, createProgressBarObj);
 
         return progressBar;
+
+    }
+
+    createScale(parrent: HTMLDivElement, styleClasses: string, observer: Observer, orientation: string): Scale {
+
+        const createScaleObj = (obj: HTMLDivElement) => { return new Scale(obj, observer, orientation) }
+        const scale = this.createElement(parrent, styleClasses, createScaleObj);
+
+        return scale;
 
     }
 

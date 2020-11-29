@@ -1,5 +1,7 @@
 import { IThumbPosition } from '../interfaces';
 import { IProgressBarPosition } from '../interfaces';
+import { IScalePointSize } from '../interfaces';
+import { IScalePointSettings } from '../interfaces';
 
 import Observer from '../observer/observer';
 import Slider from './slider';
@@ -7,11 +9,13 @@ import Track from './track';
 import Thumb from './thumb';
 import Tooltip from './tooltip';
 import ProgressBar from './progressBar';
+import Scale from './scale';
 import ElementFactory from './elementFactory';
 
 class View {
 
     private observer: Observer;
+    private orientation: string;
     private slider: Slider | null = null;
     private track: Track | null = null;
     private thumbOne: Thumb | null = null;
@@ -19,12 +23,14 @@ class View {
     private tooltipOne: Tooltip | null = null;
     private tooltipTwo: Tooltip | null = null;
     private progressBar: ProgressBar | null = null;
+    private scale: Scale | null = null;
     private elementFactory: ElementFactory;
     private sliderWrapper: HTMLDivElement;
 
-    constructor(observer: Observer, sliderWrapper: HTMLElement) {
+    constructor(observer: Observer, sliderWrapper: HTMLElement, orientation: string) {
 
         this.observer = observer;
+        this.orientation = orientation;
         this.sliderWrapper = sliderWrapper as HTMLDivElement;
         this.elementFactory = new ElementFactory();
 
@@ -136,6 +142,14 @@ class View {
 
     }
 
+    createScale(styleClasses: string) {
+        if (this.slider != null) {
+            this.scale = this.elementFactory.createScale(this.slider.getElement(), styleClasses, this.observer, this.orientation);
+            this.observer.notify('scaleIsCreated', null);
+        }
+
+    }
+
     moveThumbOne(position: IThumbPosition): void {
         if (this.thumbOne !== null) {
             this.thumbOne.moveTo(position);
@@ -163,6 +177,21 @@ class View {
     setProgressBarPosition(progressPosition: IProgressBarPosition) {
         if (this.progressBar !== null) {
             this.progressBar.setPosition(progressPosition);
+        }
+    }
+
+    getScalePointMaxSize(value: number): IScalePointSize {
+        if (this.scale !== null) {
+            console.log('ddfsdfeff')
+            return this.scale.getScalePointMaxSize(value);
+        }
+
+        return {'width': 20, 'height': 20};
+    }
+
+    addScalePoint(pointSettings: IScalePointSettings) {
+        if (this.scale !== null) {
+            this.scale.addScalePoint(pointSettings.position, pointSettings.scalePointSize, pointSettings.scalePointValue);
         }
     }
 
@@ -370,9 +399,9 @@ export default View;
 //         this.scale.setScaleSize(scaleSize.width, scaleSize.height);
 //     }
 
-//     addScalePoint(pointSettings: IScalePointSettings) {
-//         this.scale.addScalePoint(pointSettings.position, pointSettings.scalePointSize, pointSettings.scalePointValue);
-//     }
+    // addScalePoint(pointSettings: IScalePointSettings) {
+    //     this.scale.addScalePoint(pointSettings.position, pointSettings.scalePointSize, pointSettings.scalePointValue);
+    // }
 
 //     moveThumbOne(position: IThumbPosition): void {
 //         this.thumbOne.moveTo(position);
