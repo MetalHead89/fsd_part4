@@ -5,6 +5,10 @@ class Tooltip {
     constructor(tooltipElement: HTMLDivElement) {
         this.element = tooltipElement;
     }
+
+    setValue(newValue: number): void {
+        this.element.innerText = newValue.toString();
+    }
 }
 
 export default Tooltip;

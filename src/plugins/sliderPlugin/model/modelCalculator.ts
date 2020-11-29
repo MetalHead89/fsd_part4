@@ -29,11 +29,12 @@ class ModelCalculator {
     dragThumbOne(thumbPosition: IThumbPosition) {
         this.data.setThumbOnePosition(this.changePositionAccordingToStep(thumbPosition));
         const correctThumOnePosition: IThumbPosition = this.data.getThumbOnePosition();
+        const thumbValue: number = this.positionToValue(this.getElementPosByOrientation(this.data.getThumbOnePosition()));
 
-        this.thumbDrag(correctThumOnePosition, 'thumbOneDragged');
+        this.thumbDrag(correctThumOnePosition, 'thumbOneDragged', thumbValue);
 
         // this.observer.notify('progressBarDraged', this.calcProgressBarPosition());
-        // this.observer.notify('tooltipOneDraged', this.positionToValue(this.getElementPosByOrientation(this.thumbOnePosition)));
+        // this.observer.notify('tooltipOneDraged', this.positionToValue(this.getElementPosByOrientation(this.data.getThumbOnePosition())));
     }
 
 
@@ -58,14 +59,15 @@ class ModelCalculator {
         // }
         this.data.setThumbTwoPosition(this.changePositionAccordingToStep(thumbPosition));
         const correctThumTwoPosition: IThumbPosition = this.data.getThumbTwoPosition();
+        const thumbValue: number = this.positionToValue(this.getElementPosByOrientation(this.data.getThumbTwoPosition()));
 
-        this.thumbDrag(correctThumTwoPosition, 'thumbTwoDragged');
+        this.thumbDrag(correctThumTwoPosition, 'thumbTwoDragged', thumbValue);
         // this.observer.notify('progressBarDraged', this.calcProgressBarPosition());
         // this.observer.notify('tooltipTwoDraged', this.positionToValue(this.getElementPosByOrientation(this.thumbTwoPosition)));
 
     }
 
-    private thumbDrag(thumbPosition: IThumbPosition, notyfyMessage: string): void {
+    private thumbDrag(thumbPosition: IThumbPosition, notyfyMessage: string, thumbValue:number): void {
 
         const newThumbPosition = Object.assign({}, thumbPosition);
 
@@ -75,7 +77,7 @@ class ModelCalculator {
             newThumbPosition.left = 0;
         }
 
-        this.observer.notify(notyfyMessage, newThumbPosition);
+        this.observer.notify(notyfyMessage, {'thumbPosition': newThumbPosition, 'tooltipValue': thumbValue});
     }
 
     private getElementSizeByOrientation(element: ISliderSize | IThumbSize | IScalePointSize): number {
@@ -187,6 +189,27 @@ class ModelCalculator {
             });
         }
 
+    }
+
+    private positionToValue(position: number): number {
+
+        /**
+         * Возвращает значение бегунка исходя из его позиции
+         */
+        const pixelsPerValue = this.calculatePixelsPerValue();
+
+        return Math.round(this.data.getMin() + ((this.data.getMax() - this.data.getMin()) /
+            100 * Math.round(position / pixelsPerValue)));
+    }
+
+    calculatePixelsPerValue(): number {
+
+        /** 
+         * Устанавливает количество пикселей в единице ширины слайдера, с вычетом крайних 
+         * (тупиковых) зон
+         */
+
+        return(this.getElementSizeByOrientation(this.data.getSliderSize()) - this.getElementSizeByOrientation(this.data.getThumbSize())) / 100;
     }
 
 }

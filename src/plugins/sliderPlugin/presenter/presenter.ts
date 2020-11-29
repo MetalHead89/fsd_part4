@@ -2,6 +2,7 @@ import { ISliderSettings } from '../interfaces';
 import { ISliderSize } from '../interfaces'
 import { IThumbSize } from '../interfaces'
 import { IThumbPosition } from '../interfaces'
+import { IDragThumbArgs } from '../interfaces'
 
 import Observer from '../observer/observer';
 import Model from '../model/model';
@@ -33,22 +34,21 @@ class Presenter {
         this.observer.subscribe('sliderElementIsCreated',
             (sliderSize: ISliderSize) => { this.model.setSliderSize(sliderSize) });
         this.observer.subscribe('thumbOneIsCreated',
-            (thumbSize: IThumbSize) => {
-                this.model.setThumbSize(thumbSize);
-                this.model.setThumbOneToStartingPosition();
-            });
-        this.observer.subscribe('thumbTwoIsCreated',
-            () => {
-                this.model.setThumbTwoToStartingPosition();
-            });
+            (thumbSize: IThumbSize) => { this.model.setThumbSize(thumbSize); });
         this.observer.subscribe('thumbOneIsDragged',
             (thumbPosition: IThumbPosition) => { this.model.dragthumbOne(thumbPosition) });
         this.observer.subscribe('thumbTwoIsDragged',
             (thumbPosition: IThumbPosition) => { this.model.dragThumbTwo(thumbPosition) });
         this.observer.subscribe('thumbOneDragged',
-            (thumbPosition: IThumbPosition) => { this.view.moveThumbOne(thumbPosition) });
+            (args: IDragThumbArgs) => { 
+                this.view.moveThumbOne(args.thumbPosition);
+                this.view.tooltipOneSetValue(args.tooltipValue);
+            });
         this.observer.subscribe('thumbTwoDragged',
-            (thumbPosition: IThumbPosition) => { this.view.moveThumbTwo(thumbPosition) });
+            (args: IDragThumbArgs) => { 
+                this.view.moveThumbTwo(args.thumbPosition) ;
+                this.view.tooltipTwoSetValue(args.tooltipValue);
+            });
 
     }
 
@@ -68,12 +68,14 @@ class Presenter {
         if (tooltipsVisible) {
             this.view.createTooltipOne(`slider__tooltip slider__tooltip_${orientation}`);
         }
+        this.model.setThumbOneToStartingPosition()
         if (sliderType === 'range') {
             this.view.createThumbTwo(`slider__thumb slider__thumb-two slider__thumb_${orientation}`);
             if (tooltipsVisible) {
                 this.view.createTooltipTwo(`slider__tooltip slider__tooltip_${orientation}`);
             }
         }
+        this.model.setThumbTwoToStartingPosition()
     }
 
 }

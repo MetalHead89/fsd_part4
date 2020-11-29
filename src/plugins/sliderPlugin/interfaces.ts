@@ -42,6 +42,11 @@ export interface IScalePointSize {
     'height': number
 }
 
+export interface IDragThumbArgs {
+    'thumbPosition': IThumbPosition,
+    'tooltipValue': number
+}
+
 
 
 

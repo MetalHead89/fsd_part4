@@ -83,14 +83,12 @@ class View {
          * Метод выполняет следующие действия:
          * 1. Создаёт объект класса Thumb
          * 2. Создаёт бегунок в виде div контейнера с классами styleClasses
-         * 3. Уведомляет своих слушателей о том, что создан бегунок
          * 
          * @param {string} styleClasses - классы для бегунка
          */
 
         if (this.slider != null) {
             this.thumbTwo = this.elementFactory.createThumb(this.slider.getElement(), styleClasses, this.observer);
-            this.observer.notify('thumbTwoIsCreated', null);
         }
 
     }
@@ -133,9 +131,21 @@ class View {
         }
     }
 
+    tooltipOneSetValue(newValue: number) {
+        if (this.tooltipOne !== null) {
+            this.tooltipOne.setValue(newValue)
+        }
+    }
+
     moveThumbTwo(position: IThumbPosition): void {
         if (this.thumbTwo != null) {
             this.thumbTwo.moveTo(position);
+        }
+    }
+
+    tooltipTwoSetValue(newValue: number) {
+        if (this.tooltipTwo !== null) {
+            this.tooltipTwo.setValue(newValue)
         }
     }
 
