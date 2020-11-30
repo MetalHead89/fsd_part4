@@ -37,11 +37,11 @@ export class Panel {
         this.rangeRadioButton.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setSliderType', this.rangeRadioButton.value) });
         this.horizontalRadioButton.addEventListener('click', () => {
             this.setSliderWrapperHorizontalOrientation();
-            this.sliderElem.incredibleSliderPlugin('setSliderOrientation', this.horizontalRadioButton.value)
+            this.sliderElem.incredibleSliderPlugin('changeSliderOrientation', this.horizontalRadioButton.value);
         });
         this.verticalRadioButton.addEventListener('click', () => {
             this.setSliderWrapperVerticalOrientation();
-            this.sliderElem.incredibleSliderPlugin('setSliderOrientation', this.verticalRadioButton.value)
+            this.sliderElem.incredibleSliderPlugin('changeSliderOrientation', this.verticalRadioButton.value)
         });
 
         const sliderTypeRadioParams = [

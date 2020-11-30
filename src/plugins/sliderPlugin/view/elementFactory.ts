@@ -127,7 +127,7 @@ class ElementFactory {
         const element: HTMLDivElement = document.createElement('div');
         element.className = styleClasses;
         const obj = createObj(element);
-        parrent.append(element);
+        parrent.prepend(element);
 
         return obj;
 
@@ -142,9 +142,9 @@ class ElementFactory {
 
     }
 
-    createScale(parrent: HTMLDivElement, styleClasses: string, observer: Observer, orientation: string): Scale {
+    createScale(parrent: HTMLDivElement, styleClasses: string, observer: Observer): Scale {
 
-        const createScaleObj = (obj: HTMLDivElement) => { return new Scale(obj, observer, orientation) }
+        const createScaleObj = (obj: HTMLDivElement) => { return new Scale(obj, observer) }
         const scale = this.createElement(parrent, styleClasses, createScaleObj);
 
         return scale;

@@ -6,10 +6,10 @@ class Scale {
     private observer: Observer;
     private orientation: string;
 
-    constructor(element: HTMLDivElement, observer: Observer, orientation: string) {
+    constructor(element: HTMLDivElement, observer: Observer) {
         this.element = element;
         this.observer = observer;
-        this.orientation = orientation;
+        this.orientation = element.classList.contains('slider__scale_vertical') ? 'vertical' : 'horizontal';
     }
 
     getScalePointMaxSize(maxValue: number): IScalePointSize {

@@ -144,7 +144,7 @@ class View {
 
     createScale(styleClasses: string) {
         if (this.slider != null) {
-            this.scale = this.elementFactory.createScale(this.slider.getElement(), styleClasses, this.observer, this.orientation);
+            this.scale = this.elementFactory.createScale(this.slider.getElement(), styleClasses, this.observer);
             this.observer.notify('scaleIsCreated', null);
         }
 
@@ -191,6 +191,12 @@ class View {
     addScalePoint(pointSettings: IScalePointSettings) {
         if (this.scale !== null) {
             this.scale.addScalePoint(pointSettings.position, pointSettings.scalePointSize, pointSettings.scalePointValue);
+        }
+    }
+
+    removeSlider() {
+        if (this.slider !== null) {
+            this.slider.removeSlider();
         }
     }
 

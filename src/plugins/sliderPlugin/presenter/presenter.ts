@@ -117,18 +117,32 @@ class Presenter {
     getTooltipsVisiblity(): boolean {
         return this.model.getTooltipsVisiblity();
     }
-setSliderType(sliderType: string) {
-    this.model.setSliderType(sliderType);
-}
-getSliderType(): string {
-    return this.model.getSliderType();
-}
-setSliderOrientation(orientation: string) {
-    this.model.setSliderOrientation(orientation);
-}
-getSliderOrientation(): string {
-    return this.model.getSliderOrientation();
-}
+    setSliderType(sliderType: string) {
+        this.model.setSliderType(sliderType);
+    }
+    getSliderType(): string {
+        return this.model.getSliderType();
+    }
+    setSliderOrientation(orientation: string) {
+        this.model.setSliderOrientation(orientation);
+    }
+    getSliderOrientation(): string {
+        return this.model.getSliderOrientation();
+    }
+
+    changeSliderOrientation(orienation: string): void {
+        console.log('REMOVE!!!!!')
+        if (orienation !== this.model.getSliderOrientation()) {
+            this.setSliderOrientation(orienation);
+            const thumbOnePosition = this.model.getThumbOnePosition();
+            const thumbTwoPosition = this.model.getThumbTwoPosition();
+            this.model.setThumbOnePosition({ 'left': thumbOnePosition.top, 'top': thumbOnePosition.left });
+            this.model.setThumbTwoPosition({ 'left': thumbTwoPosition.top, 'top': thumbTwoPosition.left });
+            this.view.removeSlider();
+            this.createNewSlider();
+            // this.observer.notify('updatedSliderOrientation', this.orientation);
+        }
+    }
 
 
 }

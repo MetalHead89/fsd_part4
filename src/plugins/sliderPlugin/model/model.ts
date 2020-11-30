@@ -122,6 +122,22 @@ class Model {
         return this.data.getScaleVisible();
     }
 
+    getThumbOnePosition(): IThumbPosition {
+        return this.data.getThumbOnePosition();
+    }
+
+    setThumbOnePosition(thumbPosition: IThumbPosition): void {
+        this.data.setThumbOnePosition(thumbPosition);
+    }
+
+    getThumbTwoPosition(): IThumbPosition {
+        return this.data.getThumbTwoPosition();
+    }
+
+    setThumbTwoPosition(thumbPosition: IThumbPosition): void {
+        this.data.setThumbTwoPosition(thumbPosition);
+    }
+
 }
 
 export default Model;

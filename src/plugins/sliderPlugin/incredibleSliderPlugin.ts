@@ -69,8 +69,8 @@ import Presenter from './presenter/presenter';
         getSliderOrientation: function(): string {
             return $(this).data().sliderPresenter.getSliderOrientation();
         },
-        setSliderOrientation: function(orientation: string): void {
-            return $(this).data().sliderPresenter.setSliderOrientation(orientation);
+        changeSliderOrientation: function(orientation: string): void {
+            return $(this).data().sliderPresenter.changeSliderOrientation(orientation);
         }
         
     };

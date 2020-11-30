@@ -49,6 +49,10 @@ class Slider {
 
     }
 
+    removeSlider() {
+        this.element.remove();
+    }
+
 }
 
 export default Slider;
