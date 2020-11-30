@@ -21,7 +21,7 @@ class Presenter {
 
         this.observer = new Observer();
         this.model = new Model(this.observer, settings);
-        this.view = new View(this.observer, sliderWrapper, this.model.getOrientation());
+        this.view = new View(this.observer, sliderWrapper, this.model.getSliderOrientation());
 
         this.addObserverListeners();
         this.createNewSlider();
@@ -43,20 +43,20 @@ class Presenter {
         this.observer.subscribe('thumbTwoIsDragged',
             (thumbPosition: IThumbPosition) => { this.model.dragThumbTwo(thumbPosition) });
         this.observer.subscribe('thumbOneDragged',
-            (args: IDragThumbArgs) => { 
+            (args: IDragThumbArgs) => {
                 this.view.moveThumbOne(args.thumbPosition);
                 this.view.tooltipOneSetValue(args.tooltipValue);
             });
         this.observer.subscribe('thumbTwoDragged',
-            (args: IDragThumbArgs) => { 
-                this.view.moveThumbTwo(args.thumbPosition) ;
+            (args: IDragThumbArgs) => {
+                this.view.moveThumbTwo(args.thumbPosition);
                 this.view.tooltipTwoSetValue(args.tooltipValue);
             });
         this.observer.subscribe('progressBarDraged',
             (progressBarPosition: IProgressBarPosition) => { this.view.setProgressBarPosition(progressBarPosition) });
-        this.observer.subscribe('scaleIsCreated', () => { 
+        this.observer.subscribe('scaleIsCreated', () => {
             this.model.setScalePointSize(this.getScalePointMaxSize());
-            this.model.generateScale() 
+            this.model.generateScale()
         });
         this.observer.subscribe('addScalePoint',
             (pointSettings: IScalePointSettings) => { this.view.addScalePoint(pointSettings) });
@@ -68,9 +68,9 @@ class Presenter {
          * Создаёт слайдер исходя из настроек, хранящихся в Model
          */
 
-        const orientation = this.model.getOrientation();
+        const orientation = this.model.getSliderOrientation();
         const sliderType: string = this.model.getSliderType();
-        const tooltipsVisible: boolean = this.model.getTooltipsVisible();
+        const tooltipsVisible: boolean = this.model.getTooltipsVisiblity();
 
         this.view.createSlider(`slider slider_${orientation}`);
         this.view.createTrack(`slider__track slider__track_${orientation}`);
@@ -91,10 +91,45 @@ class Presenter {
         this.view.createScale(`slider__scale slider__scale_${orientation}`);
     }
 
-    private getScalePointMaxSize(): IScalePointSize{
+    private getScalePointMaxSize(): IScalePointSize {
         const sliderMaxValue: number = this.model.getMax();
         return this.view.getScalePointMaxSize(sliderMaxValue);
     }
+
+    setMin(newMin: number): void {
+        this.model.setMin(newMin)
+    }
+    setMax(newMax: number) {
+        this.model.setMax(newMax);
+    }
+    setStep(newStep: number) {
+        this.model.setStep(newStep);
+    }
+    setScaleVisibility(scaleVisible: boolean) {
+        this.model.setScaleVisibility(scaleVisible);
+    }
+    setTooltipsVisibility(tooltipsVisible: boolean) {
+        this.model.setTooltipsVisible(tooltipsVisible)
+    }
+    getScaleVisiblity(): boolean {
+        return this.model.getScaleVisiblity();
+    }
+    getTooltipsVisiblity(): boolean {
+        return this.model.getTooltipsVisiblity();
+    }
+setSliderType(sliderType: string) {
+    this.model.setSliderType(sliderType);
+}
+getSliderType(): string {
+    return this.model.getSliderType();
+}
+setSliderOrientation(orientation: string) {
+    this.model.setSliderOrientation(orientation);
+}
+getSliderOrientation(): string {
+    return this.model.getSliderOrientation();
+}
+
 
 }
 

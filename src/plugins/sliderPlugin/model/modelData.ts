@@ -147,6 +147,26 @@ class ModelData {
 
 
     /**
+     * Устанавливает флаг видимости шкалы
+     * 
+     * @param {boolean} visible - флаг видимости шкалы
+     */
+    setScaleVisible(visible: boolean): void {
+        this.scaleVisible = visible;
+    }
+
+
+    /**
+     * Возвращает флаг видимости шкалы
+     * 
+     * @returns {boolean} - флаг видимости шкалы
+     */
+    getScaleVisible(): boolean {
+        return this.scaleVisible;
+    }
+
+
+    /**
      * Устанавливает минимальное значение. Если новое значение превышает максимальное, то оно не устанавливается
      * 
      * @param {number} newMin - новое минимальное значение слайдера

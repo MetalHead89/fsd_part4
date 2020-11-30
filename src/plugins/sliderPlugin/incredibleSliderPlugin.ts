@@ -6,7 +6,7 @@ import Presenter from './presenter/presenter';
 
     // Настройки плагина по умолчанию
     const defaultSettings: ISliderSettings = {
-        'orienation': 'vertical',
+        'orienation': 'horizontal',
         'type': 'range',
         'scale': true,
         'tooltips': true,       
@@ -39,39 +39,39 @@ import Presenter from './presenter/presenter';
                 // });
             });
         },
-        // setMinValue: function(value: number) {
-        //     $(this).data().sliderPresenter.setMinValue(value);
-        // },
-        // setMaxValue: function(value: number) {
-        //     $(this).data().sliderPresenter.setMaxValue(value);
-        // },
-        // setStepValue: function(value: number) {
-        //     $(this).data().sliderPresenter.setStep(value);
-        // },
-        // setScaleVisibility: function(flag: boolean) {
-        //     $(this).data().sliderPresenter.setScaleVisibility(flag);
-        // },
-        // setTooltipsVisibility: function(flag: boolean) {
-        //     $(this).data().sliderPresenter.setTooltipsVisibility(flag);
-        // },
-        // getScaleVisiblity: function(): boolean {
-        //     return $(this).data().sliderPresenter.getScaleVisiblity();
-        // },
-        // getTooltipsVisiblity: function(): boolean {
-        //     return $(this).data().sliderPresenter.getTooltipsVisiblity();
-        // },
-        // setSliderType: function(type: string) {
-        //     return $(this).data().sliderPresenter.setSliderType(type);
-        // },
-        // getSliderType: function(): string {
-        //     return $(this).data().sliderPresenter.getSliderType();
-        // },
-        // getSliderOrientation: function(): string {
-        //     return $(this).data().sliderPresenter.getSliderOrientation();
-        // },
-        // setSliderOrientation: function(orientation: string): void {
-        //     return $(this).data().sliderPresenter.setSliderOrientation(orientation);
-        // }
+        setMinValue: function(value: number) {
+            $(this).data().sliderPresenter.setMin(value);
+        },
+        setMaxValue: function(value: number) {
+            $(this).data().sliderPresenter.setMax(value);
+        },
+        setStep: function(value: number) {
+            $(this).data().sliderPresenter.setStep(value);
+        },
+        setScaleVisibility: function(flag: boolean) {
+            $(this).data().sliderPresenter.setScaleVisibility(flag);
+        },
+        setTooltipsVisibility: function(flag: boolean) {
+            $(this).data().sliderPresenter.setTooltipsVisibility(flag);
+        },
+        getScaleVisiblity: function(): boolean {
+            return $(this).data().sliderPresenter.getScaleVisiblity();
+        },
+        getTooltipsVisiblity: function(): boolean {
+            return $(this).data().sliderPresenter.getTooltipsVisiblity();
+        },
+        setSliderType: function(type: string) {
+            return $(this).data().sliderPresenter.setSliderType(type);
+        },
+        getSliderType: function(): string {
+            return $(this).data().sliderPresenter.getSliderType();
+        },
+        getSliderOrientation: function(): string {
+            return $(this).data().sliderPresenter.getSliderOrientation();
+        },
+        setSliderOrientation: function(orientation: string): void {
+            return $(this).data().sliderPresenter.setSliderOrientation(orientation);
+        }
         
     };
 

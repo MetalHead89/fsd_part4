@@ -307,7 +307,7 @@ export class Panel {
             const minValue = parseInt(this.minValue.value);
 
             if (!isNaN(minValue)) {
-                slider.incredibleSliderPlugin('setMinValue', minValue);
+                slider.incredibleSliderPlugin('setMin', minValue);
             }
         }
     }
@@ -317,7 +317,7 @@ export class Panel {
             const maxValue = parseInt(this.maxValue.value);
 
             if (!isNaN(maxValue)) {
-                slider.incredibleSliderPlugin('setMaxValue', maxValue);
+                slider.incredibleSliderPlugin('setMax', maxValue);
             }
         }
     }
@@ -327,7 +327,7 @@ export class Panel {
             const step = parseInt(this.step.value);
 
             if (!isNaN(step)) {
-                slider.incredibleSliderPlugin('setStepValue', step);
+                slider.incredibleSliderPlugin('setStep', step);
             }
         }
     }

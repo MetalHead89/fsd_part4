@@ -182,7 +182,6 @@ class View {
 
     getScalePointMaxSize(value: number): IScalePointSize {
         if (this.scale !== null) {
-            console.log('ddfsdfeff')
             return this.scale.getScalePointMaxSize(value);
         }
 

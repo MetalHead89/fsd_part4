@@ -13,7 +13,7 @@ class Model {
     private observer: Observer;
     private data: ModelData;
     private calculator: ModelCalculator
-    
+
 
 
     constructor(observer: Observer, settings: ISliderSettings) {
@@ -36,10 +36,14 @@ class Model {
 
     }
 
-    getOrientation(): string {
+    getSliderOrientation(): string {
 
         return this.data.getOrientation();
 
+    }
+
+    setSliderOrientation(orienation: string): void {
+        this.data.setOrientation(orienation);
     }
 
     getSliderType(): string {
@@ -48,10 +52,21 @@ class Model {
 
     }
 
-    getTooltipsVisible(): boolean {
+    setSliderType(sliderType: string): void {
+
+        this.data.setSliderType(sliderType);
+
+    }
+
+    setTooltipsVisible(tooltipsVisible: boolean): void {
+
+        this.data.setTooltipsVisible(tooltipsVisible)
+
+    }
+
+    getTooltipsVisiblity(): boolean {
 
         return this.data.getTooltipsVisible();
-
     }
 
     setScalePointSize(scalePointSize: IScalePointSize) {
@@ -65,6 +80,51 @@ class Model {
     generateScale() {
         this.calculator.generateScale();
     }
+
+    dragthumbOne(thumbPosition: IThumbPosition) {
+        this.calculator.dragThumbOne(thumbPosition);
+    }
+
+    dragThumbTwo(thumbPosition: IThumbPosition) {
+        this.calculator.dragThumbTwo(thumbPosition);
+    }
+
+    setThumbOneToStartingPosition() {
+
+        this.calculator.setThumbOneToStartingPosition();
+
+    }
+
+    setThumbTwoToStartingPosition() {
+
+        this.calculator.setThumbTwoToStartingPosition();
+
+    }
+
+    setMin(newMin: number) {
+        this.data.setMin(newMin);
+    }
+
+    setMax(newMax: number) {
+        this.data.setMax(newMax);
+    }
+
+    setStep(newStep: number) {
+        this.data.setStep(newStep);
+    }
+
+    setScaleVisibility(scaleVisible: boolean) {
+        this.data.setScaleVisible(scaleVisible);
+    }
+
+    getScaleVisiblity(): boolean {
+
+        return this.data.getScaleVisible();
+    }
+
+}
+
+export default Model;
 
     // getOrientation(): string {
 
@@ -144,29 +204,7 @@ class Model {
 
     // }
 
-    dragthumbOne(thumbPosition: IThumbPosition) {
-        this.calculator.dragThumbOne(thumbPosition);
-    }
 
-    dragThumbTwo(thumbPosition: IThumbPosition) {
-        this.calculator.dragThumbTwo(thumbPosition);
-    }
-
-    setThumbOneToStartingPosition() {
-
-        this.calculator.setThumbOneToStartingPosition();
-        
-    }
-
-    setThumbTwoToStartingPosition() {
-
-        this.calculator.setThumbTwoToStartingPosition();
-        
-    }
-
-}
-
-export default Model;
 
 
 
@@ -305,16 +343,16 @@ export default Model;
 //         this.observer.notify('updatedTooltipFlag', null);
 //     }
 
-//     getScaleVisiblity(): boolean {
+    // getScaleVisiblity(): boolean {
 
-//         /**
-//         * Возвращает флаг скрытия/отображения шкалы
-//         * 
-//         * @returns {boolean} - флаг скрытия/отображения шкалы
-//         */
+    //     /**
+    //     * Возвращает флаг скрытия/отображения шкалы
+    //     * 
+    //     * @returns {boolean} - флаг скрытия/отображения шкалы
+    //     */
 
-//         return this.scale;
-//     }
+    //     return this.scale;
+    // }
 
 //     getTooltipsVisiblity(): boolean {
 
@@ -327,18 +365,18 @@ export default Model;
 //         return this.tooltip;
 //     }
 
-//     setSliderType(type: string): void {
+    // setSliderType(type: string): void {
 
-//         /**
-//          * Устанавливает тип слайдера
-//          * 
-//          * @param {string} type - тип слайдера (горизонтальный или вертикальный)
-//          */
+    //     /**
+    //      * Устанавливает тип слайдера
+    //      * 
+    //      * @param {string} type - тип слайдера (горизонтальный или вертикальный)
+    //      */
 
-//         this.type = type;
-//         this.observer.notify('updatedSliderType', null);
+    //     this.type = type;
+    //     this.observer.notify('updatedSliderType', null);
 
-//     }
+    // }
 
 //     getSliderType(): string {
 
