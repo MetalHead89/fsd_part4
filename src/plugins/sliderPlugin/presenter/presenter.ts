@@ -203,6 +203,19 @@ class Presenter {
         }
     }
 
+    changeTooltipsVisibility(tooltipsVisible: boolean) {
+        this.model.setTooltipsVisible(tooltipsVisible);
+
+        if (tooltipsVisible) {
+            this.view.removeThumbOne();
+            this.view.removeThumbTwo();
+            this.createThumbs(this.model.getSliderOrientation(), false);
+        } else {
+            this.view.removeTooltipOne();
+            this.view.removeTooltipTwo();
+        }
+    }
+
 }
 
 export default Presenter;

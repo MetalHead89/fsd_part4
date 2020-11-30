@@ -1,3 +1,5 @@
+import { timers } from "jquery";
+
 class Tooltip {
 
     private element: HTMLDivElement;
@@ -8,6 +10,10 @@ class Tooltip {
 
     setValue(newValue: number): void {
         this.element.innerText = newValue.toString();
+    }
+
+    remove() {
+        this.element.remove();
     }
 }
 

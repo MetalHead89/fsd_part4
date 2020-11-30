@@ -51,8 +51,8 @@ import Presenter from './presenter/presenter';
         changeScaleVisibility: function(flag: boolean) {
             $(this).data().sliderPresenter.changeScaleVisibility(flag);
         },
-        setTooltipsVisibility: function(flag: boolean) {
-            $(this).data().sliderPresenter.setTooltipsVisibility(flag);
+        changeTooltipsVisibility: function(flag: boolean) {
+            $(this).data().sliderPresenter.changeTooltipsVisibility(flag);
         },
         getScaleVisiblity: function(): boolean {
             return $(this).data().sliderPresenter.getScaleVisiblity();

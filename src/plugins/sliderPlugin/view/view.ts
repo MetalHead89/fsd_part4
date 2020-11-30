@@ -194,27 +194,39 @@ class View {
         }
     }
 
-    removeSlider() {
+    removeSlider(): void {
         if (this.slider !== null) {
             this.slider.remove();
         }
     }
 
-    removeThumbOne() {
+    removeThumbOne(): void {
         if (this.thumbOne !== null) {
             this.thumbOne.remove();
         }
     }
 
-    removeThumbTwo() {
+    removeThumbTwo(): void {
         if (this.thumbTwo !== null) {
             this.thumbTwo.remove();
         }
     }
 
-    removeScale() {
+    removeScale(): void {
         if (this.scale !== null) {
             this.scale.remove();
+        }
+    }
+
+    removeTooltipOne(): void {
+        if (this.tooltipOne !== null) {
+            this.tooltipOne.remove();
+        }
+    }
+
+    removeTooltipTwo(): void {
+        if (this.tooltipTwo !== null) {
+            this.tooltipTwo.remove();
         }
     }
 
