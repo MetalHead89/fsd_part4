@@ -164,6 +164,33 @@ class Presenter {
         this.createThumbs(this.model.getSliderOrientation(), false);
     }
 
+    changeMinValue(newMin: number) {
+        const valueIsSet: boolean = this.model.setMin(newMin);
+
+        if (valueIsSet) {
+            this.view.removeSlider();
+            this.createNewSlider();
+        }
+    }
+
+    changeMaxValue(newMax: number) {
+        const valueIsSet: boolean = this.model.setMax(newMax);
+
+        if (valueIsSet) {
+            this.view.removeSlider();
+            this.createNewSlider();
+        }
+    }
+
+    changeStep(newStep: number) {
+        const valueIsSet: boolean = this.model.setStep(newStep);
+
+        if (valueIsSet) {
+            this.view.removeSlider();
+            this.createNewSlider();
+        }
+    }
+
 
 }
 

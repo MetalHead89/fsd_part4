@@ -101,16 +101,16 @@ class Model {
 
     }
 
-    setMin(newMin: number) {
-        this.data.setMin(newMin);
+    setMin(newMin: number): boolean {
+        return this.data.setMin(newMin);
     }
 
-    setMax(newMax: number) {
-        this.data.setMax(newMax);
+    setMax(newMax: number): boolean {
+        return this.data.setMax(newMax);
     }
 
-    setStep(newStep: number) {
-        this.data.setStep(newStep);
+    setStep(newStep: number): boolean {
+        return this.data.setStep(newStep);
     }
 
     setScaleVisibility(scaleVisible: boolean) {

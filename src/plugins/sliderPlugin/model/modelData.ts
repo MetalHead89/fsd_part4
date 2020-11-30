@@ -171,10 +171,13 @@ class ModelData {
      * 
      * @param {number} newMin - новое минимальное значение слайдера
      */
-    setMin(newMin: number): void {
+    setMin(newMin: number): boolean {
         if (newMin <= this.max) {
             this.min = newMin;
+            return true;
         }
+
+        return false;
     }
 
 
@@ -193,10 +196,14 @@ class ModelData {
      * 
      * @param {number} newMax - новое максимальное значение слайдера
      */
-    setMax(newMax: number): void {
+    setMax(newMax: number): boolean {
         if (newMax >= this.min) {
             this.max = newMax;
+
+            return true;
         }
+
+        return false;
     }
 
 
@@ -215,10 +222,14 @@ class ModelData {
      * 
      * @param {number} newStep - новое значение шага слайдера
      */
-    setStep(newStep: number): void {
+    setStep(newStep: number): boolean {
         if (newStep > 0) {
             this.step = newStep;
+
+            return true;
         }
+
+        return false;
     }
 
 

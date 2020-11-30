@@ -39,14 +39,14 @@ import Presenter from './presenter/presenter';
                 // });
             });
         },
-        setMinValue: function(value: number) {
-            $(this).data().sliderPresenter.setMin(value);
+        setMin: function(value: number) {
+            $(this).data().sliderPresenter.changeMinValue(value);
         },
-        setMaxValue: function(value: number) {
-            $(this).data().sliderPresenter.setMax(value);
+        setMax: function(value: number) {
+            $(this).data().sliderPresenter.changeMaxValue(value);
         },
         setStep: function(value: number) {
-            $(this).data().sliderPresenter.setStep(value);
+            $(this).data().sliderPresenter.changeStep(value);
         },
         setScaleVisibility: function(flag: boolean) {
             $(this).data().sliderPresenter.setScaleVisibility(flag);
