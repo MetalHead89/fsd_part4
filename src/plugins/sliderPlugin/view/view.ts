@@ -196,7 +196,19 @@ class View {
 
     removeSlider() {
         if (this.slider !== null) {
-            this.slider.removeSlider();
+            this.slider.remove();
+        }
+    }
+
+    removeThumbOne() {
+        if (this.thumbOne !== null) {
+            this.thumbOne.remove();
+        }
+    }
+
+    removeThumbTwo() {
+        if (this.thumbTwo !== null) {
+            this.thumbTwo.remove();
         }
     }
 

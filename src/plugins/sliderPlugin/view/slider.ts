@@ -49,7 +49,7 @@ class Slider {
 
     }
 
-    removeSlider() {
+    remove() {
         this.element.remove();
     }
 

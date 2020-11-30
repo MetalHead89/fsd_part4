@@ -243,10 +243,11 @@ class ModelData {
         let left: number = this.getThumbOnePosition().left;
         let top: number = this.getThumbOnePosition().top;
 
-        if (position.left <= this.getThumbTwoPosition().left) {
+        if (this.type === 'single' || position.left <= this.getThumbTwoPosition().left) {
             left = (position.left >= 0) ? position.left : 0;
         };
-        if (position.top <= this.getThumbTwoPosition().top) {
+
+        if (this.type === 'single' || position.top <= this.getThumbTwoPosition().top) {
             top = (position.top >= 0) ? position.top : 0;
         };
 
@@ -278,10 +279,14 @@ class ModelData {
 
         if (position.left >= this.getThumbOnePosition().left) {
             left = (position.left <= (this.getSliderSize().width - this.getThumbSize().width)) ? position.left : (this.getSliderSize().width - this.getThumbSize().width);
-        };
+        } else {
+            left = this.getThumbOnePosition().left;
+        }
         if (position.top >= this.getThumbOnePosition().top) {
             top = (position.top <= (this.getSliderSize().height - this.getThumbSize().height)) ? position.top : (this.getSliderSize().height - this.getThumbSize().height);
-        };
+        } else {
+            top = this.getThumbTwoPosition().top;
+        }
 
         this.thumbTwoPosition = { 'left': left, 'top': top };
     }

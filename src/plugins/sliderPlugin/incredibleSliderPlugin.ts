@@ -60,8 +60,8 @@ import Presenter from './presenter/presenter';
         getTooltipsVisiblity: function(): boolean {
             return $(this).data().sliderPresenter.getTooltipsVisiblity();
         },
-        setSliderType: function(type: string) {
-            return $(this).data().sliderPresenter.setSliderType(type);
+        changeSliderType: function(type: string) {
+            return $(this).data().sliderPresenter.changeSliderType(type);
         },
         getSliderType: function(): string {
             return $(this).data().sliderPresenter.getSliderType();

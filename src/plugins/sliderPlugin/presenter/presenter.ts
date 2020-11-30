@@ -69,26 +69,41 @@ class Presenter {
          */
 
         const orientation = this.model.getSliderOrientation();
-        const sliderType: string = this.model.getSliderType();
-        const tooltipsVisible: boolean = this.model.getTooltipsVisiblity();
 
         this.view.createSlider(`slider slider_${orientation}`);
         this.view.createTrack(`slider__track slider__track_${orientation}`);
         this.view.createProgressBar(`slider__progress-bar slider__progress-bar_${orientation}`)
+        this.createThumbs(orientation);
+        // this.model.setScalePointSize(this.getScalePointMaxSize());
+        this.view.createScale(`slider__scale slider__scale_${orientation}`);
+    }
+
+    private createThumbs(orientation: string, isStartPosition=true): void {
+        const sliderType: string = this.model.getSliderType();
+        const tooltipsVisible: boolean = this.model.getTooltipsVisiblity();
+
         this.view.createThumbOne(`slider__thumb slider__thumb-one slider__thumb_${orientation}`);
         if (tooltipsVisible) {
             this.view.createTooltipOne(`slider__tooltip slider__tooltip_${orientation}`);
         }
-        this.model.setThumbOneToStartingPosition()
+
+        if(isStartPosition) {
+            this.model.setThumbOneToStartingPosition();
+        } else {
+            this.model.dragthumbOne(this.model.getThumbOnePosition());
+        }
+
         if (sliderType === 'range') {
             this.view.createThumbTwo(`slider__thumb slider__thumb-two slider__thumb_${orientation}`);
             if (tooltipsVisible) {
                 this.view.createTooltipTwo(`slider__tooltip slider__tooltip_${orientation}`);
             }
+            if (isStartPosition) {
+                this.model.setThumbTwoToStartingPosition();
+            } else {
+                this.model.dragThumbTwo(this.model.getThumbTwoPosition());
+            }
         }
-        this.model.setThumbTwoToStartingPosition();
-        // this.model.setScalePointSize(this.getScalePointMaxSize());
-        this.view.createScale(`slider__scale slider__scale_${orientation}`);
     }
 
     private getScalePointMaxSize(): IScalePointSize {
@@ -131,7 +146,6 @@ class Presenter {
     }
 
     changeSliderOrientation(orienation: string): void {
-        console.log('REMOVE!!!!!')
         if (orienation !== this.model.getSliderOrientation()) {
             this.setSliderOrientation(orienation);
             const thumbOnePosition = this.model.getThumbOnePosition();
@@ -140,8 +154,14 @@ class Presenter {
             this.model.setThumbTwoPosition({ 'left': thumbTwoPosition.top, 'top': thumbTwoPosition.left });
             this.view.removeSlider();
             this.createNewSlider();
-            // this.observer.notify('updatedSliderOrientation', this.orientation);
         }
+    }
+
+    changeSliderType(type: string) {
+        this.view.removeThumbOne();
+        this.view.removeThumbTwo();
+        this.model.setSliderType(type);
+        this.createThumbs(this.model.getSliderOrientation(), false);
     }
 
 

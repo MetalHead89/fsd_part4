@@ -33,8 +33,8 @@ export class Panel {
         this.tooltipChBox.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setTooltipsVisibility', this.tooltipChBox.checked) });
         this.scaleChBox.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setScaleVisibility', this.scaleChBox.checked) });
         this.tooltipChBox.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setTooltipsVisibility', this.tooltipChBox.checked) });
-        this.singleRadioButton.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setSliderType', this.singleRadioButton.value) });
-        this.rangeRadioButton.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setSliderType', this.rangeRadioButton.value) });
+        this.singleRadioButton.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('changeSliderType', this.singleRadioButton.value) });
+        this.rangeRadioButton.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('changeSliderType', this.rangeRadioButton.value) });
         this.horizontalRadioButton.addEventListener('click', () => {
             this.setSliderWrapperHorizontalOrientation();
             this.sliderElem.incredibleSliderPlugin('changeSliderOrientation', this.horizontalRadioButton.value);

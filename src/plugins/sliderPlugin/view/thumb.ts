@@ -110,9 +110,13 @@ class Thumb {
         document.removeEventListener('mouseup', this.onMouseUpHandler as EventListenerOrEventListenerObject);
     }
 
-    moveTo(position: IThumbPosition) {
+    moveTo(position: IThumbPosition): void {
         this.element.style.left = position.left + 'px';
         this.element.style.top = position.top + 'px';
+    }
+
+    remove(): void {
+        this.element.remove();
     }
 
 }
