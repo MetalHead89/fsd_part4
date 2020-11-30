@@ -212,6 +212,12 @@ class View {
         }
     }
 
+    removeScale() {
+        if (this.scale !== null) {
+            this.scale.remove();
+        }
+    }
+
 }
 
 export default View;

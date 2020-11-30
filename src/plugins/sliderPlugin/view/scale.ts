@@ -59,6 +59,10 @@ class Scale {
 
         return scalePoint
     }
+
+    remove() {
+        this.element.remove();
+    }
 }
 
 export default Scale;

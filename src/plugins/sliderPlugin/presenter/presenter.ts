@@ -75,10 +75,12 @@ class Presenter {
         this.view.createProgressBar(`slider__progress-bar slider__progress-bar_${orientation}`)
         this.createThumbs(orientation);
         // this.model.setScalePointSize(this.getScalePointMaxSize());
-        this.view.createScale(`slider__scale slider__scale_${orientation}`);
+        if (this.model.getScaleVisiblity()) {
+            this.view.createScale(`slider__scale slider__scale_${orientation}`);
+        }
     }
 
-    private createThumbs(orientation: string, isStartPosition=true): void {
+    private createThumbs(orientation: string, isStartPosition = true): void {
         const sliderType: string = this.model.getSliderType();
         const tooltipsVisible: boolean = this.model.getTooltipsVisiblity();
 
@@ -87,7 +89,7 @@ class Presenter {
             this.view.createTooltipOne(`slider__tooltip slider__tooltip_${orientation}`);
         }
 
-        if(isStartPosition) {
+        if (isStartPosition) {
             this.model.setThumbOneToStartingPosition();
         } else {
             this.model.dragthumbOne(this.model.getThumbOnePosition());
@@ -191,6 +193,15 @@ class Presenter {
         }
     }
 
+    changeScaleVisibility(scaleVisible: boolean) {
+        this.model.setScaleVisibility(scaleVisible);
+
+        if (scaleVisible) {
+            this.view.createScale(`slider__scale slider__scale_${this.model.getSliderOrientation()}`);
+        } else {
+            this.view.removeScale();
+        }
+    }
 
 }
 

@@ -29,9 +29,9 @@ export class Panel {
         this.minValue.addEventListener('input', () => { this.setMinValueSlider(this.sliderElem) });
         this.maxValue.addEventListener('input', () => { this.setMaxValueSlider(this.sliderElem) });
         this.step.addEventListener('input', () => { this.setStepValueSlider(this.sliderElem) });
-        this.scaleChBox.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setScaleVisibility', this.scaleChBox.checked) });
-        this.tooltipChBox.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setTooltipsVisibility', this.tooltipChBox.checked) });
-        this.scaleChBox.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setScaleVisibility', this.scaleChBox.checked) });
+        this.scaleChBox.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('changeScaleVisibility', this.scaleChBox.checked) });
+        this.tooltipChBox.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('changeTooltipsVisibility', this.tooltipChBox.checked) });
+        // this.scaleChBox.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setScaleVisibility', this.scaleChBox.checked) });
         this.tooltipChBox.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setTooltipsVisibility', this.tooltipChBox.checked) });
         this.singleRadioButton.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('changeSliderType', this.singleRadioButton.value) });
         this.rangeRadioButton.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('changeSliderType', this.rangeRadioButton.value) });

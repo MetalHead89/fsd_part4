@@ -48,8 +48,8 @@ import Presenter from './presenter/presenter';
         setStep: function(value: number) {
             $(this).data().sliderPresenter.changeStep(value);
         },
-        setScaleVisibility: function(flag: boolean) {
-            $(this).data().sliderPresenter.setScaleVisibility(flag);
+        changeScaleVisibility: function(flag: boolean) {
+            $(this).data().sliderPresenter.changeScaleVisibility(flag);
         },
         setTooltipsVisibility: function(flag: boolean) {
             $(this).data().sliderPresenter.setTooltipsVisibility(flag);
