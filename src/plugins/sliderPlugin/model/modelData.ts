@@ -254,11 +254,15 @@ class ModelData {
         let left: number = this.getThumbOnePosition().left;
         let top: number = this.getThumbOnePosition().top;
 
-        if (this.type === 'single' || position.left <= this.getThumbTwoPosition().left) {
+        if (this.type === 'single' &&
+            position.left <= (this.getSliderSize().width - this.getThumbSize().width) ||
+            position.left <= this.getThumbTwoPosition().left) {
             left = (position.left >= 0) ? position.left : 0;
         };
 
-        if (this.type === 'single' || position.top <= this.getThumbTwoPosition().top) {
+        if (this.type === 'single' &&
+            position.top <= (this.getSliderSize().height - this.getThumbSize().height) ||
+            position.top <= this.getThumbTwoPosition().top) {
             top = (position.top >= 0) ? position.top : 0;
         };
 
