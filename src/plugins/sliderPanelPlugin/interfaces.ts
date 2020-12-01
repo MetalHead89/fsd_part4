@@ -1,17 +1,16 @@
 export interface IInputControl {
-    'control': HTMLInputElement,
+    'inputElement': HTMLInputElement,
     'id'?: string,
     'name'?: string,
     'value'?: string,
-    'controlType': string,
-    'controlClass': string,
+    'inputType': string,
+    'inputClass': string,
     'labelText': string,
     'labelClass': string,
     'wrapperClass': string
 }
 
-export interface IRadioParams { 
-    'control': HTMLInputElement,
+export interface IRadioParams {
     'id': string,
     'label': string,
     'value': string
