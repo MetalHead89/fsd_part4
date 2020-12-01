@@ -57,11 +57,14 @@ class Thumb {
 
     }
 
+    setZIndex(zIndex: string) {
+        this.element.style.zIndex = zIndex;
+    }
+
     private startDrag(cursorX: number, cursorY: number): void {
 
-        // this.setZIndex(3);
-        // this.observer.notify('changeZIndexToAnotherThumb', this.element);
-        this.element.style.zIndex = (+this.element.style.zIndex + 1).toString()
+        this.setZIndex('3');
+        this.observer.notify('changeZIndexToAnotherThumb', this.element);
         
         const thumbCoords: DOMRect = this.element.getBoundingClientRect();
 
@@ -70,7 +73,6 @@ class Thumb {
 
         this.onMouseMoveHandler = this.drag.bind(this);
         this.onMouseUpHandler = this.endDrag.bind(this);
-        /////////////////////////////////////////////////////////////////////////////////////// <= Увеличить z-index, аа зетем уменьшить в endDrag()
         document.addEventListener('mousemove',
             this.onMouseMoveHandler as EventListenerOrEventListenerObject);
         document.addEventListener('mouseup',
@@ -109,7 +111,6 @@ class Thumb {
     private endDrag(): void {
         document.removeEventListener('mousemove', this.onMouseMoveHandler as EventListenerOrEventListenerObject);
         document.removeEventListener('mouseup', this.onMouseUpHandler as EventListenerOrEventListenerObject);
-        this.element.style.zIndex = (+this.element.style.zIndex - 1).toString();
     }
 
     moveTo(position: IThumbPosition): void {

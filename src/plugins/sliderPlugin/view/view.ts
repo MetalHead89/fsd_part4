@@ -34,6 +34,17 @@ class View {
         this.sliderWrapper = sliderWrapper as HTMLDivElement;
         this.elementFactory = new ElementFactory();
 
+        this.observer.subscribe('changeZIndexToAnotherThumb', (thumbElem: HTMLElement) => {
+
+            if (this.thumbOne !== null && this.thumbTwo !== null) {
+                if (thumbElem.isEqualNode(this.thumbOne.getElement())) {
+                    this.thumbTwo.setZIndex('2')
+                } else {
+                    this.thumbOne.setZIndex('2');
+                }
+            }
+
+        });
     }
 
     createSlider(styleClasses: string) {
@@ -185,7 +196,7 @@ class View {
             return this.scale.getScalePointMaxSize(value);
         }
 
-        return {'width': 20, 'height': 20};
+        return { 'width': 20, 'height': 20 };
     }
 
     addScalePoint(pointSettings: IScalePointSettings) {
@@ -293,15 +304,15 @@ export default View;
 //         this.progressBar = this.progressBarInit(this.slider.getElement(), 'slider__progress-bar');
 //         this.scale = this.scaleInit(this.slider.getElement(), 'slider__scale', 'horizontal');
 
-//         this.observer.subscribe('changeZIndexToAnotherThumb', (thumbElem: HTMLElement) => { 
+        // this.observer.subscribe('changeZIndexToAnotherThumb', (thumbElem: HTMLElement) => { 
 
-//             if (thumbElem.isEqualNode(this.thumbOne.getElement())) {
-//                 this.thumbTwo.setZIndex(2)
-//             } else {
-//                 this.thumbOne.setZIndex(2);
-//             }
+        //     if (thumbElem.isEqualNode(this.thumbOne.getElement())) {
+        //         this.thumbTwo.setZIndex(2)
+        //     } else {
+        //         this.thumbOne.setZIndex(2);
+        //     }
 
-//          });
+        //  });
 //     }
 
 //     createScale(scaleVisible: boolean, orientation: string) {
