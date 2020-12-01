@@ -6,12 +6,11 @@ class InputText extends PanelElement{
 
     private control: HTMLDivElement;
 
-    constructor(labelText: string, idPrefix: string) {
+    constructor(input: HTMLInputElement, labelText: string, idPrefix: string) {
         super();
-        const textField = document.createElement('input');
 
         const controlParams: IInputControl = {
-            'inputElement': textField,
+            'inputElement': input,
             'id': this.generateID(idPrefix),
             'inputType': 'text',
             'inputClass': 'slider-panel__input',

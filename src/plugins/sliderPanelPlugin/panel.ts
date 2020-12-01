@@ -1,47 +1,99 @@
 import InputCheckbox from "./panelElements/inputCheckbox";
 import InputRadio from "./panelElements/inputRadio";
-// import { IInputControl } from './interfaces'
-// import { IRadioParams } from './interfaces'
-
 import InputText from "./panelElements/inputText";
 
 class Panel {
-    sliderElem: JQuery<HTMLElement>;
-    sliderPanel: HTMLElement = document.createElement('div');
-    //     minValue: HTMLInputElement = document.createElement('input');
-    //     maxValue: HTMLInputElement = document.createElement('input');
-    //     step: HTMLInputElement = document.createElement('input');
-    //     scaleChBox: HTMLInputElement = document.createElement('input');
-    //     tooltipChBox: HTMLInputElement = document.createElement('input');
-    //     singleRadioButton: HTMLInputElement = document.createElement('input');
-    //     rangeRadioButton: HTMLInputElement = document.createElement('input');
-    //     horizontalRadioButton: HTMLInputElement = document.createElement('input');
-    //     verticalRadioButton: HTMLInputElement = document.createElement('input');
+    private sliderElem: JQuery<HTMLElement>;
+    private sliderPanel: HTMLElement = document.createElement('div');
+    private minValue: HTMLInputElement = document.createElement('input');
+    private maxValue: HTMLInputElement = document.createElement('input');
+    private step: HTMLInputElement = document.createElement('input');
+    private scaleChBox: HTMLInputElement = document.createElement('input');
+    private tooltipChBox: HTMLInputElement = document.createElement('input');
+    private singleRadioButton: HTMLInputElement = document.createElement('input');
+    private rangeRadioButton: HTMLInputElement = document.createElement('input');
+    private horizontalRadioButton: HTMLInputElement = document.createElement('input');
+    private verticalRadioButton: HTMLInputElement = document.createElement('input');
 
     constructor(slider: JQuery<HTMLElement>) {
         this.sliderElem = slider;
 
         this.createPanel();
-        // this.init();
+        this.addEventListenersToPanel();
     }
 
     private createPanel() {
-        this.sliderPanel.className = 'slider-panel';
+        const inputTextsGroup: HTMLDivElement = this.createInputTextGroup();
+        const inputRadioButtonsGroup: HTMLDivElement = this.createRadioTextGroup();
+        const inputCheckboxesGroup: HTMLDivElement = this.createCheckboxTextGroup();    
 
-        const minTextInput = new InputText('min', 'min');
-        const maxTextInput = new InputText('max', 'max');
-        const stepTextInput = new InputText('step', 'step');
+        const checkboxesAndRadioWrapper: HTMLDivElement = this.wrapElements(
+            'slider-panel__checkboxes-and-radio-wrapper',
+            inputRadioButtonsGroup,
+            inputCheckboxesGroup
+        );
+
+        this.sliderPanel.className = 'slider-panel';
+        this.sliderPanel.append(inputTextsGroup);
+        this.sliderPanel.append(checkboxesAndRadioWrapper);
+
+        const sliderType: string = String(this.sliderElem.incredibleSliderPlugin('getSliderType'));
+        if (sliderType == 'single') {
+            this.singleRadioButton.checked = true;
+        } else if (sliderType == 'range') {
+            this.rangeRadioButton.checked = true;
+        }
+
+        const sliderOrientation: string = String(this.sliderElem.incredibleSliderPlugin('getSliderOrientation'));
+        if (sliderOrientation == 'horizontal') {
+            this.setSliderWrapperHorizontalOrientation();
+            this.horizontalRadioButton.checked = true;
+        } else if (sliderOrientation == 'vertical') {
+            this.setSliderWrapperVerticalOrientation();
+            this.verticalRadioButton.checked = true;
+        }
+
+        const panelWrapper: HTMLElement = document.createElement('div');
+        panelWrapper.className = 'panel-wrapper';
+        panelWrapper.append(this.sliderPanel);
+
+        this.sliderElem.append(panelWrapper);
+    }
+
+    private addEventListenersToPanel() {
+        this.minValue.addEventListener('input', () => { this.setMinValueSlider(this.sliderElem) });
+        this.maxValue.addEventListener('input', () => { this.setMaxValueSlider(this.sliderElem) });
+        this.step.addEventListener('input', () => { this.setStepValueSlider(this.sliderElem) });
+        this.scaleChBox.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('changeScaleVisibility', this.scaleChBox.checked) });
+        this.tooltipChBox.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('changeTooltipsVisibility', this.tooltipChBox.checked) });
+        this.singleRadioButton.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('changeSliderType', this.singleRadioButton.value) });
+        this.rangeRadioButton.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('changeSliderType', this.rangeRadioButton.value) });
+        this.horizontalRadioButton.addEventListener('click', () => {
+            this.setSliderWrapperHorizontalOrientation();
+            this.sliderElem.incredibleSliderPlugin('changeSliderOrientation', this.horizontalRadioButton.value);
+        });
+        this.verticalRadioButton.addEventListener('click', () => {
+            this.setSliderWrapperVerticalOrientation();
+            this.sliderElem.incredibleSliderPlugin('changeSliderOrientation', this.verticalRadioButton.value)
+        });
+    }
+
+    private createInputTextGroup(): HTMLDivElement {
 
         const inputTextsGroup: HTMLDivElement = this.wrapElements(
             'slider-panel__input-text-group',
-            minTextInput.getControl(),
-            maxTextInput.getControl(),
-            stepTextInput.getControl()
+            new InputText(this.minValue, 'min', 'min').getControl(),
+            new InputText(this.maxValue, 'max', 'max').getControl(),
+            new InputText(this.step, 'step', 'step').getControl()
         );
 
+        return inputTextsGroup;
+    }
+
+    private createRadioTextGroup(): HTMLDivElement {
         const sliderTypeRadioParams = [
-            { 'id': 'single', 'label': 'single', 'value': 'single' },
-            { 'id': 'range', 'label': 'range', 'value': 'range' }
+            { 'input': this.singleRadioButton, 'id': 'single', 'label': 'single', 'value': 'single' },
+            { 'input': this.rangeRadioButton, 'id': 'range', 'label': 'range', 'value': 'range' }
         ];
         const typeRadioGroupLabel = document.createElement('label');
         typeRadioGroupLabel.innerText = 'type';
@@ -49,8 +101,8 @@ class Panel {
         const sliderTypeRadioControl = new InputRadio(sliderTypeRadioParams, 'sliderType')
 
         const sliderOrientationRadioParams = [
-            { 'id': 'horizontal', 'label': 'horizontal', 'value': 'horizontal' },
-            { 'id': 'vertical', 'label': 'vertical', 'value': 'vertical' }
+            { 'input': this.horizontalRadioButton, 'id': 'horizontal', 'label': 'horizontal', 'value': 'horizontal' },
+            { 'input': this.verticalRadioButton, 'id': 'vertical', 'label': 'vertical', 'value': 'vertical' }
         ];
         const orientationRadioGroupLabel = document.createElement('label');
         orientationRadioGroupLabel.innerText = 'orientation';
@@ -65,12 +117,20 @@ class Panel {
             sliderOrientationRadioControl.getControl()
         );
 
+        return inputRadioButtonsGroup;
+    }
+
+    private createCheckboxTextGroup(): HTMLDivElement {
         const checkboxesGroupLabel = document.createElement('label');
         checkboxesGroupLabel.innerText = 'on/off elements';
         checkboxesGroupLabel.classList.add('slider-panel__checkboxes-group-label');
 
-        const scaleChBox = new InputCheckbox('scale', 'scale');
-        const tooltipChBox = new InputCheckbox('tooltips', 'tooltips');
+        const scaleChBox = new InputCheckbox(this.scaleChBox, 'scale', 'scale');
+        this.scaleChBox.checked = Boolean(this.sliderElem.incredibleSliderPlugin('getScaleVisiblity'));
+
+        const tooltipChBox = new InputCheckbox(this.tooltipChBox, 'tooltips', 'tooltips');
+        this.tooltipChBox.checked = Boolean(this.sliderElem.incredibleSliderPlugin('getTooltipsVisiblity'));
+
         const inputCheckboxesGroup: HTMLDivElement = this.wrapElements(
             'slider-panel__input-checkboxes-group',
             checkboxesGroupLabel,
@@ -78,21 +138,7 @@ class Panel {
             tooltipChBox.getControl()
         );
 
-        const checkboxesAndRadioWrapper: HTMLDivElement = this.wrapElements(
-            'slider-panel__checkboxes-and-radio-wrapper',
-            inputRadioButtonsGroup,
-            inputCheckboxesGroup
-        );
-
-        this.sliderPanel.className = 'slider-panel';
-        this.sliderPanel.append(inputTextsGroup);
-        this.sliderPanel.append(checkboxesAndRadioWrapper);
-
-        const panelWrapper: HTMLElement = document.createElement('div');
-        panelWrapper.className = 'panel-wrapper';
-        panelWrapper.append(this.sliderPanel);
-
-        this.sliderElem.append(panelWrapper);
+        return inputCheckboxesGroup;
     }
 
     private wrapElements(wrapperClass: string, ...elements: HTMLElement[]): HTMLDivElement {
@@ -115,29 +161,81 @@ class Panel {
         return wrapper;
     }
 
+    private setSliderWrapperHorizontalOrientation() {
+        this.sliderElem.removeClass('slider-wrapper_vertical');
+        this.sliderElem.addClass('slider-wrapper_horizontal');
+        this.setPanelHorizontalOrientation();
+    }
+
+    private setSliderWrapperVerticalOrientation() {
+        this.sliderElem.removeClass('slider-wrapper_horizontal');
+        this.sliderElem.addClass('slider-wrapper_vertical');
+        this.setPanelVerticalOrientation();
+    }
+
+    private setPanelHorizontalOrientation() {
+        this.sliderPanel.classList.remove('slider-panel_vertical');
+        this.sliderPanel.classList.add('slider-panel_horizontal');
+    }
+
+    private setPanelVerticalOrientation() {
+        this.sliderPanel.classList.remove('slider-panel_horizontal');
+        this.sliderPanel.classList.add('slider-panel_vertical');
+    }
+
+    private setMinValueSlider(slider: JQuery<HTMLElement>) {
+        if (this.minValue) {
+            const minValue = parseInt(this.minValue.value);
+
+            if (!isNaN(minValue)) {
+                slider.incredibleSliderPlugin('setMin', minValue);
+            }
+        }
+    }
+
+    private setMaxValueSlider(slider: JQuery<HTMLElement>) {
+        if (this.maxValue) {
+            const maxValue = parseInt(this.maxValue.value);
+
+            if (!isNaN(maxValue)) {
+                slider.incredibleSliderPlugin('setMax', maxValue);
+            }
+        }
+    }
+
+    private setStepValueSlider(slider: JQuery<HTMLElement>) {
+        if (this.step) {
+            const step = parseInt(this.step.value);
+
+            if (!isNaN(step)) {
+                slider.incredibleSliderPlugin('setStep', step);
+            }
+        }
+    }
+
     //     private init() {
 
     //         /**
     //          * Создаёт панель управления и вставляет её после слайдера, который она будет контролировать
     //          */
 
-    //         this.minValue.addEventListener('input', () => { this.setMinValueSlider(this.sliderElem) });
-    //         this.maxValue.addEventListener('input', () => { this.setMaxValueSlider(this.sliderElem) });
-    //         this.step.addEventListener('input', () => { this.setStepValueSlider(this.sliderElem) });
-    //         this.scaleChBox.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('changeScaleVisibility', this.scaleChBox.checked) });
-    //         this.tooltipChBox.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('changeTooltipsVisibility', this.tooltipChBox.checked) });
-    //         // this.scaleChBox.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setScaleVisibility', this.scaleChBox.checked) });
-    //         this.tooltipChBox.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setTooltipsVisibility', this.tooltipChBox.checked) });
-    //         this.singleRadioButton.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('changeSliderType', this.singleRadioButton.value) });
-    //         this.rangeRadioButton.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('changeSliderType', this.rangeRadioButton.value) });
-    //         this.horizontalRadioButton.addEventListener('click', () => {
-    //             this.setSliderWrapperHorizontalOrientation();
-    //             this.sliderElem.incredibleSliderPlugin('changeSliderOrientation', this.horizontalRadioButton.value);
-    //         });
-    //         this.verticalRadioButton.addEventListener('click', () => {
-    //             this.setSliderWrapperVerticalOrientation();
-    //             this.sliderElem.incredibleSliderPlugin('changeSliderOrientation', this.verticalRadioButton.value)
-    //         });
+            // this.minValue.addEventListener('input', () => { this.setMinValueSlider(this.sliderElem) });
+            // this.maxValue.addEventListener('input', () => { this.setMaxValueSlider(this.sliderElem) });
+            // this.step.addEventListener('input', () => { this.setStepValueSlider(this.sliderElem) });
+            // this.scaleChBox.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('changeScaleVisibility', this.scaleChBox.checked) });
+            // this.tooltipChBox.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('changeTooltipsVisibility', this.tooltipChBox.checked) });
+            // // this.scaleChBox.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setScaleVisibility', this.scaleChBox.checked) });
+            // this.tooltipChBox.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('setTooltipsVisibility', this.tooltipChBox.checked) });
+            // this.singleRadioButton.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('changeSliderType', this.singleRadioButton.value) });
+            // this.rangeRadioButton.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('changeSliderType', this.rangeRadioButton.value) });
+            // this.horizontalRadioButton.addEventListener('click', () => {
+            //     this.setSliderWrapperHorizontalOrientation();
+            //     this.sliderElem.incredibleSliderPlugin('changeSliderOrientation', this.horizontalRadioButton.value);
+            // });
+            // this.verticalRadioButton.addEventListener('click', () => {
+            //     this.setSliderWrapperVerticalOrientation();
+            //     this.sliderElem.incredibleSliderPlugin('changeSliderOrientation', this.verticalRadioButton.value)
+            // });
 
     //         const sliderTypeRadioParams = [
     //             { 'control': this.singleRadioButton, 'id': 'single', 'label': 'single', 'value': 'single' },
@@ -220,27 +318,27 @@ class Panel {
 
     //     }
 
-    //     private setSliderWrapperHorizontalOrientation() {
-    //         this.sliderElem.removeClass('slider-wrapper_vertical');
-    //         this.sliderElem.addClass('slider-wrapper_horizontal');
-    //         this.setPanelHorizontalOrientation();
-    //     }
+        // private setSliderWrapperHorizontalOrientation() {
+        //     this.sliderElem.removeClass('slider-wrapper_vertical');
+        //     this.sliderElem.addClass('slider-wrapper_horizontal');
+        //     this.setPanelHorizontalOrientation();
+        // }
 
-    //     private setSliderWrapperVerticalOrientation() {
-    //         this.sliderElem.removeClass('slider-wrapper_horizontal');
-    //         this.sliderElem.addClass('slider-wrapper_vertical');
-    //         this.setPanelVerticalOrientation();
-    //     }
+        // private setSliderWrapperVerticalOrientation() {
+        //     this.sliderElem.removeClass('slider-wrapper_horizontal');
+        //     this.sliderElem.addClass('slider-wrapper_vertical');
+        //     this.setPanelVerticalOrientation();
+        // }
 
-    //     private setPanelHorizontalOrientation() {
-    //         this.sliderPanel.classList.remove('slider-panel_vertical');
-    //         this.sliderPanel.classList.add('slider-panel_horizontal');
-    //     }
+        // private setPanelHorizontalOrientation() {
+        //     this.sliderPanel.classList.remove('slider-panel_vertical');
+        //     this.sliderPanel.classList.add('slider-panel_horizontal');
+        // }
 
-    //     private setPanelVerticalOrientation() {
-    //         this.sliderPanel.classList.remove('slider-panel_horizontal');
-    //         this.sliderPanel.classList.add('slider-panel_vertical');
-    //     }
+        // private setPanelVerticalOrientation() {
+        //     this.sliderPanel.classList.remove('slider-panel_horizontal');
+        //     this.sliderPanel.classList.add('slider-panel_vertical');
+        // }
 
     // private createInputText(control: HTMLInputElement, labelText: string, prefix: string): HTMLElement {
 
@@ -397,35 +495,35 @@ class Panel {
 
     // }
 
-    //     setMinValueSlider(slider: JQuery<HTMLElement>) {
-    //         if (this.minValue) {
-    //             const minValue = parseInt(this.minValue.value);
+        // setMinValueSlider(slider: JQuery<HTMLElement>) {
+        //     if (this.minValue) {
+        //         const minValue = parseInt(this.minValue.value);
 
-    //             if (!isNaN(minValue)) {
-    //                 slider.incredibleSliderPlugin('setMin', minValue);
-    //             }
-    //         }
-    //     }
+        //         if (!isNaN(minValue)) {
+        //             slider.incredibleSliderPlugin('setMin', minValue);
+        //         }
+        //     }
+        // }
 
-    //     setMaxValueSlider(slider: JQuery<HTMLElement>) {
-    //         if (this.maxValue) {
-    //             const maxValue = parseInt(this.maxValue.value);
+        // setMaxValueSlider(slider: JQuery<HTMLElement>) {
+        //     if (this.maxValue) {
+        //         const maxValue = parseInt(this.maxValue.value);
 
-    //             if (!isNaN(maxValue)) {
-    //                 slider.incredibleSliderPlugin('setMax', maxValue);
-    //             }
-    //         }
-    //     }
+        //         if (!isNaN(maxValue)) {
+        //             slider.incredibleSliderPlugin('setMax', maxValue);
+        //         }
+        //     }
+        // }
 
-    //     setStepValueSlider(slider: JQuery<HTMLElement>) {
-    //         if (this.step) {
-    //             const step = parseInt(this.step.value);
+        // setStepValueSlider(slider: JQuery<HTMLElement>) {
+        //     if (this.step) {
+        //         const step = parseInt(this.step.value);
 
-    //             if (!isNaN(step)) {
-    //                 slider.incredibleSliderPlugin('setStep', step);
-    //             }
-    //         }
-    //     }
+        //         if (!isNaN(step)) {
+        //             slider.incredibleSliderPlugin('setStep', step);
+        //         }
+        //     }
+        // }
 }
 
 export default Panel;

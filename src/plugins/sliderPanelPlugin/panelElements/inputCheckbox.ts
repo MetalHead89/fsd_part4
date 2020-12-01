@@ -6,12 +6,11 @@ class InputCheckbox extends PanelElement{
 
     private control: HTMLDivElement;
 
-    constructor(labelText: string, idPrefix: string) {
-        super();
-        const checkbox = document.createElement('input');        
+    constructor(input: HTMLInputElement, labelText: string, idPrefix: string) {
+        super();      
     
             const controlParams: IInputControl = {
-                'inputElement': document.createElement('input'),
+                'inputElement': input,
                 'id': this.generateID(idPrefix),
                 'inputType': 'checkbox',
                 'inputClass': 'slider-panel__checkbox',

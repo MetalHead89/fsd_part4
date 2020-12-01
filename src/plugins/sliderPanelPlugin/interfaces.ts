@@ -11,6 +11,7 @@ export interface IInputControl {
 }
 
 export interface IRadioParams {
+    'input': HTMLInputElement
     'id': string,
     'label': string,
     'value': string

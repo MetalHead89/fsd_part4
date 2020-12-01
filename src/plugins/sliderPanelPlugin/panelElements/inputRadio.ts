@@ -17,7 +17,7 @@ class InputRadio extends PanelElement {
         for (const params of radioParams) {
 
             const controlParams: IInputControl = {
-                'inputElement': document.createElement('input'),
+                'inputElement': params.input,
                 'id': this.generateID(params.id),
                 'name': name,
                 'value': params.value,
