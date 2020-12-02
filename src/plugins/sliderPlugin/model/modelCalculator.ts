@@ -64,6 +64,7 @@ class ModelCalculator {
         this.observer.notify(notyfyMessage, { 'thumbPosition': newThumbPosition, 'tooltipValue': thumbValue });
         this.observer.notify('progressBarDraged', this.calcProgressBarPosition());
     }
+    
 
     /**
      * Возвращает ширину или длину переданного объекта в зависимости от ориентации слайдера.
