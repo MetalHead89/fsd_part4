@@ -112,8 +112,8 @@ class ModelCalculator {
          * Считает размер одного шага бегунка в пикселях
          */
 
-        return Math.ceil((this.getElementSizeByOrientation(this.data.getSliderSize()) -
-            this.getElementSizeByOrientation(this.data.getThumbSize())) / this.calculateStepsCount());
+        return (this.getElementSizeByOrientation(this.data.getSliderSize()) -
+            this.getElementSizeByOrientation(this.data.getThumbSize())) / this.calculateStepsCount();
     }
 
     private changePositionAccordingToStep(position: IThumbPosition): IThumbPosition {
