@@ -33,9 +33,6 @@ class ModelCalculator {
         const thumbValue: number = this.positionToValue(this.getElementPosByOrientation(this.data.getThumbOnePosition()));
 
         this.thumbDrag(correctThumOnePosition, 'thumbOneDragged', thumbValue);
-
-        // this.observer.notify('progressBarDraged', this.calcProgressBarPosition());
-        // this.observer.notify('tooltipOneDraged', this.positionToValue(this.getElementPosByOrientation(this.data.getThumbOnePosition())));
     }
 
 
@@ -46,29 +43,15 @@ class ModelCalculator {
      * @param {IThumbPosition} thumbPosition - сырая позиция бегунка, может выходить за пределы слайдера или первого бегунка
      */
     dragThumbTwo(thumbPosition: IThumbPosition) {
-        // if (this.data.getSliderType() == 'range' &&
-        //     this.getElementPosByOrientation(thumbPosition) <= this.getElementPosByOrientation(this.data.getThumbOnePosition())) {
-        //     thumbPosition = this.data.getThumbTwoPosition();
-
-        //     // if (this.getElementPosByOrientation(thumbPosition) < this.getElementPosByOrientation(this.data.getThumbOnePosition())) {
-        //     //     if (this.data.getOrientation() === 'horizontal') {
-        //     //         thumbPosition.left = this.data.getSliderSize().width - this.data.getThumbSize().width;
-        //     //     } else if (this.data.getOrientation() === 'vertical') {
-        //     //         thumbPosition.top = this.data.getSliderSize().height - this.data.getThumbSize().height;
-        //     //     }
-        //     // }
-        // }
         this.data.setThumbTwoPosition(this.changePositionAccordingToStep(thumbPosition));
         const correctThumTwoPosition: IThumbPosition = this.data.getThumbTwoPosition();
         const thumbValue: number = this.positionToValue(this.getElementPosByOrientation(this.data.getThumbTwoPosition()));
 
         this.thumbDrag(correctThumTwoPosition, 'thumbTwoDragged', thumbValue);
-        // this.observer.notify('progressBarDraged', this.calcProgressBarPosition());
-        // this.observer.notify('tooltipTwoDraged', this.positionToValue(this.getElementPosByOrientation(this.thumbTwoPosition)));
-
     }
 
-    private thumbDrag(thumbPosition: IThumbPosition, notyfyMessage: string, thumbValue:number): void {
+
+    private thumbDrag(thumbPosition: IThumbPosition, notyfyMessage: string, thumbValue: number): void {
 
         const newThumbPosition = Object.assign({}, thumbPosition);
 
@@ -78,28 +61,39 @@ class ModelCalculator {
             newThumbPosition.left = 0;
         }
 
-        this.observer.notify(notyfyMessage, {'thumbPosition': newThumbPosition, 'tooltipValue': thumbValue});
+        this.observer.notify(notyfyMessage, { 'thumbPosition': newThumbPosition, 'tooltipValue': thumbValue });
         this.observer.notify('progressBarDraged', this.calcProgressBarPosition());
     }
 
+    /**
+     * Возвращает ширину или длину переданного объекта в зависимости от ориентации слайдера.
+     * При горизонтальной ориентации возвращается ширина, при вертикальной - длина.
+     * 
+     * @param {ISliderSize | IThumbSize | IScalePointSize} element - объект, ширину или длину которого необходимо получить
+     */
     private getElementSizeByOrientation(element: ISliderSize | IThumbSize | IScalePointSize): number {
-
         if (this.data.getOrientation() === 'vertical') {
             return element.height;
         }
 
         return element.width
-
     }
 
-    private getElementPosByOrientation(element: IThumbPosition): number {
 
+    /**
+     * Возвращает положение переданного объекта, относительно левого или верхнего края родительского контейнера, 
+     * в зависимости от ориентации слайдера.
+     * При горизонтальной ориентации возвращается положение относительно левого края родительского контейнера, 
+     * при вертикальной - относительно верхнего.
+     * 
+     * @param {ISliderSize | IThumbSize | IScalePointSize} element - объект, ширину или длину которого необходимо получить
+     */
+    private getElementPosByOrientation(element: IThumbPosition): number {
         if (this.data.getOrientation() === 'vertical') {
             return element.top;
         }
 
         return element.left
-
     }
 
     calculateStepsCount(): number {
@@ -211,7 +205,7 @@ class ModelCalculator {
          * (тупиковых) зон
          */
 
-        return(this.getElementSizeByOrientation(this.data.getSliderSize()) - this.getElementSizeByOrientation(this.data.getThumbSize())) / 100;
+        return (this.getElementSizeByOrientation(this.data.getSliderSize()) - this.getElementSizeByOrientation(this.data.getThumbSize())) / 100;
     }
 
     private calcProgressBarPosition(): IProgressBarPosition {
