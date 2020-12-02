@@ -145,7 +145,7 @@ class ModelCalculator {
 
         /** Устанавливает первый бегунок на стартовую позицию */
 
-        this.data.setThumbTwoPosition({ 'left': this.data.getSliderSize().width, 'top': this.data.getSliderSize().height })
+        // this.data.setThumbTwoPosition({ 'left': this.data.getSliderSize().width, 'top': this.data.getSliderSize().height })
 
         if (this.data.getOrientation() === 'horizontal') {
             if (this.data.getSliderType() === 'single') {

@@ -89,12 +89,6 @@ class Presenter {
             this.view.createTooltipOne(`slider__tooltip slider__tooltip_${orientation}`);
         }
 
-        if (isStartPosition) {
-            this.model.setThumbOneToStartingPosition();
-        } else {
-            this.model.dragthumbOne(this.model.getThumbOnePosition());
-        }
-
         if (sliderType === 'range') {
             this.view.createThumbTwo(`slider__thumb slider__thumb-two slider__thumb_${orientation}`);
             if (tooltipsVisible) {
@@ -105,6 +99,12 @@ class Presenter {
             } else {
                 this.model.dragThumbTwo(this.model.getThumbTwoPosition());
             }
+        }
+
+        if (isStartPosition) {
+            this.model.setThumbOneToStartingPosition();
+        } else {
+            this.model.dragthumbOne(this.model.getThumbOnePosition());
         }
     }
 
