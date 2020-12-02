@@ -6,7 +6,7 @@ import { IScalePointSize } from '../interfaces'
 
 
 /**
- * Класс обеспечивает хранение данных слайдера, а так же их предоставление и безопасное изменение
+ * Класс обеспечивающий хранение данных слайдера, а так же их предоставление и безопасное изменение
  */
 class ModelData {
     private orientation: string;
@@ -167,7 +167,8 @@ class ModelData {
 
 
     /**
-     * Устанавливает минимальное значение. Если новое значение превышает максимальное, то оно не устанавливается
+     * Устанавливает минимальное значение и возвращает ответ об успешности операции.
+     * Если новое значение превышает максимальное, то оно остаётся прежним, а операция считается не успешной.
      * 
      * @param {number} newMin - новое минимальное значение слайдера
      */
@@ -192,7 +193,8 @@ class ModelData {
 
 
     /**
-     * Устанавливает максимальное значение. Если новое значение меньше минимального, то оно не устанавливается
+     * Устанавливает максимальное значение и возвращает ответ об успешности операции.
+     * Если новое значение меньше минимального, то оно остаётся прежним, а операция считается не успешной.
      * 
      * @param {number} newMax - новое максимальное значение слайдера
      */
@@ -218,7 +220,8 @@ class ModelData {
 
 
     /**
-     * Устанавливает шаг бегунка. Если шаг отрицательный или равен 0, то он не устанавливается
+     * Устанавливает шаг бегунка и возвращает ответ об успешности операции.
+     * Если шаг отрицательный или равен 0, то он остаётся прежним, а операция считается не успешной.
      * 
      * @param {number} newStep - новое значение шага слайдера
      */
@@ -245,7 +248,10 @@ class ModelData {
 
     /**
      * Устанавливает позицию бегунка относительно левого и верхнего края родительского контейнера.
-     * Если одно из свойств переданного объекта больше соответствующего свойства второго бегунка, то оно остаётся неизменным
+     * Если одно из свойств переданного объекта больше соответствующего свойства второго бегунка слайдера, 
+     * то оно приравнивается к этому свойству
+     * Если при одиночном режиме одно из свойств переданного объекта выходит за границы слайдера,
+     * то оно приравнивается к максимально допустимому значению ограниченному размерами слайдера.
      * Если одно из свойств переданного объекта имеет отрицательное значение, то оно приравнивается к 0
      * 
      * @param {IThumbPosition} position - объект содержащий новую позицию бегунка относительно левого и правого края родительского контейнера
@@ -254,17 +260,24 @@ class ModelData {
         let left: number = this.getThumbOnePosition().left;
         let top: number = this.getThumbOnePosition().top;
 
+
         if (this.type === 'single' &&
             position.left <= (this.getSliderSize().width - this.getThumbSize().width) ||
             position.left <= this.getThumbTwoPosition().left) {
             left = (position.left >= 0) ? position.left : 0;
-        };
+        } else {
+            left = this.type === 'single' ?
+                (this.getSliderSize().width - this.getThumbSize().width) : this.getThumbTwoPosition().left;
+        }
 
         if (this.type === 'single' &&
             position.top <= (this.getSliderSize().height - this.getThumbSize().height) ||
             position.top <= this.getThumbTwoPosition().top) {
             top = (position.top >= 0) ? position.top : 0;
-        };
+        } else {
+            top = this.type === 'single' ?
+                (this.getSliderSize().height - this.getThumbSize().height) : this.getThumbTwoPosition().top;
+        }
 
         this.thumbOnePosition = { 'left': left, 'top': top };
     }
@@ -282,7 +295,7 @@ class ModelData {
 
     /**
      * Устанавливает позицию бегунка относительно левого и верхнего края родительского контейнера.
-     * Если одно из свойств переданного объекта меньше соответствующего свойства первого бегунка, то оно остаётся неизменным
+     * Если одно из свойств переданного объекта меньше соответствующего свойства первого бегунка, то оно приравнивается к этому свойству.
      * Если одно из свойств переданного объекта превышает максимально возможную позицию бегунка, ограниченную размерами слайдера,
      * то оно приравнивается к соответствующему свойству последней корректной позиции
      * 
@@ -300,7 +313,7 @@ class ModelData {
         if (position.top >= this.getThumbOnePosition().top) {
             top = (position.top <= (this.getSliderSize().height - this.getThumbSize().height)) ? position.top : (this.getSliderSize().height - this.getThumbSize().height);
         } else {
-            top = this.getThumbTwoPosition().top;
+            top = this.getThumbOnePosition().top;
         }
 
         this.thumbTwoPosition = { 'left': left, 'top': top };
@@ -316,10 +329,19 @@ class ModelData {
         return this.thumbTwoPosition;
     }
 
-    setScalePointSize(scalePointSize: IScalePointSize) {
+    /**
+     * Устанавливает размер одного деления шкалы
+     * @param {IScalePointSize} scalePointSize
+     */
+    setScalePointSize(scalePointSize: IScalePointSize): void {
         this.scalePointSize = scalePointSize;
     }
 
+    /**
+     * Возвращает размер одного деления шкалы
+     * 
+     * @returns {IScalePointSize} - объект с шириной и высотой одного деления шкалы
+     */
     getScalePointSize(): IScalePointSize {
         return this.scalePointSize;
     }

@@ -30,6 +30,7 @@ beforeEach(() => {
     _this.setSliderSize({'width': 450, 'height': 450});
 });
 
+
 describe('Get and set slider orientation', () => {
 
     test('Should be horizontal', () => {
@@ -39,7 +40,7 @@ describe('Get and set slider orientation', () => {
     test('Should be vertical', () => {
         settings.orienation = 'vertical';
         _this = new ModelData(settings);
-
+                
         expect(_this.getOrientation()).toBe('vertical');
     });
 
@@ -56,10 +57,12 @@ describe('Get and set slider orientation', () => {
     test('Should be vertical', () => {
         _this.setOrientation('vertical');
         _this.setOrientation('someText');
+
         expect(_this.getOrientation()).toBe('vertical');
     });
 
 });
+
 
 describe('Get and set slider type', () => {
 
@@ -98,6 +101,7 @@ describe('Get and set slider type', () => {
     });
 
 });
+
 
 describe('Get and set slider size', () => {
 
@@ -150,6 +154,7 @@ describe('Get and set slider size', () => {
 
 });
 
+
 describe('Get and set thumb size', () => {
 
     test('Should be {width: 20, height: 20}', () => {
@@ -201,30 +206,48 @@ describe('Get and set thumb size', () => {
 
 });
 
+
 describe('Get and set tooltips visible', () => {
 
     test('Should be true', () => {
         expect(_this.getTooltipsVisible()).toBe(true);
-
     });
 
     test('Should be false', () => {
-
         _this.setTooltipsVisible(false);
         expect(_this.getTooltipsVisible()).toBe(false);
-
     });
 
     test('Should be false', () => {
-
         _this.setTooltipsVisible(true);
         _this.setTooltipsVisible(false);
 
         expect(_this.getTooltipsVisible()).toBe(false);
-
     });
 
 });
+
+
+describe('Get and set scale visible', () => {
+
+    test('Should be true', () => {
+        expect(_this.getScaleVisible()).toBe(true);
+    });
+
+    test('Should be false', () => {
+        _this.setScaleVisible(false);
+        expect(_this.getScaleVisible()).toBe(false);
+    });
+
+    test('Should be false', () => {
+        _this.setScaleVisible(true);
+        _this.setScaleVisible(false);
+
+        expect(_this.getScaleVisible()).toBe(false);
+    });
+
+});
+
 
 describe('Get and set min value', () => {
 
@@ -233,27 +256,22 @@ describe('Get and set min value', () => {
     });
 
     test('Should be 6', () => {
-
         _this.setMin(6);
         expect(_this.getMin()).toBe(6);
-
     });
 
     test('Should be 0', () => {
-
         _this.setMin(264);
         expect(_this.getMin()).toBe(0);
-
     });
 
     test('Should be -26', () => {
-
         _this.setMin(-26);
         expect(_this.getMin()).toBe(-26);
-
     });
 
 });
+
 
 describe('Get and set max value', () => {
 
@@ -262,27 +280,22 @@ describe('Get and set max value', () => {
     });
 
     test('Should be 6', () => {
-
         _this.setMax(6);
         expect(_this.getMax()).toBe(6);
-
     });
 
     test('Should be 0', () => {
-
         _this.setMax(0);
         expect(_this.getMax()).toBe(0);
-
     });
 
     test('Should be 100', () => {
-
         _this.setMax(-26);
         expect(_this.getMax()).toBe(100);
-
     });
 
 });
+
 
 describe('Get and set step', () => {
 
@@ -291,27 +304,22 @@ describe('Get and set step', () => {
     });
 
     test('Should be 6', () => {
-
         _this.setStep(6);
         expect(_this.getStep()).toBe(6);
-
     });
 
     test('Should be 1', () => {
-
         _this.setStep(0);
         expect(_this.getStep()).toBe(1);
-
     });
 
     test('Should be 1', () => {
-
         _this.setStep(-26);
         expect(_this.getStep()).toBe(1);
-
     });
 
 });
+
 
 describe('Get and set position of the first thumb', () => {
 
@@ -331,20 +339,20 @@ describe('Get and set position of the first thumb', () => {
         expect(_this.getThumbOnePosition().top).toBe(100);
     });
 
-    test('Should be left: 0 and top: 50', () => {
+    test('Should be left: 100 and top: 50', () => {
         _this.setThumbTwoPosition({ 'left': 100, 'top': 100 });
         _this.setThumbOnePosition({ 'left': 101, 'top': 50 })
 
-        expect(_this.getThumbOnePosition().left).toBe(0);
+        expect(_this.getThumbOnePosition().left).toBe(100);
         expect(_this.getThumbOnePosition().top).toBe(50);
     });
 
-    test('Should be left: 50 and top: 0', () => {
+    test('Should be left: 50 and top: 100', () => {
         _this.setThumbTwoPosition({ 'left': 100, 'top': 100 });
         _this.setThumbOnePosition({ 'left': 50, 'top': 101 })
 
         expect(_this.getThumbOnePosition().left).toBe(50);
-        expect(_this.getThumbOnePosition().top).toBe(0);
+        expect(_this.getThumbOnePosition().top).toBe(100);
     });
 
     test('Should be left: 0 and top: 50', () => {
@@ -363,7 +371,41 @@ describe('Get and set position of the first thumb', () => {
         expect(_this.getThumbOnePosition().top).toBe(0);
     });
 
+    test('Should be left: 99 and top: 99', () => {
+        settings.type = 'single';
+        _this = new ModelData(settings);
+        _this.setSliderSize({'width': 100, 'height': 100})
+        _this.setThumbTwoPosition({ 'left': 50, 'top': 50 });
+        _this.setThumbOnePosition({ 'left': 99, 'top': 99 })
+
+        expect(_this.getThumbOnePosition().left).toBe(99);
+        expect(_this.getThumbOnePosition().top).toBe(99);
+    });
+
+    test('Should be left: 100 and top: 51', () => {
+        settings.type = 'single';
+        _this = new ModelData(settings);
+        _this.setSliderSize({'width': 100, 'height': 100})
+        _this.setThumbTwoPosition({ 'left': 50, 'top': 50 });
+        _this.setThumbOnePosition({ 'left': 101, 'top': 51 })
+
+        expect(_this.getThumbOnePosition().left).toBe(100);
+        expect(_this.getThumbOnePosition().top).toBe(51);
+    });
+
+    test('Should be left: 64 and top: 100', () => {
+        settings.type = 'single';
+        _this = new ModelData(settings);
+        _this.setSliderSize({'width': 100, 'height': 100})
+        _this.setThumbTwoPosition({ 'left': 50, 'top': 50 });
+        _this.setThumbOnePosition({ 'left': 64, 'top': 101 })
+
+        expect(_this.getThumbOnePosition().left).toBe(64);
+        expect(_this.getThumbOnePosition().top).toBe(100);
+    });
+
 });
+
 
 describe('Get and set position of the second thumb', () => {
 
@@ -419,13 +461,42 @@ describe('Get and set position of the second thumb', () => {
         expect(_this.getThumbTwoPosition().top).toBe(50);
     });
 
-    test('Should be left: 100 and top: 100', () => {
-        _this.setThumbTwoPosition({ 'left': 100, 'top': 100 })
-        _this.setThumbOnePosition({ 'left': 50, 'top': 50 })
-        _this.setThumbTwoPosition({ 'left': 49, 'top': 49 })
+    test('Should be left: 50 and top: 50', () => {
+        _this.setThumbTwoPosition({ 'left': 100, 'top': 100 });
+        _this.setThumbOnePosition({ 'left': 50, 'top': 50 });
+        _this.setThumbTwoPosition({ 'left': 49, 'top': 49 });
 
-        expect(_this.getThumbTwoPosition().left).toBe(100);
-        expect(_this.getThumbTwoPosition().top).toBe(100);
+        expect(_this.getThumbTwoPosition().left).toBe(50);
+        expect(_this.getThumbTwoPosition().top).toBe(50);
+    });
+
+});
+
+
+describe('Get and set scale point size', () => {
+
+    test('Should be width 50 and height 78', () => {
+        _this.setScalePointSize({'width': 50, 'height': 78});
+        const scalePointSize = _this.getScalePointSize();
+
+        expect(scalePointSize.width).toBe(50);
+        expect(scalePointSize.height).toBe(78);
+    });
+
+    test('Should be width 0 and height 0', () => {
+        _this.setScalePointSize({'width': 0, 'height': 0});
+        const scalePointSize = _this.getScalePointSize();
+
+        expect(scalePointSize.width).toBe(0);
+        expect(scalePointSize.height).toBe(0);
+    });
+
+    test('Should be width 476 and height 833', () => {
+        _this.setScalePointSize({'width': 476, 'height': 833});
+        const scalePointSize = _this.getScalePointSize();
+
+        expect(scalePointSize.width).toBe(476);
+        expect(scalePointSize.height).toBe(833);
     });
 
 });
