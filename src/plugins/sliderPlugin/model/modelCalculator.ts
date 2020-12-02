@@ -121,8 +121,8 @@ class ModelCalculator {
         /**
          * Высчитывает новую позицию бегунка в соответствии с заданным шагом 
          */
-        position.left = Math.round(position.left / this.calculateStepSize()) * this.calculateStepSize();
-        position.top = Math.round(position.top / this.calculateStepSize()) * this.calculateStepSize();
+        position.left = Math.round(Math.round(position.left / this.calculateStepSize()) * this.calculateStepSize());
+        position.top = Math.round(Math.round(position.top / this.calculateStepSize()) * this.calculateStepSize());
 
         return position;
     }

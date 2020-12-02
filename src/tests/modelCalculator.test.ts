@@ -33,22 +33,22 @@ beforeEach(() => {
     _this = new ModelCalculator(observer, data);
     data.setThumbSize({'width': 20, 'height': 20});
     data.setSliderSize({'width': 450, 'height': 450});
-    data.setThumbOnePosition({'left': 86, 'top': 330});
     data.setThumbTwoPosition({'left': 100, 'top': 430});
+    data.setThumbOnePosition({'left': 86, 'top': 330});
 });
 
 
 describe('Drag thumb one', () => {
 
     test('Should be width left: 30, top: 430 and tooltipValue: 30', () => {
-        console.log(data.getThumbOnePosition())
+        
         observer.subscribe('thumbOneDragged',
             (args: IDragThumbArgs) => { 
                 expect(args.thumbPosition.left).toBe(30);
                 expect(args.thumbPosition.top).toBe(430);
                 expect(args.tooltipValue).toBe(30);
             });
-        // _this.dragThumbOne({'left': 30, 'top': 430});
+        _this.dragThumbOne({'left': 30, 'top': 430});
     });
 
 });
