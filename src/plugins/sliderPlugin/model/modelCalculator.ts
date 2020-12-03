@@ -51,10 +51,17 @@ class ModelCalculator {
     }
 
 
+    /**
+     * Посылает уведомления с новой позицией бегунка для его передвижения и положением прогрессбара
+     * 
+     * @param {IThumbPosition} thumbPosition - позиция на которую необходимо передвинуть бегунок 
+     * @param {string} notyfyMessage - текст уведомления, по которому определяется бегунок, который необходимо передвинуть 
+     * @param {number} thumbValue - значение позиции, на которой находиться бегунок
+     */
     private thumbDrag(thumbPosition: IThumbPosition, notyfyMessage: string, thumbValue: number): void {
-
         const newThumbPosition = Object.assign({}, thumbPosition);
 
+        // Зануление свойств, не учавствующих в передвижении бегунка
         if (this.data.getOrientation() === 'horizontal') {
             newThumbPosition.top = 0;
         } else {
