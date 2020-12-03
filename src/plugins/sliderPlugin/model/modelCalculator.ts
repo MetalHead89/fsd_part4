@@ -60,19 +60,19 @@ class ModelCalculator {
                     'left': this.data.getSliderSize().width / 2 - this.data.getThumbSize().width / 2,
                     'top': 0
                 });
-            } else if (this.data.getSliderType() === 'range') {
+            } else {
                 this.dragThumbOne({
                     'left': this.data.getSliderSize().width * 0.3 - this.data.getThumbSize().width / 2,
                     'top': 0
                 });
             }
-        } else if (this.data.getOrientation() === 'vertical') {
+        } else {
             if (this.data.getSliderType() === 'single') {
                 this.dragThumbOne({
                     'left': 0,
                     'top': this.data.getSliderSize().height / 2 - this.data.getThumbSize().height / 2
                 });
-            } else if (this.data.getSliderType() === 'range') {
+            } else {
                 this.dragThumbOne({
                     'left': 0,
                     'top': this.data.getSliderSize().height * 0.3 - this.data.getThumbSize().height / 2
@@ -80,7 +80,7 @@ class ModelCalculator {
             }
         }
     }
-    
+
 
     setThumbTwoToStartingPosition() {
 
@@ -273,7 +273,7 @@ class ModelCalculator {
         if (this.data.getSliderType() === 'single') {
             progress.start = 0;
             progress.end = this.getElementPosByOrientation(this.data.getThumbOnePosition()) + this.getElementSizeByOrientation(this.data.getThumbSize());
-        } else if (this.data.getSliderType() === 'range') {
+        } else {
             progress.start = this.getElementPosByOrientation(this.data.getThumbOnePosition());
             progress.end = this.getElementPosByOrientation(this.data.getThumbTwoPosition()) -
                 this.getElementPosByOrientation(this.data.getThumbOnePosition()) + this.getElementSizeByOrientation(this.data.getThumbSize());
