@@ -117,52 +117,6 @@ class ModelCalculator {
 
     }
 
-    private positionToValue(position: number): number {
-
-        /**
-         * Возвращает значение бегунка исходя из его позиции
-         */
-        const pixelsPerValue = this.calculatePixelsPerValue();
-
-        return Math.round(this.data.getMin() + ((this.data.getMax() - this.data.getMin()) /
-            100 * Math.round(position / pixelsPerValue)));
-    }
-
-    private calculatePixelsPerValue(): number {
-
-        /** 
-         * Устанавливает количество пикселей в единице ширины слайдера, с вычетом крайних 
-         * (тупиковых) зон
-         */
-
-        return (this.getElementSizeByOrientation(this.data.getSliderSize()) - this.getElementSizeByOrientation(this.data.getThumbSize())) / 100;
-    }
-
-    private calcProgressBarPosition(): IProgressBarPosition {
-
-        /**
-         * Возвращает размер и точку начала прогрессбара в зависимости от текущего положения бегунков
-         */
-
-        const progress: IProgressBarPosition = {
-            'orientation': this.data.getOrientation(),
-            'start': 0,
-            'end': 0
-        };
-
-        if (this.data.getSliderType() === 'single') {
-            progress.start = 0;
-            progress.end = this.getElementPosByOrientation(this.data.getThumbOnePosition()) + this.getElementSizeByOrientation(this.data.getThumbSize());
-        } else if (this.data.getSliderType() === 'range') {
-            progress.start = this.getElementPosByOrientation(this.data.getThumbOnePosition());
-            progress.end = this.getElementPosByOrientation(this.data.getThumbTwoPosition()) -
-                this.getElementPosByOrientation(this.data.getThumbOnePosition()) + this.getElementSizeByOrientation(this.data.getThumbSize());
-        }
-
-        return progress;
-    }
-
-
     generateScale() {
         let scalePointPosition = this.getElementSizeByOrientation(this.data.getThumbSize()) / 2 - this.getElementSizeByOrientation(this.data.getScalePointSize()) / 2;
         const stepsCount: number = this.calculateStepsCount();
@@ -203,17 +157,14 @@ class ModelCalculator {
         }
 
     }
-
+    
     private isPointFits(scalePointPosition: number, prevScalePointPosition: number): boolean {
 
         return (scalePointPosition - prevScalePointPosition - 2 >
             this.getElementSizeByOrientation(this.data.getScalePointSize()));
 
     }
-
-
-
-
+    
     /**
      * Посылает уведомления с новой позицией бегунка для его передвижения и положением прогрессбара
      * 
@@ -298,6 +249,54 @@ class ModelCalculator {
         position.top = Math.round(position.top / this.calculateStepSize()) * this.calculateStepSize();
 
         return position;
+    }
+
+
+    private positionToValue(position: number): number {
+
+        /**
+         * Возвращает значение бегунка исходя из его позиции
+         */
+        const pixelsPerValue = this.calculatePixelsPerValue();
+
+        return Math.round(this.data.getMin() + ((this.data.getMax() - this.data.getMin()) /
+            100 * Math.round(position / pixelsPerValue)));
+    }
+
+
+    private calculatePixelsPerValue(): number {
+
+        /** 
+         * Устанавливает количество пикселей в единице ширины слайдера, с вычетом крайних 
+         * (тупиковых) зон
+         */
+
+        return (this.getElementSizeByOrientation(this.data.getSliderSize()) - this.getElementSizeByOrientation(this.data.getThumbSize())) / 100;
+    }
+
+
+    private calcProgressBarPosition(): IProgressBarPosition {
+
+        /**
+         * Возвращает размер и точку начала прогрессбара в зависимости от текущего положения бегунков
+         */
+
+        const progress: IProgressBarPosition = {
+            'orientation': this.data.getOrientation(),
+            'start': 0,
+            'end': 0
+        };
+
+        if (this.data.getSliderType() === 'single') {
+            progress.start = 0;
+            progress.end = this.getElementPosByOrientation(this.data.getThumbOnePosition()) + this.getElementSizeByOrientation(this.data.getThumbSize());
+        } else if (this.data.getSliderType() === 'range') {
+            progress.start = this.getElementPosByOrientation(this.data.getThumbOnePosition());
+            progress.end = this.getElementPosByOrientation(this.data.getThumbTwoPosition()) -
+                this.getElementPosByOrientation(this.data.getThumbOnePosition()) + this.getElementSizeByOrientation(this.data.getThumbSize());
+        }
+
+        return progress;
     }
 
 }
