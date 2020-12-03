@@ -51,97 +51,19 @@ class ModelCalculator {
     }
 
 
-    /**
-     * Посылает уведомления с новой позицией бегунка для его передвижения и положением прогрессбара
-     * 
-     * @param {IThumbPosition} thumbPosition - позиция на которую необходимо передвинуть бегунок 
-     * @param {string} notyfyMessage - текст уведомления, по которому определяется бегунок, который необходимо передвинуть 
-     * @param {number} thumbValue - значение позиции, на которой находиться бегунок
-     */
-    private thumbDrag(thumbPosition: IThumbPosition, notyfyMessage: string, thumbValue: number): void {
-        const newThumbPosition = Object.assign({}, thumbPosition);
-
-        // Зануление свойств, не учавствующих в передвижении бегунка
-        if (this.data.getOrientation() === 'horizontal') {
-            newThumbPosition.top = 0;
-        } else {
-            newThumbPosition.left = 0;
-        }
-
-        this.observer.notify(notyfyMessage, { 'thumbPosition': newThumbPosition, 'tooltipValue': thumbValue });
-        this.observer.notify('progressBarDraged', this.calcProgressBarPosition());
-    }
     
 
-    /**
-     * Возвращает ширину или длину переданного объекта в зависимости от ориентации слайдера.
-     * При горизонтальной ориентации возвращается ширина, при вертикальной - длина.
-     * 
-     * @param {ISliderSize | IThumbSize | IScalePointSize} element - объект, ширину или длину которого необходимо получить
-     */
-    private getElementSizeByOrientation(element: ISliderSize | IThumbSize | IScalePointSize): number {
-        if (this.data.getOrientation() === 'vertical') {
-            return element.height;
-        }
-
-        return element.width
-    }
 
 
-    /**
-     * Возвращает положение переданного объекта, относительно левого или верхнего края родительского контейнера, 
-     * в зависимости от ориентации слайдера.
-     * При горизонтальной ориентации возвращается положение относительно левого края родительского контейнера, 
-     * при вертикальной - относительно верхнего.
-     * 
-     * @param {ISliderSize | IThumbSize | IScalePointSize} element - объект, ширину или длину которого необходимо получить
-     */
-    private getElementPosByOrientation(element: IThumbPosition): number {
-        if (this.data.getOrientation() === 'vertical') {
-            return element.top;
-        }
 
-        return element.left
-    }
+    
 
-    calculateStepsCount(): number {
+    
 
-        /** 
-         * Считает количество шагов бегунка исходя из заданных значений и величины шага
-         */
 
-        return (this.data.getMax() - this.data.getMin()) / this.data.getStep();
-    }
+    
 
-    calculateStepSize(): number {
-
-        /**
-         * Считает размер одного шага бегунка в пикселях
-         */
-
-        return (this.getElementSizeByOrientation(this.data.getSliderSize()) -
-            this.getElementSizeByOrientation(this.data.getThumbSize())) / this.calculateStepsCount();
-    }
-
-    private changePositionAccordingToStep(position: IThumbPosition): IThumbPosition {
-
-        /**
-         * Высчитывает новую позицию бегунка в соответствии с заданным шагом 
-         */
-        position.left = Math.round(position.left / this.calculateStepSize()) * this.calculateStepSize();
-        position.top = Math.round(position.top / this.calculateStepSize()) * this.calculateStepSize();
-
-        return position;
-    }
-
-    private calculateNewThumbPosition(value: number) {
-
-        /**
-         * Высчитывает новую позицию бегунка в соответствии с заданным шагом 
-         */
-        console.log(this.data.getThumbSize())
-        return Math.round(value / this.calculateStepSize()) * this.calculateStepSize()
-    }
+    
 
     setThumbOneToStartingPosition() {
 
@@ -206,7 +128,7 @@ class ModelCalculator {
             100 * Math.round(position / pixelsPerValue)));
     }
 
-    calculatePixelsPerValue(): number {
+    private calculatePixelsPerValue(): number {
 
         /** 
          * Устанавливает количество пикселей в единице ширины слайдера, с вычетом крайних 
@@ -287,6 +209,95 @@ class ModelCalculator {
         return (scalePointPosition - prevScalePointPosition - 2 >
             this.getElementSizeByOrientation(this.data.getScalePointSize()));
 
+    }
+
+
+
+
+    /**
+     * Посылает уведомления с новой позицией бегунка для его передвижения и положением прогрессбара
+     * 
+     * @param {IThumbPosition} thumbPosition - позиция на которую необходимо передвинуть бегунок 
+     * @param {string} notyfyMessage - текст уведомления, по которому определяется бегунок, который необходимо передвинуть 
+     * @param {number} thumbValue - значение позиции, на которой находиться бегунок
+     */
+    private thumbDrag(thumbPosition: IThumbPosition, notyfyMessage: string, thumbValue: number): void {
+        const newThumbPosition = Object.assign({}, thumbPosition);
+
+        // Зануление свойств, не учавствующих в передвижении бегунка
+        if (this.data.getOrientation() === 'horizontal') {
+            newThumbPosition.top = 0;
+        } else {
+            newThumbPosition.left = 0;
+        }
+
+        this.observer.notify(notyfyMessage, { 'thumbPosition': newThumbPosition, 'tooltipValue': thumbValue });
+        this.observer.notify('progressBarDraged', this.calcProgressBarPosition());
+    }
+
+
+    /**
+     * Возвращает ширину или длину переданного объекта в зависимости от ориентации слайдера.
+     * При горизонтальной ориентации возвращается ширина, при вертикальной - длина.
+     * 
+     * @param {ISliderSize | IThumbSize | IScalePointSize} element - объект, ширину или длину которого необходимо получить
+     */
+    private getElementSizeByOrientation(element: ISliderSize | IThumbSize | IScalePointSize): number {
+        if (this.data.getOrientation() === 'vertical') {
+            return element.height;
+        }
+
+        return element.width
+    }
+
+
+    /**
+     * Возвращает положение переданного объекта, относительно левого или верхнего края родительского контейнера, 
+     * в зависимости от ориентации слайдера.
+     * При горизонтальной ориентации возвращается положение относительно левого края родительского контейнера, 
+     * при вертикальной - относительно верхнего.
+     * 
+     * @param {ISliderSize | IThumbSize | IScalePointSize} element - объект, ширину или длину которого необходимо получить
+     */
+    private getElementPosByOrientation(element: IThumbPosition): number {
+        if (this.data.getOrientation() === 'vertical') {
+            return element.top;
+        }
+
+        return element.left
+    }
+
+
+    private calculateStepsCount(): number {
+
+        /** 
+         * Считает количество шагов бегунка исходя из заданных значений и величины шага
+         */
+
+        return (this.data.getMax() - this.data.getMin()) / this.data.getStep();
+    }
+
+
+    private calculateStepSize(): number {
+
+        /**
+         * Считает размер одного шага бегунка в пикселях
+         */
+
+        return (this.getElementSizeByOrientation(this.data.getSliderSize()) -
+            this.getElementSizeByOrientation(this.data.getThumbSize())) / this.calculateStepsCount();
+    }
+
+
+    private changePositionAccordingToStep(position: IThumbPosition): IThumbPosition {
+
+        /**
+         * Высчитывает новую позицию бегунка в соответствии с заданным шагом 
+         */
+        position.left = Math.round(position.left / this.calculateStepSize()) * this.calculateStepSize();
+        position.top = Math.round(position.top / this.calculateStepSize()) * this.calculateStepSize();
+
+        return position;
     }
 
 }
