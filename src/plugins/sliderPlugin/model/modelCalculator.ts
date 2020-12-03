@@ -15,6 +15,7 @@ class ModelCalculator {
     private observer: Observer;
     private data: ModelData;
 
+
     constructor(observer: Observer, data: ModelData) {
         this.observer = observer;
         this.data = data;
@@ -49,28 +50,10 @@ class ModelCalculator {
 
         this.thumbDrag(correctThumTwoPosition, 'thumbTwoDragged', thumbValue);
     }
-
-
     
-
-
-
-
     
-
-    
-
-
-    
-
-    
-
+    /** Устанавливает первый бегунок на стартовую позицию */
     setThumbOneToStartingPosition() {
-
-        /** Устанавливает первый бегунок на стартовую позицию */
-
-        // this.data.setThumbTwoPosition({ 'left': this.data.getSliderSize().width, 'top': this.data.getSliderSize().height })
-
         if (this.data.getOrientation() === 'horizontal') {
             if (this.data.getSliderType() === 'single') {
                 this.dragThumbOne({
@@ -96,8 +79,8 @@ class ModelCalculator {
                 });
             }
         }
-
     }
+    
 
     setThumbTwoToStartingPosition() {
 
