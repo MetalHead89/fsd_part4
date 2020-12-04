@@ -98,6 +98,7 @@ class ModelCalculator {
     }
 
 
+    /** Генерирует шкалу исходя из размеров слайдера, количества шагов, минимального и максимального значения */
     generateScale() {
         let scalePointPosition = this.getElementSizeByOrientation(this.data.getThumbSize()) / 2 - this.getElementSizeByOrientation(this.data.getScalePointSize()) / 2;
         const stepsCount: number = this.calculateStepsCount();
@@ -111,7 +112,6 @@ class ModelCalculator {
                 + this.getElementSizeByOrientation(this.data.getScalePointSize()) / 2);
 
             if (i === 0 || this.isPointFits(scalePointPosition, prevScalePointPosition)) {
-
                 this.observer.notify('addScalePoint',
                     {
                         'position': scalePointPosition, 'scalePointSize': this.getElementSizeByOrientation(this.data.getScalePointSize()),
@@ -119,14 +119,17 @@ class ModelCalculator {
                     });
 
                 prevScalePointPosition = scalePointPosition;
-
             }
 
             scalePointPosition += stepSize;
         }
-
     }
 
+
+    /** 
+     * Проверяет момещается ли точка на шкале без пересечения других точек, если нет, то она
+     * не добавляется на шкалу
+    */
     private isPointFits(scalePointPosition: number, prevScalePointPosition: number): boolean {
 
         return (scalePointPosition - prevScalePointPosition - 2 >
@@ -188,32 +191,34 @@ class ModelCalculator {
     }
 
 
+    /** 
+     * Возвращает количество шагов бегунка исходя из заданных значений и величины шага
+     * 
+     * @returns {number} - количество шагов бегунка в слайдере
+     */
     private calculateStepsCount(): number {
-
-        /** 
-         * Считает количество шагов бегунка исходя из заданных значений и величины шага
-         */
-
         return (this.data.getMax() - this.data.getMin()) / this.data.getStep();
     }
 
 
+    /**
+     * Возвращает размер одного шага бегунка в пикселях
+     * 
+     * @returns {number} - размер одного шага бегунка
+     */
     private calculateStepSize(): number {
-
-        /**
-         * Считает размер одного шага бегунка в пикселях
-         */
-
         return (this.getElementSizeByOrientation(this.data.getSliderSize()) -
             this.getElementSizeByOrientation(this.data.getThumbSize())) / this.calculateStepsCount();
     }
 
 
+    /**
+     * Высчитывает новую позицию бегунка в соответствии с заданным шагом
+     * 
+     * @returns {IThumbPosition} - объект с позицией бегунка. Позиция считается от левого и верхнего краёв
+     * родительского контейнера
+     */
     private changePositionAccordingToStep(position: IThumbPosition): IThumbPosition {
-
-        /**
-         * Высчитывает новую позицию бегунка в соответствии с заданным шагом 
-         */
         position.left = Math.round(position.left / this.calculateStepSize()) * this.calculateStepSize();
         position.top = Math.round(position.top / this.calculateStepSize()) * this.calculateStepSize();
 
@@ -221,11 +226,12 @@ class ModelCalculator {
     }
 
 
+    /**
+     * Возвращает значение бегунка исходя из его позиции
+     * 
+     * @returns {number} - значение позиции, на которой находится бегунок
+     */
     private positionToValue(position: number): number {
-
-        /**
-         * Возвращает значение бегунка исходя из его позиции
-         */
         const pixelsPerValue = this.calculatePixelsPerValue();
 
         return Math.round(this.data.getMin() + ((this.data.getMax() - this.data.getMin()) /
@@ -233,23 +239,24 @@ class ModelCalculator {
     }
 
 
+    /** 
+     * Возвращает количество пикселей в единице ширины слайдера, с вычетом крайних 
+     * (тупиковых) зон
+     * 
+     * @returns {number} - количество пикселей в единице ширины слайдера
+     */
     private calculatePixelsPerValue(): number {
-
-        /** 
-         * Устанавливает количество пикселей в единице ширины слайдера, с вычетом крайних 
-         * (тупиковых) зон
-         */
-
         return (this.getElementSizeByOrientation(this.data.getSliderSize()) - this.getElementSizeByOrientation(this.data.getThumbSize())) / 100;
     }
 
 
+    /**
+     * Возвращает размер и точку начала прогрессбара в зависимости от текущего положения бегунков
+     * 
+     * @returns {IProgressBarPosition} - объект с позицией прогресс бара. Содержит сведения об ориентации,
+     * точке начала и ширине (или высоте, в зависимости от ориентации слайдера) прогресс бара
+     */
     private calcProgressBarPosition(): IProgressBarPosition {
-
-        /**
-         * Возвращает размер и точку начала прогрессбара в зависимости от текущего положения бегунков
-         */
-
         const progress: IProgressBarPosition = {
             'orientation': this.data.getOrientation(),
             'start': 0,

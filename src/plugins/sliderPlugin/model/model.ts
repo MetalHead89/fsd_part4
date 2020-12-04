@@ -8,13 +8,18 @@ import Observer from '../observer/observer';
 import ModelCalculator from './modelCalculator';
 import ModelData from './modelData';
 
+
+/**
+ * Класс отвечающий за бизнес логику слайдера. Разделён на 2 подкласса:
+ * - ModelData - хранит в себе данные и настройки слайдера, но не содерит каких-либо расчётов;
+ * - ModelCalculator - содержит логику расчёта данных, отвечающих за различные аспекты работы слайдера,
+ * например вычисление положений бегунков или размера прогресс бара
+ */
 class Model {
 
     private observer: Observer;
     private data: ModelData;
     private calculator: ModelCalculator
-
-
 
     constructor(observer: Observer, settings: ISliderSettings) {
 
@@ -24,116 +29,146 @@ class Model {
 
     }
 
+
+    /** Устанавливает размер слайдера */
     setSliderSize(sliderSize: ISliderSize): void {
-
         this.data.setSliderSize(sliderSize);
-
     }
 
+
+    /** Устанавливает размер бегунка */
     setThumbSize(thumbSize: IThumbSize): void {
-
         this.data.setThumbSize(thumbSize);
-
     }
 
+
+    /** Возвращает ориентацию слайдера */
     getSliderOrientation(): string {
-
         return this.data.getOrientation();
-
     }
 
+
+    /** Устанавливает ориентацию слайдера */
     setSliderOrientation(orienation: string): void {
         this.data.setOrientation(orienation);
     }
 
+
+    /** Возвращает тип слайдера */
     getSliderType(): string {
-
-        return this.data.getSliderType();;
-
+        return this.data.getSliderType();
     }
 
+
+    /** Устанавливает тип слайдера */
     setSliderType(sliderType: string): void {
-
         this.data.setSliderType(sliderType);
-
     }
 
+
+    /** Устанавливает флаг видимости значений бегунков */
     setTooltipsVisible(tooltipsVisible: boolean): void {
-
         this.data.setTooltipsVisible(tooltipsVisible)
-
     }
 
-    getTooltipsVisiblity(): boolean {
 
+    /** Возвращает флаг видимости бегунков */
+    getTooltipsVisiblity(): boolean {
         return this.data.getTooltipsVisible();
     }
 
+
+    /** Устанавливает размер точки слайдера */
     setScalePointSize(scalePointSize: IScalePointSize) {
         this.data.setScalePointSize(scalePointSize);
     }
 
+
+    /** Возврацает максимальное значение слайдера */
     getMax(): number {
         return this.data.getMax();
     }
 
+
+    /** Создаёт новую шкалу и генерирует её точки со значениями */
     generateScale() {
         this.calculator.generateScale();
     }
 
+
+    /** Передвигает первый бегунок на новую позицию */
     dragthumbOne(thumbPosition: IThumbPosition) {
         this.calculator.dragThumbOne(thumbPosition);
     }
 
+
+    /** Передвигает второй бегунок на новую позицию */
     dragThumbTwo(thumbPosition: IThumbPosition) {
         this.calculator.dragThumbTwo(thumbPosition);
     }
 
+
+    /** Передвигает первый бегунок на стартовую позицию */
     setThumbOneToStartingPosition() {
-
         this.calculator.setThumbOneToStartingPosition();
-
     }
 
+
+    /** Передвигает второй бегунок на стартовую позицию */
     setThumbTwoToStartingPosition() {
-
         this.calculator.setThumbTwoToStartingPosition();
-
     }
 
+
+    /** Устанавливает минимальное значение слайдера */
     setMin(newMin: number): boolean {
         return this.data.setMin(newMin);
     }
 
+
+    /** Устанавливает максимальное значение слайдера */
     setMax(newMax: number): boolean {
         return this.data.setMax(newMax);
     }
 
+
+    /** Устанавливает шаг, с которым перемещается бегунок */
     setStep(newStep: number): boolean {
         return this.data.setStep(newStep);
     }
 
+
+    /** Устанавливает флаг видимости шкалы */
     setScaleVisibility(scaleVisible: boolean) {
         this.data.setScaleVisible(scaleVisible);
     }
 
-    getScaleVisiblity(): boolean {
 
+    /** Возврацает флаг видимости шкалы */
+    getScaleVisiblity(): boolean {
         return this.data.getScaleVisible();
     }
 
+
+    /** Возвращает позицию первого бегунка */
     getThumbOnePosition(): IThumbPosition {
         return this.data.getThumbOnePosition();
     }
 
+
+    /** Устанавливает позицию первого бегунка */
     setThumbOnePosition(thumbPosition: IThumbPosition): void {
         this.data.setThumbOnePosition(thumbPosition);
     }
 
+
+    /** Возвращает позицию второго бегунка */
     getThumbTwoPosition(): IThumbPosition {
         return this.data.getThumbTwoPosition();
     }
 
+
+    /** Устанавливает позицию второго бегунка */
     setThumbTwoPosition(thumbPosition: IThumbPosition): void {
         this.data.setThumbTwoPosition(thumbPosition);
     }
