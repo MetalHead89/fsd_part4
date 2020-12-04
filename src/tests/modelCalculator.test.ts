@@ -373,127 +373,247 @@ beforeEach(() => {
 // });
 
 
-// describe('Set thumb one to starting position', () => {
+describe('Set thumb one to starting position', () => {
 
-//     test('Should be left: 125, top: 0, tooltipValue: 29, orientation: horizontal, start: 125 and end: 225', () => {
-//         observer.subscribe('thumbOneDragged',
-//             (args: IDragThumbArgs) => {
-//                 expect(args.thumbPosition.left).toBeCloseTo(125, 0);
-//                 expect(args.thumbPosition.top).toBeCloseTo(0);
-//                 expect(args.tooltipValue).toBe(29);
-//             });
-//         observer.subscribe('progressBarDraged',
-//             (progressBarPosition: IProgressBarPosition) => {
-//                 expect(progressBarPosition.orientation).toBe('horizontal');
-//                 expect(progressBarPosition.start).toBeCloseTo(125, 0);
-//                 expect(progressBarPosition.end).toBeCloseTo(225, 0);
-//             });
+    test('Should be left: 125, top: 0, tooltipValue: 29, orientation: horizontal, start: 125 and end: 225', () => {
+        observer.subscribe('thumbOneDragged',
+            (args: IDragThumbArgs) => {
+                expect(args.thumbPosition.left).toBeCloseTo(125, 0);
+                expect(args.thumbPosition.top).toBeCloseTo(0);
+                expect(args.tooltipValue).toBe(29);
+            });
+        observer.subscribe('progressBarDraged',
+            (progressBarPosition: IProgressBarPosition) => {
+                expect(progressBarPosition.orientation).toBe('horizontal');
+                expect(progressBarPosition.start).toBeCloseTo(125, 0);
+                expect(progressBarPosition.end).toBeCloseTo(225, 0);
+            });
 
-//         data.setThumbTwoPosition({ 'left': 330, 'top': 330 });
-//         _this.setThumbOneToStartingPosition();
-//     });
+        data.setThumbTwoPosition({ 'left': 330, 'top': 330 });
+        _this.setThumbOneToStartingPosition();
+    });
 
-//     test('Should be left: 0, top: 125, tooltipValue: 29, orientation: vertical, start: 125 and end: 225', () => {
-//         observer.subscribe('thumbOneDragged',
-//             (args: IDragThumbArgs) => {
-//                 expect(args.thumbPosition.left).toBeCloseTo(0);
-//                 expect(args.thumbPosition.top).toBeCloseTo(125, 0);
-//                 expect(args.tooltipValue).toBe(29);
-//             });
-//         observer.subscribe('progressBarDraged',
-//             (progressBarPosition: IProgressBarPosition) => {
-//                 expect(progressBarPosition.orientation).toBe('vertical');
-//                 expect(progressBarPosition.start).toBeCloseTo(125, 0);
-//                 expect(progressBarPosition.end).toBeCloseTo(225, 0);
-//             });
+    test('Should be left: 0, top: 125, tooltipValue: 29, orientation: vertical, start: 125 and end: 225', () => {
+        observer.subscribe('thumbOneDragged',
+            (args: IDragThumbArgs) => {
+                expect(args.thumbPosition.left).toBeCloseTo(0);
+                expect(args.thumbPosition.top).toBeCloseTo(125, 0);
+                expect(args.tooltipValue).toBe(29);
+            });
+        observer.subscribe('progressBarDraged',
+            (progressBarPosition: IProgressBarPosition) => {
+                expect(progressBarPosition.orientation).toBe('vertical');
+                expect(progressBarPosition.start).toBeCloseTo(125, 0);
+                expect(progressBarPosition.end).toBeCloseTo(225, 0);
+            });
 
-//         data.setOrientation('vertical');
-//         data.setThumbTwoPosition({ 'left': 330, 'top': 330 });
-//         _this.setThumbOneToStartingPosition();
-//     });
+        data.setOrientation('vertical');
+        data.setThumbTwoPosition({ 'left': 330, 'top': 330 });
+        _this.setThumbOneToStartingPosition();
+    });
 
-//     test('Should be left: 215, top: 0, tooltipValue: 50, orientation: horizontal, start: 0 and end: 235', () => {
-//         observer.subscribe('thumbOneDragged',
-//             (args: IDragThumbArgs) => {
-//                 expect(args.thumbPosition.left).toBeCloseTo(215);
-//                 expect(args.thumbPosition.top).toBeCloseTo(0, 0);
-//                 expect(args.tooltipValue).toBe(50);
-//             });
-//         observer.subscribe('progressBarDraged',
-//             (progressBarPosition: IProgressBarPosition) => {
-//                 expect(progressBarPosition.orientation).toBe('horizontal');
-//                 expect(progressBarPosition.start).toBeCloseTo(0, 0);
-//                 expect(progressBarPosition.end).toBeCloseTo(235, 0);
-//             });
+    test('Should be left: 215, top: 0, tooltipValue: 50, orientation: horizontal, start: 0 and end: 235', () => {
+        observer.subscribe('thumbOneDragged',
+            (args: IDragThumbArgs) => {
+                expect(args.thumbPosition.left).toBeCloseTo(215);
+                expect(args.thumbPosition.top).toBeCloseTo(0, 0);
+                expect(args.tooltipValue).toBe(50);
+            });
+        observer.subscribe('progressBarDraged',
+            (progressBarPosition: IProgressBarPosition) => {
+                expect(progressBarPosition.orientation).toBe('horizontal');
+                expect(progressBarPosition.start).toBeCloseTo(0, 0);
+                expect(progressBarPosition.end).toBeCloseTo(235, 0);
+            });
 
-//         data.setSliderType('single');
-//         data.setThumbTwoPosition({ 'left': 330, 'top': 330 });
-//         _this.setThumbOneToStartingPosition();
-//     });
+        data.setSliderType('single');
+        data.setThumbTwoPosition({ 'left': 330, 'top': 330 });
+        _this.setThumbOneToStartingPosition();
+    });
 
-//     test('Should be left: 0, top: 215, tooltipValue: 50, orientation: vertical, start: 0 and end: 235', () => {
-//         observer.subscribe('thumbOneDragged',
-//             (args: IDragThumbArgs) => {
-//                 expect(args.thumbPosition.left).toBeCloseTo(0);
-//                 expect(args.thumbPosition.top).toBeCloseTo(215, 0);
-//                 expect(args.tooltipValue).toBe(50);
-//             });
-//         observer.subscribe('progressBarDraged',
-//             (progressBarPosition: IProgressBarPosition) => {
-//                 expect(progressBarPosition.orientation).toBe('vertical');
-//                 expect(progressBarPosition.start).toBeCloseTo(0, 0);
-//                 expect(progressBarPosition.end).toBeCloseTo(235, 0);
-//             });
+    test('Should be left: 0, top: 215, tooltipValue: 50, orientation: vertical, start: 0 and end: 235', () => {
+        observer.subscribe('thumbOneDragged',
+            (args: IDragThumbArgs) => {
+                expect(args.thumbPosition.left).toBeCloseTo(0);
+                expect(args.thumbPosition.top).toBeCloseTo(215, 0);
+                expect(args.tooltipValue).toBe(50);
+            });
+        observer.subscribe('progressBarDraged',
+            (progressBarPosition: IProgressBarPosition) => {
+                expect(progressBarPosition.orientation).toBe('vertical');
+                expect(progressBarPosition.start).toBeCloseTo(0, 0);
+                expect(progressBarPosition.end).toBeCloseTo(235, 0);
+            });
 
-//         data.setSliderType('single');
-//         data.setOrientation('vertical');
-//         data.setThumbTwoPosition({ 'left': 330, 'top': 330 });
-//         _this.setThumbOneToStartingPosition();
-//     });
-
-// });
+        data.setSliderType('single');
+        data.setOrientation('vertical');
+        data.setThumbTwoPosition({ 'left': 330, 'top': 330 });
+        _this.setThumbOneToStartingPosition();
+    });
 
 
-// describe('Set thumb two to starting position', () => {
 
-//     test('Should be left: 125, top: 0, tooltipValue: 29, orientation: horizontal, start: 125 and end: 225', () => {
-//         observer.subscribe('thumbTwoDragged',
-//             (args: IDragThumbArgs) => {
-//                 expect(args.thumbPosition.left).toBeCloseTo(305, 0);
-//                 expect(args.thumbPosition.top).toBeCloseTo(0);
-//                 expect(args.tooltipValue).toBe(71);
-//             });
-//         observer.subscribe('progressBarDraged',
-//             (progressBarPosition: IProgressBarPosition) => {
-//                 expect(progressBarPosition.orientation).toBe('horizontal');
-//                 expect(progressBarPosition.start).toBeCloseTo(30, 0);
-//                 expect(progressBarPosition.end).toBeCloseTo(295, 0);
-//             });
+    test('Should be left: 294, top: 0, tooltipValue: 30, orientation: horizontal, start: 294 and end: 526', () => {
+        observer.subscribe('thumbOneDragged',
+            (args: IDragThumbArgs) => {
+                expect(args.thumbPosition.left).toBeCloseTo(294, 0);
+                expect(args.thumbPosition.top).toBeCloseTo(0);
+                expect(args.tooltipValue).toBe(30);
+            });
+        observer.subscribe('progressBarDraged',
+            (progressBarPosition: IProgressBarPosition) => {
+                expect(progressBarPosition.orientation).toBe('horizontal');
+                expect(progressBarPosition.start).toBeCloseTo(294, 0);
+                expect(progressBarPosition.end).toBeCloseTo(526, 0);
+            });
+        data.setSliderSize({'width': 1000, 'height': 1000});
+        data.setThumbTwoPosition({ 'left': 800, 'top': 800 });
+        _this.setThumbOneToStartingPosition();
+    });
 
-//         data.setThumbOnePosition({ 'left': 30, 'top': 30 });
-//         _this.setThumbTwoToStartingPosition();
-//     });
+    test('Should be left: 0, top: 294, tooltipValue: 30, orientation: vertical, start: 294 and end: 526', () => {
+        observer.subscribe('thumbOneDragged',
+            (args: IDragThumbArgs) => {
+                expect(args.thumbPosition.left).toBeCloseTo(0);
+                expect(args.thumbPosition.top).toBeCloseTo(294, 0);
+                expect(args.tooltipValue).toBe(30);
+            });
+        observer.subscribe('progressBarDraged',
+            (progressBarPosition: IProgressBarPosition) => {
+                expect(progressBarPosition.orientation).toBe('vertical');
+                expect(progressBarPosition.start).toBeCloseTo(294, 0);
+                expect(progressBarPosition.end).toBeCloseTo(526, 0);
+            });
 
-//     test('Should be left: 0, top: 305, tooltipValue: 71, orientation: vertical, start: 30 and end: 295', () => {
-//         observer.subscribe('thumbTwoDragged',
-//             (args: IDragThumbArgs) => {
-//                 expect(args.thumbPosition.left).toBeCloseTo(0);
-//                 expect(args.thumbPosition.top).toBeCloseTo(305, 0);
-//                 expect(args.tooltipValue).toBe(71);
-//             });
-//         observer.subscribe('progressBarDraged',
-//             (progressBarPosition: IProgressBarPosition) => {
-//                 expect(progressBarPosition.orientation).toBe('vertical');
-//                 expect(progressBarPosition.start).toBeCloseTo(30, 0);
-//                 expect(progressBarPosition.end).toBeCloseTo(295, 0);
-//             });
+        data.setOrientation('vertical');
+        data.setSliderSize({'width': 1000, 'height': 1000});
+        data.setThumbTwoPosition({ 'left': 800, 'top': 800 });
+        _this.setThumbOneToStartingPosition();
+    });
 
-//         data.setOrientation('vertical');
-//         data.setThumbOnePosition({ 'left': 30, 'top': 30 });
-//         _this.setThumbTwoToStartingPosition();
-//     });
+    test('Should be left: 490, top: 0, tooltipValue: 50, orientation: horizontal, start: 0 and end: 510', () => {
+        observer.subscribe('thumbOneDragged',
+            (args: IDragThumbArgs) => {
+                expect(args.thumbPosition.left).toBeCloseTo(490);
+                expect(args.thumbPosition.top).toBeCloseTo(0, 0);
+                expect(args.tooltipValue).toBe(50);
+            });
+        observer.subscribe('progressBarDraged',
+            (progressBarPosition: IProgressBarPosition) => {
+                expect(progressBarPosition.orientation).toBe('horizontal');
+                expect(progressBarPosition.start).toBeCloseTo(0, 0);
+                expect(progressBarPosition.end).toBeCloseTo(510, 0);
+            });
 
-// });
+        data.setSliderType('single');
+        data.setSliderSize({'width': 1000, 'height': 1000});
+        data.setThumbTwoPosition({ 'left': 800, 'top': 800 });
+        _this.setThumbOneToStartingPosition();
+    });
+
+    test('Should be left: 0, top: 490, tooltipValue: 50, orientation: vertical, start: 0 and end: 510', () => {
+        observer.subscribe('thumbOneDragged',
+            (args: IDragThumbArgs) => {
+                expect(args.thumbPosition.left).toBeCloseTo(0);
+                expect(args.thumbPosition.top).toBeCloseTo(490, 0);
+                expect(args.tooltipValue).toBe(50);
+            });
+        observer.subscribe('progressBarDraged',
+            (progressBarPosition: IProgressBarPosition) => {
+                expect(progressBarPosition.orientation).toBe('vertical');
+                expect(progressBarPosition.start).toBeCloseTo(0, 0);
+                expect(progressBarPosition.end).toBeCloseTo(510, 0);
+            });
+
+        data.setSliderType('single');
+        data.setOrientation('vertical');
+        data.setSliderSize({'width': 1000, 'height': 1000});
+        data.setThumbTwoPosition({ 'left': 800, 'top': 800 });
+        _this.setThumbOneToStartingPosition();
+    });
+
+});
+
+
+describe('Set thumb two to starting position', () => {
+
+    test('Should be left: 125, top: 0, tooltipValue: 29, orientation: horizontal, start: 125 and end: 225', () => {
+        observer.subscribe('thumbTwoDragged',
+            (args: IDragThumbArgs) => {
+                expect(args.thumbPosition.left).toBeCloseTo(305, 0);
+                expect(args.thumbPosition.top).toBeCloseTo(0);
+                expect(args.tooltipValue).toBe(71);
+            });
+        observer.subscribe('progressBarDraged',
+            (progressBarPosition: IProgressBarPosition) => {
+                expect(progressBarPosition.orientation).toBe('horizontal');
+                expect(progressBarPosition.start).toBeCloseTo(30, 0);
+                expect(progressBarPosition.end).toBeCloseTo(295, 0);
+            });
+
+        data.setThumbOnePosition({ 'left': 30, 'top': 30 });
+        _this.setThumbTwoToStartingPosition();
+    });
+
+    test('Should be left: 0, top: 305, tooltipValue: 71, orientation: vertical, start: 30 and end: 295', () => {
+        observer.subscribe('thumbTwoDragged',
+            (args: IDragThumbArgs) => {
+                expect(args.thumbPosition.left).toBeCloseTo(0);
+                expect(args.thumbPosition.top).toBeCloseTo(305, 0);
+                expect(args.tooltipValue).toBe(71);
+            });
+        observer.subscribe('progressBarDraged',
+            (progressBarPosition: IProgressBarPosition) => {
+                expect(progressBarPosition.orientation).toBe('vertical');
+                expect(progressBarPosition.start).toBeCloseTo(30, 0);
+                expect(progressBarPosition.end).toBeCloseTo(295, 0);
+            });
+
+        data.setOrientation('vertical');
+        data.setThumbOnePosition({ 'left': 30, 'top': 30 });
+        _this.setThumbTwoToStartingPosition();
+    });
+
+    test('Should be left: 686, top: 0, tooltipValue: 70, orientation: horizontal, start: 30 and end: 676', () => {
+        observer.subscribe('thumbTwoDragged',
+            (args: IDragThumbArgs) => {
+                expect(args.thumbPosition.left).toBeCloseTo(686, 0);
+                expect(args.thumbPosition.top).toBeCloseTo(0);
+                expect(args.tooltipValue).toBe(70);
+            });
+        observer.subscribe('progressBarDraged',
+            (progressBarPosition: IProgressBarPosition) => {
+                expect(progressBarPosition.orientation).toBe('horizontal');
+                expect(progressBarPosition.start).toBeCloseTo(30, 0);
+                expect(progressBarPosition.end).toBeCloseTo(676, 0);
+            });
+
+        data.setThumbOnePosition({ 'left': 30, 'top': 30 });
+        data.setSliderSize({'width': 1000, 'height': 1000});
+        _this.setThumbTwoToStartingPosition();
+    });
+
+    test('Should be left: 0, top: 686, tooltipValue: 70, orientation: vertical, start: 30 and end: 676', () => {
+        observer.subscribe('thumbTwoDragged',
+            (args: IDragThumbArgs) => {
+                expect(args.thumbPosition.left).toBeCloseTo(0);
+                expect(args.thumbPosition.top).toBeCloseTo(686, 0);
+                expect(args.tooltipValue).toBe(70);
+            });
+        observer.subscribe('progressBarDraged',
+            (progressBarPosition: IProgressBarPosition) => {
+                expect(progressBarPosition.orientation).toBe('vertical');
+                expect(progressBarPosition.start).toBeCloseTo(30, 0);
+                expect(progressBarPosition.end).toBeCloseTo(676, 0);
+            });
+
+        data.setOrientation('vertical');
+        data.setSliderSize({'width': 1000, 'height': 1000});
+        data.setThumbOnePosition({ 'left': 30, 'top': 30 });
+        _this.setThumbTwoToStartingPosition();
+    });
+
+});
 
 
 describe('Generate scale', () => {
@@ -552,7 +672,6 @@ describe('Generate scale', () => {
         _this.generateScale();
 
         for (let scalePoint = 0; scalePoint < scalePointSettings.length; scalePoint++) {
-            console.log(scalePoint);
             expect(scalePointSettings[scalePoint].position).toBe(correctSettings[scalePoint].position);
             expect(scalePointSettings[scalePoint].scalePointSize).toBe(correctSettings[scalePoint].scalePointSize);
             expect(scalePointSettings[scalePoint].scalePointValue).toBe(correctSettings[scalePoint].scalePointValue);
@@ -582,7 +701,6 @@ describe('Generate scale', () => {
         _this.generateScale();
 
         for (let scalePoint = 0; scalePoint < scalePointSettings.length; scalePoint++) {
-            console.log(scalePoint);
             expect(scalePointSettings[scalePoint].position).toBe(correctSettings[scalePoint].position);
             expect(scalePointSettings[scalePoint].scalePointSize).toBe(correctSettings[scalePoint].scalePointSize);
             expect(scalePointSettings[scalePoint].scalePointValue).toBe(correctSettings[scalePoint].scalePointValue);
@@ -613,7 +731,6 @@ describe('Generate scale', () => {
         _this.generateScale();
 
         for (let scalePoint = 0; scalePoint < scalePointSettings.length; scalePoint++) {
-            console.log(scalePoint);
             expect(scalePointSettings[scalePoint].position).toBe(correctSettings[scalePoint].position);
             expect(scalePointSettings[scalePoint].scalePointSize).toBe(correctSettings[scalePoint].scalePointSize);
             expect(scalePointSettings[scalePoint].scalePointValue).toBe(correctSettings[scalePoint].scalePointValue);
