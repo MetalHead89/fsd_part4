@@ -7,6 +7,7 @@ import { IProgressBarPosition } from '../interfaces';
 import { IScalePointSize } from '../interfaces';
 import { IScalePointSettings } from '../interfaces';
 import { ICursorPsition } from '../interfaces';
+import { IScaleSize } from '../interfaces';
 
 import Observer from '../observer/observer';
 import Model from '../model/model';
@@ -65,6 +66,8 @@ class Presenter {
             (cursorPosition: ICursorPsition) => { this.model.moveThumbToClickPosition(cursorPosition) });
         this.observer.subscribe('clickOnTheTrack',
             (cursorPosition: ICursorPsition) => { this.model.moveThumbToClickPosition(cursorPosition) });
+        this.observer.subscribe('scaleCreated',
+            (scaleSize: IScaleSize) => { this.view.setScaleSize(scaleSize) });
     }
 
     createNewSlider(): void {
@@ -324,8 +327,8 @@ export default Presenter;
 //         this.observer.subscribe('clickOnTheTrack',
 //             (cursorPosition: ICursorPsition) => { this.model.moveThumb(cursorPosition) });
 
-//         this.observer.subscribe('scaleCreated',
-//             (scaleSize: IScaleSize) => { this.view.setScaleSize(scaleSize) });
+        // this.observer.subscribe('scaleCreated',
+        //     (scaleSize: IScaleSize) => { this.view.setScaleSize(scaleSize) });
 
 //         this.observer.subscribe('showThumbTwo', () => { this.view.showThumb() });
 

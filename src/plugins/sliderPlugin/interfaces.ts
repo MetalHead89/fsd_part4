@@ -59,6 +59,11 @@ export interface IScalePointSettings {
     'scalePointValue': number
 }
 
+export interface IScaleSize {
+    'width': number,
+    'height': number
+}
+
 
 
 

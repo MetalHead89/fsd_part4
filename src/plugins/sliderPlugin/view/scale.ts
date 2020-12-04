@@ -70,6 +70,11 @@ class Scale {
         this.element.remove();
     }
 
+    setScaleSize(width: number, height: number): void {
+        this.element.style.width = width + 'px';
+        this.element.style.height = height + 'px';
+    }
+
     private getPosition(cursorPosition: ICursorPsition): ICursorPsition {
 
         const parrent: HTMLElement | null = this.element.parentElement;
@@ -185,10 +190,10 @@ export default Scale;
 //         }
 //     }
 
-//     setScaleSize(width: number, height: number): void {
-//         this.element.style.width = width + 'px';
-//         this.element.style.height = height + 'px';
-//     }
+    // setScaleSize(width: number, height: number): void {
+    //     this.element.style.width = width + 'px';
+    //     this.element.style.height = height + 'px';
+    // }
 
 //     remove() {
 //         this.element.remove();

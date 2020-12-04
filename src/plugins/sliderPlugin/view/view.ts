@@ -2,6 +2,7 @@ import { IThumbPosition } from '../interfaces';
 import { IProgressBarPosition } from '../interfaces';
 import { IScalePointSize } from '../interfaces';
 import { IScalePointSettings } from '../interfaces';
+import { IScaleSize } from '../interfaces';
 
 import Observer from '../observer/observer';
 import Slider from './slider';
@@ -241,6 +242,12 @@ class View {
         }
     }
 
+    setScaleSize(scaleSize: IScaleSize): void {
+        if (this.scale !== null) {
+            this.scale.setScaleSize(scaleSize.width, scaleSize.height);
+        }
+    }
+
 }
 
 export default View;
@@ -441,9 +448,9 @@ export default View;
 //         return this.scale.getScalePointMaxSize(value);
 //     }
 
-//     setScaleSize(scaleSize: IScaleSize): void {
-//         this.scale.setScaleSize(scaleSize.width, scaleSize.height);
-//     }
+    // setScaleSize(scaleSize: IScaleSize): void {
+    //     this.scale.setScaleSize(scaleSize.width, scaleSize.height);
+    // }
 
     // addScalePoint(pointSettings: IScalePointSettings) {
     //     this.scale.addScalePoint(pointSettings.position, pointSettings.scalePointSize, pointSettings.scalePointValue);

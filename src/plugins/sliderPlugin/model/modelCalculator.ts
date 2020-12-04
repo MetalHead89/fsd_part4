@@ -144,6 +144,18 @@ class ModelCalculator {
             }
 
             scalePointPosition += stepSize;
+
+            // Установка высоты и ширины шкалы для того, чтобы по ней можно было совершать клики, для перемещения бегунков
+            if (i === Math.round(scalePointsCount - 2)) {
+                scalePointPosition = this.getElementSizeByOrientation(this.data.getSliderSize())
+                    - this.getElementSizeByOrientation(this.data.getThumbSize()) / 2 - this.getElementSizeByOrientation(this.data.getScalePointSize()) / 2;
+
+                if (this.data.getOrientation() === 'horizontal') {
+                    this.observer.notify('scaleCreated', { 'width': this.data.getSliderSize().width, 'height': this.data.getScalePointSize().height });
+                } else if (this.data.getOrientation() === 'vertical') {
+                    this.observer.notify('scaleCreated', { 'width': this.data.getScalePointSize().width, 'height': this.data.getSliderSize().height });
+                }
+            }
         }
     }
 
