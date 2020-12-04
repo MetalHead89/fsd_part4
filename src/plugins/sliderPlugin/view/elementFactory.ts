@@ -32,7 +32,7 @@ class ElementFactory {
 
     }
 
-    createTrack(parrent: HTMLDivElement, styleClasses: string): Track {
+    createTrack(parrent: HTMLDivElement, styleClasses: string, observer: Observer): Track {
 
         /**
          * Возвращает объект класса Track
@@ -49,7 +49,7 @@ class ElementFactory {
          * @returns {Track} - объект класса Track
          */
 
-        const createTrackrObj = (obj: HTMLDivElement) => { return new Track(obj) }
+        const createTrackrObj = (obj: HTMLDivElement) => { return new Track(obj, observer) }
         const track = this.createElement(parrent, styleClasses, createTrackrObj);
 
         return track;

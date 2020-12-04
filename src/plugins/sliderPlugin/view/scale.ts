@@ -1,4 +1,6 @@
 import { IScalePointSize } from '../interfaces';
+import { ICursorPsition } from '../interfaces';
+
 import Observer from "../observer/observer";
 
 class Scale {
@@ -10,6 +12,10 @@ class Scale {
         this.element = element;
         this.observer = observer;
         this.orientation = element.classList.contains('slider__scale_vertical') ? 'vertical' : 'horizontal';
+
+        this.element.addEventListener('click', (event) => {
+            this.observer.notify('clickOnTheScale', this.getPosition({ 'x': event.clientX, 'y': event.clientY }));
+        });
     }
 
     getScalePointMaxSize(maxValue: number): IScalePointSize {
@@ -29,7 +35,7 @@ class Scale {
         } else if (this.orientation === 'vertical') {
             scalePoint.className = 'slider__scale-point slider__scale-point_vertical';
         }
-        
+
         if (scalePointWidth > 0) {
             scalePoint.style.width = scalePointWidth + 'px';
         }
@@ -39,10 +45,10 @@ class Scale {
 
         const divisionLabel: HTMLElement = document.createElement('div')
         if (this.orientation === 'horizontal') {
-            divisionLabel.className = 
+            divisionLabel.className =
                 ('slider__scale-point-label slider__scale-point-label_horizontal')
         } else if (this.orientation === 'vertical') {
-            divisionLabel.className = 
+            divisionLabel.className =
                 ('slider__scale-point-label slider__scale-point-label_vertical')
         }
         divisionLabel.innerText = pointValue.toString();
@@ -63,6 +69,23 @@ class Scale {
     remove() {
         this.element.remove();
     }
+
+    private getPosition(cursorPosition: ICursorPsition): ICursorPsition {
+
+        const parrent: HTMLElement | null = this.element.parentElement;
+
+        if (!parrent) {
+            return { 'x': 0, 'y': 0 }
+        }
+
+        const parrentCoords: DOMRect = parrent.getBoundingClientRect();
+
+        return {
+            'x': cursorPosition.x - parrentCoords.left,
+            'y': cursorPosition.y - parrentCoords.top
+        }
+    }
+
 }
 
 export default Scale;
@@ -93,9 +116,9 @@ export default Scale;
 //         this.orientation = orientation;
 
 
-//         this.element.addEventListener('click', (event) => {
-//             this.observer.notify('clickOnTheScale', this.getPosition({ 'x': event.clientX, 'y': event.clientY }));
-//         });
+        // this.element.addEventListener('click', (event) => {
+        //     this.observer.notify('clickOnTheScale', this.getPosition({ 'x': event.clientX, 'y': event.clientY }));
+        // });
 //     }
 
 //     addScalePoint(position: number, scalePointWidth: number, pointValue: number): HTMLElement {
@@ -106,7 +129,7 @@ export default Scale;
 //         } else if (this.orientation === 'vertical') {
 //             scalePoint.className = 'slider__scale-point slider__scale-point_vertical';
 //         }
-        
+
 //         if (scalePointWidth > 0) {
 //             scalePoint.style.width = scalePointWidth + 'px';
 //         }

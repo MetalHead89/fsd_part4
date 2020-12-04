@@ -74,7 +74,7 @@ class View {
          */
 
         if (this.slider != null) {
-            this.track = this.elementFactory.createTrack(this.slider.getElement(), styleClasses);
+            this.track = this.elementFactory.createTrack(this.slider.getElement(), styleClasses, this.observer);
         }
 
     }

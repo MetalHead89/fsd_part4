@@ -3,6 +3,7 @@ import { ISliderSize } from '../interfaces';
 import { IThumbSize } from '../interfaces'
 import { IScalePointSize } from '../interfaces'
 import { IProgressBarPosition } from '../interfaces';
+import { ICursorPsition } from '../interfaces';
 
 import Observer from '../observer/observer';
 import ModelData from './modelData';
@@ -49,6 +50,27 @@ class ModelCalculator {
         const thumbValue: number = this.positionToValue(this.getElementPosByOrientation(this.data.getThumbTwoPosition()));
 
         this.thumbDrag(correctThumTwoPosition, 'thumbTwoDragged', thumbValue);
+    }
+
+
+    /**
+     * Перемещает ближайший бегунок на место клика
+     * 
+     * @param {ICursorPsition} cursorPosition - положение курсора относительно левого и правого края родительского контейнера
+     */
+    moveThumbToClickPosition(cursorPosition: ICursorPsition): void {
+        const position: IThumbPosition = {
+            'left': cursorPosition.x - this.data.getThumbSize().width / 2,
+            'top': cursorPosition.y - this.data.getThumbSize().height / 2
+        }
+
+        if (this.data.getSliderType() === 'range' &&
+            Math.abs(this.getElementPosByOrientation(position) - this.getElementPosByOrientation(this.data.getThumbOnePosition())) >
+            Math.abs(this.getElementPosByOrientation(position) - this.getElementPosByOrientation(this.data.getThumbTwoPosition()))) {
+            this.dragThumbTwo(position)
+        } else (
+            this.dragThumbOne(position)
+        )
     }
 
 
