@@ -1,6 +1,7 @@
 import { ISliderSettings } from '../plugins/sliderPlugin/interfaces';
 import { IDragThumbArgs } from '../plugins/sliderPlugin/interfaces';
 import { IProgressBarPosition } from '../plugins/sliderPlugin/interfaces';
+import { IScalePointSettings } from '../plugins/sliderPlugin/interfaces';
 
 import ModelData from '../plugins/sliderPlugin/model/modelData';
 import ModelCalculator from '../plugins/sliderPlugin/model/modelCalculator';
@@ -372,124 +373,250 @@ beforeEach(() => {
 // });
 
 
-describe('Set thumb one to starting position', () => {
+// describe('Set thumb one to starting position', () => {
 
-    test('Should be left: 125, top: 0, tooltipValue: 29, orientation: horizontal, start: 125 and end: 225', () => {
-        observer.subscribe('thumbOneDragged',
-            (args: IDragThumbArgs) => {
-                expect(args.thumbPosition.left).toBeCloseTo(125, 0);
-                expect(args.thumbPosition.top).toBeCloseTo(0);
-                expect(args.tooltipValue).toBe(29);
-            });
-        observer.subscribe('progressBarDraged',
-            (progressBarPosition: IProgressBarPosition) => {
-                expect(progressBarPosition.orientation).toBe('horizontal');
-                expect(progressBarPosition.start).toBeCloseTo(125, 0);
-                expect(progressBarPosition.end).toBeCloseTo(225, 0);
+//     test('Should be left: 125, top: 0, tooltipValue: 29, orientation: horizontal, start: 125 and end: 225', () => {
+//         observer.subscribe('thumbOneDragged',
+//             (args: IDragThumbArgs) => {
+//                 expect(args.thumbPosition.left).toBeCloseTo(125, 0);
+//                 expect(args.thumbPosition.top).toBeCloseTo(0);
+//                 expect(args.tooltipValue).toBe(29);
+//             });
+//         observer.subscribe('progressBarDraged',
+//             (progressBarPosition: IProgressBarPosition) => {
+//                 expect(progressBarPosition.orientation).toBe('horizontal');
+//                 expect(progressBarPosition.start).toBeCloseTo(125, 0);
+//                 expect(progressBarPosition.end).toBeCloseTo(225, 0);
+//             });
+
+//         data.setThumbTwoPosition({ 'left': 330, 'top': 330 });
+//         _this.setThumbOneToStartingPosition();
+//     });
+
+//     test('Should be left: 0, top: 125, tooltipValue: 29, orientation: vertical, start: 125 and end: 225', () => {
+//         observer.subscribe('thumbOneDragged',
+//             (args: IDragThumbArgs) => {
+//                 expect(args.thumbPosition.left).toBeCloseTo(0);
+//                 expect(args.thumbPosition.top).toBeCloseTo(125, 0);
+//                 expect(args.tooltipValue).toBe(29);
+//             });
+//         observer.subscribe('progressBarDraged',
+//             (progressBarPosition: IProgressBarPosition) => {
+//                 expect(progressBarPosition.orientation).toBe('vertical');
+//                 expect(progressBarPosition.start).toBeCloseTo(125, 0);
+//                 expect(progressBarPosition.end).toBeCloseTo(225, 0);
+//             });
+
+//         data.setOrientation('vertical');
+//         data.setThumbTwoPosition({ 'left': 330, 'top': 330 });
+//         _this.setThumbOneToStartingPosition();
+//     });
+
+//     test('Should be left: 215, top: 0, tooltipValue: 50, orientation: horizontal, start: 0 and end: 235', () => {
+//         observer.subscribe('thumbOneDragged',
+//             (args: IDragThumbArgs) => {
+//                 expect(args.thumbPosition.left).toBeCloseTo(215);
+//                 expect(args.thumbPosition.top).toBeCloseTo(0, 0);
+//                 expect(args.tooltipValue).toBe(50);
+//             });
+//         observer.subscribe('progressBarDraged',
+//             (progressBarPosition: IProgressBarPosition) => {
+//                 expect(progressBarPosition.orientation).toBe('horizontal');
+//                 expect(progressBarPosition.start).toBeCloseTo(0, 0);
+//                 expect(progressBarPosition.end).toBeCloseTo(235, 0);
+//             });
+
+//         data.setSliderType('single');
+//         data.setThumbTwoPosition({ 'left': 330, 'top': 330 });
+//         _this.setThumbOneToStartingPosition();
+//     });
+
+//     test('Should be left: 0, top: 215, tooltipValue: 50, orientation: vertical, start: 0 and end: 235', () => {
+//         observer.subscribe('thumbOneDragged',
+//             (args: IDragThumbArgs) => {
+//                 expect(args.thumbPosition.left).toBeCloseTo(0);
+//                 expect(args.thumbPosition.top).toBeCloseTo(215, 0);
+//                 expect(args.tooltipValue).toBe(50);
+//             });
+//         observer.subscribe('progressBarDraged',
+//             (progressBarPosition: IProgressBarPosition) => {
+//                 expect(progressBarPosition.orientation).toBe('vertical');
+//                 expect(progressBarPosition.start).toBeCloseTo(0, 0);
+//                 expect(progressBarPosition.end).toBeCloseTo(235, 0);
+//             });
+
+//         data.setSliderType('single');
+//         data.setOrientation('vertical');
+//         data.setThumbTwoPosition({ 'left': 330, 'top': 330 });
+//         _this.setThumbOneToStartingPosition();
+//     });
+
+// });
+
+
+// describe('Set thumb two to starting position', () => {
+
+//     test('Should be left: 125, top: 0, tooltipValue: 29, orientation: horizontal, start: 125 and end: 225', () => {
+//         observer.subscribe('thumbTwoDragged',
+//             (args: IDragThumbArgs) => {
+//                 expect(args.thumbPosition.left).toBeCloseTo(305, 0);
+//                 expect(args.thumbPosition.top).toBeCloseTo(0);
+//                 expect(args.tooltipValue).toBe(71);
+//             });
+//         observer.subscribe('progressBarDraged',
+//             (progressBarPosition: IProgressBarPosition) => {
+//                 expect(progressBarPosition.orientation).toBe('horizontal');
+//                 expect(progressBarPosition.start).toBeCloseTo(30, 0);
+//                 expect(progressBarPosition.end).toBeCloseTo(295, 0);
+//             });
+
+//         data.setThumbOnePosition({ 'left': 30, 'top': 30 });
+//         _this.setThumbTwoToStartingPosition();
+//     });
+
+//     test('Should be left: 0, top: 305, tooltipValue: 71, orientation: vertical, start: 30 and end: 295', () => {
+//         observer.subscribe('thumbTwoDragged',
+//             (args: IDragThumbArgs) => {
+//                 expect(args.thumbPosition.left).toBeCloseTo(0);
+//                 expect(args.thumbPosition.top).toBeCloseTo(305, 0);
+//                 expect(args.tooltipValue).toBe(71);
+//             });
+//         observer.subscribe('progressBarDraged',
+//             (progressBarPosition: IProgressBarPosition) => {
+//                 expect(progressBarPosition.orientation).toBe('vertical');
+//                 expect(progressBarPosition.start).toBeCloseTo(30, 0);
+//                 expect(progressBarPosition.end).toBeCloseTo(295, 0);
+//             });
+
+//         data.setOrientation('vertical');
+//         data.setThumbOnePosition({ 'left': 30, 'top': 30 });
+//         _this.setThumbTwoToStartingPosition();
+//     });
+
+// });
+
+
+describe('Generate scale', () => {
+
+    test('Checking the generation of a scale from 0 to 10 with a step equal to 1, with a slider width of 450', () => {
+        const scalePointSettings: IScalePointSettings[] = [];
+        const correctSettings: IScalePointSettings[] = [
+            { 'position': -15, 'scalePointSize': 50, 'scalePointValue': 0 },
+            { 'position': 71, 'scalePointSize': 50, 'scalePointValue': 2 },
+            { 'position': 157, 'scalePointSize': 50, 'scalePointValue': 4 },
+            { 'position': 243, 'scalePointSize': 50, 'scalePointValue': 6 },
+            { 'position': 329, 'scalePointSize': 50, 'scalePointValue': 8 },
+            { 'position': 415, 'scalePointSize': 50, 'scalePointValue': 10 }
+        ];
+
+        observer.subscribe('addScalePoint',
+            (settings: IScalePointSettings) => {
+                scalePointSettings.push(settings);
             });
 
-        data.setThumbTwoPosition({ 'left': 330, 'top': 330 });
-        _this.setThumbOneToStartingPosition();
+        data.setMax(10);
+        data.setScalePointSize({ 'width': 50, 'height': 50 });
+        _this.generateScale();
+
+        for (let scalePoint = 0; scalePoint < scalePointSettings.length; scalePoint++) {
+            expect(scalePointSettings[scalePoint].position).toBe(correctSettings[scalePoint].position);
+            expect(scalePointSettings[scalePoint].scalePointSize).toBe(correctSettings[scalePoint].scalePointSize);
+            expect(scalePointSettings[scalePoint].scalePointValue).toBe(correctSettings[scalePoint].scalePointValue);
+        }
     });
 
-    test('Should be left: 0, top: 125, tooltipValue: 29, orientation: vertical, start: 125 and end: 225', () => {
-        observer.subscribe('thumbOneDragged',
-            (args: IDragThumbArgs) => {
-                expect(args.thumbPosition.left).toBeCloseTo(0);
-                expect(args.thumbPosition.top).toBeCloseTo(125, 0);
-                expect(args.tooltipValue).toBe(29);
-            });
-        observer.subscribe('progressBarDraged',
-            (progressBarPosition: IProgressBarPosition) => {
-                expect(progressBarPosition.orientation).toBe('vertical');
-                expect(progressBarPosition.start).toBeCloseTo(125, 0);
-                expect(progressBarPosition.end).toBeCloseTo(225, 0);
+    test('Checking the generation of a scale from 0 to 10 with a step equal to 1, with a slider width of 1000', () => {
+        const scalePointSettings: IScalePointSettings[] = [];
+        const correctSettings: IScalePointSettings[] = [
+            { 'position': -15, 'scalePointSize': 50, 'scalePointValue': 0 },
+            { 'position': 83, 'scalePointSize': 50, 'scalePointValue': 1 },
+            { 'position': 181, 'scalePointSize': 50, 'scalePointValue': 2 },
+            { 'position': 279, 'scalePointSize': 50, 'scalePointValue': 3 },
+            { 'position': 377, 'scalePointSize': 50, 'scalePointValue': 4 },
+            { 'position': 475, 'scalePointSize': 50, 'scalePointValue': 5 },
+            { 'position': 573, 'scalePointSize': 50, 'scalePointValue': 6 },
+            { 'position': 671, 'scalePointSize': 50, 'scalePointValue': 7 },
+            { 'position': 769, 'scalePointSize': 50, 'scalePointValue': 8 },
+            { 'position': 867, 'scalePointSize': 50, 'scalePointValue': 9 },
+            { 'position': 965, 'scalePointSize': 50, 'scalePointValue': 10 }
+        ];
+
+        observer.subscribe('addScalePoint',
+            (settings: IScalePointSettings) => {
+                scalePointSettings.push(settings);
             });
 
-        data.setOrientation('vertical');
-        data.setThumbTwoPosition({ 'left': 330, 'top': 330 });
-        _this.setThumbOneToStartingPosition();
+        data.setMax(10);
+        data.setSliderSize({ 'width': 1000, 'height': 1000 });
+        data.setScalePointSize({ 'width': 50, 'height': 50 });
+        _this.generateScale();
+
+        for (let scalePoint = 0; scalePoint < scalePointSettings.length; scalePoint++) {
+            console.log(scalePoint);
+            expect(scalePointSettings[scalePoint].position).toBe(correctSettings[scalePoint].position);
+            expect(scalePointSettings[scalePoint].scalePointSize).toBe(correctSettings[scalePoint].scalePointSize);
+            expect(scalePointSettings[scalePoint].scalePointValue).toBe(correctSettings[scalePoint].scalePointValue);
+        }
     });
 
-    test('Should be left: 215, top: 0, tooltipValue: 50, orientation: horizontal, start: 0 and end: 235', () => {
-        observer.subscribe('thumbOneDragged',
-            (args: IDragThumbArgs) => {
-                expect(args.thumbPosition.left).toBeCloseTo(215);
-                expect(args.thumbPosition.top).toBeCloseTo(0, 0);
-                expect(args.tooltipValue).toBe(50);
-            });
-        observer.subscribe('progressBarDraged',
-            (progressBarPosition: IProgressBarPosition) => {
-                expect(progressBarPosition.orientation).toBe('horizontal');
-                expect(progressBarPosition.start).toBeCloseTo(0, 0);
-                expect(progressBarPosition.end).toBeCloseTo(235, 0);
+    test('Checking the generation of a scale from 0 to 10 with a step equal to 2, with a slider width of 1000', () => {
+        const scalePointSettings: IScalePointSettings[] = [];
+        const correctSettings: IScalePointSettings[] = [
+            { 'position': -15, 'scalePointSize': 50, 'scalePointValue': 0 },
+            { 'position': 181, 'scalePointSize': 50, 'scalePointValue': 2 },
+            { 'position': 377, 'scalePointSize': 50, 'scalePointValue': 4 },
+            { 'position': 573, 'scalePointSize': 50, 'scalePointValue': 6 },
+            { 'position': 769, 'scalePointSize': 50, 'scalePointValue': 8 },
+            { 'position': 965, 'scalePointSize': 50, 'scalePointValue': 10 }
+        ];
+
+        observer.subscribe('addScalePoint',
+            (settings: IScalePointSettings) => {
+                scalePointSettings.push(settings);
             });
 
-        data.setSliderType('single');
-        data.setThumbTwoPosition({ 'left': 330, 'top': 330 });
-        _this.setThumbOneToStartingPosition();
+        data.setStep(2)
+        data.setMax(10);
+        data.setSliderSize({ 'width': 1000, 'height': 1000 });
+        data.setScalePointSize({ 'width': 50, 'height': 50 });
+        _this.generateScale();
+
+        for (let scalePoint = 0; scalePoint < scalePointSettings.length; scalePoint++) {
+            console.log(scalePoint);
+            expect(scalePointSettings[scalePoint].position).toBe(correctSettings[scalePoint].position);
+            expect(scalePointSettings[scalePoint].scalePointSize).toBe(correctSettings[scalePoint].scalePointSize);
+            expect(scalePointSettings[scalePoint].scalePointValue).toBe(correctSettings[scalePoint].scalePointValue);
+        }
     });
 
-    test('Should be left: 0, top: 215, tooltipValue: 50, orientation: vertical, start: 0 and end: 235', () => {
-        observer.subscribe('thumbOneDragged',
-            (args: IDragThumbArgs) => {
-                expect(args.thumbPosition.left).toBeCloseTo(0);
-                expect(args.thumbPosition.top).toBeCloseTo(215, 0);
-                expect(args.tooltipValue).toBe(50);
-            });
-        observer.subscribe('progressBarDraged',
-            (progressBarPosition: IProgressBarPosition) => {
-                expect(progressBarPosition.orientation).toBe('vertical');
-                expect(progressBarPosition.start).toBeCloseTo(0, 0);
-                expect(progressBarPosition.end).toBeCloseTo(235, 0);
+    test('Checking the generation of a scale from 0 to 10 with a step equal to 2, with a vertical slider height of 1000', () => {
+        const scalePointSettings: IScalePointSettings[] = [];
+        const correctSettings: IScalePointSettings[] = [
+            { 'position': -15, 'scalePointSize': 50, 'scalePointValue': 0 },
+            { 'position': 181, 'scalePointSize': 50, 'scalePointValue': 2 },
+            { 'position': 377, 'scalePointSize': 50, 'scalePointValue': 4 },
+            { 'position': 573, 'scalePointSize': 50, 'scalePointValue': 6 },
+            { 'position': 769, 'scalePointSize': 50, 'scalePointValue': 8 },
+            { 'position': 965, 'scalePointSize': 50, 'scalePointValue': 10 }
+        ];
+
+        observer.subscribe('addScalePoint',
+            (settings: IScalePointSettings) => {
+                scalePointSettings.push(settings);
             });
 
-        data.setSliderType('single');
-        data.setOrientation('vertical');
-        data.setThumbTwoPosition({ 'left': 330, 'top': 330 });
-        _this.setThumbOneToStartingPosition();
+            data.setOrientation('vertical')
+        data.setStep(2)
+        data.setMax(10);
+        data.setSliderSize({ 'width': 1000, 'height': 1000 });
+        data.setScalePointSize({ 'width': 50, 'height': 50 });
+        _this.generateScale();
+
+        for (let scalePoint = 0; scalePoint < scalePointSettings.length; scalePoint++) {
+            console.log(scalePoint);
+            expect(scalePointSettings[scalePoint].position).toBe(correctSettings[scalePoint].position);
+            expect(scalePointSettings[scalePoint].scalePointSize).toBe(correctSettings[scalePoint].scalePointSize);
+            expect(scalePointSettings[scalePoint].scalePointValue).toBe(correctSettings[scalePoint].scalePointValue);
+        }
     });
-
-});
-
-
-describe('Set thumb two to starting position', () => {
-
-    test('Should be left: 125, top: 0, tooltipValue: 29, orientation: horizontal, start: 125 and end: 225', () => {
-        observer.subscribe('thumbTwoDragged',
-            (args: IDragThumbArgs) => {
-                expect(args.thumbPosition.left).toBeCloseTo(305, 0);
-                expect(args.thumbPosition.top).toBeCloseTo(0);
-                expect(args.tooltipValue).toBe(71);
-            });
-        observer.subscribe('progressBarDraged',
-            (progressBarPosition: IProgressBarPosition) => {
-                expect(progressBarPosition.orientation).toBe('horizontal');
-                expect(progressBarPosition.start).toBeCloseTo(30, 0);
-                expect(progressBarPosition.end).toBeCloseTo(295, 0);
-            });
-
-        data.setThumbOnePosition({ 'left': 30, 'top': 30 });
-        _this.setThumbTwoToStartingPosition();
-    });
-
-    test('Should be left: 0, top: 305, tooltipValue: 71, orientation: vertical, start: 30 and end: 295', () => {
-        observer.subscribe('thumbTwoDragged',
-            (args: IDragThumbArgs) => {
-                expect(args.thumbPosition.left).toBeCloseTo(0);
-                expect(args.thumbPosition.top).toBeCloseTo(305, 0);
-                expect(args.tooltipValue).toBe(71);
-            });
-        observer.subscribe('progressBarDraged',
-            (progressBarPosition: IProgressBarPosition) => {
-                expect(progressBarPosition.orientation).toBe('vertical');
-                expect(progressBarPosition.start).toBeCloseTo(30, 0);
-                expect(progressBarPosition.end).toBeCloseTo(295, 0);
-            });
-
-        data.setOrientation('vertical');
-        data.setThumbOnePosition({ 'left': 30, 'top': 30 });
-        _this.setThumbTwoToStartingPosition();
-    });
-
 });

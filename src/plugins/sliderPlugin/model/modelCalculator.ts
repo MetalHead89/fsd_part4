@@ -50,8 +50,8 @@ class ModelCalculator {
 
         this.thumbDrag(correctThumTwoPosition, 'thumbTwoDragged', thumbValue);
     }
-    
-    
+
+
     /** Устанавливает первый бегунок на стартовую позицию */
     setThumbOneToStartingPosition() {
         if (this.data.getOrientation() === 'horizontal') {
@@ -110,7 +110,6 @@ class ModelCalculator {
             const pointValue = this.positionToValue(scalePointPosition - this.getElementSizeByOrientation(this.data.getThumbSize()) / 2
                 + this.getElementSizeByOrientation(this.data.getScalePointSize()) / 2);
 
-            // if (i === 0 || this.isPointFits(scalePointPosition, prevScalePointPosition) || i === Math.round(scalePointsCount - 1)) {
             if (i === 0 || this.isPointFits(scalePointPosition, prevScalePointPosition)) {
 
                 this.observer.notify('addScalePoint',
@@ -124,28 +123,17 @@ class ModelCalculator {
             }
 
             scalePointPosition += stepSize;
-
-            // if (i === Math.round(scalePointsCount - 2)) {
-            //     scalePointPosition = this.getElementSizeByOrientation(this.data.getSliderSize())
-            //         - this.getElementSizeByOrientation(this.data.getThumbSize()) / 2 - this.getElementSizeByOrientation(this.data.getScalePointSize()) / 2;
-
-            //     if (this.data.getOrientation() === 'horizontal') {
-            //         this.observer.notify('scaleCreated', { 'width': this.data.getSliderSize().width, 'height': this.data.getScalePointSize().height });
-            //     } else if (this.data.getOrientation() === 'vertical') {
-            //         this.observer.notify('scaleCreated', { 'width': this.data.getScalePointSize().width, 'height': this.data.getSliderSize().height });
-            //     }
-            // }
         }
 
     }
-    
+
     private isPointFits(scalePointPosition: number, prevScalePointPosition: number): boolean {
 
         return (scalePointPosition - prevScalePointPosition - 2 >
             this.getElementSizeByOrientation(this.data.getScalePointSize()));
 
     }
-    
+
     /**
      * Посылает уведомления с новой позицией бегунка для его передвижения и положением прогрессбара
      * 
