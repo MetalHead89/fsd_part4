@@ -388,7 +388,7 @@ describe('Set thumb one to starting position', () => {
                 expect(progressBarPosition.end).toBeCloseTo(225, 0);
             });
 
-        data.setThumbTwoPosition({'left': 330, 'top': 330});
+        data.setThumbTwoPosition({ 'left': 330, 'top': 330 });
         _this.setThumbOneToStartingPosition();
     });
 
@@ -407,7 +407,7 @@ describe('Set thumb one to starting position', () => {
             });
 
         data.setOrientation('vertical');
-        data.setThumbTwoPosition({'left': 330, 'top': 330});
+        data.setThumbTwoPosition({ 'left': 330, 'top': 330 });
         _this.setThumbOneToStartingPosition();
     });
 
@@ -426,7 +426,7 @@ describe('Set thumb one to starting position', () => {
             });
 
         data.setSliderType('single');
-        data.setThumbTwoPosition({'left': 330, 'top': 330});
+        data.setThumbTwoPosition({ 'left': 330, 'top': 330 });
         _this.setThumbOneToStartingPosition();
     });
 
@@ -446,8 +446,50 @@ describe('Set thumb one to starting position', () => {
 
         data.setSliderType('single');
         data.setOrientation('vertical');
-        data.setThumbTwoPosition({'left': 330, 'top': 330});
+        data.setThumbTwoPosition({ 'left': 330, 'top': 330 });
         _this.setThumbOneToStartingPosition();
+    });
+
+});
+
+
+describe('Set thumb two to starting position', () => {
+
+    test('Should be left: 125, top: 0, tooltipValue: 29, orientation: horizontal, start: 125 and end: 225', () => {
+        observer.subscribe('thumbTwoDragged',
+            (args: IDragThumbArgs) => {
+                expect(args.thumbPosition.left).toBeCloseTo(305, 0);
+                expect(args.thumbPosition.top).toBeCloseTo(0);
+                expect(args.tooltipValue).toBe(71);
+            });
+        observer.subscribe('progressBarDraged',
+            (progressBarPosition: IProgressBarPosition) => {
+                expect(progressBarPosition.orientation).toBe('horizontal');
+                expect(progressBarPosition.start).toBeCloseTo(30, 0);
+                expect(progressBarPosition.end).toBeCloseTo(295, 0);
+            });
+
+        data.setThumbOnePosition({ 'left': 30, 'top': 30 });
+        _this.setThumbTwoToStartingPosition();
+    });
+
+    test('Should be left: 0, top: 305, tooltipValue: 71, orientation: vertical, start: 30 and end: 295', () => {
+        observer.subscribe('thumbTwoDragged',
+            (args: IDragThumbArgs) => {
+                expect(args.thumbPosition.left).toBeCloseTo(0);
+                expect(args.thumbPosition.top).toBeCloseTo(305, 0);
+                expect(args.tooltipValue).toBe(71);
+            });
+        observer.subscribe('progressBarDraged',
+            (progressBarPosition: IProgressBarPosition) => {
+                expect(progressBarPosition.orientation).toBe('vertical');
+                expect(progressBarPosition.start).toBeCloseTo(30, 0);
+                expect(progressBarPosition.end).toBeCloseTo(295, 0);
+            });
+
+        data.setOrientation('vertical');
+        data.setThumbOnePosition({ 'left': 30, 'top': 30 });
+        _this.setThumbTwoToStartingPosition();
     });
 
 });

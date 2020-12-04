@@ -82,23 +82,21 @@ class ModelCalculator {
     }
 
 
+    /** Устанавливает второй бегунок на стартовую позицию */
     setThumbTwoToStartingPosition() {
-
-        /** Устанавливает второй бегунок на стартовую позицию */
-
         if (this.data.getOrientation() === 'horizontal') {
             this.dragThumbTwo({
                 'left': this.data.getSliderSize().width * 0.7 - this.data.getThumbSize().width / 2,
                 'top': 0
             });
-        } else if (this.data.getOrientation() === 'vertical') {
+        } else {
             this.dragThumbTwo({
                 'left': 0,
                 'top': this.data.getSliderSize().height * 0.7 - this.data.getThumbSize().height / 2
             });
         }
-
     }
+
 
     generateScale() {
         let scalePointPosition = this.getElementSizeByOrientation(this.data.getThumbSize()) / 2 - this.getElementSizeByOrientation(this.data.getScalePointSize()) / 2;
