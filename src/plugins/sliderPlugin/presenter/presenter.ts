@@ -13,6 +13,13 @@ import Observer from '../observer/observer';
 import Model from '../model/model';
 import View from '../view/view';
 
+
+/**
+ * Реализует взаимодействие между Моделью и Видом. Выполняет следующие действия:
+ * Реагирует на уведомления от Вида о новых событиях связанных с пользовательским вводом и передаёт данные в Модель;
+ * Реагирует на уведомления от Модели о новых изменениях и передаёт данные в Вид, для изменения отображения слайдера;
+ * Предоставляет методы API для внешнего управления слайдером
+ */
 class Presenter {
     private observer: Observer;
     private model: Model;
@@ -20,22 +27,19 @@ class Presenter {
 
 
     constructor(settings: ISliderSettings, sliderWrapper: HTMLElement) {
-
         this.observer = new Observer();
         this.model = new Model(this.observer, settings);
         this.view = new View(this.observer, sliderWrapper, this.model.getSliderOrientation());
 
         this.addObserverListeners();
         this.createNewSlider();
-
     }
 
+
+    /**
+     * Подписывает наблюдателя на прослушивание уведомлений от Model и View
+     */
     private addObserverListeners(): void {
-
-        /**
-         * Подписывает наблюдателя на прослушивание уведомлений от Model и View
-         */
-
         this.observer.subscribe('sliderElementIsCreated',
             (sliderSize: ISliderSize) => { this.model.setSliderSize(sliderSize) });
         this.observer.subscribe('thumbOneIsCreated',
@@ -70,24 +74,29 @@ class Presenter {
             (scaleSize: IScaleSize) => { this.view.setScaleSize(scaleSize) });
     }
 
+
+    /**
+     * Создаёт новый слайдер исходя из настроек, хранящихся в Model
+     */
     createNewSlider(): void {
-
-        /**
-         * Создаёт слайдер исходя из настроек, хранящихся в Model
-         */
-
         const orientation = this.model.getSliderOrientation();
 
         this.view.createSlider(`slider slider_${orientation}`);
         this.view.createTrack(`slider__track slider__track_${orientation}`);
         this.view.createProgressBar(`slider__progress-bar slider__progress-bar_${orientation}`)
         this.createThumbs(orientation);
-        // this.model.setScalePointSize(this.getScalePointMaxSize());
         if (this.model.getScaleVisiblity()) {
             this.view.createScale(`slider__scale slider__scale_${orientation}`);
         }
     }
 
+
+    /**
+     * Создаёт бегунки и устанавливает их на позиции
+     * @param {string} orientation - ориентация слайдера 'horizontal или 'vertical'
+     * @param {boolean} isStartPosition - флаг расстановки бегунков на стартовые позиции. Если true - бегунки устанавливаются на стартовые позиции.
+     * Если false - на позиции сохранённые в Модели
+     */
     private createThumbs(orientation: string, isStartPosition = true): void {
         const sliderType: string = this.model.getSliderType();
         const tooltipsVisible: boolean = this.model.getTooltipsVisiblity();
@@ -116,48 +125,68 @@ class Presenter {
         }
     }
 
+
+    /**
+     * Возвращает размер последней точки шкалы, который является максимальным.
+     * Максимальный размер точки шкалы необходим для того, чтобы все точки были одинаковыми и для избежания их наложения
+     * друг на друга во время формирования шкалы
+     * 
+     * @returns {IScalePointSize} - объект с максимальной шириной и высотой точки шкалы
+     */
     private getScalePointMaxSize(): IScalePointSize {
         const sliderMaxValue: number = this.model.getMax();
         return this.view.getScalePointMaxSize(sliderMaxValue);
     }
 
-    setMin(newMin: number): void {
-        this.model.setMin(newMin)
-    }
-    setMax(newMax: number) {
-        this.model.setMax(newMax);
-    }
-    setStep(newStep: number) {
-        this.model.setStep(newStep);
-    }
-    setScaleVisibility(scaleVisible: boolean) {
-        this.model.setScaleVisibility(scaleVisible);
-    }
-    setTooltipsVisibility(tooltipsVisible: boolean) {
-        this.model.setTooltipsVisible(tooltipsVisible)
-    }
+
+    /**
+     * Возвращает флаг видимости шкалы
+     * 
+     * @returns {boolean} - флаг видимости шкалы. true - шкала видна, false - нет
+     */
     getScaleVisiblity(): boolean {
         return this.model.getScaleVisiblity();
     }
+
+
+    /**
+     * Возвращает флаг видимости бегунков
+     * 
+     * @returns {boolean} - флаг видимости значений бегунков. true - значение отображается, false - нет
+     */
     getTooltipsVisiblity(): boolean {
         return this.model.getTooltipsVisiblity();
     }
-    setSliderType(sliderType: string) {
-        this.model.setSliderType(sliderType);
-    }
+
+
+    /**
+     * Возвращает тип слайдера
+     * 
+     * @returns {string} - тип слайдера single или range
+     */
     getSliderType(): string {
         return this.model.getSliderType();
     }
-    setSliderOrientation(orientation: string) {
-        this.model.setSliderOrientation(orientation);
-    }
+
+
+    /**
+     * Возвращает ориентацию слайдера
+     * 
+     * @returns {string} - ориентация слайдера horizontal или vertical
+     */
     getSliderOrientation(): string {
         return this.model.getSliderOrientation();
     }
 
+
+    /**
+     * Изменяет ориентацию слайдера
+     * 
+     * @param orienation - ориентация слайдера horizontal или vertical
+     */
     changeSliderOrientation(orienation: string): void {
         if (orienation !== this.model.getSliderOrientation()) {
-            this.setSliderOrientation(orienation);
+            this.model.setSliderOrientation(orienation);
             const thumbOnePosition = this.model.getThumbOnePosition();
             const thumbTwoPosition = this.model.getThumbTwoPosition();
             this.model.setThumbOnePosition({ 'left': thumbOnePosition.top, 'top': thumbOnePosition.left });
@@ -167,6 +196,12 @@ class Presenter {
         }
     }
 
+
+    /**
+     * Изменяет тип слайдера
+     * 
+     * @param {string} type - тип слайдера single или range
+     */
     changeSliderType(type: string) {
         this.view.removeThumbOne();
         this.view.removeThumbTwo();
@@ -174,6 +209,12 @@ class Presenter {
         this.createThumbs(this.model.getSliderOrientation(), false);
     }
 
+
+    /**
+     * Изменяет минимальное значение слайдера
+     * 
+     * @param {number} newMin - минимальное значение 
+     */
     changeMinValue(newMin: number) {
         const valueIsSet: boolean = this.model.setMin(newMin);
 
@@ -183,6 +224,12 @@ class Presenter {
         }
     }
 
+
+    /**
+     * Изменяет максимальное значение слайдера
+     * 
+     * @param {number} newMin - максимальное значение 
+     */
     changeMaxValue(newMax: number) {
         const valueIsSet: boolean = this.model.setMax(newMax);
 
@@ -192,6 +239,12 @@ class Presenter {
         }
     }
 
+
+    /**
+     * Изменяет величину шага бегунка
+     * 
+     * @param {number} newStep - величина с которой перемещается бегунок 
+     */
     changeStep(newStep: number) {
         const valueIsSet: boolean = this.model.setStep(newStep);
 
@@ -201,6 +254,12 @@ class Presenter {
         }
     }
 
+
+    /**
+     * Изменяет флаг видимости шкалы
+     * 
+     * @param {boolean} scaleVisible - флаг видимости шкалы. true - шкала видна, false - нет
+     */
     changeScaleVisibility(scaleVisible: boolean) {
         this.model.setScaleVisibility(scaleVisible);
 
@@ -211,6 +270,12 @@ class Presenter {
         }
     }
 
+
+    /**
+     * Изменяет флаг видимости значений бегунков
+     * 
+     * @param {boolean} tooltipsVisible - флаг видимости значений бегунков. true - значение отображается, false - нет
+     */
     changeTooltipsVisibility(tooltipsVisible: boolean) {
         this.model.setTooltipsVisible(tooltipsVisible);
 
