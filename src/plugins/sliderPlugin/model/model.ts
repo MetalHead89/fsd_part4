@@ -116,7 +116,7 @@ class Model {
      * 
      * @param {IScalePointSize} scalePointSize - объект с шириной и высотой точки шкалы
      */
-    setScalePointSize(scalePointSize: IScalePointSize) {
+    setScalePointSize(scalePointSize: IScalePointSize): void {
         this.data.setScalePointSize(scalePointSize);
     }
 
