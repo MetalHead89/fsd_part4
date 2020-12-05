@@ -27,6 +27,12 @@ class Thumb {
             return false; // disable selection start (cursor change)
         });
 
+        this.element.addEventListener('touchstart', (event: TouchEvent) => {
+            // this.startDrag(event.touches[event.changedTouches.length - 1].pageX, event.changedTouches[event.changedTouches.length - 1].pageY);
+            this.startDrag(event.targetTouches[0].pageX, event.targetTouches[0].pageY);
+            return false; // disable selection start (cursor change)
+        });
+
     }
 
     getElement(): HTMLDivElement {
@@ -65,7 +71,7 @@ class Thumb {
 
         this.setZIndex('3');
         this.observer.notify('changeZIndexToAnotherThumb', this.element);
-        
+
         const thumbCoords: DOMRect = this.element.getBoundingClientRect();
 
         this.shift.shiftX = cursorX - thumbCoords.left;
@@ -78,17 +84,30 @@ class Thumb {
         document.addEventListener('mouseup',
             this.onMouseUpHandler as EventListenerOrEventListenerObject);
 
+        document.addEventListener('touchmove',
+            this.onMouseMoveHandler as EventListenerOrEventListenerObject);
+        document.addEventListener('touchend',
+            this.onMouseUpHandler as EventListenerOrEventListenerObject);
+
     }
 
-    private drag(event: MouseEvent): void {
-        
+    private drag(event: MouseEvent | TouchEvent): void {
+
         let notifyMessage = 'thumbOneIsDragged';
 
         if (this.element.classList.contains('slider__thumb-two')) {
             notifyMessage = 'thumbTwoIsDragged';
         }
 
-        this.observer.notify(notifyMessage, this.getPosition({ 'x': event.clientX, 'y': event.clientY }));
+        if (event instanceof MouseEvent) {
+            this.observer.notify(notifyMessage, this.getPosition({ 'x': event.clientX, 'y': event.clientY }));
+        } else {
+            this.observer.notify(notifyMessage, this.getPosition({ 
+                'x': event.targetTouches[0].pageX,
+                'y': event.targetTouches[0].pageY 
+            }));
+        }
+        
 
     }
 
@@ -111,6 +130,8 @@ class Thumb {
     private endDrag(): void {
         document.removeEventListener('mousemove', this.onMouseMoveHandler as EventListenerOrEventListenerObject);
         document.removeEventListener('mouseup', this.onMouseUpHandler as EventListenerOrEventListenerObject);
+        document.removeEventListener('touchmove', this.onMouseMoveHandler as EventListenerOrEventListenerObject);
+        document.removeEventListener('touchend', this.onMouseUpHandler as EventListenerOrEventListenerObject);
     }
 
     moveTo(position: IThumbPosition): void {
