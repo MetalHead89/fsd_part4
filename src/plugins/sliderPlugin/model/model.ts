@@ -134,7 +134,7 @@ class Model {
     /**
      * Создаёт новую шкалу и генерирует её точки со значениями
      */
-    generateScale() {
+    generateScale(): void {
         this.calculator.generateScale();
     }
 
@@ -144,7 +144,7 @@ class Model {
      * 
      * @param {IThumbPosition} thumbPosition - объект с расстояниями относительно левого и верхнего края родительсого контейнера
      */
-    dragthumbOne(thumbPosition: IThumbPosition) {
+    dragthumbOne(thumbPosition: IThumbPosition): void {
         this.calculator.dragThumbOne(thumbPosition);
     }
 
@@ -154,7 +154,7 @@ class Model {
      * 
      * @param {IThumbPosition} thumbPosition - объект с расстояниями относительно левого и верхнего края родительского контейнера
      */
-    dragThumbTwo(thumbPosition: IThumbPosition) {
+    dragThumbTwo(thumbPosition: IThumbPosition): void {
         this.calculator.dragThumbTwo(thumbPosition);
     }
 
@@ -162,7 +162,7 @@ class Model {
     /**
      * Передвигает первый бегунок на стартовую позицию
      */
-    setThumbOneToStartingPosition() {
+    setThumbOneToStartingPosition(): void {
         this.calculator.setThumbOneToStartingPosition();
     }
 
@@ -170,7 +170,7 @@ class Model {
     /**
      * Передвигает второй бегунок на стартовую позицию
      */
-    setThumbTwoToStartingPosition() {
+    setThumbTwoToStartingPosition(): void {
         this.calculator.setThumbTwoToStartingPosition();
     }
 
@@ -210,7 +210,7 @@ class Model {
      * 
      * @param {boolean} scaleVisible - флаг видимости шкалы. true - шкала видна, false - нет
      */
-    setScaleVisibility(scaleVisible: boolean) {
+    setScaleVisibility(scaleVisible: boolean): void {
         this.data.setScaleVisible(scaleVisible);
     }
 
