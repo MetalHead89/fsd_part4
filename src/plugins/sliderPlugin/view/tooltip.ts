@@ -1,17 +1,28 @@
-import { timers } from "jquery";
-
+/**
+ * Класс для управления элементами для показа значений над бегунками
+ */
 class Tooltip {
-
     private element: HTMLDivElement;
+
 
     constructor(tooltipElement: HTMLDivElement) {
         this.element = tooltipElement;
     }
 
+
+    /**
+     * Утанавливает новое значение над бегунком
+     * 
+     * @param {Number} newValue - значение позиции на которой находится бегунок
+     */
     setValue(newValue: number): void {
         this.element.innerText = newValue.toString();
     }
 
+
+    /**
+     * Удаляет HTML элемент, отображающий значение позиции на которой находится бегунок
+     */
     remove() {
         this.element.remove();
     }
