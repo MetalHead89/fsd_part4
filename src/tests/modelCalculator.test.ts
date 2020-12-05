@@ -466,7 +466,7 @@ describe('Set thumb one to starting position', () => {
                 expect(progressBarPosition.start).toBeCloseTo(294, 0);
                 expect(progressBarPosition.end).toBeCloseTo(526, 0);
             });
-        data.setSliderSize({'width': 1000, 'height': 1000});
+        data.setSliderSize({ 'width': 1000, 'height': 1000 });
         data.setThumbTwoPosition({ 'left': 800, 'top': 800 });
         _this.setThumbOneToStartingPosition();
     });
@@ -486,7 +486,7 @@ describe('Set thumb one to starting position', () => {
             });
 
         data.setOrientation('vertical');
-        data.setSliderSize({'width': 1000, 'height': 1000});
+        data.setSliderSize({ 'width': 1000, 'height': 1000 });
         data.setThumbTwoPosition({ 'left': 800, 'top': 800 });
         _this.setThumbOneToStartingPosition();
     });
@@ -506,7 +506,7 @@ describe('Set thumb one to starting position', () => {
             });
 
         data.setSliderType('single');
-        data.setSliderSize({'width': 1000, 'height': 1000});
+        data.setSliderSize({ 'width': 1000, 'height': 1000 });
         data.setThumbTwoPosition({ 'left': 800, 'top': 800 });
         _this.setThumbOneToStartingPosition();
     });
@@ -527,7 +527,7 @@ describe('Set thumb one to starting position', () => {
 
         data.setSliderType('single');
         data.setOrientation('vertical');
-        data.setSliderSize({'width': 1000, 'height': 1000});
+        data.setSliderSize({ 'width': 1000, 'height': 1000 });
         data.setThumbTwoPosition({ 'left': 800, 'top': 800 });
         _this.setThumbOneToStartingPosition();
     });
@@ -589,7 +589,7 @@ describe('Set thumb two to starting position', () => {
             });
 
         data.setThumbOnePosition({ 'left': 30, 'top': 30 });
-        data.setSliderSize({'width': 1000, 'height': 1000});
+        data.setSliderSize({ 'width': 1000, 'height': 1000 });
         _this.setThumbTwoToStartingPosition();
     });
 
@@ -608,7 +608,7 @@ describe('Set thumb two to starting position', () => {
             });
 
         data.setOrientation('vertical');
-        data.setSliderSize({'width': 1000, 'height': 1000});
+        data.setSliderSize({ 'width': 1000, 'height': 1000 });
         data.setThumbOnePosition({ 'left': 30, 'top': 30 });
         _this.setThumbTwoToStartingPosition();
     });
@@ -723,7 +723,7 @@ describe('Generate scale', () => {
                 scalePointSettings.push(settings);
             });
 
-            data.setOrientation('vertical')
+        data.setOrientation('vertical')
         data.setStep(2)
         data.setMax(10);
         data.setSliderSize({ 'width': 1000, 'height': 1000 });
@@ -735,5 +735,152 @@ describe('Generate scale', () => {
             expect(scalePointSettings[scalePoint].scalePointSize).toBe(correctSettings[scalePoint].scalePointSize);
             expect(scalePointSettings[scalePoint].scalePointValue).toBe(correctSettings[scalePoint].scalePointValue);
         }
+    });
+});
+
+describe('Move thumb to click position', () => {
+
+    test('The second thumb should be - left: 400, top: 0. First thumb - no change', () => {
+        data.setThumbOnePosition({ 'left': 70, 'top': 70 });
+        data.setThumbTwoPosition({ 'left': 380, 'top': 380 });
+        _this.moveThumbToClickPosition({ 'x': 400, 'y': 300 });
+
+        expect(data.getThumbOnePosition().left).toBe(70);
+        expect(data.getThumbOnePosition().top).toBe(70);
+        expect(data.getThumbTwoPosition().left).toBeCloseTo(391, 0);
+        expect(data.getThumbTwoPosition().top).toBeCloseTo(288, 0);
+    });
+
+    test('The first thumb should be - left: 9, top: 0. Second thumb - no change', () => {
+        data.setThumbOnePosition({ 'left': 70, 'top': 70 });
+        data.setThumbTwoPosition({ 'left': 380, 'top': 380 });
+        _this.moveThumbToClickPosition({ 'x': 20, 'y': 12 });
+
+        expect(data.getThumbOnePosition().left).toBeCloseTo(9, 0);
+        expect(data.getThumbOnePosition().top).toBeCloseTo(0, 0);
+        expect(data.getThumbTwoPosition().left).toBeCloseTo(380, 0);
+        expect(data.getThumbTwoPosition().top).toBeCloseTo(380, 0);
+    });
+
+    test('The first thumb should be - left: 142, top: 90. Second thumb - no change', () => {
+        data.setThumbOnePosition({ 'left': 70, 'top': 70 });
+        data.setThumbTwoPosition({ 'left': 380, 'top': 380 });
+        _this.moveThumbToClickPosition({ 'x': 150, 'y': 100 });
+
+        expect(data.getThumbOnePosition().left).toBeCloseTo(142, 0);
+        expect(data.getThumbOnePosition().top).toBeCloseTo(90, 0);
+        expect(data.getThumbTwoPosition().left).toBeCloseTo(380, 0);
+        expect(data.getThumbTwoPosition().top).toBeCloseTo(380, 0);
+    });
+
+    test('The second thumb should be - left: 400, top: 0. First thumb - no change', () => {
+        data.setThumbOnePosition({ 'left': 70, 'top': 70 });
+        data.setThumbTwoPosition({ 'left': 380, 'top': 380 });
+        data.setOrientation('vertical');
+        _this.moveThumbToClickPosition({ 'x': 400, 'y': 300 });
+
+        expect(data.getThumbOnePosition().left).toBe(70);
+        expect(data.getThumbOnePosition().top).toBe(70);
+        expect(data.getThumbTwoPosition().left).toBeCloseTo(391, 0);
+        expect(data.getThumbTwoPosition().top).toBeCloseTo(288, 0);
+    });
+
+    test('The first thumb should be - left: 9, top: 0. Second thumb - no change', () => {
+        data.setThumbOnePosition({ 'left': 70, 'top': 70 });
+        data.setThumbTwoPosition({ 'left': 380, 'top': 380 });
+        data.setOrientation('vertical');
+        _this.moveThumbToClickPosition({ 'x': 20, 'y': 12 });
+
+        expect(data.getThumbOnePosition().left).toBeCloseTo(9, 0);
+        expect(data.getThumbOnePosition().top).toBeCloseTo(0, 0);
+        expect(data.getThumbTwoPosition().left).toBeCloseTo(380, 0);
+        expect(data.getThumbTwoPosition().top).toBeCloseTo(380, 0);
+    });
+
+    test('The first thumb should be - left: 142, top: 90. Second thumb - no change', () => {
+        data.setThumbOnePosition({ 'left': 70, 'top': 70 });
+        data.setThumbTwoPosition({ 'left': 380, 'top': 380 });
+        data.setOrientation('vertical');
+        _this.moveThumbToClickPosition({ 'x': 150, 'y': 100 });
+
+        expect(data.getThumbOnePosition().left).toBeCloseTo(142, 0);
+        expect(data.getThumbOnePosition().top).toBeCloseTo(90, 0);
+        expect(data.getThumbTwoPosition().left).toBeCloseTo(380, 0);
+        expect(data.getThumbTwoPosition().top).toBeCloseTo(380, 0);
+    });
+
+    test('The first thumb should be - left: 391, top: 288. Second thumb - no change', () => {
+        data.setThumbOnePosition({ 'left': 70, 'top': 70 });
+        data.setThumbTwoPosition({ 'left': 380, 'top': 380 });
+        data.setSliderType('single');
+        _this.moveThumbToClickPosition({ 'x': 400, 'y': 300 });
+
+        expect(data.getThumbOnePosition().left).toBeCloseTo(391, 0);
+        expect(data.getThumbOnePosition().top).toBeCloseTo(288, 0);
+        expect(data.getThumbTwoPosition().left).toBeCloseTo(380, 0);
+        expect(data.getThumbTwoPosition().top).toBeCloseTo(380, 0);
+    });
+
+    test('The first thumb should be - left: 9, top: 0. Second thumb - no change', () => {
+        data.setThumbOnePosition({ 'left': 70, 'top': 70 });
+        data.setThumbTwoPosition({ 'left': 380, 'top': 380 });
+        data.setSliderType('single');
+        _this.moveThumbToClickPosition({ 'x': 20, 'y': 12 });
+
+        expect(data.getThumbOnePosition().left).toBeCloseTo(9, 0);
+        expect(data.getThumbOnePosition().top).toBeCloseTo(0, 0);
+        expect(data.getThumbTwoPosition().left).toBeCloseTo(380, 0);
+        expect(data.getThumbTwoPosition().top).toBeCloseTo(380, 0);
+    });
+
+    test('The first thumb should be - left: 400, top: 400. Second thumb - no change', () => {
+        data.setThumbOnePosition({ 'left': 70, 'top': 70 });
+        data.setThumbTwoPosition({ 'left': 380, 'top': 380 });
+        data.setSliderType('single');
+        _this.moveThumbToClickPosition({ 'x': 410, 'y': 410 });
+
+        expect(data.getThumbOnePosition().left).toBeCloseTo(400, 0);
+        expect(data.getThumbOnePosition().top).toBeCloseTo(400, 0);
+        expect(data.getThumbTwoPosition().left).toBeCloseTo(380, 0);
+        expect(data.getThumbTwoPosition().top).toBeCloseTo(380, 0);
+    });
+
+    test('The first thumb should be - left: 391, top: 288. Second thumb - no change', () => {
+        data.setThumbOnePosition({ 'left': 70, 'top': 70 });
+        data.setThumbTwoPosition({ 'left': 380, 'top': 380 });
+        data.setSliderType('single');
+        data.setOrientation('vertical');
+        _this.moveThumbToClickPosition({ 'x': 400, 'y': 300 });
+
+        expect(data.getThumbOnePosition().left).toBeCloseTo(391, 0);
+        expect(data.getThumbOnePosition().top).toBeCloseTo(288, 0);
+        expect(data.getThumbTwoPosition().left).toBeCloseTo(380, 0);
+        expect(data.getThumbTwoPosition().top).toBeCloseTo(380, 0);
+    });
+
+    test('The first thumb should be - left: 9, top: 0. Second thumb - no change', () => {
+        data.setThumbOnePosition({ 'left': 70, 'top': 70 });
+        data.setThumbTwoPosition({ 'left': 380, 'top': 380 });
+        data.setSliderType('single');
+        data.setOrientation('vertical');
+        _this.moveThumbToClickPosition({ 'x': 20, 'y': 12 });
+
+        expect(data.getThumbOnePosition().left).toBeCloseTo(9, 0);
+        expect(data.getThumbOnePosition().top).toBeCloseTo(0, 0);
+        expect(data.getThumbTwoPosition().left).toBeCloseTo(380, 0);
+        expect(data.getThumbTwoPosition().top).toBeCloseTo(380, 0);
+    });
+
+    test('The first thumb should be - left: 400, top: 400. Second thumb - no change', () => {
+        data.setThumbOnePosition({ 'left': 70, 'top': 70 });
+        data.setThumbTwoPosition({ 'left': 380, 'top': 380 });
+        data.setSliderType('single');
+        data.setOrientation('vertical');
+        _this.moveThumbToClickPosition({ 'x': 410, 'y': 410 });
+
+        expect(data.getThumbOnePosition().left).toBeCloseTo(400, 0);
+        expect(data.getThumbOnePosition().top).toBeCloseTo(400, 0);
+        expect(data.getThumbTwoPosition().left).toBeCloseTo(380, 0);
+        expect(data.getThumbTwoPosition().top).toBeCloseTo(380, 0);
     });
 });
