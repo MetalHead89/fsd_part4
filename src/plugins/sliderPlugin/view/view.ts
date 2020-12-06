@@ -14,7 +14,6 @@ import Scale from './scale';
 import ElementFactory from './elementFactory';
 
 class View {
-
     private observer: Observer;
     private orientation: string;
     private slider: Slider | null = null;
@@ -27,6 +26,7 @@ class View {
     private scale: Scale | null = null;
     private elementFactory: ElementFactory;
     private sliderWrapper: HTMLDivElement;
+
 
     constructor(observer: Observer, sliderWrapper: HTMLElement, orientation: string) {
 
@@ -48,104 +48,100 @@ class View {
         });
     }
 
+
+    /**
+     * Метод выполняет следующие действия:
+     * 1. Создаёт объект класса Slider
+     * 2. Создаёт div контейнер с классами styleClasses для компоновки элементов слайдера и размещает его в DOM
+     * 3. Уведомляет своих слушателей о том, что создан контейнер слайдера и передаёт в сообщении его размеры
+     * 
+     * @param {string} styleClasses - классы для контейнера элементов слайдера
+     */
     createSlider(styleClasses: string) {
-
-        /**
-         * Метод выполняет следующие действия:
-         * 1. Создаёт объект класса Slider
-         * 2. Создаёт div контейнер с классами styleClasses для компоновки элементов слайдера и размещает его в DOM
-         * 3. Уведомляет своих слушателей о том, что создан контейнер слайдера и передаёт в сообщении его размеры
-         * 
-         * @param {string} styleClasses - классы для контейнера элементов слайдера
-         */
-
         this.slider = this.elementFactory.createSlider(this.sliderWrapper, styleClasses);
         this.observer.notify('sliderElementIsCreated', this.slider.getSize());
-
     }
 
+
+    /**
+     * Метод выполняет следующие действия:
+     * 1. Создаёт объект класса Track
+     * 2. Создаёт дорожку слайдера в виде div контейнера с классами styleClasses
+     * 
+     * @param {string} styleClasses - классы для контейнера элементов слайдера
+     */
     createTrack(styleClasses: string) {
-
-        /**
-         * Метод выполняет следующие действия:
-         * 1. Создаёт объект класса Track
-         * 2. Создаёт дорожку слайдера в виде div контейнера с классами styleClasses
-         * 
-         * @param {string} styleClasses - классы для контейнера элементов слайдера
-         */
-
         if (this.slider != null) {
             this.track = this.elementFactory.createTrack(this.slider.getElement(), styleClasses, this.observer);
         }
-
     }
 
-    createThumbOne(styleClasses: string) {
 
-        /**
-         * Метод выполняет следующие действия:
-         * 1. Создаёт объект класса Thumb
-         * 2. Создаёт бегунок в виде div контейнера с классами styleClasses
-         * 3. Уведомляет своих слушателей о том, что создан бегунок и передаёт в сообщении его размеры
-         * 
-         * @param {string} styleClasses - классы для бегунка
-         */
-
+    /**
+     * Метод выполняет следующие действия:
+     * 1. Создаёт объект класса Thumb
+     * 2. Создаёт бегунок в виде div контейнера с классами styleClasses
+     * 3. Уведомляет своих слушателей о том, что создан бегунок и передаёт в сообщении его размеры
+     * 
+     * @param {string} styleClasses - классы для бегунка
+     */
+    createThumbOne(styleClasses: string) {  
         if (this.slider != null) {
             this.thumbOne = this.elementFactory.createThumb(this.slider.getElement(), styleClasses, this.observer);
             this.observer.notify('thumbOneIsCreated', this.thumbOne.getSize());
         }
-
     }
 
+
+    /**
+     * Метод выполняет следующие действия:
+     * 1. Создаёт объект класса Thumb
+     * 2. Создаёт бегунок в виде div контейнера с классами styleClasses
+     * 
+     * @param {string} styleClasses - классы для бегунка
+     */
     createThumbTwo(styleClasses: string) {
-
-        /**
-         * Метод выполняет следующие действия:
-         * 1. Создаёт объект класса Thumb
-         * 2. Создаёт бегунок в виде div контейнера с классами styleClasses
-         * 
-         * @param {string} styleClasses - классы для бегунка
-         */
-
         if (this.slider != null) {
             this.thumbTwo = this.elementFactory.createThumb(this.slider.getElement(), styleClasses, this.observer);
         }
-
     }
 
+
+    /**
+     * Метод выполняет следующие действия:
+     * 1. Создаёт объект класса Tooltip
+     * 2. Создаёт div контейнер с классами styleClasses для оображения значений над бегунками
+     * 
+     * @param {string} styleClasses - классы для создаваемого элемента
+     */
     createTooltipOne(styleClasses: string) {
-
-        /**
-         * Метод выполняет следующие действия:
-         * 1. Создаёт объект класса Tooltip
-         * 2. Создаёт div контейнер с классами styleClasses для оображения значений над бегунками
-         * 
-         * @param {string} styleClasses - классы для создаваемого элемента
-         */
-
         if (this.slider != null && this.thumbOne != null) {
             this.tooltipOne = this.elementFactory.createTooltip(this.thumbOne.getElement(), styleClasses);
         }
-
     }
 
+
+    /**
+     * Метод выполняет следующие действия:
+     * 1. Создаёт объект класса Tooltip
+     * 2. Создаёт div контейнер с классами styleClasses для оображения значений над бегунками
+     * 
+     * @param {string} styleClasses - классы для создаваемого элемента
+     */
     createTooltipTwo(styleClasses: string) {
-
-        /**
-         * Метод выполняет следующие действия:
-         * 1. Создаёт объект класса Tooltip
-         * 2. Создаёт div контейнер с классами styleClasses для оображения значений над бегунками
-         * 
-         * @param {string} styleClasses - классы для создаваемого элемента
-         */
-
         if (this.slider != null && this.thumbTwo != null) {
             this.tooltipTwo = this.elementFactory.createTooltip(this.thumbTwo.getElement(), styleClasses);
         }
-
     }
 
+
+    /**
+     * Метод выполняет следующие действия:
+     * 1. Создаёт объект класса ProgressBar
+     * 2. Создаёт прогресс бар в виде div контейнера с классами styleClasses
+     * 
+     * @param {string} styleClasses - классы для создаваемого элемента
+     */
     createProgressBar(styleClasses: string) {
 
         if (this.slider != null) {
@@ -154,6 +150,14 @@ class View {
 
     }
 
+
+    /**
+     * Метод выполняет следующие действия:
+     * 1. Создаёт объект класса Scale
+     * 2. Создаёт шкалу в виде div контейнера с классами styleClasses
+     * 
+     * @param {string} styleClasses - классы для создаваемого элемента
+     */
     createScale(styleClasses: string) {
         if (this.slider != null) {
             this.scale = this.elementFactory.createScale(this.slider.getElement(), styleClasses, this.observer);
@@ -162,36 +166,75 @@ class View {
 
     }
 
+
+    /**
+     * Изменяет позицию первого бегунка
+     * 
+     * @param {IThumbPosition} position - позиция на которую необходимо передвинуть бегунок
+     */
     moveThumbOne(position: IThumbPosition): void {
         if (this.thumbOne !== null) {
             this.thumbOne.moveTo(position);
         }
     }
 
+
+    /**
+     * Изменяет всплывающее значение над первым бегунком
+     * 
+     * @param {number} newValue - значение над первым бегунком
+     */
     tooltipOneSetValue(newValue: number) {
         if (this.tooltipOne !== null) {
             this.tooltipOne.setValue(newValue)
         }
     }
 
+
+    /**
+     * Изменяет позицию второго бегунка
+     * 
+     * @param {IThumbPosition} position - позиция на которую необходимо передвинуть бегунок
+     */
     moveThumbTwo(position: IThumbPosition): void {
         if (this.thumbTwo != null) {
             this.thumbTwo.moveTo(position);
         }
     }
 
+
+    /**
+     * Изменяет всплывающее значение над вторым бегунком
+     * 
+     * @param {number} newValue - значение над первым бегунком
+     */
     tooltipTwoSetValue(newValue: number) {
         if (this.tooltipTwo !== null) {
             this.tooltipTwo.setValue(newValue)
         }
     }
 
+
+    /**
+     * Изменяет позицию прогрессбара
+     * 
+     * @param {IProgressBarPosition} progressPosition - объект с позицией прогресс бара. Содержит сведения об ориентации,
+     * точке начала и ширине (или высоте, в зависимости от ориентации слайдера) прогресс бара
+     */
     setProgressBarPosition(progressPosition: IProgressBarPosition) {
         if (this.progressBar !== null) {
             this.progressBar.setPosition(progressPosition);
         }
     }
 
+
+    /**
+     * Возвращает размер последней точки шкалы, который является максимальным
+     * 
+     * @param {number} value - максимальное значение шкалы
+     * 
+     * @returns {IScalePointSize} - объект с шириной и высотой последней точки шкалы
+     */
     getScalePointMaxSize(value: number): IScalePointSize {
         if (this.scale !== null) {
             return this.scale.getScalePointMaxSize(value);
@@ -200,48 +243,84 @@ class View {
         return { 'width': 20, 'height': 20 };
     }
 
+
+    /**
+     * Добавляет новую точку со значением на шкалу
+     * 
+     * @param {IScalePointSettings} pointSettings - объект с позицией, размером и значением новой точки шкалы
+     */
     addScalePoint(pointSettings: IScalePointSettings) {
         if (this.scale !== null) {
             this.scale.addScalePoint(pointSettings.position, pointSettings.scalePointSize, pointSettings.scalePointValue);
         }
     }
 
+
+    /**
+     * Удаляет слайдер из DOM
+     */
     removeSlider(): void {
         if (this.slider !== null) {
             this.slider.remove();
         }
     }
 
+
+    /**
+     * Удаляет первый бегунок из DOM
+     */
     removeThumbOne(): void {
         if (this.thumbOne !== null) {
             this.thumbOne.remove();
         }
     }
 
+
+    /**
+     * Удаляет второй бегунок из DOM
+     */
     removeThumbTwo(): void {
         if (this.thumbTwo !== null) {
             this.thumbTwo.remove();
         }
     }
 
+
+    /**
+     * Удаляет шкалу из DOM
+     */
     removeScale(): void {
         if (this.scale !== null) {
             this.scale.remove();
         }
     }
 
+
+    /**
+     * Удаляет значение над первым бегунком из DOM
+     */
     removeTooltipOne(): void {
         if (this.tooltipOne !== null) {
             this.tooltipOne.remove();
         }
     }
 
+
+    /**
+     * Удаляет значение над вторым бегунком из DOM
+     */
     removeTooltipTwo(): void {
         if (this.tooltipTwo !== null) {
             this.tooltipTwo.remove();
         }
     }
 
+
+    /**
+     * Устанавливает размер шкалы
+     * 
+     * @param {IScaleSize} scaleSize - объект с шириной и высотой шкалы
+     */
     setScaleSize(scaleSize: IScaleSize): void {
         if (this.scale !== null) {
             this.scale.setScaleSize(scaleSize.width, scaleSize.height);
