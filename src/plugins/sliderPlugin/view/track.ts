@@ -2,10 +2,14 @@ import { ICursorPsition } from '../interfaces';
 
 import Observer from "../observer/observer";
 
-class Track {
 
+/**
+ * Класс дорожки слайдера. Содержит HTML элемент дорожки слайдера и организовывает управление им
+ */
+class Track {
     private element: HTMLDivElement;
     private observer: Observer;
+
 
     constructor(sliderElement: HTMLDivElement, observer: Observer) {
         this.element = sliderElement;
@@ -16,6 +20,14 @@ class Track {
         });
     }
 
+
+    /**
+     * Возвращает позицию курсора
+     * 
+     * @param {ICursorPsition} cursorPosition - объект с позицией курсора относительно левого и верхнего края экрана
+     * 
+     * @returns {ICursorPsition} - объект с позицией курсора относительно левого и верхнего края родительского контейнера
+     */
     private getPosition(cursorPosition: ICursorPsition): ICursorPsition {
 
         const parrent: HTMLElement | null = this.element.parentElement;
