@@ -5,6 +5,10 @@ import { ICursorPsition } from '../interfaces'
 
 import Observer from '../observer/observer';
 
+
+/**
+ * Класс бегунка. Содержит HTML элемент бегунка и организовывает управление им
+ */
 class Thumb {
     private element: HTMLDivElement;
     private observer: Observer;
