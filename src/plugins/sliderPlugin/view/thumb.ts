@@ -6,15 +6,14 @@ import { ICursorPsition } from '../interfaces'
 import Observer from '../observer/observer';
 
 class Thumb {
-
     private element: HTMLDivElement;
     private observer: Observer;
     private shift: IThumbShift = { 'shiftX': 0, 'shiftY': 0 };
     private onMouseMoveHandler: Function = () => { };
     private onMouseUpHandler: Function = () => { };
 
-    constructor(thumbElement: HTMLDivElement, observer: Observer) {
 
+    constructor(thumbElement: HTMLDivElement, observer: Observer) {
         this.element = thumbElement;
         this.observer = observer;
 
@@ -32,43 +31,50 @@ class Thumb {
             this.startDrag(event.targetTouches[0].pageX, event.targetTouches[0].pageY);
             return false; // disable selection start (cursor change)
         });
-
     }
 
+
+    /**
+     * Возвращает HTML элемент бегунка
+     * 
+     * @returns {HTMLDivElement} - div элемент бегунка
+     */
     getElement(): HTMLDivElement {
-
-        /**
-         * Возвращает div элемент бегунка
-         * 
-         * @returns {HTMLDivElement} - div элемент бегунка
-         */
-
         return this.element
     }
 
+
+    /**
+     * Возвращает ширину и высоту бегунка
+     * 
+     * @returns {IThumbSize} - ширина и высота бегунка
+     */
     getSize(): IThumbSize {
-
-        /**
-         * Возвращает ширину и высоту бегунка
-         * 
-         * @returns {ISliderSize} - ширина и высота бегунка
-         */
-
         const thumbSize: IThumbSize = {
             'width': this.element.offsetWidth,
             'height': this.element.offsetHeight
         }
 
         return thumbSize;
-
     }
 
+
+    /**
+     * Устанавливает z-индекс бегунка
+     * 
+     * @param {string} zIndex - значение z-индекса 
+     */
     setZIndex(zIndex: string) {
         this.element.style.zIndex = zIndex;
     }
 
-    private startDrag(cursorX: number, cursorY: number): void {
 
+    /**
+     * Подготавливает бегунок к передвижению
+     * @param {number} cursorX - позиция курсора по горизонтали
+     * @param {number} cursorY - позиция курсора по вертикали
+     */
+    private startDrag(cursorX: number, cursorY: number): void {
         this.setZIndex('3');
         this.observer.notify('changeZIndexToAnotherThumb', this.element);
 
@@ -88,11 +94,15 @@ class Thumb {
             this.onMouseMoveHandler as EventListenerOrEventListenerObject);
         document.addEventListener('touchend',
             this.onMouseUpHandler as EventListenerOrEventListenerObject);
-
     }
 
-    private drag(event: MouseEvent | TouchEvent): void {
 
+    /**
+     * Передает данные о передвижении бегунка своим подписчикам
+     * 
+     * @param {MouseEvent | TouchEvent} event - событие курсора или касания
+     */
+    private drag(event: MouseEvent | TouchEvent): void {
         let notifyMessage = 'thumbOneIsDragged';
 
         if (this.element.classList.contains('slider__thumb-two')) {
@@ -107,10 +117,16 @@ class Thumb {
                 'y': event.targetTouches[0].pageY 
             }));
         }
-        
-
     }
 
+
+    /**
+     * Возвращает позицию курсора
+     * 
+     * @param {ICursorPsition} cursorPosition - объект с позицией курсора относительно левого и верхнего края экрана
+     * 
+     * @returns {ICursorPsition} - объект с позицией курсора относительно левого и верхнего края родительского контейнера
+     */
     private getPosition(cursorPosition: ICursorPsition): IThumbPosition {
 
         const parrent: HTMLElement | null = this.element.parentElement;
@@ -127,6 +143,10 @@ class Thumb {
         }
     }
 
+
+    /**
+     * Завершает передвижение бегунка, удаляя слушателей событий, которые больше не нужны
+     */
     private endDrag(): void {
         document.removeEventListener('mousemove', this.onMouseMoveHandler as EventListenerOrEventListenerObject);
         document.removeEventListener('mouseup', this.onMouseUpHandler as EventListenerOrEventListenerObject);
@@ -134,11 +154,21 @@ class Thumb {
         document.removeEventListener('touchend', this.onMouseUpHandler as EventListenerOrEventListenerObject);
     }
 
+
+    /**
+     * Передвигает бегунок на позицию из параметра position
+     * 
+     * @param {IThumbPosition} position - объект с позицией бегунка относительно левого и верхнего края родительского контейнера
+     */
     moveTo(position: IThumbPosition): void {
         this.element.style.left = position.left + 'px';
         this.element.style.top = position.top + 'px';
     }
 
+
+    /**
+     * Удаляет бегунок из DOM
+     */
     remove(): void {
         this.element.remove();
     }

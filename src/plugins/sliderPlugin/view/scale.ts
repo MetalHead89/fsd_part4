@@ -108,7 +108,9 @@ class Scale {
     /**
      * Возвращает позицию курсора
      * 
-     * @param {ICursorPsition} cursorPosition - объект с позицией курсора относительно левого и верхнего края родительского контейнера
+     * @param {ICursorPsition} cursorPosition - объект с позицией курсора относительно левого и верхнего края экрана
+     * 
+     * @returns {ICursorPsition} - объект с позицией курсора относительно левого и верхнего края родительского контейнера
      */
     private getPosition(cursorPosition: ICursorPsition): ICursorPsition {
 
