@@ -23,7 +23,7 @@ class Tooltip {
     /**
      * Удаляет HTML элемент, отображающий значение позиции на которой находится бегунок
      */
-    remove() {
+    remove(): void {
         this.element.remove();
     }
 }

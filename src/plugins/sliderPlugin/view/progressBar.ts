@@ -5,7 +5,7 @@ import { IProgressBarPosition } from '../interfaces';
  * Класс для управления элементом прогресс бара
  */
 class ProgressBar {
-    private element: HTMLDivElement
+    private element: HTMLDivElement;
 
 
     constructor(element: HTMLDivElement) {
@@ -29,7 +29,7 @@ class ProgressBar {
      * @param {IProgressBarPosition} progressPosition - объект с позицией прогресс бара. Содержит сведения об ориентации,
      * точке начала и ширине (или высоте, в зависимости от ориентации слайдера) прогресс бара
      */
-    setPosition(progressPosition: IProgressBarPosition) {
+    setPosition(progressPosition: IProgressBarPosition): void {
         if (progressPosition.orientation === 'horizontal') {
             this.setHorizontalOrientation();
             this.element.style.left = progressPosition.start + 'px';
@@ -45,7 +45,7 @@ class ProgressBar {
     /**
      * Делает прогресс бар гризонтальным
      */
-    setHorizontalOrientation() {
+    setHorizontalOrientation(): void {
         this.element.removeAttribute('style');
         this.element.classList.remove('slider__progress-bar_vertical')
         this.element.classList.add('slider__progress-bar_horizontal')
@@ -55,7 +55,7 @@ class ProgressBar {
     /**
      * Делает прогресс бар вертикальным
      */
-    setVerticalOrientation() {
+    setVerticalOrientation(): void {
         this.element.removeAttribute('style');
         this.element.classList.remove('slider__progress-bar_horizontal')
         this.element.classList.add('slider__progress-bar_vertical')

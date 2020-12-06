@@ -89,7 +89,7 @@ class Scale {
     /**
      * Удаляет HTML элемент шкалы из DOM
      */
-    remove() {
+    remove(): void {
         this.element.remove();
     }
 

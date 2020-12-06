@@ -68,8 +68,27 @@ class Thumb {
      * 
      * @param {string} zIndex - значение z-индекса 
      */
-    setZIndex(zIndex: string) {
+    setZIndex(zIndex: string): void {
         this.element.style.zIndex = zIndex;
+    }
+
+
+    /**
+     * Передвигает бегунок на позицию из параметра position
+     * 
+     * @param {IThumbPosition} position - объект с позицией бегунка относительно левого и верхнего края родительского контейнера
+     */
+    moveTo(position: IThumbPosition): void {
+        this.element.style.left = position.left + 'px';
+        this.element.style.top = position.top + 'px';
+    }
+
+
+    /**
+     * Удаляет бегунок из DOM
+     */
+    remove(): void {
+        this.element.remove();
     }
 
 
@@ -157,26 +176,6 @@ class Thumb {
         document.removeEventListener('touchmove', this.onMouseMoveHandler as EventListenerOrEventListenerObject);
         document.removeEventListener('touchend', this.onMouseUpHandler as EventListenerOrEventListenerObject);
     }
-
-
-    /**
-     * Передвигает бегунок на позицию из параметра position
-     * 
-     * @param {IThumbPosition} position - объект с позицией бегунка относительно левого и верхнего края родительского контейнера
-     */
-    moveTo(position: IThumbPosition): void {
-        this.element.style.left = position.left + 'px';
-        this.element.style.top = position.top + 'px';
-    }
-
-
-    /**
-     * Удаляет бегунок из DOM
-     */
-    remove(): void {
-        this.element.remove();
-    }
-
 }
 
 export default Thumb;

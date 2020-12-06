@@ -52,7 +52,7 @@ class Slider {
     /**
      * Удаляет контейнер с его дочерними элементами из DOM
      */
-    remove() {
+    remove(): void {
         this.element.remove();
     }
 
