@@ -29,7 +29,7 @@ class Presenter {
     constructor(settings: ISliderSettings, sliderWrapper: HTMLElement) {
         this.observer = new Observer();
         this.model = new Model(this.observer, settings);
-        this.view = new View(this.observer, sliderWrapper, this.model.getSliderOrientation());
+        this.view = new View(this.observer, sliderWrapper);
 
         this.addObserverListeners();
         this.createNewSlider();

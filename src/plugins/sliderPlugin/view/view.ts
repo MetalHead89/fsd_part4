@@ -15,7 +15,6 @@ import ElementFactory from './elementFactory';
 
 class View {
     private observer: Observer;
-    private orientation: string;
     private slider: Slider | null = null;
     private track: Track | null = null;
     private thumbOne: Thumb | null = null;
@@ -28,10 +27,9 @@ class View {
     private sliderWrapper: HTMLDivElement;
 
 
-    constructor(observer: Observer, sliderWrapper: HTMLElement, orientation: string) {
+    constructor(observer: Observer, sliderWrapper: HTMLElement) {
 
         this.observer = observer;
-        this.orientation = orientation;
         this.sliderWrapper = sliderWrapper as HTMLDivElement;
         this.elementFactory = new ElementFactory();
 
