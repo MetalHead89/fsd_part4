@@ -6,104 +6,11 @@ import Tooltip from './tooltip';
 import ProgressBar from './progressBar';
 import Scale from './scale';
 
+
+/**
+ * Класс-фабрика для создания элементов слайдера
+ */
 class ElementFactory {
-
-    createSlider(parrent: HTMLDivElement, styleClasses: string): Slider {
-
-        /**
-         * Возвращает объект класса Slider
-         * 
-         * Метод выполняет следующие действия:
-         * 1. Создаёт callback функцию, которая создаёт и возвращает новый объект класса Slider
-         * 2. Вызывает метод createElement в котором создаётся объект класса Slider и div элемент slider, с классами из
-         * параметра styles, помещённый в контейнер из параметра parrent
-         * 3. Возвращает в вызывающий код объект класса Slider
-         * 
-         * @param {HTMLDivElement} parrent - контейнер, в который будет добавлен создаваемый элемент
-         * @param {string} styleClasses - классы для создаваемого элемента
-         * 
-         * @returns {Slider} - объект класса Slider
-         */
-
-        const createSliderObj = (obj: HTMLDivElement) => { return new Slider(obj) }
-        const slider = this.createElement(parrent, styleClasses, createSliderObj);
-
-        return slider
-
-    }
-
-    createTrack(parrent: HTMLDivElement, styleClasses: string, observer: Observer): Track {
-
-        /**
-         * Возвращает объект класса Track
-         * 
-         * Метод выполняет следующие действия:
-         * 1. Создаёт callback функцию, которая создаёт и возвращает новый объект класса Track
-         * 2. Вызывает метод createElement в котором создаётся объект класса Track и div элемент track, с классами из
-         * параметра styles, помещённый в контейнер из параметра parrent
-         * 3. Возвращает в вызывающий код объект класса Track
-         * 
-         * @param {HTMLDivElement} parrent - контейнер, в который будет добавлен создаваемый элемент
-         * @param {string} styleClasses - классы для создаваемого элемента
-         * 
-         * @returns {Track} - объект класса Track
-         */
-
-        const createTrackrObj = (obj: HTMLDivElement) => { return new Track(obj, observer) }
-        const track = this.createElement(parrent, styleClasses, createTrackrObj);
-
-        return track;
-
-    }
-
-    createThumb(parrent: HTMLDivElement, styleClasses: string, observer: Observer): Thumb {
-
-        /**
-         * Возвращает объект класса Thumb
-         * 
-         * Метод выполняет следующие действия:
-         * 1. Создаёт callback функцию, которая создаёт и возвращает новый объект класса Thumb
-         * 2. Вызывает метод createElement в котором создаётся объект класса Thumb и div элемент thumb, с классами из
-         * параметра styles, помещённый в контейнер из параметра parrent
-         * 3. Возвращает в вызывающий код объект класса Thumb
-         * 
-         * @param {HTMLDivElement} parrent - контейнер, в который будет добавлен создаваемый элемент
-         * @param {string} styleClasses - классы для создаваемого элемента
-         * 
-         * @returns {Thumb} - объект класса Thumb
-         */
-
-        const createThumbObj = (obj: HTMLDivElement) => { return new Thumb(obj, observer) }
-        const thumb = this.createElement(parrent, styleClasses, createThumbObj);
-
-        return thumb;
-
-    }
-
-    createTooltip(parrent: HTMLDivElement, styleClasses: string): Tooltip {
-
-        /**
-         * Возвращает объект класса Tooltip
-         * 
-         * Метод выполняет следующие действия:
-         * 1. Создаёт callback функцию, которая создаёт и возвращает новый объект класса Tooltip
-         * 2. Вызывает метод createElement в котором создаётся объект класса Tooltip и div элемент tooltip, с классами из
-         * параметра styles, помещённый в контейнер из параметра parrent
-         * 3. Возвращает в вызывающий код объект класса Tooltip
-         * 
-         * @param {HTMLDivElement} parrent - контейнер, в который будет добавлен создаваемый элемент
-         * @param {string} styleClasses - классы для создаваемого элемента
-         * 
-         * @returns {Thumb} - объект класса Tooltip
-         */
-
-        const createTooltipObj = (obj: HTMLDivElement) => { return new Tooltip(obj) }
-        const tooltip = this.createElement(parrent, styleClasses, createTooltipObj);
-
-        return tooltip;
-
-    }
-
     private createElement(parrent: HTMLDivElement, styleClasses: string, createObj: Function): any {
 
         /**
@@ -130,9 +37,111 @@ class ElementFactory {
         parrent.prepend(element);
 
         return obj;
-
     }
 
+
+    /**
+     * Возвращает объект класса Slider. Метод выполняет следующие действия:
+     * 1. Создаёт callback функцию, которая создаёт и возвращает новый объект класса Slider
+     * 2. Вызывает метод createElement в котором создаётся объект класса Slider и div элемент slider, с классами из
+     * параметра styles, помещённый в контейнер из параметра parrent
+     * 3. Возвращает в вызывающий код объект класса Slider
+     * 
+     * @param {HTMLDivElement} parrent - контейнер, в который будет добавлен создаваемый элемент
+     * @param {string} styleClasses - классы для создаваемого элемента
+     * 
+     * @returns {Slider} - объект класса Slider
+     */
+    createSlider(parrent: HTMLDivElement, styleClasses: string): Slider {
+        const createSliderObj = (obj: HTMLDivElement) => { return new Slider(obj) }
+        const slider = this.createElement(parrent, styleClasses, createSliderObj);
+
+        return slider
+    }
+
+
+    /**
+     * Возвращает объект класса Track
+     * 
+     * Метод выполняет следующие действия:
+     * 1. Создаёт callback функцию, которая создаёт и возвращает новый объект класса Track
+     * 2. Вызывает метод createElement в котором создаётся объект класса Track и div элемент track, с классами из
+     * параметра styles, помещённый в контейнер из параметра parrent
+     * 3. Возвращает в вызывающий код объект класса Track
+     * 
+     * @param {HTMLDivElement} parrent - контейнер, в который будет добавлен создаваемый элемент
+     * @param {string} styleClasses - классы для создаваемого элемента
+     * @param {Observer} observer - обсервер для отправки уведомлений подписчикам
+     * 
+     * @returns {Track} - объект класса Track
+     */
+    createTrack(parrent: HTMLDivElement, styleClasses: string, observer: Observer): Track {
+        const createTrackrObj = (obj: HTMLDivElement) => { return new Track(obj, observer) }
+        const track = this.createElement(parrent, styleClasses, createTrackrObj);
+
+        return track;
+    }
+
+
+    /**
+     * Возвращает объект класса Thumb
+     * 
+     * Метод выполняет следующие действия:
+     * 1. Создаёт callback функцию, которая создаёт и возвращает новый объект класса Thumb
+     * 2. Вызывает метод createElement в котором создаётся объект класса Thumb и div элемент thumb, с классами из
+     * параметра styles, помещённый в контейнер из параметра parrent
+     * 3. Возвращает в вызывающий код объект класса Thumb
+     * 
+     * @param {HTMLDivElement} parrent - контейнер, в который будет добавлен создаваемый элемент
+     * @param {string} styleClasses - классы для создаваемого элемента
+     * @param {Observer} observer - обсервер для отправки уведомлений подписчикам
+     * 
+     * @returns {Thumb} - объект класса Thumb
+     */
+    createThumb(parrent: HTMLDivElement, styleClasses: string, observer: Observer): Thumb {
+        const createThumbObj = (obj: HTMLDivElement) => { return new Thumb(obj, observer) }
+        const thumb = this.createElement(parrent, styleClasses, createThumbObj);
+
+        return thumb;
+    }
+
+
+    /**
+     * Возвращает объект класса Tooltip
+     * 
+     * Метод выполняет следующие действия:
+     * 1. Создаёт callback функцию, которая создаёт и возвращает новый объект класса Tooltip
+     * 2. Вызывает метод createElement в котором создаётся объект класса Tooltip и div элемент tooltip, с классами из
+     * параметра styles, помещённый в контейнер из параметра parrent
+     * 3. Возвращает в вызывающий код объект класса Tooltip
+     * 
+     * @param {HTMLDivElement} parrent - контейнер, в который будет добавлен создаваемый элемент
+     * @param {string} styleClasses - классы для создаваемого элемента
+     * 
+     * @returns {Thumb} - объект класса Tooltip
+     */
+    createTooltip(parrent: HTMLDivElement, styleClasses: string): Tooltip {
+        const createTooltipObj = (obj: HTMLDivElement) => { return new Tooltip(obj) }
+        const tooltip = this.createElement(parrent, styleClasses, createTooltipObj);
+
+        return tooltip;
+    }
+
+
+    /**
+     * Возвращает объект класса ProgressBar
+     * 
+     * Метод выполняет следующие действия:
+     * 1. Создаёт callback функцию, которая создаёт и возвращает новый объект класса ProgressBar
+     * 2. Вызывает метод createElement в котором создаётся объект класса ProgressBar и div элемент progressBar, с классами из
+     * параметра styles, помещённый в контейнер из параметра parrent
+     * 3. Возвращает в вызывающий код объект класса ProgressBar
+     * 
+     * @param {HTMLDivElement} parrent - контейнер, в который будет добавлен создаваемый элемент
+     * @param {string} styleClasses - классы для создаваемого элемента
+     * 
+     * @returns {ProgressBar} - объект класса ProgressBar
+     */
     createProgressBar(parrent: HTMLDivElement, styleClasses: string): ProgressBar {
 
         const createProgressBarObj = (obj: HTMLDivElement) => { return new ProgressBar(obj) }
@@ -141,7 +150,23 @@ class ElementFactory {
         return progressBar;
 
     }
+    
 
+    /**
+     * Возвращает объект класса Scale
+     * 
+     * Метод выполняет следующие действия:
+     * 1. Создаёт callback функцию, которая создаёт и возвращает новый объект класса Scale
+     * 2. Вызывает метод createElement в котором создаётся объект класса Scale и div элемент scale, с классами из
+     * параметра styles, помещённый в контейнер из параметра parrent
+     * 3. Возвращает в вызывающий код объект класса Scale
+     * 
+     * @param {HTMLDivElement} parrent - контейнер, в который будет добавлен создаваемый элемент
+     * @param {string} styleClasses - классы для создаваемого элемента
+     * @param {Observer} observer - обсервер для отправки уведомлений подписчикам
+     * 
+     * @returns {ProgressBar} - объект класса Scale
+     */
     createScale(parrent: HTMLDivElement, styleClasses: string, observer: Observer): Scale {
 
         const createScaleObj = (obj: HTMLDivElement) => { return new Scale(obj, observer) }
