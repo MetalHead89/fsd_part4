@@ -74,7 +74,7 @@ class Scale {
 
         if (this.orientation === 'horizontal') {
             scalePoint.style.left = position + 'px';
-        } else if (this.orientation === 'vertical') {
+        } else {
             scalePoint.style.top = position + 'px';
         }
 

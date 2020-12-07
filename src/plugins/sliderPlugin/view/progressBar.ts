@@ -34,7 +34,7 @@ class ProgressBar {
             this.setHorizontalOrientation();
             this.element.style.left = progressPosition.start + 'px';
             this.element.style.width = progressPosition.end + 'px';
-        } else if (progressPosition.orientation === 'vertical') {
+        } else {
             this.setVerticalOrientation();
             this.element.style.top = progressPosition.start + 'px';
             this.element.style.height = progressPosition.end + 'px';

@@ -33,7 +33,19 @@ beforeEach( () => {
 });
 
 describe('Create new slider', () => {
-    test('Checking for a notification about the creation of a slider', () => {
+    test('Checking for a notification about the creation of a horizontal slider', () => {
+        let sliderIsCreated: boolean = false;
+        _this.subscribeToNotifications('sliderElementIsCreated', (size: ISliderSize) => { sliderIsCreated = true });
+
+        expect(sliderIsCreated).toBe(false);
+        _this.createNewSlider();
+        expect(sliderIsCreated).toBe(true);
+    });
+
+    test('Checking for a notification about the creation of a vertical slider', () => {
+        settings.orienation = 'vertical';
+        _this = new Presenter(settings, sliderWrapper);
+        
         let sliderIsCreated: boolean = false;
         _this.subscribeToNotifications('sliderElementIsCreated', (size: ISliderSize) => { sliderIsCreated = true });
 
@@ -42,3 +54,14 @@ describe('Create new slider', () => {
         expect(sliderIsCreated).toBe(true);
     });
 });
+
+// describe('Get Scale Point Max Size', () => {
+//     test('Checking for a notification about the creation of a slider', () => {
+//         let sliderIsCreated: boolean = false;
+//         _this.subscribeToNotifications('sliderElementIsCreated', (size: ISliderSize) => { sliderIsCreated = true });
+
+//         expect(sliderIsCreated).toBe(false);
+//         _this.createNewSlider();
+//         expect(sliderIsCreated).toBe(true);
+//     });
+// });

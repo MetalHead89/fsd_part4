@@ -20,7 +20,6 @@ class Thumb {
     constructor(thumbElement: HTMLDivElement, observer: Observer) {
         this.element = thumbElement;
         this.observer = observer;
-
         this.element.ondragstart = function () {
             return false;
         };
@@ -31,7 +30,6 @@ class Thumb {
         });
 
         this.element.addEventListener('touchstart', (event: TouchEvent) => {
-            // this.startDrag(event.touches[event.changedTouches.length - 1].pageX, event.changedTouches[event.changedTouches.length - 1].pageY);
             this.startDrag(event.targetTouches[0].pageX, event.targetTouches[0].pageY);
             return false; // disable selection start (cursor change)
         });
