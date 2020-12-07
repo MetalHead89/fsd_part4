@@ -289,6 +289,16 @@ class Presenter {
         }
     }
 
+
+    /**
+     * Метод для тестирования. Необходим для доступа к приватному полю observer
+     * @param {string} notification - уведомление при получении которого вызывается функция func
+     * @param {Function} func - функция, которая вызывается после получения наблюдателем уведомления notification
+     */
+    subscribeToNotifications(notification: string, func: Function) {
+        this.observer.subscribe(notification, func);
+    }
+
 }
 
 export default Presenter;
