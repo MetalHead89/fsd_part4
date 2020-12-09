@@ -1,7 +1,7 @@
 import { IThumbSize } from '../interfaces'
 import { IThumbShift } from '../interfaces'
 import { IThumbPosition } from '../interfaces'
-import { ICursorPsition } from '../interfaces'
+import { ICursorPosition } from '../interfaces'
 
 import Observer from '../observer/observer';
 
@@ -144,11 +144,11 @@ class Thumb {
     /**
      * Возвращает позицию курсора
      * 
-     * @param {ICursorPsition} cursorPosition - объект с позицией курсора относительно левого и верхнего края экрана
+     * @param {ICursorPosition} cursorPosition - объект с позицией курсора относительно левого и верхнего края экрана
      * 
-     * @returns {ICursorPsition} - объект с позицией курсора относительно левого и верхнего края родительского контейнера
+     * @returns {ICursorPosition} - объект с позицией курсора относительно левого и верхнего края родительского контейнера
      */
-    private getPosition(cursorPosition: ICursorPsition): IThumbPosition {
+    private getPosition(cursorPosition: ICursorPosition): IThumbPosition {
 
         const parrent: HTMLElement | null = this.element.parentElement;
 
@@ -187,7 +187,7 @@ export default Thumb;
 
 // import { IThumbShift } from './interfaces'
 // import { IThumbPosition } from './interfaces'
-// import { ICursorPsition } from './interfaces'
+// import { ICursorPosition } from './interfaces'
 // import { IThumbSize } from './interfaces';
 
 // import Observable from './observable';
@@ -261,7 +261,7 @@ export default Thumb;
 //         // this.observer.notify('startDrag', this.getPosition({ 'x': event.clientX, 'y': event.clientY }))
 //     }
 
-//     private getPosition(cursorPosition: ICursorPsition): IThumbPosition {
+//     private getPosition(cursorPosition: ICursorPosition): IThumbPosition {
 
 //         const parrent: HTMLElement | null = this.element.parentElement;
 

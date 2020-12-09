@@ -1,4 +1,4 @@
-import { ICursorPsition } from '../interfaces';
+import { ICursorPosition } from '../interfaces';
 
 import Observer from "../observer/observer";
 
@@ -24,11 +24,11 @@ class Track {
     /**
      * Возвращает позицию курсора
      * 
-     * @param {ICursorPsition} cursorPosition - объект с позицией курсора относительно левого и верхнего края экрана
+     * @param {ICursorPosition} cursorPosition - объект с позицией курсора относительно левого и верхнего края экрана
      * 
-     * @returns {ICursorPsition} - объект с позицией курсора относительно левого и верхнего края родительского контейнера
+     * @returns {ICursorPosition} - объект с позицией курсора относительно левого и верхнего края родительского контейнера
      */
-    private getPosition(cursorPosition: ICursorPsition): ICursorPsition {
+    private getPosition(cursorPosition: ICursorPosition): ICursorPosition {
 
         const parrent: HTMLElement | null = this.element.parentElement;
 
@@ -64,7 +64,7 @@ export default Track;
 
 
 // import Observable from "./observable";
-// import {ICursorPsition} from './interfaces'
+// import {ICursorPosition} from './interfaces'
 
 // class Track {
 //     private element: HTMLElement;
@@ -89,7 +89,7 @@ export default Track;
 //         this.element.classList.add('slider__track_vertical')
 //     }
 
-//     private getPosition(cursorPosition: ICursorPsition): ICursorPsition {
+//     private getPosition(cursorPosition: ICursorPosition): ICursorPosition {
 
 //         const parrent: HTMLElement | null = this.element.parentElement;
 

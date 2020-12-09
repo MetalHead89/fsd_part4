@@ -6,7 +6,7 @@ import { IDragThumbArgs } from '../interfaces'
 import { IProgressBarPosition } from '../interfaces';
 import { IScalePointSize } from '../interfaces';
 import { IScalePointSettings } from '../interfaces';
-import { ICursorPsition } from '../interfaces';
+import { ICursorPosition } from '../interfaces';
 import { IScaleSize } from '../interfaces';
 
 import Observer from '../observer/observer';
@@ -67,9 +67,9 @@ class Presenter {
         this.observer.subscribe('addScalePoint',
             (pointSettings: IScalePointSettings) => { this.view.addScalePoint(pointSettings) });
         this.observer.subscribe('clickOnTheScale',
-            (cursorPosition: ICursorPsition) => { this.model.moveThumbToClickPosition(cursorPosition) });
+            (cursorPosition: ICursorPosition) => { this.model.moveThumbToClickPosition(cursorPosition) });
         this.observer.subscribe('clickOnTheTrack',
-            (cursorPosition: ICursorPsition) => { this.model.moveThumbToClickPosition(cursorPosition) });
+            (cursorPosition: ICursorPosition) => { this.model.moveThumbToClickPosition(cursorPosition) });
         this.observer.subscribe('scaleCreated',
             (scaleSize: IScaleSize) => { this.view.setScaleSize(scaleSize) });
     }
@@ -322,7 +322,7 @@ export default Presenter;
 
 // import { IThumbPosition } from './interfaces';
 // import { IScalePointSettings } from './interfaces';
-// import { ICursorPsition } from './interfaces';
+// import { ICursorPosition } from './interfaces';
 // import { IScalePointSize } from './interfaces';
 // import { IProgressBarPosition } from './interfaces';
 // import { IScaleSize } from './interfaces';
@@ -397,10 +397,10 @@ export default Presenter;
         //     (pointSettings: IScalePointSettings) => { this.view.addScalePoint(pointSettings) });
 
         // this.observer.subscribe('clickOnTheScale',
-        //     (cursorPosition: ICursorPsition) => { this.model.moveThumb(cursorPosition) });
+        //     (cursorPosition: ICursorPosition) => { this.model.moveThumb(cursorPosition) });
 
 //         this.observer.subscribe('clickOnTheTrack',
-//             (cursorPosition: ICursorPsition) => { this.model.moveThumb(cursorPosition) });
+//             (cursorPosition: ICursorPosition) => { this.model.moveThumb(cursorPosition) });
 
         // this.observer.subscribe('scaleCreated',
         //     (scaleSize: IScaleSize) => { this.view.setScaleSize(scaleSize) });

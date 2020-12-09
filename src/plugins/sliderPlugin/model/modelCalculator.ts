@@ -3,7 +3,7 @@ import { ISliderSize } from '../interfaces';
 import { IThumbSize } from '../interfaces'
 import { IScalePointSize } from '../interfaces'
 import { IProgressBarPosition } from '../interfaces';
-import { ICursorPsition } from '../interfaces';
+import { ICursorPosition } from '../interfaces';
 
 import Observer from '../observer/observer';
 import ModelData from './modelData';
@@ -56,9 +56,9 @@ class ModelCalculator {
     /**
      * Перемещает ближайший бегунок на место клика
      * 
-     * @param {ICursorPsition} cursorPosition - положение курсора относительно левого и правого края родительского контейнера
+     * @param {ICursorPosition} cursorPosition - положение курсора относительно левого и правого края родительского контейнера
      */
-    moveThumbToClickPosition(cursorPosition: ICursorPsition): void {
+    moveThumbToClickPosition(cursorPosition: ICursorPosition): void {
         const position: IThumbPosition = {
             'left': cursorPosition.x - this.data.getThumbSize().width / 2,
             'top': cursorPosition.y - this.data.getThumbSize().height / 2

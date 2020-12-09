@@ -1,5 +1,5 @@
 import { IScalePointSize } from '../interfaces';
-import { ICursorPsition } from '../interfaces';
+import { ICursorPosition } from '../interfaces';
 
 import Observer from "../observer/observer";
 
@@ -108,11 +108,11 @@ class Scale {
     /**
      * Возвращает позицию курсора
      * 
-     * @param {ICursorPsition} cursorPosition - объект с позицией курсора относительно левого и верхнего края экрана
+     * @param {ICursorPosition} cursorPosition - объект с позицией курсора относительно левого и верхнего края экрана
      * 
-     * @returns {ICursorPsition} - объект с позицией курсора относительно левого и верхнего края родительского контейнера
+     * @returns {ICursorPosition} - объект с позицией курсора относительно левого и верхнего края родительского контейнера
      */
-    private getPosition(cursorPosition: ICursorPsition): ICursorPsition {
+    private getPosition(cursorPosition: ICursorPosition): ICursorPosition {
 
         const parrent: HTMLElement | null = this.element.parentElement;
 
@@ -143,7 +143,7 @@ export default Scale;
 
 
 // import Observable from "./observable";
-// import { ICursorPsition } from './interfaces';
+// import { ICursorPosition } from './interfaces';
 // import { IScalePointSize } from './interfaces';
 
 // class Scale {
@@ -211,7 +211,7 @@ export default Scale;
     //     return { 'width': width, 'height': height };
     // }
 
-//     private getPosition(cursorPosition: ICursorPsition): ICursorPsition {
+//     private getPosition(cursorPosition: ICursorPosition): ICursorPosition {
 
 //         const parrent: HTMLElement | null = this.element.parentElement;
 

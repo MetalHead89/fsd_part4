@@ -32,7 +32,7 @@ export interface IThumbPosition {
     'top': number
 }
 
-export interface ICursorPsition {
+export interface ICursorPosition {
     'x': number,
     'y': number
 }
@@ -102,7 +102,7 @@ export interface IScaleSize {
 //     'top': number
 // }
 
-// export interface ICursorPsition {
+// export interface ICursorPosition {
 //     'x': number,
 //     'y': number
 // }
