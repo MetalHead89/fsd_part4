@@ -150,9 +150,7 @@ describe('Scale click event and getPosition method', () => {
         observer = new Observer();
         observer.subscribe('clickOnTheScale',
             (position: ICursorPosition) => { cursorPosition = position });
-
-        scaleElem = document.createElement('div');
-        scaleElem.classList.add('slider__scale_vertical');
+            
         document.body.append(scaleElem);
         _this = new Scale(scaleElem, observer);
         
@@ -166,32 +164,26 @@ describe('Scale click event and getPosition method', () => {
 
     });
 
-    // test('Should be width: 50px and height: 480px', () => {
+    test('Should be x: 150 and y: 33', () => {
 
-    //     let cursorPosition: ICursorPosition = { 'x': 1, 'y': 1 };
-    //     scaleElem = document.createElement('div');
-    //     scaleElem.classList.add('slider__scale_vertical');
-    //     scaleElem.style.position = 'absolute';
+        let cursorPosition: ICursorPosition = { 'x': 1, 'y': 1 };
+        scaleElem = document.createElement('div');
+        scaleElem.classList.add('slider__scale_horizontal');
+        observer = new Observer();
+        observer.subscribe('clickOnTheScale',
+            (position: ICursorPosition) => { cursorPosition = position });
+            
+        document.body.append(scaleElem);
+        _this = new Scale(scaleElem, observer);
         
-    //     observer = new Observer();
-    //     observer.subscribe('clickOnTheScale',
-    //         (position: ICursorPosition) => { cursorPosition = position });
+        const evt = document.createEvent('MouseEvent');
+        evt.clientX;
+        evt.initMouseEvent('click', true, true, window, 0, 150, 33, 150, 33, false, false, false, false, 0, null)
+        scaleElem.dispatchEvent(evt);
 
-    //     scaleElem = document.createElement('div');
-    //     scaleElem.classList.add('slider__scale_vertical');
-    //     document.body.append(scaleElem);
-    //     _this = new Scale(scaleElem, observer);
-    //     body.style.left = '80px';
-    //     body.style.right = '100px';
-        
-    //     const evt = document.createEvent('MouseEvent');
-    //     evt.clientX;
-    //     evt.initMouseEvent('click', true, true, window, 0, 30, 80, 30, 80, false, false, false, false, 0, null)
-    //     scaleElem.dispatchEvent(evt);
+        expect(cursorPosition.x).toBe(150);
+        expect(cursorPosition.y).toBe(33);
 
-    //     expect(cursorPosition.x).toBe(50);
-    //     expect(cursorPosition.y).toBe(80);
-
-    // });
+    });
 
 });
