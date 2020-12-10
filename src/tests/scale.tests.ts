@@ -155,7 +155,6 @@ describe('Scale click event and getPosition method', () => {
         _this = new Scale(scaleElem, observer);
         
         const evt = document.createEvent('MouseEvent');
-        evt.clientX;
         evt.initMouseEvent('click', true, true, window, 0, 50, 80, 50, 80, false, false, false, false, 0, null)
         scaleElem.dispatchEvent(evt);
 
