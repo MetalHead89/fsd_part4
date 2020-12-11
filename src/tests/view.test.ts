@@ -125,7 +125,7 @@ describe('Create second thumb', () => {
 });
 
 
-describe('Create second tooltip', () => {
+describe('Create first tooltip', () => {
     test('An element with a tooltip-one class must be in sliderWrapper', () => {
         expect(sliderWrapper.querySelectorAll('.tooltip-one').length).toBe(0);
         _this.createSlider('tooltip-one');
@@ -136,5 +136,20 @@ describe('Create second tooltip', () => {
         expect(sliderWrapper.querySelectorAll('.tooltip-one_horizontal').length).toBe(0);
         _this.createSlider('tooltip-one_horizontal');
         expect(sliderWrapper.querySelectorAll('.tooltip-one_horizontal').length).toBe(1);
+    });
+});
+
+
+describe('Create second tooltip', () => {
+    test('An element with a tooltip-two class must be in sliderWrapper', () => {
+        expect(sliderWrapper.querySelectorAll('.tooltip-two').length).toBe(0);
+        _this.createSlider('tooltip-two');
+        expect(sliderWrapper.querySelectorAll('.tooltip-two').length).toBe(1);
+    });
+
+    test('An element with a tooltip-two_horizontal class must be in sliderWrapper', () => {
+        expect(sliderWrapper.querySelectorAll('.tooltip-two_horizontal').length).toBe(0);
+        _this.createSlider('tooltip-two_horizontal');
+        expect(sliderWrapper.querySelectorAll('.tooltip-two_horizontal').length).toBe(1);
     });
 });
