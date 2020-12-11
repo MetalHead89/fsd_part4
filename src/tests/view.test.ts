@@ -92,3 +92,34 @@ describe('Create first thumb', () => {
         expect(sliderWrapper.querySelectorAll('.thumb-one_horizontal').length).toBe(1);
     });
 });
+
+
+describe('Create second thumb', () => {
+    test('An element with a thumb-two class must be in sliderWrapper', () => {
+        expect(sliderWrapper.querySelectorAll('.thumb-two').length).toBe(0);
+
+        observer.subscribe('thumbTwoIsCreated', 
+            (size: IThumbSize) => {
+                expect(size.width).toBe(0);
+                expect(size.height).toBe(0);
+            }
+        );    
+        _this.createSlider('thumb-two');
+
+        expect(sliderWrapper.querySelectorAll('.thumb-two').length).toBe(1);
+    });
+
+    test('An element with a thumb-two_horizontal class must be in sliderWrapper', () => {
+        expect(sliderWrapper.querySelectorAll('.thumb-two_horizontal').length).toBe(0);
+
+        observer.subscribe('thumbTwoIsCreated', 
+            (size: IThumbSize) => {
+                expect(size.width).toBe(0);
+                expect(size.height).toBe(0);
+            }
+        );
+        _this.createSlider('thumb-two_horizontal');
+
+        expect(sliderWrapper.querySelectorAll('.thumb-two_horizontal').length).toBe(1);
+    });
+});
