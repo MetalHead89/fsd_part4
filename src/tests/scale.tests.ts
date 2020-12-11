@@ -19,7 +19,6 @@ beforeEach(() => {
 
 
 describe('Add scale point', () => {
-
     test('The scale point must contain the horizontal orientation class', () => {
         const scalePoint: HTMLElement = _this.addScalePoint(112, 50, 5);
         expect(scalePoint.classList.contains('slider__scale-point_horizontal')).toBe(true);
@@ -81,12 +80,10 @@ describe('Add scale point', () => {
         const scalePoint: HTMLElement = _this.addScalePoint(300, 50, 5);
         expect(scalePoint.style.top).toBe('300px');
     });
-
 });
 
 
 describe('Remove', () => {
-
     test('The scale should be removed', () => {
         const page: HTMLDivElement = document.createElement('div');
 
@@ -114,12 +111,10 @@ describe('Remove', () => {
         _this.remove();
         expect(page.querySelectorAll('.slider__scale_vertical').length).toBe(0);
     });
-
 });
 
 
 describe('Set scale size', () => {
-
     test('Should be width: 50px and height: 480px', () => {
         _this.setScaleSize(50, 480);
         expect(scaleElem.style.width).toBe('50px');
@@ -136,14 +131,11 @@ describe('Set scale size', () => {
         expect(scaleElem.style.width).toBe('180px');
         expect(scaleElem.style.height).toBe('60px');
     });
-
 });
 
 
 describe('Scale click event and getPosition method', () => {
-
     test('Should be x: 50 and y: 80', () => {
-
         let cursorPosition: ICursorPosition = { 'x': 1, 'y': 1 };
         scaleElem = document.createElement('div');
         scaleElem.classList.add('slider__scale_vertical');
@@ -160,11 +152,9 @@ describe('Scale click event and getPosition method', () => {
 
         expect(cursorPosition.x).toBe(50);
         expect(cursorPosition.y).toBe(80);
-
     });
 
     test('Should be x: 150 and y: 33', () => {
-
         let cursorPosition: ICursorPosition = { 'x': 1, 'y': 1 };
         scaleElem = document.createElement('div');
         scaleElem.classList.add('slider__scale_horizontal');
@@ -182,7 +172,5 @@ describe('Scale click event and getPosition method', () => {
 
         expect(cursorPosition.x).toBe(150);
         expect(cursorPosition.y).toBe(33);
-
     });
-
 });
