@@ -29,19 +29,16 @@ class Track {
      * @returns {ICursorPosition} - объект с позицией курсора относительно левого и верхнего края родительского контейнера
      */
     private getPosition(cursorPosition: ICursorPosition): ICursorPosition {
-
+        let positionInsideParent: ICursorPosition = Object.assign({}, cursorPosition);
         const parrent: HTMLElement | null = this.element.parentElement;
 
-        if (!parrent) {
-            return { 'x': 0, 'y': 0 }
+        if (parrent !== null) {
+            const parrentCoords: DOMRect = parrent.getBoundingClientRect();
+            positionInsideParent.x = positionInsideParent.x - parrentCoords.left;
+            positionInsideParent.y = positionInsideParent.y - parrentCoords.top;
         }
 
-        const parrentCoords: DOMRect = parrent.getBoundingClientRect();
-
-        return {
-            'x': cursorPosition.x - parrentCoords.left,
-            'y': cursorPosition.y - parrentCoords.top
-        }
+        return positionInsideParent;
     }
 
 }
