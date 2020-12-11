@@ -18,6 +18,16 @@ beforeEach(() => {
 });
 
 
+describe('Get scale point max size', () => {    
+    // Через jsdom нельзя проверить свойства offsetWidth и offsetHeight, поэтому результат равен 0
+    // Тест создан исключительно для 100% покрытия класса.
+    test('Should be 0', () => {
+        expect(_this.getScalePointMaxSize(89).height).toBe(0);
+        expect(_this.getScalePointMaxSize(89).width).toBe(0);
+    });
+});
+
+
 describe('Add scale point', () => {
     test('The scale point must contain the horizontal orientation class', () => {
         const scalePoint: HTMLElement = _this.addScalePoint(112, 50, 5);
@@ -162,7 +172,6 @@ describe('Scale click event and getPosition method', () => {
         observer.subscribe('clickOnTheScale',
             (position: ICursorPosition) => { cursorPosition = position });
             
-        document.body.append(scaleElem);
         _this = new Scale(scaleElem, observer);
         
         const evt = document.createEvent('MouseEvent');
