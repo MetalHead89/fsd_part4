@@ -4,7 +4,7 @@
 
 import View from '../plugins/sliderPlugin/view/view';
 import Observer from '../plugins/sliderPlugin/observer/observer';
-import { ISliderSize } from '../plugins/sliderPlugin/interfaces';
+import { ISliderSize, IThumbSize } from '../plugins/sliderPlugin/interfaces';
 
 let sliderWrapper: HTMLDivElement = document.createElement('div');
 let observer: Observer = new Observer();
@@ -59,5 +59,36 @@ describe('Create track', () => {
         expect(sliderWrapper.querySelectorAll('.track_horizontal').length).toBe(0);
         _this.createSlider('track_horizontal');
         expect(sliderWrapper.querySelectorAll('.track_horizontal').length).toBe(1);
+    });
+});
+
+
+describe('Create first thumb', () => {
+    test('An element with a thumb-one class must be in sliderWrapper', () => {
+        expect(sliderWrapper.querySelectorAll('.thumb-one').length).toBe(0);
+
+        observer.subscribe('thumbOneIsCreated', 
+            (size: IThumbSize) => {
+                expect(size.width).toBe(0);
+                expect(size.height).toBe(0);
+            }
+        );    
+        _this.createSlider('thumb-one');
+
+        expect(sliderWrapper.querySelectorAll('.thumb-one').length).toBe(1);
+    });
+
+    test('An element with a thumb-one_horizontal class must be in sliderWrapper', () => {
+        expect(sliderWrapper.querySelectorAll('.thumb-one_horizontal').length).toBe(0);
+
+        observer.subscribe('thumbOneIsCreated', 
+            (size: IThumbSize) => {
+                expect(size.width).toBe(0);
+                expect(size.height).toBe(0);
+            }
+        );
+        _this.createSlider('thumb-one_horizontal');
+
+        expect(sliderWrapper.querySelectorAll('.thumb-one_horizontal').length).toBe(1);
     });
 });
