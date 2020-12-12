@@ -166,30 +166,50 @@ describe('Create second thumb', () => {
 
 
 describe('Create first tooltip', () => {
+    test('An element with a tooltip-one class not must be in sliderWrapper', () => {
+        expect(sliderWrapper.querySelectorAll('.tooltip-one').length).toBe(0);
+        _this.createTooltipOne('tooltip-one');
+        expect(sliderWrapper.querySelectorAll('.tooltip-one').length).toBe(0);
+    });
+
     test('An element with a tooltip-one class must be in sliderWrapper', () => {
         expect(sliderWrapper.querySelectorAll('.tooltip-one').length).toBe(0);
-        _this.createSlider('tooltip-one');
+        _this.createSlider('.slider');
+        _this.createThumbOne('.thumb-one');
+        _this.createTooltipOne('tooltip-one');
         expect(sliderWrapper.querySelectorAll('.tooltip-one').length).toBe(1);
     });
 
     test('An element with a tooltip-one_horizontal class must be in sliderWrapper', () => {
         expect(sliderWrapper.querySelectorAll('.tooltip-one_horizontal').length).toBe(0);
-        _this.createSlider('tooltip-one_horizontal');
+        _this.createSlider('.slider');
+        _this.createThumbOne('.thumb-one');
+        _this.createTooltipOne('tooltip-one_horizontal');
         expect(sliderWrapper.querySelectorAll('.tooltip-one_horizontal').length).toBe(1);
     });
 });
 
 
 describe('Create second tooltip', () => {
+    test('An element with a tooltip-two class not must be in sliderWrapper', () => {
+        expect(sliderWrapper.querySelectorAll('.tooltip-two').length).toBe(0);
+        _this.createTooltipTwo('tooltip-two');
+        expect(sliderWrapper.querySelectorAll('.tooltip-two').length).toBe(0);
+    });
+
     test('An element with a tooltip-two class must be in sliderWrapper', () => {
         expect(sliderWrapper.querySelectorAll('.tooltip-two').length).toBe(0);
-        _this.createSlider('tooltip-two');
+        _this.createSlider('slider');
+        _this.createThumbTwo('.thumb-two');
+        _this.createTooltipTwo('tooltip-two');
         expect(sliderWrapper.querySelectorAll('.tooltip-two').length).toBe(1);
     });
 
     test('An element with a tooltip-two_horizontal class must be in sliderWrapper', () => {
         expect(sliderWrapper.querySelectorAll('.tooltip-two_horizontal').length).toBe(0);
-        _this.createSlider('tooltip-two_horizontal');
+        _this.createSlider('slider');
+        _this.createThumbTwo('.thumb-two');
+        _this.createTooltipTwo('tooltip-two_horizontal');
         expect(sliderWrapper.querySelectorAll('.tooltip-two_horizontal').length).toBe(1);
     });
 });
