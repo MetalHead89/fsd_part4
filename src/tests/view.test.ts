@@ -49,7 +49,7 @@ describe('Create slider', () => {
 
 
 describe('Create track', () => {
-    test('An element with a track class must be in sliderWrapper', () => {
+    test('An element with a track class not must be in sliderWrapper', () => {
         expect(sliderWrapper.querySelectorAll('.track').length).toBe(0);
         _this.createTrack('track');
         expect(sliderWrapper.querySelectorAll('.track').length).toBe(0);
@@ -72,7 +72,7 @@ describe('Create track', () => {
 
 
 describe('Create first thumb', () => {
-    test('An element with a thumb-one class must be in sliderWrapper', () => {
+    test('An element with a thumb-one class not must be in sliderWrapper', () => {
         expect(sliderWrapper.querySelectorAll('.thumb-one').length).toBe(0);
 
         observer.subscribe('thumbOneIsCreated', 
@@ -81,7 +81,22 @@ describe('Create first thumb', () => {
                 expect(size.height).toBe(0);
             }
         );    
-        _this.createSlider('thumb-one');
+        _this.createThumbOne('thumb-one');
+
+        expect(sliderWrapper.querySelectorAll('.thumb-one').length).toBe(0);
+    });
+
+    test('An element with a thumb-one class must be in sliderWrapper', () => {
+        expect(sliderWrapper.querySelectorAll('.thumb-one').length).toBe(0);
+
+        observer.subscribe('thumbOneIsCreated', 
+            (size: IThumbSize) => {
+                expect(size.width).toBe(0);
+                expect(size.height).toBe(0);
+            }
+        );
+        _this.createSlider('slider');
+        _this.createThumbOne('thumb-one');
 
         expect(sliderWrapper.querySelectorAll('.thumb-one').length).toBe(1);
     });
@@ -95,7 +110,8 @@ describe('Create first thumb', () => {
                 expect(size.height).toBe(0);
             }
         );
-        _this.createSlider('thumb-one_horizontal');
+        _this.createSlider('slider');
+        _this.createThumbOne('thumb-one_horizontal');
 
         expect(sliderWrapper.querySelectorAll('.thumb-one_horizontal').length).toBe(1);
     });
@@ -103,7 +119,7 @@ describe('Create first thumb', () => {
 
 
 describe('Create second thumb', () => {
-    test('An element with a thumb-two class must be in sliderWrapper', () => {
+    test('An element with a thumb-two class not must be in sliderWrapper', () => {
         expect(sliderWrapper.querySelectorAll('.thumb-two').length).toBe(0);
 
         observer.subscribe('thumbTwoIsCreated', 
@@ -112,7 +128,22 @@ describe('Create second thumb', () => {
                 expect(size.height).toBe(0);
             }
         );    
-        _this.createSlider('thumb-two');
+        _this.createThumbTwo('thumb-two');
+
+        expect(sliderWrapper.querySelectorAll('.thumb-two').length).toBe(0);
+    });
+
+    test('An element with a thumb-two class must be in sliderWrapper', () => {
+        expect(sliderWrapper.querySelectorAll('.thumb-two').length).toBe(0);
+
+        observer.subscribe('thumbTwoIsCreated', 
+            (size: IThumbSize) => {
+                expect(size.width).toBe(0);
+                expect(size.height).toBe(0);
+            }
+        );
+        _this.createSlider('slider');
+        _this.createThumbTwo('thumb-two');
 
         expect(sliderWrapper.querySelectorAll('.thumb-two').length).toBe(1);
     });
@@ -126,7 +157,8 @@ describe('Create second thumb', () => {
                 expect(size.height).toBe(0);
             }
         );
-        _this.createSlider('thumb-two_horizontal');
+        _this.createSlider('slider');
+        _this.createThumbTwo('thumb-two_horizontal');
 
         expect(sliderWrapper.querySelectorAll('.thumb-two_horizontal').length).toBe(1);
     });
