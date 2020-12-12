@@ -213,3 +213,26 @@ describe('Create second tooltip', () => {
         expect(sliderWrapper.querySelectorAll('.tooltip-two_horizontal').length).toBe(1);
     });
 });
+
+
+describe('Create progress bar', () => {
+    test('An element with a progress-bar class not must be in sliderWrapper', () => {
+        expect(sliderWrapper.querySelectorAll('.progress-bar').length).toBe(0);
+        _this.createProgressBar('progress-bar');
+        expect(sliderWrapper.querySelectorAll('.progress-bar').length).toBe(0);
+    });
+
+    test('An element with a progress-bar class must be in sliderWrapper', () => {
+        expect(sliderWrapper.querySelectorAll('.progress-bar').length).toBe(0);
+        _this.createSlider('slider');
+        _this.createProgressBar('progress-bar');
+        expect(sliderWrapper.querySelectorAll('.progress-bar').length).toBe(1);
+    });
+
+    test('An element with a progress-bar_horizontal class must be in sliderWrapper', () => {
+        expect(sliderWrapper.querySelectorAll('.progress-bar_horizontal').length).toBe(0);
+        _this.createSlider('slider');
+        _this.createProgressBar('progress-bar_horizontal');
+        expect(sliderWrapper.querySelectorAll('.progress-bar_horizontal').length).toBe(1);
+    });
+});
