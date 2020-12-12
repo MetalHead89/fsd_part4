@@ -51,13 +51,21 @@ describe('Create slider', () => {
 describe('Create track', () => {
     test('An element with a track class must be in sliderWrapper', () => {
         expect(sliderWrapper.querySelectorAll('.track').length).toBe(0);
-        _this.createSlider('track');
+        _this.createTrack('track');
+        expect(sliderWrapper.querySelectorAll('.track').length).toBe(0);
+    });
+
+    test('An element with a track class must be in sliderWrapper', () => {
+        expect(sliderWrapper.querySelectorAll('.track').length).toBe(0);
+        _this.createSlider('slider');
+        _this.createTrack('track');
         expect(sliderWrapper.querySelectorAll('.track').length).toBe(1);
     });
 
     test('An element with a track_horizontal class must be in sliderWrapper', () => {
         expect(sliderWrapper.querySelectorAll('.track_horizontal').length).toBe(0);
-        _this.createSlider('track_horizontal');
+        _this.createSlider('slider');
+        _this.createTrack('track_horizontal');
         expect(sliderWrapper.querySelectorAll('.track_horizontal').length).toBe(1);
     });
 });
