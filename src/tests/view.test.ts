@@ -3,6 +3,7 @@
  */
 
 import View from '../plugins/sliderPlugin/view/view';
+import Thumb from '../plugins/sliderPlugin/view/thumb';
 import Observer from '../plugins/sliderPlugin/observer/observer';
 import { ISliderSize, IThumbSize } from '../plugins/sliderPlugin/interfaces';
 
@@ -280,3 +281,38 @@ describe('Create scale', () => {
         expect(sliderWrapper.querySelectorAll('.scale_horizontal').length).toBe(1);
     });
 });
+
+
+describe('Move thumb one', () => {
+    test('thumbOne should be null', () => {
+        _this.createThumbOne('thumb-one');
+        _this.moveThumbOne({'left': 45, 'top': 78});
+
+        const thumb: Thumb | null = _this['thumbOne'];
+        expect(thumb).toBe(null);
+    });
+
+    test('Position thumbOne should be left: 45 and top 45', () => {
+        _this.createSlider('slider');
+        _this.createThumbOne('thumb-one');
+        _this.moveThumbOne({'left': 45, 'top': 78});
+
+        const thumb: Thumb | null = _this['thumbOne'];
+        expect(thumb).not.toBe(null);
+        expect(thumb?.getElement().style.left).toBe('45px');
+        expect(thumb?.getElement().style.top).toBe('78px');
+    });
+
+    test('Position thumbOne should be left: 100 and top 0', () => {
+        _this.createSlider('slider');
+        _this.createThumbOne('thumb-one_vertical');
+        _this.moveThumbOne({'left': 100, 'top': 0});
+
+        const thumb: Thumb | null = _this['thumbOne'];
+        expect(thumb).not.toBe(null);
+        expect(thumb?.getElement().style.left).toBe('100px');
+        expect(thumb?.getElement().style.top).toBe('0px');
+    });
+});
+
+
