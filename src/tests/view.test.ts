@@ -236,3 +236,47 @@ describe('Create progress bar', () => {
         expect(sliderWrapper.querySelectorAll('.progress-bar_horizontal').length).toBe(1);
     });
 });
+
+
+describe('Create scale', () => {
+    test('An element with a scale class not must be in sliderWrapper', () => {
+        expect(sliderWrapper.querySelectorAll('.scale').length).toBe(0);
+
+        let notificationReceived = false;
+        observer.subscribe('scaleIsCreated', 
+            () => { notificationReceived = true; }
+        );    
+        _this.createScale('scale');
+
+        expect(notificationReceived).toBe(false);
+        expect(sliderWrapper.querySelectorAll('.scale').length).toBe(0);
+    });
+
+    test('An element with a scale class must be in sliderWrapper', () => {
+        expect(sliderWrapper.querySelectorAll('.scale').length).toBe(0);
+
+        let notificationReceived = false;
+        observer.subscribe('scaleIsCreated', 
+            () => { notificationReceived = true; }
+        );
+        _this.createSlider('slider');
+        _this.createScale('scale');
+
+        expect(notificationReceived).toBe(true);
+        expect(sliderWrapper.querySelectorAll('.scale').length).toBe(1);
+    });
+
+    test('An element with a scale_horizontal class must be in sliderWrapper', () => {
+        expect(sliderWrapper.querySelectorAll('.scale_horizontal').length).toBe(0);
+
+        let notificationReceived = false;
+        observer.subscribe('scaleIsCreated', 
+            () => { notificationReceived = true; }
+        );
+        _this.createSlider('slider');
+        _this.createScale('scale_horizontal');
+
+        expect(notificationReceived).toBe(true);
+        expect(sliderWrapper.querySelectorAll('.scale_horizontal').length).toBe(1);
+    });
+});
