@@ -6,6 +6,7 @@ import View from '../plugins/sliderPlugin/view/view';
 import Thumb from '../plugins/sliderPlugin/view/thumb';
 import Observer from '../plugins/sliderPlugin/observer/observer';
 import { ISliderSize, IThumbSize } from '../plugins/sliderPlugin/interfaces';
+import Tooltip from '../plugins/sliderPlugin/view/tooltip';
 
 let sliderWrapper: HTMLDivElement = document.createElement('div');
 let observer: Observer = new Observer();
@@ -316,3 +317,44 @@ describe('Move thumb one', () => {
 });
 
 
+describe('Tooltip one set value', () => {
+    test('Tooltip should be null', () => {
+        _this.createTooltipOne('tooltip-one');
+        _this.tooltipOneSetValue(84);
+
+        const tooltip: Tooltip | null = _this['tooltipOne'];
+        expect(tooltip).toBe(null);
+    });
+
+    test('Should be 84', () => {
+        _this.createSlider('slider');
+        _this.createThumbOne('thumb-one');
+        _this.createTooltipOne('tooltip-one');
+        _this.tooltipOneSetValue(84);
+
+        const tooltip: Tooltip | null = _this['tooltipOne'];
+        let tooltipValue = '';
+
+        expect(tooltip).not.toBe(null);
+        if (tooltip != null) {
+            tooltipValue = tooltip['element'].innerText
+        }
+        expect(tooltipValue).toBe('84');
+    });
+
+    test('Should be 999', () => {
+        _this.createSlider('slider');
+        _this.createThumbOne('thumb-one');
+        _this.createTooltipOne('tooltip-one_vertical');
+        _this.tooltipOneSetValue(999);
+
+        const tooltip: Tooltip | null = _this['tooltipOne'];
+        let tooltipValue = '';
+
+        expect(tooltip).not.toBe(null);
+        if (tooltip != null) {
+            tooltipValue = tooltip['element'].innerText
+        }
+        expect(tooltipValue).toBe('999');
+    });
+});
