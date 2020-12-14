@@ -8,6 +8,7 @@ import Observer from '../plugins/sliderPlugin/observer/observer';
 import { IScalePointSize, ISliderSize, IThumbSize } from '../plugins/sliderPlugin/interfaces';
 import Tooltip from '../plugins/sliderPlugin/view/tooltip';
 import ProgressBar from '../plugins/sliderPlugin/view/progressBar';
+import Scale from '../plugins/sliderPlugin/view/scale';
 
 let sliderWrapper: HTMLDivElement = document.createElement('div');
 let observer: Observer = new Observer();
@@ -550,5 +551,100 @@ describe('Get scale point max size', () => {
         const size: IScalePointSize = _this.getScalePointMaxSize(150);
         expect(size.width).toBe(0);
         expect(size.height).toBe(0);
+    });
+});
+
+
+describe('Add scale point', () => {
+    test('Scale point should not be added', () => {
+        _this.createScale('scale');
+        _this.addScalePoint({'position': 50, 'scalePointSize': 20, 'scalePointValue': 5});
+        const scale: Scale | null = _this['scale'];
+
+        let scalePointsCount: number = 0;
+        let position: string = '';
+        let width: string = '';
+        let value: string = '';
+
+        if(scale !== null) {
+            scalePointsCount = scale['element'].querySelectorAll('.slider__scale-point').length
+            const scalePoint: HTMLElement | null = scale['element'].querySelector('.slider__scale-point');
+            if(scalePoint !== null) {
+                position = scalePoint.style.left;
+                width = scalePoint.style.width;
+
+                const label: HTMLLabelElement | null = scalePoint.querySelector('.slider__scale-point-label');
+                if(label !== null) {
+                    value = label.innerText;
+                }
+            }            
+        }
+
+        expect(scalePointsCount).toBe(0);
+        expect(position).toBe('');
+        expect(width).toBe('');
+        expect(value).toBe('');
+    });
+    
+    test('Should be position: 50px, width: 20px and value: 5', () => {
+        _this.createSlider('slider');
+        _this.createScale('scale');
+        _this.addScalePoint({'position': 50, 'scalePointSize': 20, 'scalePointValue': 5});
+        const scale: Scale | null = _this['scale'];
+
+        let scalePointsCount: number = 0;
+        let position: string = '';
+        let width: string = '';
+        let value: string = '';
+
+        if(scale !== null) {
+            scalePointsCount = scale['element'].querySelectorAll('.slider__scale-point').length
+            const scalePoint: HTMLElement | null = scale['element'].querySelector('.slider__scale-point');
+            if(scalePoint !== null) {
+                position = scalePoint.style.left;
+                width = scalePoint.style.width;
+
+                const label: HTMLLabelElement | null = scalePoint.querySelector('.slider__scale-point-label');
+                if(label !== null) {
+                    value = label.innerText;
+                }
+            }            
+        }
+
+        expect(scalePointsCount).toBe(1);
+        expect(position).toBe('50px');
+        expect(width).toBe('20px');
+        expect(value).toBe('5');
+    });
+
+    test('Should be position: 150px, width: 69px and value: 41', () => {
+        _this.createSlider('slider');
+        _this.createScale('slider__scale_vertical');
+        _this.addScalePoint({'position': 150, 'scalePointSize': 69, 'scalePointValue': 41});
+        const scale: Scale | null = _this['scale'];
+
+        let scalePointsCount: number = 0;
+        let position: string = '';
+        let width: string = '';
+        let value: string = '';
+
+        if(scale !== null) {
+            scalePointsCount = scale['element'].querySelectorAll('.slider__scale-point').length
+            const scalePoint: HTMLElement | null = scale['element'].querySelector('.slider__scale-point');
+            if(scalePoint !== null) {
+                position = scalePoint.style.top;
+                width = scalePoint.style.width;
+
+                const label: HTMLLabelElement | null = scalePoint.querySelector('.slider__scale-point-label');
+                if(label !== null) {
+                    value = label.innerText;
+                }
+            }            
+        }
+
+        expect(scalePointsCount).toBe(1);
+        expect(position).toBe('150px');
+        expect(width).toBe('69px');
+        expect(value).toBe('41');
     });
 });
