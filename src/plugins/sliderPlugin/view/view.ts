@@ -238,7 +238,7 @@ class View {
             return this.scale.getScalePointMaxSize(value);
         }
 
-        return { 'width': 20, 'height': 20 };
+        return { 'width': 0, 'height': 0 };
     }
 
 

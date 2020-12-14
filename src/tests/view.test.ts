@@ -5,7 +5,7 @@
 import View from '../plugins/sliderPlugin/view/view';
 import Thumb from '../plugins/sliderPlugin/view/thumb';
 import Observer from '../plugins/sliderPlugin/observer/observer';
-import { ISliderSize, IThumbSize } from '../plugins/sliderPlugin/interfaces';
+import { IScalePointSize, ISliderSize, IThumbSize } from '../plugins/sliderPlugin/interfaces';
 import Tooltip from '../plugins/sliderPlugin/view/tooltip';
 import ProgressBar from '../plugins/sliderPlugin/view/progressBar';
 
@@ -522,5 +522,33 @@ describe('Set progress bar position', () => {
         expect(top).toBe('25px');
         expect(width).toBe('');
         expect(height).toBe('50px');
+    });
+});
+
+
+// Через jsdom нельзя проверить свойства offsetWidth и offsetHeight, поэтому результат равен 0
+// Тест создан исключительно для 100% покрытия класса.
+describe('Get scale point max size', () => {
+    test('Should be width: 0 and height: 0', () => {
+        _this.createScale('scale');
+        const size: IScalePointSize = _this.getScalePointMaxSize(150);
+        expect(size.width).toBe(0);
+        expect(size.height).toBe(0);
+    });
+
+    test('Should be width: 0 and height: 0', () => {
+        _this.createSlider('slider');
+        _this.createScale('scale');
+        const size: IScalePointSize = _this.getScalePointMaxSize(150);
+        expect(size.width).toBe(0);
+        expect(size.height).toBe(0);
+    });
+
+    test('Should be width: 0 and height: 0', () => {
+        _this.createSlider('slider');
+        _this.createScale('scale_vertical');
+        const size: IScalePointSize = _this.getScalePointMaxSize(150);
+        expect(size.width).toBe(0);
+        expect(size.height).toBe(0);
     });
 });
