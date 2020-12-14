@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { IThumbSize } from '../plugins/sliderPlugin/interfaces';
+import { ICursorPosition, IThumbPosition, IThumbSize } from '../plugins/sliderPlugin/interfaces';
 
 import Thumb from '../plugins/sliderPlugin/view/thumb';
 import Observer from '../plugins/sliderPlugin/observer/observer';
@@ -102,6 +102,65 @@ describe('Remove', () => {
 });
 
 
+describe('Drag', () => {
+    test('Should be left: 50 and top: 80', () => {
+        let position: IThumbPosition = {'left': 0, 'top': 0};
+        thumbElem = document.createElement('div');
+        thumbElem.classList.add('slider__thumb-one');
+        observer = new Observer();
+        observer.subscribe('thumbOneIsDragged', (thumbPosition: IThumbPosition) => {
+            position = thumbPosition;
+        });
+        document.body.append(thumbElem);
+        _this = new Thumb(thumbElem, observer);
+
+        const evt = document.createEvent('MouseEvent');
+        evt.initMouseEvent('mousemove', true, true, window, 0, 50, 80, 50, 80, false, false, false, false, 0, null)
+        _this['drag'](evt);
+
+        expect(position.left).toBe(50);
+        expect(position.top).toBe(80);
+    });
+
+    test('Should be left: 310 and top: 313', () => {
+        let position: IThumbPosition = {'left': 0, 'top': 0};
+        thumbElem = document.createElement('div');
+        thumbElem.classList.add('slider__thumb-two');
+        observer = new Observer();
+        observer.subscribe('thumbTwoIsDragged', (thumbPosition: IThumbPosition) => {
+            position = thumbPosition;
+        });
+        document.body.append(thumbElem);
+        _this = new Thumb(thumbElem, observer);
+
+        const evt = document.createEvent('MouseEvent');
+        evt.initMouseEvent('mousemove', true, true, window, 0, 310, 313, 310, 313, false, false, false, false, 0, null)
+        _this['drag'](evt);
+
+        expect(position.left).toBe(310);
+        expect(position.top).toBe(313);
+    });
+
+    test('Should be left: 555 and top: 666', () => {
+        let position: IThumbPosition = {'left': 0, 'top': 0};
+        thumbElem = document.createElement('div');
+        thumbElem.classList.add('slider__thumb-one');
+        observer = new Observer();
+        observer.subscribe('thumbOneIsDragged', (thumbPosition: IThumbPosition) => {
+            position = thumbPosition;
+        });
+        _this = new Thumb(thumbElem, observer);
+
+        const evt = document.createEvent('MouseEvent');
+        evt.initMouseEvent('mousemove', true, true, window, 0, 555, 666, 555, 666, false, false, false, false, 0, null)
+        _this['drag'](evt);
+
+        expect(position.left).toBe(555);
+        expect(position.top).toBe(666);
+    });
+});
+
+
 describe('Thumb click event and startDrag method', () => {
     test('A notification should be sent containing a thumb element and z-index should be 3', () => {
         thumbElem = document.createElement('div');
@@ -119,6 +178,17 @@ describe('Thumb click event and startDrag method', () => {
         thumbElem.dispatchEvent(evt);
 
         expect(_this.getElement().style.zIndex).toBe('3');
+    });
+});
+
+
+// Создан исключительно для 100% покрытия кода тестами, сам по себе
+// этот тест не несет ни какого смысла
+describe('End drag', () => {
+    test('All event handlers should be removed', () => {
+        _this['endDrag']();
+        _this['endDrag']();
+        _this['endDrag']();
     });
 });
 

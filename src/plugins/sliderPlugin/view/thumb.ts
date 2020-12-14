@@ -13,16 +13,16 @@ class Thumb {
     private element: HTMLDivElement;
     private observer: Observer;
     private shift: IThumbShift = { 'shiftX': 0, 'shiftY': 0 };
-    private onMouseMoveHandler: Function = () => { };
-    private onMouseUpHandler: Function = () => { };
+    private onMouseMoveHandler: Function = new Function();
+    private onMouseUpHandler: Function = new Function();
 
 
     constructor(thumbElement: HTMLDivElement, observer: Observer) {
         this.element = thumbElement;
         this.observer = observer;
-        this.element.ondragstart = function () {
-            return false;
-        };
+        // this.element.ondragstart = function () {
+        //     return false;
+        // };
 
         this.element.addEventListener('mousedown', (event: MouseEvent) => {
             this.startDrag(event.clientX, event.clientY);
@@ -149,19 +149,17 @@ class Thumb {
      * @returns {ICursorPosition} - объект с позицией курсора относительно левого и верхнего края родительского контейнера
      */
     private getPosition(cursorPosition: ICursorPosition): IThumbPosition {
+        let positionInsideParent: IThumbPosition = {'left': cursorPosition.x, 'top': cursorPosition.y};
 
         const parrent: HTMLElement | null = this.element.parentElement;
 
-        if (!parrent) {
-            return { 'left': 0, 'top': 0 }
+        if (parrent !== null) {
+            const parrentCoords: DOMRect = parrent.getBoundingClientRect();
+            positionInsideParent.left = positionInsideParent.left - parrentCoords.left;
+            positionInsideParent.top = positionInsideParent.top - parrentCoords.top;
         }
 
-        const parrentCoords: DOMRect = parrent.getBoundingClientRect();
-
-        return {
-            'left': cursorPosition.x - this.shift.shiftX - parrentCoords.left,
-            'top': cursorPosition.y - this.shift.shiftY - parrentCoords.top
-        }
+        return positionInsideParent;
     }
 
 
