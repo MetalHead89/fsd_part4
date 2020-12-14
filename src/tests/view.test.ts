@@ -741,3 +741,35 @@ describe('Remove second thumb', () => {
         expect(document.querySelectorAll('.thumb-two_vertical').length).toBe(0);
     });
 });
+
+
+describe('Remove scale', () => {
+    test('The scale does not exist', () => {
+        _this.createScale('scale');
+        document.body.append(_this['sliderWrapper']);
+
+        expect(document.querySelectorAll('.scale').length).toBe(0);
+        _this.removeScale();;
+        expect(document.querySelectorAll('.scale').length).toBe(0);
+    });
+
+    test('The scale should be removed', () => {
+        _this.createSlider('slider');
+        _this.createScale('scale');
+        document.body.append(_this['sliderWrapper']);
+
+        expect(document.querySelectorAll('.scale').length).toBe(1);
+        _this.removeScale();
+        expect(document.querySelectorAll('.scale').length).toBe(0);
+    });
+
+    test('The vertical scale should be removed', () => {
+        _this.createSlider('slider_vertical');
+        _this.createScale('scale_vertical')
+        document.body.append(_this['sliderWrapper']);
+
+        expect(document.querySelectorAll('.scale_vertical').length).toBe(1);
+        _this.removeScale();
+        expect(document.querySelectorAll('.scale_vertical').length).toBe(0);
+    });
+});
