@@ -7,6 +7,7 @@ import Thumb from '../plugins/sliderPlugin/view/thumb';
 import Observer from '../plugins/sliderPlugin/observer/observer';
 import { ISliderSize, IThumbSize } from '../plugins/sliderPlugin/interfaces';
 import Tooltip from '../plugins/sliderPlugin/view/tooltip';
+import ProgressBar from '../plugins/sliderPlugin/view/progressBar';
 
 let sliderWrapper: HTMLDivElement = document.createElement('div');
 let observer: Observer = new Observer();
@@ -432,5 +433,94 @@ describe('Tooltip two set value', () => {
             tooltipValue = tooltip['element'].innerText
         }
         expect(tooltipValue).toBe('999');
+    });
+});
+
+
+describe('Set progress bar position', () => {
+    test('Position should not change', () => {
+        _this.createProgressBar('progress-bar_horizontal');
+        _this.setProgressBarPosition({
+            'orientation': 'horizontal',
+            'start': 25,
+            'end': 50
+        });
+
+        const progressBar: ProgressBar | null = _this['progressBar'];
+        let left: string = '';
+        let top: string = '';
+        let width: string = '';
+        let height: string = '';
+
+        if(progressBar !== null) {
+            const progressBarElem: HTMLDivElement = progressBar.getElement();
+            left = progressBarElem.style.left;
+            top = progressBarElem.style.top;
+            width = progressBarElem.style.width;
+            height = progressBarElem.style.height;
+        }
+
+        expect(left).toBe('');
+        expect(top).toBe('');
+        expect(width).toBe('');
+        expect(height).toBe('');
+    });
+
+    test('Should be left: 25px and width: 50px', () => {
+        _this.createSlider('slider');
+        _this.createProgressBar('progress-bar_horizontal');
+        _this.setProgressBarPosition({
+            'orientation': 'horizontal',
+            'start': 25,
+            'end': 50
+        });
+
+        const progressBar: ProgressBar | null = _this['progressBar'];
+        let left: string = '';
+        let top: string = '';
+        let width: string = '';
+        let height: string = '';
+
+        if(progressBar !== null) {
+            const progressBarElem: HTMLDivElement = progressBar.getElement();
+            left = progressBarElem.style.left;
+            top = progressBarElem.style.top;
+            width = progressBarElem.style.width;
+            height = progressBarElem.style.height;
+        }
+
+        expect(left).toBe('25px');
+        expect(top).toBe('');
+        expect(width).toBe('50px');
+        expect(height).toBe('');
+    });
+
+    test('Should be top: 25px and height: 50px', () => {
+        _this.createSlider('slider');
+        _this.createProgressBar('progress-bar_vertical');
+        _this.setProgressBarPosition({
+            'orientation': 'vertical',
+            'start': 25,
+            'end': 50
+        });
+
+        const progressBar: ProgressBar | null = _this['progressBar'];
+        let left: string = '';
+        let top: string = '';
+        let width: string = '';
+        let height: string = '';
+
+        if(progressBar !== null) {
+            const progressBarElem: HTMLDivElement = progressBar.getElement();
+            left = progressBarElem.style.left;
+            top = progressBarElem.style.top;
+            width = progressBarElem.style.width;
+            height = progressBarElem.style.height;
+        }
+
+        expect(left).toBe('');
+        expect(top).toBe('25px');
+        expect(width).toBe('');
+        expect(height).toBe('50px');
     });
 });
