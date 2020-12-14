@@ -391,3 +391,46 @@ describe('Move thumb two', () => {
         expect(thumb?.getElement().style.top).toBe('0px');
     });
 });
+
+
+describe('Tooltip two set value', () => {
+    test('Tooltip should be null', () => {
+        _this.createTooltipTwo('tooltip-two');
+        _this.tooltipTwoSetValue(84);
+
+        const tooltip: Tooltip | null = _this['tooltipTwo'];
+        expect(tooltip).toBe(null);
+    });
+
+    test('Should be 84', () => {
+        _this.createSlider('slider');
+        _this.createThumbTwo('thumb-one');
+        _this.createTooltipTwo('tooltip-two');
+        _this.tooltipTwoSetValue(84);
+
+        const tooltip: Tooltip | null = _this['tooltipTwo'];
+        let tooltipValue = '';
+
+        expect(tooltip).not.toBe(null);
+        if (tooltip != null) {
+            tooltipValue = tooltip['element'].innerText
+        }
+        expect(tooltipValue).toBe('84');
+    });
+
+    test('Should be 999', () => {
+        _this.createSlider('slider');
+        _this.createThumbTwo('thumb-one');
+        _this.createTooltipTwo('tooltip-one_vertical');
+        _this.tooltipTwoSetValue(999);
+
+        const tooltip: Tooltip | null = _this['tooltipTwo'];
+        let tooltipValue = '';
+
+        expect(tooltip).not.toBe(null);
+        if (tooltip != null) {
+            tooltipValue = tooltip['element'].innerText
+        }
+        expect(tooltipValue).toBe('999');
+    });
+});
