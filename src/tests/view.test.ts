@@ -897,3 +897,44 @@ describe('Set scale size', () => {
         expect(height).toBe('97px');
     });
 });
+
+
+describe('Change z-index to another thumb', () => {
+    test('z-indexes do not change since there is no second thumb', () => {
+        _this.createSlider('slider');
+        _this.createThumbOne('thumb-one');
+        _this['observer'].notify('changeZIndexToAnotherThumb', _this['thumbOne']?.getElement());
+
+        expect(_this['thumbOne']?.getElement().style.zIndex).toBe('');
+        expect(_this['thumbTwo']).toBe(null);
+    });
+
+    test('z-indexes do not change since there is no first thumb', () => {
+        _this.createSlider('slider');
+        _this.createThumbTwo('thumb-two');
+        _this['observer'].notify('changeZIndexToAnotherThumb', _this['thumbTwo']?.getElement());
+
+        expect(_this['thumbTwo']?.getElement().style.zIndex).toBe('');
+        expect(_this['thumbOne']).toBe(null);
+    });
+
+    test('z-index of the second thumb should be 2', () => {
+        _this.createSlider('slider');
+        _this.createThumbOne('thumb-one');
+        _this.createThumbTwo('thumb-two');
+        _this['observer'].notify('changeZIndexToAnotherThumb', _this['thumbOne']?.getElement());
+
+        expect(_this['thumbOne']?.getElement().style.zIndex).toBe('');
+        expect(_this['thumbTwo']?.getElement().style.zIndex).toBe('2');
+    });
+
+    test('z-index of the first thumb should be 2', () => {
+        _this.createSlider('slider');
+        _this.createThumbOne('thumb-one');
+        _this.createThumbTwo('thumb-two');
+        _this['observer'].notify('changeZIndexToAnotherThumb', _this['thumbTwo']?.getElement());
+
+        expect(_this['thumbOne']?.getElement().style.zIndex).toBe('2');
+        expect(_this['thumbTwo']?.getElement().style.zIndex).toBe('');
+    });
+});
