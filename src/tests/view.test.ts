@@ -841,3 +841,59 @@ describe('Remove second tooltip', () => {
         expect(document.querySelectorAll('.tooltip-two_vertical').length).toBe(0);
     });
 });
+
+
+describe('Set scale size', () => {
+    test('Scale does not exist', () => {
+        _this.createScale('scale');
+        _this.setScaleSize({'width': 540, 'height': 71})
+
+        let width: string = '';
+        let height: string = '';
+
+        const scale: Scale | null = _this['scale'];
+        if (scale !== null) {
+            width = scale['element'].style.width;
+            height = scale['element'].style.height;
+        }
+
+        expect(width).toBe('');
+        expect(height).toBe('');
+    });
+
+    test('Should be width: 540px and height: 71px', () => {
+        _this.createSlider('slider');
+        _this.createScale('scale');
+        _this.setScaleSize({'width': 540, 'height': 71})
+
+        let width: string = '';
+        let height: string = '';
+
+        const scale: Scale | null = _this['scale'];
+        if (scale !== null) {
+            width = scale['element'].style.width;
+            height = scale['element'].style.height;
+        }
+
+        expect(width).toBe('540px');
+        expect(height).toBe('71px');
+    });
+
+    test('Should be width: 83px and height: 97px', () => {
+        _this.createSlider('slider');
+        _this.createScale('scale_vertical');
+        _this.setScaleSize({'width': 83, 'height': 97})
+
+        let width: string = '';
+        let height: string = '';
+
+        const scale: Scale | null = _this['scale'];
+        if (scale !== null) {
+            width = scale['element'].style.width;
+            height = scale['element'].style.height;
+        }
+
+        expect(width).toBe('83px');
+        expect(height).toBe('97px');
+    });
+});
