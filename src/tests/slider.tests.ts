@@ -61,7 +61,7 @@ describe('get size', () => {
 
 
 describe('Remove', () => {
-    test('The scale should be removed', () => {
+    test('The slider should be removed', () => {
         sliderElem = document.createElement('div');
         sliderElem.classList.add('slider');
         _this = new Slider(sliderElem);
@@ -73,7 +73,7 @@ describe('Remove', () => {
         expect(document.querySelectorAll('.slider').length).toBe(0);
     });
 
-    test('The vertical scale should be removed', () => {
+    test('The vertical slider should be removed', () => {
         sliderElem = document.createElement('div');
         sliderElem.classList.add('slider_vertical');
         _this = new Slider(sliderElem);

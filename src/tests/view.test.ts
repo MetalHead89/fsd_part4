@@ -648,3 +648,32 @@ describe('Add scale point', () => {
         expect(value).toBe('41');
     });
 });
+
+
+describe('Remove slider', () => {
+    test('The slider does not exist', () => {
+        document.body.append(_this['sliderWrapper']);
+
+        expect(document.querySelectorAll('.slider').length).toBe(0);
+        _this.removeSlider();
+        expect(document.querySelectorAll('.slider').length).toBe(0);
+    });
+
+    test('The slider should be removed', () => {
+        _this.createSlider('slider');
+        document.body.append(_this['sliderWrapper']);
+
+        expect(document.querySelectorAll('.slider').length).toBe(1);
+        _this.removeSlider();
+        expect(document.querySelectorAll('.slider').length).toBe(0);
+    });
+
+    test('The vertical slider should be removed', () => {
+        _this.createSlider('slider_vertical');
+        document.body.append(_this['sliderWrapper']);
+
+        expect(document.querySelectorAll('.slider_vertical').length).toBe(1);
+        _this.removeSlider();
+        expect(document.querySelectorAll('.slider_vertical').length).toBe(0);
+    });
+});
