@@ -677,3 +677,67 @@ describe('Remove slider', () => {
         expect(document.querySelectorAll('.slider_vertical').length).toBe(0);
     });
 });
+
+
+describe('Remove first thumb', () => {
+    test('Thumb does not exist', () => {
+        _this.createThumbOne('thumb-one');
+        document.body.append(_this['sliderWrapper']);
+
+        expect(document.querySelectorAll('.thumb-one').length).toBe(0);
+        _this.removeThumbOne();
+        expect(document.querySelectorAll('.thumb-one').length).toBe(0);
+    });
+
+    test('First thumb should be removed', () => {
+        _this.createSlider('slider');
+        _this.createThumbOne('thumb-one');
+        document.body.append(_this['sliderWrapper']);
+
+        expect(document.querySelectorAll('.thumb-one').length).toBe(1);
+        _this.removeThumbOne();
+        expect(document.querySelectorAll('.thumb-one').length).toBe(0);
+    });
+
+    test('The vertical first thumb should be removed', () => {
+        _this.createSlider('slider');
+        _this.createThumbOne('thumb-one_vertical');
+        document.body.append(_this['sliderWrapper']);
+
+        expect(document.querySelectorAll('.thumb-one_vertical').length).toBe(1);
+        _this.removeThumbOne();
+        expect(document.querySelectorAll('.thumb-one_vertical').length).toBe(0);
+    });
+});
+
+
+describe('Remove second thumb', () => {
+    test('Thumb does not exist', () => {
+        _this.createThumbTwo('thumb-two');
+        document.body.append(_this['sliderWrapper']);
+
+        expect(document.querySelectorAll('.thumb-two').length).toBe(0);
+        _this.removeThumbTwo();
+        expect(document.querySelectorAll('.thumb-two').length).toBe(0);
+    });
+
+    test('Second thumb should be removed', () => {
+        _this.createSlider('slider');
+        _this.createThumbTwo('thumb-two');
+        document.body.append(_this['sliderWrapper']);
+
+        expect(document.querySelectorAll('.thumb-two').length).toBe(1);
+        _this.removeThumbTwo();
+        expect(document.querySelectorAll('.thumb-two').length).toBe(0);
+    });
+
+    test('The vertical second thumb should be removed', () => {
+        _this.createSlider('slider');
+        _this.createThumbTwo('thumb-two_vertical');
+        document.body.append(_this['sliderWrapper']);
+
+        expect(document.querySelectorAll('.thumb-two_vertical').length).toBe(1);
+        _this.removeThumbTwo();
+        expect(document.querySelectorAll('.thumb-two_vertical').length).toBe(0);
+    });
+});
