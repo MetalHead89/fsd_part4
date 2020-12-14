@@ -358,3 +358,36 @@ describe('Tooltip one set value', () => {
         expect(tooltipValue).toBe('999');
     });
 });
+
+
+describe('Move thumb two', () => {
+    test('thumbTwo should be null', () => {
+        _this.createThumbTwo('thumb-two');
+        _this.moveThumbTwo({'left': 45, 'top': 78});
+
+        const thumb: Thumb | null = _this['thumbTwo'];
+        expect(thumb).toBe(null);
+    });
+
+    test('Position thumbTwo should be left: 45 and top 45', () => {
+        _this.createSlider('slider');
+        _this.createThumbTwo('thumb-two');
+        _this.moveThumbTwo({'left': 45, 'top': 78});
+
+        const thumb: Thumb | null = _this['thumbTwo'];
+        expect(thumb).not.toBe(null);
+        expect(thumb?.getElement().style.left).toBe('45px');
+        expect(thumb?.getElement().style.top).toBe('78px');
+    });
+
+    test('Position thumbTwo should be left: 100 and top 0', () => {
+        _this.createSlider('slider');
+        _this.createThumbTwo('thumb-two_vertical');
+        _this.moveThumbTwo({'left': 100, 'top': 0});
+
+        const thumb: Thumb | null = _this['thumbTwo'];
+        expect(thumb).not.toBe(null);
+        expect(thumb?.getElement().style.left).toBe('100px');
+        expect(thumb?.getElement().style.top).toBe('0px');
+    });
+});
