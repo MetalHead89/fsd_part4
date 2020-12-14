@@ -773,3 +773,71 @@ describe('Remove scale', () => {
         expect(document.querySelectorAll('.scale_vertical').length).toBe(0);
     });
 });
+
+
+describe('Remove first tooltip', () => {
+    test('First tooltip does not exist', () => {
+        _this.createTooltipOne('tooltip-one');
+        document.body.append(_this['sliderWrapper']);
+
+        expect(document.querySelectorAll('.tooltip-one').length).toBe(0);
+        _this.removeTooltipOne();
+        expect(document.querySelectorAll('.tooltip-one').length).toBe(0);
+    });
+
+    test('First tooltip should be removed', () => {
+        _this.createSlider('slider');
+        _this.createThumbOne('thumb-one');
+        _this.createTooltipOne('tooltip-one');
+        document.body.append(_this['sliderWrapper']);
+
+        expect(document.querySelectorAll('.tooltip-one').length).toBe(1);
+        _this.removeTooltipOne();
+        expect(document.querySelectorAll('.tooltip-one').length).toBe(0);
+    });
+
+    test('Vertical first tooltip should be removed', () => {
+        _this.createSlider('slider_vertical');
+        _this.createThumbOne('thumb-one_vertical');
+        _this.createTooltipOne('tooltip-one_vertical')
+        document.body.append(_this['sliderWrapper']);
+
+        expect(document.querySelectorAll('.tooltip-one_vertical').length).toBe(1);
+        _this.removeTooltipOne();
+        expect(document.querySelectorAll('.tooltip-one_vertical').length).toBe(0);
+    });
+});
+
+
+describe('Remove second tooltip', () => {
+    test('Second tooltip does not exist', () => {
+        _this.createTooltipTwo('tooltip-two');
+        document.body.append(_this['sliderWrapper']);
+
+        expect(document.querySelectorAll('.tooltip-two').length).toBe(0);
+        _this.removeTooltipTwo();
+        expect(document.querySelectorAll('.tooltip-two').length).toBe(0);
+    });
+
+    test('Second tooltip should be removed', () => {
+        _this.createSlider('slider');
+        _this.createThumbTwo('thumb-two');
+        _this.createTooltipTwo('tooltip-two');
+        document.body.append(_this['sliderWrapper']);
+
+        expect(document.querySelectorAll('.tooltip-two').length).toBe(1);
+        _this.removeTooltipTwo();
+        expect(document.querySelectorAll('.tooltip-two').length).toBe(0);
+    });
+
+    test('Vertical second tooltip should be removed', () => {
+        _this.createSlider('slider_vertical');
+        _this.createThumbTwo('thumb-two_vertical');
+        _this.createTooltipTwo('tooltip-two_vertical')
+        document.body.append(_this['sliderWrapper']);
+
+        expect(document.querySelectorAll('.tooltip-two_vertical').length).toBe(1);
+        _this.removeTooltipTwo();
+        expect(document.querySelectorAll('.tooltip-two_vertical').length).toBe(0);
+    });
+});
