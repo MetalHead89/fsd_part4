@@ -201,3 +201,15 @@ describe('Change slider orientation', () => {
         expect(_this.getSliderOrientation()).toBe('vertical');
     });
 });
+
+
+describe('Change slider type', () => {
+    test('Should be single', () => {
+        _this.changeSliderType('single');
+        expect(_this.getSliderType()).toBe('single');
+    });
+    test('Should be range', () => {
+        _this.changeSliderType('range');
+        expect(_this.getSliderType()).toBe('range');
+    });
+});
