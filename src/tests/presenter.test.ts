@@ -176,6 +176,7 @@ describe('Get slider type', () => {
     });
 });
 
+
 describe('Get slider orientation', () => {
     test('Should be horizontal', () => {
         expect(_this.getSliderOrientation()).toBe('horizontal');
@@ -185,6 +186,18 @@ describe('Get slider orientation', () => {
         _this = new Presenter(settings, sliderWrapper);
         _this.createNewSlider();
 
+        expect(_this.getSliderOrientation()).toBe('vertical');
+    });
+});
+
+
+describe('Change slider orientation', () => {
+    test('Should be horizontal', () => {
+        _this.changeSliderOrientation('horizontal');
+        expect(_this.getSliderOrientation()).toBe('horizontal');
+    });
+    test('Should be vertical', () => {
+        _this.changeSliderOrientation('vertical');
         expect(_this.getSliderOrientation()).toBe('vertical');
     });
 });
