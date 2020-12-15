@@ -134,6 +134,20 @@ describe('Create thumbs', () => {
     });
 });
 
+
+describe('Get scale visiblity', () => {
+    test('Should be true', () => {
+        expect(_this.getScaleVisiblity()).toBe(true);
+    });
+    test('Should be false', () => {
+        settings.scale = false;
+        _this = new Presenter(settings, sliderWrapper);
+        _this.createNewSlider();
+
+        expect(_this.getScaleVisiblity()).toBe(false);
+    });
+});
+
 // describe('Get Scale Point Max Size', () => {
 //     test('Checking for a notification about the creation of a slider', () => {
 //         let sliderIsCreated: boolean = false;
