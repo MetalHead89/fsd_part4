@@ -245,3 +245,16 @@ describe('Change max value', () => {
         expect(_this['model'].getMax()).toBe(100);
     });
 });
+
+
+describe('Change step', () => {
+    test('Should be 3', () => {
+        _this.changeStep(3);        
+        expect(_this['model']['data'].getStep()).toBe(3);
+    });
+
+    test('Should be 1', () => {
+        _this.changeStep(-1);        
+        expect(_this['model']['data'].getStep()).toBe(1);
+    });
+});
