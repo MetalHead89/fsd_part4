@@ -258,3 +258,15 @@ describe('Change step', () => {
         expect(_this['model']['data'].getStep()).toBe(1);
     });
 });
+
+describe('Change scale visibility', () => {
+    test('Should be true', () => {
+        _this.changeScaleVisibility(true);
+        expect(_this.getScaleVisiblity()).toBe(true);
+    });
+
+    test('Should be false', () => {
+        _this.changeScaleVisibility(false);
+        expect(_this.getScaleVisiblity()).toBe(false);
+    });
+});
