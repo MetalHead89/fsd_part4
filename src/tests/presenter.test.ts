@@ -139,7 +139,7 @@ describe('Get scale visiblity', () => {
     test('Should be true', () => {
         expect(_this.getScaleVisiblity()).toBe(true);
     });
-    
+
     test('Should be false', () => {
         settings.scale = false;
         _this = new Presenter(settings, sliderWrapper);
@@ -230,5 +230,18 @@ describe('Change min value', () => {
     test('Should be 0', () => {
         _this.changeMinValue(101);        
         expect(_this['model']['data'].getMin()).toBe(0);
+    });
+});
+
+
+describe('Change max value', () => {
+    test('Should be 3', () => {
+        _this.changeMaxValue(3);        
+        expect(_this['model'].getMax()).toBe(3);
+    });
+
+    test('Should be 0', () => {
+        _this.changeMaxValue(-1);        
+        expect(_this['model'].getMax()).toBe(100);
     });
 });
