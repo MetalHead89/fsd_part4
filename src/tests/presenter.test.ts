@@ -175,3 +175,16 @@ describe('Get slider type', () => {
         expect(_this.getSliderType()).toBe('single');
     });
 });
+
+describe('Get slider orientation', () => {
+    test('Should be horizontal', () => {
+        expect(_this.getSliderOrientation()).toBe('horizontal');
+    });
+    test('Should be vertical', () => {
+        settings.orienation = 'vertical';
+        _this = new Presenter(settings, sliderWrapper);
+        _this.createNewSlider();
+
+        expect(_this.getSliderOrientation()).toBe('vertical');
+    });
+});
