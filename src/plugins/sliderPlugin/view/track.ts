@@ -11,8 +11,8 @@ class Track {
     private observer: Observer;
 
 
-    constructor(sliderElement: HTMLDivElement, observer: Observer) {
-        this.element = sliderElement;
+    constructor(element: HTMLDivElement, observer: Observer) {
+        this.element = element;
         this.observer = observer
 
         this.element.addEventListener('click', (event) => {
