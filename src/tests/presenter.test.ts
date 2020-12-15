@@ -161,3 +161,17 @@ describe('Get tooltips visiblity', () => {
         expect(_this.getTooltipsVisiblity()).toBe(false);
     });
 });
+
+
+describe('Get slider type', () => {
+    test('Should be range', () => {
+        expect(_this.getSliderType()).toBe('range');
+    });
+    test('Should be single', () => {
+        settings.type = 'single';
+        _this = new Presenter(settings, sliderWrapper);
+        _this.createNewSlider();
+
+        expect(_this.getSliderType()).toBe('single');
+    });
+});
