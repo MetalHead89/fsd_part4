@@ -148,13 +148,16 @@ describe('Get scale visiblity', () => {
     });
 });
 
-// describe('Get Scale Point Max Size', () => {
-//     test('Checking for a notification about the creation of a slider', () => {
-//         let sliderIsCreated: boolean = false;
-//         _this.subscribeToNotifications('sliderElementIsCreated', (size: ISliderSize) => { sliderIsCreated = true });
 
-//         expect(sliderIsCreated).toBe(false);
-//         _this.createNewSlider();
-//         expect(sliderIsCreated).toBe(true);
-//     });
-// });
+describe('Get tooltips visiblity', () => {
+    test('Should be true', () => {
+        expect(_this.getTooltipsVisiblity()).toBe(true);
+    });
+    test('Should be false', () => {
+        settings.tooltips = false;
+        _this = new Presenter(settings, sliderWrapper);
+        _this.createNewSlider();
+
+        expect(_this.getTooltipsVisiblity()).toBe(false);
+    });
+});
