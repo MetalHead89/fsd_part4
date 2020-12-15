@@ -139,6 +139,7 @@ describe('Get scale visiblity', () => {
     test('Should be true', () => {
         expect(_this.getScaleVisiblity()).toBe(true);
     });
+    
     test('Should be false', () => {
         settings.scale = false;
         _this = new Presenter(settings, sliderWrapper);
@@ -153,6 +154,7 @@ describe('Get tooltips visiblity', () => {
     test('Should be true', () => {
         expect(_this.getTooltipsVisiblity()).toBe(true);
     });
+    
     test('Should be false', () => {
         settings.tooltips = false;
         _this = new Presenter(settings, sliderWrapper);
@@ -167,6 +169,7 @@ describe('Get slider type', () => {
     test('Should be range', () => {
         expect(_this.getSliderType()).toBe('range');
     });
+
     test('Should be single', () => {
         settings.type = 'single';
         _this = new Presenter(settings, sliderWrapper);
@@ -181,6 +184,7 @@ describe('Get slider orientation', () => {
     test('Should be horizontal', () => {
         expect(_this.getSliderOrientation()).toBe('horizontal');
     });
+
     test('Should be vertical', () => {
         settings.orienation = 'vertical';
         _this = new Presenter(settings, sliderWrapper);
@@ -196,6 +200,7 @@ describe('Change slider orientation', () => {
         _this.changeSliderOrientation('horizontal');
         expect(_this.getSliderOrientation()).toBe('horizontal');
     });
+
     test('Should be vertical', () => {
         _this.changeSliderOrientation('vertical');
         expect(_this.getSliderOrientation()).toBe('vertical');
@@ -208,8 +213,22 @@ describe('Change slider type', () => {
         _this.changeSliderType('single');
         expect(_this.getSliderType()).toBe('single');
     });
+
     test('Should be range', () => {
         _this.changeSliderType('range');
         expect(_this.getSliderType()).toBe('range');
+    });
+});
+
+
+describe('Change min value', () => {
+    test('Should be 3', () => {
+        _this.changeMinValue(3);        
+        expect(_this['model']['data'].getMin()).toBe(3);
+    });
+
+    test('Should be 0', () => {
+        _this.changeMinValue(101);        
+        expect(_this['model']['data'].getMin()).toBe(0);
     });
 });
