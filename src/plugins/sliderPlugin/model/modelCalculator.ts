@@ -152,7 +152,7 @@ class ModelCalculator {
 
                 if (this.data.getOrientation() === 'horizontal') {
                     this.observer.notify('scaleCreated', { 'width': this.data.getSliderSize().width, 'height': this.data.getScalePointSize().height });
-                } else if (this.data.getOrientation() === 'vertical') {
+                } else {
                     this.observer.notify('scaleCreated', { 'width': this.data.getScalePointSize().width, 'height': this.data.getSliderSize().height });
                 }
             }

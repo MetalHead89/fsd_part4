@@ -191,28 +191,3 @@ describe('End drag', () => {
         _this['endDrag']();
     });
 });
-
-// describe('Thumb touch event and startDrag method', () => {
-//     test('A notification should be sent containing a thumb element and z-index should be 3', () => {
-//         thumbElem = document.createElement('div');
-//         thumbElem.classList.add('slider__thumb_hotizontal');
-//         observer = new Observer();
-//         observer.subscribe('changeZIndexToAnotherThumb',
-//             (elem: HTMLDivElement) => { /*expect(elem).toBe(thumbElem)*/ });
-//         document.body.append(thumbElem);
-//         _this = new Thumb(thumbElem, observer);
-
-//         // expect(_this.getElement().style.zIndex).toBe('');
-//         const touch = new Touch({
-//             identifier: 0,
-//             target: thumbElem,
-//             clientX: 50,
-//             clientY: 40,
-//         });
-//         // const evt: TouchEvent = new  TouchEvent ( 'touchstart' ,  { changedTouches : [touch] } ) ;
-        
-//         // thumbElem.dispatchEvent(evt);
-
-//         // expect(_this.getElement().style.zIndex).toBe('3');
-//     });
-// });
