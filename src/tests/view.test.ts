@@ -21,6 +21,18 @@ beforeEach(() => {
 });
 
 
+describe('Resize event', () => {
+    test('', () => {
+        let windowResized: boolean = false;
+        observer.subscribe('sliderResized', () => { windowResized = true; })
+
+        expect(windowResized).toBe(false);
+        window.dispatchEvent(new Event('resize'));
+        expect(windowResized).toBe(true);
+    });
+});
+
+
 describe('Create slider', () => {
     test('An element with a slider class must be in sliderWrapper', () => {
         expect(sliderWrapper.querySelectorAll('.slider').length).toBe(0);

@@ -43,7 +43,7 @@ class View {
         });
 
         window.addEventListener('resize', () => {
-            this.observer.notify('sliderResized', () => null);
+            this.observer.notify('sliderResized', null);
         }, false);
     }
 
