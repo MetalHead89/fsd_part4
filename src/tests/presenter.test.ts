@@ -270,3 +270,16 @@ describe('Change scale visibility', () => {
         expect(_this.getScaleVisiblity()).toBe(false);
     });
 });
+
+
+describe('Change tooltips visibility', () => {
+    test('Should be true', () => {
+        _this.changeTooltipsVisibility(true);
+        expect(_this.getTooltipsVisiblity()).toBe(true);
+    });
+
+    test('Should be false', () => {
+        _this.changeTooltipsVisibility(false);
+        expect(_this.getTooltipsVisiblity()).toBe(false);
+    });
+});
