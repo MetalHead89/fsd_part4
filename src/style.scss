@@ -31,3 +31,21 @@ html {
     max-width:  500px;
     margin: 0 auto;
 }
+
+.button-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.add-new-slider {
+    width: 40px;
+    height: 40px;
+    background: #e6e5e5;
+    border: none;
+    border-radius: 8px;
+    font-size: 20px;
+    &:active, &:focus {
+        outline: none;
+    }
+}
