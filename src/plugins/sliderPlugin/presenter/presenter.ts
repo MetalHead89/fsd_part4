@@ -72,19 +72,23 @@ class Presenter {
             (cursorPosition: ICursorPosition) => { this.model.moveThumbToClickPosition(cursorPosition) });
         this.observer.subscribe('scaleCreated',
             (scaleSize: IScaleSize) => { this.view.setScaleSize(scaleSize) });
+        this.observer.subscribe('sliderResized', () => {
+            this.view.removeSlider();
+            this.createNewSlider(false);
+        });
     }
 
 
     /**
      * Создаёт новый слайдер исходя из настроек, хранящихся в Model
      */
-    createNewSlider(): void {
+    createNewSlider(isThumbsStartPosition = true): void {
         const orientation = this.model.getSliderOrientation();
 
         this.view.createSlider(`slider slider_${orientation}`);
         this.view.createTrack(`slider__track slider__track_${orientation}`);
         this.view.createProgressBar(`slider__progress-bar slider__progress-bar_${orientation}`)
-        this.createThumbs(orientation);
+        this.createThumbs(orientation, isThumbsStartPosition);
         if (this.model.getScaleVisiblity()) {
             this.view.createScale(`slider__scale slider__scale_${orientation}`);
         }

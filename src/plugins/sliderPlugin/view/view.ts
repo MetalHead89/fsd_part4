@@ -28,13 +28,11 @@ class View {
 
 
     constructor(observer: Observer, sliderWrapper: HTMLElement) {
-
         this.observer = observer;
         this.sliderWrapper = sliderWrapper as HTMLDivElement;
         this.elementFactory = new ElementFactory();
 
         this.observer.subscribe('changeZIndexToAnotherThumb', (thumbElem: HTMLElement) => {
-
             if (this.thumbOne !== null && this.thumbTwo !== null) {
                 if (thumbElem.isEqualNode(this.thumbOne.getElement())) {
                     this.thumbTwo.setZIndex('2')
@@ -42,8 +40,11 @@ class View {
                     this.thumbOne.setZIndex('2');
                 }
             }
-
         });
+
+        window.addEventListener('resize', () => {
+            this.observer.notify('sliderResized', () => null);
+        }, false);
     }
 
 
