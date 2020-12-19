@@ -206,7 +206,7 @@ class Presenter {
      * 
      * @param {string} type - тип слайдера single или range
      */
-    changeSliderType(type: string) {
+    changeSliderType(type: string): void {
         this.view.removeThumbOne();
         this.view.removeThumbTwo();
         this.model.setSliderType(type);
@@ -219,7 +219,7 @@ class Presenter {
      * 
      * @param {number} newMin - минимальное значение 
      */
-    changeMinValue(newMin: number) {
+    changeMinValue(newMin: number): void {
         const valueIsSet: boolean = this.model.setMin(newMin);
 
         if (valueIsSet) {
@@ -234,7 +234,7 @@ class Presenter {
      * 
      * @param {number} newMin - максимальное значение 
      */
-    changeMaxValue(newMax: number) {
+    changeMaxValue(newMax: number): void {
         const valueIsSet: boolean = this.model.setMax(newMax);
 
         if (valueIsSet) {
@@ -249,7 +249,7 @@ class Presenter {
      * 
      * @param {number} newStep - величина с которой перемещается бегунок 
      */
-    changeStep(newStep: number) {
+    changeStep(newStep: number): void {
         const valueIsSet: boolean = this.model.setStep(newStep);
 
         if (valueIsSet) {
@@ -264,7 +264,7 @@ class Presenter {
      * 
      * @param {boolean} scaleVisible - флаг видимости шкалы. true - шкала видна, false - нет
      */
-    changeScaleVisibility(scaleVisible: boolean) {
+    changeScaleVisibility(scaleVisible: boolean): void {
         this.model.setScaleVisibility(scaleVisible);
 
         if (scaleVisible) {
@@ -280,7 +280,7 @@ class Presenter {
      * 
      * @param {boolean} tooltipsVisible - флаг видимости значений бегунков. true - значение отображается, false - нет
      */
-    changeTooltipsVisibility(tooltipsVisible: boolean) {
+    changeTooltipsVisibility(tooltipsVisible: boolean): void {
         this.model.setTooltipsVisible(tooltipsVisible);
 
         if (tooltipsVisible) {
