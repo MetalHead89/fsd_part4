@@ -254,25 +254,21 @@ class ModelData {
      * то оно приравнивается к максимально допустимому значению ограниченному размерами слайдера.
      * Если одно из свойств переданного объекта имеет отрицательное значение, то оно приравнивается к 0
      * 
-     * @param {IThumbPosition} position - объект содержащий новую позицию бегунка относительно левого и правого края родительского контейнера
+     * @param {IThumbPosition} position - объект содержащий новую позицию бегунка относительно левого и верхнего края родительского контейнера
      */
     setThumbOnePosition(position: IThumbPosition): void {
         let left: number = this.getThumbOnePosition().left;
         let top: number = this.getThumbOnePosition().top;
 
 
-        if (this.type === 'single' &&
-            position.left <= (this.getSliderSize().width - this.getThumbSize().width) ||
-            position.left <= this.getThumbTwoPosition().left) {
+        if (!this.thumbIsOutOfRangeHorizontally(position)) {
             left = (position.left >= 0) ? position.left : 0;
         } else {
             left = this.type === 'single' ?
                 (this.getSliderSize().width - this.getThumbSize().width) : this.getThumbTwoPosition().left;
         }
 
-        if (this.type === 'single' &&
-            position.top <= (this.getSliderSize().height - this.getThumbSize().height) ||
-            position.top <= this.getThumbTwoPosition().top) {
+        if (!this.thumbIsOutOfRangeVertically(position)) {
             top = (position.top >= 0) ? position.top : 0;
         } else {
             top = this.type === 'single' ?
@@ -284,9 +280,35 @@ class ModelData {
 
 
     /**
+     * Проверяет не выходит ли бегунок за допустимые пределы по горизонтали
+     * 
+     * @param {IThumbPosition} position - объект содержащий новую позицию бегунка относительно левого и верхнего края родительского контейнера
+     * @returns {boolean} - флаг выхода бегунка за допустимые пределы по горизонтали
+     */
+    private thumbIsOutOfRangeHorizontally(position: IThumbPosition): boolean {
+        return !(this.type === 'single' &&
+            position.left <= (this.getSliderSize().width - this.getThumbSize().width) ||
+            position.left <= this.getThumbTwoPosition().left);
+    }
+
+
+    /**
+     * Проверяет не выходит ли бегунок за допустимые пределы по вертикали
+     * 
+     * @param {IThumbPosition} position - объект содержащий новую позицию бегунка относительно левого и верхнего края родительского контейнера
+     * @returns {boolean} - флаг выхода бегунка за допустимые пределы по вертикали
+     */
+    private thumbIsOutOfRangeVertically(position: IThumbPosition): boolean {
+        return !(this.type === 'single' &&
+            position.top <= (this.getSliderSize().height - this.getThumbSize().height) ||
+            position.top <= this.getThumbTwoPosition().top);
+    }
+
+
+    /**
      * Возвращает позицию бегунка относительно левого и верхнего края родительского контейнера
      * 
-     * @returns {IThumbPosition} - объект содержащий позицию бегунка относительно левого и правого края родительского контейнера
+     * @returns {IThumbPosition} - объект содержащий позицию бегунка относительно левого и верхнего края родительского контейнера
      */
     getThumbOnePosition(): IThumbPosition {
         return this.thumbOnePosition;
@@ -299,7 +321,7 @@ class ModelData {
      * Если одно из свойств переданного объекта превышает максимально возможную позицию бегунка, ограниченную размерами слайдера,
      * то оно приравнивается к соответствующему свойству последней корректной позиции
      * 
-     * @param {IThumbPosition} position - объект содержащий новую позицию бегунка относительно левого и правого края родительского контейнера
+     * @param {IThumbPosition} position - объект содержащий новую позицию бегунка относительно левого и верхнего края родительского контейнера
      */
     setThumbTwoPosition(position: IThumbPosition): void {
         let left: number = this.getThumbTwoPosition().left;
@@ -323,7 +345,7 @@ class ModelData {
     /**
     * Возвращает позицию бегунка относительно левого и верхнего края родительского контейнера
     * 
-    * @returns {IThumbPosition} - объект содержащий позицию бегунка относительно левого и правого края родительского контейнера
+    * @returns {IThumbPosition} - объект содержащий позицию бегунка относительно левого и верхнего края родительского контейнера
     */
     getThumbTwoPosition(): IThumbPosition {
         return this.thumbTwoPosition;
