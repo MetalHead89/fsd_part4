@@ -29,7 +29,7 @@ class ModelCalculator {
      * 
      * @param {IThumbPosition} thumbPosition - сырая позиция бегунка, может выходить за пределы слайдера или второго бегунка
      */
-    dragThumbOne(thumbPosition: IThumbPosition) {
+    dragThumbOne(thumbPosition: IThumbPosition): void {
         this.data.setThumbOnePosition(this.changePositionAccordingToStep(thumbPosition));
         const correctThumOnePosition: IThumbPosition = this.data.getThumbOnePosition();
         const thumbValue: number = this.positionToValue(this.getElementPosByOrientation(this.data.getThumbOnePosition()));
@@ -44,7 +44,7 @@ class ModelCalculator {
      * 
      * @param {IThumbPosition} thumbPosition - сырая позиция бегунка, может выходить за пределы слайдера или первого бегунка
      */
-    dragThumbTwo(thumbPosition: IThumbPosition) {
+    dragThumbTwo(thumbPosition: IThumbPosition): void {
         this.data.setThumbTwoPosition(this.changePositionAccordingToStep(thumbPosition));
         const correctThumTwoPosition: IThumbPosition = this.data.getThumbTwoPosition();
         const thumbValue: number = this.positionToValue(this.getElementPosByOrientation(this.data.getThumbTwoPosition()));
@@ -75,7 +75,7 @@ class ModelCalculator {
 
 
     /** Устанавливает первый бегунок на стартовую позицию */
-    setThumbOneToStartingPosition() {
+    setThumbOneToStartingPosition(): void {
         if (this.data.getOrientation() === 'horizontal') {
             if (this.data.getSliderType() === 'single') {
                 this.dragThumbOne({
@@ -105,7 +105,7 @@ class ModelCalculator {
 
 
     /** Устанавливает второй бегунок на стартовую позицию */
-    setThumbTwoToStartingPosition() {
+    setThumbTwoToStartingPosition(): void {
         if (this.data.getOrientation() === 'horizontal') {
             this.dragThumbTwo({
                 'left': this.data.getSliderSize().width * 0.7 - this.data.getThumbSize().width / 2,
@@ -121,12 +121,12 @@ class ModelCalculator {
 
 
     /** Генерирует шкалу исходя из размеров слайдера, количества шагов, минимального и максимального значения */
-    generateScale() {
+    generateScale(): void {
         let scalePointPosition = this.getElementSizeByOrientation(this.data.getThumbSize()) / 2 - this.getElementSizeByOrientation(this.data.getScalePointSize()) / 2;
         const stepsCount: number = this.calculateStepsCount();
         const stepSize: number = this.calculateStepSize();
 
-        let prevScalePointPosition: number = 0;
+        let prevScalePointPosition = 0;
         const scalePointsCount = stepsCount + 1;
 
         for (let i = 0; i <= Math.round(scalePointsCount - 1); i++) {
