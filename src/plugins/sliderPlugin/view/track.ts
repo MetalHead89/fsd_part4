@@ -13,11 +13,25 @@ class Track {
 
     constructor(element: HTMLDivElement, observer: Observer) {
         this.element = element;
-        this.observer = observer
+        this.observer = observer;
+        this.addClickEventListener();
+    }
 
-        this.element.addEventListener('click', (event) => {
-            this.observer.notify('clickOnTheTrack', this.getPosition({ 'x': event.clientX, 'y': event.clientY }));
-        });
+
+    /**
+     * Добавляет событие на клик по дорожке слайдера
+     */
+    private addClickEventListener(): void {
+        this.element.addEventListener('click', this.clickToTrack.bind(this));
+    }
+
+
+    /**
+     * Обработка клика по дорожке. Метод отправляет уведомление с координатами курсора
+     * @param {MouseEvent} event - объект события клика 
+     */
+    private clickToTrack(event: MouseEvent): void {
+        this.observer.notify('clickOnTheTrack', this.getPosition({ 'x': event.clientX, 'y': event.clientY }));
     }
 
 
@@ -29,7 +43,7 @@ class Track {
      * @returns {ICursorPosition} - объект с позицией курсора относительно левого и верхнего края родительского контейнера
      */
     private getPosition(cursorPosition: ICursorPosition): ICursorPosition {
-        let positionInsideParent: ICursorPosition = Object.assign({}, cursorPosition);
+        const positionInsideParent: ICursorPosition = Object.assign({}, cursorPosition);
         const parrent: HTMLElement | null = this.element.parentElement;
 
         if (parrent !== null) {

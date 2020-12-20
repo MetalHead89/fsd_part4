@@ -31,6 +31,7 @@ class View {
         this.observer = observer;
         this.sliderWrapper = sliderWrapper as HTMLDivElement;
         this.elementFactory = new ElementFactory();
+        this.addWindowResizeEventListener();
 
         this.observer.subscribe('changeZIndexToAnotherThumb', (thumbElem: HTMLElement) => {
             if (this.thumbOne !== null && this.thumbTwo !== null) {
@@ -40,11 +41,23 @@ class View {
                     this.thumbOne.setZIndex('2');
                 }
             }
-        });
+        });        
+    }
 
-        window.addEventListener('resize', () => {
-            this.observer.notify('sliderResized', null);
-        }, false);
+
+    /**
+     * Добавляет событие на изменение размера окна
+     */
+    private addWindowResizeEventListener(): void {
+        window.addEventListener('resize', this.windowResize.bind(this));
+    }
+
+
+    /**
+     * Обработка изменения размера окна
+     */
+    private windowResize(): void {
+        this.observer.notify('sliderResized', null);
     }
 
 
@@ -56,7 +69,7 @@ class View {
      * 
      * @param {string} styleClasses - классы для контейнера элементов слайдера
      */
-    createSlider(styleClasses: string) {
+    createSlider(styleClasses: string): void {
         this.slider = this.elementFactory.createSlider(this.sliderWrapper, styleClasses);
         this.observer.notify('sliderElementIsCreated', this.slider.getSize());
     }
@@ -69,7 +82,7 @@ class View {
      * 
      * @param {string} styleClasses - классы для контейнера элементов слайдера
      */
-    createTrack(styleClasses: string) {
+    createTrack(styleClasses: string): void {
         if (this.slider != null) {
             this.track = this.elementFactory.createTrack(this.slider.getElement(), styleClasses, this.observer);
         }
@@ -84,7 +97,7 @@ class View {
      * 
      * @param {string} styleClasses - классы для бегунка
      */
-    createThumbOne(styleClasses: string) {  
+    createThumbOne(styleClasses: string): void {  
         if (this.slider != null) {
             this.thumbOne = this.elementFactory.createThumb(this.slider.getElement(), styleClasses, this.observer);
             this.observer.notify('thumbOneIsCreated', this.thumbOne.getSize());
@@ -99,7 +112,7 @@ class View {
      * 
      * @param {string} styleClasses - классы для бегунка
      */
-    createThumbTwo(styleClasses: string) {
+    createThumbTwo(styleClasses: string): void {
         if (this.slider != null) {
             this.thumbTwo = this.elementFactory.createThumb(this.slider.getElement(), styleClasses, this.observer);
         }
@@ -113,7 +126,7 @@ class View {
      * 
      * @param {string} styleClasses - классы для создаваемого элемента
      */
-    createTooltipOne(styleClasses: string) {
+    createTooltipOne(styleClasses: string): void {
         if (this.slider != null && this.thumbOne != null) {
             this.tooltipOne = this.elementFactory.createTooltip(this.thumbOne.getElement(), styleClasses);
         }
@@ -127,7 +140,7 @@ class View {
      * 
      * @param {string} styleClasses - классы для создаваемого элемента
      */
-    createTooltipTwo(styleClasses: string) {
+    createTooltipTwo(styleClasses: string): void {
         if (this.slider != null && this.thumbTwo != null) {
             this.tooltipTwo = this.elementFactory.createTooltip(this.thumbTwo.getElement(), styleClasses);
         }
@@ -141,7 +154,7 @@ class View {
      * 
      * @param {string} styleClasses - классы для создаваемого элемента
      */
-    createProgressBar(styleClasses: string) {
+    createProgressBar(styleClasses: string): void {
 
         if (this.slider != null) {
             this.progressBar = this.elementFactory.createProgressBar(this.slider.getElement(), styleClasses);
@@ -157,7 +170,7 @@ class View {
      * 
      * @param {string} styleClasses - классы для создаваемого элемента
      */
-    createScale(styleClasses: string) {
+    createScale(styleClasses: string): void {
         if (this.slider != null) {
             this.scale = this.elementFactory.createScale(this.slider.getElement(), styleClasses, this.observer);
             this.observer.notify('scaleIsCreated', null);
@@ -183,7 +196,7 @@ class View {
      * 
      * @param {number} newValue - значение над первым бегунком
      */
-    tooltipOneSetValue(newValue: number) {
+    tooltipOneSetValue(newValue: number): void {
         if (this.tooltipOne !== null) {
             this.tooltipOne.setValue(newValue)
         }
@@ -207,7 +220,7 @@ class View {
      * 
      * @param {number} newValue - значение над первым бегунком
      */
-    tooltipTwoSetValue(newValue: number) {
+    tooltipTwoSetValue(newValue: number): void {
         if (this.tooltipTwo !== null) {
             this.tooltipTwo.setValue(newValue)
         }
@@ -220,7 +233,7 @@ class View {
      * @param {IProgressBarPosition} progressPosition - объект с позицией прогресс бара. Содержит сведения об ориентации,
      * точке начала и ширине (или высоте, в зависимости от ориентации слайдера) прогресс бара
      */
-    setProgressBarPosition(progressPosition: IProgressBarPosition) {
+    setProgressBarPosition(progressPosition: IProgressBarPosition): void {
         if (this.progressBar !== null) {
             this.progressBar.setPosition(progressPosition);
         }
@@ -248,7 +261,7 @@ class View {
      * 
      * @param {IScalePointSettings} pointSettings - объект с позицией, размером и значением новой точки шкалы
      */
-    addScalePoint(pointSettings: IScalePointSettings) {
+    addScalePoint(pointSettings: IScalePointSettings): void {
         if (this.scale !== null) {
             this.scale.addScalePoint(pointSettings.position, pointSettings.scalePointSize, pointSettings.scalePointValue);
         }
