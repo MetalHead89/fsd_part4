@@ -1,3 +1,5 @@
+import { ICreateObject } from '../interfaces';
+
 import Observer from '../observer/observer';
 import Slider from './slider';
 import Track from './track';
@@ -11,7 +13,7 @@ import Scale from './scale';
  * Класс-фабрика для создания элементов слайдера
  */
 class ElementFactory {
-    private createElement(parrent: HTMLDivElement, styleClasses: string, createObj: Function): any {
+    private createElement(parrent: HTMLDivElement, styleClasses: string, createObj: ICreateObject): any {
 
         /**
          * Метод для создания объектов различных классов.

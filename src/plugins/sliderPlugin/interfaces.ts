@@ -16,6 +16,10 @@ export interface IObservable {
     [index: string]: IObserverFunc[]
 }
 
+export interface ICreateObject {
+    (obj: any): any;
+}
+
 export interface ISliderSize {
     'width': number,
     'height': number
