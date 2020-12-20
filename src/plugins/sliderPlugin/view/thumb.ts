@@ -13,26 +13,49 @@ class Thumb {
     private element: HTMLDivElement;
     private observer: Observer;
     private shift: IThumbShift = { 'shiftX': 0, 'shiftY': 0 };
-    private onMouseMoveHandler: Function = new Function();
-    private onMouseUpHandler: Function = new Function();
+    private onMouseMoveHandler = new Function();
+    private onMouseUpHandler = new Function();
 
 
     constructor(thumbElement: HTMLDivElement, observer: Observer) {
         this.element = thumbElement;
         this.observer = observer;
-        // this.element.ondragstart = function () {
-        //     return false;
-        // };
+        this.addMousedownEventListener();
+        this.addTouchstartEventListener();
+    }
 
-        this.element.addEventListener('mousedown', (event: MouseEvent) => {
-            this.startDrag(event.clientX, event.clientY);
-            return false; // disable selection start (cursor change)
-        });
 
-        this.element.addEventListener('touchstart', (event: TouchEvent) => {
-            this.startDrag(event.targetTouches[0].pageX, event.targetTouches[0].pageY);
-            return false; // disable selection start (cursor change)
-        });
+    /**
+     * Добавляет событие на нажатие кнопки мыши на бегунке
+     */
+    private addMousedownEventListener(): void {
+        this.element.addEventListener('mousedown', this.moveMouse.bind(this));
+    }
+
+
+    /**
+     * Обработка перемещения мыши
+     * @param {MouseEvent} event - объект события клика 
+     */
+    private moveMouse(event: MouseEvent): void {
+        this.startDrag(event.clientX, event.clientY);
+    }
+
+
+    /**
+     * Добавляет событие касания бегунка
+     */
+    private addTouchstartEventListener(): void {
+        this.element.addEventListener('touchstart', this.moveTouch.bind(this));
+    }
+
+
+    /**
+     * Обработка перемещения бегунка пальцем
+     * @param {TouchEvent} event - объект события перемещения пальца при касании 
+     */
+    private moveTouch(event: TouchEvent): void {
+        this.startDrag(event.targetTouches[0].pageX, event.targetTouches[0].pageY);
     }
 
 
@@ -149,7 +172,7 @@ class Thumb {
      * @returns {ICursorPosition} - объект с позицией курсора относительно левого и верхнего края родительского контейнера
      */
     private getPosition(cursorPosition: ICursorPosition): IThumbPosition {
-        let positionInsideParent: IThumbPosition = {'left': cursorPosition.x, 'top': cursorPosition.y};
+        const positionInsideParent: IThumbPosition = {'left': cursorPosition.x, 'top': cursorPosition.y};
 
         const parrent: HTMLElement | null = this.element.parentElement;
 
