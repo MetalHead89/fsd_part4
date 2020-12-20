@@ -8,8 +8,12 @@ export interface ISliderSettings {
     'step': number
 }
 
+export interface IObserverFunc {
+    (data: any): void;
+}
+
 export interface IObservable {
-    [index: string]: Function[]
+    [index: string]: IObserverFunc[]
 }
 
 export interface ISliderSize {

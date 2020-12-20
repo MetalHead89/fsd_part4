@@ -1,4 +1,5 @@
 import { IObservable } from '../interfaces';
+import { IObserverFunc } from '../interfaces';
 
 
 /**
@@ -20,7 +21,7 @@ class Observable {
      * @param {string} notification - уведомление при получении которого вызывается функция func
      * @param {Function} func - функция, которая вызывается после получения наблюдателем уведомления notification
      */
-    subscribe(notification: string, func: Function): void {
+    subscribe(notification: string, func: IObserverFunc): void {
         this.observables[notification] = this.observables[notification] || [];
         this.observables[notification].push(func);
     }
@@ -32,7 +33,7 @@ class Observable {
      * @param {string} notification - уведомление из которого нужно удалить обработчик func
      * @param {Function} func - функция, которую необходимо удалить из уведомления notification
      */
-    unsubscribe(notification: string, func: Function): void {
+    unsubscribe(notification: string, func: IObserverFunc): void {
         this.observables[notification] = this.observables[notification].filter(subscriberfunc => subscriberfunc !== func);
     }
 
@@ -47,7 +48,7 @@ class Observable {
      */
     notify(notification: string, data: any): void {
         if (this.observables[notification]) {
-            this.observables[notification].forEach(function (listener: Function) {
+            this.observables[notification].forEach(function (listener: IObserverFunc) {
                 listener(data);
             });
         }
