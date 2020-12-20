@@ -17,10 +17,24 @@ class Scale {
         this.element = element;
         this.observer = observer;
         this.orientation = element.classList.contains('slider__scale_vertical') ? 'vertical' : 'horizontal';
+        this.addClickEventListener();
+    }
 
-        this.element.addEventListener('click', (event) => {
-            this.observer.notify('clickOnTheScale', this.getPosition({ 'x': event.clientX, 'y': event.clientY }));
-        });
+
+    /**
+     * Добавляет событие на клик по шкале
+     */
+    private addClickEventListener(): void {
+        this.element.addEventListener('click', this.clickToScale.bind(this));
+    }
+
+
+    /**
+     * Обработка клика по шкале. Метод отправляет уведомление с координатами курсора
+     * @param {MouseEvent} event - объект события клика 
+     */
+    private clickToScale(event: MouseEvent): void {
+        this.observer.notify('clickOnTheScale', this.getPosition({ 'x': event.clientX, 'y': event.clientY }));
     }
 
 
@@ -113,7 +127,7 @@ class Scale {
      * @returns {ICursorPosition} - объект с позицией курсора относительно левого и верхнего края родительского контейнера
      */
     private getPosition(cursorPosition: ICursorPosition): ICursorPosition {
-        let positionInsideParent: ICursorPosition = Object.assign({}, cursorPosition);
+        const positionInsideParent: ICursorPosition = Object.assign({}, cursorPosition);
         const parrent: HTMLElement | null = this.element.parentElement;
 
         if (parrent !== null) {
