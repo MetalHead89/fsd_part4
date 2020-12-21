@@ -35,7 +35,7 @@ class InputRadio extends PanelElement {
         this.control = wrapper;
     }
 
-    getControl() {
+    getControl(): HTMLDivElement {
         return this.control;
     }
 
