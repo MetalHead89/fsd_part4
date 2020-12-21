@@ -22,7 +22,7 @@ class InputText extends PanelElement{
         this.control = this.createControl(controlParams);
     }
 
-    getControl() {
+    getControl(): HTMLDivElement {
         return this.control;
     }
 
