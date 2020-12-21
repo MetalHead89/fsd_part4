@@ -8,16 +8,16 @@ export interface ISliderSettings {
     'step': number
 }
 
-export interface IObserverFunc {
-    (data: any): void;
+export interface IObserverFunc<T> {
+    (data: T): void;
 }
 
 export interface IObservable {
-    [index: string]: IObserverFunc[]
+    [index: string]: IObserverFunc<any>[];
 }
 
-export interface ICreateObject {
-    (obj: any): any;
+export interface ICreateObject<T> {
+    (obj: HTMLDivElement): T;
 }
 
 export interface ISliderSize {

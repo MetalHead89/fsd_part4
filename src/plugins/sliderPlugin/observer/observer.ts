@@ -21,7 +21,7 @@ class Observable {
      * @param {string} notification - уведомление при получении которого вызывается функция func
      * @param {Function} func - функция, которая вызывается после получения наблюдателем уведомления notification
      */
-    subscribe(notification: string, func: IObserverFunc): void {
+    subscribe<T>(notification: string, func: IObserverFunc<T>): void {
         this.observables[notification] = this.observables[notification] || [];
         this.observables[notification].push(func);
     }
@@ -33,7 +33,7 @@ class Observable {
      * @param {string} notification - уведомление из которого нужно удалить обработчик func
      * @param {Function} func - функция, которую необходимо удалить из уведомления notification
      */
-    unsubscribe(notification: string, func: IObserverFunc): void {
+    unsubscribe<T>(notification: string, func: IObserverFunc<T>): void {
         this.observables[notification] = this.observables[notification].filter(subscriberfunc => subscriberfunc !== func);
     }
 
@@ -46,9 +46,9 @@ class Observable {
      * @param {any} data - аргумент, который будет передан в функцию, вызываемую после получения
      * наблюдателем уведомления notification
      */
-    notify(notification: string, data: any): void {
+    notify<T>(notification: string, data: T): void {
         if (this.observables[notification]) {
-            this.observables[notification].forEach(function (listener: IObserverFunc) {
+            this.observables[notification].forEach(function (listener: IObserverFunc<T>) {
                 listener(data);
             });
         }

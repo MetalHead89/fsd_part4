@@ -13,7 +13,7 @@ import Scale from './scale';
  * Класс-фабрика для создания элементов слайдера
  */
 class ElementFactory {
-    private createElement<T>(parrent: HTMLDivElement, styleClasses: string, createObj: ICreateObject): T {
+    private createElement<T>(parrent: HTMLDivElement, styleClasses: string, createObj: ICreateObject<T>): T {
 
         /**
          * Метод для создания объектов различных классов.
