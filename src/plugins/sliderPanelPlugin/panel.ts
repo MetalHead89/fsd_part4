@@ -37,14 +37,14 @@ class Panel {
         this.sliderPanel.append(inputTextsGroup);
         this.sliderPanel.append(checkboxesAndRadioWrapper);
 
-        const sliderType: string = String(this.sliderElem.incredibleSliderPlugin('getSliderType'));
+        const sliderType = String(this.sliderElem.incredibleSliderPlugin('getSliderType'));
         if (sliderType == 'single') {
             this.singleRadioButton.checked = true;
         } else if (sliderType == 'range') {
             this.rangeRadioButton.checked = true;
         }
 
-        const sliderOrientation: string = String(this.sliderElem.incredibleSliderPlugin('getSliderOrientation'));
+        const sliderOrientation = String(this.sliderElem.incredibleSliderPlugin('getSliderOrientation'));
         if (sliderOrientation == 'horizontal') {
             this.setSliderWrapperHorizontalOrientation();
             this.horizontalRadioButton.checked = true;
@@ -61,22 +61,64 @@ class Panel {
     }
 
     private addEventListenersToPanel() {
-        this.minValue.addEventListener('input', () => { this.setMinValueSlider(this.sliderElem) });
-        this.maxValue.addEventListener('input', () => { this.setMaxValueSlider(this.sliderElem) });
-        this.step.addEventListener('input', () => { this.setStepValueSlider(this.sliderElem) });
-        this.scaleChBox.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('changeScaleVisibility', this.scaleChBox.checked) });
-        this.tooltipChBox.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('changeTooltipsVisibility', this.tooltipChBox.checked) });
-        this.singleRadioButton.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('changeSliderType', this.singleRadioButton.value) });
-        this.rangeRadioButton.addEventListener('click', () => { this.sliderElem.incredibleSliderPlugin('changeSliderType', this.rangeRadioButton.value) });
-        this.horizontalRadioButton.addEventListener('click', () => {
-            this.setSliderWrapperHorizontalOrientation();
-            this.sliderElem.incredibleSliderPlugin('changeSliderOrientation', this.horizontalRadioButton.value);
-        });
-        this.verticalRadioButton.addEventListener('click', () => {
-            this.setSliderWrapperVerticalOrientation();
-            this.sliderElem.incredibleSliderPlugin('changeSliderOrientation', this.verticalRadioButton.value)
-        });
+        this.minValue.addEventListener('input', this.minInputEvent.bind(this));
+        this.maxValue.addEventListener('input', this.maxInputEvent.bind(this));
+        this.step.addEventListener('input', this.stepInputEvent.bind(this));
+        this.scaleChBox.addEventListener('click', this.scaleChBoxClickEvent.bind(this));
+        this.tooltipChBox.addEventListener('click', this.tooltipChBoxClickEvent.bind(this));
+        this.singleRadioButton.addEventListener('click', this.singleRadioButtonClickEvent.bind(this));
+        this.rangeRadioButton.addEventListener('click', this.rangeRadioButtonClickEvent.bind(this));
+        this.horizontalRadioButton.addEventListener('click', this.horizontalRadioButtonClickEvent.bind(this));
+        this.verticalRadioButton.addEventListener('click', this.verticalRadioButtonClickEvent.bind(this));
     }
+
+
+    private minInputEvent(): void {
+        this.setMinValueSlider(this.sliderElem);
+    }
+
+
+    private maxInputEvent(): void {
+        this.setMaxValueSlider(this.sliderElem);
+    }
+
+
+    private stepInputEvent(): void {
+        this.setStepValueSlider(this.sliderElem);
+    }
+
+
+    private scaleChBoxClickEvent(): void {
+        this.sliderElem.incredibleSliderPlugin('changeScaleVisibility', this.scaleChBox.checked);
+    }
+
+
+    private tooltipChBoxClickEvent(): void {
+        this.sliderElem.incredibleSliderPlugin('changeTooltipsVisibility', this.tooltipChBox.checked);
+    }
+
+
+    private singleRadioButtonClickEvent(): void {
+        this.sliderElem.incredibleSliderPlugin('changeSliderType', this.singleRadioButton.value);
+    }
+
+
+    private rangeRadioButtonClickEvent(): void {
+        this.sliderElem.incredibleSliderPlugin('changeSliderType', this.rangeRadioButton.value);
+    }
+
+
+    private horizontalRadioButtonClickEvent(): void {
+        this.setSliderWrapperHorizontalOrientation();
+        this.sliderElem.incredibleSliderPlugin('changeSliderOrientation', this.horizontalRadioButton.value);
+    }
+
+
+    private verticalRadioButtonClickEvent(): void {
+        this.setSliderWrapperVerticalOrientation();
+        this.sliderElem.incredibleSliderPlugin('changeSliderOrientation', this.verticalRadioButton.value)
+    }
+
 
     private createInputTextGroup(): HTMLDivElement {
 

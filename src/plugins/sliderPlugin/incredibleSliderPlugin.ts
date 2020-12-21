@@ -16,7 +16,7 @@ import Presenter from './presenter/presenter';
     };
 
     // API мотоды плагина
-    const methods: any = {  ///////////////////////////////////////////// ТИП ANY /////////////////////////////////////////////
+    const methods: any = {
 
         init: function (options: ISliderSettings) {
 
@@ -24,7 +24,7 @@ import Presenter from './presenter/presenter';
             const settings: ISliderSettings = $.extend(defaultSettings, options);
 
             // Создание слайдеров
-            return this.each(function (this: any) { ///////////////////////////////////////////// ТИП ANY /////////////////////////////////////////////
+            return this.each(function (this: any) {
                 // const observer = new Observable();
                 // const model: Model = new Model(observer, settings);
                 // const view: View = new View(observer, this,
