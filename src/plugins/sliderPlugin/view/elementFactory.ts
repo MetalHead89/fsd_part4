@@ -13,7 +13,7 @@ import Scale from './scale';
  * Класс-фабрика для создания элементов слайдера
  */
 class ElementFactory {
-    private createElement(parrent: HTMLDivElement, styleClasses: string, createObj: ICreateObject): any {
+    private createElement<T>(parrent: HTMLDivElement, styleClasses: string, createObj: ICreateObject): T {
 
         /**
          * Метод для создания объектов различных классов.
@@ -56,7 +56,7 @@ class ElementFactory {
      */
     createSlider(parrent: HTMLDivElement, styleClasses: string): Slider {
         const createSliderObj = (obj: HTMLDivElement) => { return new Slider(obj) }
-        const slider = this.createElement(parrent, styleClasses, createSliderObj);
+        const slider = this.createElement<Slider>(parrent, styleClasses, createSliderObj);
 
         return slider
     }
@@ -79,7 +79,7 @@ class ElementFactory {
      */
     createTrack(parrent: HTMLDivElement, styleClasses: string, observer: Observer): Track {
         const createTrackrObj = (obj: HTMLDivElement) => { return new Track(obj, observer) }
-        const track = this.createElement(parrent, styleClasses, createTrackrObj);
+        const track = this.createElement<Track>(parrent, styleClasses, createTrackrObj);
 
         return track;
     }
@@ -102,7 +102,7 @@ class ElementFactory {
      */
     createThumb(parrent: HTMLDivElement, styleClasses: string, observer: Observer): Thumb {
         const createThumbObj = (obj: HTMLDivElement) => { return new Thumb(obj, observer) }
-        const thumb = this.createElement(parrent, styleClasses, createThumbObj);
+        const thumb = this.createElement<Thumb>(parrent, styleClasses, createThumbObj);
 
         return thumb;
     }
@@ -124,7 +124,7 @@ class ElementFactory {
      */
     createTooltip(parrent: HTMLDivElement, styleClasses: string): Tooltip {
         const createTooltipObj = (obj: HTMLDivElement) => { return new Tooltip(obj) }
-        const tooltip = this.createElement(parrent, styleClasses, createTooltipObj);
+        const tooltip = this.createElement<Tooltip>(parrent, styleClasses, createTooltipObj);
 
         return tooltip;
     }
@@ -147,7 +147,7 @@ class ElementFactory {
     createProgressBar(parrent: HTMLDivElement, styleClasses: string): ProgressBar {
 
         const createProgressBarObj = (obj: HTMLDivElement) => { return new ProgressBar(obj) }
-        const progressBar = this.createElement(parrent, styleClasses, createProgressBarObj);
+        const progressBar = this.createElement<ProgressBar>(parrent, styleClasses, createProgressBarObj);
 
         return progressBar;
 
@@ -172,7 +172,7 @@ class ElementFactory {
     createScale(parrent: HTMLDivElement, styleClasses: string, observer: Observer): Scale {
 
         const createScaleObj = (obj: HTMLDivElement) => { return new Scale(obj, observer) }
-        const scale = this.createElement(parrent, styleClasses, createScaleObj);
+        const scale = this.createElement<Scale>(parrent, styleClasses, createScaleObj);
 
         return scale;
 
