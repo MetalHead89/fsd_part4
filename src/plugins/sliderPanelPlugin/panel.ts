@@ -61,9 +61,8 @@ class Panel {
     }
 
     private addEventListenersToPanel() {
-        // this.minValue.addEventListener('input', this.minInputEvent.bind(this));
         this.minValue.addEventListener('keyup', this.minKeyupEvent.bind(this));
-        this.maxValue.addEventListener('input', this.maxInputEvent.bind(this));
+        this.maxValue.addEventListener('keyup', this.maxKeyupEvent.bind(this));
         this.step.addEventListener('input', this.stepInputEvent.bind(this));
         this.scaleChBox.addEventListener('click', this.scaleChBoxClickEvent.bind(this));
         this.tooltipChBox.addEventListener('click', this.tooltipChBoxClickEvent.bind(this));
@@ -73,19 +72,15 @@ class Panel {
         this.verticalRadioButton.addEventListener('click', this.verticalRadioButtonClickEvent.bind(this));
     }
 
-
-    // private minInputEvent(): void {
-    //     // this.setMinValueSlider(this.sliderElem);
-    // }
-
     private minKeyupEvent(): void {
         const minValue = this.minValue.value.replace(/[^\d]/g,'');
         this.setMinValueSlider(this.sliderElem, minValue);
     }
 
 
-    private maxInputEvent(): void {
-        this.setMaxValueSlider(this.sliderElem);
+    private maxKeyupEvent(): void {
+        const maxValue = this.maxValue.value.replace(/[^\d]/g,'');
+        this.setMaxValueSlider(this.sliderElem, maxValue);
     }
 
 
@@ -246,12 +241,14 @@ class Panel {
         }
     }
 
-    private setMaxValueSlider(slider: JQuery<HTMLElement>) {
+    private setMaxValueSlider(slider: JQuery<HTMLElement>, newValue: string) {
         if (this.maxValue) {
-            const maxValue = parseInt(this.maxValue.value);
-
+            const maxValue = parseInt(newValue);
             if (!isNaN(maxValue)) {
                 slider.incredibleSliderPlugin('setMax', maxValue);
+                this.maxValue.value = maxValue.toString();
+            } else {
+                this.maxValue.value = '0';
             }
         }
     }
