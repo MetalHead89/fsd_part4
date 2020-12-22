@@ -194,6 +194,16 @@ class Presenter {
 
 
     /**
+     * Возврацает максимальное значение слайдера
+     * 
+     * @returns {number} - максимальное значение слайдера
+     */
+    getSliderMaxValue(): number {
+        return this.model.getMax();
+    }
+
+
+    /**
      * Изменяет ориентацию слайдера
      * 
      * @param orienation - ориентация слайдера horizontal или vertical
@@ -251,6 +261,16 @@ class Presenter {
             this.view.removeSlider();
             this.createNewSlider();
         }
+    }
+
+
+    /**
+     * Возвращает шаг, с которым перемещается бегунок
+     * 
+     * @returns {number} - величина шага перемещения бегунка
+     */
+    getSliderStep(): number {
+        return this.model.getStep();
     }
 
 

@@ -216,6 +216,16 @@ class Model {
 
 
     /**
+     * Возвращает шаг, с которым перемещается бегунок
+     * 
+     * @returns {number} - величина шага перемещения бегунка
+     */
+    getStep(): number {
+        return this.data.getStep();
+    }
+
+
+    /**
      * Устанавливает флаг видимости шкалы
      * 
      * @param {boolean} scaleVisible - флаг видимости шкалы. true - шкала видна, false - нет

@@ -122,6 +122,8 @@ class Panel {
 
     private createInputTextGroup(): HTMLDivElement {
         this.minValue.value = String(this.sliderElem.incredibleSliderPlugin('getMin'));
+        this.maxValue.value = String(this.sliderElem.incredibleSliderPlugin('getMax'));
+        this.step.value = String(this.sliderElem.incredibleSliderPlugin('getStep'));
 
         const inputTextsGroup: HTMLDivElement = this.wrapElements(
             'slider-panel__input-text-group',

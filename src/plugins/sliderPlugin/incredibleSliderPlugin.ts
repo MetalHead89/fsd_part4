@@ -48,6 +48,12 @@ import Presenter from './presenter/presenter';
         setMax: function(value: number) {
             $(this).data().sliderPresenter.changeMaxValue(value);
         },
+        getMax: function() {
+            return $(this).data().sliderPresenter.getSliderMaxValue();
+        },
+        getStep: function() {
+            return $(this).data().sliderPresenter.getSliderStep();
+        },
         setStep: function(value: number) {
             $(this).data().sliderPresenter.changeStep(value);
         },
