@@ -63,7 +63,7 @@ class Panel {
     private addEventListenersToPanel() {
         this.minValue.addEventListener('keyup', this.minKeyupEvent.bind(this));
         this.maxValue.addEventListener('keyup', this.maxKeyupEvent.bind(this));
-        this.step.addEventListener('input', this.stepInputEvent.bind(this));
+        this.step.addEventListener('keyup', this.stepKeyupEvent.bind(this));
         this.scaleChBox.addEventListener('click', this.scaleChBoxClickEvent.bind(this));
         this.tooltipChBox.addEventListener('click', this.tooltipChBoxClickEvent.bind(this));
         this.singleRadioButton.addEventListener('click', this.singleRadioButtonClickEvent.bind(this));
@@ -74,19 +74,19 @@ class Panel {
 
     private minKeyupEvent(): void {
         const minValue = this.minValue.value.replace(/[^\d]/g,'');
-        this.setMinValueSlider(this.sliderElem, minValue);
+        this.setMinValueSlider(minValue);
     }
 
 
     private maxKeyupEvent(): void {
         const maxValue = this.maxValue.value.replace(/[^\d]/g,'');
-        this.setMaxValueSlider(this.sliderElem, maxValue);
+        this.setMaxValueSlider(maxValue);
     }
 
 
-    private stepInputEvent(): void {
+    private stepKeyupEvent(): void {
         const step = this.step.value.replace(/[^\d]/g,'');
-        this.setStepValueSlider(this.sliderElem, step);
+        this.setStepValueSlider(step);
     }
 
 
@@ -230,35 +230,45 @@ class Panel {
         this.sliderPanel.classList.add('slider-panel_vertical');
     }
 
-    private setMinValueSlider(slider: JQuery<HTMLElement>, newValue: string) {
+    private setMinValueSlider(newValue: string) {
         if (this.minValue) {
-            const minValue = parseInt(newValue);
-            if (!isNaN(minValue)) {
-                slider.incredibleSliderPlugin('setMin', minValue);
-                this.minValue.value = minValue.toString();
-            } else {
-                this.minValue.value = '0';
+            let minValue = parseInt(newValue);
+
+            if (isNaN(minValue)) {
+                minValue = 0;
             }
+
+            if (minValue >= parseInt(this.maxValue.value)) {
+                minValue = Number(this.sliderElem.incredibleSliderPlugin('getMax')) - 1;
+            }
+
+            this.sliderElem.incredibleSliderPlugin('setMin', minValue);
+            this.minValue.value = minValue.toString();
         }
     }
 
-    private setMaxValueSlider(slider: JQuery<HTMLElement>, newValue: string) {
+    private setMaxValueSlider(newValue: string) {
         if (this.maxValue) {
-            const maxValue = parseInt(newValue);
-            if (!isNaN(maxValue)) {
-                slider.incredibleSliderPlugin('setMax', maxValue);
-                this.maxValue.value = maxValue.toString();
-            } else {
-                this.maxValue.value = '0';
+            let maxValue = parseInt(newValue);
+
+            if (isNaN(maxValue)) {
+                maxValue = Number(this.sliderElem.incredibleSliderPlugin('getMax'));
             }
+
+            if (maxValue <= parseInt(this.minValue.value)) {
+                maxValue = Number(this.sliderElem.incredibleSliderPlugin('getMin')) + 1;
+            }
+
+            this.sliderElem.incredibleSliderPlugin('setMax', maxValue);
+            this.maxValue.value = maxValue.toString();
         }
     }
 
-    private setStepValueSlider(slider: JQuery<HTMLElement>, newValue: string) {
+    private setStepValueSlider(newValue: string) {
         if (this.step) {
             const step = parseInt(newValue);
             if (!isNaN(step)) {
-                slider.incredibleSliderPlugin('setStep', step);
+                this.sliderElem.incredibleSliderPlugin('setStep', step);
                 this.step.value = step.toString();
             } else {
                 this.step.value = '1';
