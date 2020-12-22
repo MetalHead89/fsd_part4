@@ -61,7 +61,8 @@ class Panel {
     }
 
     private addEventListenersToPanel() {
-        this.minValue.addEventListener('input', this.minInputEvent.bind(this));
+        // this.minValue.addEventListener('input', this.minInputEvent.bind(this));
+        this.minValue.addEventListener('keyup', this.minKeyupEvent.bind(this));
         this.maxValue.addEventListener('input', this.maxInputEvent.bind(this));
         this.step.addEventListener('input', this.stepInputEvent.bind(this));
         this.scaleChBox.addEventListener('click', this.scaleChBoxClickEvent.bind(this));
@@ -73,8 +74,13 @@ class Panel {
     }
 
 
-    private minInputEvent(): void {
-        this.setMinValueSlider(this.sliderElem);
+    // private minInputEvent(): void {
+    //     // this.setMinValueSlider(this.sliderElem);
+    // }
+
+    private minKeyupEvent(): void {
+        const minValue = this.minValue.value.replace(/[^\d]/g,'');
+        this.setMinValueSlider(this.sliderElem, minValue);
     }
 
 
@@ -228,12 +234,14 @@ class Panel {
         this.sliderPanel.classList.add('slider-panel_vertical');
     }
 
-    private setMinValueSlider(slider: JQuery<HTMLElement>) {
+    private setMinValueSlider(slider: JQuery<HTMLElement>, newValue: string) {
         if (this.minValue) {
-            const minValue = parseInt(this.minValue.value);
-
+            const minValue = parseInt(newValue);
             if (!isNaN(minValue)) {
                 slider.incredibleSliderPlugin('setMin', minValue);
+                this.minValue.value = minValue.toString();
+            } else {
+                this.minValue.value = '0';
             }
         }
     }
