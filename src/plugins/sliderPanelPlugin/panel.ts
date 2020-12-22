@@ -85,7 +85,8 @@ class Panel {
 
 
     private stepInputEvent(): void {
-        this.setStepValueSlider(this.sliderElem);
+        const step = this.step.value.replace(/[^\d]/g,'');
+        this.setStepValueSlider(this.sliderElem, step);
     }
 
 
@@ -253,12 +254,14 @@ class Panel {
         }
     }
 
-    private setStepValueSlider(slider: JQuery<HTMLElement>) {
+    private setStepValueSlider(slider: JQuery<HTMLElement>, newValue: string) {
         if (this.step) {
-            const step = parseInt(this.step.value);
-
+            const step = parseInt(newValue);
             if (!isNaN(step)) {
                 slider.incredibleSliderPlugin('setStep', step);
+                this.step.value = step.toString();
+            } else {
+                this.step.value = '1';
             }
         }
     }
