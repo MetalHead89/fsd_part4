@@ -7,8 +7,6 @@ html {
 }
 
 body {
-    // background-image: url('./images/page_background.jpg');
-    // background-size: contain;
     background: url('./images/page_background.jpg'), linear-gradient(90deg, rgba(132,231,247,0.9) 0%, rgba(244,56,236,0.9) 100%);
     background-blend-mode: screen;
 }
@@ -21,6 +19,9 @@ body {
     max-width:  500px;
     margin: 20px auto;
     display: flex;
+    -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
 }
 
 .slider-wrapper_horizontal {
