@@ -184,6 +184,16 @@ class Presenter {
 
 
     /**
+     * Возврацает минимальное значение слайдера
+     * 
+     * @returns {number} - минимальное значение слайдера
+     */
+    getSliderMinValue(): number {
+        return this.model.getMin();
+    }
+
+
+    /**
      * Изменяет ориентацию слайдера
      * 
      * @param orienation - ориентация слайдера horizontal или vertical

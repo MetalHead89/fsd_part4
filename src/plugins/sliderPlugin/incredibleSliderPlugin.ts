@@ -42,6 +42,9 @@ import Presenter from './presenter/presenter';
         setMin: function(value: number) {
             $(this).data().sliderPresenter.changeMinValue(value);
         },
+        getMin: function() {
+            return $(this).data().sliderPresenter.getSliderMinValue();
+        },
         setMax: function(value: number) {
             $(this).data().sliderPresenter.changeMaxValue(value);
         },
