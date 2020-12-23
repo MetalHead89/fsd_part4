@@ -6,7 +6,7 @@ import '@/plugins/sliderPlugin/styles/style.scss'
 import '@/plugins/sliderPanelPlugin/styles/style.scss'
 import '@/fonts/fontsStyles.scss'
 
-const addNewSliderBtn = document.querySelector('.add-new-slider');
+const addNewSliderBtn = document.querySelector('.add-new-slider-btn');
 let helpImage: HTMLElement | null = document.querySelector('.help-image')
 const buttonWrapper = document.querySelector('.button-wrapper');
 

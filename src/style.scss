@@ -49,7 +49,7 @@ body {
     justify-content: center;
 }
 
-.add-new-slider {
+.add-new-slider-btn {
     width: 40px;
     height: 40px;
     background: white;
@@ -60,8 +60,18 @@ body {
     -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
     box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
     transition: background .2s ease-in;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    & .add-new-slider-btn__icon {
+        transition: transform .1s ease-in;
+        pointer-events: none;
+    }
     &:hover {
-        background: rgba(228, 235, 236, 0.9);
+        background: rgba(240, 243, 243, 0.9);        
+        & .add-new-slider-btn__icon {            
+            transform: rotate(45deg);
+        }
     }
     &:active, &:focus {
         outline: none;
