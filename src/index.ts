@@ -25,9 +25,13 @@ function clickToAddNewSliderBtn(): void {
         sliderWrapper.classList.add('slider-wrapper');
         buttonWrapper.before(sliderWrapper);
 
-        const removeSliderButton = document.createElement('div');
+        const icon = document.createElement('span');
+        icon.classList.add('material-icons', 'remove-slider-button__icon');
+        icon.innerText = 'clear';
+
+        const removeSliderButton = document.createElement('button');
         removeSliderButton.classList.add('remove-slider-button');
-        removeSliderButton.innerText = 'x';
+        removeSliderButton.append(icon);
         removeSliderButton.addEventListener('click', removeSlider.bind(removeSliderButton, sliderWrapper));
         sliderWrapper.append(removeSliderButton);
         

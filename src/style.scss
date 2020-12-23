@@ -64,13 +64,13 @@ body {
     align-items: center;
     justify-content: center;
     & .add-new-slider-btn__icon {
-        transition: transform .1s ease-in;
+        transition: transform .2s ease-in;
         pointer-events: none;
     }
     &:hover {
         background: rgba(240, 243, 243, 0.9);        
         & .add-new-slider-btn__icon {            
-            transform: rotate(45deg);
+            transform: rotate(90deg);
         }
     }
     &:active, &:focus {
@@ -87,14 +87,25 @@ body {
 }
 
 .remove-slider-button {
-    width: 25px;
-    height: 25px;
-    background: rgb(189, 189, 189);
+    background: white;
     position: absolute;
     right: 5px;
     top: 5px;
-    border-radius: 50%;
+    border: none;
+    font-size: 20px;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    & .remove-slider-button__icon {
+        transition: transform .2s ease-in;
+        pointer-events: none;
+    }
+    &:hover {      
+        & .remove-slider-button__icon {            
+            transform: rotate(90deg);
+        }
+    }
+    &:active, &:focus {
+        outline: none;
+    }
 }
