@@ -22,6 +22,14 @@ class Thumb {
         this.observer = observer;
         this.addMousedownEventListener();
         this.addTouchstartEventListener();
+        this.disableDragAndDrop();
+    }
+
+
+    private disableDragAndDrop() {
+        this.element.ondragstart = function() {
+            return false;
+          };
     }
 
 
