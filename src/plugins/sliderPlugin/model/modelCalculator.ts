@@ -1,4 +1,4 @@
-import { IThumbPosition } from '../interfaces'
+import { IThumbPosition, ITooltipPosition } from '../interfaces'
 import { ISliderSize } from '../interfaces';
 import { IThumbSize } from '../interfaces'
 import { IScalePointSize } from '../interfaces'
@@ -157,6 +157,28 @@ class ModelCalculator {
                 }
             }
         }
+    }
+
+
+    /**
+     * Возвращает позицию значения над бегунком
+     * 
+     * @param {IThumbPosition} thumbPosition - позиция бегунка
+     * @returns {ITooltipPosition} - позиция значения над бегунком
+     */
+    getTooltipPosition(thumbPosition: IThumbPosition): ITooltipPosition {
+        const orientation = this.data.getOrientation();
+        const thumbSize = this.data.getThumbSize();
+        let left = 0;
+        let top = 0;
+    
+        if (orientation === 'horizontal') {
+            left = thumbPosition.left + thumbSize.width / 2;
+        } else {
+            top = thumbPosition.top + thumbSize.height / 2;
+        }
+
+        return ({'left': left, 'top': top});    
     }
 
 

@@ -1,4 +1,4 @@
-import { ISliderSettings } from '../interfaces';
+import { ISliderSettings, ITooltipPosition } from '../interfaces';
 import { ISliderSize } from '../interfaces';
 import { IThumbSize } from '../interfaces';
 import { IThumbPosition } from '../interfaces';
@@ -292,6 +292,17 @@ class Model {
      */
     moveThumbToClickPosition(cursorPosition: ICursorPosition): void {
         this.calculator.moveThumbToClickPosition(cursorPosition);
+    }
+
+
+    /**
+     * Возвращает позицию значения над бегунком
+     * 
+     * @param {IThumbPosition} thumbPosition - позиция бегунка
+     * @returns {ITooltipPosition} - позиция значения над бегунком
+     */
+    getTooltipPosition(thumbPosition: IThumbPosition): ITooltipPosition {
+        return this.calculator.getTooltipPosition(thumbPosition);
     }
 
 }

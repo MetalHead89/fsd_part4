@@ -1,3 +1,5 @@
+import { IThumbPosition } from "../interfaces";
+
 /**
  * Класс для управления элементами для показа значений над бегунками
  */
@@ -17,6 +19,12 @@ class Tooltip {
      */
     setValue(newValue: number): void {
         this.element.innerText = newValue.toString();
+    }
+
+
+    moveTo(position: IThumbPosition): void {
+        this.element.style.left = position.left + 'px';
+        this.element.style.top = position.top + 'px';
     }
 
 

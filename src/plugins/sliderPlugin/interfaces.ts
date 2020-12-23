@@ -40,6 +40,11 @@ export interface IThumbPosition {
     'top': number
 }
 
+export interface ITooltipPosition {
+    'left': number,
+    'top': number
+}
+
 export interface ICursorPosition {
     'x': number,
     'y': number

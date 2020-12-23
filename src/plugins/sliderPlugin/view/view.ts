@@ -128,7 +128,7 @@ class View {
      */
     createTooltipOne(styleClasses: string): void {
         if (this.slider != null && this.thumbOne != null) {
-            this.tooltipOne = this.elementFactory.createTooltip(this.thumbOne.getElement(), styleClasses);
+            this.tooltipOne = this.elementFactory.createTooltip(this.slider.getElement(), styleClasses);
         }
     }
 
@@ -142,7 +142,7 @@ class View {
      */
     createTooltipTwo(styleClasses: string): void {
         if (this.slider != null && this.thumbTwo != null) {
-            this.tooltipTwo = this.elementFactory.createTooltip(this.thumbTwo.getElement(), styleClasses);
+            this.tooltipTwo = this.elementFactory.createTooltip(this.slider.getElement(), styleClasses);
         }
     }
 
@@ -189,6 +189,13 @@ class View {
             this.thumbOne.moveTo(position);
         }
     }
+    
+
+    moveTooltipOne(position: IThumbPosition): void {
+        if (this.tooltipOne !== null) {
+            this.tooltipOne.moveTo(position);
+        }
+    }
 
 
     /**
@@ -211,6 +218,13 @@ class View {
     moveThumbTwo(position: IThumbPosition): void {
         if (this.thumbTwo != null) {
             this.thumbTwo.moveTo(position);
+        }
+    }
+
+
+    moveTooltipTwo(position: IThumbPosition): void {
+        if (this.tooltipTwo !== null) {
+            this.tooltipTwo.moveTo(position);
         }
     }
 

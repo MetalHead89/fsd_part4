@@ -52,11 +52,13 @@ class Presenter {
             (args: IDragThumbArgs) => {
                 this.view.moveThumbOne(args.thumbPosition);
                 this.view.tooltipOneSetValue(args.tooltipValue);
+                this.view.moveTooltipOne(this.model.getTooltipPosition(args.thumbPosition));
             });
         this.observer.subscribe('thumbTwoDragged',
             (args: IDragThumbArgs) => {
                 this.view.moveThumbTwo(args.thumbPosition);
                 this.view.tooltipTwoSetValue(args.tooltipValue);
+                this.view.moveTooltipTwo(this.model.getTooltipPosition(args.thumbPosition));
             });
         this.observer.subscribe('progressBarDraged',
             (progressBarPosition: IProgressBarPosition) => { this.view.setProgressBarPosition(progressBarPosition) });
