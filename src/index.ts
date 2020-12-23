@@ -7,22 +7,25 @@ import '@/plugins/sliderPanelPlugin/styles/style.scss'
 import '@/fonts/fontsStyles.scss'
 
 const addNewSliderBtn = document.querySelector('.add-new-slider');
-const buttonWrapper = document.querySelector('.button-wrapper')
+let helpImage: HTMLElement | null = document.querySelector('.helpImage')
+const buttonWrapper = document.querySelector('.button-wrapper');
+
 if (addNewSliderBtn !== null) {
-    addNewSliderBtn.addEventListener('click', () => {
-        if (buttonWrapper !== null) {
-            const sliderWrapper = document.createElement('div');
-            sliderWrapper.classList.add('slider-wrapper');
-            buttonWrapper.before(sliderWrapper);
-            $(sliderWrapper).incredibleSliderPlugin();
-            $(sliderWrapper).sliderControlPanel();
-        }
-    });
+    addNewSliderBtn.addEventListener('click', clickToAddNewSliderBtn);
 }
 
-// Поиск блоков с классом incredibleSliderPlugin и передача их плагину для добавления в них слайдеров
-// const sliders = $('.slider-wrapper').incredibleSliderPlugin();
+function clickToAddNewSliderBtn(): void {
+    if (buttonWrapper !== null) {
+        const sliderWrapper = document.createElement('div');
+        sliderWrapper.classList.add('slider-wrapper');
+        buttonWrapper.before(sliderWrapper);
 
-// sliders.each(function() {
-//     $(this).sliderControlPanel();
-// });
+        if (helpImage != null) {
+            helpImage.remove();
+            helpImage = null;
+        }
+        
+        $(sliderWrapper).incredibleSliderPlugin();
+        $(sliderWrapper).sliderControlPanel();
+    }
+}
