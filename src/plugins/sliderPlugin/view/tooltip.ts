@@ -1,4 +1,4 @@
-import { IThumbPosition } from "../interfaces";
+import { ITooltipPosition } from "../interfaces";
 
 /**
  * Класс для управления элементами для показа значений над бегунками
@@ -22,7 +22,12 @@ class Tooltip {
     }
 
 
-    moveTo(position: IThumbPosition): void {
+    /**
+     * Изменяет позицию значения над бегунком
+     * 
+     * @param {ITooltipPosition} position - позиция значения над бегунком
+     */
+    moveTo(position: ITooltipPosition): void {
         this.element.style.left = position.left + 'px';
         this.element.style.top = position.top + 'px';
     }

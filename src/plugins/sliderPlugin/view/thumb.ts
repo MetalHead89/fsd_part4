@@ -37,7 +37,7 @@ class Thumb {
      * Обработка перемещения мыши
      * @param {MouseEvent} event - объект события клика 
      */
-    private moveMouse(event: MouseEvent): void {
+    private moveMouse(event: MouseEvent): void {        
         this.startDrag(event.clientX, event.clientY);
     }
 
@@ -178,8 +178,8 @@ class Thumb {
 
         if (parrent !== null) {
             const parrentCoords: DOMRect = parrent.getBoundingClientRect();
-            positionInsideParent.left = positionInsideParent.left - parrentCoords.left;
-            positionInsideParent.top = positionInsideParent.top - parrentCoords.top;
+            positionInsideParent.left = positionInsideParent.left - parrentCoords.left - this.shift.shiftX;
+            positionInsideParent.top = positionInsideParent.top - parrentCoords.top - this.shift.shiftY;
         }
 
         return positionInsideParent;

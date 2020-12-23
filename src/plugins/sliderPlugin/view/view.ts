@@ -1,4 +1,4 @@
-import { IThumbPosition } from '../interfaces';
+import { IThumbPosition, ITooltipPosition } from '../interfaces';
 import { IProgressBarPosition } from '../interfaces';
 import { IScalePointSize } from '../interfaces';
 import { IScalePointSettings } from '../interfaces';
@@ -191,6 +191,11 @@ class View {
     }
     
 
+    /**
+     * Изменяет позицию значения над первым бегунком
+     * 
+     * @param {ITooltipPosition} position - позиция значения над бегунком
+     */
     moveTooltipOne(position: IThumbPosition): void {
         if (this.tooltipOne !== null) {
             this.tooltipOne.moveTo(position);
@@ -222,7 +227,12 @@ class View {
     }
 
 
-    moveTooltipTwo(position: IThumbPosition): void {
+    /**
+     * Изменяет позицию значения над вторым бегунком
+     * 
+     * @param {ITooltipPosition} position - позиция значения над бегунком
+     */
+    moveTooltipTwo(position: ITooltipPosition): void {
         if (this.tooltipTwo !== null) {
             this.tooltipTwo.moveTo(position);
         }
