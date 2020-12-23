@@ -7,7 +7,7 @@ import '@/plugins/sliderPanelPlugin/styles/style.scss'
 import '@/fonts/fontsStyles.scss'
 
 const addNewSliderBtn = document.querySelector('.add-new-slider');
-let helpImage: HTMLElement | null = document.querySelector('.helpImage')
+let helpImage: HTMLElement | null = document.querySelector('.help-image')
 const buttonWrapper = document.querySelector('.button-wrapper');
 
 if (addNewSliderBtn !== null) {
@@ -16,16 +16,26 @@ if (addNewSliderBtn !== null) {
 
 function clickToAddNewSliderBtn(): void {
     if (buttonWrapper !== null) {
-        const sliderWrapper = document.createElement('div');
-        sliderWrapper.classList.add('slider-wrapper');
-        buttonWrapper.before(sliderWrapper);
-
         if (helpImage != null) {
             helpImage.remove();
             helpImage = null;
         }
+
+        const sliderWrapper = document.createElement('div');
+        sliderWrapper.classList.add('slider-wrapper');
+        buttonWrapper.before(sliderWrapper);
+
+        const removeSliderButton = document.createElement('div');
+        removeSliderButton.classList.add('remove-slider-button');
+        removeSliderButton.innerText = 'x';
+        removeSliderButton.addEventListener('click', removeSlider.bind(removeSliderButton, sliderWrapper));
+        sliderWrapper.append(removeSliderButton);
         
         $(sliderWrapper).incredibleSliderPlugin();
         $(sliderWrapper).sliderControlPanel();
     }
+}
+
+function removeSlider(sliderWrapper: HTMLDivElement) {
+    sliderWrapper.remove();
 }

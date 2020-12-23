@@ -12,6 +12,7 @@ body {
 }
 
 .slider-wrapper {
+    position: relative;
     background: white;
     border-radius: 8px;
     padding: 50px;
@@ -67,10 +68,23 @@ body {
     }
 }
 
-.helpImage {
+.help-image {
     display: block;
     width: 100%;
     max-width: 440px;
     margin: 0 auto;
     padding: 10px;
+}
+
+.remove-slider-button {
+    width: 25px;
+    height: 25px;
+    background: rgb(189, 189, 189);
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

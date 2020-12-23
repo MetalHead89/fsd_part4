@@ -26,7 +26,10 @@ class Thumb {
     }
 
 
-    private disableDragAndDrop() {
+    /**
+     * Отключает html5 Drag and Drop
+     */
+    private disableDragAndDrop(): void {
         this.element.ondragstart = function() {
             return false;
           };
