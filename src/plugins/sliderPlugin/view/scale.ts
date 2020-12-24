@@ -147,14 +147,13 @@ class Scale {
      * @returns {IBorderCoords} - Координаты границ шкалы
      */
     getCoords(): IBorderCoords {
-        const firstPointCoords = this.element.children[0].getBoundingClientRect();
-        const lastPointCoords = this.element.children[this.element.children.length - 1].getBoundingClientRect();
+        const ScaleCoords = this.element.getBoundingClientRect();
 
         return {
-            'left': firstPointCoords.left,
-            'top': firstPointCoords.top,
-            'right': lastPointCoords.right,
-            'bottom': lastPointCoords.bottom
+            'left': ScaleCoords.left,
+            'top': ScaleCoords.top,
+            'right': ScaleCoords.right,
+            'bottom': ScaleCoords.bottom
         };
     }
 

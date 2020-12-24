@@ -182,6 +182,7 @@ console.log(elements.scaleCoords)
         } else {
             if (elements.sliderCoords !== null && elements.scaleCoords !== null) {
                 right = elements.scaleCoords.right - elements.sliderCoords.right;
+                console.log(right)
                 left = right;
             } else if (elements.scaleCoords === null && elements.tooltipCoords !== null) {
                 if (elements.sliderCoords !== null) {
