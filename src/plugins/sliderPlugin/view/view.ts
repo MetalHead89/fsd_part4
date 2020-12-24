@@ -335,6 +335,7 @@ class View {
     removeSlider(): void {
         if (this.slider !== null) {
             this.slider.remove();
+            this.slider = null;
         }
     }
 
@@ -365,6 +366,7 @@ class View {
     removeScale(): void {
         if (this.scale !== null) {
             this.scale.remove();
+            this.scale = null;
         }
     }
 
@@ -375,6 +377,7 @@ class View {
     removeTooltipOne(): void {
         if (this.tooltipOne !== null) {
             this.tooltipOne.remove();
+            this.tooltipOne = null;
         }
     }
 
@@ -385,6 +388,7 @@ class View {
     removeTooltipTwo(): void {
         if (this.tooltipTwo !== null) {
             this.tooltipTwo.remove();
+            this.tooltipTwo = null;
         }
     }
 

@@ -89,6 +89,7 @@ class Presenter {
      * с вложенными в него элементами с абсолютным позиционированием
      */
     private addMarginsToSlider() {
+        this.view.setSliderMargins({'left': 0, 'top': 0, 'right': 0, 'bottom': 0});
         const margins = this.model.getSliderMargins(this.view.getCoordsForMargins());
         this.view.setSliderMargins(margins);
     }

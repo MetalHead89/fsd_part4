@@ -162,16 +162,32 @@ class ModelCalculator {
     }
 
 
+    /**
+     * Расчитывает и возвращает отступы слайдера
+     * 
+     * @param {ICoordsForMargins} elements - объект с координатами слайдера, шкалы и значения позиции бегунка
+     * @returns {ISliderMargins} - объект со значениями отступов
+     */
     getSliderMargins(elements: ICoordsForMargins): ISliderMargins {
         let left = 0;
         let top = 0;
         let right = 0;
         let bottom = 0;
-
+console.log(elements.scaleCoords)
         if (this.data.getOrientation() === 'horizontal') {
             if (elements.sliderCoords !== null && elements.scaleCoords !== null) {
-                top = elements.scaleCoords.bottom - elements.sliderCoords.bottom;
-                bottom = top;
+                bottom = elements.scaleCoords.bottom - elements.sliderCoords.bottom;
+                top = bottom;
+            }
+        } else {
+            if (elements.sliderCoords !== null && elements.scaleCoords !== null) {
+                right = elements.scaleCoords.right - elements.sliderCoords.right;
+                left = right;
+            } else if (elements.scaleCoords === null && elements.tooltipCoords !== null) {
+                if (elements.sliderCoords !== null) {
+                    right = elements.sliderCoords.left - elements.tooltipCoords.left;
+                    left = right;
+                }
             }
         }
 
