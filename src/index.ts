@@ -22,6 +22,10 @@ function clickToAddNewSliderBtn(): void {
             helpImage = null;
         }
 
+        if (addNewSliderBtn != null) {
+            addNewSliderBtn.classList.remove('add-new-slider-btn_margin-top');
+        }
+
         const sliderWrapper = document.createElement('div');
         sliderWrapper.classList.add('slider-wrapper');
         buttonWrapper.before(sliderWrapper);
@@ -43,4 +47,9 @@ function clickToAddNewSliderBtn(): void {
 
 function removeSlider(sliderWrapper: HTMLDivElement) {
     sliderWrapper.remove();
+    if (document.querySelectorAll('.slider-wrapper').length == 0) {
+        if (addNewSliderBtn !== null) {
+            addNewSliderBtn.classList.add('add-new-slider-btn_margin-top');
+        }
+    }
 }
