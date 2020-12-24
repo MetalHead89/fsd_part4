@@ -2,6 +2,7 @@ import '@/plugins/sliderPlugin/incredibleSliderPlugin.ts'
 import '@/plugins/sliderPanelPlugin/sliderControlPanel.ts'
 
 import '@/style.scss';
+import '@/normalize.scss';
 import '@/plugins/sliderPlugin/styles/style.scss'
 import '@/plugins/sliderPanelPlugin/styles/style.scss'
 import '@/fonts/fontsStyles.scss'
