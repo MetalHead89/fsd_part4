@@ -4,6 +4,8 @@ import { IThumbSize } from '../interfaces'
 import { IScalePointSize } from '../interfaces'
 import { IProgressBarPosition } from '../interfaces';
 import { ICursorPosition } from '../interfaces';
+import { ICoordsForMargins } from '../interfaces';
+import { ISliderMargins } from '../interfaces';
 
 import Observer from '../observer/observer';
 import ModelData from './modelData';
@@ -157,6 +159,28 @@ class ModelCalculator {
                 }
             }
         }
+    }
+
+
+    getSliderMargins(elements: ICoordsForMargins): ISliderMargins {
+        let left = 0;
+        let top = 0;
+        let right = 0;
+        let bottom = 0;
+
+        if (this.data.getOrientation() === 'horizontal') {
+            if (elements.sliderCoords !== null && elements.scaleCoords !== null) {
+                top = elements.scaleCoords.bottom - elements.sliderCoords.bottom;
+                bottom = top;
+            }
+        }
+
+        return {
+            'left': left,
+            'top': top,
+            'right': right,
+            'bottom': bottom
+        }        
     }
 
 

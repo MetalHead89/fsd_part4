@@ -1,5 +1,6 @@
 import { IScalePointSize } from '../interfaces';
 import { ICursorPosition } from '../interfaces';
+import { IBorderCoords } from '../interfaces';
 
 import Observer from "../observer/observer";
 
@@ -137,6 +138,24 @@ class Scale {
         }
 
         return positionInsideParent;
+    }
+
+
+    /**
+     * Возвращает координаты границ шкалы
+     * 
+     * @returns {IBorderCoords} - Координаты границ шкалы
+     */
+    getCoords(): IBorderCoords {
+        const firstPointCoords = this.element.children[0].getBoundingClientRect();
+        const lastPointCoords = this.element.children[this.element.children.length - 1].getBoundingClientRect();
+
+        return {
+            'left': firstPointCoords.left,
+            'top': firstPointCoords.top,
+            'right': lastPointCoords.right,
+            'bottom': lastPointCoords.bottom
+        };
     }
 
 }

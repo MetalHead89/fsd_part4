@@ -1,4 +1,5 @@
 import { ITooltipPosition } from "../interfaces";
+import { IBorderCoords } from '../interfaces';
 
 /**
  * Класс для управления элементами для показа значений над бегунками
@@ -38,6 +39,23 @@ class Tooltip {
      */
     remove(): void {
         this.element.remove();
+    }
+
+
+    /**
+     * Возвращает координаты границ значения над бегунком
+     * 
+     * @returns {IBorderCoords} - Координаты границ значения над бегунком
+     */
+    getCoords(): IBorderCoords {
+        const tooltipCoords = this.element.getBoundingClientRect();
+
+        return {
+            'left': tooltipCoords.left,
+            'top': tooltipCoords.top,
+            'right': tooltipCoords.right,
+            'bottom': tooltipCoords.bottom
+        };
     }
 }
 

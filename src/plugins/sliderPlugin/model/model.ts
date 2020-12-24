@@ -1,4 +1,4 @@
-import { ISliderSettings, ITooltipPosition } from '../interfaces';
+import { ICoordsForMargins, ISliderMargins, ISliderSettings, ITooltipPosition } from '../interfaces';
 import { ISliderSize } from '../interfaces';
 import { IThumbSize } from '../interfaces';
 import { IThumbPosition } from '../interfaces';
@@ -305,6 +305,10 @@ class Model {
         return this.calculator.getTooltipPosition(thumbPosition);
     }
 
+
+    getSliderMargins(elements: ICoordsForMargins): ISliderMargins {
+        return this.calculator.getSliderMargins(elements);
+    }
 }
 
 export default Model;

@@ -64,7 +64,7 @@ class Presenter {
             (progressBarPosition: IProgressBarPosition) => { this.view.setProgressBarPosition(progressBarPosition) });
         this.observer.subscribe('scaleIsCreated', () => {
             this.model.setScalePointSize(this.getScalePointMaxSize());
-            this.model.generateScale()
+            this.model.generateScale();
         });
         this.observer.subscribe('addScalePoint',
             (pointSettings: IScalePointSettings) => { this.view.addScalePoint(pointSettings) });
@@ -73,11 +73,24 @@ class Presenter {
         this.observer.subscribe('clickOnTheTrack',
             (cursorPosition: ICursorPosition) => { this.model.moveThumbToClickPosition(cursorPosition) });
         this.observer.subscribe('scaleCreated',
-            (scaleSize: IScaleSize) => { this.view.setScaleSize(scaleSize) });
+            (scaleSize: IScaleSize) => {
+                this.view.setScaleSize(scaleSize);
+                this.addMarginsToSlider();
+            });
         this.observer.subscribe('sliderResized', () => {
             this.view.removeSlider();
             this.createNewSlider(false);
         });
+    }
+
+
+    /**
+     * Добавляет отступы к слайдеру. Отступы нужны для формирования размера контейнера в соответствии
+     * с вложенными в него элементами с абсолютным позиционированием
+     */
+    private addMarginsToSlider() {
+        const margins = this.model.getSliderMargins(this.view.getCoordsForMargins());
+        this.view.setSliderMargins(margins);
     }
 
 

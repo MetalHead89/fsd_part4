@@ -3,6 +3,9 @@ import { IProgressBarPosition } from '../interfaces';
 import { IScalePointSize } from '../interfaces';
 import { IScalePointSettings } from '../interfaces';
 import { IScaleSize } from '../interfaces';
+import { IBorderCoords } from '../interfaces';
+import { ICoordsForMargins } from '../interfaces';
+import { ISliderMargins } from '../interfaces';
 
 import Observer from '../observer/observer';
 import Slider from './slider';
@@ -199,6 +202,40 @@ class View {
     moveTooltipOne(position: IThumbPosition): void {
         if (this.tooltipOne !== null) {
             this.tooltipOne.moveTo(position);
+        }
+    }
+
+
+    /**
+     * Возвращает объект с координатами границ слайдера, шкалы и элемента со значением позиции бегунка
+     * 
+     * @returns {ICoordsForMargins} - объект с координатами границ слайдера, шкалы и элемента со значением позиции бегунка
+     */
+    getCoordsForMargins(): ICoordsForMargins {
+        let sliderCoords: IBorderCoords | null = null;
+        let tooltipOneCoords: IBorderCoords | null = null;
+        let scaleCoords: IBorderCoords | null = null;
+
+        if (this.slider !== null) {
+            sliderCoords = this.slider.getCoords();
+        }
+        if (this.tooltipOne !== null) {
+            tooltipOneCoords = this.tooltipOne.getCoords();
+        }
+        if (this.scale !== null) {
+            scaleCoords = this.scale.getCoords();
+        }
+
+        return {
+            'sliderCoords': sliderCoords,
+            'tooltipCoords': tooltipOneCoords,
+            'scaleCoords': scaleCoords
+        }
+    }
+
+    setSliderMargins(margins: ISliderMargins): void {
+        if (this.slider !== null) {
+            this.slider.setMargins(margins);
         }
     }
 

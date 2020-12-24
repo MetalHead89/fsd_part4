@@ -1,4 +1,6 @@
-import { ISliderSize } from '../interfaces'
+import { ISliderSize } from '../interfaces';
+import { IBorderCoords } from '../interfaces';
+import { ISliderMargins } from '../interfaces';
 
 
 /**
@@ -54,6 +56,28 @@ class Slider {
      */
     remove(): void {
         this.element.remove();
+    }
+
+
+    /**
+     * Возвращает координаты границ слайдера
+     * 
+     * @returns {IBorderCoords} - Координаты границ слайдера
+     */
+    getCoords(): IBorderCoords {
+        const sliderCoords = this.element.getBoundingClientRect();
+
+        return {
+            'left': sliderCoords.left,
+            'top': sliderCoords.top,
+            'right': sliderCoords.right,
+            'bottom': sliderCoords.bottom
+        };
+    }
+
+
+    setMargins(margins: ISliderMargins): void {
+        this.element.style.margin = `${margins.top}px ${margins.right}px ${margins.bottom}px ${margins.left}px`
     }
 
 }

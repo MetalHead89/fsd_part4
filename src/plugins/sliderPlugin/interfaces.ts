@@ -45,6 +45,26 @@ export interface ITooltipPosition {
     'top': number
 }
 
+export interface IBorderCoords {
+    'left': number,
+    'top': number,
+    'right': number,
+    'bottom': number
+}
+
+export interface ICoordsForMargins {
+    'sliderCoords': IBorderCoords | null,
+    'tooltipCoords': IBorderCoords | null,
+    'scaleCoords': IBorderCoords | null
+}
+
+export interface ISliderMargins {
+    'left': number,
+    'top': number,
+    'right': number,
+    'bottom': number
+}
+
 export interface ICursorPosition {
     'x': number,
     'y': number
