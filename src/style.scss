@@ -54,6 +54,7 @@ body {
 }
 
 .add-new-slider-btn {
+    padding: 0 8px;
     width: 40px;
     height: 40px;
     background: white;
@@ -77,6 +78,7 @@ body {
     }
     &:active, &:focus {
         outline: none;
+        padding: 0 8px;
     }
 }
 
@@ -94,6 +96,7 @@ body {
 }
 
 .remove-slider-button {
+    padding: 0 8px;
     background: white;
     position: absolute;
     color: #575757;
@@ -111,5 +114,6 @@ body {
     }
     &:active, &:focus {
         outline: none;
+        padding: 0 8px;
     }
 }
