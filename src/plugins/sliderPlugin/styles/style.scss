@@ -146,12 +146,14 @@
 
 .slider__tooltip_horizontal {
     transform: translate(-50%, -30px);
+    transition: left .2s cubic-bezier(0,1.73,.32,.74);
 }
 
 .slider__tooltip_vertical {
     left: 0;
     transform: translate(-100%, -50%);
     padding-right: 10px;
+    transition: top .2s cubic-bezier(0,1.73,.32,.74);
 }
 
 .slider__tooltip_hide {
