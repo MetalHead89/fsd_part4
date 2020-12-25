@@ -97,15 +97,16 @@ body {
 .remove-slider-button__icon {
     transition: transform .2s ease-in;
     pointer-events: none;
+    font-size: 21px;
 }
 
 .remove-slider-button {
-    padding: 0 8px;
+    padding: 0;
     background: white;
     position: absolute;
     color: #575757;
-    right: 5px;
-    top: 5px;
+    right: 6px;
+    top: 6px;
     border: none;
     font-size: 20px;
     display: flex;
@@ -118,6 +119,6 @@ body {
     }
     &:active, &:focus {
         outline: none;
-        padding: 0 8px;
+        padding: 0;
     }
 }
