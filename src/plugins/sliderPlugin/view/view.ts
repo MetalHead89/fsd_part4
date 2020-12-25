@@ -346,6 +346,10 @@ class View {
     removeThumbOne(): void {
         if (this.thumbOne !== null) {
             this.thumbOne.remove();
+            if (this.tooltipOne != null) {
+                this.tooltipOne.remove();
+                this.tooltipOne = null;
+            }
         }
     }
 
@@ -356,6 +360,10 @@ class View {
     removeThumbTwo(): void {
         if (this.thumbTwo !== null) {
             this.thumbTwo.remove();
+            if (this.tooltipTwo != null) {
+                this.tooltipTwo.remove();
+                this.tooltipTwo = null;
+            }
         }
     }
 
