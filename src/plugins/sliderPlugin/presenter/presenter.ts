@@ -318,6 +318,8 @@ class Presenter {
         } else {
             this.view.removeScale();
         }
+
+        this.addMarginsToSlider();
     }
 
 
@@ -337,6 +339,8 @@ class Presenter {
             this.view.removeTooltipOne();
             this.view.removeTooltipTwo();
         }
+
+        this.addMarginsToSlider();
     }
 
 }

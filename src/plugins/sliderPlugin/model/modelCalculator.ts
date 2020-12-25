@@ -173,20 +173,23 @@ class ModelCalculator {
         let top = 0;
         let right = 0;
         let bottom = 0;
-        
+
         if (this.data.getOrientation() === 'horizontal') {
-            if (elements.sliderCoords !== null && elements.scaleCoords !== null) {
-                bottom = elements.scaleCoords.bottom - elements.sliderCoords.bottom;
-                top = bottom;
+            if (elements.sliderCoords != null) {
+                if (elements.scaleCoords !== null) {
+                    bottom = elements.scaleCoords.bottom - elements.sliderCoords.bottom;
+                }
+                if (elements.tooltipCoords !== null) {
+                    top = elements.sliderCoords.top - elements.tooltipCoords.top;
+                }
             }
         } else {
-            if (elements.sliderCoords !== null && elements.scaleCoords !== null) {
-                right = elements.scaleCoords.right - elements.sliderCoords.right;
-                left = right;
-            } else if (elements.scaleCoords === null && elements.tooltipCoords !== null) {
-                if (elements.sliderCoords !== null) {
-                    right = elements.sliderCoords.left - elements.tooltipCoords.left;
-                    left = right;
+            if (elements.sliderCoords !== null ) {
+                if (elements.tooltipCoords !== null) {
+                    left = elements.sliderCoords.left - elements.tooltipCoords.left;
+                }
+                if (elements.scaleCoords !== null) {
+                    right = elements.scaleCoords.right - elements.sliderCoords.right;
                 }
             }
         }
@@ -196,7 +199,7 @@ class ModelCalculator {
             'top': top,
             'right': right,
             'bottom': bottom
-        }        
+        }
     }
 
 
@@ -211,14 +214,14 @@ class ModelCalculator {
         const thumbSize = this.data.getThumbSize();
         let left = 0;
         let top = 0;
-    
+
         if (orientation === 'horizontal') {
             left = thumbPosition.left + thumbSize.width / 2;
         } else {
             top = thumbPosition.top + thumbSize.height / 2;
         }
 
-        return ({'left': left, 'top': top});    
+        return ({ 'left': left, 'top': top });
     }
 
 
