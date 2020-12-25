@@ -173,7 +173,7 @@ class ModelCalculator {
         let top = 0;
         let right = 0;
         let bottom = 0;
-console.log(elements.scaleCoords)
+        
         if (this.data.getOrientation() === 'horizontal') {
             if (elements.sliderCoords !== null && elements.scaleCoords !== null) {
                 bottom = elements.scaleCoords.bottom - elements.sliderCoords.bottom;
@@ -182,7 +182,6 @@ console.log(elements.scaleCoords)
         } else {
             if (elements.sliderCoords !== null && elements.scaleCoords !== null) {
                 right = elements.scaleCoords.right - elements.sliderCoords.right;
-                console.log(right)
                 left = right;
             } else if (elements.scaleCoords === null && elements.tooltipCoords !== null) {
                 if (elements.sliderCoords !== null) {
