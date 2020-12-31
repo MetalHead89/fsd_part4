@@ -1,44 +1,42 @@
-import { IInputControl } from '../interfaces'
-import { IRadioParams } from '../interfaces'
+import { IInputControl, IRadioParams } from '../interfaces';
 
-import PanelElement from "./panelElement";
+import PanelElement from './panelElement';
 
 class InputRadio extends PanelElement {
+  private control: HTMLDivElement;
 
-    private control: HTMLDivElement;
+  constructor(radioParams: IRadioParams[], namePprefix: string) {
+    super();
+    const nameValue = this.generateName(namePprefix);
 
-    constructor(radioParams: IRadioParams[], namePprefix: string) {
-        super();
-        const name = this.generateName(namePprefix);
+    const wrapper: HTMLDivElement = document.createElement('div');
+    wrapper.className = 'slider-panel__radio-group';
 
-        const wrapper: HTMLDivElement = document.createElement('div');
-        wrapper.className = 'slider-panel__radio-group';
+    for (let paramsIndex = 0; paramsIndex < radioParams.length; paramsIndex += 1) {
+      const params = radioParams[paramsIndex];
 
-        for (const params of radioParams) {
+      const controlParams: IInputControl = {
+        inputElement: params.input,
+        id: this.generateID(params.id),
+        name: nameValue,
+        value: params.value,
+        inputType: 'radio',
+        inputClass: 'slider-panel__radio-button',
+        labelText: params.label,
+        labelClass: 'slider-panel__input-radio-label',
+        wrapperClass: 'slider-panel__input-radio-wrapper',
+      };
 
-            const controlParams: IInputControl = {
-                'inputElement': params.input,
-                'id': this.generateID(params.id),
-                'name': name,
-                'value': params.value,
-                'inputType': 'radio',
-                'inputClass': 'slider-panel__radio-button',
-                'labelText': params.label,
-                'labelClass': 'slider-panel__input-radio-label',
-                'wrapperClass': 'slider-panel__input-radio-wrapper'
-            }
-
-            const wrappedRadio: HTMLDivElement = this.createControl(controlParams);
-            wrapper.append(wrappedRadio);
-        }
-
-        this.control = wrapper;
+      const wrappedRadio: HTMLDivElement = this.createControl(controlParams);
+      wrapper.append(wrappedRadio);
     }
 
-    getControl(): HTMLDivElement {
-        return this.control;
-    }
+    this.control = wrapper;
+  }
 
+  getControl(): HTMLDivElement {
+    return this.control;
+  }
 }
 
 export default InputRadio;
