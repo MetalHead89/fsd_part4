@@ -26,14 +26,14 @@ class View {
     private tooltipTwo: Tooltip | null = null;
     private progressBar: ProgressBar | null = null;
     private scale: Scale | null = null;
-    private elementFactory: ElementFactory;
+    // private elementFactory: ElementFactory;
     private sliderWrapper: HTMLDivElement;
 
 
     constructor(observer: Observer, sliderWrapper: HTMLElement) {
         this.observer = observer;
         this.sliderWrapper = sliderWrapper as HTMLDivElement;
-        this.elementFactory = new ElementFactory();
+        // this.elementFactory = new ElementFactory();
         this.addWindowResizeEventListener();
 
         this.observer.subscribe('changeZIndexToAnotherThumb', (thumbElem: HTMLElement) => {
@@ -73,7 +73,7 @@ class View {
      * @param {string} styleClasses - классы для контейнера элементов слайдера
      */
     createSlider(styleClasses: string): void {
-        this.slider = this.elementFactory.createSlider(this.sliderWrapper, styleClasses);
+        this.slider = ElementFactory.createSlider(this.sliderWrapper, styleClasses);
         this.observer.notify('sliderElementIsCreated', this.slider.getSize());
     }
 
@@ -87,7 +87,7 @@ class View {
      */
     createTrack(styleClasses: string): void {
         if (this.slider != null) {
-            this.track = this.elementFactory.createTrack(this.slider.getElement(), styleClasses, this.observer);
+            this.track = ElementFactory.createTrack(this.slider.getElement(), styleClasses, this.observer);
         }
     }
 
@@ -102,7 +102,7 @@ class View {
      */
     createThumbOne(styleClasses: string): void {  
         if (this.slider != null) {
-            this.thumbOne = this.elementFactory.createThumb(this.slider.getElement(), styleClasses, this.observer);
+            this.thumbOne = ElementFactory.createThumb(this.slider.getElement(), styleClasses, this.observer);
             this.observer.notify('thumbOneIsCreated', this.thumbOne.getSize());
         }
     }
@@ -117,7 +117,7 @@ class View {
      */
     createThumbTwo(styleClasses: string): void {
         if (this.slider != null) {
-            this.thumbTwo = this.elementFactory.createThumb(this.slider.getElement(), styleClasses, this.observer);
+            this.thumbTwo = ElementFactory.createThumb(this.slider.getElement(), styleClasses, this.observer);
         }
     }
 
@@ -131,7 +131,7 @@ class View {
      */
     createTooltipOne(styleClasses: string): void {
         if (this.slider != null && this.thumbOne != null) {
-            this.tooltipOne = this.elementFactory.createTooltip(this.slider.getElement(), styleClasses);
+            this.tooltipOne = ElementFactory.createTooltip(this.slider.getElement(), styleClasses);
         }
     }
 
@@ -145,7 +145,7 @@ class View {
      */
     createTooltipTwo(styleClasses: string): void {
         if (this.slider != null && this.thumbTwo != null) {
-            this.tooltipTwo = this.elementFactory.createTooltip(this.slider.getElement(), styleClasses);
+            this.tooltipTwo = ElementFactory.createTooltip(this.slider.getElement(), styleClasses);
         }
     }
 
@@ -160,7 +160,7 @@ class View {
     createProgressBar(styleClasses: string): void {
 
         if (this.slider != null) {
-            this.progressBar = this.elementFactory.createProgressBar(this.slider.getElement(), styleClasses);
+            this.progressBar = ElementFactory.createProgressBar(this.slider.getElement(), styleClasses);
         }
 
     }
@@ -175,7 +175,7 @@ class View {
      */
     createScale(styleClasses: string): void {
         if (this.slider != null) {
-            this.scale = this.elementFactory.createScale(this.slider.getElement(), styleClasses, this.observer);
+            this.scale = ElementFactory.createScale(this.slider.getElement(), styleClasses, this.observer);
             this.observer.notify('scaleIsCreated', null);
         }
 
