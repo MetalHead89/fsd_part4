@@ -1,4 +1,4 @@
-import Panel from './panel'
+import Panel from './panel';
 
 (function ($) {
     $.fn.sliderControlPanel = function (): JQuery<HTMLElement> {
