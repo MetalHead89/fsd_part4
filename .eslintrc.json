@@ -24,6 +24,13 @@
         "fsd/no-function-declaration-in-event-listener": "error",
         "fsd/split-conditionals": "error",
         "import/no-unresolved": "off",
-        "import/extensions": "off"
+        "import/extensions": "off",
+        "lines-between-class-members": [
+            "error",
+            "always",
+            {
+                "exceptAfterSingleLine": true
+            }
+        ]
     }
 }
