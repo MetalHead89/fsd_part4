@@ -1,8 +1,10 @@
+/* eslint wrap-iife: [2, "inside"] */
+
 import Panel from './panel';
 
-(function ($) {
-    $.fn.sliderControlPanel = function (): JQuery<HTMLElement> {
-        new Panel(this);
-        return this
-    };
+(($) => {
+  $.fn.sliderControlPanel = function (): JQuery<HTMLElement> {
+    const panel = new Panel(this);
+    return this;
+  };
 })(jQuery);
