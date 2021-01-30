@@ -1,0 +1,131 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 12px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background: url('../images/page_background.jpg'),
+    linear-gradient(
+      90deg,
+      rgba(132, 231, 247, 0.9) 0%,
+      rgba(244, 56, 236, 0.9) 100%
+    );
+  background-blend-mode: screen;
+}
+
+// .slider-wrapper {
+//     position: relative;
+//     background: white;
+//     border-radius: 8px;
+//     padding: 30px;
+//     margin: 20px auto;
+//     display: inline-flex;
+//     -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+//     -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+//     box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+// }
+
+// .slider-wrapper_horizontal {
+//     flex-direction: column;
+// }
+
+// .slider-wrapper_vertical {
+//     flex-direction: row;
+//     align-items: center;
+//     & .slider-panel__checkboxes-and-radio-wrapper {
+//         justify-content: center;
+//     }
+// }
+
+// .panel-wrapper {
+//     width: 100%;
+//     max-width:  500px;
+//     margin: 0 auto;
+// }
+
+// .button-wrapper {
+//     width: 100%;
+//     display: flex;
+//     justify-content: center;
+// }
+
+// .add-new-slider-btn__icon {
+//     transition: transform .2s ease-in;
+// }
+
+// .add-new-slider-btn {
+//     padding: 0 8px;
+//     width: 40px;
+//     height: 40px;
+//     background: white;
+//     color: #575757;
+//     border: none;
+//     border-radius: 8px;
+//     font-size: 20px;
+//     -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+//     -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+//     box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+//     transition: background .2s ease-in;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     &:hover {
+//         background: rgba(240, 243, 243, 0.9);
+//         & .add-new-slider-btn__icon {
+//             transform: none;
+//             transform: rotate(90deg);
+//         }
+//     }
+//     &:active, &:focus {
+//         outline: none;
+//         padding: 0 8px;
+//     }
+// }
+
+// .add-new-slider-btn_margin-top {
+//     margin-top: 20px;
+// }
+
+.help-image {
+    display: block;
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+// .remove-slider-button__icon {
+//     transition: transform .2s ease-in;
+//     pointer-events: none;
+//     font-size: 21px;
+//     user-select: none;
+// }
+
+// .remove-slider-button {
+//     padding: 0;
+//     background: white;
+//     position: absolute;
+//     color: #575757;
+//     right: 6px;
+//     top: 6px;
+//     border: none;
+//     font-size: 20px;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     user-select: none;
+//     &:hover {
+//         & .remove-slider-button__icon {
+//             transform: rotate(90deg);
+//         }
+//     }
+//     &:active, &:focus {
+//         outline: none;
+//         padding: 0;
+//     }
+// }
