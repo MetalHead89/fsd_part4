@@ -4,6 +4,7 @@ import '@/plugins/simple-slider/simple-slider.ts';
 import '@/demo/scss/style.scss';
 import '@/demo/scss/normalize.scss';
 import '@/fonts/fonts.scss';
+import '@/plugins/simple-slider/styles.scss';
 // import '@/plugins/sliderPlugin/styles/style.scss';
 // import '@/plugins/sliderPanelPlugin/styles/style.scss';
 // import '@/fonts/fontsStyles.scss';
