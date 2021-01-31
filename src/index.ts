@@ -1,4 +1,4 @@
-// import '@/plugins/sliderPlugin/incredibleSliderPlugin.ts';
+import '@/plugins/simple-slider/simple-slider.ts';
 // import '@/plugins/sliderPanelPlugin/sliderControlPanel.ts';
 
 import '@/scss/style.scss';
