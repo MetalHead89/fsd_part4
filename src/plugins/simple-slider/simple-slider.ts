@@ -1,5 +1,8 @@
 import Slider from './view/slider';
 
+// Тестовое создание класса Slider
+const slider = new Slider();
+
 // /* eslint wrap-iife: [2, "inside"] */
 
 // import { ISliderSettings } from './interfaces';
