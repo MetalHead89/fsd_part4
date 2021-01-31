@@ -1,4 +1,5 @@
 import Track from './track/track';
+import Thumb from './thumb/thumb';
 
 /**
  * Класс дорожки слайдера. Содержит HTML элемент дорожки слайдера и организовывает управление им
@@ -6,6 +7,8 @@ import Track from './track/track';
 class Slider {
   private element: HTMLDivElement;
   private track: Track;
+  private thumbOne: Thumb;
+  private thumbTwo: Thumb;
   private sliderWrapper: HTMLDivElement;
 
   constructor() {
@@ -19,6 +22,8 @@ class Slider {
 
     this.element = document.createElement('div');
     this.track = new Track();
+    this.thumbOne = new Thumb();
+    this.thumbTwo = new Thumb(); 
 
     this.assembleSlider();
   }
