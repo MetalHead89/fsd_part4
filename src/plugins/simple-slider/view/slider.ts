@@ -5,9 +5,18 @@ import Track from './track/track';
  */
 class Slider {
   private element: HTMLDivElement;
-  protected track: Track;
+  private track: Track;
+  private sliderWrapper: HTMLDivElement;
 
   constructor() {
+    // sliderWrapper должен инициализироваться из параметров конструктора
+    this.sliderWrapper = document.createElement('div');
+    this.sliderWrapper.classList.add(
+      'slider-wrapper',
+      'slider-wrapper_horizontal'
+    );
+    // sliderWrapper должен инициализироваться из параметров конструктора
+
     this.element = document.createElement('div');
     this.track = new Track();
 
@@ -17,13 +26,13 @@ class Slider {
   assembleSlider(): void {
     this.element.append(this.track.getElement());
 
-    // Тестовый контейнер
+    // Временный способ размещения слайдера на странице
     const body = document.querySelector('body');
-    const wrapper = document.createElement('div');
     if (body !== null) {
-      body.append(wrapper);
-      wrapper.append(this.element);
+      this.sliderWrapper.append(this.element);
+      body.append(this.sliderWrapper);
     }
+    // Временный способ размещения слайдера на странице
   }
 }
 
