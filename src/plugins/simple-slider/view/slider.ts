@@ -1,4 +1,4 @@
-import Track from './track';
+import Track from './track/track';
 
 /**
  * Класс дорожки слайдера. Содержит HTML элемент дорожки слайдера и организовывает управление им
