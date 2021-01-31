@@ -31,7 +31,7 @@ module.exports = {
     },
     plugins: [
         new HTMLWebpackPlugin({
-            template: path.resolve(__dirname, 'src/index.pug')
+            template: path.resolve(__dirname, 'src/demo/index.pug')
         }),
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin([
@@ -43,8 +43,8 @@ module.exports = {
         }),
         new CopyWebpackPlugin({
             patterns: [
-                { from: path.resolve(__dirname, 'src/fonts'), to: path.resolve(__dirname, 'dist/fonts') },
-                { from: path.resolve(__dirname, 'src/images'), to: path.resolve(__dirname, 'dist/src/images') }
+                { from: path.resolve(__dirname, 'src/demo/fonts'), to: path.resolve(__dirname, 'dist/fonts') },
+                { from: path.resolve(__dirname, 'src/demo/images'), to: path.resolve(__dirname, 'dist/src/images') }
             ]
         })
     ],

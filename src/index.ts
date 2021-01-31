@@ -1,8 +1,8 @@
 import '@/plugins/simple-slider/simple-slider.ts';
 // import '@/plugins/sliderPanelPlugin/sliderControlPanel.ts';
 
-import '@/scss/style.scss';
-import '@/scss/normalize.scss';
+import '@/demo/scss/style.scss';
+import '@/demo/scss/normalize.scss';
 // import '@/plugins/sliderPlugin/styles/style.scss';
 // import '@/plugins/sliderPanelPlugin/styles/style.scss';
 // import '@/fonts/fontsStyles.scss';
