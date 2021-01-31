@@ -21,15 +21,19 @@ class Slider {
     // sliderWrapper должен инициализироваться из параметров конструктора
 
     this.element = document.createElement('div');
+    this.element.classList.add('slider', 'slider_horizontal');
+
     this.track = new Track();
     this.thumbOne = new Thumb();
-    this.thumbTwo = new Thumb(); 
+    this.thumbTwo = new Thumb();
 
     this.assembleSlider();
   }
 
   assembleSlider(): void {
     this.element.append(this.track.getElement());
+    this.element.append(this.thumbOne.getElement());
+    this.element.append(this.thumbTwo.getElement());
 
     // Временный способ размещения слайдера на странице
     const body = document.querySelector('body');

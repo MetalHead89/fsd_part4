@@ -1,0 +1,19 @@
+.slider__thumb {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgb(85, 196, 153);
+//   display: flex;
+//   justify-content: center;
+  z-index: 2;
+}
+
+.slider__thumb_horizontal {
+  top: 0;
+  transform: translate(0, -25%);
+  &:hover,
+  &:active {
+    transform: translate(0, -25%) scale(1.2);
+  }
+}

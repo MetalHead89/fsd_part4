@@ -1,0 +1,15 @@
+.slider {
+  position: relative;
+  display: flex;
+}
+
+.slider_horizontal {
+  width: 100%;
+  max-width: 500px;
+  flex-direction: column;
+}
+
+.slider_vertical {
+  height: 300px;
+  flex-direction: row;
+}
