@@ -1,15 +1,17 @@
 import Track from './track/track';
 import Thumb from './thumb/thumb';
+import ProgressBar from './progress-bar/progress-bar';
 
 /**
  * Класс дорожки слайдера. Содержит HTML элемент дорожки слайдера и организовывает управление им
  */
 class Slider {
   private element: HTMLDivElement;
+  private sliderWrapper: HTMLDivElement;
   private track: Track;
   private thumbOne: Thumb;
   private thumbTwo: Thumb;
-  private sliderWrapper: HTMLDivElement;
+  private progressBar: ProgressBar;
 
   constructor() {
     // sliderWrapper должен инициализироваться из параметров конструктора
@@ -26,6 +28,7 @@ class Slider {
     this.track = new Track();
     this.thumbOne = new Thumb();
     this.thumbTwo = new Thumb();
+    this.progressBar = new ProgressBar();
 
     this.assembleSlider();
   }
