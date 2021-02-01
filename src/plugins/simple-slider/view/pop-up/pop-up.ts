@@ -3,6 +3,7 @@ class PopUp {
 
   constructor() {
     this.element = document.createElement('div');
+    this.element.classList.add('slider__pop-up', 'slider__pop-up_horizontal');
   }
 
   getElement(): HTMLDivElement {
