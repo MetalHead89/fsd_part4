@@ -2,6 +2,7 @@ import Track from './track/track';
 import Thumb from './thumb/thumb';
 import ProgressBar from './progress-bar/progress-bar';
 import PopUp from './pop-up/pop-up';
+import Scale from './scale/scale';
 
 /**
  * Класс дорожки слайдера. Содержит HTML элемент дорожки слайдера и организовывает управление им
@@ -15,6 +16,7 @@ class Slider {
   private popUpOne: PopUp;
   private popUpTwo: PopUp;
   private progressBar: ProgressBar;
+  private scale: Scale;
 
   constructor() {
     // sliderWrapper должен инициализироваться из параметров конструктора
@@ -34,6 +36,7 @@ class Slider {
     this.popUpOne = new PopUp();
     this.popUpTwo = new PopUp();
     this.progressBar = new ProgressBar();
+    this.scale = new Scale();
 
     this.assembleSlider();
   }
