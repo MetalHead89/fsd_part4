@@ -1,3 +1,5 @@
+import { SimpleSliderModelInterface } from '../interfaces';
+
 import Track from './track/track';
 import Thumb from './thumb/thumb';
 import ProgressBar from './progress-bar/progress-bar';
@@ -8,6 +10,7 @@ import Scale from './scale/scale';
  * Класс дорожки слайдера. Содержит HTML элемент дорожки слайдера и организовывает управление им
  */
 class SimpleSliderView {
+  private simpleSliderModel: SimpleSliderModelInterface;
   private element: HTMLDivElement;
   private sliderWrapper: HTMLDivElement;
   private track: Track;
@@ -18,12 +21,14 @@ class SimpleSliderView {
   private progressBar: ProgressBar;
   private scale: Scale;
 
-  constructor() {
+  constructor(model: SimpleSliderModelInterface) {
+    this.simpleSliderModel = model;
+
     // sliderWrapper должен инициализироваться из параметров конструктора
     this.sliderWrapper = document.createElement('div');
     this.sliderWrapper.classList.add(
       'slider-wrapper',
-      'slider-wrapper_horizontal'
+      'slider-wrapper_horizontal',
     );
     // sliderWrapper должен инициализироваться из параметров конструктора
 

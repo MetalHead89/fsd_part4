@@ -1,7 +1,9 @@
+import SimpleSliderModel from './model/simple-slider-model';
 import SimpleSliderView from './view/simple-slider-view';
 
 // Тестовое создание класса Slider
-const simpleSliderView = new SimpleSliderView();
+const simpleSliderModel = new SimpleSliderModel();
+const simpleSliderView = new SimpleSliderView(simpleSliderModel);
 
 // /* eslint wrap-iife: [2, "inside"] */
 
