@@ -1,11 +1,12 @@
-import SimpleSliderModel from '../model/simple-slider-model';
+import { SimpleSliderControllerInterface, SimpleSliderModelInterface } from '../interfaces';
+
 import SimpleSliderView from '../view/simple-slider-view';
 
-class SimpleSliderController {
-  private simpleSliderModel: SimpleSliderModel;
+class SimpleSliderController implements SimpleSliderControllerInterface {
+  private simpleSliderModel: SimpleSliderModelInterface;
   private simpleSliderView: SimpleSliderView;
 
-  constructor(model: SimpleSliderModel) {
+  constructor(model: SimpleSliderModelInterface) {
     this.simpleSliderModel = model;
     this.simpleSliderView = new SimpleSliderView(model);
   }
