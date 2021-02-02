@@ -1,8 +1,8 @@
 export interface SimpleSliderModelInterface {
-  registerObserver(observer: IThumbsMoveObserver): void;
-  removeObserver(observer: IThumbsMoveObserver): void;
+  registerObserver(observer: IThumbsObserver): void;
+  removeObserver(observer: IThumbsObserver): void;
 }
 
-export interface IThumbsMoveObserver {
+export interface IThumbsObserver {
   updateThumbsPosition(): void;
 }

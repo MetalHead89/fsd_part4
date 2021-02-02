@@ -1,26 +1,24 @@
-import { SimpleSliderModelInterface, IThumbsMoveObserver } from '../interfaces';
+import { SimpleSliderModelInterface, IThumbsObserver } from '../interfaces';
 
 class SimpleSliderModel implements SimpleSliderModelInterface {
-  private thumbsMoveObserver: IThumbsMoveObserver[];
+  private thumbsObservers: IThumbsObserver[];
 
   constructor() {
-    this.thumbsMoveObserver = new Array();
+    this.thumbsObservers = new Array();
   }
 
-  registerObserver(observer: IThumbsMoveObserver): void {
-    this.thumbsMoveObserver.push(observer);
+  registerObserver(observer: IThumbsObserver): void {
+    this.thumbsObservers.push(observer);
   }
 
-  removeObserver(observer: IThumbsMoveObserver) {
-    this.thumbsMoveObserver = this.thumbsMoveObserver.filter(
-      (registeredObserver) => {
-        registeredObserver !== observer;
-      },
-    );
+  removeObserver(observer: IThumbsObserver) {
+    this.thumbsObservers = this.thumbsObservers.filter((registeredObserver) => {
+      registeredObserver !== observer;
+    });
   }
 
   notifyThumbsMoveObservers() {
-    this.thumbsMoveObserver.forEach((registeredObserver) =>
+    this.thumbsObservers.forEach((registeredObserver) =>
       registeredObserver.updateThumbsPosition(),
     );
   }
