@@ -1,6 +1,6 @@
-import { SimpleSliderModelInterface, IThumbsObserver } from '../interfaces';
+import { ISimpleSliderModel, IThumbsObserver } from '../interfaces';
 
-class SimpleSliderModel implements SimpleSliderModelInterface {
+class SimpleSliderModel implements ISimpleSliderModel {
   private thumbsObservers: IThumbsObserver[];
 
   constructor() {
@@ -30,7 +30,7 @@ class SimpleSliderModel implements SimpleSliderModelInterface {
    */
   notifyThumbsMoveObservers() {
     this.thumbsObservers.forEach((registeredObserver) =>
-      registeredObserver.updateThumbsPosition(),
+      registeredObserver.updateThumbsPosition()
     );
   }
 }
