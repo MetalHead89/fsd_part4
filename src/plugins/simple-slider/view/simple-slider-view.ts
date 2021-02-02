@@ -7,7 +7,7 @@ import Scale from './scale/scale';
 /**
  * Класс дорожки слайдера. Содержит HTML элемент дорожки слайдера и организовывает управление им
  */
-class Slider {
+class SimpleSliderView {
   private element: HTMLDivElement;
   private sliderWrapper: HTMLDivElement;
   private track: Track;
@@ -60,4 +60,4 @@ class Slider {
   }
 }
 
-export default Slider;
+export default SimpleSliderView;
