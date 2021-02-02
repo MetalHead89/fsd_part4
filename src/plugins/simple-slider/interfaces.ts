@@ -1,3 +1,1 @@
-interface SimpleSliderModelInterface {
-  getState(): string;
-}
+export interface SimpleSliderModelInterface {}
