@@ -1,7 +1,8 @@
-import { ISimpleSliderModel, IThumbsObserver } from '../interfaces';
+import { ISimpleSliderModel, IThumbsObserver, ISize } from '../interfaces';
 
 class SimpleSliderModel implements ISimpleSliderModel {
   private thumbsObservers: IThumbsObserver[];
+  sliderSize = { width: 0, height: 0 };
 
   constructor() {
     this.thumbsObservers = new Array();
@@ -30,8 +31,13 @@ class SimpleSliderModel implements ISimpleSliderModel {
    */
   notifyThumbsMoveObservers() {
     this.thumbsObservers.forEach((registeredObserver) =>
-      registeredObserver.updateThumbsPosition()
+      registeredObserver.updateThumbsPosition(),
     );
+  }
+
+  setSliderSize(size: ISize): void {
+    this.sliderSize = size;
+    console.log(this.sliderSize);
   }
 }
 

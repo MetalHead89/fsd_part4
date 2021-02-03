@@ -1,3 +1,8 @@
+export interface ISize {
+  width: number;
+  height: number;
+}
+
 export interface IThumbsObserver {
   updateThumbsPosition(): void;
 }
@@ -5,6 +10,10 @@ export interface IThumbsObserver {
 export interface ISimpleSliderModel {
   registerObserver(observer: IThumbsObserver): void;
   removeObserver(observer: IThumbsObserver): void;
+  notifyThumbsMoveObservers(): void;
+  setSliderSize(size: ISize): void;
 }
 
-export interface ISimpleSliderController {}
+export interface ISimpleSliderController {
+  setSliderSize(size: ISize): void;
+}

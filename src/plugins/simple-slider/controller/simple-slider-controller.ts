@@ -1,4 +1,8 @@
-import { ISimpleSliderController, ISimpleSliderModel } from '../interfaces';
+import {
+  ISimpleSliderController,
+  ISimpleSliderModel,
+  ISize,
+} from '../interfaces';
 
 import SimpleSliderView from '../view/simple-slider-view';
 
@@ -9,6 +13,10 @@ class SimpleSliderController implements ISimpleSliderController {
   constructor(model: ISimpleSliderModel) {
     this.simpleSliderModel = model;
     this.simpleSliderView = new SimpleSliderView(this, this.simpleSliderModel);
+  }
+
+  setSliderSize(size: ISize): void {
+    this.simpleSliderModel.setSliderSize(size);
   }
 }
 

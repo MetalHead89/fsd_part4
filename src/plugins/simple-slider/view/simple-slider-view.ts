@@ -46,9 +46,10 @@ class SimpleSliderView {
     this.scale = new Scale();
 
     this.assembleSlider();
+    this.init();
   }
 
-  assembleSlider(): void {
+  private assembleSlider(): void {
     this.element.append(this.track.getElement());
     this.element.append(this.thumbOne.getElement());
     this.element.append(this.thumbTwo.getElement());
@@ -64,6 +65,13 @@ class SimpleSliderView {
       body.append(this.sliderWrapper);
     }
     // Временный способ размещения слайдера на странице
+  }
+
+  private init(): void {
+    this.simpleSliderController.setSliderSize({
+      width: this.element.offsetWidth,
+      height: this.element.offsetHeight,
+    });
   }
 }
 
