@@ -22,9 +22,9 @@ class SimpleSliderModel implements ISimpleSliderModel {
    * @param {IThumbsObserver} observer - удаляемый наблюдатель
    */
   removeObserver(observer: IThumbsObserver) {
-    this.thumbsObservers = this.thumbsObservers.filter((registeredObserver) => {
-      registeredObserver !== observer;
-    });
+    this.thumbsObservers = this.thumbsObservers.filter(
+      (registeredObserver) => registeredObserver !== observer
+    );
   }
 
   /**
@@ -32,7 +32,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
    */
   notifyThumbsMoveObservers() {
     this.thumbsObservers.forEach((registeredObserver) =>
-      registeredObserver.updateThumbsPosition(),
+      registeredObserver.updateThumbsPosition()
     );
   }
 
