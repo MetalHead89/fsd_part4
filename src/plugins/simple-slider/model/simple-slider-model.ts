@@ -2,8 +2,8 @@ import { ISimpleSliderModel, IThumbsObserver, ISize } from '../interfaces';
 
 class SimpleSliderModel implements ISimpleSliderModel {
   private thumbsObservers: IThumbsObserver[];
-  sliderSize = { width: 0, height: 0 };
-  thumbSize = { width: 0, height: 0 };
+  private sliderSize = { width: 0, height: 0 };
+  private thumbSize = { width: 0, height: 0 };
 
   constructor() {
     this.thumbsObservers = new Array();
