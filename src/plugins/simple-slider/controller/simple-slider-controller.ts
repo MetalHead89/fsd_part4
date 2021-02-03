@@ -15,10 +15,18 @@ class SimpleSliderController implements ISimpleSliderController {
     this.simpleSliderView = new SimpleSliderView(this, this.simpleSliderModel);
   }
 
+  /**
+   * Установка размера слайдера
+   * @param {ISize} size - новый размер слайдера
+   */
   setSliderSize(size: ISize): void {
     this.simpleSliderModel.setSliderSize(size);
   }
 
+  /**
+   * Установка размера бегунка
+   * @param {ISize} size - новый размер бегунка
+   */
   setThumbSize(size: ISize): void {
     this.simpleSliderModel.setThumbSize(size);
   }
