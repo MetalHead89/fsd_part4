@@ -36,10 +36,18 @@ class SimpleSliderModel implements ISimpleSliderModel {
     );
   }
 
+  /**
+   * Установка размера слайдера
+   * @param {ISize} size - новый размер слайдера
+   */
   setSliderSize(size: ISize): void {
     this.sliderSize = size;
   }
 
+  /**
+   * Установка размера бегунка
+   * @param {ISize} size - новый размер бегунка
+   */
   setThumbSize(size: ISize): void {
     this.thumbSize = size;
   }
