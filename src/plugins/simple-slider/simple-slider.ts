@@ -1,11 +1,15 @@
-import { ISimpleSliderModel } from './interfaces';
+import { ISimpleSliderModel, ISimpleSliderController } from './interfaces';
 
 import SimpleSliderModel from './model/simple-slider-model';
-import SimpleSliderView from './view/simple-slider-view';
+import SimpleSliderController from './controller/simple-slider-controller';
 
-// Тестовое создание класса Slider
+// Временный способ создания слайдера
 const simpleSliderModel: ISimpleSliderModel = new SimpleSliderModel();
-const simpleSliderView = new SimpleSliderView(simpleSliderModel);
+const simpleSliderController: ISimpleSliderController = new SimpleSliderController(
+  simpleSliderModel,
+);
+
+// const simpleSliderView = new SimpleSliderView(simpleSliderModel);
 
 // /* eslint wrap-iife: [2, "inside"] */
 
