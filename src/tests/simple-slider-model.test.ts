@@ -25,16 +25,6 @@ describe('Register observer', () => {
         /* some operations */
       },
     };
-    const newObserverFour = {
-      updateThumbsPosition(): void {
-        /* some operations */
-      },
-    };
-    const newObserverFive = {
-      updateThumbsPosition(): void {
-        /* some operations */
-      },
-    };
 
     model.registerObserver(newObserverOne);
     expect(model['thumbsObservers'].length).toBe(1);
@@ -44,11 +34,42 @@ describe('Register observer', () => {
 
     model.registerObserver(newObserverThree);
     expect(model['thumbsObservers'].length).toBe(3);
+  });
+});
 
-    model.registerObserver(newObserverFour);
-    expect(model['thumbsObservers'].length).toBe(4);
+describe('Remove observer', () => {
+  test('Observers must be removed', () => {
+    expect(model['thumbsObservers'].length).toBe(0);
 
-    model.registerObserver(newObserverFive);
-    expect(model['thumbsObservers'].length).toBe(5);
+    const newObserverOne = {
+      updateThumbsPosition(): void {
+        /* some operations */
+      },
+    };
+    const newObserverTwo = {
+      updateThumbsPosition(): void {
+        /* some operations */
+      },
+    };
+    const newObserverThree = {
+      updateThumbsPosition(): void {
+        /* some operations */
+      },
+    };
+
+    model.registerObserver(newObserverOne);
+    model.registerObserver(newObserverTwo);
+    model.registerObserver(newObserverThree);
+
+    expect(model['thumbsObservers'].length).toBe(3);
+
+    model.removeObserver(newObserverOne);
+    expect(model['thumbsObservers'].length).toBe(2);
+
+    model.removeObserver(newObserverTwo);
+    expect(model['thumbsObservers'].length).toBe(1);
+
+    model.removeObserver(newObserverThree);
+    expect(model['thumbsObservers'].length).toBe(0);
   });
 });
