@@ -18,6 +18,10 @@ class SimpleSliderController implements ISimpleSliderController {
   setSliderSize(size: ISize): void {
     this.simpleSliderModel.setSliderSize(size);
   }
+
+  setThumbSize(size: ISize): void {
+    this.simpleSliderModel.setThumbSize(size);
+  }
 }
 
 export default SimpleSliderController;

@@ -72,6 +72,11 @@ class SimpleSliderView {
       width: this.element.offsetWidth,
       height: this.element.offsetHeight,
     });
+
+    this.simpleSliderController.setThumbSize({
+      width: this.thumbOne.getElement().offsetWidth,
+      height: this.thumbOne.getElement().offsetHeight,
+    });
   }
 }
 

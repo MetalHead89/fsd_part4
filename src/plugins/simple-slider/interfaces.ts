@@ -12,8 +12,10 @@ export interface ISimpleSliderModel {
   removeObserver(observer: IThumbsObserver): void;
   notifyThumbsMoveObservers(): void;
   setSliderSize(size: ISize): void;
+  setThumbSize(size: ISize): void;
 }
 
 export interface ISimpleSliderController {
   setSliderSize(size: ISize): void;
+  setThumbSize(size: ISize): void;
 }
