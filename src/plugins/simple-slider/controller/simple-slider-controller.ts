@@ -8,7 +8,7 @@ class SimpleSliderController implements ISimpleSliderController {
 
   constructor(model: ISimpleSliderModel) {
     this.simpleSliderModel = model;
-    this.simpleSliderView = new SimpleSliderView(model);
+    this.simpleSliderView = new SimpleSliderView(this, this.simpleSliderModel);
   }
 }
 

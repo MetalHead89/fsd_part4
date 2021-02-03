@@ -1,4 +1,4 @@
-import { ISimpleSliderModel } from '../interfaces';
+import { ISimpleSliderModel, ISimpleSliderController } from '../interfaces';
 
 import Track from './track/track';
 import Thumb from './thumb/thumb';
@@ -11,6 +11,7 @@ import Scale from './scale/scale';
  */
 class SimpleSliderView {
   private simpleSliderModel: ISimpleSliderModel;
+  private simpleSliderController: ISimpleSliderController;
   private element: HTMLDivElement;
   private sliderWrapper: HTMLDivElement;
   private track: Track;
@@ -21,8 +22,9 @@ class SimpleSliderView {
   private progressBar: ProgressBar;
   private scale: Scale;
 
-  constructor(model: ISimpleSliderModel) {
+  constructor(controller: ISimpleSliderController, model: ISimpleSliderModel) {
     this.simpleSliderModel = model;
+    this.simpleSliderController = controller;
 
     // sliderWrapper должен инициализироваться из параметров конструктора
     this.sliderWrapper = document.createElement('div');
