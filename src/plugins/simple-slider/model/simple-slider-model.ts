@@ -1,3 +1,8 @@
+/* eslint-disable function-paren-newline */
+/* eslint-disable operator-linebreak */
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable comma-dangle */
+
 import {
   ISimpleSliderModel,
   IThumbsObserver,
@@ -17,7 +22,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
   private thumbSize = { width: 0, height: 0 };
 
   constructor() {
-    this.thumbsObservers = new Array();
+    this.thumbsObservers = [];
   }
 
   /**
@@ -32,7 +37,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
    * Удаление наблюдателя, следящего за изменением позиций бегунков
    * @param {IThumbsObserver} observer - удаляемый наблюдатель
    */
-  removeObserver(observer: IThumbsObserver) {
+  removeObserver(observer: IThumbsObserver): void {
     this.thumbsObservers = this.thumbsObservers.filter(
       (registeredObserver) => registeredObserver !== observer
     );
@@ -41,7 +46,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
   /**
    * Оповещение зарегистрированных наблюдателей об изменении позиций бегунков
    */
-  notifyThumbsMoveObservers() {
+  notifyThumbsMoveObservers(): void {
     this.thumbsObservers.forEach((registeredObserver) =>
       registeredObserver.updateThumbsPosition()
     );
