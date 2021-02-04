@@ -203,4 +203,24 @@ describe('Thumb value to position', () => {
     expect(position.left).toBe(420);
     expect(position.top).toBe(0);
   });
+
+  test('Position left should be 0 and top should be 420', () => {
+    model['orientation'] = 'vertical';
+    model['sliderSize'] = { width: 440, height: 440 };
+    model['thumbSize'] = { width: 20, height: 20 };
+
+    const position = model['thumbValueToPos'](11);
+    expect(position.left).toBe(0);
+    expect(position.top).toBe(420);
+  });
+
+  test('Position left should be 0 and top should be 420', () => {
+    model['orientation'] = 'vertical';
+    model['sliderSize'] = { width: 440, height: 440 };
+    model['thumbSize'] = { width: 20, height: 20 };
+
+    const position = model['thumbValueToPos'](7);
+    expect(position.left).toBe(0);
+    expect(position.top).toBeCloseTo(294);
+  });
 });
