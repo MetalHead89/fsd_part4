@@ -1,6 +1,7 @@
 /**
  * @jest-environment jsdom
  */
+/* eslint-disable dot-notation */
 
 import SimpleSliderModel from '../plugins/simple-slider/model/simple-slider-model';
 import SimpleSliderController from '../plugins/simple-slider/controller/simple-slider-controller';
