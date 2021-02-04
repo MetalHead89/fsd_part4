@@ -78,7 +78,9 @@ class SimpleSliderView {
       height: this.thumbOne.getElement().offsetHeight,
     });
 
-    this.simpleSliderModel.getThumbsPositions()
+    const thumbsPositions = this.simpleSliderModel.getThumbsPositions();
+    this.thumbOne.moveTo(thumbsPositions.thumbOne);
+    this.thumbTwo.moveTo(thumbsPositions.thumbTwo);
   }
 }
 
