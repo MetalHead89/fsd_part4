@@ -114,3 +114,29 @@ describe('Notify Thumbs Move Observers', () => {
     expect(numberOfNotifiedObservers).toBe(2);
   });
 });
+
+describe('Set slider size', () => {
+  test('Slider width should be 5 and height should be 9', () => {
+    model.setSliderSize({ width: 5, height: 9 });
+    expect(model['sliderSize'].width).toBe(5);
+    expect(model['sliderSize'].height).toBe(9);
+  });
+
+  test('Slider width should be 0 and height should be 12', () => {
+    model.setSliderSize({ width: -1, height: 12 });
+    expect(model['sliderSize'].width).toBe(0);
+    expect(model['sliderSize'].height).toBe(12);
+  });
+
+  test('Slider width should be 54 and height should be 0', () => {
+    model.setSliderSize({ width: 54, height: -1 });
+    expect(model['sliderSize'].width).toBe(54);
+    expect(model['sliderSize'].height).toBe(0);
+  });
+
+  test('Slider width should be 0 and height should be 0', () => {
+    model.setSliderSize({ width: 0, height: 0 });
+    expect(model['sliderSize'].width).toBe(0);
+    expect(model['sliderSize'].height).toBe(0);
+  });
+});
