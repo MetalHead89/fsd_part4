@@ -38,3 +38,29 @@ describe('Set slider size', () => {
     expect(model['sliderSize'].height).toBe(0);
   });
 });
+
+describe('Set thumb size', () => {
+  test('Thumb width should be 5 and height should be 9', () => {
+    controller.setThumbSize({ width: 5, height: 9 });
+    expect(model['thumbSize'].width).toBe(5);
+    expect(model['thumbSize'].height).toBe(9);
+  });
+
+  test('Thumb width should be 0 and height should be 12', () => {
+    controller.setThumbSize({ width: -1, height: 12 });
+    expect(model['thumbSize'].width).toBe(0);
+    expect(model['thumbSize'].height).toBe(12);
+  });
+
+  test('Thumb width should be 54 and height should be 0', () => {
+    controller.setThumbSize({ width: 54, height: -1 });
+    expect(model['thumbSize'].width).toBe(54);
+    expect(model['thumbSize'].height).toBe(0);
+  });
+
+  test('Thumb width should be 0 and height should be 0', () => {
+    controller.setThumbSize({ width: 0, height: 0 });
+    expect(model['thumbSize'].width).toBe(0);
+    expect(model['thumbSize'].height).toBe(0);
+  });
+});
