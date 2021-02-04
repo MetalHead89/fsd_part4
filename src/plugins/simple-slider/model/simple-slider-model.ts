@@ -23,7 +23,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
    */
   removeObserver(observer: IThumbsObserver) {
     this.thumbsObservers = this.thumbsObservers.filter(
-      (registeredObserver) => registeredObserver !== observer
+      (registeredObserver) => registeredObserver !== observer,
     );
   }
 
@@ -32,7 +32,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
    */
   notifyThumbsMoveObservers() {
     this.thumbsObservers.forEach((registeredObserver) =>
-      registeredObserver.updateThumbsPosition()
+      registeredObserver.updateThumbsPosition(),
     );
   }
 
@@ -41,7 +41,8 @@ class SimpleSliderModel implements ISimpleSliderModel {
    * @param {ISize} size - новый размер слайдера
    */
   setSliderSize(size: ISize): void {
-    this.sliderSize = size;
+    this.sliderSize.width = size.width < 0 ? 0 : size.width;
+    this.sliderSize.height = size.height < 0 ? 0 : size.height;
   }
 
   /**
