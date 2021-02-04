@@ -34,7 +34,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
    */
   removeObserver(observer: IThumbsObserver) {
     this.thumbsObservers = this.thumbsObservers.filter(
-      (registeredObserver) => registeredObserver !== observer,
+      (registeredObserver) => registeredObserver !== observer
     );
   }
 
@@ -43,7 +43,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
    */
   notifyThumbsMoveObservers() {
     this.thumbsObservers.forEach((registeredObserver) =>
-      registeredObserver.updateThumbsPosition(),
+      registeredObserver.updateThumbsPosition()
     );
   }
 
@@ -76,10 +76,16 @@ class SimpleSliderModel implements ISimpleSliderModel {
     const percent = (value - this.min) / (this.max - this.min);
 
     if (this.orientation === 'horizontal') {
-      return { left: this.sliderSize.width * percent, top: 0 };
+      return {
+        left: this.sliderSize.width * percent - this.thumbSize.width / 2,
+        top: 0,
+      };
     }
 
-    return { left: 0, top: this.sliderSize.height * percent };
+    return {
+      left: 0,
+      top: this.sliderSize.height * percent - this.thumbSize.height / 2,
+    };
   }
 }
 
