@@ -84,19 +84,39 @@ class SimpleSliderModel implements ISimpleSliderModel {
    * родительского контейнера
    */
   private thumbValueToPos(value: number): IThumbPosition {
-    const percent = (value - this.min) / (this.max - this.min);
+    const position = { left: 0, top: 0 };
+    const pxPerVal = this.getPxPerValue();
+    let thumbValue = value;
 
-    if (this.orientation === 'horizontal') {
-      return {
-        left: this.sliderSize.width * percent - this.thumbSize.width / 2,
-        top: 0,
-      };
+    if (thumbValue < this.min) {
+      thumbValue = this.min;
+    } else if (thumbValue > this.max) {
+      thumbValue = this.max;
     }
 
-    return {
-      left: 0,
-      top: this.sliderSize.height * percent - this.thumbSize.height / 2,
-    };
+    const posValue =
+      this.min + ((this.max - this.min) / 100) * thumbValue * pxPerVal * 100;
+
+    if (this.orientation === 'horizontal') {
+      position.left = posValue;
+    } else {
+      position.top = posValue;
+    }
+
+    return position;
+  }
+
+  /**
+   * Возвращает количество пикселей в единице ширины слайдера, с вычетом крайних
+   * (тупиковых) зон
+   * @returns {number} - количество пикселей в единице ширины слайдера
+   */
+  private getPxPerValue(): number {
+    if (this.orientation === 'horizontal') {
+      return (this.sliderSize.width - this.thumbSize.width) / 100;
+    }
+
+    return (this.sliderSize.height - this.thumbSize.height) / 100;
   }
 }
 

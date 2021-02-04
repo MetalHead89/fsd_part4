@@ -166,3 +166,41 @@ describe('Set thumb size', () => {
     expect(model['thumbSize'].height).toBe(0);
   });
 });
+
+describe('Thumb value to position', () => {
+  test('Position left should be 0 and top should be 0', () => {
+    model['sliderSize'] = { width: 440, height: 10 };
+    model['thumbSize'] = { width: 20, height: 20 };
+
+    const position = model['thumbValueToPos'](-1);
+    expect(position.left).toBe(0);
+    expect(position.top).toBe(0);
+  });
+
+  test('Position left should be 0 and top should be 0', () => {
+    model['sliderSize'] = { width: 440, height: 10 };
+    model['thumbSize'] = { width: 20, height: 20 };
+
+    const position = model['thumbValueToPos'](0);
+    expect(position.left).toBe(0);
+    expect(position.top).toBe(0);
+  });
+
+  test('Position left should be 210 and top should be 0', () => {
+    model['sliderSize'] = { width: 440, height: 10 };
+    model['thumbSize'] = { width: 20, height: 20 };
+
+    const position = model['thumbValueToPos'](5);
+    expect(position.left).toBe(210);
+    expect(position.top).toBe(0);
+  });
+
+  test('Position left should be 420 and top should be 0', () => {
+    model['sliderSize'] = { width: 440, height: 10 };
+    model['thumbSize'] = { width: 20, height: 20 };
+
+    const position = model['thumbValueToPos'](11);
+    expect(position.left).toBe(420);
+    expect(position.top).toBe(0);
+  });
+});
