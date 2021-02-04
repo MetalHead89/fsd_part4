@@ -77,6 +77,12 @@ class SimpleSliderModel implements ISimpleSliderModel {
     };
   }
 
+  /**
+   * Возвращает позицию бегунка исходя из его значения
+   * @param {number} value - значение бегунка
+   * @returns {IThumbPosition} - объект с позицией бегунка относительно левого и вернего края
+   * родительского контейнера
+   */
   private thumbValueToPos(value: number): IThumbPosition {
     const percent = (value - this.min) / (this.max - this.min);
 
