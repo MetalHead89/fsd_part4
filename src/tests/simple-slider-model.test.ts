@@ -73,3 +73,44 @@ describe('Remove observer', () => {
     expect(model['thumbsObservers'].length).toBe(0);
   });
 });
+
+describe('Notify Thumbs Move Observers', () => {
+  test('Observers must be notified', () => {
+    let numberOfNotifiedObservers = 0;
+
+    const newObserverOne = {
+      updateThumbsPosition(): void {
+        numberOfNotifiedObservers += 1;
+      },
+    };
+    const newObserverTwo = {
+      updateThumbsPosition(): void {
+        numberOfNotifiedObservers += 1;
+      },
+    };
+    const newObserverThree = {
+      updateThumbsPosition(): void {
+        numberOfNotifiedObservers += 1;
+      },
+    };
+
+    model.registerObserver(newObserverOne);
+    model['notifyThumbsMoveObservers']();
+    expect(numberOfNotifiedObservers).toBe(1);
+
+    numberOfNotifiedObservers = 0;
+    model.registerObserver(newObserverTwo);
+    model['notifyThumbsMoveObservers']();
+    expect(numberOfNotifiedObservers).toBe(2);
+
+    numberOfNotifiedObservers = 0;
+    model.registerObserver(newObserverThree);
+    model['notifyThumbsMoveObservers']();
+    expect(numberOfNotifiedObservers).toBe(3);
+
+    numberOfNotifiedObservers = 0;
+    model.removeObserver(newObserverThree);
+    model['notifyThumbsMoveObservers']();
+    expect(numberOfNotifiedObservers).toBe(2);
+  });
+});
