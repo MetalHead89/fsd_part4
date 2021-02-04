@@ -13,9 +13,20 @@ export interface ISimpleSliderModel {
   notifyThumbsMoveObservers(): void;
   setSliderSize(size: ISize): void;
   setThumbSize(size: ISize): void;
+  getThumbsPositions(): IThumbsPositions;
 }
 
 export interface ISimpleSliderController {
   setSliderSize(size: ISize): void;
   setThumbSize(size: ISize): void;
+}
+
+export interface IThumbPosition {
+  left: number;
+  top: number;
+}
+
+export interface IThumbsPositions {
+  thumbOne: IThumbPosition;
+  thumbTwo: IThumbPosition;
 }

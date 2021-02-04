@@ -1,7 +1,18 @@
-import { ISimpleSliderModel, IThumbsObserver, ISize } from '../interfaces';
+import {
+  ISimpleSliderModel,
+  IThumbsObserver,
+  ISize,
+  IThumbsPositions,
+  IThumbPosition,
+} from '../interfaces';
 
 class SimpleSliderModel implements ISimpleSliderModel {
   private thumbsObservers: IThumbsObserver[];
+  private orientation = 'horizontal';
+  private min = 0;
+  private max = 10;
+  private thumbOneValue = 3;
+  private thumbTwoValue = 7;
   private sliderSize = { width: 0, height: 0 };
   private thumbSize = { width: 0, height: 0 };
 
@@ -52,6 +63,23 @@ class SimpleSliderModel implements ISimpleSliderModel {
   setThumbSize(size: ISize): void {
     this.thumbSize.width = size.width < 0 ? 0 : size.width;
     this.thumbSize.height = size.height < 0 ? 0 : size.height;
+  }
+
+  getThumbsPositions(): IThumbsPositions {
+    return {
+      thumbOne: this.thumbValueToPos(this.thumbOneValue),
+      thumbTwo: this.thumbValueToPos(this.thumbTwoValue),
+    };
+  }
+
+  private thumbValueToPos(value: number): IThumbPosition {
+    const percent = (value - this.min) / (this.max - this.min);
+
+    if (this.orientation === 'horizontal') {
+      return { left: this.sliderSize.width * percent, top: 0 };
+    }
+
+    return { left: 0, top: this.sliderSize.height * percent };
   }
 }
 
