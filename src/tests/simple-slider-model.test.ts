@@ -1,3 +1,5 @@
+/* eslint-disable dot-notation */
+
 import SimpleSliderModel from '../plugins/simple-slider/model/simple-slider-model';
 
 let model = new SimpleSliderModel();
