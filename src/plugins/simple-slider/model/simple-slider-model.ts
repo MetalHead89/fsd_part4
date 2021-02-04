@@ -65,6 +65,11 @@ class SimpleSliderModel implements ISimpleSliderModel {
     this.thumbSize.height = size.height < 0 ? 0 : size.height;
   }
 
+  /**
+   * Возвращает объект с позициями бегунков
+   * @returns {IThumbsPositions} - объект с позициями бегунков относительно левого и вернего края
+   * родительского контейнера
+   */
   getThumbsPositions(): IThumbsPositions {
     return {
       thumbOne: this.thumbValueToPos(this.thumbOneValue),
