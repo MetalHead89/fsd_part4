@@ -50,7 +50,8 @@ class SimpleSliderModel implements ISimpleSliderModel {
    * @param {ISize} size - новый размер бегунка
    */
   setThumbSize(size: ISize): void {
-    this.thumbSize = size;
+    this.thumbSize.width = size.width < 0 ? 0 : size.width;
+    this.thumbSize.height = size.height < 0 ? 0 : size.height;
   }
 }
 
