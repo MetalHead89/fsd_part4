@@ -5,13 +5,15 @@
 
 import SimpleSliderModel from '../plugins/simple-slider/model/simple-slider-model';
 import SimpleSliderController from '../plugins/simple-slider/controller/simple-slider-controller';
+import SimpleSliderView from '../plugins/simple-slider/view/simple-slider-view';
 
 let model = new SimpleSliderModel();
-let controller = new SimpleSliderController(model);
+let view = new SimpleSliderView();
+let controller = new SimpleSliderController(model, view);
 
 beforeEach(() => {
   model = new SimpleSliderModel();
-  controller = new SimpleSliderController(model);
+  controller = new SimpleSliderController(model, view);
 });
 
 describe('Set slider size', () => {
