@@ -13,6 +13,16 @@ class SimpleSliderController implements ISimpleSliderController {
   constructor(model: ISimpleSliderModel) {
     this.simpleSliderModel = model;
     this.simpleSliderView = new SimpleSliderView(this, this.simpleSliderModel);
+
+    this.init();
+  }
+
+  private init(): void {
+    this.simpleSliderModel.setSliderSize(this.simpleSliderView.getSliderSize());
+    this.simpleSliderModel.setThumbSize(this.simpleSliderView.getThumbSize());
+    this.simpleSliderView.updatedThumbs(
+      this.simpleSliderModel.getThumbsPositions(),
+    );
   }
 
   /**
