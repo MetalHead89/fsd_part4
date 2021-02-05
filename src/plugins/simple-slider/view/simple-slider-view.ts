@@ -4,6 +4,7 @@ import {
   ISize,
 } from '../interfaces';
 
+import Container from './container/container';
 import Track from './track/track';
 import Thumb from './thumb/thumb';
 import ProgressBar from './progress-bar/progress-bar';
@@ -16,7 +17,7 @@ import Scale from './scale/scale';
 class SimpleSliderView {
   private simpleSliderModel: ISimpleSliderModel;
   private simpleSliderController: ISimpleSliderController;
-  private element: HTMLDivElement;
+  private container: Container;
   private sliderWrapper: HTMLDivElement;
   private track: Track;
   private thumbOne: Thumb;
@@ -38,9 +39,10 @@ class SimpleSliderView {
     );
     // sliderWrapper должен инициализироваться из параметров конструктора
 
-    this.element = document.createElement('div');
-    this.element.classList.add('slider', 'slider_horizontal');
+    // this.element = document.createElement('div');
+    // this.element.classList.add('slider', 'slider_horizontal');
 
+    this.container = new Container();
     this.track = new Track();
     this.thumbOne = new Thumb();
     this.thumbTwo = new Thumb();
