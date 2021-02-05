@@ -13,7 +13,8 @@ import PopUp from './pop-up/pop-up';
 import Scale from './scale/scale';
 
 /**
- * Класс дорожки слайдера. Содержит HTML элемент дорожки слайдера и организовывает управление им
+ * Класс дорожки слайдера. Содержит HTML элемент дорожки слайдера
+ * и организовывает управление им
  */
 class SimpleSliderView {
   private simpleSliderModel: ISimpleSliderModel;
@@ -40,9 +41,6 @@ class SimpleSliderView {
     );
     // sliderWrapper должен инициализироваться из параметров конструктора
 
-    // this.element = document.createElement('div');
-    // this.element.classList.add('slider', 'slider_horizontal');
-
     this.container = new Container();
     this.track = new Track();
     this.thumbOne = new Thumb();
@@ -53,7 +51,6 @@ class SimpleSliderView {
     this.scale = new Scale();
 
     this.assembleSlider();
-    // this.init();
   }
 
   private assembleSlider(): void {
@@ -86,22 +83,6 @@ class SimpleSliderView {
     this.thumbOne.moveTo(thumbsPositions.thumbOne);
     this.thumbTwo.moveTo(thumbsPositions.thumbTwo);
   }
-
-  // private init(): void {
-  //   this.simpleSliderController.setSliderSize({
-  //     width: this.element.offsetWidth,
-  //     height: this.element.offsetHeight,
-  //   });
-
-  //   this.simpleSliderController.setThumbSize({
-  //     width: this.thumbOne.getElement().offsetWidth,
-  //     height: this.thumbOne.getElement().offsetHeight,
-  //   });
-
-  //   const thumbsPositions = this.simpleSliderModel.getThumbsPositions();
-  //   this.thumbOne.moveTo(thumbsPositions.thumbOne);
-  //   this.thumbTwo.moveTo(thumbsPositions.thumbTwo);
-  // }
 }
 
 export default SimpleSliderView;
