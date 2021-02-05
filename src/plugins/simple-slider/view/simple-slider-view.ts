@@ -1,4 +1,8 @@
-import { ISimpleSliderModel, ISimpleSliderController } from '../interfaces';
+import {
+  ISimpleSliderModel,
+  ISimpleSliderController,
+  ISize,
+} from '../interfaces';
 
 import Track from './track/track';
 import Thumb from './thumb/thumb';
@@ -46,7 +50,7 @@ class SimpleSliderView {
     this.scale = new Scale();
 
     this.assembleSlider();
-    this.init();
+    // this.init();
   }
 
   private assembleSlider(): void {
@@ -67,21 +71,25 @@ class SimpleSliderView {
     // Временный способ размещения слайдера на странице
   }
 
-  private init(): void {
-    this.simpleSliderController.setSliderSize({
-      width: this.element.offsetWidth,
-      height: this.element.offsetHeight,
-    });
-
-    this.simpleSliderController.setThumbSize({
-      width: this.thumbOne.getElement().offsetWidth,
-      height: this.thumbOne.getElement().offsetHeight,
-    });
-
-    const thumbsPositions = this.simpleSliderModel.getThumbsPositions();
-    this.thumbOne.moveTo(thumbsPositions.thumbOne);
-    this.thumbTwo.moveTo(thumbsPositions.thumbTwo);
+  getThumbSize(): ISize {
+    return this.thumbOne.getSize();
   }
+
+  // private init(): void {
+  //   this.simpleSliderController.setSliderSize({
+  //     width: this.element.offsetWidth,
+  //     height: this.element.offsetHeight,
+  //   });
+
+  //   this.simpleSliderController.setThumbSize({
+  //     width: this.thumbOne.getElement().offsetWidth,
+  //     height: this.thumbOne.getElement().offsetHeight,
+  //   });
+
+  //   const thumbsPositions = this.simpleSliderModel.getThumbsPositions();
+  //   this.thumbOne.moveTo(thumbsPositions.thumbOne);
+  //   this.thumbTwo.moveTo(thumbsPositions.thumbTwo);
+  // }
 }
 
 export default SimpleSliderView;
