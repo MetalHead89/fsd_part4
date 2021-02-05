@@ -77,6 +77,10 @@ class SimpleSliderView {
     return this.thumbOne.getSize();
   }
 
+  getSliderSize(): ISize {
+    return this.container.getSize();
+  }
+
   // private init(): void {
   //   this.simpleSliderController.setSliderSize({
   //     width: this.element.offsetWidth,
