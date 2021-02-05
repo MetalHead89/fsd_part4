@@ -2,6 +2,7 @@ import {
   ISimpleSliderModel,
   ISimpleSliderController,
   ISize,
+  IThumbsPositions,
 } from '../interfaces';
 
 import Container from './container/container';
@@ -79,6 +80,11 @@ class SimpleSliderView {
 
   getSliderSize(): ISize {
     return this.container.getSize();
+  }
+
+  updatedThumbs(thumbsPositions: IThumbsPositions): void {
+    this.thumbOne.moveTo(thumbsPositions.thumbOne);
+    this.thumbTwo.moveTo(thumbsPositions.thumbTwo);
   }
 
   // private init(): void {
