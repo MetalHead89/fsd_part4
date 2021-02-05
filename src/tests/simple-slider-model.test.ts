@@ -226,3 +226,35 @@ describe('Thumb value to position', () => {
     expect(position.top).toBeCloseTo(294);
   });
 });
+
+describe('Get thumbs positions', () => {
+  test(
+    'First thumb left position should be 126 and top should be 0' +
+      'and second thumb left position should be 294 and top should be 0',
+    () => {
+      model['sliderSize'] = { width: 440, height: 10 };
+      model['thumbSize'] = { width: 20, height: 20 };
+      const pos = model.getThumbsPositions();
+
+      expect(pos.thumbOne.left).toBeCloseTo(126);
+      expect(pos.thumbOne.top).toBe(0);
+      expect(pos.thumbTwo.left).toBeCloseTo(294);
+      expect(pos.thumbTwo.top).toBe(0);
+    },
+  );
+
+  test('First thumb left position should be 0 and top should be 0' +
+  'and second thumb left position should be 0 and top should be 420', () => {
+    model['orientation'] = 'vertical';
+    model['sliderSize'] = { width: 440, height: 440 };
+    model['thumbSize'] = { width: 20, height: 20 };
+    model['thumbOneValue'] = -5;
+    model['thumbTwoValue'] = 77;
+    const pos = model.getThumbsPositions();
+
+    expect(pos.thumbOne.left).toBe(0);
+    expect(pos.thumbOne.top).toBe(0);
+    expect(pos.thumbTwo.left).toBeCloseTo(0);
+    expect(pos.thumbTwo.top).toBe(420);
+  });
+});
