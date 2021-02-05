@@ -1,4 +1,4 @@
-import { IThumbPosition } from '../../interfaces';
+import { IThumbPosition, ISize } from '../../interfaces';
 
 class Thumb {
   private element: HTMLDivElement;
@@ -15,6 +15,13 @@ class Thumb {
   moveTo(position: IThumbPosition): void {
     this.element.style.left = `${position.left}px`;
     this.element.style.top = `${position.top}px`;
+  }
+
+  getSize(): ISize {
+    return {
+      width: this.element.offsetWidth,
+      height: this.element.offsetHeight,
+    };
   }
 }
 
