@@ -243,18 +243,53 @@ describe('Get thumbs positions', () => {
     },
   );
 
-  test('First thumb left position should be 0 and top should be 0' +
-  'and second thumb left position should be 0 and top should be 420', () => {
-    model['orientation'] = 'vertical';
-    model['sliderSize'] = { width: 440, height: 440 };
-    model['thumbSize'] = { width: 20, height: 20 };
-    model['thumbOneValue'] = -5;
-    model['thumbTwoValue'] = 77;
-    const pos = model.getThumbsPositions();
+  test(
+    'First thumb left position should be 0 and top should be 0' +
+      'and second thumb left position should be 0 and top should be 420',
+    () => {
+      model['orientation'] = 'vertical';
+      model['sliderSize'] = { width: 440, height: 440 };
+      model['thumbSize'] = { width: 20, height: 20 };
+      model['thumbOneValue'] = -5;
+      model['thumbTwoValue'] = 77;
+      const pos = model.getThumbsPositions();
 
-    expect(pos.thumbOne.left).toBe(0);
-    expect(pos.thumbOne.top).toBe(0);
-    expect(pos.thumbTwo.left).toBeCloseTo(0);
-    expect(pos.thumbTwo.top).toBe(420);
+      expect(pos.thumbOne.left).toBe(0);
+      expect(pos.thumbOne.top).toBe(0);
+      expect(pos.thumbTwo.left).toBeCloseTo(0);
+      expect(pos.thumbTwo.top).toBe(420);
+    },
+  );
+});
+
+describe('Get pixels per value', () => {
+  test('Should be 4.2', () => {
+    model['sliderSize'] = { width: 440, height: 1440 };
+    model['thumbSize'] = { width: 20, height: 200 };
+
+    expect(model['getPxPerValue']()).toBeCloseTo(4.2);
+  });
+
+  test('Should be 12.4', () => {
+    model['orientation'] = 'vertical';
+    model['sliderSize'] = { width: 440, height: 1440 };
+    model['thumbSize'] = { width: 20, height: 200 };
+
+    expect(model['getPxPerValue']()).toBeCloseTo(12.4);
+  });
+
+  test('Should be 6.4', () => {
+    model['sliderSize'] = { width: 680, height: 50 };
+    model['thumbSize'] = { width: 40, height: 30 };
+
+    expect(model['getPxPerValue']()).toBeCloseTo(6.4);
+  });
+
+  test('Should be 0.2 ', () => {
+    model['orientation'] = 'vertical';
+    model['sliderSize'] = { width: 680, height: 50 };
+    model['thumbSize'] = { width: 40, height: 30 };
+
+    expect(model['getPxPerValue']()).toBeCloseTo(0.2);
   });
 });
