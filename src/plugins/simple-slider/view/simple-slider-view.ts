@@ -17,8 +17,6 @@ import Scale from './scale/scale';
  * и организовывает управление им
  */
 class SimpleSliderView {
-  private simpleSliderModel: ISimpleSliderModel;
-  private simpleSliderController: ISimpleSliderController;
   private container: Container;
   private sliderWrapper: HTMLDivElement;
   private track: Track;
@@ -29,9 +27,7 @@ class SimpleSliderView {
   private progressBar: ProgressBar;
   private scale: Scale;
 
-  constructor(controller: ISimpleSliderController, model: ISimpleSliderModel) {
-    this.simpleSliderModel = model;
-    this.simpleSliderController = controller;
+  constructor() {
 
     // sliderWrapper должен инициализироваться из параметров конструктора
     this.sliderWrapper = document.createElement('div');
