@@ -14,6 +14,10 @@ class Container {
       height: this.element.offsetHeight,
     };
   }
+
+  append(control: HTMLDivElement): void {
+    this.element.append(control);
+  }
 }
 
 export default Container;

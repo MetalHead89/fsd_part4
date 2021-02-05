@@ -56,18 +56,18 @@ class SimpleSliderView {
   }
 
   private assembleSlider(): void {
-    this.element.append(this.track.getElement());
-    this.element.append(this.thumbOne.getElement());
-    this.element.append(this.thumbTwo.getElement());
-    this.element.append(this.popUpOne.getElement());
-    this.element.append(this.popUpTwo.getElement());
-    this.element.append(this.progressBar.getElement());
-    this.element.append(this.scale.getElement());
+    this.container.append(this.track.getElement());
+    this.container.append(this.thumbOne.getElement());
+    this.container.append(this.thumbTwo.getElement());
+    this.container.append(this.popUpOne.getElement());
+    this.container.append(this.popUpTwo.getElement());
+    this.container.append(this.progressBar.getElement());
+    this.container.append(this.scale.getElement());
 
     // Временный способ размещения слайдера на странице
     const body = document.querySelector('body');
     if (body !== null) {
-      this.sliderWrapper.append(this.element);
+      this.sliderWrapper.append(this.container.element);
       body.append(this.sliderWrapper);
     }
     // Временный способ размещения слайдера на странице
