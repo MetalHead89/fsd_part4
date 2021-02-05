@@ -1,6 +1,5 @@
 import {
-  ISimpleSliderModel,
-  ISimpleSliderController,
+  ISimpleSliderView,
   ISize,
   IThumbsPositions,
 } from '../interfaces';
@@ -16,7 +15,7 @@ import Scale from './scale/scale';
  * Класс дорожки слайдера. Содержит HTML элемент дорожки слайдера
  * и организовывает управление им
  */
-class SimpleSliderView {
+class SimpleSliderView implements ISimpleSliderView{
   private container: Container;
   private sliderWrapper: HTMLDivElement;
   private track: Track;

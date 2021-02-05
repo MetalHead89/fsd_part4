@@ -1,4 +1,4 @@
-import { ISimpleSliderModel, ISimpleSliderController } from './interfaces';
+import { ISimpleSliderModel, ISimpleSliderView } from './interfaces';
 
 import SimpleSliderModel from './model/simple-slider-model';
 import SimpleSliderController from './controller/simple-slider-controller';
@@ -6,8 +6,8 @@ import SimpleSliderView from './view/simple-slider-view';
 
 // Временный способ создания слайдера
 const simpleSliderModel: ISimpleSliderModel = new SimpleSliderModel();
-const simpleSliderView: SimpleSliderView = new SimpleSliderView();
-const simpleSliderController: ISimpleSliderController = new SimpleSliderController(
+const simpleSliderView: ISimpleSliderView = new SimpleSliderView();
+const simpleSliderController = new SimpleSliderController(
   simpleSliderModel,
   simpleSliderView,
 );

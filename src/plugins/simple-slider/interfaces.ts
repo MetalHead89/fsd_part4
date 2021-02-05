@@ -16,10 +16,16 @@ export interface ISimpleSliderModel {
   getThumbsPositions(): IThumbsPositions;
 }
 
-export interface ISimpleSliderController {
-  setSliderSize(size: ISize): void;
-  setThumbSize(size: ISize): void;
+export interface ISimpleSliderView {
+  getThumbSize(): ISize;
+  getSliderSize(): ISize;
+  updatedThumbs(thumbsPositions: IThumbsPositions): void;
 }
+
+// export interface ISimpleSliderController {
+//   setSliderSize(size: ISize): void;
+//   setThumbSize(size: ISize): void;
+// }
 
 export interface IThumbPosition {
   left: number;

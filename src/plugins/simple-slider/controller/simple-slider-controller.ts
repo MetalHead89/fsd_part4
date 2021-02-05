@@ -1,16 +1,10 @@
-import {
-  ISimpleSliderController,
-  ISimpleSliderModel,
-  ISize,
-} from '../interfaces';
+import { ISimpleSliderModel, ISimpleSliderView, ISize } from '../interfaces';
 
-import SimpleSliderView from '../view/simple-slider-view';
-
-class SimpleSliderController implements ISimpleSliderController {
+class SimpleSliderController {
   private simpleSliderModel: ISimpleSliderModel;
-  private simpleSliderView: SimpleSliderView;
+  private simpleSliderView: ISimpleSliderView;
 
-  constructor(model: ISimpleSliderModel, view: SimpleSliderView) {
+  constructor(model: ISimpleSliderModel, view: ISimpleSliderView) {
     this.simpleSliderModel = model;
     this.simpleSliderView = view;
 
