@@ -36,7 +36,9 @@ class Subject implements ISubject {
   }
 
   /**
-   * Оповещение зарегистрированных наблюдателей об изменении позиций бегунков
+   * Оповещение наблюдателей, подписанных на событие eventType о его наступлении
+   * @param {string} eventType - тип события, при наступлении которого
+   * будут оповещены подписанные на него наблюдатели
    */
   notifyThumbsMoveObservers(eventType: string): void {
     this.observers[eventType].forEach((registeredObserver) =>
