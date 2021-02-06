@@ -11,10 +11,12 @@ class Subject implements ISubject {
     this.observers = {};
   }
 
-  // /**
-  //  * Регистрация нового наблюдателя, следящего за изменением позиций бегунков
-  //  * @param {IThumbsObserver} observer - регистрируемый наблюдатель
-  //  */
+  /**
+   * Регистрация нового наблюдателя, следящего за изменением позиций бегунков
+   * @param {IObserver} observer - регистрируемый наблюдатель
+   * @param {string} eventType - тип события, при наступлении которого будет происходить оповещение
+   * зарегистрированных наблюдателей
+   */
   registerObserver(eventType: string, observer: IObserver): void {
     if (!Object.prototype.hasOwnProperty.call(this.observers, eventType)) {
       this.observers[eventType] = [];
