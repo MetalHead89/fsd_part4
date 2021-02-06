@@ -4,6 +4,12 @@
 
 import { ISubject, IObserversList, IObserver } from '../interfaces';
 
+/**
+ * Реализация субъекта, оповещающего подписанных на него наблюдателей
+ * о наступлении определённого события.
+ * Класс является частью паттерна 'налблюдатель' и создан с целью ослабления связей
+ * между Model, View и Controller
+ */
 class Subject implements ISubject {
   private observers: IObserversList;
 
