@@ -17,7 +17,7 @@ class Subject implements ISubject {
    * @param {string} eventType - тип события, при наступлении которого будет происходить оповещение
    * зарегистрированных наблюдателей
    */
-  registerObserver(eventType: string, observer: IObserver): void {
+  register(eventType: string, observer: IObserver): void {
     if (!Object.prototype.hasOwnProperty.call(this.observers, eventType)) {
       this.observers[eventType] = [];
     }

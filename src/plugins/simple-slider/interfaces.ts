@@ -7,7 +7,7 @@ export interface IObserversList {
 }
 
 export interface ISubject {
-  registerObserver(eventType: string, observer: IObserver): void;
+  register(eventType: string, observer: IObserver): void;
   removeObserver(eventType: string, observer: IObserver): void;
   notifyThumbsMoveObservers(eventType: string): void;
 }
