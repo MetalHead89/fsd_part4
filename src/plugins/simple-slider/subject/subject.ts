@@ -12,7 +12,7 @@ class Subject implements ISubject {
   }
 
   /**
-   * Регистрация нового наблюдателя, следящего за изменением позиций бегунков
+   * Регистрация нового наблюдателя, подписанного на событие eventType
    * @param {IObserver} observer - регистрируемый наблюдатель
    * @param {string} eventType - тип события, при наступлении которого будет происходить оповещение
    * зарегистрированных наблюдателей
@@ -25,8 +25,9 @@ class Subject implements ISubject {
   }
 
   /**
-   * Удаление наблюдателя, следящего за изменением позиций бегунков
-   * @param {IThumbsObserver} observer - удаляемый наблюдатель
+   * Удаление наблюдателя, подписанного на событие eventType
+   * @param {IObserver} observer - удаляемый наблюдатель
+   * @param {string} eventType - тип события, на которое подписан удаляемый наблюдатель
    */
   removeObserver(eventType: string, observer: IObserver): void {
     this.observers[eventType] = this.observers[eventType].filter(
