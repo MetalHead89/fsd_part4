@@ -1,19 +1,15 @@
 /* eslint-disable function-paren-newline */
 /* eslint-disable operator-linebreak */
-/* eslint-disable implicit-arrow-linebreak */
-/* eslint-disable comma-dangle */
 
 import {
   ISimpleSliderModel,
-  IObserver,
   ISize,
   IThumbsPositions,
   IThumbPosition,
-  IObserversList,
 } from '../interfaces';
+import Subject from '../subject/subject';
 
-class SimpleSliderModel implements ISimpleSliderModel {
-  private observers: IObserversList;
+class SimpleSliderModel extends Subject implements ISimpleSliderModel {
   private orientation = 'horizontal';
   private min = 0;
   private max = 10;
@@ -21,40 +17,6 @@ class SimpleSliderModel implements ISimpleSliderModel {
   private thumbTwoValue = 7;
   private sliderSize = { width: 0, height: 0 };
   private thumbSize = { width: 0, height: 0 };
-
-  constructor() {
-    this.observers = {};
-  }
-
-  // /**
-  //  * Регистрация нового наблюдателя, следящего за изменением позиций бегунков
-  //  * @param {IThumbsObserver} observer - регистрируемый наблюдатель
-  //  */
-  registerObserver(eventType: string, observer: IObserver): void {
-    if (!Object.prototype.hasOwnProperty.call(this.observers, eventType)) {
-      this.observers[eventType] = [];
-    }
-    this.observers[eventType].push(observer);
-  }
-
-  /**
-   * Удаление наблюдателя, следящего за изменением позиций бегунков
-   * @param {IThumbsObserver} observer - удаляемый наблюдатель
-   */
-  removeObserver(eventType: string, observer: IObserver): void {
-    this.observers[eventType] = this.observers[eventType].filter(
-      (registeredObserver) => registeredObserver !== observer
-    );
-  }
-
-  /**
-   * Оповещение зарегистрированных наблюдателей об изменении позиций бегунков
-   */
-  notifyThumbsMoveObservers(eventType: string): void {
-    this.observers[eventType].forEach((registeredObserver) =>
-      registeredObserver.update(eventType)
-    );
-  }
 
   /**
    * Установка размера слайдера
