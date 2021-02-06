@@ -1,12 +1,6 @@
-/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable comma-dangle */
 
-import {
-  IObserver,
-  IObserversList,
-  ISimpleSliderView,
-  ISize,
-  IThumbsPositions,
-} from '../interfaces';
+import { ISimpleSliderView, ISize, IThumbsPositions } from '../interfaces';
 
 import Container from './container/container';
 import Track from './track/track';
@@ -14,13 +8,13 @@ import Thumb from './thumb/thumb';
 import ProgressBar from './progress-bar/progress-bar';
 import PopUp from './pop-up/pop-up';
 import Scale from './scale/scale';
+import Subject from '../subject/subject';
 
 /**
  * Класс дорожки слайдера. Содержит HTML элемент дорожки слайдера
  * и организовывает управление им
  */
-class SimpleSliderView implements ISimpleSliderView {
-  private observers: IObserversList;
+class SimpleSliderView extends Subject implements ISimpleSliderView {
   private container: Container;
   private sliderWrapper: HTMLDivElement;
   private track: Track;
@@ -32,7 +26,7 @@ class SimpleSliderView implements ISimpleSliderView {
   private scale: Scale;
 
   constructor() {
-    this.observers = {};
+    super();
     // sliderWrapper должен инициализироваться из параметров конструктора
     this.sliderWrapper = document.createElement('div');
     this.sliderWrapper.classList.add(
@@ -51,36 +45,6 @@ class SimpleSliderView implements ISimpleSliderView {
     this.scale = new Scale();
 
     this.assembleSlider();
-  }
-
-  // /**
-  //  * Регистрация нового наблюдателя, следящего за изменением позиций бегунков
-  //  * @param {IThumbsObserver} observer - регистрируемый наблюдатель
-  //  */
-  registerObserver(eventType: string, observer: IObserver): void {
-    if (!Object.prototype.hasOwnProperty.call(this.observers, eventType)) {
-      this.observers[eventType] = [];
-    }
-    this.observers[eventType].push(observer);
-  }
-
-  /**
-   * Удаление наблюдателя, следящего за изменением позиций бегунков
-   * @param {IThumbsObserver} observer - удаляемый наблюдатель
-   */
-  removeObserver(eventType: string, observer: IObserver): void {
-    this.observers[eventType] = this.observers[eventType].filter(
-      (registeredObserver) => registeredObserver !== observer
-    );
-  }
-
-  /**
-   * Оповещение зарегистрированных наблюдателей об изменении позиций бегунков
-   */
-  notifyThumbsMoveObservers(eventType: string): void {
-    this.observers[eventType].forEach((registeredObserver) =>
-      registeredObserver.update(eventType)
-    );
   }
 
   private assembleSlider(): void {
