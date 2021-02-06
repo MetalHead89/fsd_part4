@@ -29,7 +29,7 @@ class Subject implements ISubject {
    * @param {IObserver} observer - удаляемый наблюдатель
    * @param {string} eventType - тип события, на которое подписан удаляемый наблюдатель
    */
-  removeObserver(eventType: string, observer: IObserver): void {
+  remove(eventType: string, observer: IObserver): void {
     this.observers[eventType] = this.observers[eventType].filter(
       (registeredObserver) => registeredObserver !== observer
     );
