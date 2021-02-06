@@ -1,5 +1,8 @@
+/* eslint-disable implicit-arrow-linebreak */
+
 import {
   IObserver,
+  IObserversList,
   ISimpleSliderView,
   ISize,
   IThumbsPositions,
@@ -17,7 +20,7 @@ import Scale from './scale/scale';
  * и организовывает управление им
  */
 class SimpleSliderView implements ISimpleSliderView {
-  private observers: IObserver[];
+  private observers: IObserversList;
   private container: Container;
   private sliderWrapper: HTMLDivElement;
   private track: Track;
@@ -29,7 +32,7 @@ class SimpleSliderView implements ISimpleSliderView {
   private scale: Scale;
 
   constructor() {
-    this.observers = [];
+    this.observers = {};
     // sliderWrapper должен инициализироваться из параметров конструктора
     this.sliderWrapper = document.createElement('div');
     this.sliderWrapper.classList.add(
@@ -50,20 +53,23 @@ class SimpleSliderView implements ISimpleSliderView {
     this.assembleSlider();
   }
 
-  /**
-   * Регистрация нового наблюдателя, следящего за изменением позиций бегунков
-   * @param {IThumbsObserver} observer - регистрируемый наблюдатель
-   */
-  registerObserver(observer: IObserver): void {
-    this.observers.push(observer);
+  // /**
+  //  * Регистрация нового наблюдателя, следящего за изменением позиций бегунков
+  //  * @param {IThumbsObserver} observer - регистрируемый наблюдатель
+  //  */
+  registerObserver(eventType: string, observer: IObserver): void {
+    if (!Object.prototype.hasOwnProperty.call(this.observers, eventType)) {
+      this.observers[eventType] = [];
+    }
+    this.observers[eventType].push(observer);
   }
 
   /**
    * Удаление наблюдателя, следящего за изменением позиций бегунков
    * @param {IThumbsObserver} observer - удаляемый наблюдатель
    */
-  removeObserver(observer: IObserver): void {
-    this.observers = this.observers.filter(
+  removeObserver(eventType: string, observer: IObserver): void {
+    this.observers[eventType] = this.observers[eventType].filter(
       (registeredObserver) => registeredObserver !== observer
     );
   }
@@ -71,8 +77,10 @@ class SimpleSliderView implements ISimpleSliderView {
   /**
    * Оповещение зарегистрированных наблюдателей об изменении позиций бегунков
    */
-  notifyThumbsMoveObservers(): void {
-    this.observers.forEach((registeredObserver) => registeredObserver.update());
+  notifyThumbsMoveObservers(eventType: string): void {
+    this.observers[eventType].forEach((registeredObserver) =>
+      registeredObserver.update(eventType)
+    );
   }
 
   private assembleSlider(): void {

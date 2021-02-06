@@ -1,6 +1,11 @@
-import { ISimpleSliderModel, ISimpleSliderView, ISize } from '../interfaces';
+import {
+  IObserver,
+  ISimpleSliderModel,
+  ISimpleSliderView,
+  ISize,
+} from '../interfaces';
 
-class SimpleSliderController {
+class SimpleSliderController implements IObserver {
   private simpleSliderModel: ISimpleSliderModel;
   private simpleSliderView: ISimpleSliderView;
 
@@ -15,9 +20,11 @@ class SimpleSliderController {
     this.simpleSliderModel.setSliderSize(this.simpleSliderView.getSliderSize());
     this.simpleSliderModel.setThumbSize(this.simpleSliderView.getThumbSize());
     this.simpleSliderView.updatedThumbs(
-      this.simpleSliderModel.getThumbsPositions(),
+      this.simpleSliderModel.getThumbsPositions()
     );
   }
+
+  update(): void {}
 
   /**
    * Установка размера слайдера

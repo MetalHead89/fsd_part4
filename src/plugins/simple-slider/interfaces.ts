@@ -1,11 +1,15 @@
 export interface IObserver {
-  update(): void
+  update(eventType: string): void;
+}
+
+export interface IObserversList {
+  [index: string]: IObserver[];
 }
 
 interface ISubject {
-  registerObserver(observer: IObserver): void;
-  removeObserver(observer: IObserver): void;
-  notifyThumbsMoveObservers(): void;
+  registerObserver(eventType: string, observer: IObserver): void;
+  removeObserver(eventType: string, observer: IObserver): void;
+  notifyThumbsMoveObservers(eventType: string): void;
 }
 
 export interface ISize {

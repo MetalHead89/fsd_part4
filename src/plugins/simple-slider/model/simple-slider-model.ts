@@ -9,10 +9,11 @@ import {
   ISize,
   IThumbsPositions,
   IThumbPosition,
+  IObserversList,
 } from '../interfaces';
 
 class SimpleSliderModel implements ISimpleSliderModel {
-  private thumbsObservers: IObserver[];
+  private observers: IObserversList;
   private orientation = 'horizontal';
   private min = 0;
   private max = 10;
@@ -22,23 +23,26 @@ class SimpleSliderModel implements ISimpleSliderModel {
   private thumbSize = { width: 0, height: 0 };
 
   constructor() {
-    this.thumbsObservers = [];
+    this.observers = {};
   }
 
-  /**
-   * Регистрация нового наблюдателя, следящего за изменением позиций бегунков
-   * @param {IThumbsObserver} observer - регистрируемый наблюдатель
-   */
-  registerObserver(observer: IObserver): void {
-    this.thumbsObservers.push(observer);
+  // /**
+  //  * Регистрация нового наблюдателя, следящего за изменением позиций бегунков
+  //  * @param {IThumbsObserver} observer - регистрируемый наблюдатель
+  //  */
+  registerObserver(eventType: string, observer: IObserver): void {
+    if (!Object.prototype.hasOwnProperty.call(this.observers, eventType)) {
+      this.observers[eventType] = [];
+    }
+    this.observers[eventType].push(observer);
   }
 
   /**
    * Удаление наблюдателя, следящего за изменением позиций бегунков
    * @param {IThumbsObserver} observer - удаляемый наблюдатель
    */
-  removeObserver(observer: IObserver): void {
-    this.thumbsObservers = this.thumbsObservers.filter(
+  removeObserver(eventType: string, observer: IObserver): void {
+    this.observers[eventType] = this.observers[eventType].filter(
       (registeredObserver) => registeredObserver !== observer
     );
   }
@@ -46,9 +50,9 @@ class SimpleSliderModel implements ISimpleSliderModel {
   /**
    * Оповещение зарегистрированных наблюдателей об изменении позиций бегунков
    */
-  notifyThumbsMoveObservers(): void {
-    this.thumbsObservers.forEach((registeredObserver) =>
-      registeredObserver.update()
+  notifyThumbsMoveObservers(eventType: string): void {
+    this.observers[eventType].forEach((registeredObserver) =>
+      registeredObserver.update(eventType)
     );
   }
 
