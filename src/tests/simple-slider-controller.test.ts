@@ -13,6 +13,7 @@ let controller = new SimpleSliderController(model, view);
 
 beforeEach(() => {
   model = new SimpleSliderModel();
+  view = new SimpleSliderView();
   controller = new SimpleSliderController(model, view);
 });
 

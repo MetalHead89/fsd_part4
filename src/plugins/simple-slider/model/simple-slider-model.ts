@@ -5,14 +5,14 @@
 
 import {
   ISimpleSliderModel,
-  IThumbsObserver,
+  IObserver,
   ISize,
   IThumbsPositions,
   IThumbPosition,
 } from '../interfaces';
 
 class SimpleSliderModel implements ISimpleSliderModel {
-  private thumbsObservers: IThumbsObserver[];
+  private thumbsObservers: IObserver[];
   private orientation = 'horizontal';
   private min = 0;
   private max = 10;
@@ -29,7 +29,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
    * Регистрация нового наблюдателя, следящего за изменением позиций бегунков
    * @param {IThumbsObserver} observer - регистрируемый наблюдатель
    */
-  registerObserver(observer: IThumbsObserver): void {
+  registerObserver(observer: IObserver): void {
     this.thumbsObservers.push(observer);
   }
 
@@ -37,7 +37,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
    * Удаление наблюдателя, следящего за изменением позиций бегунков
    * @param {IThumbsObserver} observer - удаляемый наблюдатель
    */
-  removeObserver(observer: IThumbsObserver): void {
+  removeObserver(observer: IObserver): void {
     this.thumbsObservers = this.thumbsObservers.filter(
       (registeredObserver) => registeredObserver !== observer
     );
@@ -48,7 +48,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
    */
   notifyThumbsMoveObservers(): void {
     this.thumbsObservers.forEach((registeredObserver) =>
-      registeredObserver.updateThumbsPosition()
+      registeredObserver.update()
     );
   }
 

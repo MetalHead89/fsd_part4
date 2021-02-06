@@ -1,4 +1,5 @@
 import {
+  IObserver,
   ISimpleSliderView,
   ISize,
   IThumbsPositions,
@@ -15,7 +16,8 @@ import Scale from './scale/scale';
  * Класс дорожки слайдера. Содержит HTML элемент дорожки слайдера
  * и организовывает управление им
  */
-class SimpleSliderView implements ISimpleSliderView{
+class SimpleSliderView implements ISimpleSliderView {
+  private observers: IObserver[];
   private container: Container;
   private sliderWrapper: HTMLDivElement;
   private track: Track;
@@ -27,12 +29,12 @@ class SimpleSliderView implements ISimpleSliderView{
   private scale: Scale;
 
   constructor() {
-
+    this.observers = [];
     // sliderWrapper должен инициализироваться из параметров конструктора
     this.sliderWrapper = document.createElement('div');
     this.sliderWrapper.classList.add(
       'slider-wrapper',
-      'slider-wrapper_horizontal',
+      'slider-wrapper_horizontal'
     );
     // sliderWrapper должен инициализироваться из параметров конструктора
 
@@ -46,6 +48,31 @@ class SimpleSliderView implements ISimpleSliderView{
     this.scale = new Scale();
 
     this.assembleSlider();
+  }
+
+  /**
+   * Регистрация нового наблюдателя, следящего за изменением позиций бегунков
+   * @param {IThumbsObserver} observer - регистрируемый наблюдатель
+   */
+  registerObserver(observer: IObserver): void {
+    this.observers.push(observer);
+  }
+
+  /**
+   * Удаление наблюдателя, следящего за изменением позиций бегунков
+   * @param {IThumbsObserver} observer - удаляемый наблюдатель
+   */
+  removeObserver(observer: IObserver): void {
+    this.observers = this.observers.filter(
+      (registeredObserver) => registeredObserver !== observer
+    );
+  }
+
+  /**
+   * Оповещение зарегистрированных наблюдателей об изменении позиций бегунков
+   */
+  notifyThumbsMoveObservers(): void {
+    this.observers.forEach((registeredObserver) => registeredObserver.update());
   }
 
   private assembleSlider(): void {

@@ -1,3 +1,13 @@
+export interface IObserver {
+  update(): void
+}
+
+interface ISubject {
+  registerObserver(observer: IObserver): void;
+  removeObserver(observer: IObserver): void;
+  notifyThumbsMoveObservers(): void;
+}
+
 export interface ISize {
   width: number;
   height: number;
@@ -17,16 +27,13 @@ export interface IThumbsPositions {
   thumbTwo: IThumbPosition;
 }
 
-export interface ISimpleSliderModel {
-  registerObserver(observer: IThumbsObserver): void;
-  removeObserver(observer: IThumbsObserver): void;
-  notifyThumbsMoveObservers(): void;
+export interface ISimpleSliderModel extends ISubject {
   setSliderSize(size: ISize): void;
   setThumbSize(size: ISize): void;
   getThumbsPositions(): IThumbsPositions;
 }
 
-export interface ISimpleSliderView {
+export interface ISimpleSliderView extends ISubject {
   getThumbSize(): ISize;
   getSliderSize(): ISize;
   updatedThumbs(thumbsPositions: IThumbsPositions): void;
