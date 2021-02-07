@@ -36,6 +36,25 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     this.thumbSize.height = size.height < 0 ? 0 : size.height;
   }
 
+  setThumbs(positions: IThumbsPositions): void {
+    this.thumbOneValue = this.thumbPosToValue(positions.thumbOne.left);
+    this.thumbTwoValue = this.thumbPosToValue(positions.thumbTwo.left);
+    this.notify('thumbsPosIsUpdated');
+  }
+
+  /**
+   * Возвращает значение бегунка исходя из его позиции
+   * @returns {number} - значение позиции, на которой находится бегунок
+   */
+  private thumbPosToValue(position: number): number {
+    const pixelsPerValue = this.getPxPerValue();
+
+    return Math.round(
+      this.min +
+        ((this.max - this.min) / 100) * Math.round(position / pixelsPerValue)
+    );
+  }
+
   /**
    * Возвращает объект с позициями бегунков
    * @returns {IThumbsPositions} - объект с позициями бегунков относительно левого и вернего края

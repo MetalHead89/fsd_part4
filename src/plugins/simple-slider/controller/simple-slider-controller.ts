@@ -12,6 +12,7 @@ class SimpleSliderController implements IObserver {
   constructor(model: ISimpleSliderModel, view: ISimpleSliderView) {
     this.simpleSliderModel = model;
     this.simpleSliderView = view;
+    this.simpleSliderModel.register('thumbsPosIsUpdated', this);
     this.simpleSliderView.register('thumbIsDragged', this);
 
     this.init();
@@ -27,7 +28,9 @@ class SimpleSliderController implements IObserver {
 
   update(eventType: string): void {
     if (eventType === 'thumbIsDragged') {
-      
+      this.simpleSliderModel.setThumbs(
+        this.simpleSliderView.getThumbsPositions()
+      );
     }
   }
 

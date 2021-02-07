@@ -27,14 +27,16 @@ export interface IThumbsPositions {
   thumbTwo: IPosition;
 }
 
-export interface ISimpleSliderModel {
+export interface ISimpleSliderModel extends ISubject {
   setSliderSize(size: ISize): void;
   setThumbSize(size: ISize): void;
   getThumbsPositions(): IThumbsPositions;
+  setThumbs(positions: IThumbsPositions): void;
 }
 
 export interface ISimpleSliderView extends ISubject {
   getThumbSize(): ISize;
   getSliderSize(): ISize;
   updatedThumbs(thumbsPositions: IThumbsPositions): void;
+  getThumbsPositions(): IThumbsPositions;
 }
