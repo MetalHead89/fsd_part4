@@ -59,12 +59,12 @@ class Thumb extends Subject {
    */
   private drag(event: MouseEvent | TouchEvent): void {
     if (event instanceof MouseEvent) {
-      this.position = this.getPosition({
+      this.setPosition({
         left: event.clientX,
         top: event.clientY,
       });
     } else {
-      this.position = this.getPosition({
+      this.setPosition({
         left: event.targetTouches[0].pageX,
         top: event.targetTouches[0].pageY,
       });
@@ -80,7 +80,7 @@ class Thumb extends Subject {
    * @returns {ICursorPosition} - объект с позицией курсора относительно
    * левого и верхнего края родительского контейнера
    */
-  private getPosition(cursorPosition: IPosition): IPosition {
+  private setPosition(cursorPosition: IPosition): void {
     const positionInsideParent: IPosition = {
       left: cursorPosition.left,
       top: cursorPosition.top,
@@ -96,7 +96,11 @@ class Thumb extends Subject {
         positionInsideParent.top - parrentCoords.top - this.shift.shiftY;
     }
 
-    return positionInsideParent;
+    this.position = positionInsideParent;
+  }
+
+  getPosition(): IPosition {
+    return this.position;
   }
 
   /**
