@@ -47,9 +47,11 @@ class Subject implements ISubject {
    * будут оповещены подписанные на него наблюдатели
    */
   notify(eventType: string): void {
-    this.observers[eventType].forEach((registeredObserver) =>
-      registeredObserver.update(eventType)
-    );
+    if (Object.prototype.hasOwnProperty.call(this.observers, eventType)) {
+      this.observers[eventType].forEach((registeredObserver) =>
+        registeredObserver.update(eventType)
+      );
+    }
   }
 }
 
