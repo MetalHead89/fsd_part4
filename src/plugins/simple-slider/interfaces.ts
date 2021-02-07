@@ -17,10 +17,6 @@ export interface ISize {
   height: number;
 }
 
-// export interface IThumbsObserver {
-//   updateThumbsPosition(): void;
-// }
-
 export interface IPosition {
   left: number;
   top: number;

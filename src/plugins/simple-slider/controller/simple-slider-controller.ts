@@ -12,6 +12,7 @@ class SimpleSliderController implements IObserver {
   constructor(model: ISimpleSliderModel, view: ISimpleSliderView) {
     this.simpleSliderModel = model;
     this.simpleSliderView = view;
+    this.simpleSliderView.register('thumbIsDragged', this);
 
     this.init();
   }
@@ -24,7 +25,11 @@ class SimpleSliderController implements IObserver {
     );
   }
 
-  update(): void {}
+  update(eventType: string): void {
+    if (eventType === 'thumbIsDragged') {
+      
+    }
+  }
 
   /**
    * Установка размера слайдера
