@@ -30,7 +30,7 @@ class SimpleSliderController implements IObserver {
 
   update(eventType: string): void {
     if (eventType === 'thumbIsDragged') {
-      this.simpleSliderModel.setThumbsPos(
+      this.simpleSliderModel.updatedThumbsValues(
         this.simpleSliderView.getThumbsPos()
       );
     } else if (eventType === 'thumbsPosIsUpdated') {
