@@ -87,6 +87,13 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
     return this.container.getSize();
   }
 
+  getThumbsPositions(): IThumbsPositions {
+    return {
+      thumbOne: this.thumbOne.getPosition(),
+      thumbTwo: this.thumbTwo.getPosition(),
+    };
+  }
+
   updatedThumbs(thumbsPositions: IThumbsPositions): void {
     this.thumbOne.moveTo(thumbsPositions.thumbOne);
     this.thumbTwo.moveTo(thumbsPositions.thumbTwo);
