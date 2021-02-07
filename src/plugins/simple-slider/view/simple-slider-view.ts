@@ -49,6 +49,9 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
     this.progressBar = new ProgressBar();
     this.scale = new Scale();
 
+    this.thumbOne.register('thumbIsDragged', this);
+    this.thumbTwo.register('thumbIsDragged', this);
+
     this.assembleSlider();
   }
 
