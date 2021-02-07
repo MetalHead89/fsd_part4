@@ -5,7 +5,7 @@ import {
   ISimpleSliderModel,
   ISize,
   IThumbsPositions,
-  IThumbPosition,
+  IPosition,
 } from '../interfaces';
 import Subject from '../subject/subject';
 
@@ -54,7 +54,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
    * @returns {IThumbPosition} - объект с позицией бегунка относительно левого и вернего края
    * родительского контейнера
    */
-  private thumbValueToPos(value: number): IThumbPosition {
+  private thumbValueToPos(value: number): IPosition {
     const position = { left: 0, top: 0 };
     const pxPerVal = this.getPxPerValue();
     let thumbValue = value;

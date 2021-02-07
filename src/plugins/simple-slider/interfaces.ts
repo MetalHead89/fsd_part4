@@ -17,18 +17,18 @@ export interface ISize {
   height: number;
 }
 
-export interface IThumbsObserver {
-  updateThumbsPosition(): void;
-}
+// export interface IThumbsObserver {
+//   updateThumbsPosition(): void;
+// }
 
-export interface IThumbPosition {
+export interface IPosition {
   left: number;
   top: number;
 }
 
 export interface IThumbsPositions {
-  thumbOne: IThumbPosition;
-  thumbTwo: IThumbPosition;
+  thumbOne: IPosition;
+  thumbTwo: IPosition;
 }
 
 export interface ISimpleSliderModel {
