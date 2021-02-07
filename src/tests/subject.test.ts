@@ -36,3 +36,38 @@ describe('Register', () => {
     expect(subject['observers'].thumbMove.length).toBe(3);
   });
 });
+
+describe('Remove', () => {
+  test('Observers must be removed', () => {
+    const newObserverOne = {
+      update(): void {
+        /* some operations */
+      },
+    };
+    const newObserverTwo = {
+      update(): void {
+        /* some operations */
+      },
+    };
+    const newObserverThree = {
+      update(): void {
+        /* some operations */
+      },
+    };
+
+    subject.register('thumbMove', newObserverOne);
+    subject.register('thumbMove', newObserverTwo);
+    subject.register('thumbMove', newObserverThree);
+
+    expect(subject['observers'].thumbMove.length).toBe(3);
+
+    subject.remove('thumbMove', newObserverOne);
+    expect(subject['observers'].thumbMove.length).toBe(2);
+
+    subject.remove('thumbMove', newObserverTwo);
+    expect(subject['observers'].thumbMove.length).toBe(1);
+
+    subject.remove('thumbMove', newObserverThree);
+    expect(subject['observers'].thumbMove.length).toBe(0);
+  });
+});
