@@ -1,6 +1,11 @@
 /* eslint-disable comma-dangle */
 
-import { ISimpleSliderView, ISize, IThumbsPositions } from '../interfaces';
+import {
+  IObserver,
+  ISimpleSliderView,
+  ISize,
+  IThumbsPositions,
+} from '../interfaces';
 
 import Container from './container/container';
 import Track from './track/track';
@@ -14,7 +19,7 @@ import Subject from '../subject/subject';
  * Класс дорожки слайдера. Содержит HTML элемент дорожки слайдера
  * и организовывает управление им
  */
-class SimpleSliderView extends Subject implements ISimpleSliderView {
+class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
   private container: Container;
   private sliderWrapper: HTMLDivElement;
   private track: Track;
@@ -45,6 +50,12 @@ class SimpleSliderView extends Subject implements ISimpleSliderView {
     this.scale = new Scale();
 
     this.assembleSlider();
+  }
+
+  update(eventType: string): void {
+    if (eventType === 'thumbIsDragged') {
+      this.notify(eventType);
+    }
   }
 
   private assembleSlider(): void {
