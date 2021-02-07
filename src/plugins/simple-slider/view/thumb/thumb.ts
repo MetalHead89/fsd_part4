@@ -126,6 +126,7 @@ class Thumb extends Subject {
   }
 
   moveTo(position: IPosition): void {
+    this.position = position;
     this.element.style.left = `${position.left}px`;
     this.element.style.top = `${position.top}px`;
   }
