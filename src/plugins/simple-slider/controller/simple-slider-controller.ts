@@ -1,3 +1,5 @@
+/* eslint-disable comma-dangle */
+
 import {
   IObserver,
   ISimpleSliderModel,

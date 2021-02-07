@@ -1,5 +1,6 @@
 /* eslint-disable function-paren-newline */
 /* eslint-disable operator-linebreak */
+/* eslint-disable comma-dangle */
 
 import {
   ISimpleSliderModel,
