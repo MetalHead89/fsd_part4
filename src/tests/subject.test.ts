@@ -71,3 +71,51 @@ describe('Remove', () => {
     expect(subject['observers'].thumbMove.length).toBe(0);
   });
 });
+
+describe('Notify', () => {
+  test('Observers must be notified', () => {
+    let numberOfNotifiedObservers = 0;
+
+    const newObserverOne = {
+      update(): void {
+        numberOfNotifiedObservers += 1;
+      },
+    };
+    const newObserverTwo = {
+      update(): void {
+        numberOfNotifiedObservers += 1;
+      },
+    };
+    const newObserverThree = {
+      update(): void {
+        numberOfNotifiedObservers += 1;
+      },
+    };
+
+    subject.register('thumbMove', newObserverOne);
+    subject.notify('thumbMove');
+    expect(numberOfNotifiedObservers).toBe(1);
+
+    numberOfNotifiedObservers = 0;
+    subject.register('thumbMove', newObserverTwo);
+    subject.notify('thumbMove');
+    expect(numberOfNotifiedObservers).toBe(2);
+
+    numberOfNotifiedObservers = 0;
+    subject.register('thumbMove', newObserverThree);
+    subject.notify('thumbMove');
+    expect(numberOfNotifiedObservers).toBe(3);
+
+    numberOfNotifiedObservers = 0;
+    subject.remove('thumbMove', newObserverThree);
+    subject.notify('thumbMove');
+    expect(numberOfNotifiedObservers).toBe(2);
+
+    numberOfNotifiedObservers = 0;
+    subject.register('clickToScale', newObserverOne);
+    subject.notify('thumbMove');
+    expect(numberOfNotifiedObservers).toBe(2);
+    numberOfNotifiedObservers = 0;
+    subject.notify('clickToScale');
+  });
+});
