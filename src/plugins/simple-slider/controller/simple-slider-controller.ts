@@ -24,18 +24,18 @@ class SimpleSliderController implements IObserver {
     this.simpleSliderModel.setSliderSize(this.simpleSliderView.getSliderSize());
     this.simpleSliderModel.setThumbSize(this.simpleSliderView.getThumbSize());
     this.simpleSliderView.updatedThumbs(
-      this.simpleSliderModel.getThumbsPositions()
+      this.simpleSliderModel.getThumbsPos()
     );
   }
 
   update(eventType: string): void {
     if (eventType === 'thumbIsDragged') {
-      this.simpleSliderModel.setThumbs(
-        this.simpleSliderView.getThumbsPositions()
+      this.simpleSliderModel.setThumbsPos(
+        this.simpleSliderView.getThumbsPos()
       );
     } else if (eventType === 'thumbsPosIsUpdated') {
       this.simpleSliderView.updatedThumbs(
-        this.simpleSliderModel.getThumbsPositions()
+        this.simpleSliderModel.getThumbsPos()
       );
     }
   }

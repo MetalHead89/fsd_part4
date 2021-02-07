@@ -37,7 +37,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     this.thumbSize.height = size.height < 0 ? 0 : size.height;
   }
 
-  setThumbs(positions: IThumbsPositions): void {
+  setThumbsPos(positions: IThumbsPositions): void {
     this.thumbOneValue = this.thumbPosToValue(positions.thumbOne.left);
     this.thumbTwoValue = this.thumbPosToValue(positions.thumbTwo.left);
     this.notify('thumbsPosIsUpdated');
@@ -61,7 +61,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
    * @returns {IThumbsPositions} - объект с позициями бегунков относительно левого и вернего края
    * родительского контейнера
    */
-  getThumbsPositions(): IThumbsPositions {
+  getThumbsPos(): IThumbsPositions {
     return {
       thumbOne: this.thumbValueToPos(this.thumbOneValue),
       thumbTwo: this.thumbValueToPos(this.thumbTwoValue),

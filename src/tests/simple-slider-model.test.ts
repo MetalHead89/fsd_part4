@@ -126,7 +126,7 @@ describe('Get thumbs positions', () => {
     () => {
       model['sliderSize'] = { width: 440, height: 10 };
       model['thumbSize'] = { width: 20, height: 20 };
-      const pos = model.getThumbsPositions();
+      const pos = model.getThumbsPos();
 
       expect(pos.thumbOne.left).toBeCloseTo(126);
       expect(pos.thumbOne.top).toBe(0);
@@ -144,7 +144,7 @@ describe('Get thumbs positions', () => {
       model['thumbSize'] = { width: 20, height: 20 };
       model['thumbOneValue'] = -5;
       model['thumbTwoValue'] = 77;
-      const pos = model.getThumbsPositions();
+      const pos = model.getThumbsPos();
 
       expect(pos.thumbOne.left).toBe(0);
       expect(pos.thumbOne.top).toBe(0);
