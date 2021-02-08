@@ -1,4 +1,4 @@
-const sliderWrapper = document.querySelector('.slider-wrapper');
+const sliderWrapper = document.querySelectorAll('.slider-wrapper');
 if (sliderWrapper !== null) {
   $(sliderWrapper).simpleSlider();
 }
