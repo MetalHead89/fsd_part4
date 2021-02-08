@@ -1,16 +1,8 @@
-import { ISimpleSliderModel, ISimpleSliderView, ISliderSettings } from './interfaces';
+import { ISliderSettings } from './interfaces';
 
 import SimpleSliderModel from './model/simple-slider-model';
 import SimpleSliderController from './controller/simple-slider-controller';
 import SimpleSliderView from './view/simple-slider-view';
-
-// // Временный способ создания слайдера
-// const simpleSliderModel: ISimpleSliderModel = new SimpleSliderModel();
-// const simpleSliderView: ISimpleSliderView = new SimpleSliderView();
-// const simpleSliderController = new SimpleSliderController(
-//   simpleSliderModel,
-//   simpleSliderView,
-// );
 
 (($) => {
   // Настройки плагина по умолчанию
@@ -34,7 +26,7 @@ import SimpleSliderView from './view/simple-slider-view';
 
       // Создание слайдеров
       return this.each(function createSlider(this: any) {
-        console.log('dfsf')
+        console.log('dfsf');
         const model = new SimpleSliderModel();
         const view = new SimpleSliderView();
         const controller = new SimpleSliderController(model, view);
@@ -42,7 +34,7 @@ import SimpleSliderView from './view/simple-slider-view';
         $(this).data('settings', settings);
         $(this).data('controller', controller);
       });
-    }
+    },
   };
 
   $.fn.simpleSlider = function plug(
@@ -56,9 +48,7 @@ import SimpleSliderView from './view/simple-slider-view';
     } else if (typeof action === 'object' || !action) {
       method = methods.init.call(this, args);
     } else {
-      $.error(
-        `Метод с именем ${action} не существует для jQuery.simpleSlider`,
-      );
+      $.error(`Метод с именем ${action} не существует для jQuery.simpleSlider`);
       method = this;
     }
 
