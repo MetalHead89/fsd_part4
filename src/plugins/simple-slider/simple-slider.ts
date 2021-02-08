@@ -1,3 +1,5 @@
+/* eslint-disable comma-dangle */
+
 import { ISliderSettings } from './interfaces';
 
 import SimpleSliderModel from './model/simple-slider-model';
@@ -20,17 +22,17 @@ import SimpleSliderView from './view/simple-slider-view';
 
   // API мотоды плагина
   const methods: any = {
-    init(options: ISliderSettings) {
+    init(options: ISliderSettings): void {
       // Обновление настроек плагина в соответсвии с полученными параметрами
       const settings: ISliderSettings = $.extend(defaultSettings, options);
 
       // Создание слайдеров
-      return this.each(function createSlider(this: any) {
+      return this.each(function createSlider(this: HTMLDivElement) {
         const model = new SimpleSliderModel();
         const view = new SimpleSliderView(this);
         const controller = new SimpleSliderController({
-          model: model,
-          view: view,
+          model,
+          view,
           settings: defaultSettings,
         });
 
@@ -40,6 +42,7 @@ import SimpleSliderView from './view/simple-slider-view';
     },
   };
 
+  // eslint-disable-next-line no-param-reassign
   $.fn.simpleSlider = function plug(
     action?: string | ISliderSettings,
     args?
