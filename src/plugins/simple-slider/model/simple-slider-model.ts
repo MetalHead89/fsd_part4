@@ -14,7 +14,8 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
   private orientation = 'horizontal';
   private min = 0;
   private max = 10;
-  private thumbOneValue = 3;
+  private step = 2;
+  private thumbOneValue = 0;
   private thumbTwoValue = 7;
   private sliderSize = { width: 0, height: 0 };
   private thumbSize = { width: 0, height: 0 };
@@ -42,9 +43,28 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
    * @param {IThumbsPositions} positions - текущая позиция бегунков
    */
   updatedThumbsValues(positions: IThumbsPositions): void {
-    this.thumbOneValue = this.thumbPosToValue(positions.thumbOne.left);
-    this.thumbTwoValue = this.thumbPosToValue(positions.thumbTwo.left);
+    this.thumbOneValue = this.valueWithStep(
+      this.posByOrientation(positions.thumbOne),
+    );
+    this.thumbTwoValue = this.valueWithStep(
+      this.posByOrientation(positions.thumbTwo),
+    );
+
+    // if (thumbOneValue !== this.thumbOneValue) {
+
+    // }
+
+    // this.thumbOneValue = this.thumbPosToValue(
+    // Math.round(positions.thumbOne.left / this.getStepSize()) *
+    //   this.getStepSize(),
+    // );
+    // this.thumbTwoValue = this.thumbPosToValue(positions.thumbTwo.left);
     this.notify('thumbsPosIsUpdated');
+  }
+
+  private valueWithStep(pos: number): number {
+    const newPos = Math.round(pos / this.getStepSize()) * this.getStepSize();
+    return this.thumbPosToValue(newPos);
   }
 
   /**
@@ -56,7 +76,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
 
     return Math.round(
       this.min +
-        ((this.max - this.min) / 100) * Math.round(position / pixelsPerValue)
+        ((this.max - this.min) / 100) * Math.round(position / pixelsPerValue),
     );
   }
 
@@ -112,6 +132,36 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     }
 
     return (this.sliderSize.height - this.thumbSize.height) / 100;
+  }
+
+  /**
+   * Возвращает размер одного шага бегунка в пикселях
+   * @returns {number} - размер одного шага бегунка
+   */
+  private getStepSize(): number {
+    const stepsCount = (this.max - this.min) / this.step;
+
+    return (
+      (this.sizeByOrientation(this.sliderSize) -
+        this.sizeByOrientation(this.thumbSize)) /
+      stepsCount
+    );
+  }
+
+  private sizeByOrientation(elem: ISize): number {
+    if (this.orientation === 'horizontal') {
+      return elem.width;
+    } else {
+      return elem.height;
+    }
+  }
+
+  private posByOrientation(elem: IPosition): number {
+    if (this.orientation === 'horizontal') {
+      return elem.left;
+    } else {
+      return elem.top;
+    }
   }
 }
 
