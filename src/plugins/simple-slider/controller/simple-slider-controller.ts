@@ -1,6 +1,7 @@
 /* eslint-disable comma-dangle */
 
 import {
+  IControllerParams,
   IObserver,
   ISimpleSliderModel,
   ISimpleSliderView,
@@ -11,9 +12,9 @@ class SimpleSliderController implements IObserver {
   private simpleSliderModel: ISimpleSliderModel;
   private simpleSliderView: ISimpleSliderView;
 
-  constructor(model: ISimpleSliderModel, view: ISimpleSliderView) {
-    this.simpleSliderModel = model;
-    this.simpleSliderView = view;
+  constructor(params: IControllerParams) {
+    this.simpleSliderModel = params.model;
+    this.simpleSliderView = params.view;
     this.simpleSliderModel.register('thumbsPosIsUpdated', this);
     this.simpleSliderView.register('thumbIsDragged', this);
 

@@ -29,7 +29,12 @@ import SimpleSliderView from './view/simple-slider-view';
         console.log('dfsf');
         const model = new SimpleSliderModel();
         const view = new SimpleSliderView();
-        const controller = new SimpleSliderController(model, view);
+        const controller = new SimpleSliderController({
+          model: model,
+          view: view,
+          settings: defaultSettings,
+          wrapper: this,
+        });
 
         $(this).data('settings', settings);
         $(this).data('controller', controller);
