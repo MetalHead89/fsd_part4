@@ -10,6 +10,13 @@ export interface ISliderSettings {
   thumbTwoValue: number;
 }
 
+export interface IControllerParams {
+  model: ISimpleSliderModel;
+  view: ISimpleSliderView;
+  settings: ISliderSettings;
+  wrapper: JQuery<HTMLElement>;
+}
+
 export interface IObserver {
   update(eventType: string): void;
 }
