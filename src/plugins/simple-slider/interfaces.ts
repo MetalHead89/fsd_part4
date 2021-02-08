@@ -1,3 +1,15 @@
+export interface ISliderSettings {
+  orienation: string;
+  type: string;
+  scale: boolean;
+  tooltips: boolean;
+  min: number;
+  max: number;
+  step: number;
+  thumbOneValue: number;
+  thumbTwoValue: number;
+}
+
 export interface IObserver {
   update(eventType: string): void;
 }
