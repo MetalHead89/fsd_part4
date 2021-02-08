@@ -10,12 +10,6 @@ export interface ISliderSettings {
   thumbTwoValue: number;
 }
 
-export interface IControllerParams {
-  model: ISimpleSliderModel;
-  view: ISimpleSliderView;
-  settings: ISliderSettings;
-}
-
 export interface IObserver {
   update(eventType: string): void;
 }
@@ -57,4 +51,10 @@ export interface ISimpleSliderView extends ISubject {
   getSliderSize(): ISize;
   updatedThumbs(thumbsPositions: IThumbsPositions): void;
   getThumbsPos(): IThumbsPositions;
+}
+
+export interface IControllerParams {
+  model: ISimpleSliderModel;
+  view: ISimpleSliderView;
+  settings: ISliderSettings;
 }
