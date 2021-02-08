@@ -33,12 +33,6 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
   constructor(wrapper: HTMLDivElement) {
     super();
     this.sliderWrapper = wrapper;
-    // sliderWrapper должен инициализироваться из параметров конструктора
-    // this.sliderWrapper = document.createElement('div');
-    // this.sliderWrapper.classList.add(
-    //   'slider-wrapper'
-    // );
-    // sliderWrapper должен инициализироваться из параметров конструктора
 
     this.container = new Container();
     this.track = new Track();
@@ -71,14 +65,6 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
     this.container.append(this.scale.getElement());
 
     this.sliderWrapper.append(this.container.element);
-
-    // // Временный способ размещения слайдера на странице
-    // const body = document.querySelector('body');
-    // if (body !== null) {
-    //   this.sliderWrapper.append(this.container.element);
-    //   body.append(this.sliderWrapper);
-    // }
-    // // Временный способ размещения слайдера на странице
   }
 
   getThumbSize(): ISize {
