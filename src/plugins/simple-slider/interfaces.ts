@@ -14,7 +14,6 @@ export interface IControllerParams {
   model: ISimpleSliderModel;
   view: ISimpleSliderView;
   settings: ISliderSettings;
-  wrapper: JQuery<HTMLElement>;
 }
 
 export interface IObserver {

@@ -32,7 +32,6 @@ import SimpleSliderView from './view/simple-slider-view';
           model: model,
           view: view,
           settings: defaultSettings,
-          wrapper: this,
         });
 
         $(this).data('settings', settings);
