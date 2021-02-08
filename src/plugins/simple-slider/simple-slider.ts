@@ -26,9 +26,8 @@ import SimpleSliderView from './view/simple-slider-view';
 
       // Создание слайдеров
       return this.each(function createSlider(this: any) {
-        console.log('dfsf');
         const model = new SimpleSliderModel();
-        const view = new SimpleSliderView();
+        const view = new SimpleSliderView(this);
         const controller = new SimpleSliderController({
           model: model,
           view: view,
@@ -44,7 +43,7 @@ import SimpleSliderView from './view/simple-slider-view';
 
   $.fn.simpleSlider = function plug(
     action?: string | ISliderSettings,
-    args?,
+    args?
   ): JQuery<HTMLElement> {
     let method: any;
 

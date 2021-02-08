@@ -30,14 +30,14 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
   private progressBar: ProgressBar;
   private scale: Scale;
 
-  constructor() {
+  constructor(wrapper: HTMLDivElement) {
     super();
+    this.sliderWrapper = wrapper;
     // sliderWrapper должен инициализироваться из параметров конструктора
-    this.sliderWrapper = document.createElement('div');
-    this.sliderWrapper.classList.add(
-      'slider-wrapper',
-      'slider-wrapper_horizontal'
-    );
+    // this.sliderWrapper = document.createElement('div');
+    // this.sliderWrapper.classList.add(
+    //   'slider-wrapper'
+    // );
     // sliderWrapper должен инициализироваться из параметров конструктора
 
     this.container = new Container();
@@ -70,13 +70,15 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
     this.container.append(this.progressBar.getElement());
     this.container.append(this.scale.getElement());
 
-    // Временный способ размещения слайдера на странице
-    const body = document.querySelector('body');
-    if (body !== null) {
-      this.sliderWrapper.append(this.container.element);
-      body.append(this.sliderWrapper);
-    }
-    // Временный способ размещения слайдера на странице
+    this.sliderWrapper.append(this.container.element);
+
+    // // Временный способ размещения слайдера на странице
+    // const body = document.querySelector('body');
+    // if (body !== null) {
+    //   this.sliderWrapper.append(this.container.element);
+    //   body.append(this.sliderWrapper);
+    // }
+    // // Временный способ размещения слайдера на странице
   }
 
   getThumbSize(): ISize {
