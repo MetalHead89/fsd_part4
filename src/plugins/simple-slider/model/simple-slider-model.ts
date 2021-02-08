@@ -14,12 +14,12 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
   private orientation = 'horizontal';
   private min = 0;
   private max = 10;
-  private step = 2;
-  private thumbOneValue = 0;
+  private step = 1;
+  private thumbOneValue = 3;
   private thumbTwoValue = 7;
   private sliderSize = { width: 0, height: 0 };
   private thumbSize = { width: 0, height: 0 };
-
+  
   /**
    * Установка размера слайдера
    * @param {ISize} size - новый размер слайдера
@@ -50,15 +50,6 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
       this.posByOrientation(positions.thumbTwo),
     );
 
-    // if (thumbOneValue !== this.thumbOneValue) {
-
-    // }
-
-    // this.thumbOneValue = this.thumbPosToValue(
-    // Math.round(positions.thumbOne.left / this.getStepSize()) *
-    //   this.getStepSize(),
-    // );
-    // this.thumbTwoValue = this.thumbPosToValue(positions.thumbTwo.left);
     this.notify('thumbsPosIsUpdated');
   }
 
