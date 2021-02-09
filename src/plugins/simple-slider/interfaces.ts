@@ -42,8 +42,6 @@ export interface IThumbsPositions {
 }
 
 export interface ISimpleSliderModel extends ISubject {
-  // setSliderSize(size: ISize): void;
-  // setThumbSize(size: ISize): void;
   fullStateUpdate(settings: ISliderSettings): void;
   getThumbsPos(): IThumbsPositions;
   updateThumbsState(positions: IThumbsPositions): void;
