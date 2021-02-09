@@ -5,7 +5,6 @@ import {
   IObserver,
   ISimpleSliderModel,
   ISimpleSliderView,
-  ISize,
   ISliderSettings,
 } from '../interfaces';
 

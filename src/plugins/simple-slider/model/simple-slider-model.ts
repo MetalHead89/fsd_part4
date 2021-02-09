@@ -22,15 +22,15 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
   private thumbSize = { width: 500, height: 10 };
 
   fullStateUpdate(settings: ISliderSettings) {
-    const thumbOnePos = this.thumbValueToPos(settings.thumbOneValue);
-    const thumbTwoPos = this.thumbValueToPos(settings.thumbTwoValue);
-
     this.orientation = settings.orienation;
     this.min = settings.min;
     this.max = settings.max;
     this.step = settings.step;
     this.sliderSize = settings.sliderSize;
-    this.thumbSize = settings.thumbSize;    
+    this.thumbSize = settings.thumbSize; 
+    
+    const thumbOnePos = this.thumbValueToPos(settings.thumbOneValue);
+    const thumbTwoPos = this.thumbValueToPos(settings.thumbTwoValue);
     this.updateThumbsState({thumbOne: thumbOnePos, thumbTwo: thumbTwoPos})
   }
 
