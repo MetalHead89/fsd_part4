@@ -21,7 +21,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
   private sliderSize = { width: 500, height: 10 };
   private thumbSize = { width: 500, height: 10 };
 
-  fullStateUpdate(settings: ISliderSettings) {
+  fullStateUpdate(settings: ISliderSettings): void {
     this.orientation = settings.orienation;
     this.min = settings.min;
     this.max = settings.max;
@@ -70,10 +70,10 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
    */
   updateThumbsState(positions: IThumbsPositions): void {
     const thumbOneValue = this.valueWithStep(
-      this.posByOrientation(positions.thumbOne),
+      this.posByOrientation(positions.thumbOne)
     );
     const thumbTwoValue = this.valueWithStep(
-      this.posByOrientation(positions.thumbTwo),
+      this.posByOrientation(positions.thumbTwo)
     );
 
     if (thumbOneValue <= thumbTwoValue) {
@@ -113,7 +113,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
 
     return Math.round(
       this.min +
-        ((this.max - this.min) / 100) * Math.round(position / pixelsPerValue),
+        ((this.max - this.min) / 100) * Math.round(position / pixelsPerValue)
     );
   }
 
@@ -180,9 +180,9 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
   private sizeByOrientation(size: ISize): number {
     if (this.orientation === 'horizontal') {
       return size.width;
-    } else {
-      return size.height;
     }
+
+    return size.height;
   }
 
   /**
@@ -193,9 +193,9 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
   private posByOrientation(position: IPosition): number {
     if (this.orientation === 'horizontal') {
       return position.left;
-    } else {
-      return position.top;
     }
+
+    return position.top;
   }
 }
 
