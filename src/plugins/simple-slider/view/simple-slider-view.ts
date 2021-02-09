@@ -45,6 +45,8 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
 
     this.thumbOne.register('thumbIsDragged', this);
     this.thumbTwo.register('thumbIsDragged', this);
+    this.thumbOne.register('thumbIsCatched', this);
+    this.thumbTwo.register('thumbIsCatched', this);
 
     this.assembleSlider();
   }
@@ -52,6 +54,9 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
   update(eventType: string): void {
     if (eventType === 'thumbIsDragged') {
       this.notify('thumbIsDragged');
+    } else if (eventType === 'thumbIsCatched') {
+      this.thumbOne.resetZIndex();
+      this.thumbTwo.resetZIndex();
     }
   }
 

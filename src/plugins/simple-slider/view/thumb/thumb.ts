@@ -23,6 +23,10 @@ class Thumb extends Subject {
     return this.element;
   }
 
+  setZIndex(index: number): void {
+    this.element.style.zIndex = index.toString();
+  }
+
   /**
    * Отключает html5 Drag and Drop
    */
@@ -38,7 +42,7 @@ class Thumb extends Subject {
   }
 
   /**
-   * Обработка перемещения мыши
+   * Обработка касания бегунка мышкой
    * @param {MouseEvent} event - объект события клика
    */
   private clickToThumb(event: MouseEvent): void {
@@ -52,6 +56,22 @@ class Thumb extends Subject {
 
     document.addEventListener('touchmove', this.onMouseMoveHandler);
     document.addEventListener('touchend', this.onMouseUpHandler);
+
+    this.notify('thumbIsCatched');
+    this.increaseZIndex();
+  }
+
+  private increaseZIndex() {
+    const zIndex = document.defaultView
+      ?.getComputedStyle(this.element, null)
+      .getPropertyValue('z-index');
+    if (zIndex !== undefined) {
+      this.element.style.zIndex = (zIndex + 1).toString();
+    }
+  }
+
+  resetZIndex() {
+    this.element.style.zIndex = '';
   }
 
   /**
@@ -109,19 +129,19 @@ class Thumb extends Subject {
   private endDrag(): void {
     document.removeEventListener(
       'mousemove',
-      this.onMouseMoveHandler as EventListenerOrEventListenerObject
+      this.onMouseMoveHandler as EventListenerOrEventListenerObject,
     );
     document.removeEventListener(
       'mouseup',
-      this.onMouseUpHandler as EventListenerOrEventListenerObject
+      this.onMouseUpHandler as EventListenerOrEventListenerObject,
     );
     document.removeEventListener(
       'touchmove',
-      this.onMouseMoveHandler as EventListenerOrEventListenerObject
+      this.onMouseMoveHandler as EventListenerOrEventListenerObject,
     );
     document.removeEventListener(
       'touchend',
-      this.onMouseUpHandler as EventListenerOrEventListenerObject
+      this.onMouseUpHandler as EventListenerOrEventListenerObject,
     );
   }
 
