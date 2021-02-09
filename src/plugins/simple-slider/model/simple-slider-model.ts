@@ -13,7 +13,7 @@ import Subject from '../subject/subject';
 
 class SimpleSliderModel extends Subject implements ISimpleSliderModel {
   private orientation = 'horizontal';
-  private type: string;
+  private type = 'range';
   private min = 0;
   private max = 10;
   private step = 1;
