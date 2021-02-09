@@ -19,7 +19,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
   private thumbTwoValue = 7;
   private sliderSize = { width: 0, height: 0 };
   private thumbSize = { width: 0, height: 0 };
-  
+
   /**
    * Установка размера слайдера
    * @param {ISize} size - новый размер слайдера
@@ -39,10 +39,22 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
   }
 
   /**
+   * Возвращает объект с позициями бегунков
+   * @returns {IThumbsPositions} - объект с позициями бегунков относительно левого и вернего края
+   * родительского контейнера
+   */
+  getThumbsPos(): IThumbsPositions {
+    return {
+      thumbOne: this.thumbValueToPos(this.thumbOneValue),
+      thumbTwo: this.thumbValueToPos(this.thumbTwoValue),
+    };
+  }
+
+  /**
    * Смена значений бегунков
    * @param {IThumbsPositions} positions - текущая позиция бегунков
    */
-  updatedThumbsValues(positions: IThumbsPositions): void {
+  updateThumbsState(positions: IThumbsPositions): void {
     this.thumbOneValue = this.valueWithStep(
       this.posByOrientation(positions.thumbOne),
     );
@@ -54,7 +66,13 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
   }
 
   private valueWithStep(pos: number): number {
-    const newPos = Math.round(pos / this.getStepSize()) * this.getStepSize();
+    const stepsCount = (this.max - this.min) / this.step;
+    const stepSize =
+      (this.sizeByOrientation(this.sliderSize) -
+        this.sizeByOrientation(this.thumbSize)) /
+      stepsCount;
+    const newPos = Math.round(pos / stepSize) * stepSize;
+
     return this.thumbPosToValue(newPos);
   }
 
@@ -69,18 +87,6 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
       this.min +
         ((this.max - this.min) / 100) * Math.round(position / pixelsPerValue),
     );
-  }
-
-  /**
-   * Возвращает объект с позициями бегунков
-   * @returns {IThumbsPositions} - объект с позициями бегунков относительно левого и вернего края
-   * родительского контейнера
-   */
-  getThumbsPos(): IThumbsPositions {
-    return {
-      thumbOne: this.thumbValueToPos(this.thumbOneValue),
-      thumbTwo: this.thumbValueToPos(this.thumbTwoValue),
-    };
   }
 
   /**
@@ -125,19 +131,19 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     return (this.sliderSize.height - this.thumbSize.height) / 100;
   }
 
-  /**
-   * Возвращает размер одного шага бегунка в пикселях
-   * @returns {number} - размер одного шага бегунка
-   */
-  private getStepSize(): number {
-    const stepsCount = (this.max - this.min) / this.step;
+  // /**
+  //  * Возвращает размер одного шага бегунка в пикселях
+  //  * @returns {number} - размер одного шага бегунка
+  //  */
+  // private getStepSize(): number {
+  //   const stepsCount = (this.max - this.min) / this.step;
 
-    return (
-      (this.sizeByOrientation(this.sliderSize) -
-        this.sizeByOrientation(this.thumbSize)) /
-      stepsCount
-    );
-  }
+  //   return (
+  //     (this.sizeByOrientation(this.sliderSize) -
+  //       this.sizeByOrientation(this.thumbSize)) /
+  //     stepsCount
+  //   );
+  // }
 
   private sizeByOrientation(elem: ISize): number {
     if (this.orientation === 'horizontal') {

@@ -43,7 +43,7 @@ export interface ISimpleSliderModel extends ISubject {
   setSliderSize(size: ISize): void;
   setThumbSize(size: ISize): void;
   getThumbsPos(): IThumbsPositions;
-  updatedThumbsValues(positions: IThumbsPositions): void;
+  updateThumbsState(positions: IThumbsPositions): void;
 }
 
 export interface ISimpleSliderView extends ISubject {
