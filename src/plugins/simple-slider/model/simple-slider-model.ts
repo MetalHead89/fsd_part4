@@ -17,8 +17,8 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
   private step = 1;
   private thumbOneValue = 3;
   private thumbTwoValue = 7;
-  private sliderSize = { width: 0, height: 0 };
-  private thumbSize = { width: 0, height: 0 };
+  private sliderSize = { width: 500, height: 10 };
+  private thumbSize = { width: 500, height: 10 };
 
   /**
    * Установка размера слайдера

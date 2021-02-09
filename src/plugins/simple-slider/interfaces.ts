@@ -1,3 +1,8 @@
+export interface ISize {
+  width: number;
+  height: number;
+}
+
 export interface ISliderSettings {
   orienation: string;
   type: string;
@@ -8,6 +13,8 @@ export interface ISliderSettings {
   step: number;
   thumbOneValue: number;
   thumbTwoValue: number;
+  sliderSize: ISize;
+  thumbSize: ISize;
 }
 
 export interface IObserver {
@@ -22,11 +29,6 @@ export interface ISubject {
   register(eventType: string, observer: IObserver): void;
   remove(eventType: string, observer: IObserver): void;
   notify(eventType: string): void;
-}
-
-export interface ISize {
-  width: number;
-  height: number;
 }
 
 export interface IPosition {

@@ -18,6 +18,8 @@ import SimpleSliderView from './view/simple-slider-view';
     step: 1,
     thumbOneValue: 3,
     thumbTwoValue: 7,
+    sliderSize: { width: 500, height: 10 },
+    thumbSize: { width: 500, height: 10 },
   };
 
   // API мотоды плагина
@@ -45,7 +47,7 @@ import SimpleSliderView from './view/simple-slider-view';
   // eslint-disable-next-line no-param-reassign
   $.fn.simpleSlider = function plug(
     action?: string | ISliderSettings,
-    args?
+    args?,
   ): JQuery<HTMLElement> {
     let method: any;
 
