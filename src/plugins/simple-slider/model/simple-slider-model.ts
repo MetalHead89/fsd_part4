@@ -39,7 +39,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
   }
 
   /**
-   * Возвращает объект с позициями бегунков
+   * Возврат объекта с позициями бегунков
    * @returns {IThumbsPositions} - объект с позициями бегунков относительно левого и вернего края
    * родительского контейнера
    */
@@ -51,7 +51,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
   }
 
   /**
-   * Смена значений бегунков
+   * Обновление состояния бегунков и оповещение наблюдателей об изменении
    * @param {IThumbsPositions} positions - текущая позиция бегунков
    */
   updateThumbsState(positions: IThumbsPositions): void {
@@ -65,20 +65,29 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     this.notify('thumbsPosIsUpdated');
   }
 
-  private valueWithStep(pos: number): number {
+  /**
+   * Возвращение значение бегунка в соответствии с заданным шагом исходя из
+   * его позиции
+   * @param {number} position - позиция бегунка относительно левого или верхнего
+   * края родительского контейнера
+   * @returns {number} - значение бегунка в соответствии с заданным шагом
+   */
+  private valueWithStep(position: number): number {
     const stepsCount = (this.max - this.min) / this.step;
     const stepSize =
       (this.sizeByOrientation(this.sliderSize) -
         this.sizeByOrientation(this.thumbSize)) /
       stepsCount;
-    const newPos = Math.round(pos / stepSize) * stepSize;
+    const newPosition = Math.round(position / stepSize) * stepSize;
 
-    return this.thumbPosToValue(newPos);
+    return this.thumbPosToValue(newPosition);
   }
 
   /**
-   * Возвращает значение бегунка исходя из его позиции
-   * @returns {number} - значение позиции, на которой находится бегунок
+   * Возвращение значения бегунка исходя из его позиции
+   * @param {number} position - позиция бегунка относительно левого или верхнего
+   * края родительского контейнера
+   * @returns {number} - значение бегунка
    */
   private thumbPosToValue(position: number): number {
     const pixelsPerValue = this.getPxPerValue();
@@ -90,7 +99,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
   }
 
   /**
-   * Возвращает позицию бегунка исходя из его значения
+   * Возвращение позиции бегунка исходя из его значения
    * @param {number} value - значение бегунка
    * @returns {IThumbPosition} - объект с позицией бегунка относительно левого и вернего края
    * родительского контейнера
@@ -119,8 +128,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
   }
 
   /**
-   * Возвращает количество пикселей в единице ширины слайдера, с вычетом крайних
-   * (тупиковых) зон
+   * Возвращает количество пикселей в единице ширины слайдера, с вычетом крайних зон
    * @returns {number} - количество пикселей в единице ширины слайдера
    */
   private getPxPerValue(): number {
@@ -145,19 +153,29 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
   //   );
   // }
 
-  private sizeByOrientation(elem: ISize): number {
+  /**
+   * Возвращение ширины или высоты объекта, в зависимости от ориентации слайдера
+   * @param {ISize} size - объект с шириной и высотой объекта
+   * @returns {number} - значение ширины или высоты объекта
+   */
+  private sizeByOrientation(size: ISize): number {
     if (this.orientation === 'horizontal') {
-      return elem.width;
+      return size.width;
     } else {
-      return elem.height;
+      return size.height;
     }
   }
 
-  private posByOrientation(elem: IPosition): number {
+  /**
+   * Возвращение левого или верхнего отступа объекта, в зависимости от ориентации слайдера
+   * @param {IPosition} position - объект с позицией
+   * @returns {number} - значение левого или верхнего отступа объекта
+   */
+  private posByOrientation(position: IPosition): number {
     if (this.orientation === 'horizontal') {
-      return elem.left;
+      return position.left;
     } else {
-      return elem.top;
+      return position.top;
     }
   }
 }
