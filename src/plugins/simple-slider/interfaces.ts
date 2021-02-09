@@ -41,6 +41,11 @@ export interface IThumbsPositions {
   thumbTwo: IPosition;
 }
 
+export interface IProgressBarParams {
+  position: IPosition;
+  size: ISize;
+}
+
 export interface ISimpleSliderModel extends ISubject {
   fullStateUpdate(settings: ISliderSettings): void;
   getThumbsPos(): IThumbsPositions;
