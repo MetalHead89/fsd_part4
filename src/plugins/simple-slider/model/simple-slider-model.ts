@@ -13,6 +13,7 @@ import Subject from '../subject/subject';
 
 class SimpleSliderModel extends Subject implements ISimpleSliderModel {
   private orientation = 'horizontal';
+  private type: string;
   private min = 0;
   private max = 10;
   private step = 1;
@@ -27,6 +28,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
    */
   fullStateUpdate(settings: ISliderSettings): void {
     this.orientation = settings.orienation;
+    this.type = settings.type;
     this.min = settings.min;
     this.max = settings.max;
     this.step = settings.step;
@@ -36,6 +38,25 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     const thumbOnePos = this.thumbValueToPos(settings.thumbOneValue);
     const thumbTwoPos = this.thumbValueToPos(settings.thumbTwoValue);
     this.updateThumbsState({ thumbOne: thumbOnePos, thumbTwo: thumbTwoPos });
+  }
+
+  getProgressBarSize(): void {
+    const thumbOnePos = this.thumbValueToPos(this.thumbOneValue);
+    const thumbTwoPos = this.thumbValueToPos(this.thumbTwoValue);
+    let start = 0;
+    let end = 0;
+
+    if (this.type === 'single') {
+      end =
+        this.posByOrientation(thumbOnePos) +
+        this.sizeByOrientation(this.thumbSize);
+    } else {
+      start = this.posByOrientation(thumbOnePos);
+      end =
+        this.posByOrientation(thumbOnePos) -
+        this.posByOrientation(thumbTwoPos) +
+        this.sizeByOrientation(this.thumbSize);
+    }
   }
 
   // /**
