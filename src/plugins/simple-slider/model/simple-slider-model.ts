@@ -8,6 +8,7 @@ import {
   IThumbsPositions,
   IPosition,
   ISliderSettings,
+  IProgressBarParams,
 } from '../interfaces';
 import Subject from '../subject/subject';
 
@@ -40,9 +41,11 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     this.updateThumbsState({ thumbOne: thumbOnePos, thumbTwo: thumbTwoPos });
   }
 
-  getProgressBarSize(): void {
+  getProgressBarSize(): IProgressBarParams {
     const thumbOnePos = this.thumbValueToPos(this.thumbOneValue);
     const thumbTwoPos = this.thumbValueToPos(this.thumbTwoValue);
+    const size = { ...this.sliderSize };
+    const position = { left: 0, top: 0 };
     let start = 0;
     let end = 0;
 
@@ -57,6 +60,15 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
         this.posByOrientation(thumbTwoPos) +
         this.sizeByOrientation(this.thumbSize);
     }
+
+    if (this.orientation === 'horizontal') {
+      size.width = end;
+    } else {
+      position.top = start;
+      size.height = end;
+    }
+
+    return { position, size };
   }
 
   // /**
