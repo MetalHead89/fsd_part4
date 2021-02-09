@@ -7,6 +7,7 @@ import {
   ISize,
   IThumbsPositions,
   IPosition,
+  ISliderSettings,
 } from '../interfaces';
 import Subject from '../subject/subject';
 
@@ -20,23 +21,36 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
   private sliderSize = { width: 500, height: 10 };
   private thumbSize = { width: 500, height: 10 };
 
-  /**
-   * Установка размера слайдера
-   * @param {ISize} size - новый размер слайдера
-   */
-  setSliderSize(size: ISize): void {
-    this.sliderSize.width = size.width < 0 ? 0 : size.width;
-    this.sliderSize.height = size.height < 0 ? 0 : size.height;
+  fullStateUpdate(settings: ISliderSettings) {
+    const thumbOnePos = this.thumbValueToPos(settings.thumbOneValue);
+    const thumbTwoPos = this.thumbValueToPos(settings.thumbTwoValue);
+
+    this.orientation = settings.orienation;
+    this.min = settings.min;
+    this.max = settings.max;
+    this.step = settings.step;
+    this.sliderSize = settings.sliderSize;
+    this.thumbSize = settings.thumbSize;    
+    this.updateThumbsState({thumbOne: thumbOnePos, thumbTwo: thumbTwoPos})
   }
 
-  /**
-   * Установка размера бегунка
-   * @param {ISize} size - новый размер бегунка
-   */
-  setThumbSize(size: ISize): void {
-    this.thumbSize.width = size.width < 0 ? 0 : size.width;
-    this.thumbSize.height = size.height < 0 ? 0 : size.height;
-  }
+  // /**
+  //  * Установка размера слайдера
+  //  * @param {ISize} size - новый размер слайдера
+  //  */
+  // setSliderSize(size: ISize): void {
+  //   this.sliderSize.width = size.width < 0 ? 0 : size.width;
+  //   this.sliderSize.height = size.height < 0 ? 0 : size.height;
+  // }
+
+  // /**
+  //  * Установка размера бегунка
+  //  * @param {ISize} size - новый размер бегунка
+  //  */
+  // setThumbSize(size: ISize): void {
+  //   this.thumbSize.width = size.width < 0 ? 0 : size.width;
+  //   this.thumbSize.height = size.height < 0 ? 0 : size.height;
+  // }
 
   /**
    * Возврат объекта с позициями бегунков
