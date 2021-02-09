@@ -28,13 +28,6 @@ class SimpleSliderController implements IObserver {
     settings.sliderSize = sliderSize;
     settings.thumbSize = thumbSize;
     this.simpleSliderModel.fullStateUpdate(settings);
-
-    // this.simpleSliderView.updatedThumbs(this.simpleSliderModel.getThumbsPos());
-    // this.simpleSliderModel.setSliderSize(this.simpleSliderView.getSliderSize());
-    // this.simpleSliderModel.setThumbSize(this.simpleSliderView.getThumbSize());
-    // this.simpleSliderView.updatedThumbs(
-    //   this.simpleSliderModel.getThumbsPos()
-    // );
   }
 
   update(eventType: string): void {
@@ -48,22 +41,6 @@ class SimpleSliderController implements IObserver {
       );
     }
   }
-
-  /**
-   * Установка размера слайдера
-   * @param {ISize} size - новый размер слайдера
-   */
-  // setSliderSize(size: ISize): void {
-  //   this.simpleSliderModel.setSliderSize(size);
-  // }
-
-  // /**
-  //  * Установка размера бегунка
-  //  * @param {ISize} size - новый размер бегунка
-  //  */
-  // setThumbSize(size: ISize): void {
-  //   this.simpleSliderModel.setThumbSize(size);
-  // }
 }
 
 export default SimpleSliderController;
