@@ -27,11 +27,11 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     this.max = settings.max;
     this.step = settings.step;
     this.sliderSize = settings.sliderSize;
-    this.thumbSize = settings.thumbSize; 
-    
+    this.thumbSize = settings.thumbSize;
+
     const thumbOnePos = this.thumbValueToPos(settings.thumbOneValue);
     const thumbTwoPos = this.thumbValueToPos(settings.thumbTwoValue);
-    this.updateThumbsState({thumbOne: thumbOnePos, thumbTwo: thumbTwoPos})
+    this.updateThumbsState({ thumbOne: thumbOnePos, thumbTwo: thumbTwoPos });
   }
 
   // /**
@@ -69,12 +69,17 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
    * @param {IThumbsPositions} positions - текущая позиция бегунков
    */
   updateThumbsState(positions: IThumbsPositions): void {
-    this.thumbOneValue = this.valueWithStep(
+    const thumbOneValue = this.valueWithStep(
       this.posByOrientation(positions.thumbOne),
     );
-    this.thumbTwoValue = this.valueWithStep(
+    const thumbTwoValue = this.valueWithStep(
       this.posByOrientation(positions.thumbTwo),
     );
+
+    if (thumbOneValue <= thumbTwoValue) {
+      this.thumbOneValue = thumbOneValue;
+      this.thumbTwoValue = thumbTwoValue;
+    }
 
     this.notify('thumbsPosIsUpdated');
   }

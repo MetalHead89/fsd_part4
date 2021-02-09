@@ -51,7 +51,7 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
 
   update(eventType: string): void {
     if (eventType === 'thumbIsDragged') {
-      this.notify(eventType);
+      this.notify('thumbIsDragged');
     }
   }
 
