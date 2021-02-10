@@ -21,6 +21,10 @@ class SimpleSliderController implements IObserver {
     this.init(params.settings);
   }
 
+  /**
+   * Инициализация слайдера в оответствии с полученными настройками
+   * @param {ISliderSettings} sliderSettings - объект с настройками слайдера
+   */
   private init(sliderSettings: ISliderSettings): void {
     const settings = { ...sliderSettings };
     const sliderSize = this.simpleSliderView.getSliderSize();
@@ -31,6 +35,10 @@ class SimpleSliderController implements IObserver {
     this.simpleSliderModel.fullStateUpdate(settings);
   }
 
+  /**
+   * Перехватывание и реагирование на уведомления от SimpleSliderModel и SimpleSliderView
+   * @param {string} eventType - тип уведомления
+   */
   update(eventType: string): void {
     if (eventType === 'thumbIsDragged') {
       this.simpleSliderModel.updateThumbsState(
