@@ -1,3 +1,5 @@
+import { IPopUpParams, IPosition } from '../../interfaces';
+
 class PopUp {
   private element: HTMLDivElement;
 
@@ -10,8 +12,18 @@ class PopUp {
     return this.element;
   }
 
-  update(value: number): void {
+  update(params: IPopUpParams): void {
+    this.updateValue(params.value);
+    this.updatePosition(params.position);
+  }
+
+  updateValue(value: number): void {
     this.element.innerHTML = `${value}`;
+  }
+
+  updatePosition(position: IPosition): void {
+    this.element.style.left = `${position.left}px`;
+    this.element.style.top = `${position.top}px';
   }
 }
 

@@ -70,7 +70,7 @@ export interface ISimpleSliderView extends ISubject {
   getThumbsPos(): IThumbsPositions;
   updateThumbs(thumbsPositions: IThumbsPositions): void;
   updateProgressBar(params: IProgressBarParams): void;
-  updatePopUps(params: IPopUpsParams): void;
+  updatePopUps(params: IPopUps): void;
 }
 
 export interface IControllerParams {
