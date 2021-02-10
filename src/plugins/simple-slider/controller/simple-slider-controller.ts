@@ -21,7 +21,8 @@ class SimpleSliderController implements IObserver {
     this.init(params.settings);
   }
 
-  private init(settings: ISliderSettings): void {
+  private init(sliderSettings: ISliderSettings): void {
+    const settings = { ...sliderSettings };
     const sliderSize = this.simpleSliderView.getSliderSize();
     const thumbSize = this.simpleSliderView.getThumbSize();
 
@@ -33,15 +34,15 @@ class SimpleSliderController implements IObserver {
   update(eventType: string): void {
     if (eventType === 'thumbIsDragged') {
       this.simpleSliderModel.updateThumbsState(
-        this.simpleSliderView.getThumbsPos(),
+        this.simpleSliderView.getThumbsPos()
       );
     } else if (eventType === 'thumbsPosIsUpdated') {
       this.simpleSliderView.updateThumbs(this.simpleSliderModel.getThumbsPos());
       this.simpleSliderView.updatePopUps(
-        this.simpleSliderModel.getPopUpsParams(),
+        this.simpleSliderModel.getPopUpsParams()
       );
       this.simpleSliderView.updateProgressBar(
-        this.simpleSliderModel.getProgressBarParams(),
+        this.simpleSliderModel.getProgressBarParams()
       );
     }
   }
