@@ -41,7 +41,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     this.updateThumbsState({ thumbOne: thumbOnePos, thumbTwo: thumbTwoPos });
   }
 
-  getProgressBarSize(): IProgressBarParams {
+  getProgressBarParams(): IProgressBarParams {
     const thumbOnePos = this.thumbValueToPos(this.thumbOneValue);
     const thumbTwoPos = this.thumbValueToPos(this.thumbTwoValue);
     const size = { ...this.sliderSize };

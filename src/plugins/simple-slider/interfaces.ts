@@ -55,8 +55,9 @@ export interface ISimpleSliderModel extends ISubject {
 export interface ISimpleSliderView extends ISubject {
   getThumbSize(): ISize;
   getSliderSize(): ISize;
-  updateThumbs(thumbsPositions: IThumbsPositions): void;
   getThumbsPos(): IThumbsPositions;
+  getProgressBarParams(): IProgressBarParams;
+  updateThumbs(thumbsPositions: IThumbsPositions): void;
 }
 
 export interface IControllerParams {
