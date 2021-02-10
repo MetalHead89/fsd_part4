@@ -2,6 +2,7 @@
 
 import {
   IObserver,
+  IProgressBarParams,
   ISimpleSliderView,
   ISize,
   IThumbsPositions,
@@ -90,6 +91,10 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
   updatedThumbs(thumbsPositions: IThumbsPositions): void {
     this.thumbOne.moveTo(thumbsPositions.thumbOne);
     this.thumbTwo.moveTo(thumbsPositions.thumbTwo);
+  }
+
+  updateProgressBar(params: IProgressBarParams): void {
+    this.progressBar.update(params);
   }
 }
 
