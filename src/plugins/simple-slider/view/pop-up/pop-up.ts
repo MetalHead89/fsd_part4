@@ -23,7 +23,7 @@ class PopUp {
 
   updatePosition(position: IPosition): void {
     this.element.style.left = `${position.left}px`;
-    this.element.style.top = `${position.top}px';
+    this.element.style.top = `${position.top}px`;
   }
 }
 
