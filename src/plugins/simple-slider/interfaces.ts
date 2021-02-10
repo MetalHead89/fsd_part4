@@ -45,12 +45,17 @@ export interface IProgressBarParams {
   position: IPosition;
   size: ISize;
 }
+export interface IPopUpsParams {
+  popUpOne: number | null;
+  popUpTwo: number | null;
+}
 
 export interface ISimpleSliderModel extends ISubject {
   fullStateUpdate(settings: ISliderSettings): void;
   getThumbsPos(): IThumbsPositions;
   updateThumbsState(positions: IThumbsPositions): void;
   getProgressBarParams(): IProgressBarParams;
+  getPopUpsParams(): IPopUpsParams;
 }
 
 export interface ISimpleSliderView extends ISubject {
@@ -59,6 +64,7 @@ export interface ISimpleSliderView extends ISubject {
   getThumbsPos(): IThumbsPositions;
   updateThumbs(thumbsPositions: IThumbsPositions): void;
   updateProgressBar(params: IProgressBarParams): void;
+  updatePopUps(params: IPopUpsParams): void;
 }
 
 export interface IControllerParams {

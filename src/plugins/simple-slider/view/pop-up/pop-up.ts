@@ -9,5 +9,10 @@ class PopUp {
   getElement(): HTMLDivElement {
     return this.element;
   }
+
+  update(value: number): void {
+    this.element.innerHTML = `${value}`;
+  }
 }
+
 export default PopUp;

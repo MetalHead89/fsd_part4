@@ -2,6 +2,7 @@
 
 import {
   IObserver,
+  IPopUpsParams,
   IProgressBarParams,
   ISimpleSliderView,
   ISize,
@@ -95,6 +96,15 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
 
   updateProgressBar(params: IProgressBarParams): void {
     this.progressBar.update(params);
+  }
+
+  updatePopUps(params: IPopUpsParams): void {
+    if (params.popUpOne !== null) {
+      this.thumbOne.updatePopUp(params.popUpOne);
+    }
+    if (params.popUpTwo !== null) {
+      this.thumbTwo.updatePopUp(params.popUpTwo);
+    }
   }
 }
 

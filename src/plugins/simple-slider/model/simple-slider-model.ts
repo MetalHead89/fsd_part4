@@ -9,6 +9,7 @@ import {
   IPosition,
   ISliderSettings,
   IProgressBarParams,
+  IPopUpsParams,
 } from '../interfaces';
 import Subject from '../subject/subject';
 
@@ -100,6 +101,10 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
       thumbOne: this.thumbValueToPos(this.thumbOneValue),
       thumbTwo: this.thumbValueToPos(this.thumbTwoValue),
     };
+  }
+
+  getPopUpsParams(): IPopUpsParams {
+    return { popUpOne: this.thumbOneValue, popUpTwo: this.thumbTwoValue };
   }
 
   /**
