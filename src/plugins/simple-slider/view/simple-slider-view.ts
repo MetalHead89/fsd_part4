@@ -53,6 +53,10 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
     this.assembleSlider();
   }
 
+  /**
+   * Перехватывание и реагирование на уведомления от субъектов, на которые подписано View
+   * @param {string} eventType - тип уведомления
+   */
   update(eventType: string): void {
     if (eventType === 'thumbIsDragged') {
       this.notify('thumbIsDragged');
@@ -62,6 +66,9 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
     }
   }
 
+  /**
+   * Сборка слайдера из отдельных контролов
+   */
   private assembleSlider(): void {
     this.container.append(this.track.getElement());
     this.container.append(this.thumbOne.getElement());
@@ -74,14 +81,27 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
     this.sliderWrapper.append(this.container.element);
   }
 
+  /**
+   * Возвращение размера бегунка
+   * @returns {ISize} - объкт с шириной и высотой бегунка
+   */
   getThumbSize(): ISize {
     return this.thumbOne.getSize();
   }
 
+  /**
+   * Возвращение размера слайдера
+   * @returns {IPosition} - объект с отступами от левого и верхнего края родительского
+   * контейнера
+   */
   getSliderSize(): ISize {
     return this.container.getSize();
   }
 
+  /**
+   * Взвращение позиций бегунков
+   * @returns {IThumbsPositions} - объект с позициями бегунков
+   */
   getThumbsPos(): IThumbsPositions {
     return {
       thumbOne: this.thumbOne.getPosition(),
@@ -89,15 +109,27 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
     };
   }
 
+  /**
+   * Обновляет позиции бегунков
+   * @param {IThumbsPositions} thumbsPositions - объект с позициями бегунков
+   */
   updateThumbs(thumbsPositions: IThumbsPositions): void {
     this.thumbOne.moveTo(thumbsPositions.thumbOne);
     this.thumbTwo.moveTo(thumbsPositions.thumbTwo);
   }
 
+  /**
+   * Обновляет позицию и размер прогрессбара
+   * @param {IProgressBarParams} thumbsPositions - объект с позицей и размером прогрессбара
+   */
   updateProgressBar(params: IProgressBarParams): void {
     this.progressBar.update(params);
   }
 
+  /**
+   * Обновляет значения попапов
+   * @param {IProgressBarParams} thumbsPositions - объект со значениями попапов
+   */
   updatePopUps(params: IPopUpsParams): void {
     if (params.popUpOne !== null) {
       this.thumbOne.updatePopUp(params.popUpOne);
