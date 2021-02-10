@@ -39,7 +39,7 @@ class Thumb extends Subject {
     this.popUp.update(value);
   }
 
-  removePopUp() {
+  removePopUp(): void {
     this.popUp = null;
   }
 
@@ -86,7 +86,7 @@ class Thumb extends Subject {
     }
   }
 
-  resetZIndex() {
+  resetZIndex(): void {
     this.element.style.zIndex = '';
   }
 
@@ -145,19 +145,19 @@ class Thumb extends Subject {
   private endDrag(): void {
     document.removeEventListener(
       'mousemove',
-      this.onMouseMoveHandler as EventListenerOrEventListenerObject,
+      this.onMouseMoveHandler as EventListenerOrEventListenerObject
     );
     document.removeEventListener(
       'mouseup',
-      this.onMouseUpHandler as EventListenerOrEventListenerObject,
+      this.onMouseUpHandler as EventListenerOrEventListenerObject
     );
     document.removeEventListener(
       'touchmove',
-      this.onMouseMoveHandler as EventListenerOrEventListenerObject,
+      this.onMouseMoveHandler as EventListenerOrEventListenerObject
     );
     document.removeEventListener(
       'touchend',
-      this.onMouseUpHandler as EventListenerOrEventListenerObject,
+      this.onMouseUpHandler as EventListenerOrEventListenerObject
     );
   }
 
