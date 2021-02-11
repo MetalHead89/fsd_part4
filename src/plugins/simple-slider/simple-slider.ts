@@ -19,7 +19,7 @@ import SimpleSliderView from './view/simple-slider-view';
     thumbOneValue: 3,
     thumbTwoValue: 7,
     sliderSize: { width: 500, height: 10 },
-    thumbSize: { width: 500, height: 10 },
+    thumbSize: { width: 20, height: 20 },
   };
 
   // API мотоды плагина

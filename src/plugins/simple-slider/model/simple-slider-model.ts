@@ -33,6 +33,8 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
   fullStateUpdate(settings: ISliderSettings): void {
     this.orientation = settings.orienation;
     this.type = settings.type;
+    this.scale = settings.scale;
+    this.popUps = settings.popUps;
     this.min = settings.min;
     this.max = settings.max;
     this.step = settings.step;
