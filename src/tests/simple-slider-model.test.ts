@@ -106,7 +106,7 @@ describe('Get progress bar params', () => {
   });
   test('Should be position: {{left: 0, top: 100} and size: {width: 10, height: 212}}', () => {
     settings.orienation = 'vertical';
-    settings.sliderSize = {width: 10, height: 500}
+    settings.sliderSize = { width: 10, height: 500 };
     model.fullStateUpdate(settings);
     const progressParams = model.getProgressBarParams();
     expect(progressParams.position.left).toBeCloseTo(0, 0);
@@ -114,7 +114,7 @@ describe('Get progress bar params', () => {
     expect(progressParams.size.width).toBeCloseTo(10, 0);
     expect(progressParams.size.height).toBeCloseTo(212, 0);
   });
-  test('Should be position: {{left: 0, top: 0} and size: {width: 164, height: 10}}', () => {    
+  test('Should be position: {{left: 0, top: 0} and size: {width: 164, height: 10}}', () => {
     settings.type = 'single';
     model.fullStateUpdate(settings);
     const progressParams = model.getProgressBarParams();
@@ -123,16 +123,42 @@ describe('Get progress bar params', () => {
     expect(progressParams.size.width).toBeCloseTo(164, 0);
     expect(progressParams.size.height).toBeCloseTo(10, 0);
   });
-  test('Should be position: {{left: 0, top: 100} and size: {width: 10, height: 212}}', () => {
+  test('Should be position: {{left: 0, top: 0} and size: {width: 10, height: 239}}', () => {
     settings.orienation = 'vertical';
-    settings.type = 'single'
-    settings.sliderSize = {width: 10, height: 750}
+    settings.type = 'single';
+    settings.sliderSize = { width: 10, height: 750 };
     model.fullStateUpdate(settings);
     const progressParams = model.getProgressBarParams();
     expect(progressParams.position.left).toBeCloseTo(0, 0);
     expect(progressParams.position.top).toBeCloseTo(0, 0);
     expect(progressParams.size.width).toBeCloseTo(10, 0);
     expect(progressParams.size.height).toBeCloseTo(239, 0);
+  });
+});
+
+describe('Get thumbs positions', () => {
+  test('Should be thumbOne: {left: 126, top: 0} and thumbTwo: {left: 294, top: 0}', () => {
+    model['sliderSize'] = { width: 440, height: 10 };
+    model['thumbSize'] = { width: 20, height: 20 };
+    const pos = model.getThumbsPos();
+
+    expect(pos.thumbOne.left).toBeCloseTo(126);
+    expect(pos.thumbOne.top).toBe(0);
+    expect(pos.thumbTwo.left).toBeCloseTo(294);
+    expect(pos.thumbTwo.top).toBe(0);
+  });
+  test('Should be thumbOne: {left: 0, top: 0} and thumbTwo: {left: 0, top: 420}', () => {
+    model['orientation'] = 'vertical';
+    model['sliderSize'] = { width: 440, height: 440 };
+    model['thumbSize'] = { width: 20, height: 20 };
+    model['thumbOneValue'] = -5;
+    model['thumbTwoValue'] = 77;
+    const pos = model.getThumbsPos();
+
+    expect(pos.thumbOne.left).toBe(0);
+    expect(pos.thumbOne.top).toBe(0);
+    expect(pos.thumbTwo.left).toBeCloseTo(0);
+    expect(pos.thumbTwo.top).toBe(420);
   });
 });
 
@@ -192,41 +218,6 @@ describe('Thumb value to position', () => {
     expect(position.left).toBe(0);
     expect(position.top).toBeCloseTo(294);
   });
-});
-
-describe('Get thumbs positions', () => {
-  test(
-    'First thumb left position should be 126 and top should be 0' +
-      'and second thumb left position should be 294 and top should be 0',
-    () => {
-      model['sliderSize'] = { width: 440, height: 10 };
-      model['thumbSize'] = { width: 20, height: 20 };
-      const pos = model.getThumbsPos();
-
-      expect(pos.thumbOne.left).toBeCloseTo(126);
-      expect(pos.thumbOne.top).toBe(0);
-      expect(pos.thumbTwo.left).toBeCloseTo(294);
-      expect(pos.thumbTwo.top).toBe(0);
-    },
-  );
-
-  test(
-    'First thumb left position should be 0 and top should be 0' +
-      'and second thumb left position should be 0 and top should be 420',
-    () => {
-      model['orientation'] = 'vertical';
-      model['sliderSize'] = { width: 440, height: 440 };
-      model['thumbSize'] = { width: 20, height: 20 };
-      model['thumbOneValue'] = -5;
-      model['thumbTwoValue'] = 77;
-      const pos = model.getThumbsPos();
-
-      expect(pos.thumbOne.left).toBe(0);
-      expect(pos.thumbOne.top).toBe(0);
-      expect(pos.thumbTwo.left).toBeCloseTo(0);
-      expect(pos.thumbTwo.top).toBe(420);
-    },
-  );
 });
 
 describe('Get pixels per value', () => {
