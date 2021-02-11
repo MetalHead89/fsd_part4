@@ -17,11 +17,11 @@ class PopUp {
     this.updatePosition(params.position);
   }
 
-  updateValue(value: number): void {
+  private updateValue(value: number): void {
     this.element.innerHTML = `${value}`;
   }
 
-  updatePosition(position: IPosition): void {
+  private updatePosition(position: IPosition): void {
     this.element.style.left = `${position.left}px`;
     this.element.style.top = `${position.top}px`;
   }
