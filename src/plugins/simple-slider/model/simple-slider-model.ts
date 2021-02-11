@@ -81,24 +81,6 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     return { position, size };
   }
 
-  // /**
-  //  * Установка размера слайдера
-  //  * @param {ISize} size - новый размер слайдера
-  //  */
-  // setSliderSize(size: ISize): void {
-  //   this.sliderSize.width = size.width < 0 ? 0 : size.width;
-  //   this.sliderSize.height = size.height < 0 ? 0 : size.height;
-  // }
-
-  // /**
-  //  * Установка размера бегунка
-  //  * @param {ISize} size - новый размер бегунка
-  //  */
-  // setThumbSize(size: ISize): void {
-  //   this.thumbSize.width = size.width < 0 ? 0 : size.width;
-  //   this.thumbSize.height = size.height < 0 ? 0 : size.height;
-  // }
-
   /**
    * Возврат объекта с позициями бегунков
    * @returns {IThumbsPositions} - объект с позициями бегунков относительно левого и вернего края
@@ -244,20 +226,6 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
 
     return (this.sliderSize.height - this.thumbSize.height) / 100;
   }
-
-  // /**
-  //  * Возвращает размер одного шага бегунка в пикселях
-  //  * @returns {number} - размер одного шага бегунка
-  //  */
-  // private getStepSize(): number {
-  //   const stepsCount = (this.max - this.min) / this.step;
-
-  //   return (
-  //     (this.sizeByOrientation(this.sliderSize) -
-  //       this.sizeByOrientation(this.thumbSize)) /
-  //     stepsCount
-  //   );
-  // }
 
   /**
    * Возвращение ширины или высоты объекта, в зависимости от ориентации слайдера
