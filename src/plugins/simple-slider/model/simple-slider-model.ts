@@ -102,16 +102,36 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
       popUpOne: {
         value: this.thumbOneValue,
         position: this.getPopUpPosition(
-          this.thumbValueToPos(this.thumbOneValue),
+          this.thumbValueToPos(this.thumbOneValue)
         ),
       },
       popUpTwo: {
         value: this.thumbTwoValue,
         position: this.getPopUpPosition(
-          this.thumbValueToPos(this.thumbTwoValue),
+          this.thumbValueToPos(this.thumbTwoValue)
         ),
       },
     };
+  }
+
+  /**
+   * Обновление состояния бегунков и оповещение наблюдателей об изменении
+   * @param {IThumbsPositions} positions - текущая позиция бегунков
+   */
+  updateThumbsState(positions: IThumbsPositions): void {
+    const thumbOneValue = this.valueWithStep(
+      this.posByOrientation(positions.thumbOne)
+    );
+    const thumbTwoValue = this.valueWithStep(
+      this.posByOrientation(positions.thumbTwo)
+    );
+
+    if (thumbOneValue <= thumbTwoValue) {
+      this.thumbOneValue = thumbOneValue;
+      this.thumbTwoValue = thumbTwoValue;
+    }
+
+    this.notify('thumbsPosIsUpdated');
   }
 
   /**
@@ -131,26 +151,6 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     }
 
     return { left, top };
-  }
-
-  /**
-   * Обновление состояния бегунков и оповещение наблюдателей об изменении
-   * @param {IThumbsPositions} positions - текущая позиция бегунков
-   */
-  updateThumbsState(positions: IThumbsPositions): void {
-    const thumbOneValue = this.valueWithStep(
-      this.posByOrientation(positions.thumbOne),
-    );
-    const thumbTwoValue = this.valueWithStep(
-      this.posByOrientation(positions.thumbTwo),
-    );
-
-    if (thumbOneValue <= thumbTwoValue) {
-      this.thumbOneValue = thumbOneValue;
-      this.thumbTwoValue = thumbTwoValue;
-    }
-
-    this.notify('thumbsPosIsUpdated');
   }
 
   /**
@@ -182,7 +182,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
 
     return Math.round(
       this.min +
-        ((this.max - this.min) / 100) * Math.round(position / pixelsPerValue),
+        ((this.max - this.min) / 100) * Math.round(position / pixelsPerValue)
     );
   }
 
