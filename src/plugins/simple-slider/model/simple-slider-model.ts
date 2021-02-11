@@ -9,7 +9,7 @@ import {
   IPosition,
   ISliderSettings,
   IProgressBarParams,
-  IPopUpsParams,
+  IPopUps,
 } from '../interfaces';
 import Subject from '../subject/subject';
 
@@ -103,8 +103,34 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     };
   }
 
-  getPopUpsParams(): IPopUpsParams {
-    return { popUpOne: this.thumbOneValue, popUpTwo: this.thumbTwoValue };
+  getPopUpsParams(): IPopUps {
+    return {
+      popUpOne: {
+        value: this.thumbOneValue,
+        position: this.getPopUpPosition(
+          this.thumbValueToPos(this.thumbOneValue),
+        ),
+      },
+      popUpTwo: {
+        value: this.thumbTwoValue,
+        position: this.getPopUpPosition(
+          this.thumbValueToPos(this.thumbTwoValue),
+        ),
+      },
+    };
+  }
+
+  private getPopUpPosition(thumbPosition: IPosition): IPosition {
+    let left = 0;
+    let top = 0;
+
+    if (this.orientation === 'horizontal') {
+      left = thumbPosition.left + this.thumbSize.width / 2;
+    } else {
+      top = thumbPosition.top + this.thumbSize.height / 2;
+    }
+
+    return { left, top };
   }
 
   /**
