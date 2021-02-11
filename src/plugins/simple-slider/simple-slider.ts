@@ -12,7 +12,7 @@ import SimpleSliderView from './view/simple-slider-view';
     orienation: 'horizontal',
     type: 'range',
     scale: true,
-    tooltips: true,
+    popUps: true,
     min: 0,
     max: 10,
     step: 1,

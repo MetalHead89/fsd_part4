@@ -7,7 +7,7 @@ export interface ISliderSettings {
   orienation: string;
   type: string;
   scale: boolean;
-  tooltips: boolean;
+  popUps: boolean;
   min: number;
   max: number;
   step: number;
