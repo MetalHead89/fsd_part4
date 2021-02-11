@@ -42,6 +42,10 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     this.updateThumbsState({ thumbOne: thumbOnePos, thumbTwo: thumbTwoPos });
   }
 
+  /**
+   * Возвращает объект с параметрами для прогрессбара
+   * @returns {IProgressBarParams} - Объект с позицией и размерами прогрессбара
+   */
   getProgressBarParams(): IProgressBarParams {
     const thumbOnePos = this.thumbValueToPos(this.thumbOneValue);
     const thumbTwoPos = this.thumbValueToPos(this.thumbTwoValue);
@@ -103,6 +107,10 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     };
   }
 
+  /**
+   * Возвращает объект с параметрами для попапов
+   * @returns {IPopUps} - объект с позицииями и значениями попапов
+   */
   getPopUpsParams(): IPopUps {
     return {
       popUpOne: {
@@ -120,6 +128,12 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     };
   }
 
+  /**
+   * Возвращает позицию попапа
+   * @param {IPosition} thumbPosition - объект с позицией бегунка,
+   * рядом с которым будет распологаться попап
+   * @returns {IPosition} - объект с позицией попапа
+   */
   private getPopUpPosition(thumbPosition: IPosition): IPosition {
     let left = 0;
     let top = 0;
