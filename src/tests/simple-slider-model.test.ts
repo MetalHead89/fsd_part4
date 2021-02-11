@@ -162,6 +162,37 @@ describe('Get thumbs positions', () => {
   });
 });
 
+describe('Get pop ups params', () => {
+  test('Should be posOne: {left: 154, top: 0} and posTwo: {left: 346, top: 0}', () => {
+    const params = model.getPopUpsParams();
+    expect(params.popUpOne.position.left).toBeCloseTo(154, 0);
+    expect(params.popUpOne.position.top).toBeCloseTo(0, 0);
+    expect(params.popUpTwo.position.left).toBeCloseTo(346, 0);
+    expect(params.popUpTwo.position.top).toBeCloseTo(0, 0);
+  });
+  test('Should be popUpOne: 3 and popUpTwo: 7}', () => {
+    const params = model.getPopUpsParams();
+    expect(params.popUpOne.value).toBe(3);
+    expect(params.popUpTwo.value).toBe(7);
+  });
+  test('Should be posOne: {left: 0, top: 154} and posTwo: {left: 0, top: 346}', () => {
+    settings.orienation = 'vertical';
+    settings. sliderSize = {width: 10, height: 500}
+    model.fullStateUpdate(settings);
+    
+    const params = model.getPopUpsParams();
+    expect(params.popUpOne.position.left).toBeCloseTo(0, 0);
+    expect(params.popUpOne.position.top).toBeCloseTo(154, 0);
+    expect(params.popUpTwo.position.left).toBeCloseTo(0, 0);
+    expect(params.popUpTwo.position.top).toBeCloseTo(346, 0);
+  });
+  test('Should be popUpOne: 3 and popUpTwo: 7}', () => {
+    const params = model.getPopUpsParams();
+    expect(params.popUpOne.value).toBe(3);
+    expect(params.popUpTwo.value).toBe(7);
+  });
+});
+
 describe('Thumb value to position', () => {
   test('Position left should be 0 and top should be 0', () => {
     model['sliderSize'] = { width: 440, height: 10 };
