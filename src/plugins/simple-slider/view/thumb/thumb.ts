@@ -3,7 +3,6 @@
 
 import { IPosition, ISize } from '../../interfaces';
 import Subject from '../../subject/subject';
-import PopUp from '../pop-up/pop-up';
 
 class Thumb extends Subject {
   private element: HTMLDivElement;
@@ -11,7 +10,6 @@ class Thumb extends Subject {
   private onMouseMoveHandler = this.drag.bind(this);
   private onMouseUpHandler = this.endDrag.bind(this);
   private position = { left: 0, top: 0 };
-  private popUp: PopUp | null;
 
   constructor() {
     super();
@@ -19,7 +17,6 @@ class Thumb extends Subject {
     this.element.classList.add('slider__thumb', 'slider__thumb_horizontal');
     this.addMousedownEventListener();
     this.disableDragAndDrop();
-    this.popUp = null;
   }
 
   getElement(): HTMLDivElement {
@@ -28,19 +25,6 @@ class Thumb extends Subject {
 
   setZIndex(index: number): void {
     this.element.style.zIndex = index.toString();
-  }
-
-  updatePopUp(value: number): void {
-    if (this.popUp === null) {
-      this.popUp = new PopUp();
-      this.element.append(this.popUp.getElement());
-    }
-
-    this.popUp.update(value);
-  }
-
-  removePopUp(): void {
-    this.popUp = null;
   }
 
   /**
@@ -145,19 +129,19 @@ class Thumb extends Subject {
   private endDrag(): void {
     document.removeEventListener(
       'mousemove',
-      this.onMouseMoveHandler as EventListenerOrEventListenerObject
+      this.onMouseMoveHandler as EventListenerOrEventListenerObject,
     );
     document.removeEventListener(
       'mouseup',
-      this.onMouseUpHandler as EventListenerOrEventListenerObject
+      this.onMouseUpHandler as EventListenerOrEventListenerObject,
     );
     document.removeEventListener(
       'touchmove',
-      this.onMouseMoveHandler as EventListenerOrEventListenerObject
+      this.onMouseMoveHandler as EventListenerOrEventListenerObject,
     );
     document.removeEventListener(
       'touchend',
-      this.onMouseUpHandler as EventListenerOrEventListenerObject
+      this.onMouseUpHandler as EventListenerOrEventListenerObject,
     );
   }
 
