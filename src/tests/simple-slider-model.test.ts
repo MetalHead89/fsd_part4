@@ -4,9 +4,95 @@
 import SimpleSliderModel from '../plugins/simple-slider/model/simple-slider-model';
 
 let model = new SimpleSliderModel();
+let settings = {
+  orienation: 'horizontal',
+  type: 'range',
+  scale: true,
+  popUps: true,
+  min: 0,
+  max: 10,
+  step: 1,
+  thumbOneValue: 3,
+  thumbTwoValue: 7,
+  sliderSize: { width: 500, height: 10 },
+  thumbSize: { width: 20, height: 20 },
+};
 
 beforeEach(() => {
   model = new SimpleSliderModel();
+  settings = {
+    orienation: 'horizontal',
+    type: 'range',
+    scale: true,
+    popUps: true,
+    min: 0,
+    max: 10,
+    step: 1,
+    thumbOneValue: 3,
+    thumbTwoValue: 7,
+    sliderSize: { width: 500, height: 10 },
+    thumbSize: { width: 20, height: 20 },
+  };
+});
+
+describe('Full state update', () => {
+  test('Orientation should be vertical', () => {
+    settings.orienation = 'vertical';
+    model.fullStateUpdate(settings);
+    expect(model['orientation']).toBe('vertical');
+  });
+  test('Type should be single', () => {
+    settings.type = 'single';
+    model.fullStateUpdate(settings);
+    expect(model['type']).toBe('single');
+  });
+  test('Scale should be false', () => {
+    settings.scale = false;
+    model.fullStateUpdate(settings);
+    expect(model['scale']).toBe(false);
+  });
+  test('PopUps should be false', () => {
+    settings.popUps = false;
+    model.fullStateUpdate(settings);
+    expect(model['popUps']).toBe(false);
+  });
+  test('Min should be 20', () => {
+    settings.min = 20;
+    model.fullStateUpdate(settings);
+    expect(model['min']).toBe(20);
+  });
+  test('Max should be 40', () => {
+    settings.max = 40;
+    model.fullStateUpdate(settings);
+    expect(model['max']).toBe(40);
+  });
+  test('Step should be 8', () => {
+    settings.step = 8;
+    model.fullStateUpdate(settings);
+    expect(model['step']).toBe(8);
+  });
+  test('ThumbOneValue should be 6', () => {
+    settings.thumbOneValue = 6;
+    model.fullStateUpdate(settings);
+    expect(model['thumbOneValue']).toBe(6);
+  });
+  test('ThumbTwoValue should be 10', () => {
+    settings.thumbTwoValue = 10;
+    model.fullStateUpdate(settings);
+    expect(model['thumbTwoValue']).toBe(10);
+  });
+  test('SliderSize widh should be 300 and height 50', () => {
+    settings.sliderSize = { width: 300, height: 50 };
+    model.fullStateUpdate(settings);
+    expect(model['sliderSize'].width).toBe(300);
+    expect(model['sliderSize'].height).toBe(50);
+  });
+  test('ThumbSize widh should be 750 and height 35', () => {
+    settings.thumbSize = { width: 750, height: 35 };
+    model.fullStateUpdate(settings);
+    expect(model['thumbSize'].width).toBe(750);
+    expect(model['thumbSize'].height).toBe(35);
+  });
 });
 
 describe('Thumb value to position', () => {
@@ -80,7 +166,7 @@ describe('Get thumbs positions', () => {
       expect(pos.thumbOne.top).toBe(0);
       expect(pos.thumbTwo.left).toBeCloseTo(294);
       expect(pos.thumbTwo.top).toBe(0);
-    }
+    },
   );
 
   test(
@@ -98,7 +184,7 @@ describe('Get thumbs positions', () => {
       expect(pos.thumbOne.top).toBe(0);
       expect(pos.thumbTwo.left).toBeCloseTo(0);
       expect(pos.thumbTwo.top).toBe(420);
-    }
+    },
   );
 });
 
