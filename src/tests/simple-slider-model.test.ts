@@ -177,9 +177,9 @@ describe('Get pop ups params', () => {
   });
   test('Should be posOne: {left: 0, top: 154} and posTwo: {left: 0, top: 346}', () => {
     settings.orienation = 'vertical';
-    settings. sliderSize = {width: 10, height: 500}
+    settings.sliderSize = { width: 10, height: 500 };
     model.fullStateUpdate(settings);
-    
+
     const params = model.getPopUpsParams();
     expect(params.popUpOne.position.left).toBeCloseTo(0, 0);
     expect(params.popUpOne.position.top).toBeCloseTo(154, 0);
@@ -193,92 +193,137 @@ describe('Get pop ups params', () => {
   });
 });
 
-describe('Thumb value to position', () => {
-  test('Position left should be 0 and top should be 0', () => {
-    model['sliderSize'] = { width: 440, height: 10 };
-    model['thumbSize'] = { width: 20, height: 20 };
-
-    const position = model['thumbValueToPos'](-1);
-    expect(position.left).toBe(0);
-    expect(position.top).toBe(0);
+describe('Update thumbs state', () => {
+  test('Should be thumbOne: 5 and thumbTwo: 9', () => {
+    const position = {
+      thumbOne: { left: 250, top: 0 },
+      thumbTwo: { left: 450, top: 0 },
+    };
+    model.updateThumbsState(position);
+    expect(model['thumbOneValue']).toBe(5);
+    expect(model['thumbTwoValue']).toBe(9);
   });
-
-  test('Position left should be 0 and top should be 0', () => {
-    model['sliderSize'] = { width: 440, height: 10 };
-    model['thumbSize'] = { width: 20, height: 20 };
-
-    const position = model['thumbValueToPos'](0);
-    expect(position.left).toBe(0);
-    expect(position.top).toBe(0);
+  test('Should be thumbOne: 3 and thumbTwo: 7', () => {
+    const position = {
+      thumbOne: { left: 450, top: 0 },
+      thumbTwo: { left: 250, top: 0 },
+    };
+    model.updateThumbsState(position);
+    expect(model['thumbOneValue']).toBe(3);
+    expect(model['thumbTwoValue']).toBe(7);
   });
-
-  test('Position left should be 210 and top should be 0', () => {
-    model['sliderSize'] = { width: 440, height: 10 };
-    model['thumbSize'] = { width: 20, height: 20 };
-
-    const position = model['thumbValueToPos'](5);
-    expect(position.left).toBe(210);
-    expect(position.top).toBe(0);
+  test('Should be thumbOne: 0 and thumbTwo: 0', () => {
+    settings.orienation = 'vertical';
+    settings.sliderSize = { width: 10, height: 500 };
+    model.fullStateUpdate(settings);
+    const position = {
+      thumbOne: { left: 250, top: 0 },
+      thumbTwo: { left: 450, top: 0 },
+    };
+    model.updateThumbsState(position);
+    expect(model['thumbOneValue']).toBe(0);
+    expect(model['thumbTwoValue']).toBe(0);
   });
-
-  test('Position left should be 420 and top should be 0', () => {
-    model['sliderSize'] = { width: 440, height: 10 };
-    model['thumbSize'] = { width: 20, height: 20 };
-
-    const position = model['thumbValueToPos'](11);
-    expect(position.left).toBe(420);
-    expect(position.top).toBe(0);
-  });
-
-  test('Position left should be 0 and top should be 420', () => {
-    model['orientation'] = 'vertical';
-    model['sliderSize'] = { width: 440, height: 440 };
-    model['thumbSize'] = { width: 20, height: 20 };
-
-    const position = model['thumbValueToPos'](11);
-    expect(position.left).toBe(0);
-    expect(position.top).toBe(420);
-  });
-
-  test('Position left should be 0 and top should be 420', () => {
-    model['orientation'] = 'vertical';
-    model['sliderSize'] = { width: 440, height: 440 };
-    model['thumbSize'] = { width: 20, height: 20 };
-
-    const position = model['thumbValueToPos'](7);
-    expect(position.left).toBe(0);
-    expect(position.top).toBeCloseTo(294);
+  test('Should be thumbOne: 0 and thumbTwo: 0', () => {
+    settings.orienation = 'vertical';
+    settings.sliderSize = { width: 10, height: 500 };
+    model.fullStateUpdate(settings);
+    const position = {
+      thumbOne: { left: 0, top: 100 },
+      thumbTwo: { left: 0, top: 400 },
+    };
+    model.updateThumbsState(position);
+    expect(model['thumbOneValue']).toBe(2);
+    expect(model['thumbTwoValue']).toBe(8);
   });
 });
 
-describe('Get pixels per value', () => {
-  test('Should be 4.2', () => {
-    model['sliderSize'] = { width: 440, height: 1440 };
-    model['thumbSize'] = { width: 20, height: 200 };
+// describe('Thumb value to position', () => {
+//   test('Position left should be 0 and top should be 0', () => {
+//     model['sliderSize'] = { width: 440, height: 10 };
+//     model['thumbSize'] = { width: 20, height: 20 };
 
-    expect(model['getPxPerValue']()).toBeCloseTo(4.2);
-  });
+//     const position = model['thumbValueToPos'](-1);
+//     expect(position.left).toBe(0);
+//     expect(position.top).toBe(0);
+//   });
 
-  test('Should be 12.4', () => {
-    model['orientation'] = 'vertical';
-    model['sliderSize'] = { width: 440, height: 1440 };
-    model['thumbSize'] = { width: 20, height: 200 };
+//   test('Position left should be 0 and top should be 0', () => {
+//     model['sliderSize'] = { width: 440, height: 10 };
+//     model['thumbSize'] = { width: 20, height: 20 };
 
-    expect(model['getPxPerValue']()).toBeCloseTo(12.4);
-  });
+//     const position = model['thumbValueToPos'](0);
+//     expect(position.left).toBe(0);
+//     expect(position.top).toBe(0);
+//   });
 
-  test('Should be 6.4', () => {
-    model['sliderSize'] = { width: 680, height: 50 };
-    model['thumbSize'] = { width: 40, height: 30 };
+//   test('Position left should be 210 and top should be 0', () => {
+//     model['sliderSize'] = { width: 440, height: 10 };
+//     model['thumbSize'] = { width: 20, height: 20 };
 
-    expect(model['getPxPerValue']()).toBeCloseTo(6.4);
-  });
+//     const position = model['thumbValueToPos'](5);
+//     expect(position.left).toBe(210);
+//     expect(position.top).toBe(0);
+//   });
 
-  test('Should be 0.2 ', () => {
-    model['orientation'] = 'vertical';
-    model['sliderSize'] = { width: 680, height: 50 };
-    model['thumbSize'] = { width: 40, height: 30 };
+//   test('Position left should be 420 and top should be 0', () => {
+//     model['sliderSize'] = { width: 440, height: 10 };
+//     model['thumbSize'] = { width: 20, height: 20 };
 
-    expect(model['getPxPerValue']()).toBeCloseTo(0.2);
-  });
-});
+//     const position = model['thumbValueToPos'](11);
+//     expect(position.left).toBe(420);
+//     expect(position.top).toBe(0);
+//   });
+
+//   test('Position left should be 0 and top should be 420', () => {
+//     model['orientation'] = 'vertical';
+//     model['sliderSize'] = { width: 440, height: 440 };
+//     model['thumbSize'] = { width: 20, height: 20 };
+
+//     const position = model['thumbValueToPos'](11);
+//     expect(position.left).toBe(0);
+//     expect(position.top).toBe(420);
+//   });
+
+//   test('Position left should be 0 and top should be 420', () => {
+//     model['orientation'] = 'vertical';
+//     model['sliderSize'] = { width: 440, height: 440 };
+//     model['thumbSize'] = { width: 20, height: 20 };
+
+//     const position = model['thumbValueToPos'](7);
+//     expect(position.left).toBe(0);
+//     expect(position.top).toBeCloseTo(294);
+//   });
+// });
+
+// describe('Get pixels per value', () => {
+//   test('Should be 4.2', () => {
+//     model['sliderSize'] = { width: 440, height: 1440 };
+//     model['thumbSize'] = { width: 20, height: 200 };
+
+//     expect(model['getPxPerValue']()).toBeCloseTo(4.2);
+//   });
+
+//   test('Should be 12.4', () => {
+//     model['orientation'] = 'vertical';
+//     model['sliderSize'] = { width: 440, height: 1440 };
+//     model['thumbSize'] = { width: 20, height: 200 };
+
+//     expect(model['getPxPerValue']()).toBeCloseTo(12.4);
+//   });
+
+//   test('Should be 6.4', () => {
+//     model['sliderSize'] = { width: 680, height: 50 };
+//     model['thumbSize'] = { width: 40, height: 30 };
+
+//     expect(model['getPxPerValue']()).toBeCloseTo(6.4);
+//   });
+
+//   test('Should be 0.2 ', () => {
+//     model['orientation'] = 'vertical';
+//     model['sliderSize'] = { width: 680, height: 50 };
+//     model['thumbSize'] = { width: 40, height: 30 };
+
+//     expect(model['getPxPerValue']()).toBeCloseTo(0.2);
+//   });
+// });
