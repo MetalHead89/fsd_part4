@@ -2,7 +2,7 @@
 
 import {
   IObserver,
-  IPopUpsParams,
+  IPopUps,
   IProgressBarParams,
   ISimpleSliderView,
   ISize,
@@ -12,8 +12,8 @@ import {
 import Container from './container/container';
 import Track from './track/track';
 import Thumb from './thumb/thumb';
-import ProgressBar from './progress-bar/progress-bar';
 import PopUp from './pop-up/pop-up';
+import ProgressBar from './progress-bar/progress-bar';
 import Scale from './scale/scale';
 import Subject from '../subject/subject';
 
@@ -27,8 +27,8 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
   private track: Track;
   private thumbOne: Thumb;
   private thumbTwo: Thumb;
-  private popUpOne: PopUp;
-  private popUpTwo: PopUp;
+  private popUpOne: PopUp | null;
+  private popUpTwo: PopUp | null;
   private progressBar: ProgressBar;
   private scale: Scale;
 
@@ -73,8 +73,12 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
     this.container.append(this.track.getElement());
     this.container.append(this.thumbOne.getElement());
     this.container.append(this.thumbTwo.getElement());
-    this.container.append(this.popUpOne.getElement());
-    this.container.append(this.popUpTwo.getElement());
+    if (this.popUpOne !== null) {
+      this.container.append(this.popUpOne.getElement());
+    }
+    if (this.popUpTwo !== null) {
+      this.container.append(this.popUpTwo.getElement());
+    }
     this.container.append(this.progressBar.getElement());
     this.container.append(this.scale.getElement());
 
@@ -130,13 +134,16 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
    * Обновляет значения попапов
    * @param {IProgressBarParams} thumbsPositions - объект со значениями попапов
    */
-  updatePopUps(params: IPopUpsParams): void {
-    if (params.popUpOne !== null) {
-      this.thumbOne.updatePopUp(params.popUpOne);
+  updatePopUps(params: IPopUps): void {
+    if (this.popUpOne === null) {
+      this.popUpOne = new PopUp();
     }
-    if (params.popUpTwo !== null) {
-      this.thumbTwo.updatePopUp(params.popUpTwo);
+    if (this.popUpTwo === null) {
+      this.popUpTwo = new PopUp();
     }
+
+    this.popUpOne.update(params.popUpOne);
+    this.popUpTwo.update(params.popUpTwo);
   }
 }
 
