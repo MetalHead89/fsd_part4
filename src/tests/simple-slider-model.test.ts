@@ -33,6 +33,7 @@ beforeEach(() => {
     sliderSize: { width: 500, height: 10 },
     thumbSize: { width: 20, height: 20 },
   };
+  model.fullStateUpdate(settings);
 });
 
 describe('Full state update', () => {
@@ -92,6 +93,46 @@ describe('Full state update', () => {
     model.fullStateUpdate(settings);
     expect(model['thumbSize'].width).toBe(750);
     expect(model['thumbSize'].height).toBe(35);
+  });
+});
+
+describe('Get progress bar params', () => {
+  test('Should be position: {{left: 100, top: 0} and size: {width: 212, height: 10}}', () => {
+    const progressParams = model.getProgressBarParams();
+    expect(progressParams.position.left).toBeCloseTo(144, 0);
+    expect(progressParams.position.top).toBeCloseTo(0, 0);
+    expect(progressParams.size.width).toBeCloseTo(212, 0);
+    expect(progressParams.size.height).toBeCloseTo(10, 0);
+  });
+  test('Should be position: {{left: 0, top: 100} and size: {width: 10, height: 212}}', () => {
+    settings.orienation = 'vertical';
+    settings.sliderSize = {width: 10, height: 500}
+    model.fullStateUpdate(settings);
+    const progressParams = model.getProgressBarParams();
+    expect(progressParams.position.left).toBeCloseTo(0, 0);
+    expect(progressParams.position.top).toBeCloseTo(144, 0);
+    expect(progressParams.size.width).toBeCloseTo(10, 0);
+    expect(progressParams.size.height).toBeCloseTo(212, 0);
+  });
+  test('Should be position: {{left: 0, top: 0} and size: {width: 164, height: 10}}', () => {    
+    settings.type = 'single';
+    model.fullStateUpdate(settings);
+    const progressParams = model.getProgressBarParams();
+    expect(progressParams.position.left).toBeCloseTo(0, 0);
+    expect(progressParams.position.top).toBeCloseTo(0, 0);
+    expect(progressParams.size.width).toBeCloseTo(164, 0);
+    expect(progressParams.size.height).toBeCloseTo(10, 0);
+  });
+  test('Should be position: {{left: 0, top: 100} and size: {width: 10, height: 212}}', () => {
+    settings.orienation = 'vertical';
+    settings.type = 'single'
+    settings.sliderSize = {width: 10, height: 750}
+    model.fullStateUpdate(settings);
+    const progressParams = model.getProgressBarParams();
+    expect(progressParams.position.left).toBeCloseTo(0, 0);
+    expect(progressParams.position.top).toBeCloseTo(0, 0);
+    expect(progressParams.size.width).toBeCloseTo(10, 0);
+    expect(progressParams.size.height).toBeCloseTo(239, 0);
   });
 });
 
