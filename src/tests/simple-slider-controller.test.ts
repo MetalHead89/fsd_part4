@@ -7,64 +7,41 @@ import SimpleSliderModel from '../plugins/simple-slider/model/simple-slider-mode
 import SimpleSliderController from '../plugins/simple-slider/controller/simple-slider-controller';
 import SimpleSliderView from '../plugins/simple-slider/view/simple-slider-view';
 
-// let model = new SimpleSliderModel();
-// let view = new SimpleSliderView();
-// let controller = new SimpleSliderController(model, view);
+const defaultSettings = {
+  orienation: 'horizontal',
+  type: 'range',
+  scale: true,
+  popUps: true,
+  min: 0,
+  max: 10,
+  step: 1,
+  thumbOneValue: 3,
+  thumbTwoValue: 7,
+  sliderSize: { width: 500, height: 10 },
+  thumbSize: { width: 20, height: 20 },
+};
+let settings = { ...defaultSettings };
 
-// beforeEach(() => {
-//   model = new SimpleSliderModel();
-//   view = new SimpleSliderView();
-//   controller = new SimpleSliderController(model, view);
-// });
+let wrapper = document.createElement('div');
+wrapper.classList.add('slider-wrapper');
+document.append(wrapper);
 
-// describe('Set slider size', () => {
-//   test('Slider width should be 5 and height should be 9', () => {
-//     controller.setSliderSize({ width: 5, height: 9 });
-//     expect(model['sliderSize'].width).toBe(5);
-//     expect(model['sliderSize'].height).toBe(9);
-//   });
+let model = new SimpleSliderModel();
+let view = new SimpleSliderView(wrapper);
+let params = { model, view, settings };
 
-//   test('Slider width should be 0 and height should be 12', () => {
-//     controller.setSliderSize({ width: -1, height: 12 });
-//     expect(model['sliderSize'].width).toBe(0);
-//     expect(model['sliderSize'].height).toBe(12);
-//   });
+let controller = new SimpleSliderController(params);
 
-//   test('Slider width should be 54 and height should be 0', () => {
-//     controller.setSliderSize({ width: 54, height: -1 });
-//     expect(model['sliderSize'].width).toBe(54);
-//     expect(model['sliderSize'].height).toBe(0);
-//   });
+beforeEach(() => {
+  settings = { ...defaultSettings };
 
-//   test('Slider width should be 0 and height should be 0', () => {
-//     controller.setSliderSize({ width: 0, height: 0 });
-//     expect(model['sliderSize'].width).toBe(0);
-//     expect(model['sliderSize'].height).toBe(0);
-//   });
-// });
+  wrapper.remove();
+  wrapper = document.createElement('div');
+  wrapper.classList.add('slider-wrapper');
 
-// describe('Set thumb size', () => {
-//   test('Thumb width should be 5 and height should be 9', () => {
-//     controller.setThumbSize({ width: 5, height: 9 });
-//     expect(model['thumbSize'].width).toBe(5);
-//     expect(model['thumbSize'].height).toBe(9);
-//   });
+  model = new SimpleSliderModel();
+  view = new SimpleSliderView(wrapper);
+  params = { model, view, settings };
 
-//   test('Thumb width should be 0 and height should be 12', () => {
-//     controller.setThumbSize({ width: -1, height: 12 });
-//     expect(model['thumbSize'].width).toBe(0);
-//     expect(model['thumbSize'].height).toBe(12);
-//   });
-
-//   test('Thumb width should be 54 and height should be 0', () => {
-//     controller.setThumbSize({ width: 54, height: -1 });
-//     expect(model['thumbSize'].width).toBe(54);
-//     expect(model['thumbSize'].height).toBe(0);
-//   });
-
-//   test('Thumb width should be 0 and height should be 0', () => {
-//     controller.setThumbSize({ width: 0, height: 0 });
-//     expect(model['thumbSize'].width).toBe(0);
-//     expect(model['thumbSize'].height).toBe(0);
-//   });
-// });
+  controller = new SimpleSliderController(params);
+});
