@@ -1,6 +1,3 @@
-/**
- * @jest-environment jsdom
- */
 /* eslint-disable dot-notation */
 
 import SimpleSliderModel from '../plugins/simple-slider/model/simple-slider-model';
@@ -20,15 +17,9 @@ const defaultSettings = {
   sliderSize: { width: 500, height: 10 },
   thumbSize: { width: 20, height: 20 },
 };
+
 let settings = { ...defaultSettings };
-
-const body = document.querySelector('body');
 let wrapper = document.createElement('div');
-wrapper.classList.add('slider-wrapper');
-wrapper.style.width = '500px';
-wrapper.style.height = '10px';
-body?.append(wrapper);
-
 let model = new SimpleSliderModel();
 let view = new SimpleSliderView(wrapper);
 let params = { model, view, settings };
@@ -37,11 +28,8 @@ let controller = new SimpleSliderController(params);
 
 beforeEach(() => {
   settings = { ...defaultSettings };
-
-  wrapper.remove();
   wrapper = document.createElement('div');
   wrapper.classList.add('slider-wrapper');
-  body?.append(wrapper);
 
   model = new SimpleSliderModel();
   view = new SimpleSliderView(wrapper);
@@ -86,29 +74,30 @@ describe('Slider init', () => {
     controller = new SimpleSliderController({ view, model, settings });
     expect(model['step']).toBe(2);
   });
-  //   test('ThumbOneValue should be 1', () => {
-  //     settings.thumbOneValue = 1;
-  //     view['container']['element'].style.width = '500px';
-  //     controller = new SimpleSliderController({ view, model, settings });
-  //     expect(model['thumbOneValue']).toBe(1);
-  //   });
-  //   test('ThumbTwoValue should be 9', () => {
-  //     settings.thumbTwoValue = 9;
-  //     view['container']['element'].style.width = '500px';
-  //     controller = new SimpleSliderController({ view, model, settings });
-  //     expect(model['thumbTwoValue']).toBe(9);
-  //   });
-  //   test('SliderSize should be {width: 350, height: 31}', () => {
-  //     view['container']['element'].style.width = '350px';
-  //     view['container']['element'].style.height = '31px';
-  //     controller = new SimpleSliderController({ view, model, settings });
-  //     expect(model['sliderSize'].width).toBe(350);
-  //     expect(model['sliderSize'].height).toBe(31);
-  //   });
-  //   test('ThumbSize should be {width: 45, height: 55}', () => {
-  //     settings.thumbSize = { width: 45, height: 55 };
-  //     controller = new SimpleSliderController({ view, model, settings });
-  //     expect(model['thumbSize'].width).toBe(45);
-  //     expect(model['thumbSize'].height).toBe(55);
-  //   });
+
+  test('ThumbOneValue should be 1', () => {
+    settings.thumbOneValue = 1;
+    view['container']['element'].style.width = '500px';
+    controller = new SimpleSliderController({ view, model, settings });
+    expect(model['thumbOneValue']).toBe(1);
+  });
+  test('ThumbTwoValue should be 9', () => {
+    settings.thumbTwoValue = 9;
+    view['container']['element'].style.width = '500px';
+    controller = new SimpleSliderController({ view, model, settings });
+    expect(model['thumbTwoValue']).toBe(9);
+  });
+  test('SliderSize should be {width: 350, height: 31}', () => {
+    view['container']['element'].style.width = '350px';
+    view['container']['element'].style.height = '31px';
+    controller = new SimpleSliderController({ view, model, settings });
+    expect(model['sliderSize'].width).toBe(350);
+    expect(model['sliderSize'].height).toBe(31);
+  });
+  test('ThumbSize should be {width: 45, height: 55}', () => {
+    settings.thumbSize = { width: 45, height: 55 };
+    controller = new SimpleSliderController({ view, model, settings });
+    expect(model['thumbSize'].width).toBe(45);
+    expect(model['thumbSize'].height).toBe(55);
+  });
 });
