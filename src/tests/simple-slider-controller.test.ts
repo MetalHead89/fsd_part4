@@ -5,11 +5,17 @@
 /* eslint-disable dot-notation */
 
 import SimpleSliderController from '../plugins/simple-slider/controller/simple-slider-controller';
-import SimpleSliderModel from '../plugins/simple-slider/model/simple-slider-model';
-import SimpleSliderView from '../plugins/simple-slider/view/simple-slider-view';
+import * as orignalModel from '../plugins/simple-slider/model/simple-slider-model';
+import * as orignalView from '../plugins/simple-slider/view/simple-slider-view';
 
 jest.mock('../plugins/simple-slider/model/simple-slider-model');
 jest.mock('../plugins/simple-slider/view/simple-slider-view');
+
+const mockedView = orignalView as jest.Mocked<typeof orignalView>;
+const SimpleSliderView = mockedView.default;
+
+const mockedModel = orignalModel as jest.Mocked<typeof orignalModel>;
+const SimpleSliderModel = mockedModel.default;
 
 const defaultSettings = {
   orienation: 'horizontal',
@@ -43,10 +49,6 @@ beforeEach(() => {
   params = { model, view, settings };
 
   controller = new SimpleSliderController(params);
-});
-
-describe('Slider init', () => {
-  test('Orientation should be vertical', () => {});
 });
 
 // describe('Slider init', () => {
