@@ -47,7 +47,7 @@ beforeEach(() => {
   model = new SimpleSliderModel();
 });
 
-describe('Slider init', () => {
+describe('Init method', () => {
   test('The getSliderSize method from the SimpleSliderView class must be called once', () => {
     controller = new SimpleSliderController({ model, view, settings });
     expect(SimpleSliderView.mock.instances[0].getSliderSize).toBeCalledTimes(1);
@@ -61,5 +61,56 @@ describe('Slider init', () => {
     expect(SimpleSliderModel.mock.instances[0].fullStateUpdate).toBeCalledTimes(
       1
     );
+  });
+});
+
+describe('Update method', () => {
+  test('The updateThumbsState method from the SimpleSliderModel class must be called once', () => {
+    controller = new SimpleSliderController({ model, view, settings });
+    controller.update('thumbIsDragged');
+    expect(
+      SimpleSliderModel.mock.instances[0].updateThumbsState
+    ).toBeCalledTimes(1);
+  });
+  test('The getThumbsPos method from the SimpleSliderView class must be called once', () => {
+    controller = new SimpleSliderController({ model, view, settings });
+    controller.update('thumbIsDragged');
+    expect(SimpleSliderView.mock.instances[0].getThumbsPos).toBeCalledTimes(1);
+  });
+  test('The updateThumbs method from the SimpleSliderView class must be called once', () => {
+    controller = new SimpleSliderController({ model, view, settings });
+    controller.update('thumbsPosIsUpdated');
+    expect(SimpleSliderView.mock.instances[0].updateThumbs).toBeCalledTimes(1);
+  });
+  test('The updatePopUps method from the SimpleSliderView class must be called once', () => {
+    controller = new SimpleSliderController({ model, view, settings });
+    controller.update('thumbsPosIsUpdated');
+    expect(SimpleSliderView.mock.instances[0].updatePopUps).toBeCalledTimes(1);
+  });
+  test('The updateProgressBar method from the SimpleSliderView class must be called once', () => {
+    controller = new SimpleSliderController({ model, view, settings });
+    controller.update('thumbsPosIsUpdated');
+    expect(
+      SimpleSliderView.mock.instances[0].updateProgressBar
+    ).toBeCalledTimes(1);
+  });
+  test('The getThumbsPos method from the SimpleSliderModel class must be called once', () => {
+    controller = new SimpleSliderController({ model, view, settings });
+    controller.update('thumbsPosIsUpdated');
+    expect(SimpleSliderModel.mock.instances[0].getThumbsPos).toBeCalledTimes(1);
+  });
+  test('The getPopUpsParams method from the SimpleSliderModel class must be called once', () => {
+    controller = new SimpleSliderController({ model, view, settings });
+    controller.update('thumbsPosIsUpdated');
+    expect(SimpleSliderModel.mock.instances[0].getPopUpsParams).toBeCalledTimes(
+      1
+    );
+  });
+  test('The getProgressBarParams method from the SimpleSliderModel class must be called once', () => {
+    controller = new SimpleSliderController({ model, view, settings });
+    controller.update('thumbsPosIsUpdated');
+    expect(
+      SimpleSliderModel.mock.instances[0].getProgressBarParams
+    ).toBeCalledTimes(1);
   });
 });
