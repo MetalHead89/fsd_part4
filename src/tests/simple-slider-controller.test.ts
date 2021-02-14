@@ -2,6 +2,8 @@
  * @jest-environment jsdom
  */
 
+/* eslint-disable comma-dangle */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable dot-notation */
 
 import SimpleSliderController from '../plugins/simple-slider/controller/simple-slider-controller';
