@@ -3,9 +3,9 @@
  */
 
 import SimpleSliderView from '../plugins/simple-slider/view/simple-slider-view';
-// import * as orignalModel from '../plugins/simple-slider/model/simple-slider-model';
+import * as orignalContainer from '../plugins/simple-slider/view/container/container';
 
-// jest.mock('../plugins/simple-slider/model/simple-slider-model');
+jest.mock('../plugins/simple-slider/view/container/container');
 
 // const mockedView = orignalView as jest.Mocked<typeof orignalView>;
 // const SimpleSliderView = mockedView.default;
