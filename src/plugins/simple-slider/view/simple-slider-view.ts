@@ -82,7 +82,7 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
     this.container.append(this.progressBar.getElement());
     this.container.append(this.scale.getElement());
 
-    this.sliderWrapper.append(this.container.element);
+    this.sliderWrapper.append(this.container.getElement());
   }
 
   /**
