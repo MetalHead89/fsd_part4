@@ -17,7 +17,7 @@ const SimpleSliderView = mockedView.default;
 const mockedModel = orignalModel as jest.Mocked<typeof orignalModel>;
 const SimpleSliderModel = mockedModel.default;
 
-const defaultSettings = {
+const settings = {
   orienation: 'horizontal',
   type: 'range',
   scale: true,
@@ -31,24 +31,18 @@ const defaultSettings = {
   thumbSize: { width: 20, height: 20 },
 };
 
-let settings = { ...defaultSettings };
-let wrapper = document.createElement('div');
+const wrapper = document.createElement('div');
 let model = new SimpleSliderModel();
 let view = new SimpleSliderView(wrapper);
-let params = { model, view, settings };
 
-let controller = new SimpleSliderController(params);
+let controller: SimpleSliderController;
 
 beforeEach(() => {
-  settings = { ...defaultSettings };
-  wrapper = document.createElement('div');
-  wrapper.classList.add('slider-wrapper');
-
-  model = new SimpleSliderModel();
+  SimpleSliderView.mockClear();
   view = new SimpleSliderView(wrapper);
-  params = { model, view, settings };
 
-  controller = new SimpleSliderController(params);
+  SimpleSliderModel.mockClear();
+  model = new SimpleSliderModel();
 });
 
 describe('Slider init', () => {
