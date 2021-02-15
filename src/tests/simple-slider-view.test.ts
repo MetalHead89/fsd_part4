@@ -4,12 +4,31 @@
 
 import SimpleSliderView from '../plugins/simple-slider/view/simple-slider-view';
 
-describe('Assemble slider', () => {
-  test('The getSliderSize method from the SimpleSliderView class must be called once', () => {
-    const wrapper = document.createElement('div');
-    const view = new SimpleSliderView(wrapper);
+let wrapper: HTMLDivElement;
+let view: SimpleSliderView;
 
-    const div = wrapper.querySelector('.slider');
-    console.log(div);
+beforeEach(() => {
+  wrapper = document.createElement('div');
+  view = new SimpleSliderView(wrapper);
+});
+
+describe('Assemble slider', () => {
+  test('Wrapper should be contain a slider element', () => {
+    expect(wrapper.querySelector('.slider')).not.toBeNull();
+  });
+  test('Wrapper should be contain a track element', () => {
+    expect(wrapper.querySelector('.slider__track')).not.toBeNull();
+  });
+  test('Wrapper should be contain a thumb element', () => {
+    expect(wrapper.querySelector('.slider__thumb')).not.toBeNull();
+  });
+  test('Wrapper should be contain a pop-up element', () => {
+    expect(wrapper.querySelector('.slider__pop-up')).not.toBeNull();
+  });
+  test('Wrapper should be contain a progress-bar element', () => {
+    expect(wrapper.querySelector('.slider__progress-bar')).not.toBeNull();
+  });
+  test('Wrapper should be contain a scale element', () => {
+    expect(wrapper.querySelector('.slider__scale')).not.toBeNull();
   });
 });

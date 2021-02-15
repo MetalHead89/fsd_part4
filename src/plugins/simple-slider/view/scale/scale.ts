@@ -3,6 +3,7 @@ class Scale {
 
   constructor() {
     this.element = document.createElement('div');
+    this.element.classList.add('slider__scale');
   }
 
   getElement(): HTMLDivElement {
