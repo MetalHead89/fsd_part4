@@ -28,6 +28,12 @@ Thumb.prototype.getSize = jest
   .fn()
   .mockImplementation(() => ({ width: 50, height: 50 }));
 
+Thumb.prototype.getElement = jest.fn().mockImplementation(() => {
+  const div = document.createElement('div');
+  div.classList.add('slider__thumb');
+  return div;
+});
+
 describe('Assemble slider', () => {
   test('Wrapper should be contain a slider element', () => {
     expect(wrapper.querySelector('.slider')).not.toBeNull();
@@ -35,9 +41,9 @@ describe('Assemble slider', () => {
   test('Wrapper should be contain a track element', () => {
     expect(wrapper.querySelector('.slider__track')).not.toBeNull();
   });
-  // test('Wrapper should be contain a thumb element', () => {
-  //   expect(wrapper.querySelector('.slider__thumb')).not.toBeNull();
-  // });
+  test('Wrapper should be contain a thumb element', () => {
+    expect(wrapper.querySelector('.slider__thumb')).not.toBeNull();
+  });
   test('Wrapper should be contain a pop-up element', () => {
     expect(wrapper.querySelector('.slider__pop-up')).not.toBeNull();
   });
