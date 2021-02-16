@@ -8,6 +8,7 @@ jest.mock('../plugins/simple-slider/view/container/container');
 jest.mock('../plugins/simple-slider/view/track/track');
 jest.mock('../plugins/simple-slider/view/thumb/thumb');
 jest.mock('../plugins/simple-slider/view/pop-up/pop-up');
+jest.mock('../plugins/simple-slider/view/progress-bar/progress-bar');
 
 let wrapper: HTMLDivElement;
 let view: SimpleSliderView;
