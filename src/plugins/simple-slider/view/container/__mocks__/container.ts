@@ -1,7 +1,9 @@
 export default class Container {
   element: HTMLDivElement;
+  testOk: boolean;
 
   constructor() {
+    this.testOk = true;
     this.element = document.createElement('div');
     this.element.classList.add('slider');
   }
@@ -15,6 +17,6 @@ export default class Container {
   }
 
   getSize(): boolean {
-    return true;
+    return this.testOk;
   }
 }
