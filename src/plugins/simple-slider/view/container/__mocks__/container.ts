@@ -13,4 +13,8 @@ export default class Container {
   getElement(): HTMLDivElement {
     return this.element;
   }
+
+  getSize(): boolean {
+    return true;
+  }
 }
