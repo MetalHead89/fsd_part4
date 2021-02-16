@@ -8,5 +8,6 @@ export default jest.fn(() => {
       return div;
     },
     getSize: () => true,
+    getPosition: () => true,
   };
 });

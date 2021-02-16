@@ -51,3 +51,12 @@ describe('Get slider size', () => {
     expect(view.getSliderSize()).toBe(true);
   });
 });
+
+describe('Get thumbs positions', () => {
+  test('ThumbOne should be true', () => {
+    expect(view.getThumbsPos().thumbOne).toBe(true);
+  });
+  test('ThumbTwo should be true', () => {
+    expect(view.getThumbsPos().thumbTwo).toBe(true);
+  });
+});
