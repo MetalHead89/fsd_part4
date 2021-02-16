@@ -39,3 +39,9 @@ describe('Assemble slider', () => {
     expect(wrapper.querySelector('.slider__scale')).not.toBeNull();
   });
 });
+
+describe('Get thumb size', () => {
+  test('Should be true', () => {
+    expect(view.getThumbSize()).toBe(true);
+  });
+});
