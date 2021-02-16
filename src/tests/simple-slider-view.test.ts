@@ -4,8 +4,9 @@
 
 import SimpleSliderView from '../plugins/simple-slider/view/simple-slider-view';
 
-jest.mock('../plugins/simple-slider/view/thumb/thumb');
 jest.mock('../plugins/simple-slider/view/container/container');
+jest.mock('../plugins/simple-slider/view/thumb/thumb');
+jest.mock('../plugins/simple-slider/view/track/track');
 
 let wrapper: HTMLDivElement;
 let view: SimpleSliderView;
