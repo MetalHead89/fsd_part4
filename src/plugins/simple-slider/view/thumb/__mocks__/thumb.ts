@@ -10,5 +10,6 @@ export default jest.fn(() => {
     getSize: () => true,
     getPosition: () => true,
     resetZIndex: () => true,
+    moveTo: () => true,
   };
 });

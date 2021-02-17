@@ -40,6 +40,25 @@ describe('Assemble slider', () => {
   });
 });
 
+describe('Update method', () => {
+  test('Notify method of the SimpleSliderView class should be called once', () => {
+    const spy = spyOn(view, 'notify');
+    view.update('thumbIsDragged');
+    expect(spy).toBeCalledTimes(1);
+  });
+  test('The resetZIndex method of the thumbOne object should be called once', () => {
+    const spy = spyOn(view['thumbOne'], 'resetZIndex');
+    view.update('thumbIsCatched');
+    expect(spy).toBeCalledTimes(1);
+  });
+  test('The resetZIndex method of thumbTwo must be called twice', () => {
+    const spy = spyOn(view['thumbTwo'], 'resetZIndex');
+    view.update('thumbIsCatched');
+    view.update('thumbIsCatched');
+    expect(spy).toBeCalledTimes(2);
+  });
+});
+
 describe('Get thumb size', () => {
   test('Should be true', () => {
     expect(view.getThumbSize()).toBe(true);
@@ -61,21 +80,25 @@ describe('Get thumbs positions', () => {
   });
 });
 
-describe('Update method', () => {
-  test('Notify method of the SimpleSliderView class should be called once', () => {
-    const spy = spyOn(view, 'notify');
-    view.update('thumbIsDragged');
+describe('Update thumbs', () => {
+  test('The moveTo method of the thumbOne object should be called once', () => {
+    const spy = spyOn(view['thumbOne'], 'moveTo');
+    view.updateThumbs({
+      thumbOne: { left: 0, top: 0 },
+      thumbTwo: { left: 0, top: 0 },
+    });
     expect(spy).toBeCalledTimes(1);
   });
-  test('The resetZIndex method of the thumbOne object should be called once', () => {
-    const spy = spyOn(view['thumbOne'], 'resetZIndex');
-    view.update('thumbIsCatched');
-    expect(spy).toBeCalledTimes(1);
-  });
-  test('The resetZIndex method of thumbTwo must be called twice', () => {
-    const spy = spyOn(view['thumbTwo'], 'resetZIndex');
-    view.update('thumbIsCatched');
-    view.update('thumbIsCatched');
+  test('The moveTo method of thumbTwo must be called twice', () => {
+    const spy = spyOn(view['thumbTwo'], 'moveTo');
+    view.updateThumbs({
+      thumbOne: { left: 0, top: 0 },
+      thumbTwo: { left: 0, top: 0 },
+    });
+    view.updateThumbs({
+      thumbOne: { left: 0, top: 0 },
+      thumbTwo: { left: 0, top: 0 },
+    });
     expect(spy).toBeCalledTimes(2);
   });
 });
