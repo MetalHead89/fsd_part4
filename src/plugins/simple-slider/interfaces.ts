@@ -61,6 +61,12 @@ export interface IPopUps {
   popUpTwo: IPopUpParams;
 }
 
+export interface IScalePointParams {
+  position: number;
+  pointSize: ISize;
+  value: number;
+}
+
 export interface ISimpleSliderModel extends ISubject {
   fullStateUpdate(settings: ISliderSettings): void;
   getThumbsPos(): IThumbsPositions;
