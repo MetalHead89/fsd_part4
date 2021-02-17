@@ -130,7 +130,10 @@ describe('Update progress bar', () => {
 
 describe('Update pop ups', () => {
   test('The update method of the popUpOne object should be called once', () => {
-    const spy = spyOn(view['popUpOne'], 'update');
+    let spy;
+    if (view['popUpOne'] !== null) {
+      spy = spyOn(view['popUpOne'], 'update');
+    }
     view.updatePopUps({
       popUpOne: { value: 0, position: { left: 0, top: 0 } },
       popUpTwo: { value: 0, position: { left: 0, top: 0 } },
@@ -138,7 +141,10 @@ describe('Update pop ups', () => {
     expect(spy).toBeCalledTimes(1);
   });
   test('The update method of the popUpTwo object should be called twice', () => {
-    const spy = spyOn(view['popUpTwo'], 'update');
+    let spy;
+    if (view['popUpTwo'] !== null) {
+      spy = spyOn(view['popUpTwo'], 'update');
+    }
     view.updatePopUps({
       popUpOne: { value: 0, position: { left: 0, top: 0 } },
       popUpTwo: { value: 0, position: { left: 0, top: 0 } },
