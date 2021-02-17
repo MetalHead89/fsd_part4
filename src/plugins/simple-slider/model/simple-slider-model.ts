@@ -126,12 +126,29 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
       this.posByOrientation(positions.thumbTwo)
     );
 
-    if (thumbOneValue <= thumbTwoValue) {
+    if (this.isCorrectThumbsPos(thumbOneValue, thumbTwoValue)) {
       this.thumbOneValue = thumbOneValue;
       this.thumbTwoValue = thumbTwoValue;
     }
 
     this.notify('thumbsPosIsUpdated');
+  }
+
+  /**
+   * Проверка корректности значений ползунков
+   * @param {number} thumbOneValue - зачение первого бегунка
+   * @param {number} thumbTwoValue - значение второго бегунка
+   * @returns {boolean} - значение отображающее корректность начений бегунков
+   */
+  private isCorrectThumbsPos(
+    thumbOneValue: number,
+    thumbTwoValue: number
+  ): boolean {
+    return (
+      thumbOneValue <= thumbTwoValue &&
+      thumbOneValue >= this.min &&
+      thumbTwoValue <= this.max
+    );
   }
 
   /**
