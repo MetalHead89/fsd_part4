@@ -1,22 +1,9 @@
-import { ISize } from '../../interfaces';
+import Element from '../element/element';
 
-class Container {
-  private element: HTMLDivElement;
-
+class Container extends Element {
   constructor() {
-    this.element = document.createElement('div');
-    this.element.classList.add('slider', 'slider_horizontal');
-  }
-
-  getElement(): HTMLDivElement {
-    return this.element;
-  }
-
-  getSize(): ISize {
-    return {
-      width: this.element.offsetWidth,
-      height: this.element.offsetHeight,
-    };
+    super();
+    this.element.classList.add('slider');
   }
 
   append(control: HTMLDivElement): void {
