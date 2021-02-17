@@ -2,6 +2,8 @@
  * @jest-environment jsdom
  */
 
+/* eslint-disable dot-notation */
+
 import SimpleSliderView from '../plugins/simple-slider/view/simple-slider-view';
 
 jest.mock('../plugins/simple-slider/view/container/container');
