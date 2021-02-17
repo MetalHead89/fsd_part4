@@ -10,6 +10,7 @@ import {
   ISliderSettings,
   IProgressBarParams,
   IPopUps,
+  IScalePointParams,
 } from '../interfaces';
 import Subject from '../subject/subject';
 
@@ -277,6 +278,61 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     }
 
     return position.top;
+  }
+
+  getScaleParams(scalePointSize: ISize): IScalePointParams[] {
+    const scaleParams = [];
+    let scalePointPosition =
+      this.sizeByOrientation(this.thumbSize) / 2 -
+      this.sizeByOrientation(scalePointSize) / 2;
+    const stepsCount = this.getStepsCount();
+    const stepSize: number = this.getStepSize();
+
+    let prevScalePointPosition = 0;
+    const scalePointsCount = stepsCount + 1;
+
+    for (let i = 0; i <= Math.round(scalePointsCount - 1); i += 1) {
+      const pointValue = this.thumbPosToValue(
+        scalePointPosition -
+          this.sizeByOrientation(this.thumbSize) / 2 +
+          this.sizeByOrientation(scalePointSize) / 2
+      );
+
+      if (
+        i === 0 ||
+        this.isPointFits(
+          scalePointPosition,
+          prevScalePointPosition,
+          scalePointSize
+        )
+      ) {
+        scaleParams.push({
+          position: scalePointPosition,
+          pointSize: scalePointSize,
+          value: pointValue,
+        });
+
+        prevScalePointPosition = scalePointPosition;
+      }
+
+      scalePointPosition += stepSize;
+    }
+    return scaleParams;
+  }
+
+  /**
+   * Проверяет момещается ли точка на шкале без пересечения других точек, если нет, то она
+   * не добавляется на шкалу
+   */
+  private isPointFits(
+    scalePointPosition: number,
+    prevScalePointPosition: number,
+    scalePointSize: ISize
+  ): boolean {
+    return (
+      scalePointPosition - prevScalePointPosition - 2 >
+      this.sizeByOrientation(scalePointSize)
+    );
   }
 }
 
