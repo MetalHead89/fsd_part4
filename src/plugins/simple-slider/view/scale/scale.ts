@@ -1,13 +1,9 @@
-class Scale {
-  private element: HTMLDivElement;
+import Element from '../element/element';
 
+class Scale extends Element {
   constructor() {
-    this.element = document.createElement('div');
+    super();
     this.element.classList.add('slider__scale');
-  }
-
-  getElement(): HTMLDivElement {
-    return this.element;
   }
 }
 
