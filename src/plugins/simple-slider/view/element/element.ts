@@ -1,6 +1,6 @@
-import { ISize } from '../../interfaces';
+import { IElement, ISize } from '../../interfaces';
 
-export default class Element {
+export default class Element implements IElement {
   element: HTMLDivElement;
 
   constructor() {

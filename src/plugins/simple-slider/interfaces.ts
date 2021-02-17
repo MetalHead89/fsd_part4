@@ -17,6 +17,11 @@ export interface ISliderSettings {
   thumbSize: ISize;
 }
 
+export interface IElement {
+  getElement(): HTMLDivElement;
+  getSize(): ISize;
+}
+
 export interface IObserver {
   update(eventType: string): void;
 }

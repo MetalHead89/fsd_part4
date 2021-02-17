@@ -1,10 +1,10 @@
 /* eslint operator-linebreak: ["error", "after"] */
 /* eslint-disable comma-dangle */
 
-import { IPosition, ISize } from '../../interfaces';
+import { IElement, IPosition, ISize } from '../../interfaces';
 import Subject from '../../subject/subject';
 
-class Thumb extends Subject {
+class Thumb extends Subject implements IElement {
   private element: HTMLDivElement;
   private shift = { shiftX: 0, shiftY: 0 };
   private onMouseMoveHandler = this.drag.bind(this);
@@ -129,19 +129,19 @@ class Thumb extends Subject {
   private endDrag(): void {
     document.removeEventListener(
       'mousemove',
-      this.onMouseMoveHandler as EventListenerOrEventListenerObject,
+      this.onMouseMoveHandler as EventListenerOrEventListenerObject
     );
     document.removeEventListener(
       'mouseup',
-      this.onMouseUpHandler as EventListenerOrEventListenerObject,
+      this.onMouseUpHandler as EventListenerOrEventListenerObject
     );
     document.removeEventListener(
       'touchmove',
-      this.onMouseMoveHandler as EventListenerOrEventListenerObject,
+      this.onMouseMoveHandler as EventListenerOrEventListenerObject
     );
     document.removeEventListener(
       'touchend',
-      this.onMouseUpHandler as EventListenerOrEventListenerObject,
+      this.onMouseUpHandler as EventListenerOrEventListenerObject
     );
   }
 
