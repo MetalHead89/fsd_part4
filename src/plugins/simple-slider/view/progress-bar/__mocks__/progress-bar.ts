@@ -6,5 +6,6 @@ export default jest.fn(() => {
       div.classList.add('slider__progress-bar');
       return div;
     },
+    update: () => true,
   };
 });

@@ -89,7 +89,7 @@ describe('Update thumbs', () => {
     });
     expect(spy).toBeCalledTimes(1);
   });
-  test('The moveTo method of thumbTwo must be called twice', () => {
+  test('The moveTo method of thumbTwo should be called twice', () => {
     const spy = spyOn(view['thumbTwo'], 'moveTo');
     view.updateThumbs({
       thumbOne: { left: 0, top: 0 },
@@ -98,6 +98,29 @@ describe('Update thumbs', () => {
     view.updateThumbs({
       thumbOne: { left: 0, top: 0 },
       thumbTwo: { left: 0, top: 0 },
+    });
+    expect(spy).toBeCalledTimes(2);
+  });
+});
+
+describe('Update progress bar', () => {
+  test('The update method of the progressBar object should be called once', () => {
+    const spy = spyOn(view['progressBar'], 'update');
+    view.updateProgressBar({
+      position: { left: 0, top: 0 },
+      size: { width: 0, height: 0 },
+    });
+    expect(spy).toBeCalledTimes(1);
+  });
+  test('The update method of the progressBar object should be called twice', () => {
+    const spy = spyOn(view['progressBar'], 'update');
+    view.updateProgressBar({
+      position: { left: 0, top: 0 },
+      size: { width: 0, height: 0 },
+    });
+    view.updateProgressBar({
+      position: { left: 0, top: 0 },
+      size: { width: 0, height: 0 },
     });
     expect(spy).toBeCalledTimes(2);
   });
