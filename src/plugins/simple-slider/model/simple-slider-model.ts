@@ -184,12 +184,12 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     return this.thumbPosToValue(newPosition);
   }
 
-  private getStepCount(): number {
+  private getStepsCount(): number {
     return (this.max - this.min) / this.step;
   }
 
   private getStepSize(): number {
-    const stepsCount = this.getStepCount();
+    const stepsCount = this.getStepsCount();
     return (
       (this.sizeByOrientation(this.sliderSize) -
         this.sizeByOrientation(this.thumbSize)) /
