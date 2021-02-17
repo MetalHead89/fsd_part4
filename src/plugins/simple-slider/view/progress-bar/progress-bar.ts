@@ -1,18 +1,13 @@
 import { IProgressBarParams } from '../../interfaces';
+import Element from '../element/element';
 
-class ProgressBar {
-  private element: HTMLDivElement;
-
+class ProgressBar extends Element {
   constructor() {
-    this.element = document.createElement('div');
+    super();
     this.element.classList.add(
       'slider__progress-bar',
       'slider__progress-bar_horizontal',
     );
-  }
-
-  getElement(): HTMLDivElement {
-    return this.element;
   }
 
   update(params: IProgressBarParams): void {
