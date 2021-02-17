@@ -1,15 +1,10 @@
 import { IPopUpParams, IPosition } from '../../interfaces';
+import Element from '../element/element';
 
-class PopUp {
-  private element: HTMLDivElement;
-
+class PopUp extends Element {
   constructor() {
-    this.element = document.createElement('div');
+    super();
     this.element.classList.add('slider__pop-up', 'slider__pop-up_horizontal');
-  }
-
-  getElement(): HTMLDivElement {
-    return this.element;
   }
 
   update(params: IPopUpParams): void {
