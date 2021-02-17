@@ -6,5 +6,6 @@ export default jest.fn(() => {
       div.classList.add('slider__pop-up');
       return div;
     },
+    update: () => true,
   };
 });
