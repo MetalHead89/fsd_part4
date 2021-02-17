@@ -178,14 +178,23 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
    * @returns {number} - значение бегунка в соответствии с заданным шагом
    */
   private valueWithStep(position: number): number {
-    const stepsCount = (this.max - this.min) / this.step;
-    const stepSize =
-      (this.sizeByOrientation(this.sliderSize) -
-        this.sizeByOrientation(this.thumbSize)) /
-      stepsCount;
+    const stepSize = this.getStepSize();
     const newPosition = Math.round(position / stepSize) * stepSize;
 
     return this.thumbPosToValue(newPosition);
+  }
+
+  private getStepCount(): number {
+    return (this.max - this.min) / this.step;
+  }
+
+  private getStepSize(): number {
+    const stepsCount = this.getStepCount();
+    return (
+      (this.sizeByOrientation(this.sliderSize) -
+        this.sizeByOrientation(this.thumbSize)) /
+      stepsCount
+    );
   }
 
   /**
