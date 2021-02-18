@@ -4,6 +4,7 @@ import {
   IObserver,
   IPopUps,
   IProgressBarParams,
+  IScalePointParams,
   ISimpleSliderView,
   ISize,
   IThumbsPositions,
@@ -144,6 +145,14 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
 
     this.popUpOne.update(params.popUpOne);
     this.popUpTwo.update(params.popUpTwo);
+  }
+
+  getScalePointSize(value: number): ISize {
+    return this.scale.getPointSize(value);
+  }
+
+  addScalePoints(points: IScalePointParams[]): void {
+    this.scale.addPoints(points);
   }
 }
 

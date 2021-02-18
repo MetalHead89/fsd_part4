@@ -68,11 +68,13 @@ export interface IScalePointParams {
 }
 
 export interface ISimpleSliderModel extends ISubject {
+  getMax(): number;
   fullStateUpdate(settings: ISliderSettings): void;
   getThumbsPos(): IThumbsPositions;
   updateThumbsState(positions: IThumbsPositions): void;
   getProgressBarParams(): IProgressBarParams;
   getPopUpsParams(): IPopUps;
+  getScalePoints(scalePointSize: ISize): IScalePointParams[];
 }
 
 export interface ISimpleSliderView extends ISubject {
@@ -82,6 +84,8 @@ export interface ISimpleSliderView extends ISubject {
   updateThumbs(thumbsPositions: IThumbsPositions): void;
   updateProgressBar(params: IProgressBarParams): void;
   updatePopUps(params: IPopUps): void;
+  getScalePointSize(value: number): ISize;
+  addScalePoints(points: IScalePointParams[]): void;
 }
 
 export interface IControllerParams {

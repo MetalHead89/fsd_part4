@@ -17,6 +17,7 @@ class SimpleSliderController implements IObserver {
     this.simpleSliderView = params.view;
     this.simpleSliderModel.register('thumbsPosIsUpdated', this);
     this.simpleSliderView.register('thumbIsDragged', this);
+    this.simpleSliderModel.register('scaleOn', this);
 
     this.init(params.settings);
   }
@@ -42,18 +43,26 @@ class SimpleSliderController implements IObserver {
   update(eventType: string): void {
     if (eventType === 'thumbIsDragged') {
       this.simpleSliderModel.updateThumbsState(
-        this.simpleSliderView.getThumbsPos()
+        this.simpleSliderView.getThumbsPos(),
       );
     }
 
     if (eventType === 'thumbsPosIsUpdated') {
       this.simpleSliderView.updateThumbs(this.simpleSliderModel.getThumbsPos());
       this.simpleSliderView.updatePopUps(
-        this.simpleSliderModel.getPopUpsParams()
+        this.simpleSliderModel.getPopUpsParams(),
       );
       this.simpleSliderView.updateProgressBar(
-        this.simpleSliderModel.getProgressBarParams()
+        this.simpleSliderModel.getProgressBarParams(),
       );
+    }
+
+    if (eventType === 'scaleOn') {
+      const max = this.simpleSliderModel.getMax();
+      const points = this.simpleSliderModel.getScalePoints(
+        this.simpleSliderView.getScalePointSize(max),
+      );
+      this.simpleSliderView.addScalePoints(points);
     }
   }
 }

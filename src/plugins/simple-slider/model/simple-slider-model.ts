@@ -45,6 +45,14 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     const thumbOnePos = this.thumbValueToPos(settings.thumbOneValue);
     const thumbTwoPos = this.thumbValueToPos(settings.thumbTwoValue);
     this.updateThumbsState({ thumbOne: thumbOnePos, thumbTwo: thumbTwoPos });
+
+    if (this.scale) {
+      this.notify('scaleOn');
+    }
+  }
+
+  getMax(): number {
+    return this.max;
   }
 
   /**
