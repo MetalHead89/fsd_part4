@@ -316,7 +316,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
       if (i === 0 || this.isPointFits(position, prevPointPos, scalePointSize)) {
         scaleParams.push({
           position: pointPos,
-          pointSize: scalePointSize,
+          size: scalePointSize,
           value: pointValue,
         });
 
