@@ -10,13 +10,14 @@ class Scale extends Element {
   getPointSize(value: number): ISize {
     this.addPoint({
       position: { left: 0, top: 0 },
+      paddings: { left: 0, top: 0 },
       size: { width: 0, height: 0 },
       value,
     });
 
     const pointSize = { width: 0, height: 0 };
     const scalePoint: HTMLDivElement | null = this.element.querySelector(
-      '.slider__scale-point',
+      '.slider__scale-point'
     );
     if (scalePoint !== null) {
       pointSize.width = scalePoint.offsetWidth;
@@ -38,7 +39,7 @@ class Scale extends Element {
     const scalePoint: HTMLElement = document.createElement('div');
     scalePoint.classList.add(
       'slider__scale-point',
-      `slider__scale-point_${orienation}`,
+      `slider__scale-point_${orienation}`
     );
     if (point.size.width > 0) {
       scalePoint.style.width = `${point.size.width}px`;
@@ -50,12 +51,14 @@ class Scale extends Element {
     const divisionLabel: HTMLElement = document.createElement('div');
     divisionLabel.classList.add(
       'slider__scale-point-label',
-      `slider__scale-point-label_${orienation}`,
+      `slider__scale-point-label_${orienation}`
     );
     divisionLabel.innerText = point.value.toString();
 
     scalePoint.style.left = `${point.position.left}px`;
     scalePoint.style.top = `${point.position.top}px`;
+    scalePoint.style.paddingLeft = `${point.paddings.left}px`;
+    scalePoint.style.paddingTop = `${point.paddings.top}px`;
 
     scalePoint.append(divisionMarker);
     scalePoint.append(divisionLabel);
