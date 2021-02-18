@@ -288,7 +288,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     return position.top;
   }
 
-  getScaleParams(scalePointSize: ISize): IScalePointParams[] {
+  getScalePoints(scalePointSize: ISize): IScalePointParams[] {
     const scaleParams = [];
     const stepsCount = this.getStepsCount();
     const stepSize: number = this.getStepSize();
