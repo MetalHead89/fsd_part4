@@ -8,33 +8,21 @@ class Scale extends Element {
   }
 
   getPointSize(value: number): ISize {
-    const orienation = this.getOrientation();
-    const scalePoint: HTMLElement = document.createElement('div');
-    scalePoint.classList.add(
-      'slider__scale-point',
-      `slider__scale-point_${orienation}`,
+    this.addScalePoint({
+      position: { left: 0, top: 0 },
+      pointSize: { width: 0, height: 0 },
+      value,
+    });
+
+    const pointSize = { width: 0, height: 0 };
+    const scalePoint: HTMLDivElement | null = this.element.querySelector(
+      '.slider__scale-point',
     );
-
-    const divisionMarker: HTMLElement = document.createElement('div');
-    divisionMarker.classList.add('slider__scale-point-marker');
-
-    const divisionLabel: HTMLElement = document.createElement('div');
-    divisionLabel.classList.add(
-      'slider__scale-point-label',
-      `slider__scale-point-label_${orienation}`,
-    );
-    divisionLabel.innerText = value.toString();
-
-    scalePoint.append(divisionMarker);
-    scalePoint.append(divisionLabel);
-    this.element.append(scalePoint);
-
-    const pointSize = {
-      width: scalePoint.offsetWidth,
-      height: scalePoint.offsetHeight,
-    };
-
-    scalePoint.remove();
+    if (scalePoint !== null) {
+      pointSize.width = scalePoint.offsetWidth;
+      pointSize.height = scalePoint.offsetHeight;
+      scalePoint.remove();
+    }
 
     return pointSize;
   }
