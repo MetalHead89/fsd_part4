@@ -62,7 +62,7 @@ export interface IPopUps {
 }
 
 export interface IScalePointParams {
-  position: number;
+  position: IPosition;
   pointSize: ISize;
   value: number;
 }
