@@ -290,40 +290,40 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
 
   getScaleParams(scalePointSize: ISize): IScalePointParams[] {
     const scaleParams = [];
-    let scalePointPosition =
-      this.sizeByOrientation(this.thumbSize) / 2 -
-      this.sizeByOrientation(scalePointSize) / 2;
     const stepsCount = this.getStepsCount();
     const stepSize: number = this.getStepSize();
+    const pointPos = { left: 0, top: 0 };
+    let prevPointPos = 0;
 
-    let prevScalePointPosition = 0;
+    let position =
+      this.sizeByOrientation(this.thumbSize) / 2 -
+      this.sizeByOrientation(scalePointSize) / 2;
+    if (this.orientation === 'horizontal') {
+      pointPos.left = position;
+    } else {
+      pointPos.top = position;
+    }
+
     const scalePointsCount = stepsCount + 1;
 
     for (let i = 0; i <= Math.round(scalePointsCount - 1); i += 1) {
       const pointValue = this.thumbPosToValue(
-        scalePointPosition -
+        position -
           this.sizeByOrientation(this.thumbSize) / 2 +
           this.sizeByOrientation(scalePointSize) / 2,
       );
 
-      if (
-        i === 0 ||
-        this.isPointFits(
-          scalePointPosition,
-          prevScalePointPosition,
-          scalePointSize,
-        )
-      ) {
+      if (i === 0 || this.isPointFits(position, prevPointPos, scalePointSize)) {
         scaleParams.push({
-          position: scalePointPosition,
+          position: pointPos,
           pointSize: scalePointSize,
           value: pointValue,
         });
 
-        prevScalePointPosition = scalePointPosition;
+        prevPointPos = position;
       }
 
-      scalePointPosition += stepSize;
+      position += stepSize;
     }
     return scaleParams;
   }
@@ -333,14 +333,11 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
    * не добавляется на шкалу
    */
   private isPointFits(
-    scalePointPosition: number,
-    prevScalePointPosition: number,
+    pointPos: number,
+    prevpointPos: number,
     scalePointSize: ISize,
   ): boolean {
-    return (
-      scalePointPosition - prevScalePointPosition - 2 >
-      this.sizeByOrientation(scalePointSize)
-    );
+    return pointPos - prevpointPos - 2 > this.sizeByOrientation(scalePointSize);
   }
 }
 
