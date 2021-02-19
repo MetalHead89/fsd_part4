@@ -1,6 +1,6 @@
 import '@/plugins/simple-slider/simple-slider.ts';
+import '@/plugins/control-panel/control-panel.ts';
 import '@/demo/demo.ts';
-// import '@/plugins/sliderPanelPlugin/sliderControlPanel.ts';
 
 import '@/demo/scss/style.scss';
 import '@/demo/scss/normalize.scss';

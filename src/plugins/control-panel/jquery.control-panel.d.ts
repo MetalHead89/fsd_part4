@@ -1,3 +1,3 @@
 interface JQuery {
-  controlPanel(): JQuery;
+  controlPanel(action?: string | IPluginSettings, args?): JQuery;
 }
