@@ -1,0 +1,33 @@
+.control-panel {
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  background-image: linear-gradient(white, white),
+    linear-gradient(
+      90deg,
+      rgba(132, 231, 247, 0.9) 0%,
+      rgba(244, 56, 236, 0.9) 100%
+    );
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  -webkit-background-clip: padding-box, border-box;
+  border-radius: 5px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Chrome/Safari/Opera */
+  -khtml-user-select: none; /* Konqueror */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+}
+
+.control-panel_horizontal {
+  margin-top: 30px;
+}
+
+.control-panel_vertical {
+  margin-left: 30px;
+}
