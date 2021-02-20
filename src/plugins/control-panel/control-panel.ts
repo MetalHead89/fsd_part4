@@ -7,12 +7,11 @@ import ControlPanelView from './view/control-panel-view';
   const methods: any = {
     init(): void {
       return this.each(function jj(this: HTMLDivElement) {
-        const view = new ControlPanelView();
+        const view = new ControlPanelView(this);
       });
     },
   };
 
-  // eslint-disable-next-line no-param-reassign
   $.fn.controlPanel = function hh(action?: string, args?): JQuery<HTMLElement> {
     let method: any;
 
