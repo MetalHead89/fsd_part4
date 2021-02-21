@@ -1,6 +1,7 @@
 import Container from './container/container';
 import TextField from './text-field/text-field';
 import groupElements from './group-elements';
+import RadioButton from './radio-button/radio-button';
 
 export default class ControlPanelView {
   private sliderWrapper: HTMLDivElement;
@@ -9,6 +10,7 @@ export default class ControlPanelView {
   private min: TextField;
   private max: TextField;
   private step: TextField;
+  private typeRadio: RadioButton;
 
   constructor(sliderWrapper: HTMLDivElement) {
     this.sliderWrapper = sliderWrapper;
@@ -17,6 +19,11 @@ export default class ControlPanelView {
     this.min = new TextField('min value');
     this.max = new TextField('max value');
     this.step = new TextField('step');
+    this.typeRadio = new RadioButton(
+      'type',
+      { label: 'single', value: 'single' },
+      { label: 'range', value: 'range' }
+    );
 
     this.createPanel();
   }
@@ -40,6 +47,8 @@ export default class ControlPanelView {
         this.step.getControl()
       )
     );
+
+    container.append(groupElements('', this.typeRadio.getControl()));
 
     this.sliderWrapper.append(container.getElement());
   }
