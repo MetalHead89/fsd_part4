@@ -13,9 +13,9 @@ export default class TextField {
     this.label = document.createElement('label');
     this.label.classList.add('slider-panel__text-field-label');
     this.label.innerText = labelText;
+    this.label.append(this.field);
 
     this.control.append(this.label);
-    this.control.append(this.field);
   }
 
   getControl(): HTMLDivElement {
