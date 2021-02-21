@@ -1,14 +1,28 @@
-export default class InputText {
-  private element: HTMLDivElement;
-  private label: string;
+export default class TextField {
+  private control: HTMLDivElement;
+  private field: HTMLInputElement;
+  private label: HTMLLabelElement;
 
-  constructor(label: string) {
-    this.element = document.createElement('div');
-    this.element.classList.add('control-panel__text-field');
-    this.label = label;
+  constructor(labelText: string) {
+    this.control = document.createElement('div');
+    this.control.classList.add('slider-panel__text-field-control');
+
+    this.field = document.createElement('input');
+    this.field.classList.add('control-panel__text-field');
+
+    this.label = document.createElement('label');
+    this.label.classList.add('slider-panel__text-field-label');
+    this.label.innerText = labelText;
+
+    this.control.append(this.label);
+    this.control.append(this.field);
+  }
+
+  getControl(): HTMLDivElement {
+    return this.control;
   }
 
   getValue(): string {
-    return this.element.innerText;
+    return this.field.innerText;
   }
 }
