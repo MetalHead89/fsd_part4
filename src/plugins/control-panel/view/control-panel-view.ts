@@ -11,6 +11,7 @@ export default class ControlPanelView {
   private max: TextField;
   private step: TextField;
   private typeRadio: RadioButton;
+  private orientationRadio: RadioButton;
 
   constructor(sliderWrapper: HTMLDivElement) {
     this.sliderWrapper = sliderWrapper;
@@ -23,6 +24,11 @@ export default class ControlPanelView {
       'type',
       { label: 'single', value: 'single' },
       { label: 'range', value: 'range' }
+    );
+    this.orientationRadio = new RadioButton(
+      'orientation',
+      { label: 'horizontal', value: 'horizontal' },
+      { label: 'vertical', value: 'vertical' }
     );
 
     this.createPanel();
@@ -49,6 +55,8 @@ export default class ControlPanelView {
     );
 
     container.append(groupElements('', this.typeRadio.getControl()));
+
+    container.append(groupElements('', this.orientationRadio.getControl()));
 
     this.sliderWrapper.append(container.getElement());
   }
