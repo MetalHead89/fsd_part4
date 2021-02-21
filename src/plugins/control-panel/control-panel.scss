@@ -2,9 +2,18 @@
 @import './view/text-field/text-field.scss';
 @import './view/radio-button//radio-button.scss';
 
-.slider-panel__text-fields-group {
+.control-panel__text-fields-group {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   padding: 5px 0;
+}
+
+.control-panel__radio-group-header {
+  display: block;
+  font-family: 'Roboto';
+  color: rgb(87, 87, 87);
+  font-size: 1rem;
+  text-transform: uppercase;
+  margin: 10px 0 2px;
 }
