@@ -1,2 +1,9 @@
 @import './view/container/container.scss';
 @import './view/text-field/text-field.scss';
+
+.slider-panel__text-fields-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 5px 0;
+}
