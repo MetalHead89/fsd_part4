@@ -2,6 +2,7 @@ import Container from './container/container';
 import TextField from './text-field/text-field';
 import groupElements from './group-elements';
 import RadioButton from './radio-button/radio-button';
+import Checkbox from './checkbox/checkbox';
 
 export default class ControlPanelView {
   private sliderWrapper: HTMLDivElement;
@@ -12,6 +13,7 @@ export default class ControlPanelView {
   private step: TextField;
   private typeRadio: RadioButton;
   private orientationRadio: RadioButton;
+  private scaleCheckbox: Checkbox;
 
   constructor(sliderWrapper: HTMLDivElement) {
     this.sliderWrapper = sliderWrapper;
@@ -30,6 +32,11 @@ export default class ControlPanelView {
       { label: 'horizontal', value: 'horizontal' },
       { label: 'vertical', value: 'vertical' }
     );
+    this.scaleCheckbox = new Checkbox({
+      label: 'scale',
+      name: 'scale',
+      value: 'scale',
+    });
 
     this.createPanel();
   }
@@ -71,6 +78,14 @@ export default class ControlPanelView {
         header: 'orientation',
         wrapperClass: '',
         elements: [this.orientationRadio.getControl()],
+      })
+    );
+
+    container.append(
+      groupElements({
+        header: 'on/off elements',
+        wrapperClass: '',
+        elements: [this.scaleCheckbox.getControl()],
       })
     );
 
