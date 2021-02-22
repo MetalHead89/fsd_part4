@@ -1,3 +1,5 @@
+/* eslint-disable comma-dangle */
+
 import Container from './container/container';
 import TextField from './text-field/text-field';
 import groupElements from './group-elements';
