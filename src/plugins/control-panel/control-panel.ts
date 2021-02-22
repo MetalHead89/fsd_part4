@@ -3,7 +3,7 @@
 
 import ControlPanelView from './view/control-panel-view';
 import ControlPanelModel from './model/control-panel-model';
-import ControlPanelController from './controller/controller';
+import ControlPanelController from './controller/control-panel-controller';
 
 (($) => {
   const methods: any = {
