@@ -142,7 +142,15 @@ export default class ControlPanelView {
     this.thumbTwoValue.setValue(thumbsValues.thumbTwo);
   }
 
+  setMinValue(value: number): void {
+    this.min.setValue(value);
+  }
+
   setMaxValue(value: number): void {
     this.max.setValue(value);
+  }
+
+  setStep(value: number): void {
+    this.step.setValue(value);
   }
 }

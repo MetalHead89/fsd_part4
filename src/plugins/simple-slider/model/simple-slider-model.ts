@@ -52,8 +52,16 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     }
   }
 
+  getMin(): number {
+    return this.min;
+  }
+
   getMax(): number {
     return this.max;
+  }
+
+  getStep(): number {
+    return this.step;
   }
 
   /**

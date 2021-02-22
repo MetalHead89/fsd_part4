@@ -14,6 +14,8 @@ export default class ControlPanelController {
 
   init(): void {
     this.view.setThumbsValues(this.model.getThumbsValues());
+    this.view.setMinValue(this.model.getMin());
     this.view.setMaxValue(this.model.getMax());
+    this.view.setStep(this.model.getStep());
   }
 }

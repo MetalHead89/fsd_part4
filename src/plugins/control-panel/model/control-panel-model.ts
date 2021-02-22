@@ -11,7 +11,15 @@ export default class ControlPanelModel {
     return this.slider.simpleSlider('getThumbsValues');
   }
 
+  getMin(): number {
+    return this.slider.simpleSlider('getMin');
+  }
+
   getMax(): number {
     return this.slider.simpleSlider('getMax');
+  }
+
+  getStep(): number {
+    return this.slider.simpleSlider('getStep');
   }
 }

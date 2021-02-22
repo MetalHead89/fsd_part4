@@ -47,8 +47,14 @@ import { data } from 'jquery';
     getThumbsValues(): IThumbsValues {
       return $(this).data().model.getThumbsValues();
     },
+    getMin(): number {
+      return $(this).data().model.getMin();
+    },
     getMax(): number {
       return $(this).data().model.getMax();
+    },
+    getStep(): number {
+      return $(this).data().model.getStep();
     },
   };
 
