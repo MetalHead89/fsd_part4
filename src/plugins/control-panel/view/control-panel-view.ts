@@ -73,32 +73,65 @@ export default class ControlPanelView {
       })
     );
 
-    container.append(
-      groupElements({
-        header: 'type',
-        wrapperClass: '',
-        elements: [this.typeRadio.getControl()],
-      })
-    );
+    const typeRadioGroup = groupElements({
+      header: 'type',
+      wrapperClass: '',
+      elements: [this.typeRadio.getControl()],
+    });
+
+    const orientationRadioGroup = groupElements({
+      header: 'orientation',
+      wrapperClass: '',
+      elements: [this.orientationRadio.getControl()],
+    });
+
+    const allRadiosGroup = groupElements({
+      wrapperClass: '',
+      elements: [typeRadioGroup, orientationRadioGroup],
+    });
+
+    const checkboxesGroup = groupElements({
+      header: 'on/off elements',
+      wrapperClass: '',
+      elements: [
+        this.scaleCheckbox.getControl(),
+        this.popUpsCheckbox.getControl(),
+      ],
+    });
 
     container.append(
       groupElements({
-        header: 'orientation',
-        wrapperClass: '',
-        elements: [this.orientationRadio.getControl()],
+        wrapperClass: 'control-panel__checkboxes-and-radios-wrapper',
+        elements: [allRadiosGroup, checkboxesGroup],
       })
     );
 
-    container.append(
-      groupElements({
-        header: 'on/off elements',
-        wrapperClass: '',
-        elements: [
-          this.scaleCheckbox.getControl(),
-          this.popUpsCheckbox.getControl(),
-        ],
-      })
-    );
+    // container.append(
+    //   groupElements({
+    //     header: 'type',
+    //     wrapperClass: '',
+    //     elements: [this.typeRadio.getControl()],
+    //   })
+    // );
+
+    // container.append(
+    //   groupElements({
+    //     header: 'orientation',
+    //     wrapperClass: '',
+    //     elements: [this.orientationRadio.getControl()],
+    //   })
+    // );
+
+    // container.append(
+    //   groupElements({
+    //     header: 'on/off elements',
+    //     wrapperClass: '',
+    //     elements: [
+    //       this.scaleCheckbox.getControl(),
+    //       this.popUpsCheckbox.getControl(),
+    //     ],
+    //   })
+    // );
 
     this.sliderWrapper.append(container.getElement());
   }

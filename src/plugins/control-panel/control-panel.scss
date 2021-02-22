@@ -18,3 +18,11 @@
   text-transform: uppercase;
   margin: 10px 0 2px;
 }
+
+.control-panel__checkboxes-and-radios-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
