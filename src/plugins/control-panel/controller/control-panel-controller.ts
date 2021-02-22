@@ -19,5 +19,7 @@ export default class ControlPanelController {
     this.view.setStep(this.model.getStep());
     this.view.setScaleState(this.model.getScaleState());
     this.view.setPopUpsState(this.model.getPopUpsState());
+    this.view.setTypeRadio(this.model.getType());
+    this.view.setOrientationRadio(this.model.getOrientation());
   }
 }

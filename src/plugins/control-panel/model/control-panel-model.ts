@@ -30,4 +30,12 @@ export default class ControlPanelModel {
   getPopUpsState(): boolean {
     return this.slider.simpleSlider('getPopUpsState');
   }
+
+  getType(): string {
+    return this.slider.simpleSlider('getType');
+  }
+
+  getOrientation(): string {
+    return this.slider.simpleSlider('getOrientation');
+  }
 }

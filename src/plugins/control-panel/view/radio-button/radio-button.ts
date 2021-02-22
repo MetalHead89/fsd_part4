@@ -50,4 +50,14 @@ export default class RadioButton {
       }
     }
   }
+
+  switchTo(value: string): void {
+    for (let radio = 0; radio < this.radios.length; radio += 1) {
+      if (this.radios[radio].value === value) {
+        this.radios[radio].checked = true;
+        this.onChange();
+        break;
+      }
+    }
+  }
 }

@@ -161,4 +161,12 @@ export default class ControlPanelView {
   setPopUpsState(state: boolean): void {
     this.popUpsCheckbox.setState(state);
   }
+
+  setTypeRadio(value: string): void {
+    this.typeRadio.switchTo(value);
+  }
+
+  setOrientationRadio(value: string): void {
+    this.orientationRadio.switchTo(value);
+  }
 }

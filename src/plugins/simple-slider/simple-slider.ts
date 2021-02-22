@@ -61,7 +61,13 @@ import { data } from 'jquery';
     },
     getPopUpsState(): boolean {
       return $(this).data().model.getPopUpsState();
-    }
+    },
+    getType(): string {
+      return $(this).data().model.getType();
+    },
+    getOrientation(): string {
+      return $(this).data().model.getOrientation();
+    },
   };
 
   // eslint-disable-next-line no-param-reassign
