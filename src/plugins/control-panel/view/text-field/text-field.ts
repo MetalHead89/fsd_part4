@@ -23,6 +23,10 @@ export default class TextField {
   }
 
   getValue(): string {
-    return this.field.innerText;
+    return this.field.value;
+  }
+
+  setValue(value: number): void {
+    this.field.value = `${value}`;
   }
 }

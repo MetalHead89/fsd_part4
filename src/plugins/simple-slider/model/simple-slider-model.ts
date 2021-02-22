@@ -11,6 +11,7 @@ import {
   IProgressBarParams,
   IPopUps,
   IScalePointParams,
+  IThumbsValues,
 } from '../interfaces';
 import Subject from '../subject/subject';
 
@@ -121,6 +122,10 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
         ),
       },
     };
+  }
+
+  getThumbsValues(): IThumbsValues {
+    return { thumbOne: this.thumbOneValue, thumbTwo: this.thumbTwoValue };
   }
 
   /**

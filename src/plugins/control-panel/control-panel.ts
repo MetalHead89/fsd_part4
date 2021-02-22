@@ -2,17 +2,21 @@
 /* eslint-disable no-param-reassign */
 
 import ControlPanelView from './view/control-panel-view';
+import ControlPanelModel from './model/control-panel-model';
+import ControlPanelController from './controller/controller';
 
 (($) => {
   const methods: any = {
     init(): void {
-      return this.each(function jj(this: HTMLDivElement) {
+      return this.each(function (this: HTMLDivElement) {
         const view = new ControlPanelView(this);
+        const model = new ControlPanelModel($(this));
+        const controller = new ControlPanelController(view, model);
       });
     },
   };
 
-  $.fn.controlPanel = function hh(action?: string, args?): JQuery<HTMLElement> {
+  $.fn.controlPanel = function (action?: string, args?): JQuery<HTMLElement> {
     let method: any;
 
     if (typeof action === 'string' && methods[action]) {

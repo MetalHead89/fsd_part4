@@ -1,10 +1,11 @@
 /* eslint-disable comma-dangle */
 
-import { ISliderSettings } from './interfaces';
+import { ISliderSettings, IThumbsValues } from './interfaces';
 
 import SimpleSliderModel from './model/simple-slider-model';
 import SimpleSliderController from './controller/simple-slider-controller';
 import SimpleSliderView from './view/simple-slider-view';
+import { data } from 'jquery';
 
 (($) => {
   // Настройки плагина по умолчанию
@@ -40,15 +41,19 @@ import SimpleSliderView from './view/simple-slider-view';
 
         $(this).data('settings', settings);
         $(this).data('controller', controller);
+        $(this).data('model', model);
       });
+    },
+    getThumbsValues(): IThumbsValues {
+      return $(this).data().model.getThumbsValues();
     },
   };
 
   // eslint-disable-next-line no-param-reassign
   $.fn.simpleSlider = function plug(
     action?: string | ISliderSettings,
-    args?,
-  ): JQuery<HTMLElement> {
+    args?
+  ): any {
     let method: any;
 
     if (typeof action === 'string' && methods[action]) {

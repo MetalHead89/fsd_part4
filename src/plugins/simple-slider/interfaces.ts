@@ -30,6 +30,11 @@ export interface IObserversList {
   [index: string]: IObserver[];
 }
 
+export interface IThumbsValues {
+  thumbOne: number;
+  thumbTwo: number;
+}
+
 export interface ISubject {
   register(eventType: string, observer: IObserver): void;
   remove(eventType: string, observer: IObserver): void;

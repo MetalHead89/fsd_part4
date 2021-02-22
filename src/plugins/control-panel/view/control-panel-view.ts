@@ -5,6 +5,7 @@ import TextField from './text-field/text-field';
 import groupElements from './group-elements';
 import RadioButton from './radio-button/radio-button';
 import Checkbox from './checkbox/checkbox';
+import { IThumbsValues } from '../../simple-slider/interfaces';
 
 export default class ControlPanelView {
   private sliderWrapper: HTMLDivElement;
@@ -134,5 +135,10 @@ export default class ControlPanelView {
     // );
 
     this.sliderWrapper.append(container.getElement());
+  }
+
+  setThumbsValues(thumbsValues: IThumbsValues): void {
+    this.thumbOneValue.setValue(thumbsValues.thumbOne);
+    this.thumbTwoValue.setValue(thumbsValues.thumbTwo);
   }
 }
