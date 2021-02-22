@@ -14,7 +14,7 @@ export default class Checkbox {
   }
 
   private init(params: ICheckboxParams): void {
-    this.control.classList.add('control-panel__checkbox');
+    this.control.classList.add('control-panel__checkbox-wrapper');
 
     this.label.classList.add('control-panel__checkbox-label');
     this.label.innerText = params.label;
@@ -35,9 +35,9 @@ export default class Checkbox {
 
   private onChange(): void {
     if (this.checkbox.checked) {
-      this.label.classList.add('control-panel__checkbox-label_checkd');
+      this.label.classList.add('control-panel__checkbox-label_checked');
     } else {
-      this.label.classList.remove('control-panel__checkbox-label_checkd');
+      this.label.classList.remove('control-panel__checkbox-label_checked');
     }
   }
 }
