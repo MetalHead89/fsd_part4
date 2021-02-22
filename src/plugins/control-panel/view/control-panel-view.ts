@@ -14,6 +14,7 @@ export default class ControlPanelView {
   private typeRadio: RadioButton;
   private orientationRadio: RadioButton;
   private scaleCheckbox: Checkbox;
+  private popUpsCheckbox: Checkbox;
 
   constructor(sliderWrapper: HTMLDivElement) {
     this.sliderWrapper = sliderWrapper;
@@ -36,6 +37,11 @@ export default class ControlPanelView {
       label: 'scale',
       name: 'scale',
       value: 'scale',
+    });
+    this.popUpsCheckbox = new Checkbox({
+      label: 'pop ups',
+      name: 'popUps',
+      value: 'popUps',
     });
 
     this.createPanel();
@@ -85,7 +91,10 @@ export default class ControlPanelView {
       groupElements({
         header: 'on/off elements',
         wrapperClass: '',
-        elements: [this.scaleCheckbox.getControl()],
+        elements: [
+          this.scaleCheckbox.getControl(),
+          this.popUpsCheckbox.getControl(),
+        ],
       })
     );
 
