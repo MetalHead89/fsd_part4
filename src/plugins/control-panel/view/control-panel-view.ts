@@ -141,4 +141,8 @@ export default class ControlPanelView {
     this.thumbOneValue.setValue(thumbsValues.thumbOne);
     this.thumbTwoValue.setValue(thumbsValues.thumbTwo);
   }
+
+  setMaxValue(value: number): void {
+    this.max.setValue(value);
+  }
 }

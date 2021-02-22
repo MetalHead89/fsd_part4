@@ -10,4 +10,8 @@ export default class ControlPanelModel {
   getThumbsValues(): IThumbsValues {
     return this.slider.simpleSlider('getThumbsValues');
   }
+
+  getMax(): number {
+    return this.slider.simpleSlider('getMax');
+  }
 }

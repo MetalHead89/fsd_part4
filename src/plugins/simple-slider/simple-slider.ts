@@ -47,6 +47,9 @@ import { data } from 'jquery';
     getThumbsValues(): IThumbsValues {
       return $(this).data().model.getThumbsValues();
     },
+    getMax(): number {
+      return $(this).data().model.getMax();
+    },
   };
 
   // eslint-disable-next-line no-param-reassign
