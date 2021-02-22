@@ -3,6 +3,12 @@ export interface IRadioParams {
   value: string;
 }
 
+export interface ICheckboxParams {
+  label: string;
+  name: string;
+  value: string;
+}
+
 export interface IGroupElements {
   header?: string;
   wrapperClass: string;
