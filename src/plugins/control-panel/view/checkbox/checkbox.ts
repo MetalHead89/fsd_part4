@@ -26,8 +26,7 @@ export default class Checkbox {
     this.checkbox.addEventListener('change', this.onChange.bind(this));
 
     this.label.append(this.checkbox);
-    this.checkbox.append(this.label);
-    this.control.append(this.checkbox);
+    this.control.append(this.label);
   }
 
   getControl(): HTMLDivElement {
