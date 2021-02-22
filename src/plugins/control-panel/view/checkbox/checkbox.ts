@@ -40,4 +40,9 @@ export default class Checkbox {
       this.label.classList.remove('control-panel__checkbox-label_checked');
     }
   }
+
+  setState(state: boolean): void {
+    this.checkbox.checked = state;
+    this.onChange();
+  }
 }

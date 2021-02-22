@@ -153,4 +153,12 @@ export default class ControlPanelView {
   setStep(value: number): void {
     this.step.setValue(value);
   }
+
+  setScaleState(state: boolean): void {
+    this.scaleCheckbox.setState(state);
+  }
+
+  setPopUpsState(state: boolean): void {
+    this.popUpsCheckbox.setState(state);
+  }
 }

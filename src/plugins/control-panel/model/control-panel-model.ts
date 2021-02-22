@@ -22,4 +22,12 @@ export default class ControlPanelModel {
   getStep(): number {
     return this.slider.simpleSlider('getStep');
   }
+
+  getScaleState(): boolean {
+    return this.slider.simpleSlider('getScaleState');
+  }
+
+  getPopUpsState(): boolean {
+    return this.slider.simpleSlider('getPopUpsState');
+  }
 }

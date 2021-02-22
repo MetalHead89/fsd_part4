@@ -56,6 +56,12 @@ import { data } from 'jquery';
     getStep(): number {
       return $(this).data().model.getStep();
     },
+    getScaleState(): boolean {
+      return $(this).data().model.getScaleState();
+    },
+    getPopUpsState(): boolean {
+      return $(this).data().model.getPopUpsState();
+    }
   };
 
   // eslint-disable-next-line no-param-reassign

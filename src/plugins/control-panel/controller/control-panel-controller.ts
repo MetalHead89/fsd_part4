@@ -17,5 +17,7 @@ export default class ControlPanelController {
     this.view.setMinValue(this.model.getMin());
     this.view.setMaxValue(this.model.getMax());
     this.view.setStep(this.model.getStep());
+    this.view.setScaleState(this.model.getScaleState());
+    this.view.setPopUpsState(this.model.getPopUpsState());
   }
 }

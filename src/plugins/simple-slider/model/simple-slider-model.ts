@@ -64,6 +64,14 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     return this.step;
   }
 
+  getScaleState(): boolean {
+    return this.scale;
+  }
+
+  getPopUpsState(): boolean {
+    return this.popUps;
+  }
+
   /**
    * Возвращает объект с параметрами для прогрессбара
    * @returns {IProgressBarParams} - Объект с позицией и размерами прогрессбара
