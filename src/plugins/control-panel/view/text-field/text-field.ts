@@ -31,7 +31,7 @@ export default class TextField extends Subject {
 
     this.field.classList.add('control-panel__text-field');
     this.field.addEventListener('blur', this.reportChanges.bind(this));
-    this.field.onkeypress = this.removeNonDigitChar;
+    this.field.onkeypress = TextField.removeNonDigitChar;
 
     this.label.classList.add('slider-panel__text-field-label');
     this.label.innerText = labelText;
@@ -44,7 +44,7 @@ export default class TextField extends Subject {
     this.notify('thumbValuesIsUpdated');
   }
 
-  private removeNonDigitChar(event: KeyboardEvent): boolean {
-    return /^\-?\d+/.test(event.key);
+  private static removeNonDigitChar(event: KeyboardEvent): boolean {
+    return /[-\d]/.test(event.key);
   }
 }
