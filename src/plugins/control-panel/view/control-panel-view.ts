@@ -110,33 +110,6 @@ export default class ControlPanelView extends Subject implements IObserver {
       })
     );
 
-    // container.append(
-    //   groupElements({
-    //     header: 'type',
-    //     wrapperClass: '',
-    //     elements: [this.typeRadio.getControl()],
-    //   })
-    // );
-
-    // container.append(
-    //   groupElements({
-    //     header: 'orientation',
-    //     wrapperClass: '',
-    //     elements: [this.orientationRadio.getControl()],
-    //   })
-    // );
-
-    // container.append(
-    //   groupElements({
-    //     header: 'on/off elements',
-    //     wrapperClass: '',
-    //     elements: [
-    //       this.scaleCheckbox.getControl(),
-    //       this.popUpsCheckbox.getControl(),
-    //     ],
-    //   })
-    // );
-
     this.sliderWrapper.append(container.getElement());
   }
 
