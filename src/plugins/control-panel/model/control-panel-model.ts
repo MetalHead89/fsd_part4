@@ -1,10 +1,25 @@
-import { IThumbsValues } from '../../simple-slider/interfaces';
+import {
+  IObserver,
+  ISubject,
+  IThumbsValues,
+} from '../../simple-slider/interfaces';
+import Subject from '../../simple-slider/subject/subject';
 
-export default class ControlPanelModel {
+export default class ControlPanelModel extends Subject implements IObserver {
   private slider: JQuery<HTMLElement>;
+  private subject: ISubject;
 
   constructor(slider: JQuery<HTMLElement>) {
+    super();
     this.slider = slider;
+    this.subject = slider.simpleSlider('getModelSubject');
+    this.subject.register('thumbsPosIsUpdated', this);
+  }
+
+  update(eventType: string): void {
+    if (eventType === 'thumbsPosIsUpdated') {
+      this.notify('thumbsPosIsUpdated');
+    }
   }
 
   getThumbsValues(): IThumbsValues {

@@ -1,6 +1,6 @@
 /* eslint-disable comma-dangle */
 
-import { ISliderSettings, IThumbsValues } from './interfaces';
+import { ISliderSettings, ISubject, IThumbsValues } from './interfaces';
 
 import SimpleSliderModel from './model/simple-slider-model';
 import SimpleSliderController from './controller/simple-slider-controller';
@@ -43,6 +43,9 @@ import { data } from 'jquery';
         $(this).data('controller', controller);
         $(this).data('model', model);
       });
+    },
+    getModelSubject(): ISubject {
+      return $(this).data().model;
     },
     getThumbsValues(): IThumbsValues {
       return $(this).data().model.getThumbsValues();
