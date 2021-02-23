@@ -46,6 +46,8 @@ class Thumb extends Subject implements IElement {
    * @param {MouseEvent} event - объект события клика
    */
   private clickToThumb(event: MouseEvent): void {
+    Thumb.disableSelection();
+
     const thumbCoords: DOMRect = this.element.getBoundingClientRect();
 
     this.shift.shiftX = event.clientX - thumbCoords.left;
@@ -127,6 +129,8 @@ class Thumb extends Subject implements IElement {
    * Завершает передвижение бегунка, удаляя слушателей событий, которые больше не нужны
    */
   private endDrag(): void {
+    Thumb.enableSelection();
+
     document.removeEventListener(
       'mousemove',
       this.onMouseMoveHandler as EventListenerOrEventListenerObject
@@ -156,6 +160,22 @@ class Thumb extends Subject implements IElement {
       width: this.element.offsetWidth,
       height: this.element.offsetHeight,
     };
+  }
+
+  /**
+   * Отключение выделения при перетягивании бегунка
+   */
+  private static disableSelection() {
+    document.onselectstart = () => false;
+    document.onmousedown = () => false;
+  }
+
+  /**
+   * Включение выделения текста
+   */
+  private static enableSelection() {
+    document.onselectstart = null;
+    document.onmousedown = null;
   }
 }
 
