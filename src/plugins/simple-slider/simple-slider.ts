@@ -72,7 +72,6 @@ import { data } from 'jquery';
       return $(this).data().model.getOrientation();
     },
     setThumbsValues(thumbs: IThumbsValues): void {
-      console.log('qqq')
       $(this).data().model.setThumbsValues(thumbs);
     },
   };
