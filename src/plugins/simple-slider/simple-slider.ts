@@ -71,6 +71,10 @@ import { data } from 'jquery';
     getOrientation(): string {
       return $(this).data().model.getOrientation();
     },
+    setThumbsValues(thumbs: IThumbsValues): void {
+      console.log('qqq')
+      $(this).data().model.setThumbsValues(thumbs);
+    },
   };
 
   // eslint-disable-next-line no-param-reassign

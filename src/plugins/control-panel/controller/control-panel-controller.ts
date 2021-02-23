@@ -10,6 +10,7 @@ export default class ControlPanelController implements IObserver {
     this.view = view;
     this.model = model;
     this.model.register('thumbsPosIsUpdated', this);
+    this.view.register('thumbValuesIsUpdated', this);
     this.init();
   }
 
@@ -27,6 +28,10 @@ export default class ControlPanelController implements IObserver {
   update(eventType: string): void {
     if (eventType === 'thumbsPosIsUpdated') {
       this.view.setThumbsValues(this.model.getThumbsValues());
+    }
+
+    if (eventType === 'thumbValuesIsUpdated') {
+      this.model.setThumbsValues(this.view.getThumbsValues());
     }
   }
 }

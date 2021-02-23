@@ -5,9 +5,10 @@ import TextField from './text-field/text-field';
 import groupElements from './group-elements';
 import RadioButton from './radio-button/radio-button';
 import Checkbox from './checkbox/checkbox';
-import { IThumbsValues } from '../../simple-slider/interfaces';
+import { IObserver, IThumbsValues } from '../../simple-slider/interfaces';
+import Subject from '../../simple-slider/subject/subject';
 
-export default class ControlPanelView {
+export default class ControlPanelView extends Subject implements IObserver {
   private sliderWrapper: HTMLDivElement;
   private thumbOneValue: TextField;
   private thumbTwoValue: TextField;
@@ -20,6 +21,7 @@ export default class ControlPanelView {
   private popUpsCheckbox: Checkbox;
 
   constructor(sliderWrapper: HTMLDivElement) {
+    super();
     this.sliderWrapper = sliderWrapper;
     this.thumbOneValue = new TextField('First thumb value');
     this.thumbTwoValue = new TextField('Second thumb value');
@@ -47,6 +49,7 @@ export default class ControlPanelView {
       value: 'popUps',
     });
 
+    this.subscribeToEvents();
     this.createPanel();
   }
 
@@ -137,6 +140,17 @@ export default class ControlPanelView {
     this.sliderWrapper.append(container.getElement());
   }
 
+  private subscribeToEvents(): void {
+    this.thumbOneValue.register('thumbValuesIsUpdated', this);
+    this.thumbTwoValue.register('thumbValuesIsUpdated', this);
+  }
+
+  update(eventType: string): void {
+    if (eventType === 'thumbValuesIsUpdated') {
+      this.notify('thumbValuesIsUpdated');
+    }
+  }
+
   setThumbsValues(thumbsValues: IThumbsValues): void {
     this.thumbOneValue.setValue(thumbsValues.thumbOne);
     this.thumbTwoValue.setValue(thumbsValues.thumbTwo);
@@ -168,5 +182,12 @@ export default class ControlPanelView {
 
   setOrientationRadio(value: string): void {
     this.orientationRadio.switchTo(value);
+  }
+
+  getThumbsValues(): IThumbsValues {
+    return {
+      thumbOne: this.thumbOneValue.getValue(),
+      thumbTwo: this.thumbTwoValue.getValue(),
+    };
   }
 }

@@ -1,16 +1,37 @@
-export default class TextField {
+import Subject from '../../../simple-slider/subject/subject';
+
+export default class TextField extends Subject {
   private control: HTMLDivElement;
   private field: HTMLInputElement;
   private label: HTMLLabelElement;
 
   constructor(labelText: string) {
+    super();
     this.control = document.createElement('div');
+    this.field = document.createElement('input');
+    this.label = document.createElement('label');
+
+    this.init(labelText);
+  }
+
+  getControl(): HTMLDivElement {
+    return this.control;
+  }
+
+  getValue(): number {
+    return parseInt(this.field.value, 10);
+  }
+
+  setValue(value: number): void {
+    this.field.value = `${value}`;
+  }
+
+  private init(labelText: string) {
     this.control.classList.add('slider-panel__text-field-control');
 
-    this.field = document.createElement('input');
     this.field.classList.add('control-panel__text-field');
+    this.field.addEventListener('blur', this.reportChanges.bind(this));
 
-    this.label = document.createElement('label');
     this.label.classList.add('slider-panel__text-field-label');
     this.label.innerText = labelText;
     this.label.append(this.field);
@@ -18,15 +39,7 @@ export default class TextField {
     this.control.append(this.label);
   }
 
-  getControl(): HTMLDivElement {
-    return this.control;
-  }
-
-  getValue(): string {
-    return this.field.value;
-  }
-
-  setValue(value: number): void {
-    this.field.value = `${value}`;
+  private reportChanges() {
+    this.notify('thumbValuesIsUpdated');
   }
 }

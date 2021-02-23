@@ -53,4 +53,8 @@ export default class ControlPanelModel extends Subject implements IObserver {
   getOrientation(): string {
     return this.slider.simpleSlider('getOrientation');
   }
+
+  setThumbsValues(thumbs: IThumbsValues): void {
+    this.slider.simpleSlider('setThumbsValues', thumbs);
+  }
 }
