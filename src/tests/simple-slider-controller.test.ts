@@ -56,9 +56,9 @@ describe('Init method', () => {
     controller = new SimpleSliderController({ model, view, settings });
     expect(SimpleSliderView.mock.instances[0].getThumbSize).toBeCalledTimes(1);
   });
-  test('The fullStateUpdate method from the SimpleSliderModel class must be called once', () => {
+  test('The refreshSliderState method from the SimpleSliderModel class must be called once', () => {
     controller = new SimpleSliderController({ model, view, settings });
-    expect(SimpleSliderModel.mock.instances[0].fullStateUpdate).toBeCalledTimes(
+    expect(SimpleSliderModel.mock.instances[0].refreshSliderState).toBeCalledTimes(
       1
     );
   });

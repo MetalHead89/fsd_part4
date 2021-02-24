@@ -32,7 +32,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
    * Полностью обновляет состояние модели
    * @param settings - объект с настройками модели
    */
-  fullStateUpdate(settings: ISliderSettings): void {
+  refreshSliderState(settings: ISliderSettings): void {
     this.orientation = settings.orienation;
     this.type = settings.type;
     this.scale = settings.scale;

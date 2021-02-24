@@ -33,7 +33,7 @@ class SimpleSliderController implements IObserver {
 
     settings.sliderSize = sliderSize;
     settings.thumbSize = thumbSize;
-    this.simpleSliderModel.fullStateUpdate(settings);
+    this.simpleSliderModel.refreshSliderState(settings);
   }
 
   /**

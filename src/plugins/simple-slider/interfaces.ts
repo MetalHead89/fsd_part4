@@ -75,7 +75,7 @@ export interface IScalePointParams {
 
 export interface ISimpleSliderModel extends ISubject {
   getMax(): number;
-  fullStateUpdate(settings: ISliderSettings): void;
+  refreshSliderState(settings: ISliderSettings): void;
   getThumbsPos(): IThumbsPositions;
   updateThumbsState(positions: IThumbsPositions): void;
   getProgressBarParams(): IProgressBarParams;
