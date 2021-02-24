@@ -16,6 +16,17 @@ export default class RadioButton {
     return this.control;
   }
 
+  getValue(): string {
+    let value = '';
+    for (let radio = 0; radio < this.radios.length; radio += 1) {
+      if (this.radios[radio].checked) {
+        value = this.radios[radio].value;
+        break;
+      }
+    }
+    return value;
+  }
+
   private init(name: string, params: IRadioParams[]) {
     for (let radio = 0; radio < params.length; radio += 1) {
       const radioWrapper = document.createElement('div');

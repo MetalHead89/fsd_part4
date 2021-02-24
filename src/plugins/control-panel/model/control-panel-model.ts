@@ -1,5 +1,6 @@
 import {
   IObserver,
+  ISliderSettings,
   ISubject,
   IThumbsValues,
 } from '../../simple-slider/interfaces';
@@ -54,7 +55,7 @@ export default class ControlPanelModel extends Subject implements IObserver {
     return this.slider.simpleSlider('getOrientation');
   }
 
-  setThumbsValues(thumbs: IThumbsValues): void {
-    this.slider.simpleSlider('setThumbsValues', thumbs);
+  refreshSliderState(sliderSettings: ISliderSettings): void {
+    this.slider.simpleSlider('refreshSliderState', sliderSettings);
   }
 }

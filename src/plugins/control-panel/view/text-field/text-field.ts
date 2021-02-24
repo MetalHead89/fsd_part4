@@ -41,7 +41,7 @@ export default class TextField extends Subject {
   }
 
   private reportChanges() {
-    this.notify('thumbValuesIsUpdated');
+    this.notify('fieldValueIsUpdated');
   }
 
   private static removeNonDigitChar(event: KeyboardEvent): boolean {

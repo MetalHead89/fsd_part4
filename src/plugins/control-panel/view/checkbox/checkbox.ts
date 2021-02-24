@@ -45,4 +45,8 @@ export default class Checkbox {
     this.checkbox.checked = state;
     this.onChange();
   }
+
+  getState(): boolean {
+    return this.checkbox.checked;
+  }
 }

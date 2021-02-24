@@ -10,7 +10,7 @@ import { data } from 'jquery';
 (($) => {
   // Настройки плагина по умолчанию
   const defaultSettings = {
-    orienation: 'horizontal',
+    orientation: 'horizontal',
     type: 'range',
     scale: true,
     popUps: true,
@@ -71,15 +71,15 @@ import { data } from 'jquery';
     getOrientation(): string {
       return $(this).data().model.getOrientation();
     },
-    setThumbsValues(thumbs: IThumbsValues): void {
-      $(this).data().model.setThumbsValues(thumbs);
+    refreshSliderState(sliderSettings: ISliderSettings): void {
+      $(this).data().model.refreshSliderState(sliderSettings);
     },
   };
 
   // eslint-disable-next-line no-param-reassign
   $.fn.simpleSlider = function plug(
     action?: string | ISliderSettings,
-    args?
+    args?,
   ): any {
     let method: any;
 

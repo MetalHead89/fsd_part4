@@ -10,7 +10,7 @@ export default class ControlPanelController implements IObserver {
     this.view = view;
     this.model = model;
     this.model.register('thumbsPosIsUpdated', this);
-    this.view.register('thumbValuesIsUpdated', this);
+    this.view.register('fieldValueIsUpdated', this);
     this.init();
   }
 
@@ -30,8 +30,19 @@ export default class ControlPanelController implements IObserver {
       this.view.setThumbsValues(this.model.getThumbsValues());
     }
 
-    if (eventType === 'thumbValuesIsUpdated') {
-      this.model.setThumbsValues(this.view.getThumbsValues());
+    if (eventType === 'fieldValueIsUpdated') {
+      const sliderSettings = {
+        orientation: this.view.getOrientation(),
+        type: this.view.getType(),
+        scale: this.view.getScaleState(),
+        popUps: this.view.getPopUpsState(),
+        min: this.view.getMin(),
+        max: this.view.getMax(),
+        step: this.view.getStep(),
+        thumbOneValue: this.view.getThumbOneValue(),
+        thumbTwoValue: this.view.getThumbTwoValue(),
+      };
+      this.model.refreshSliderState(sliderSettings);
     }
   }
 }
