@@ -4,7 +4,7 @@ export interface ISize {
 }
 
 export interface ISliderSettings {
-  orienation: string;
+  orientation: string;
   type: string;
   scale: boolean;
   popUps: boolean;
@@ -13,8 +13,8 @@ export interface ISliderSettings {
   step: number;
   thumbOneValue: number;
   thumbTwoValue: number;
-  sliderSize: ISize;
-  thumbSize: ISize;
+  sliderSize?: ISize;
+  thumbSize?: ISize;
 }
 
 export interface IElement {

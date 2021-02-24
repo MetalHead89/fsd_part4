@@ -5,7 +5,7 @@ import SimpleSliderModel from '../plugins/simple-slider/model/simple-slider-mode
 
 let model = new SimpleSliderModel();
 let settings = {
-  orienation: 'horizontal',
+  orientation: 'horizontal',
   type: 'range',
   scale: true,
   popUps: true,
@@ -21,7 +21,7 @@ let settings = {
 beforeEach(() => {
   model = new SimpleSliderModel();
   settings = {
-    orienation: 'horizontal',
+    orientation: 'horizontal',
     type: 'range',
     scale: true,
     popUps: true,
@@ -38,7 +38,7 @@ beforeEach(() => {
 
 describe('Full state update', () => {
   test('Orientation should be vertical', () => {
-    settings.orienation = 'vertical';
+    settings.orientation = 'vertical';
     model.refreshSliderState(settings);
     expect(model['orientation']).toBe('vertical');
   });
@@ -105,7 +105,7 @@ describe('Get progress bar params', () => {
     expect(progressParams.size.height).toBeCloseTo(10, 0);
   });
   test('Should be position: {{left: 0, top: 100} and size: {width: 10, height: 212}}', () => {
-    settings.orienation = 'vertical';
+    settings.orientation = 'vertical';
     settings.sliderSize = { width: 10, height: 500 };
     model.refreshSliderState(settings);
     const progressParams = model.getProgressBarParams();
@@ -124,7 +124,7 @@ describe('Get progress bar params', () => {
     expect(progressParams.size.height).toBeCloseTo(10, 0);
   });
   test('Should be position: {{left: 0, top: 0} and size: {width: 10, height: 239}}', () => {
-    settings.orienation = 'vertical';
+    settings.orientation = 'vertical';
     settings.type = 'single';
     settings.sliderSize = { width: 10, height: 750 };
     model.refreshSliderState(settings);
@@ -176,7 +176,7 @@ describe('Get pop ups params', () => {
     expect(params.popUpTwo.value).toBe(7);
   });
   test('Should be posOne: {left: 0, top: 154} and posTwo: {left: 0, top: 346}', () => {
-    settings.orienation = 'vertical';
+    settings.orientation = 'vertical';
     settings.sliderSize = { width: 10, height: 500 };
     model.refreshSliderState(settings);
 
@@ -213,7 +213,7 @@ describe('Update thumbs state', () => {
     expect(model['thumbTwoValue']).toBe(7);
   });
   test('Should be thumbOne: 0 and thumbTwo: 0', () => {
-    settings.orienation = 'vertical';
+    settings.orientation = 'vertical';
     settings.sliderSize = { width: 10, height: 500 };
     model.refreshSliderState(settings);
     const position = {
@@ -225,7 +225,7 @@ describe('Update thumbs state', () => {
     expect(model['thumbTwoValue']).toBe(0);
   });
   test('Should be thumbOne: 0 and thumbTwo: 0', () => {
-    settings.orienation = 'vertical';
+    settings.orientation = 'vertical';
     settings.sliderSize = { width: 10, height: 500 };
     model.refreshSliderState(settings);
     const position = {

@@ -20,7 +20,7 @@ const mockedModel = orignalModel as jest.Mocked<typeof orignalModel>;
 const SimpleSliderModel = mockedModel.default;
 
 const settings = {
-  orienation: 'horizontal',
+  orientation: 'horizontal',
   type: 'range',
   scale: true,
   popUps: true,
