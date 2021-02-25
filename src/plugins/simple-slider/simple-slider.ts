@@ -31,12 +31,11 @@ import SimpleSliderView from './view/simple-slider-view';
 
       // Создание слайдеров
       return this.each(function createSlider(this: HTMLDivElement) {
-        const model = new SimpleSliderModel();
+        const model = new SimpleSliderModel(settings);
         const view = new SimpleSliderView(this);
         const controller = new SimpleSliderController({
           model,
           view,
-          settings: defaultSettings,
         });
 
         $(this).data('settings', settings);
@@ -79,7 +78,7 @@ import SimpleSliderView from './view/simple-slider-view';
   // eslint-disable-next-line no-param-reassign
   $.fn.simpleSlider = function plug(
     action?: string | ISliderSettings,
-    args?,
+    args?
   ): any {
     let method: any;
 

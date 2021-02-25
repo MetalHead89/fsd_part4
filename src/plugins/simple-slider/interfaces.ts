@@ -97,5 +97,4 @@ export interface ISimpleSliderView extends ISubject {
 export interface IControllerParams {
   model: ISimpleSliderModel;
   view: ISimpleSliderView;
-  settings: ISliderSettings;
 }

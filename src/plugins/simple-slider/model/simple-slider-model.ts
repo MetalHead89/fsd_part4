@@ -28,6 +28,11 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
   private sliderSize = { width: 500, height: 10 };
   private thumbSize = { width: 500, height: 10 };
 
+  constructor(settings: ISliderSettings) {
+    super();
+    this.refreshSliderState(settings);
+  }
+
   /**
    * Полностью обновляет состояние модели
    * @param settings - объект с настройками модели
