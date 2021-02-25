@@ -47,19 +47,34 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
       this.type = settings.type;
       this.notify('typeIsUpdated');
     }
-    this.scale = settings.scale;
-    this.popUps = settings.popUps;
-    this.min = settings.min;
-    this.max = settings.max;
-    this.step = settings.step;
-
-    this.setThumbsValues({
-      thumbOne: settings.thumbOneValue,
-      thumbTwo: settings.thumbTwoValue,
-    });
-
-    if (this.scale) {
-      this.notify('scaleOn');
+    if (this.min !== settings.min) {
+      this.min = settings.min;
+      this.notify('minIsUpdated');
+    }
+    if (this.max !== settings.max) {
+      this.max = settings.max;
+      this.notify('maxIsUpdated');
+    }
+    if (this.step !== settings.step) {
+      this.step = settings.step;
+      this.notify('stepIsUpdated');
+    }
+    if (this.scale !== settings.scale) {
+      this.scale = settings.scale;
+      this.notify('scaleStateIsUpdated');
+    }
+    if (this.popUps !== settings.popUps) {
+      this.popUps = settings.popUps;
+      this.notify('popUpsStateIsUpdated');
+    }
+    if (
+      this.thumbOneValue !== settings.thumbOneValue ||
+      this.thumbTwoValue !== settings.thumbTwoValue
+    ) {
+      this.setThumbsValues({
+        thumbOne: settings.thumbOneValue,
+        thumbTwo: settings.thumbTwoValue,
+      });
     }
   }
 
@@ -153,13 +168,13 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
       popUpOne: {
         value: this.thumbOneValue,
         position: this.getPopUpPosition(
-          this.thumbValueToPos(this.thumbOneValue),
+          this.thumbValueToPos(this.thumbOneValue)
         ),
       },
       popUpTwo: {
         value: this.thumbTwoValue,
         position: this.getPopUpPosition(
-          this.thumbValueToPos(this.thumbTwoValue),
+          this.thumbValueToPos(this.thumbTwoValue)
         ),
       },
     };
@@ -175,10 +190,10 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
    */
   updateThumbsState(positions: IThumbsPositions): void {
     const thumbOneValue = this.valueWithStep(
-      this.posByOrientation(positions.thumbOne),
+      this.posByOrientation(positions.thumbOne)
     );
     const thumbTwoValue = this.valueWithStep(
-      this.posByOrientation(positions.thumbTwo),
+      this.posByOrientation(positions.thumbTwo)
     );
 
     if (this.isCorrectThumbsPos(thumbOneValue, thumbTwoValue)) {
@@ -197,7 +212,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
    */
   private isCorrectThumbsPos(
     thumbOneValue: number,
-    thumbTwoValue: number,
+    thumbTwoValue: number
   ): boolean {
     return (
       thumbOneValue <= thumbTwoValue &&
@@ -271,7 +286,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
 
     return Math.round(
       this.min +
-        ((this.max - this.min) / 100) * Math.round(position / pixelsPerValue),
+        ((this.max - this.min) / 100) * Math.round(position / pixelsPerValue)
     );
   }
 
@@ -358,7 +373,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
       const pointValue = this.thumbPosToValue(
         position -
           this.sizeByOrientation(this.thumbSize) / 2 +
-          this.sizeByOrientation(scalePointSize) / 2,
+          this.sizeByOrientation(scalePointSize) / 2
       );
 
       if (i === 0 || this.isPointFits(position, prevPointPos, scalePointSize)) {
@@ -394,7 +409,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
   private isPointFits(
     pointPos: number,
     prevpointPos: number,
-    scalePointSize: ISize,
+    scalePointSize: ISize
   ): boolean {
     return pointPos - prevpointPos - 2 > this.sizeByOrientation(scalePointSize);
   }
