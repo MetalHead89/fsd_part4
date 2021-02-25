@@ -19,6 +19,18 @@ export default class Element implements IElement {
     };
   }
 
+  switchToHorizontal(): void {
+    const mainClass = this.element.classList[0];
+    this.element.classList.remove(`${mainClass}_vertical`);
+    this.element.classList.add(`${mainClass}_horizontal`);
+  }
+
+  switchToVertical(): void {
+    const mainClass = this.element.classList[0];
+    this.element.classList.remove(`${mainClass}_horizontal`);
+    this.element.classList.add(`${mainClass}_vertical`);
+  }
+
   protected getOrientation(): string {
     const mainClass = this.element.classList[0];
     const classWithOrientation = this.element.classList[1];

@@ -19,6 +19,18 @@ class Thumb extends Subject implements IElement {
     this.disableDragAndDrop();
   }
 
+  switchToHorizontal(): void {
+    const mainClass = this.element.classList[0];
+    this.element.classList.remove(`${mainClass}_vertical`);
+    this.element.classList.add(`${mainClass}_horizontal`);
+  }
+
+  switchToVertical(): void {
+    const mainClass = this.element.classList[0];
+    this.element.classList.remove(`${mainClass}_horizontal`);
+    this.element.classList.add(`${mainClass}_vertical`);
+  }
+
   getElement(): HTMLDivElement {
     return this.element;
   }

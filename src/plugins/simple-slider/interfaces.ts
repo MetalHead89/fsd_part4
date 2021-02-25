@@ -20,6 +20,8 @@ export interface ISliderSettings {
 export interface IElement {
   getElement(): HTMLDivElement;
   getSize(): ISize;
+  switchToHorizontal(): void;
+  switchToVertical(): void;
 }
 
 export interface IObserver {
@@ -74,6 +76,8 @@ export interface IScalePointParams {
 }
 
 export interface ISimpleSliderModel extends ISubject {
+  setSliderSize(size: ISize): void;
+  setThumbSize(size: ISize): void;
   getMax(): number;
   refreshSliderState(settings: ISliderSettings): void;
   getThumbsPos(): IThumbsPositions;
@@ -81,9 +85,12 @@ export interface ISimpleSliderModel extends ISubject {
   getProgressBarParams(): IProgressBarParams;
   getPopUpsParams(): IPopUps;
   getScalePoints(scalePointSize: ISize): IScalePointParams[];
+  getOrientation(): string;
 }
 
 export interface ISimpleSliderView extends ISubject {
+  switchToHorizontal(): void;
+  switchToVertical(): void;
   getThumbSize(): ISize;
   getSliderSize(): ISize;
   getThumbsPos(): IThumbsPositions;

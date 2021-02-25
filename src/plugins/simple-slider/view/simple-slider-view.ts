@@ -86,6 +86,36 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
     this.sliderWrapper.append(this.container.getElement());
   }
 
+  switchToHorizontal(): void {
+    this.container.switchToHorizontal();
+    this.track.switchToHorizontal();
+    this.thumbOne.switchToHorizontal();
+    this.thumbTwo.switchToHorizontal();
+    if (this.popUpOne !== null) {
+      this.popUpOne.switchToHorizontal();
+    }
+    if (this.popUpTwo !== null) {
+      this.popUpTwo.switchToHorizontal();
+    }
+    this.progressBar.switchToHorizontal();
+    this.scale.switchToHorizontal();
+  }
+
+  switchToVertical(): void {
+    this.container.switchToVertical();
+    this.track.switchToVertical();
+    this.thumbOne.switchToVertical();
+    this.thumbTwo.switchToVertical();
+    if (this.popUpOne !== null) {
+      this.popUpOne.switchToVertical();
+    }
+    if (this.popUpTwo !== null) {
+      this.popUpTwo.switchToVertical();
+    }
+    this.progressBar.switchToVertical();
+    this.scale.switchToVertical();
+  }
+
   /**
    * Возвращение размера бегунка
    * @returns {ISize} - объкт с шириной и высотой бегунка

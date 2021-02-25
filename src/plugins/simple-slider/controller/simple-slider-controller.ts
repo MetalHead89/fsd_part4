@@ -9,19 +9,30 @@ import {
 } from '../interfaces';
 
 class SimpleSliderController implements IObserver {
-  private simpleSliderModel: ISimpleSliderModel;
-  private simpleSliderView: ISimpleSliderView;
+  private model: ISimpleSliderModel;
+  private view: ISimpleSliderView;
 
   constructor(params: IControllerParams) {
-    this.simpleSliderModel = params.model;
-    this.simpleSliderView = params.view;
+    this.model = params.model;
+    this.view = params.view;
 
     this.subscribeToEvents();
+    this.init();
     // this.simpleSliderModel.register('thumbsPosIsUpdated', this);
     // this.simpleSliderView.register('thumbIsDragged', this);
     // this.simpleSliderModel.register('scaleOn', this);
 
     // this.init(params.settings);
+  }
+
+  private init(): void {
+    this.model.setSliderSize(this.view.getSliderSize());
+    this.model.setThumbSize(this.view.getThumbSize());
+    if (this.model.getOrientation() === 'horizontal') {
+      this.view.switchToHorizontal();
+    } else {
+      this.view.switchToVertical();
+    }
   }
 
   private subscribeToEvents(): void {}
