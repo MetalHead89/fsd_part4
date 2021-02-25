@@ -33,6 +33,14 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     this.refreshSliderState(settings);
   }
 
+  setSliderSize(size: ISize): void {
+    this.sliderSize = size;
+  }
+
+  setThumbSize(size: ISize): void {
+    this.thumbSize = size;
+  }
+
   /**
    * Полностью обновляет состояние модели
    * @param settings - объект с настройками модели
