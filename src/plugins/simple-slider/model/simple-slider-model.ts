@@ -99,6 +99,10 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     }
   }
 
+  /**
+   * Сохраняет значения бегунков
+   * @param {IThumbsValues} thumbs - объект со значениями бегунков
+   */
   setThumbsValues(thumbs: IThumbsValues): void {
     const thumbOnePos = this.thumbValueToPos(thumbs.thumbOne);
     const thumbTwoPos = this.thumbValueToPos(thumbs.thumbTwo);
