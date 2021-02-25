@@ -27,7 +27,7 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
   private sliderWrapper: HTMLDivElement;
   private track: Track;
   private thumbOne: Thumb;
-  private thumbTwo: Thumb;
+  private thumbTwo: Thumb | null;
   private popUpOne: PopUp | null;
   private popUpTwo: PopUp | null;
   private progressBar: ProgressBar;
@@ -63,7 +63,7 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
       this.notify('thumbIsDragged');
     } else if (eventType === 'thumbIsCatched') {
       this.thumbOne.resetZIndex();
-      this.thumbTwo.resetZIndex();
+      this.thumbTwo?.resetZIndex();
     }
   }
 
@@ -73,7 +73,9 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
   private assembleSlider(): void {
     this.container.append(this.track.getElement());
     this.container.append(this.thumbOne.getElement());
-    this.container.append(this.thumbTwo.getElement());
+    if (this.thumbTwo !== null) {
+      this.container.append(this.thumbTwo.getElement());
+    }
     if (this.popUpOne !== null) {
       this.container.append(this.popUpOne.getElement());
     }
@@ -90,13 +92,9 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
     this.container.switchToHorizontal();
     this.track.switchToHorizontal();
     this.thumbOne.switchToHorizontal();
-    this.thumbTwo.switchToHorizontal();
-    if (this.popUpOne !== null) {
-      this.popUpOne.switchToHorizontal();
-    }
-    if (this.popUpTwo !== null) {
-      this.popUpTwo.switchToHorizontal();
-    }
+    this.thumbTwo?.switchToHorizontal();
+    this.popUpOne?.switchToHorizontal();
+    this.popUpTwo?.switchToHorizontal();
     this.progressBar.switchToHorizontal();
     this.scale.switchToHorizontal();
   }
@@ -105,15 +103,22 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
     this.container.switchToVertical();
     this.track.switchToVertical();
     this.thumbOne.switchToVertical();
-    this.thumbTwo.switchToVertical();
-    if (this.popUpOne !== null) {
-      this.popUpOne.switchToVertical();
-    }
-    if (this.popUpTwo !== null) {
-      this.popUpTwo.switchToVertical();
-    }
+    this.thumbTwo?.switchToVertical();
+    this.popUpOne?.switchToVertical();
+    this.popUpTwo?.switchToVertical();
     this.progressBar.switchToVertical();
     this.scale.switchToVertical();
+  }
+
+  switchToSingle(): void {
+    this.thumbTwo?.remove();
+    this.thumbTwo = null;
+  }
+
+  switchToRange(): void {
+    if (this.thumbTwo === null) {
+      this.thumbTwo = new Thumb();
+    }
   }
 
   /**
@@ -140,7 +145,7 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
   getThumbsPos(): IThumbsPositions {
     return {
       thumbOne: this.thumbOne.getPosition(),
-      thumbTwo: this.thumbTwo.getPosition(),
+      thumbTwo: null,
     };
   }
 
@@ -150,7 +155,9 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
    */
   updateThumbs(thumbsPositions: IThumbsPositions): void {
     this.thumbOne.moveTo(thumbsPositions.thumbOne);
-    this.thumbTwo.moveTo(thumbsPositions.thumbTwo);
+    if (thumbsPositions.thumbTwo !== null) {
+      this.thumbTwo?.moveTo(thumbsPositions.thumbTwo);
+    }
   }
 
   /**

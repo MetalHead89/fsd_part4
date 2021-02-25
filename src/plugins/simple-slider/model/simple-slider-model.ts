@@ -205,13 +205,19 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     const thumbOneValue = this.valueWithStep(
       this.posByOrientation(positions.thumbOne)
     );
-    const thumbTwoValue = this.valueWithStep(
-      this.posByOrientation(positions.thumbTwo)
-    );
+    let thumbTwoValue: null | number = null;
+
+    if (positions.thumbTwo !== null) {
+      thumbTwoValue = this.valueWithStep(
+        this.posByOrientation(positions.thumbTwo)
+      );
+    }
 
     if (this.isCorrectThumbsPos(thumbOneValue, thumbTwoValue)) {
       this.thumbOneValue = thumbOneValue;
-      this.thumbTwoValue = thumbTwoValue;
+      if (thumbTwoValue !== null) {
+        this.thumbTwoValue = thumbTwoValue;
+      }
     }
 
     this.notify('thumbsPosIsUpdated');
@@ -225,13 +231,20 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
    */
   private isCorrectThumbsPos(
     thumbOneValue: number,
-    thumbTwoValue: number
+    thumbTwoValue: number | null
   ): boolean {
-    return (
-      thumbOneValue <= thumbTwoValue &&
-      thumbOneValue >= this.min &&
-      thumbTwoValue <= this.max
-    );
+    let result = true;
+
+    if (thumbTwoValue !== null) {
+      result =
+        thumbOneValue <= thumbTwoValue &&
+        thumbOneValue >= this.min &&
+        thumbTwoValue <= this.max;
+    } else {
+      result = thumbOneValue >= this.min && thumbOneValue <= this.max;
+    }
+
+    return result;
   }
 
   /**

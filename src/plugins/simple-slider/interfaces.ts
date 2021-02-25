@@ -50,7 +50,7 @@ export interface IPosition {
 
 export interface IThumbsPositions {
   thumbOne: IPosition;
-  thumbTwo: IPosition;
+  thumbTwo: IPosition | null;
 }
 
 export interface IProgressBarParams {
@@ -79,6 +79,7 @@ export interface ISimpleSliderModel extends ISubject {
   setSliderSize(size: ISize): void;
   setThumbSize(size: ISize): void;
   getMax(): number;
+  getType(): string;
   refreshSliderState(settings: ISliderSettings): void;
   getThumbsPos(): IThumbsPositions;
   updateThumbsState(positions: IThumbsPositions): void;
@@ -91,6 +92,8 @@ export interface ISimpleSliderModel extends ISubject {
 export interface ISimpleSliderView extends ISubject {
   switchToHorizontal(): void;
   switchToVertical(): void;
+  switchToSingle(): void;
+  switchToRange(): void;
   getThumbSize(): ISize;
   getSliderSize(): ISize;
   getThumbsPos(): IThumbsPositions;

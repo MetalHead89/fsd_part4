@@ -31,6 +31,10 @@ export default class Element implements IElement {
     this.element.classList.add(`${mainClass}_vertical`);
   }
 
+  remove(): void {
+    this.element.remove();
+  }
+
   protected getOrientation(): string {
     const mainClass = this.element.classList[0];
     const classWithOrientation = this.element.classList[1];

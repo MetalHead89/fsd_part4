@@ -31,6 +31,10 @@ class Thumb extends Subject implements IElement {
     this.element.classList.add(`${mainClass}_vertical`);
   }
 
+  remove(): void {
+    this.element.remove();
+  }
+
   getElement(): HTMLDivElement {
     return this.element;
   }
