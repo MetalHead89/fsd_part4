@@ -33,6 +33,10 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     this.refreshSliderState(settings);
   }
 
+  /**
+   * Устанавливает размер слайдера
+   * @param {ISize} size - объект с шириной и высотой слайдера
+   */
   setSliderSize(size: ISize): void {
     this.sliderSize = size;
   }
