@@ -31,18 +31,19 @@ export default class ControlPanelController implements IObserver {
     }
 
     if (eventType === 'fieldValueIsUpdated') {
-      const sliderSettings = {
-        orientation: this.view.getOrientation(),
-        type: this.view.getType(),
-        scale: this.view.getScaleState(),
-        popUps: this.view.getPopUpsState(),
-        min: this.view.getMin(),
-        max: this.view.getMax(),
-        step: this.view.getStep(),
-        thumbOneValue: this.view.getThumbOneValue(),
-        thumbTwoValue: this.view.getThumbTwoValue(),
-      };
-      this.model.refreshSliderState(sliderSettings);
+      console.log(this.view.getOrientation());
+      // const sliderSettings = {
+      //   orientation: this.view.getOrientation(),
+      //   type: this.view.getType(),
+      //   scale: this.view.getScaleState(),
+      //   popUps: this.view.getPopUpsState(),
+      //   min: this.view.getMin(),
+      //   max: this.view.getMax(),
+      //   step: this.view.getStep(),
+      //   thumbOneValue: this.view.getThumbOneValue(),
+      //   thumbTwoValue: this.view.getThumbTwoValue(),
+      // };
+      // this.model.refreshSliderState(sliderSettings);
     }
   }
 }

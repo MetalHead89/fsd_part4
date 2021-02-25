@@ -5,11 +5,12 @@ export default class RadioButton {
   private radios: HTMLInputElement[];
 
   constructor(name: string, ...params: IRadioParams[]) {
+    const uniqueName = RadioButton.generateName(name);
     this.control = document.createElement('div');
     this.control.classList.add('control-panel__radio-group');
     this.radios = [];
 
-    this.init(name, params);
+    this.init(uniqueName, params);
   }
 
   getControl(): HTMLDivElement {
@@ -70,5 +71,20 @@ export default class RadioButton {
         break;
       }
     }
+  }
+
+  static generateName(name: string): string {
+    let counter = 1;
+    let uniqueName = '';
+
+    while (uniqueName === '') {
+      const newName = `${name}${counter}`;
+      if (document.querySelector(`[name="${newName}"]`) === null) {
+        uniqueName = newName;
+      }
+      counter += 1;
+    }
+
+    return uniqueName;
   }
 }
