@@ -15,12 +15,16 @@ class SimpleSliderController implements IObserver {
   constructor(params: IControllerParams) {
     this.simpleSliderModel = params.model;
     this.simpleSliderView = params.view;
-    this.simpleSliderModel.register('thumbsPosIsUpdated', this);
-    this.simpleSliderView.register('thumbIsDragged', this);
-    this.simpleSliderModel.register('scaleOn', this);
+
+    this.subscribeToEvents();
+    // this.simpleSliderModel.register('thumbsPosIsUpdated', this);
+    // this.simpleSliderView.register('thumbIsDragged', this);
+    // this.simpleSliderModel.register('scaleOn', this);
 
     // this.init(params.settings);
   }
+
+  private subscribeToEvents(): void {}
 
   // /**
   //  * Инициализация слайдера в оответствии с полученными настройками
