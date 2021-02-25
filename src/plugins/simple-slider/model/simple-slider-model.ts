@@ -39,9 +39,14 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     if (settings.thumbSize !== undefined) {
       this.thumbSize = settings.thumbSize;
     }
-
-    this.orientation = settings.orientation;
-    this.type = settings.type;
+    if (this.orientation !== settings.orientation) {
+      this.orientation = settings.orientation;
+      this.notify('orientationIsUpdated');
+    }
+    if (this.type !== settings.type) {
+      this.type = settings.type;
+      this.notify('typeIsUpdated');
+    }
     this.scale = settings.scale;
     this.popUps = settings.popUps;
     this.min = settings.min;
