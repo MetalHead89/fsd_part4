@@ -117,6 +117,10 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     return this.min;
   }
 
+  /**
+   * Возвращает максимальное значение слайдера
+   * @returns {number} - максимальное значение
+   */
   getMax(): number {
     return this.max;
   }
