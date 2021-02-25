@@ -125,6 +125,10 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     return this.max;
   }
 
+  /**
+   * Возвращает шаг с которым перемещается бегунок
+   * @returns {number} - значение шага
+   */
   getStep(): number {
     return this.step;
   }
