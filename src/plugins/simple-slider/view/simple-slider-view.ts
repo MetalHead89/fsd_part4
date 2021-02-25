@@ -121,6 +121,23 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
     }
   }
 
+  disablePopUps(): void {
+    this.popUpOne?.remove();
+    this.popUpOne = null;
+    this.popUpTwo?.remove();
+    this.popUpTwo = null;
+  }
+
+  enablePopUps(): void {
+    if (this.popUpOne === null) {
+      this.popUpOne = new PopUp();
+    }
+
+    if (this.popUpTwo === null) {
+      this.popUpTwo = new PopUp();
+    }
+  }
+
   /**
    * Возвращение размера бегунка
    * @returns {ISize} - объкт с шириной и высотой бегунка

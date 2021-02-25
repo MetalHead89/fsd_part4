@@ -40,6 +40,12 @@ class SimpleSliderController implements IObserver {
     } else {
       this.view.switchToRange();
     }
+
+    if (this.model.getPopUpsState()) {
+      this.view.enablePopUps();
+    } else {
+      this.view.disablePopUps();
+    }
   }
 
   private subscribeToEvents(): void {}
