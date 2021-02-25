@@ -109,6 +109,10 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     this.updateThumbsState({ thumbOne: thumbOnePos, thumbTwo: thumbTwoPos });
   }
 
+  /**
+   * Возвращает минимальное значение слайдера
+   * @returns {number} - минимальное значение
+   */
   getMin(): number {
     return this.min;
   }
