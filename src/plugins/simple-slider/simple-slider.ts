@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable comma-dangle */
 
 import { ISliderSettings, ISubject, IThumbsValues } from './interfaces';
@@ -5,7 +6,6 @@ import { ISliderSettings, ISubject, IThumbsValues } from './interfaces';
 import SimpleSliderModel from './model/simple-slider-model';
 import SimpleSliderController from './controller/simple-slider-controller';
 import SimpleSliderView from './view/simple-slider-view';
-import { data } from 'jquery';
 
 (($) => {
   // Настройки плагина по умолчанию
