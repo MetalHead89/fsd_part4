@@ -41,6 +41,10 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     this.sliderSize = size;
   }
 
+  /**
+   * Устанавливает размер бегунков
+   * @param {ISize} size - объект с шириной и высотой бегунка
+   */
   setThumbSize(size: ISize): void {
     this.thumbSize = size;
   }
