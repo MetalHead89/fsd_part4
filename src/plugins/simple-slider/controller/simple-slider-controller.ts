@@ -46,6 +46,10 @@ class SimpleSliderController implements IObserver {
     } else {
       this.view.disablePopUps();
     }
+
+    this.view.updateThumbs(this.model.getThumbsPos());
+    this.view.updatePopUps(this.model.getPopUpsParams());
+    this.view.updateProgressBar(this.model.getProgressBarParams());
   }
 
   private subscribeToEvents(): void {}
