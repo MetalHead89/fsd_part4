@@ -3,6 +3,7 @@
 import {
   IObserver,
   IPopUps,
+  IPosition,
   IProgressBarParams,
   IScalePointParams,
   ISimpleSliderView,
@@ -173,10 +174,12 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
    * @returns {IThumbsPositions} - объект с позициями бегунков
    */
   getThumbsPos(): IThumbsPositions {
-    return {
-      thumbOne: this.thumbOne.getPosition(),
-      thumbTwo: null,
-    };
+    const thumbOne = this.thumbOne.getPosition();
+    let thumbTwo: IPosition | null = null;
+    if (this.thumbTwo !== null) {
+      thumbTwo = this.thumbTwo.getPosition();
+    }
+    return { thumbOne, thumbTwo };
   }
 
   /**

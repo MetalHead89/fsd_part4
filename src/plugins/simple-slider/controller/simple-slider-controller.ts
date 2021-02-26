@@ -63,7 +63,10 @@ class SimpleSliderController implements IObserver {
     }
   }
 
-  private subscribeToEvents(): void {}
+  private subscribeToEvents(): void {
+    this.view.register('thumbIsDragged', this);
+    this.model.register('thumbsPosIsUpdated', this);
+  }
 
   // /**
   //  * Инициализация слайдера в оответствии с полученными настройками
@@ -84,20 +87,14 @@ class SimpleSliderController implements IObserver {
   //  * @param {string} eventType - тип уведомления
   //  */
   update(eventType: string): void {
-    //   if (eventType === 'thumbIsDragged') {
-    //     this.simpleSliderModel.updateThumbsState(
-    //       this.simpleSliderView.getThumbsPos(),
-    //     );
-    //   }
-    //   if (eventType === 'thumbsPosIsUpdated') {
-    //     this.simpleSliderView.updateThumbs(this.simpleSliderModel.getThumbsPos());
-    //     this.simpleSliderView.updatePopUps(
-    //       this.simpleSliderModel.getPopUpsParams(),
-    //     );
-    //     this.simpleSliderView.updateProgressBar(
-    //       this.simpleSliderModel.getProgressBarParams(),
-    //     );
-    //   }
+    if (eventType === 'thumbIsDragged') {
+      this.model.updateThumbsState(this.view.getThumbsPos());
+    }
+    if (eventType === 'thumbsPosIsUpdated') {
+      this.view.updateThumbs(this.model.getThumbsPos());
+      this.view.updatePopUps(this.model.getPopUpsParams());
+      this.view.updateProgressBar(this.model.getProgressBarParams());
+    }
     //   if (eventType === 'scaleOn') {
     // const max = this.simpleSliderModel.getMax();
     // const points = this.simpleSliderModel.getScalePoints(
