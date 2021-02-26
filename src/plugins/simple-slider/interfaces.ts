@@ -81,6 +81,7 @@ export interface ISimpleSliderModel extends ISubject {
   getMax(): number;
   getType(): string;
   getPopUpsState(): boolean;
+  getScaleState(): boolean;
   refreshSliderState(settings: ISliderSettings): void;
   getThumbsPos(): IThumbsPositions;
   updateThumbsState(positions: IThumbsPositions): void;
@@ -97,6 +98,8 @@ export interface ISimpleSliderView extends ISubject {
   switchToRange(): void;
   disablePopUps(): void;
   enablePopUps(): void;
+  enableScale(): void;
+  disableScale(): void;
   getThumbSize(): ISize;
   getSliderSize(): ISize;
   getThumbsPos(): IThumbsPositions;

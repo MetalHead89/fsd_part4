@@ -50,6 +50,17 @@ class SimpleSliderController implements IObserver {
     this.view.updateThumbs(this.model.getThumbsPos());
     this.view.updatePopUps(this.model.getPopUpsParams());
     this.view.updateProgressBar(this.model.getProgressBarParams());
+
+    if (this.model.getScaleState()) {
+      this.view.enableScale();
+      const max = this.model.getMax();
+      const points = this.model.getScalePoints(
+        this.view.getScalePointSize(max),
+      );
+      this.view.addScalePoints(points);
+    } else {
+      this.view.disableScale();
+    }
   }
 
   private subscribeToEvents(): void {}
@@ -88,10 +99,10 @@ class SimpleSliderController implements IObserver {
     //     );
     //   }
     //   if (eventType === 'scaleOn') {
-    //     const max = this.simpleSliderModel.getMax();
-    //     const points = this.simpleSliderModel.getScalePoints(
-    //       this.simpleSliderView.getScalePointSize(max),
-    //     );
+    // const max = this.simpleSliderModel.getMax();
+    // const points = this.simpleSliderModel.getScalePoints(
+    //   this.simpleSliderView.getScalePointSize(max),
+    // );
     //     this.simpleSliderView.addScalePoints(points);
     // }
   }

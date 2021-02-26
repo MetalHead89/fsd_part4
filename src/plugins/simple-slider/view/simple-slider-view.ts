@@ -31,7 +31,7 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
   private popUpOne: PopUp | null;
   private popUpTwo: PopUp | null;
   private progressBar: ProgressBar;
-  private scale: Scale;
+  private scale: Scale | null;
 
   constructor(wrapper: HTMLDivElement) {
     super();
@@ -83,7 +83,9 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
       this.container.append(this.popUpTwo.getElement());
     }
     this.container.append(this.progressBar.getElement());
-    this.container.append(this.scale.getElement());
+    if (this.scale !== null) {
+      this.container.append(this.scale.getElement());
+    }
 
     this.sliderWrapper.append(this.container.getElement());
   }
@@ -96,7 +98,7 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
     this.popUpOne?.switchToHorizontal();
     this.popUpTwo?.switchToHorizontal();
     this.progressBar.switchToHorizontal();
-    this.scale.switchToHorizontal();
+    this.scale?.switchToHorizontal();
   }
 
   switchToVertical(): void {
@@ -107,7 +109,7 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
     this.popUpOne?.switchToVertical();
     this.popUpTwo?.switchToVertical();
     this.progressBar.switchToVertical();
-    this.scale.switchToVertical();
+    this.scale?.switchToVertical();
   }
 
   switchToSingle(): void {
@@ -135,6 +137,17 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
 
     if (this.popUpTwo === null) {
       this.popUpTwo = new PopUp();
+    }
+  }
+
+  disableScale(): void {
+    this.scale?.remove();
+    this.scale = null;
+  }
+
+  enableScale(): void {
+    if (this.scale === null) {
+      this.scale = new Scale();
     }
   }
 
@@ -202,11 +215,14 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
   }
 
   getScalePointSize(value: number): ISize {
-    return this.scale.getPointSize(value);
+    if (this.scale !== null) {
+      return this.scale.getPointSize(value);
+    }
+    return { width: 0, height: 0 };
   }
 
   addScalePoints(points: IScalePointParams[]): void {
-    this.scale.addPoints(points);
+    this.scale?.addPoints(points);
   }
 }
 
