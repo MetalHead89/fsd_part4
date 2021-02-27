@@ -10,7 +10,7 @@ export default class ControlPanelController implements IObserver {
     this.view = view;
     this.model = model;
     this.model.register('thumbsPosIsUpdated', this);
-    this.view.register('fieldValueIsUpdated', this);
+    this.view.register('controlPanelDataUpdated', this);
     this.init();
   }
 
@@ -30,7 +30,7 @@ export default class ControlPanelController implements IObserver {
       this.view.setThumbsValues(this.model.getThumbsValues());
     }
 
-    if (eventType === 'fieldValueIsUpdated') {
+    if (eventType === 'controlPanelDataUpdated') {
       const sliderSettings = {
         orientation: this.view.getOrientation(),
         type: this.view.getType(),

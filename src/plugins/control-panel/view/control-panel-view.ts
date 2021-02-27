@@ -114,13 +114,13 @@ export default class ControlPanelView extends Subject implements IObserver {
   }
 
   private subscribeToEvents(): void {
-    this.thumbOneValue.register('fieldValueIsUpdated', this);
-    this.thumbTwoValue.register('fieldValueIsUpdated', this);
+    this.thumbOneValue.register('controlPanelDataUpdated', this);
+    this.thumbTwoValue.register('controlPanelDataUpdated', this);
   }
 
   update(eventType: string): void {
-    if (eventType === 'fieldValueIsUpdated') {
-      this.notify('fieldValueIsUpdated');
+    if (eventType === 'controlPanelDataUpdated') {
+      this.notify('controlPanelDataUpdated');
     }
   }
 

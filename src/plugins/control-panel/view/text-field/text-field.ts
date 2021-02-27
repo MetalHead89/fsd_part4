@@ -41,7 +41,7 @@ export default class TextField extends Subject {
   }
 
   private reportChanges() {
-    this.notify('fieldValueIsUpdated');
+    this.notify('controlPanelDataUpdated');
   }
 
   private static removeNonDigitChar(event: KeyboardEvent): boolean {
