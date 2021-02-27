@@ -69,8 +69,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
       this.notify('typeIsUpdated');
     }
     if (this.min !== settings.min) {
-      this.min = settings.min;
-      this.notify('minIsUpdated');
+      this.updateMinValue(settings.min);
     }
     if (this.max !== settings.max) {
       this.max = settings.max;
@@ -97,6 +96,15 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
         thumbTwo: settings.thumbTwoValue,
       });
     }
+  }
+
+  private updateMinValue(value: number): void {
+    let newMin = value;
+    if (this.type === 'range' && newMin > this.max) {
+      newMin = this.max;
+    }
+    this.min = newMin;
+    this.notify('minIsUpdated');
   }
 
   /**

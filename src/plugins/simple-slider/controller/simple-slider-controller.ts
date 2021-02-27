@@ -47,25 +47,13 @@ class SimpleSliderController implements IObserver {
       this.view.disablePopUps();
     }
 
-    this.view.updateThumbs(this.model.getThumbsPos());
-    this.view.updatePopUps(this.model.getPopUpsParams());
-    this.view.updateProgressBar(this.model.getProgressBarParams());
-
-    if (this.model.getScaleState()) {
-      this.view.enableScale();
-      const max = this.model.getMax();
-      const points = this.model.getScalePoints(
-        this.view.getScalePointSize(max),
-      );
-      this.view.addScalePoints(points);
-    } else {
-      this.view.disableScale();
-    }
+    this.updateView();
   }
 
   private subscribeToEvents(): void {
     this.view.register('thumbIsDragged', this);
     this.model.register('thumbsPosIsUpdated', this);
+    this.model.register('minIsUpdated', this);
   }
 
   // /**
@@ -95,6 +83,9 @@ class SimpleSliderController implements IObserver {
       this.view.updatePopUps(this.model.getPopUpsParams());
       this.view.updateProgressBar(this.model.getProgressBarParams());
     }
+    if (eventType === 'minIsUpdated') {
+      this.updateView();
+    }
     //   if (eventType === 'scaleOn') {
     // const max = this.simpleSliderModel.getMax();
     // const points = this.simpleSliderModel.getScalePoints(
@@ -102,6 +93,23 @@ class SimpleSliderController implements IObserver {
     // );
     //     this.simpleSliderView.addScalePoints(points);
     // }
+  }
+
+  private updateView(): void {
+    this.view.updateThumbs(this.model.getThumbsPos());
+    this.view.updatePopUps(this.model.getPopUpsParams());
+    this.view.updateProgressBar(this.model.getProgressBarParams());
+
+    if (this.model.getScaleState()) {
+      this.view.enableScale();
+      const max = this.model.getMax();
+      const points = this.model.getScalePoints(
+        this.view.getScalePointSize(max)
+      );
+      this.view.addScalePoints(points);
+    } else {
+      this.view.disableScale();
+    }
   }
 }
 
