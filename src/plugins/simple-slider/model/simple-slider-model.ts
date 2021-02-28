@@ -98,6 +98,10 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     }
   }
 
+  /**
+   * Устанавливает минимальное значение слайдера
+   * @param {number} value - новое значение минимума
+   */
   private updateMinValue(value: number): void {
     let newMin = value;
     if (this.type === 'range' && newMin > this.max) {
