@@ -69,9 +69,7 @@ class SimpleSliderController implements IObserver {
   }
 
   private updateView(): void {
-    this.view.updateThumbs(this.model.getThumbsPos());
-    this.view.updatePopUps(this.model.getPopUpsParams());
-    this.view.updateProgressBar(this.model.getProgressBarParams());
+    this.model.updateThumbsState(this.model.getThumbsPos());
 
     if (this.model.getScaleState()) {
       this.view.enableScale();
