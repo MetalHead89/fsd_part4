@@ -147,9 +147,11 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
   }
 
   enableScale(): void {
-    if (this.scale === null) {
-      this.scale = new Scale();
+    if (this.scale !== null) {
+      this.scale?.remove();
     }
+    this.scale = new Scale();
+    this.container.append(this.scale.getElement());
   }
 
   /**
