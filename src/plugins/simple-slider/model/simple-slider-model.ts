@@ -145,6 +145,10 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     return this.step;
   }
 
+  /**
+   * Возвращает состояние шкалы (выключена или включена)
+   * @returns {number} - состояние шкалы
+   */
   getScaleState(): boolean {
     return this.scale;
   }
