@@ -70,6 +70,9 @@ class SimpleSliderController implements IObserver {
     if (eventType === 'maxIsUpdated') {
       this.updateView();
     }
+    if (eventType === 'stepIsUpdated') {
+      this.updateView();
+    }
   }
 
   private updateView(): void {

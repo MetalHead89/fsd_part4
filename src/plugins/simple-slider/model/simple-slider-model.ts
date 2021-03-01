@@ -124,6 +124,19 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
   }
 
   /**
+   * Устанавливает размер шага бегунка
+   * @param {number} value - новое значение шага
+   */
+  private updateStep(value: number): void {
+    let newStep = value;
+    if (newStep <= 0) {
+      newStep = 1;
+    }
+    this.step = newStep;
+    this.notify('stepIsUpdated');
+  }
+
+  /**
    * Сохраняет значения бегунков
    * @param {IThumbsValues} thumbs - объект со значениями бегунков
    */
