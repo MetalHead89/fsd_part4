@@ -177,6 +177,10 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     return this.scale;
   }
 
+  /**
+   * Возвращает состояние попапов (выключены или отключены)
+   * @returns {number} - состояние попапов
+   */
   getPopUpsState(): boolean {
     return this.popUps;
   }
