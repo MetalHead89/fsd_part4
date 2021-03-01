@@ -352,7 +352,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
 
     return Math.round(
       this.min +
-        ((this.max - this.min) / 100) * Math.round(position / pixelsPerValue),
+        ((this.max - this.min) / 100) * Math.round(position / pixelsPerValue) * this.max,
     );
   }
 
@@ -376,7 +376,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     // const ratio = (thumbValue - this.min) / (this.max - this.min);
     const posValue =
       ((thumbValue - this.min) / (this.max - this.min)) *
-      ((this.sliderSize.width - this.thumbSize.width) / this.max) * this.max;
+      (pxPerVal) * this.max;
 
     // const posValue =
     //   this.min + ((this.max - this.min) / 100) * thumbValue * pxPerVal * 100;
@@ -396,10 +396,10 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
    */
   private getPxPerValue(): number {
     if (this.orientation === 'horizontal') {
-      return (this.sliderSize.width - this.thumbSize.width) / 100;
+      return (this.sliderSize.width - this.thumbSize.width) / this.max;
     }
 
-    return (this.sliderSize.height - this.thumbSize.height) / 100;
+    return (this.sliderSize.height - this.thumbSize.height) / this.max;
   }
 
   /**
