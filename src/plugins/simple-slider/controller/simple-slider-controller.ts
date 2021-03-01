@@ -49,6 +49,7 @@ class SimpleSliderController implements IObserver {
     this.model.register('thumbsPosIsUpdated', this);
     this.model.register('minIsUpdated', this);
     this.model.register('maxIsUpdated', this);
+    this.model.register('stepIsUpdated', this);
   }
 
   // /**
