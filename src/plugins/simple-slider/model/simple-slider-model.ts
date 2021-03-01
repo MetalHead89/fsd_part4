@@ -373,10 +373,10 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
       thumbValue = this.max;
     }
 
-    const ratio = (thumbValue - this.min) / (this.max - this.min);
+    // const ratio = (thumbValue - this.min) / (this.max - this.min);
     const posValue =
       ((thumbValue - this.min) / (this.max - this.min)) *
-      ((this.sliderSize.width - this.thumbSize.width) / this.max) * 10;
+      ((this.sliderSize.width - this.thumbSize.width) / this.max) * this.max;
 
     // const posValue =
     //   this.min + ((this.max - this.min) / 100) * thumbValue * pxPerVal * 100;
