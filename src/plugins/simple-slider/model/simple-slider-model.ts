@@ -221,13 +221,13 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
       popUpOne: {
         value: this.thumbOneValue,
         position: this.getPopUpPosition(
-          this.thumbValueToPos(this.thumbOneValue)
+          this.thumbValueToPos(this.thumbOneValue),
         ),
       },
       popUpTwo: {
         value: this.thumbTwoValue,
         position: this.getPopUpPosition(
-          this.thumbValueToPos(this.thumbTwoValue)
+          this.thumbValueToPos(this.thumbTwoValue),
         ),
       },
     };
@@ -243,13 +243,13 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
    */
   updateThumbsState(positions: IThumbsPositions): void {
     const thumbOneValue = this.valueWithStep(
-      this.posByOrientation(positions.thumbOne)
+      this.posByOrientation(positions.thumbOne),
     );
     let thumbTwoValue: null | number = null;
 
     if (positions.thumbTwo !== null) {
       thumbTwoValue = this.valueWithStep(
-        this.posByOrientation(positions.thumbTwo)
+        this.posByOrientation(positions.thumbTwo),
       );
     }
 
@@ -271,7 +271,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
    */
   private isCorrectThumbsPos(
     thumbOneValue: number,
-    thumbTwoValue: number | null
+    thumbTwoValue: number | null,
   ): boolean {
     let result = true;
 
@@ -352,7 +352,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
 
     return Math.round(
       this.min +
-        ((this.max - this.min) / 100) * Math.round(position / pixelsPerValue)
+        ((this.max - this.min) / 100) * Math.round(position / pixelsPerValue),
     );
   }
 
@@ -373,8 +373,13 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
       thumbValue = this.max;
     }
 
+    const ratio = (thumbValue - this.min) / (this.max - this.min);
     const posValue =
-      this.min + ((this.max - this.min) / 100) * thumbValue * pxPerVal * 100;
+      ((thumbValue - this.min) / (this.max - this.min)) *
+      ((this.sliderSize.width - this.thumbSize.width) / this.max) * 10;
+
+    // const posValue =
+    //   this.min + ((this.max - this.min) / 100) * thumbValue * pxPerVal * 100;
 
     if (this.orientation === 'horizontal') {
       position.left = posValue;
@@ -439,7 +444,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
       const pointValue = this.thumbPosToValue(
         position -
           this.sizeByOrientation(this.thumbSize) / 2 +
-          this.sizeByOrientation(scalePointSize) / 2
+          this.sizeByOrientation(scalePointSize) / 2,
       );
 
       if (i === 0 || this.isPointFits(position, prevPointPos, scalePointSize)) {
@@ -475,7 +480,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
   private isPointFits(
     pointPos: number,
     prevpointPos: number,
-    scalePointSize: ISize
+    scalePointSize: ISize,
   ): boolean {
     return pointPos - prevpointPos - 2 > this.sizeByOrientation(scalePointSize);
   }
