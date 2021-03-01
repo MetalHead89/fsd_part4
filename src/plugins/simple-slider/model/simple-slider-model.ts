@@ -392,11 +392,11 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
    * @returns {number} - количество пикселей в единице ширины слайдера
    */
   private getPxPerValue(): number {
-    if (this.orientation === 'horizontal') {
-      return (this.sliderSize.width - this.thumbSize.width) / this.max;
-    }
-
-    return (this.sliderSize.height - this.thumbSize.height) / this.max;
+    return (
+      (this.sizeByOrientation(this.sliderSize) -
+        this.sizeByOrientation(this.thumbSize)) /
+      this.max
+    );
   }
 
   /**
