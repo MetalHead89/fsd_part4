@@ -117,10 +117,12 @@ export default class ControlPanelView extends Subject implements IObserver {
     this.thumbOneValue.register('controlPanelDataUpdated', this);
     this.thumbTwoValue.register('controlPanelDataUpdated', this);
     this.min.register('controlPanelDataUpdated', this);
+    this.max.register('controlPanelDataUpdated', this);
   }
 
   update(eventType: string): void {
     if (eventType === 'controlPanelDataUpdated') {
+      console.log('sdfsdf')
       this.notify('controlPanelDataUpdated');
     }
   }

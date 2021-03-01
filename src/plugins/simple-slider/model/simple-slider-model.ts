@@ -72,8 +72,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
       this.updateMinValue(settings.min);
     }
     if (this.max !== settings.max) {
-      this.max = settings.max;
-      this.notify('maxIsUpdated');
+      this.updateMaxValue(settings.max);
     }
     if (this.step !== settings.step) {
       this.step = settings.step;
@@ -109,6 +108,19 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     }
     this.min = newMin;
     this.notify('minIsUpdated');
+  }
+
+  /**
+   * Устанавливает максимальное значение слайдера
+   * @param {number} value - новое значение максимума
+   */
+  private updateMaxValue(value: number): void {
+    let newMax = value;
+    if (this.type === 'range' && newMax < this.min) {
+      newMax = this.min;
+    }
+    this.max = newMax;
+    this.notify('maxIsUpdated');
   }
 
   /**

@@ -48,6 +48,7 @@ class SimpleSliderController implements IObserver {
     this.view.register('thumbIsDragged', this);
     this.model.register('thumbsPosIsUpdated', this);
     this.model.register('minIsUpdated', this);
+    this.model.register('maxIsUpdated', this);
   }
 
   // /**
@@ -64,6 +65,9 @@ class SimpleSliderController implements IObserver {
       this.view.updateProgressBar(this.model.getProgressBarParams());
     }
     if (eventType === 'minIsUpdated') {
+      this.updateView();
+    }
+    if (eventType === 'maxIsUpdated') {
       this.updateView();
     }
   }
