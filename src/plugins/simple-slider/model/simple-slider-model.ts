@@ -75,8 +75,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
       this.updateMaxValue(settings.max);
     }
     if (this.step !== settings.step) {
-      this.step = settings.step;
-      this.notify('stepIsUpdated');
+      this.updateStep(settings.step);
     }
     if (this.scale !== settings.scale) {
       this.scale = settings.scale;
@@ -278,7 +277,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
       );
     }
 
-    if (this.isCorrectThumbsPos(thumbOneValue, thumbTwoValue)) {
+    if (thumbTwoValue === null || thumbOneValue <= thumbTwoValue) {
       this.thumbOneValue = thumbOneValue;
       if (thumbTwoValue !== null) {
         this.thumbTwoValue = thumbTwoValue;
@@ -286,30 +285,6 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     }
 
     this.notify('thumbsPosIsUpdated');
-  }
-
-  /**
-   * Проверка корректности значений ползунков
-   * @param {number} thumbOneValue - зачение первого бегунка
-   * @param {number} thumbTwoValue - значение второго бегунка
-   * @returns {boolean} - значение отображающее корректность начений бегунков
-   */
-  private isCorrectThumbsPos(
-    thumbOneValue: number,
-    thumbTwoValue: number | null
-  ): boolean {
-    let result = true;
-
-    if (thumbTwoValue !== null) {
-      result =
-        thumbOneValue <= thumbTwoValue &&
-        thumbOneValue >= this.min &&
-        thumbTwoValue <= this.max;
-    } else {
-      result = thumbOneValue >= this.min && thumbOneValue <= this.max;
-    }
-
-    return result;
   }
 
   /**
@@ -375,11 +350,15 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
   private thumbPosToValue(position: number): number {
     const pixelsPerValue = this.getPxPerValue();
 
-    return Math.round(
+    let newValue = Math.round(
       this.min +
-        ((this.max - this.min) / 100) *
-          Math.round(position / pixelsPerValue)
+        ((this.max - this.min) / 100) * Math.round(position / pixelsPerValue)
     );
+
+    newValue = newValue < this.min ? this.min : newValue;
+    newValue = newValue > this.max ? this.max : newValue;
+
+    return newValue;
   }
 
   /**
