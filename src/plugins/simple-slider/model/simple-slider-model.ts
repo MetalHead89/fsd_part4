@@ -171,7 +171,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
 
   /**
    * Возвращает состояние шкалы (выключена или включена)
-   * @returns {number} - состояние шкалы
+   * @returns {boolean} - состояние шкалы
    */
   getScaleState(): boolean {
     return this.scale;
@@ -179,12 +179,16 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
 
   /**
    * Возвращает состояние попапов (выключены или отключены)
-   * @returns {number} - состояние попапов
+   * @returns {boolean} - состояние попапов
    */
   getPopUpsState(): boolean {
     return this.popUps;
   }
 
+  /**
+   * Возвращает тип слайдера (одиночный или диапазон)
+   * @returns {string} - тип слайдера
+   */
   getType(): string {
     return this.type;
   }
