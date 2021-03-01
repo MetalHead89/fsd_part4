@@ -193,6 +193,10 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     return this.type;
   }
 
+  /**
+   * Возвращает ориентацию слайдера (горизонтальный или вертикальный)
+   * @returns {string} - ориентация слайдера
+   */
   getOrientation(): string {
     return this.orientation;
   }
