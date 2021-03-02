@@ -257,13 +257,13 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
       popUpOne: {
         value: this.thumbOneValue,
         position: this.getPopUpPosition(
-          this.thumbValueToPos(this.thumbOneValue),
+          this.thumbValueToPos(this.thumbOneValue)
         ),
       },
       popUpTwo: {
         value: this.thumbTwoValue,
         position: this.getPopUpPosition(
-          this.thumbValueToPos(this.thumbTwoValue),
+          this.thumbValueToPos(this.thumbTwoValue)
         ),
       },
     };
@@ -283,13 +283,13 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
    */
   updateThumbsState(positions: IThumbsPositions): void {
     const thumbOneValue = this.valueWithStep(
-      this.posByOrientation(positions.thumbOne),
+      this.posByOrientation(positions.thumbOne)
     );
     let thumbTwoValue: null | number = null;
 
     if (positions.thumbTwo !== null) {
       thumbTwoValue = this.valueWithStep(
-        this.posByOrientation(positions.thumbTwo),
+        this.posByOrientation(positions.thumbTwo)
       );
     }
 
@@ -372,7 +372,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
 
     let newValue = Math.round(
       this.min +
-        ((this.max - this.min) / 100) * Math.round(position / pixelsPerValue),
+        ((this.max - this.min) / 100) * Math.round(position / pixelsPerValue)
     );
 
     newValue = newValue < this.min ? this.min : newValue;
@@ -448,6 +448,11 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     return position.top;
   }
 
+  /**
+   * Возвращает массив объектов с настройками делений шкалы
+   * @param {ISize} scalePointSize - объект с размерами шкалы
+   * @returns {IScalePointParams[]} - массив объектов с настройками делений шкалы
+   */
   getScalePoints(scalePointSize: ISize): IScalePointParams[] {
     const scaleParams = [];
     const stepsCount = this.getStepsCount();
@@ -464,7 +469,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
       const pointValue = this.thumbPosToValue(
         position -
           this.sizeByOrientation(this.thumbSize) / 2 +
-          this.sizeByOrientation(scalePointSize) / 2,
+          this.sizeByOrientation(scalePointSize) / 2
       );
 
       position = this.getNextScalePointPos(position, scalePointSize);
@@ -502,7 +507,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
   private isPointFits(
     pointPos: number,
     prevpointPos: number,
-    scalePointSize: ISize,
+    scalePointSize: ISize
   ): boolean {
     return pointPos - prevpointPos > this.sizeByOrientation(scalePointSize);
   }
