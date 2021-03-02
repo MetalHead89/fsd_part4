@@ -1,6 +1,7 @@
 export interface IRadioParams {
   label: string;
   value: string;
+  checked?: boolean;
 }
 
 export interface ICheckboxParams {

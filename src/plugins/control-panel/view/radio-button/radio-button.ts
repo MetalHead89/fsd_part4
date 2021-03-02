@@ -43,6 +43,9 @@ export default class RadioButton extends Subject {
       radioButton.type = 'radio';
       radioButton.name = name;
       radioButton.value = params[radio].value;
+      if (radio === 0 || params[radio].checked) {
+        radioButton.checked = true;
+      }
       radioButton.classList.add('control-panel__radio-button');
       radioButton.addEventListener('change', this.onChange.bind(this));
       this.radios.push(radioButton);
