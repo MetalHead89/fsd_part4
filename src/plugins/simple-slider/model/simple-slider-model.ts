@@ -515,6 +515,12 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     return pointPos - prevpointPos > this.sizeByOrientation(scalePointSize);
   }
 
+  /**
+   * Возвращает позицию следующего деления шкалы
+   * @param {number} position - позиция последнго деления
+   * @param {ISize} pointSize - объект с размерами деления
+   * @returns {number} - позиция следующего деления
+   */
   private getNextScalePointPos(position: number, pointSize: ISize): number {
     let newPosition = position;
 
