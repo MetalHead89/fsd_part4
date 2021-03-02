@@ -114,6 +114,9 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
   }
 
   switchToSingle(): void {
+    this.thumbTwo?.unsubscribe('thumbIsCatched', this);
+    this.thumbTwo?.unsubscribe('thumbIsCatched', this);
+
     this.thumbTwo?.remove();
     this.thumbTwo = null;
     this.popUpTwo?.remove();
@@ -124,6 +127,11 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
     if (this.thumbTwo === null) {
       this.thumbTwo = new Thumb();
       this.popUpTwo = new PopUp();
+      this.container.append(this.thumbTwo.getElement());
+      this.container.append(this.popUpTwo.getElement());
+
+      this.thumbTwo.register('thumbIsDragged', this);
+      this.thumbTwo.register('thumbIsCatched', this);
     }
   }
 
