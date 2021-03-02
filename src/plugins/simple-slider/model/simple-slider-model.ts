@@ -66,6 +66,9 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     }
     if (this.type !== settings.type) {
       this.type = settings.type;
+      if (this.type === 'range' && this.thumbTwoValue < this.thumbOneValue) {
+        this.thumbTwoValue = this.thumbOneValue;
+      }
       this.notify('typeIsUpdated');
     }
     if (this.min !== settings.min) {
