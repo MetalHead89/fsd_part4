@@ -269,6 +269,10 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     };
   }
 
+  /**
+   * Возвращает объект с текущими значеними бегунков
+   * @returns {IThumbsValues} - объект со значеними бегунков
+   */
   getThumbsValues(): IThumbsValues {
     return { thumbOne: this.thumbOneValue, thumbTwo: this.thumbTwoValue };
   }
