@@ -463,6 +463,8 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
           this.sizeByOrientation(scalePointSize) / 2,
       );
 
+      position = this.getNextScalePointPos(position, scalePointSize);
+
       if (i === 0 || this.isPointFits(position, prevPointPos, scalePointSize)) {
         const pointPos = { left: 0, top: 0 };
         const paddings = { left: 0, top: 0 };
@@ -498,7 +500,22 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     prevpointPos: number,
     scalePointSize: ISize,
   ): boolean {
-    return pointPos - prevpointPos - 2 > this.sizeByOrientation(scalePointSize);
+    return pointPos - prevpointPos > this.sizeByOrientation(scalePointSize);
+  }
+
+  private getNextScalePointPos(position: number, pointSize: ISize): number {
+    let newPosition = position;
+
+    const extremePosition =
+      this.sizeByOrientation(this.sliderSize) -
+      this.sizeByOrientation(this.thumbSize) / 2 -
+      this.sizeByOrientation(pointSize) / 2;
+
+    if (newPosition > extremePosition) {
+      newPosition = extremePosition;
+    }
+
+    return newPosition;
   }
 }
 
