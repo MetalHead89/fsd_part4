@@ -16,9 +16,9 @@ import SimpleSliderView from './view/simple-slider-view';
     popUps: true,
     min: 0,
     max: 10,
-    step: 3,
+    step: 1,
     thumbOneValue: 3,
-    thumbTwoValue: 10,
+    thumbTwoValue: 7,
     sliderSize: { width: 500, height: 10 },
     thumbSize: { width: 20, height: 20 },
   };

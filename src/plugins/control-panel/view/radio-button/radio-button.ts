@@ -1,10 +1,12 @@
+import Subject from '../../../simple-slider/subject/subject';
 import { IRadioParams } from '../../interfaces';
 
-export default class RadioButton {
+export default class RadioButton extends Subject {
   private control: HTMLDivElement;
   private radios: HTMLInputElement[];
 
   constructor(name: string, ...params: IRadioParams[]) {
+    super();
     const uniqueName = RadioButton.generateName(name);
     this.control = document.createElement('div');
     this.control.classList.add('control-panel__radio-group');
@@ -61,6 +63,8 @@ export default class RadioButton {
         label?.classList.remove('control-panel__radio-label_checked');
       }
     }
+
+    this.notify('controlPanelDataUpdated');
   }
 
   switchTo(value: string): void {
@@ -73,7 +77,7 @@ export default class RadioButton {
     }
   }
 
-  static generateName(name: string): string {
+  private static generateName(name: string): string {
     let counter = 1;
     let uniqueName = '';
 

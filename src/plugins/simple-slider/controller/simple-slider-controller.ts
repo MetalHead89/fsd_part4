@@ -50,6 +50,7 @@ class SimpleSliderController implements IObserver {
     this.model.register('minIsUpdated', this);
     this.model.register('maxIsUpdated', this);
     this.model.register('stepIsUpdated', this);
+    this.model.register('typeIsUpdated', this);
   }
 
   // /**
@@ -74,6 +75,14 @@ class SimpleSliderController implements IObserver {
     if (eventType === 'stepIsUpdated') {
       this.updateView();
     }
+    if (eventType === 'typeIsUpdated') {
+      if (this.model.getType() === 'single') {
+        this.view.switchToSingle();
+        this.model.updateThumbsState(this.model.getThumbsPos());
+      } else {
+        this.view.switchToRange();
+      }
+    }
   }
 
   private updateView(): void {
@@ -83,7 +92,7 @@ class SimpleSliderController implements IObserver {
       this.view.enableScale();
       const max = this.model.getMax();
       const points = this.model.getScalePoints(
-        this.view.getScalePointSize(max)
+        this.view.getScalePointSize(max),
       );
       this.view.addScalePoints(points);
     } else {

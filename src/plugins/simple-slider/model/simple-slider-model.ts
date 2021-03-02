@@ -61,8 +61,8 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
       this.thumbSize = settings.thumbSize;
     }
     if (this.orientation !== settings.orientation) {
-      this.orientation = settings.orientation;
-      this.notify('orientationIsUpdated');
+      // this.orientation = settings.orientation;
+      // this.notify('orientationIsUpdated');
     }
     if (this.type !== settings.type) {
       this.type = settings.type;
