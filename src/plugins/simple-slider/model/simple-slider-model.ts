@@ -257,13 +257,13 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
       popUpOne: {
         value: this.thumbOneValue,
         position: this.getPopUpPosition(
-          this.thumbValueToPos(this.thumbOneValue)
+          this.thumbValueToPos(this.thumbOneValue),
         ),
       },
       popUpTwo: {
         value: this.thumbTwoValue,
         position: this.getPopUpPosition(
-          this.thumbValueToPos(this.thumbTwoValue)
+          this.thumbValueToPos(this.thumbTwoValue),
         ),
       },
     };
@@ -279,13 +279,13 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
    */
   updateThumbsState(positions: IThumbsPositions): void {
     const thumbOneValue = this.valueWithStep(
-      this.posByOrientation(positions.thumbOne)
+      this.posByOrientation(positions.thumbOne),
     );
     let thumbTwoValue: null | number = null;
 
     if (positions.thumbTwo !== null) {
       thumbTwoValue = this.valueWithStep(
-        this.posByOrientation(positions.thumbTwo)
+        this.posByOrientation(positions.thumbTwo),
       );
     }
 
@@ -326,6 +326,10 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
    * @returns {number} - значение бегунка в соответствии с заданным шагом
    */
   private valueWithStep(position: number): number {
+    if (this.thumbPosToValue(position) >= this.max) {
+      return this.thumbPosToValue(position);
+    }
+
     const stepSize = this.getStepSize();
     const newPosition = Math.round(position / stepSize) * stepSize;
 
@@ -364,7 +368,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
 
     let newValue = Math.round(
       this.min +
-        ((this.max - this.min) / 100) * Math.round(position / pixelsPerValue)
+        ((this.max - this.min) / 100) * Math.round(position / pixelsPerValue),
     );
 
     newValue = newValue < this.min ? this.min : newValue;
@@ -456,7 +460,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
       const pointValue = this.thumbPosToValue(
         position -
           this.sizeByOrientation(this.thumbSize) / 2 +
-          this.sizeByOrientation(scalePointSize) / 2
+          this.sizeByOrientation(scalePointSize) / 2,
       );
 
       if (i === 0 || this.isPointFits(position, prevPointPos, scalePointSize)) {
@@ -492,7 +496,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
   private isPointFits(
     pointPos: number,
     prevpointPos: number,
-    scalePointSize: ISize
+    scalePointSize: ISize,
   ): boolean {
     return pointPos - prevpointPos - 2 > this.sizeByOrientation(scalePointSize);
   }
