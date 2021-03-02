@@ -39,7 +39,7 @@ export interface IThumbsValues {
 
 export interface ISubject {
   register(eventType: string, observer: IObserver): void;
-  remove(eventType: string, observer: IObserver): void;
+  unsubscribe(eventType: string, observer: IObserver): void;
   notify(eventType: string): void;
 }
 
