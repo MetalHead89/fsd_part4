@@ -47,6 +47,9 @@ class SimpleSliderController implements IObserver {
     this.updateView();
   }
 
+  /**
+   * Подписывает Controller на необходимые события, возникающие во View и Model
+   */
   private subscribeToEvents(): void {
     this.view.register('thumbIsDragged', this);
     this.model.register('thumbsPosIsUpdated', this);
