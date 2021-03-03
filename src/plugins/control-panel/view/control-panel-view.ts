@@ -120,6 +120,7 @@ export default class ControlPanelView extends Subject implements IObserver {
     this.max.register('controlPanelDataUpdated', this);
     this.step.register('controlPanelDataUpdated', this);
     this.typeRadio.register('controlPanelDataUpdated', this);
+    this.orientationRadio.register('controlPanelDataUpdated', this);
   }
 
   update(eventType: string): void {

@@ -31,6 +31,7 @@ export default class ControlPanelController implements IObserver {
     }
 
     if (eventType === 'controlPanelDataUpdated') {
+      console.log(this.view.getOrientation());
       const sliderSettings = {
         orientation: this.view.getOrientation(),
         type: this.view.getType(),

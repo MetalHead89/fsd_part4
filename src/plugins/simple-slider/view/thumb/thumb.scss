@@ -15,3 +15,12 @@
     transform: translate(0, -25%) scale(1.2);
   }
 }
+
+.slider__thumb_vertical {
+  left: 0;
+  transform: translate(-25%, 0);
+  &:hover,
+  &:active {
+    transform: translate(-25%, 0) scale(1.2);
+  }
+}

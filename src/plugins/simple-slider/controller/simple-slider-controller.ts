@@ -51,6 +51,7 @@ class SimpleSliderController implements IObserver {
     this.model.register('maxIsUpdated', this);
     this.model.register('stepIsUpdated', this);
     this.model.register('typeIsUpdated', this);
+    this.model.register('orientationIsUpdated', this);
   }
 
   // /**
@@ -75,6 +76,14 @@ class SimpleSliderController implements IObserver {
     if (eventType === 'stepIsUpdated') {
       this.updateView();
     }
+    if (eventType === 'orientationIsUpdated') {
+      if (this.model.getOrientation() === 'horizontal') {
+        this.view.switchToHorizontal();
+      } else {
+        this.view.switchToVertical();
+      }
+      this.updateView();
+    }
     if (eventType === 'typeIsUpdated') {
       if (this.model.getType() === 'single') {
         this.view.switchToSingle();
@@ -93,7 +102,7 @@ class SimpleSliderController implements IObserver {
       this.view.enableScale();
       const max = this.model.getMax();
       const points = this.model.getScalePoints(
-        this.view.getScalePointSize(max)
+        this.view.getScalePointSize(max),
       );
       this.view.addScalePoints(points);
     } else {
