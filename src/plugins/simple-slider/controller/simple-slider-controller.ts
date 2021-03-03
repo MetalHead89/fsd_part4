@@ -82,6 +82,8 @@ class SimpleSliderController implements IObserver {
       } else {
         this.view.switchToVertical();
       }
+
+      this.model.setSliderSize(this.view.getSliderSize());
       this.updateView();
     }
     if (eventType === 'typeIsUpdated') {
