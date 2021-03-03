@@ -60,10 +60,10 @@ class SimpleSliderController implements IObserver {
     this.model.register('orientationIsUpdated', this);
   }
 
-  // /**
-  //  * Перехватывание и реагирование на уведомления от SimpleSliderModel и SimpleSliderView
-  //  * @param {string} eventType - тип уведомления
-  //  */
+  /**
+   * Перехватывание и реагирование на события, возникающие в Model и View
+   * @param {string} eventType - тип уведомления
+   */
   update(eventType: string): void {
     if (eventType === 'thumbIsDragged') {
       this.model.updateThumbsState(this.view.getThumbsPos());
@@ -103,6 +103,9 @@ class SimpleSliderController implements IObserver {
     }
   }
 
+  /**
+   * Обновляет бегунки, прогрессбар и шкалу во View в соответствии с их состоянием
+   */
   private updateView(): void {
     this.model.updateThumbsState(this.model.getThumbsPos());
 
