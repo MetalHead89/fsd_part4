@@ -19,6 +19,9 @@ class SimpleSliderController implements IObserver {
     this.init();
   }
 
+  /**
+   * Инициализация слайдера в соответстви с первичными настройками
+   */
   private init(): void {
     this.model.setSliderSize(this.view.getSliderSize());
     this.model.setThumbSize(this.view.getThumbSize());
@@ -104,7 +107,7 @@ class SimpleSliderController implements IObserver {
       this.view.enableScale();
       const max = this.model.getMax();
       const points = this.model.getScalePoints(
-        this.view.getScalePointSize(max),
+        this.view.getScalePointSize(max)
       );
       this.view.addScalePoints(points);
     } else {
