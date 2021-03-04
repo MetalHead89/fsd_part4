@@ -1,11 +1,13 @@
+import Subject from '../../../simple-slider/subject/subject';
 import { ICheckboxParams } from '../../interfaces';
 
-export default class Checkbox {
+export default class Checkbox extends Subject {
   private control: HTMLDivElement;
   private checkbox: HTMLInputElement;
   private label: HTMLLabelElement;
 
   constructor(params: ICheckboxParams) {
+    super();
     this.control = document.createElement('div');
     this.label = document.createElement('label');
     this.checkbox = document.createElement('input');
@@ -39,6 +41,8 @@ export default class Checkbox {
     } else {
       this.label.classList.remove('control-panel__checkbox-label_checked');
     }
+
+    this.notify('controlPanelDataUpdated');
   }
 
   setState(state: boolean): void {

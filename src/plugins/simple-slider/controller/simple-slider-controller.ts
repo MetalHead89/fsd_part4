@@ -1,5 +1,6 @@
 /* eslint-disable comma-dangle */
 
+import { event } from 'jquery';
 import {
   IControllerParams,
   IObserver,
@@ -58,6 +59,7 @@ class SimpleSliderController implements IObserver {
     this.model.register('stepIsUpdated', this);
     this.model.register('typeIsUpdated', this);
     this.model.register('orientationIsUpdated', this);
+    this.model.register('scaleStateIsUpdated', this);
   }
 
   /**
@@ -100,6 +102,14 @@ class SimpleSliderController implements IObserver {
       }
 
       this.model.updateThumbsState(this.model.getThumbsPos());
+    }
+    if (eventType === 'scaleStateIsUpdated') {
+      if (this.model.getScaleState()) {
+        this.view.enableScale();
+        this.updateView();
+      } else {
+        this.view.disableScale();
+      }
     }
   }
 
