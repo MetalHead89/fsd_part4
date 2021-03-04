@@ -60,6 +60,7 @@ class SimpleSliderController implements IObserver {
     this.model.register('typeIsUpdated', this);
     this.model.register('orientationIsUpdated', this);
     this.model.register('scaleStateIsUpdated', this);
+    this.model.register('popUpsStateIsUpdated', this);
   }
 
   /**
@@ -109,6 +110,14 @@ class SimpleSliderController implements IObserver {
         this.updateView();
       } else {
         this.view.disableScale();
+      }
+    }
+    if (eventType === 'popUpsStateIsUpdated') {
+      if (this.model.getPopUpsState()) {
+        this.view.enablePopUps();
+        this.model.updateThumbsState(this.model.getThumbsPos());
+      } else {
+        this.view.disablePopUps();
       }
     }
   }

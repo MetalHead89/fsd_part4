@@ -31,12 +31,12 @@ export default class ControlPanelView extends Subject implements IObserver {
     this.typeRadio = new RadioButton(
       'type',
       { label: 'single', value: 'single' },
-      { label: 'range', value: 'range' },
+      { label: 'range', value: 'range' }
     );
     this.orientationRadio = new RadioButton(
       'orientation',
       { label: 'horizontal', value: 'horizontal' },
-      { label: 'vertical', value: 'vertical' },
+      { label: 'vertical', value: 'vertical' }
     );
     this.scaleCheckbox = new Checkbox({
       label: 'scale',
@@ -63,7 +63,7 @@ export default class ControlPanelView extends Subject implements IObserver {
           this.thumbOneValue.getControl(),
           this.thumbTwoValue.getControl(),
         ],
-      }),
+      })
     );
 
     container.append(
@@ -74,7 +74,7 @@ export default class ControlPanelView extends Subject implements IObserver {
           this.max.getControl(),
           this.step.getControl(),
         ],
-      }),
+      })
     );
 
     const typeRadioGroup = groupElements({
@@ -107,7 +107,7 @@ export default class ControlPanelView extends Subject implements IObserver {
       groupElements({
         wrapperClass: 'control-panel__checkboxes-and-radios-wrapper',
         elements: [allRadiosGroup, checkboxesGroup],
-      }),
+      })
     );
 
     this.sliderWrapper.append(container.getElement());
@@ -122,6 +122,7 @@ export default class ControlPanelView extends Subject implements IObserver {
     this.typeRadio.register('controlPanelDataUpdated', this);
     this.orientationRadio.register('controlPanelDataUpdated', this);
     this.scaleCheckbox.register('controlPanelDataUpdated', this);
+    this.popUpsCheckbox.register('controlPanelDataUpdated', this);
   }
 
   update(eventType: string): void {
