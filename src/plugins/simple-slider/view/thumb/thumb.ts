@@ -11,10 +11,17 @@ class Thumb extends Subject implements IElement {
   private onMouseUpHandler = this.endDrag.bind(this);
   private position = { left: 0, top: 0 };
 
-  constructor() {
+  constructor(orientation?: string) {
     super();
+
     this.element = document.createElement('div');
-    this.element.classList.add('slider__thumb', 'slider__thumb_horizontal');
+
+    let orientationClass = 'slider__thumb_horizontal';
+    if (orientation) {
+      orientationClass = `slider__thumb_${orientation}`;
+    }
+    this.element.classList.add('slider__thumb', orientationClass);
+
     this.addMousedownEventListener();
     this.disableDragAndDrop();
   }
