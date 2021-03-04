@@ -161,7 +161,7 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
     if (this.scale !== null) {
       this.scale?.remove();
     }
-    this.scale = new Scale();
+    this.scale = new Scale(this.container.getOrientation());
     this.container.append(this.scale.getElement());
   }
 

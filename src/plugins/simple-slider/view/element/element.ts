@@ -35,7 +35,7 @@ export default class Element implements IElement {
     this.element.remove();
   }
 
-  protected getOrientation(): string {
+  getOrientation(): string {
     const mainClass = this.element.classList[0];
     const classWithOrientation = this.element.classList[1];
     return classWithOrientation.replace(`${mainClass}_`, '');

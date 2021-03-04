@@ -1,10 +1,15 @@
+/* eslint-disable comma-dangle */
 import { IScalePointParams, ISize } from '../../interfaces';
 import Element from '../element/element';
 
 class Scale extends Element {
-  constructor() {
+  constructor(orientation?: string) {
     super();
-    this.element.classList.add('slider__scale', 'slider__scale_horizontal');
+    let orientationClass = 'slider__scale_horizontal';
+    if (orientation) {
+      orientationClass = `slider__scale_${orientation}`;
+    }
+    this.element.classList.add('slider__scale', orientationClass);
   }
 
   getPointSize(value: number): ISize {
