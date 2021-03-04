@@ -43,6 +43,12 @@ class Thumb extends Subject implements IElement {
     this.element.style.zIndex = index.toString();
   }
 
+  getOrientation(): string {
+    const mainClass = this.element.classList[0];
+    const classWithOrientation = this.element.classList[1];
+    return classWithOrientation.replace(`${mainClass}_`, '');
+  }
+
   /**
    * Отключает html5 Drag and Drop
    */

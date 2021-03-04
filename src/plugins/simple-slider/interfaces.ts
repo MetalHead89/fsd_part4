@@ -22,6 +22,7 @@ export interface IElement {
   getSize(): ISize;
   switchToHorizontal(): void;
   switchToVertical(): void;
+  getOrientation(): string;
 }
 
 export interface IObserver {
