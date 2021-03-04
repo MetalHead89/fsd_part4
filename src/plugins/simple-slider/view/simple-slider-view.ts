@@ -126,7 +126,7 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
   switchToRange(): void {
     if (this.thumbTwo === null) {
       this.thumbTwo = new Thumb(this.container.getOrientation());
-      this.popUpTwo = new PopUp();
+      this.popUpTwo = new PopUp(this.container.getOrientation());
       this.container.append(this.thumbTwo.getElement());
       this.container.append(this.popUpTwo.getElement());
 

@@ -2,9 +2,14 @@ import { IPopUpParams, IPosition } from '../../interfaces';
 import Element from '../element/element';
 
 class PopUp extends Element {
-  constructor() {
+  constructor(orientation?: string) {
     super();
-    this.element.classList.add('slider__pop-up', 'slider__pop-up_horizontal');
+
+    let orientationClass = 'slider__pop-up_horizontal';
+    if (orientation) {
+      orientationClass = `slider__pop-up_${orientation}`;
+    }
+    this.element.classList.add('slider__pop-up', orientationClass);
   }
 
   update(params: IPopUpParams): void {
