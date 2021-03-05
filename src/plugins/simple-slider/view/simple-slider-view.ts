@@ -264,6 +264,10 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
     return { width: 0, height: 0 };
   }
 
+  /**
+   * Добаавляет деления к шкале
+   * @param {IScalePointParams[]} points - массив объектов с параметрами делений шкалы
+   */
   addScalePoints(points: IScalePointParams[]): void {
     this.scale?.addPoints(points);
   }
