@@ -143,6 +143,9 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
     }
   }
 
+  /**
+   * Отключает всплываеющие подсказки над бегунками
+   */
   disablePopUps(): void {
     this.popUpOne?.remove();
     this.popUpOne = null;
