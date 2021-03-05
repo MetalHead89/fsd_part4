@@ -19,10 +19,6 @@ import ProgressBar from './progress-bar/progress-bar';
 import Scale from './scale/scale';
 import Subject from '../subject/subject';
 
-/**
- * Класс дорожки слайдера. Содержит HTML элемент дорожки слайдера
- * и организовывает управление им
- */
 class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
   private container: Container;
   private sliderWrapper: HTMLDivElement;
@@ -91,6 +87,9 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
     this.sliderWrapper.append(this.container.getElement());
   }
 
+  /**
+   * Меняет ориентацию слайдера на горизонтальную
+   */
   switchToHorizontal(): void {
     this.container.switchToHorizontal();
     this.track.switchToHorizontal();
