@@ -252,6 +252,11 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
     this.popUpTwo.update(params.popUpTwo);
   }
 
+  /**
+   * Возвращает объект с шириной и высотой одного деления шкалы (включая маркер деления и значение)
+   * @param {number} value - максимальное значение слайдера
+   * @returns {ISize} - объект с шириной и высотой одного деления шкалы
+   */
   getScalePointSize(value: number): ISize {
     if (this.scale !== null) {
       return this.scale.getPointSize(value);
