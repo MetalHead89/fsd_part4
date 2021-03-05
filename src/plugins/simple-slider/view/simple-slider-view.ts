@@ -115,6 +115,9 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
     this.scale?.switchToVertical();
   }
 
+  /**
+   * Меняет тип слайдера на одиночный, удаляя второй бегунок
+   */
   switchToSingle(): void {
     this.thumbTwo?.unsubscribe('thumbIsCatched', this);
     this.thumbTwo?.unsubscribe('thumbIsCatched', this);
