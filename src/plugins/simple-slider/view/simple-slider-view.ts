@@ -144,7 +144,7 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
   }
 
   /**
-   * Отключает всплываеющие подсказки над бегунками
+   * Отключает всплывающие подсказки над бегунками
    */
   disablePopUps(): void {
     this.popUpOne?.remove();
@@ -153,6 +153,9 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
     this.popUpTwo = null;
   }
 
+  /**
+   * Включает всплывающие подсказки над бегунками
+   */
   enablePopUps(): void {
     if (this.popUpOne === null) {
       this.popUpOne = new PopUp();
