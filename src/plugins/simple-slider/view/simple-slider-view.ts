@@ -101,6 +101,9 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
     this.scale?.switchToHorizontal();
   }
 
+  /**
+   * Меняет ориентацию слайдера на вертикальную
+   */
   switchToVertical(): void {
     this.container.switchToVertical();
     this.track.switchToVertical();
