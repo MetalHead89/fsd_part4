@@ -128,6 +128,9 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
     this.popUpTwo = null;
   }
 
+  /**
+   * Меняет тип слайдера на диапазон, добавляя второй бегунок, если он отсутствует
+   */
   switchToRange(): void {
     if (this.thumbTwo === null) {
       this.thumbTwo = new Thumb(this.container.getOrientation());
