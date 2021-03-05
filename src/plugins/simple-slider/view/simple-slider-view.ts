@@ -168,6 +168,9 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
     }
   }
 
+  /**
+   * Отключает шкалу
+   */
   disableScale(): void {
     this.scale?.remove();
     this.scale = null;
