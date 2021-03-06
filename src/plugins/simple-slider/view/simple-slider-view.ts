@@ -45,10 +45,10 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
     this.progressBar = new ProgressBar();
     this.scale = new Scale();
 
-    this.thumbOne.register('thumbIsDragged', this);
-    this.thumbTwo.register('thumbIsDragged', this);
-    this.thumbOne.register('thumbIsCatched', this);
-    this.thumbTwo.register('thumbIsCatched', this);
+    this.thumbOne.subject.register('thumbIsDragged', this);
+    this.thumbTwo.subject.register('thumbIsDragged', this);
+    this.thumbOne.subject.register('thumbIsCatched', this);
+    this.thumbTwo.subject.register('thumbIsCatched', this);
 
     this.assembleSlider();
   }
@@ -121,8 +121,8 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
    * Меняет тип слайдера на одиночный, удаляя второй бегунок
    */
   switchToSingle(): void {
-    this.thumbTwo?.unsubscribe('thumbIsCatched', this);
-    this.thumbTwo?.unsubscribe('thumbIsCatched', this);
+    this.thumbTwo?.subject.unsubscribe('thumbIsCatched', this);
+    this.thumbTwo?.subject.unsubscribe('thumbIsCatched', this);
 
     this.thumbTwo?.remove();
     this.thumbTwo = null;
@@ -140,8 +140,8 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
       this.container.append(this.thumbTwo.getElement());
       this.container.append(this.popUpTwo.getElement());
 
-      this.thumbTwo.register('thumbIsDragged', this);
-      this.thumbTwo.register('thumbIsCatched', this);
+      this.thumbTwo.subject.register('thumbIsDragged', this);
+      this.thumbTwo.subject.register('thumbIsCatched', this);
     }
   }
 

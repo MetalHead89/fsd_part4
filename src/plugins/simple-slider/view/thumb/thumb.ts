@@ -1,11 +1,11 @@
 /* eslint operator-linebreak: ["error", "after"] */
 /* eslint-disable comma-dangle */
-
-import { IElement, IPosition, ISize } from '../../interfaces';
+import { IPosition } from '../../interfaces';
 import Subject from '../../subject/subject';
+import Element from '../element/element';
 
-class Thumb extends Subject implements IElement {
-  private element: HTMLDivElement;
+class Thumb extends Element {
+  subject = new Subject();
   private shift = { shiftX: 0, shiftY: 0 };
   private onMouseMoveHandler = this.drag.bind(this);
   private onMouseUpHandler = this.endDrag.bind(this);
@@ -24,26 +24,6 @@ class Thumb extends Subject implements IElement {
 
     this.addMousedownEventListener();
     this.disableDragAndDrop();
-  }
-
-  switchToHorizontal(): void {
-    const mainClass = this.element.classList[0];
-    this.element.classList.remove(`${mainClass}_vertical`);
-    this.element.classList.add(`${mainClass}_horizontal`);
-  }
-
-  switchToVertical(): void {
-    const mainClass = this.element.classList[0];
-    this.element.classList.remove(`${mainClass}_horizontal`);
-    this.element.classList.add(`${mainClass}_vertical`);
-  }
-
-  remove(): void {
-    this.element.remove();
-  }
-
-  getElement(): HTMLDivElement {
-    return this.element;
   }
 
   setZIndex(index: number): void {
@@ -82,7 +62,7 @@ class Thumb extends Subject implements IElement {
     document.addEventListener('touchmove', this.onMouseMoveHandler);
     document.addEventListener('touchend', this.onMouseUpHandler);
 
-    this.notify('thumbIsCatched');
+    this.subject.notify('thumbIsCatched');
     this.increaseZIndex();
   }
 
@@ -115,7 +95,7 @@ class Thumb extends Subject implements IElement {
       });
     }
 
-    this.notify('thumbIsDragged');
+    this.subject.notify('thumbIsDragged');
   }
 
   /**
@@ -176,13 +156,6 @@ class Thumb extends Subject implements IElement {
     this.position = position;
     this.element.style.left = `${position.left}px`;
     this.element.style.top = `${position.top}px`;
-  }
-
-  getSize(): ISize {
-    return {
-      width: this.element.offsetWidth,
-      height: this.element.offsetHeight,
-    };
   }
 
   /**
