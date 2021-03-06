@@ -92,13 +92,7 @@ class SimpleSliderController implements IObserver {
         this.updateSliderOrientation();
         break;
       case 'typeIsUpdated':
-        if (this.model.getType() === 'single') {
-          this.view.switchToSingle();
-        } else {
-          this.view.switchToRange();
-        }
-
-        this.model.updateThumbsState(this.model.getThumbsPos());
+        this.updateSliderType();
         break;
       case 'scaleStateIsUpdated':
         if (this.model.getScaleState()) {
@@ -154,6 +148,16 @@ class SimpleSliderController implements IObserver {
 
     this.model.setSliderSize(this.view.getSliderSize());
     this.updateView();
+  }
+
+  private updateSliderType(): void {
+    if (this.model.getType() === 'single') {
+      this.view.switchToSingle();
+    } else {
+      this.view.switchToRange();
+    }
+
+    this.model.updateThumbsState(this.model.getThumbsPos());
   }
 }
 
