@@ -8,6 +8,7 @@ import {
   IScalePointParams,
   ISimpleSliderView,
   ISize,
+  ISubject,
   IThumbsPositions,
 } from '../interfaces';
 
@@ -19,7 +20,8 @@ import ProgressBar from './progress-bar/progress-bar';
 import Scale from './scale/scale';
 import Subject from '../subject/subject';
 
-class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
+class SimpleSliderView implements ISimpleSliderView, IObserver {
+  subject: ISubject;
   private container: Container;
   private sliderWrapper: HTMLDivElement;
   private track: Track;
@@ -31,7 +33,7 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
   private scale: Scale | null;
 
   constructor(wrapper: HTMLDivElement) {
-    super();
+    this.subject = new Subject();
     this.sliderWrapper = wrapper;
 
     this.container = new Container();
@@ -57,7 +59,7 @@ class SimpleSliderView extends Subject implements ISimpleSliderView, IObserver {
    */
   update(eventType: string): void {
     if (eventType === 'thumbIsDragged') {
-      this.notify('thumbIsDragged');
+      this.subject.notify('thumbIsDragged');
     } else if (eventType === 'thumbIsCatched') {
       this.thumbOne.resetZIndex();
       this.thumbTwo?.resetZIndex();

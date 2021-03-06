@@ -75,7 +75,8 @@ export interface IScalePointParams {
   value: number;
 }
 
-export interface ISimpleSliderModel extends ISubject {
+export interface ISimpleSliderModel {
+  subject: ISubject;
   setSliderSize(size: ISize): void;
   setThumbSize(size: ISize): void;
   getMax(): number;
@@ -91,7 +92,8 @@ export interface ISimpleSliderModel extends ISubject {
   getOrientation(): string;
 }
 
-export interface ISimpleSliderView extends ISubject {
+export interface ISimpleSliderView {
+  subject: ISubject;
   switchToHorizontal(): void;
   switchToVertical(): void;
   switchToSingle(): void;

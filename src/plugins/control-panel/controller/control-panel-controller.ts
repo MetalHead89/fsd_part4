@@ -9,9 +9,9 @@ export default class ControlPanelController implements IObserver {
   constructor(view: ControlPanelView, model: ControlPanelModel) {
     this.view = view;
     this.model = model;
+    this.init();
     this.model.register('thumbsPosIsUpdated', this);
     this.view.register('controlPanelDataUpdated', this);
-    this.init();
   }
 
   init(): void {

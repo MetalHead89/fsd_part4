@@ -44,7 +44,7 @@ import SimpleSliderView from './view/simple-slider-view';
       });
     },
     getModelSubject(): ISubject {
-      return $(this).data().model;
+      return $(this).data().model.subject;
     },
     getThumbsValues(): IThumbsValues {
       return $(this).data().model.getThumbsValues();

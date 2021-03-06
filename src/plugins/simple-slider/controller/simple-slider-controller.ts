@@ -6,15 +6,20 @@ import {
   IObserver,
   ISimpleSliderModel,
   ISimpleSliderView,
+  ISubject,
 } from '../interfaces';
 
 class SimpleSliderController implements IObserver {
   private model: ISimpleSliderModel;
   private view: ISimpleSliderView;
+  private modelSubject: ISubject;
+  private viewSubject: ISubject;
 
   constructor(params: IControllerParams) {
     this.model = params.model;
     this.view = params.view;
+    this.modelSubject = this.model.subject;
+    this.viewSubject = this.view.subject;
 
     this.subscribeToEvents();
     this.init();
@@ -52,15 +57,15 @@ class SimpleSliderController implements IObserver {
    * Подписывает Controller на необходимые события, возникающие во View и Model
    */
   private subscribeToEvents(): void {
-    this.view.register('thumbIsDragged', this);
-    this.model.register('thumbsPosIsUpdated', this);
-    this.model.register('minIsUpdated', this);
-    this.model.register('maxIsUpdated', this);
-    this.model.register('stepIsUpdated', this);
-    this.model.register('typeIsUpdated', this);
-    this.model.register('orientationIsUpdated', this);
-    this.model.register('scaleStateIsUpdated', this);
-    this.model.register('popUpsStateIsUpdated', this);
+    this.viewSubject.register('thumbIsDragged', this);
+    this.modelSubject.register('thumbsPosIsUpdated', this);
+    this.modelSubject.register('minIsUpdated', this);
+    this.modelSubject.register('maxIsUpdated', this);
+    this.modelSubject.register('stepIsUpdated', this);
+    this.modelSubject.register('typeIsUpdated', this);
+    this.modelSubject.register('orientationIsUpdated', this);
+    this.modelSubject.register('scaleStateIsUpdated', this);
+    this.modelSubject.register('popUpsStateIsUpdated', this);
   }
 
   /**

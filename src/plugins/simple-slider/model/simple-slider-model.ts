@@ -12,10 +12,12 @@ import {
   IPopUps,
   IScalePointParams,
   IThumbsValues,
+  ISubject,
 } from '../interfaces';
 import Subject from '../subject/subject';
 
-class SimpleSliderModel extends Subject implements ISimpleSliderModel {
+class SimpleSliderModel implements ISimpleSliderModel {
+  subject: ISubject;
   private orientation = 'horizontal';
   private type = 'range';
   private scale = true;
@@ -29,7 +31,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
   private thumbSize = { width: 20, height: 10 };
 
   constructor(settings: ISliderSettings) {
-    super();
+    this.subject = new Subject();
     this.refreshSliderState(settings);
   }
 
@@ -62,14 +64,14 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     }
     if (this.orientation !== settings.orientation) {
       this.orientation = settings.orientation;
-      this.notify('orientationIsUpdated');
+      this.subject.notify('orientationIsUpdated');
     }
     if (this.type !== settings.type) {
       this.type = settings.type;
       if (this.type === 'range' && this.thumbTwoValue < this.thumbOneValue) {
         this.thumbTwoValue = this.thumbOneValue;
       }
-      this.notify('typeIsUpdated');
+      this.subject.notify('typeIsUpdated');
     }
     if (this.min !== settings.min) {
       this.updateMinValue(settings.min);
@@ -82,11 +84,11 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
     }
     if (this.scale !== settings.scale) {
       this.scale = settings.scale;
-      this.notify('scaleStateIsUpdated');
+      this.subject.notify('scaleStateIsUpdated');
     }
     if (this.popUps !== settings.popUps) {
       this.popUps = settings.popUps;
-      this.notify('popUpsStateIsUpdated');
+      this.subject.notify('popUpsStateIsUpdated');
     }
     if (
       this.thumbOneValue !== settings.thumbOneValue ||
@@ -109,7 +111,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
       newMin = this.max;
     }
     this.min = newMin;
-    this.notify('minIsUpdated');
+    this.subject.notify('minIsUpdated');
   }
 
   /**
@@ -122,7 +124,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
       newMax = this.min;
     }
     this.max = newMax;
-    this.notify('maxIsUpdated');
+    this.subject.notify('maxIsUpdated');
   }
 
   /**
@@ -135,7 +137,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
       newStep = 1;
     }
     this.step = newStep;
-    this.notify('stepIsUpdated');
+    this.subject.notify('stepIsUpdated');
   }
 
   /**
@@ -303,7 +305,7 @@ class SimpleSliderModel extends Subject implements ISimpleSliderModel {
       }
     }
 
-    this.notify('thumbsPosIsUpdated');
+    this.subject.notify('thumbsPosIsUpdated');
   }
 
   /**
