@@ -123,12 +123,18 @@ class SimpleSliderController implements IObserver {
     }
   }
 
+  /**
+   * Обновляет позиции бегунков во view
+   */
   private updateThumbsPos(): void {
     this.view.updateThumbs(this.model.getThumbsPos());
     this.view.updatePopUps(this.model.getPopUpsParams());
     this.view.updateProgressBar(this.model.getProgressBarParams());
   }
 
+  /**
+   * Обновляет ориентацию слайдера и его элементов во view
+   */
   private updateSliderOrientation(): void {
     if (this.model.getOrientation() === 'horizontal') {
       this.view.switchToHorizontal();
@@ -140,6 +146,9 @@ class SimpleSliderController implements IObserver {
     this.updateView();
   }
 
+  /**
+   * Обновляет слайдер во view в соответствии с типом
+   */
   private updateSliderType(): void {
     if (this.model.getType() === 'single') {
       this.view.switchToSingle();
@@ -150,6 +159,9 @@ class SimpleSliderController implements IObserver {
     this.model.updateThumbsState(this.model.getThumbsPos());
   }
 
+  /**
+   * Обновляет отображение шкалы слайдера во view
+   */
   private updateScaleState() {
     if (this.model.getScaleState()) {
       this.view.enableScale();
@@ -159,6 +171,9 @@ class SimpleSliderController implements IObserver {
     }
   }
 
+  /**
+   * Обновляет отображение всплывающих подсказок во view
+   */
   private updatePopUpsSate(): void {
     if (this.model.getPopUpsState()) {
       this.view.enablePopUps();
