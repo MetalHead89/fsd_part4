@@ -95,12 +95,7 @@ class SimpleSliderController implements IObserver {
         this.updateSliderType();
         break;
       case 'scaleStateIsUpdated':
-        if (this.model.getScaleState()) {
-          this.view.enableScale();
-          this.updateView();
-        } else {
-          this.view.disableScale();
-        }
+        this.updateScaleState();
         break;
       case 'popUpsStateIsUpdated':
         if (this.model.getPopUpsState()) {
@@ -158,6 +153,15 @@ class SimpleSliderController implements IObserver {
     }
 
     this.model.updateThumbsState(this.model.getThumbsPos());
+  }
+
+  private updateScaleState() {
+    if (this.model.getScaleState()) {
+      this.view.enableScale();
+      this.updateView();
+    } else {
+      this.view.disableScale();
+    }
   }
 }
 
