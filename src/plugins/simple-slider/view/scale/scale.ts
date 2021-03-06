@@ -4,12 +4,7 @@ import Element from '../element/element';
 
 class Scale extends Element {
   constructor(orientation?: string) {
-    super();
-    let orientationClass = 'slider__scale_horizontal';
-    if (orientation) {
-      orientationClass = `slider__scale_${orientation}`;
-    }
-    this.element.classList.add('slider__scale', orientationClass);
+    super('slider__scale', orientation);
   }
 
   getPointSize(value: number): ISize {

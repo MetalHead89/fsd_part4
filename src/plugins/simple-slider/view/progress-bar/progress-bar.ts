@@ -3,11 +3,7 @@ import Element from '../element/element';
 
 class ProgressBar extends Element {
   constructor() {
-    super();
-    this.element.classList.add(
-      'slider__progress-bar',
-      'slider__progress-bar_horizontal',
-    );
+    super('slider__progress-bar');
   }
 
   update(params: IProgressBarParams): void {

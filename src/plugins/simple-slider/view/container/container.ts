@@ -2,8 +2,7 @@ import Element from '../element/element';
 
 class Container extends Element {
   constructor() {
-    super();
-    this.element.classList.add('slider', 'slider_horizontal');
+    super('slider');
   }
 
   append(control: HTMLDivElement): void {

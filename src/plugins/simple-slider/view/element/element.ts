@@ -1,11 +1,17 @@
 import { IElement, ISize } from '../../interfaces';
 
 export default class Element implements IElement {
-  element: HTMLDivElement;
+  protected element: HTMLDivElement;
 
-  constructor() {
+  constructor(name: string, orientation?: string) {
     const element = document.createElement('div');
     this.element = element;
+
+    let orientationClass = `${name}_horizontal`;
+    if (orientation) {
+      orientationClass = `${name}_${orientation}`;
+    }
+    this.element.classList.add(`${name}`, orientationClass);
   }
 
   getElement(): HTMLDivElement {

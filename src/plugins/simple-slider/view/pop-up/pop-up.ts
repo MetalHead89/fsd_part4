@@ -3,13 +3,7 @@ import Element from '../element/element';
 
 class PopUp extends Element {
   constructor(orientation?: string) {
-    super();
-
-    let orientationClass = 'slider__pop-up_horizontal';
-    if (orientation) {
-      orientationClass = `slider__pop-up_${orientation}`;
-    }
-    this.element.classList.add('slider__pop-up', orientationClass);
+    super('slider__pop-up', orientation);
   }
 
   update(params: IPopUpParams): void {

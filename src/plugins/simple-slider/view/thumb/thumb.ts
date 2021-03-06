@@ -12,15 +12,7 @@ class Thumb extends Element {
   private position = { left: 0, top: 0 };
 
   constructor(orientation?: string) {
-    super();
-
-    this.element = document.createElement('div');
-
-    let orientationClass = 'slider__thumb_horizontal';
-    if (orientation) {
-      orientationClass = `slider__thumb_${orientation}`;
-    }
-    this.element.classList.add('slider__thumb', orientationClass);
+    super('slider__thumb', orientation);
 
     this.addMousedownEventListener();
     this.disableDragAndDrop();
