@@ -89,14 +89,7 @@ class SimpleSliderController implements IObserver {
         this.updateView();
         break;
       case 'orientationIsUpdated':
-        if (this.model.getOrientation() === 'horizontal') {
-          this.view.switchToHorizontal();
-        } else {
-          this.view.switchToVertical();
-        }
-
-        this.model.setSliderSize(this.view.getSliderSize());
-        this.updateView();
+        this.updateSliderOrientation();
         break;
       case 'typeIsUpdated':
         if (this.model.getType() === 'single') {
@@ -150,6 +143,17 @@ class SimpleSliderController implements IObserver {
     this.view.updateThumbs(this.model.getThumbsPos());
     this.view.updatePopUps(this.model.getPopUpsParams());
     this.view.updateProgressBar(this.model.getProgressBarParams());
+  }
+
+  private updateSliderOrientation(): void {
+    if (this.model.getOrientation() === 'horizontal') {
+      this.view.switchToHorizontal();
+    } else {
+      this.view.switchToVertical();
+    }
+
+    this.model.setSliderSize(this.view.getSliderSize());
+    this.updateView();
   }
 }
 
