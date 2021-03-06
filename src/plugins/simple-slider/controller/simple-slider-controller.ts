@@ -1,6 +1,5 @@
 /* eslint-disable comma-dangle */
 
-import { event } from 'jquery';
 import {
   IControllerParams,
   IObserver,
