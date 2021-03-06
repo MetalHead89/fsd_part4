@@ -72,57 +72,61 @@ class SimpleSliderController implements IObserver {
    * @param {string} eventType - тип уведомления
    */
   update(eventType: string): void {
-    if (eventType === 'thumbIsDragged') {
-      this.model.updateThumbsState(this.view.getThumbsPos());
-    }
-    if (eventType === 'thumbsPosIsUpdated') {
-      this.view.updateThumbs(this.model.getThumbsPos());
-      this.view.updatePopUps(this.model.getPopUpsParams());
-      this.view.updateProgressBar(this.model.getProgressBarParams());
-    }
-    if (eventType === 'minIsUpdated') {
-      this.updateView();
-    }
-    if (eventType === 'maxIsUpdated') {
-      this.updateView();
-    }
-    if (eventType === 'stepIsUpdated') {
-      this.updateView();
-    }
-    if (eventType === 'orientationIsUpdated') {
-      if (this.model.getOrientation() === 'horizontal') {
-        this.view.switchToHorizontal();
-      } else {
-        this.view.switchToVertical();
-      }
-
-      this.model.setSliderSize(this.view.getSliderSize());
-      this.updateView();
-    }
-    if (eventType === 'typeIsUpdated') {
-      if (this.model.getType() === 'single') {
-        this.view.switchToSingle();
-      } else {
-        this.view.switchToRange();
-      }
-
-      this.model.updateThumbsState(this.model.getThumbsPos());
-    }
-    if (eventType === 'scaleStateIsUpdated') {
-      if (this.model.getScaleState()) {
-        this.view.enableScale();
+    switch (eventType) {
+      case 'thumbIsDragged':
+        this.model.updateThumbsState(this.view.getThumbsPos());
+        break;
+      case 'thumbsPosIsUpdated':
+        this.view.updateThumbs(this.model.getThumbsPos());
+        this.view.updatePopUps(this.model.getPopUpsParams());
+        this.view.updateProgressBar(this.model.getProgressBarParams());
+        break;
+      case 'minIsUpdated':
         this.updateView();
-      } else {
-        this.view.disableScale();
-      }
-    }
-    if (eventType === 'popUpsStateIsUpdated') {
-      if (this.model.getPopUpsState()) {
-        this.view.enablePopUps();
+        break;
+      case 'maxIsUpdated':
+        this.updateView();
+        break;
+      case 'stepIsUpdated':
+        this.updateView();
+        break;
+      case 'orientationIsUpdated':
+        if (this.model.getOrientation() === 'horizontal') {
+          this.view.switchToHorizontal();
+        } else {
+          this.view.switchToVertical();
+        }
+
+        this.model.setSliderSize(this.view.getSliderSize());
+        this.updateView();
+        break;
+      case 'typeIsUpdated':
+        if (this.model.getType() === 'single') {
+          this.view.switchToSingle();
+        } else {
+          this.view.switchToRange();
+        }
+
         this.model.updateThumbsState(this.model.getThumbsPos());
-      } else {
-        this.view.disablePopUps();
-      }
+        break;
+      case 'scaleStateIsUpdated':
+        if (this.model.getScaleState()) {
+          this.view.enableScale();
+          this.updateView();
+        } else {
+          this.view.disableScale();
+        }
+        break;
+      case 'popUpsStateIsUpdated':
+        if (this.model.getPopUpsState()) {
+          this.view.enablePopUps();
+          this.model.updateThumbsState(this.model.getThumbsPos());
+        } else {
+          this.view.disablePopUps();
+        }
+        break;
+      default:
+        break;
     }
   }
 
