@@ -136,9 +136,12 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
   switchToRange(): void {
     if (this.thumbTwo === null) {
       this.thumbTwo = new Thumb(this.container.getOrientation());
-      this.popUpTwo = new PopUp(this.container.getOrientation());
       this.container.append(this.thumbTwo.getElement());
-      this.container.append(this.popUpTwo.getElement());
+
+      if (this.popUpOne !== null) {
+        this.popUpTwo = new PopUp(this.container.getOrientation());
+        this.container.append(this.popUpTwo.getElement());
+      }
 
       this.thumbTwo.subject.register('thumbIsDragged', this);
       this.thumbTwo.subject.register('thumbIsCatched', this);
@@ -243,15 +246,12 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
    * @param {IProgressBarParams} thumbsPositions - объект со значениями попапов
    */
   updatePopUps(params: IPopUps): void {
-    if (this.popUpOne === null) {
-      this.popUpOne = new PopUp();
+    if (this.popUpOne !== null) {
+      this.popUpOne.update(params.popUpOne);
     }
-    if (this.popUpTwo === null) {
-      this.popUpTwo = new PopUp();
+    if (this.popUpTwo !== null) {
+      this.popUpTwo.update(params.popUpTwo);
     }
-
-    this.popUpOne.update(params.popUpOne);
-    this.popUpTwo.update(params.popUpTwo);
   }
 
   /**
