@@ -163,12 +163,12 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
    */
   enablePopUps(): void {
     if (this.popUpOne === null) {
-      this.popUpOne = new PopUp();
+      this.popUpOne = new PopUp(this.container.getOrientation());
       this.container.append(this.popUpOne.getElement());
     }
 
     if (this.popUpTwo === null && this.thumbTwo !== null) {
-      this.popUpTwo = new PopUp();
+      this.popUpTwo = new PopUp(this.container.getOrientation());
       this.container.append(this.popUpTwo.getElement());
     }
   }
