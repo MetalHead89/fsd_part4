@@ -17,13 +17,6 @@ export interface ISliderSettings {
   thumbSize?: ISize;
 }
 
-export interface IElement {
-  getElement(): HTMLDivElement;
-  getSize(): ISize;
-  switchToHorizontal(): void;
-  switchToVertical(): void;
-}
-
 export interface IObserver {
   update(eventType: string): void;
 }
