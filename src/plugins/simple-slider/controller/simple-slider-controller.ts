@@ -77,9 +77,7 @@ class SimpleSliderController implements IObserver {
         this.model.updateThumbsState(this.view.getThumbsPos());
         break;
       case 'thumbsPosIsUpdated':
-        this.view.updateThumbs(this.model.getThumbsPos());
-        this.view.updatePopUps(this.model.getPopUpsParams());
-        this.view.updateProgressBar(this.model.getProgressBarParams());
+        this.updateThumbsPos();
         break;
       case 'minIsUpdated':
         this.updateView();
@@ -146,6 +144,12 @@ class SimpleSliderController implements IObserver {
     } else {
       this.view.disableScale();
     }
+  }
+
+  private updateThumbsPos(): void {
+    this.view.updateThumbs(this.model.getThumbsPos());
+    this.view.updatePopUps(this.model.getPopUpsParams());
+    this.view.updateProgressBar(this.model.getProgressBarParams());
   }
 }
 
