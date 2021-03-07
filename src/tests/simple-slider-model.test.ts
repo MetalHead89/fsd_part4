@@ -369,3 +369,15 @@ describe('Get pop ups params', () => {
     expect(params.popUpTwo.value).toBe(7);
   });
 });
+
+describe('Get thumb values', () => {
+  test('Should be {thumbOne: 3, thumbTwo: 7}', () => {
+    expect(model.getThumbsValues().thumbOne).toBe(3);
+    expect(model.getThumbsValues().thumbTwo).toBe(7);
+  });
+  test('Should be {thumbOne: 5, thumbTwo: 9}', () => {
+    model.setThumbsValues({ thumbOne: 5, thumbTwo: 9 });
+    expect(model.getThumbsValues().thumbOne).toBe(5);
+    expect(model.getThumbsValues().thumbTwo).toBe(9);
+  });
+});
