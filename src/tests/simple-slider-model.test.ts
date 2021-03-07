@@ -165,6 +165,15 @@ describe('Update thumbs state', () => {
     expect(model['thumbOneValue']).toBe(2);
     expect(model['thumbTwoValue']).toBe(8);
   });
+  test('Should be thumbOne: 0 and thumbTwo: 9', () => {
+    const position = {
+      thumbOne: { left: -45, top: 0 },
+      thumbTwo: { left: 450, top: 0 },
+    };
+    model.updateThumbsState(position);
+    expect(model['thumbOneValue']).toBe(0);
+    expect(model['thumbTwoValue']).toBe(9);
+  });
 });
 
 describe('Set slider size', () => {
