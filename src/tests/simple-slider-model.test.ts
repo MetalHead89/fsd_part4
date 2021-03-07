@@ -190,6 +190,83 @@ describe('Set thumb values', () => {
   });
 });
 
+describe('Get min', () => {
+  test('Should be 0', () => {
+    expect(model.getMin()).toBe(0);
+  });
+  test('Should be 2', () => {
+    settings.min = 2;
+    model = new SimpleSliderModel(settings);
+    expect(model.getMin()).toBe(2);
+  });
+});
+
+describe('Get max', () => {
+  test('Should be 10', () => {
+    expect(model.getMax()).toBe(10);
+  });
+  test('Should be 5', () => {
+    settings.max = 5;
+    model = new SimpleSliderModel(settings);
+    expect(model.getMax()).toBe(5);
+  });
+});
+
+describe('Get step', () => {
+  test('Should be 1', () => {
+    expect(model.getStep()).toBe(1);
+  });
+  test('Should be 2', () => {
+    settings.step = 2;
+    model = new SimpleSliderModel(settings);
+    expect(model.getStep()).toBe(2);
+  });
+});
+
+describe('Get scale state', () => {
+  test('Should be true', () => {
+    expect(model.getScaleState()).toBe(true);
+  });
+  test('Should be false', () => {
+    settings.scale = false;
+    model = new SimpleSliderModel(settings);
+    expect(model.getScaleState()).toBe(false);
+  });
+});
+
+describe('Get pop-ups state', () => {
+  test('Should be true', () => {
+    expect(model.getPopUpsState()).toBe(true);
+  });
+  test('Should be false', () => {
+    settings.popUps = false;
+    model = new SimpleSliderModel(settings);
+    expect(model.getPopUpsState()).toBe(false);
+  });
+});
+
+describe('Get type', () => {
+  test('Should be range', () => {
+    expect(model.getType()).toBe('range');
+  });
+  test('Should be single', () => {
+    settings.type = 'single';
+    model = new SimpleSliderModel(settings);
+    expect(model.getType()).toBe('single');
+  });
+});
+
+describe('Get orientation', () => {
+  test('Should be horizontal', () => {
+    expect(model.getOrientation()).toBe('horizontal');
+  });
+  test('Should be vertical', () => {
+    settings.orientation = 'vertical';
+    model = new SimpleSliderModel(settings);
+    expect(model.getOrientation()).toBe('vertical');
+  });
+});
+
 describe('Get progress bar params', () => {
   test('Should be position: {{left: 100, top: 0} and size: {width: 212, height: 10}}', () => {
     const progressParams = model.getProgressBarParams();
