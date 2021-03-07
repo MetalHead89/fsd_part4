@@ -149,6 +149,24 @@ describe('Set slider size', () => {
   });
 });
 
+describe('Set thumb size', () => {
+  test('Should be {width: 80, height: 15}', () => {
+    model.setThumbSize({ width: 80, height: 15 });
+    expect(model['thumbSize'].width).toBe(80);
+    expect(model['thumbSize'].height).toBe(15);
+  });
+  test('Should be {width: 0, height: 15}', () => {
+    model.setThumbSize({ width: -80, height: 15 });
+    expect(model['thumbSize'].width).toBe(0);
+    expect(model['thumbSize'].height).toBe(15);
+  });
+  test('Should be {width: 80, height: 0}', () => {
+    model.setThumbSize({ width: 80, height: 0 });
+    expect(model['thumbSize'].width).toBe(80);
+    expect(model['thumbSize'].height).toBe(0);
+  });
+});
+
 describe('Get progress bar params', () => {
   test('Should be position: {{left: 100, top: 0} and size: {width: 212, height: 10}}', () => {
     const progressParams = model.getProgressBarParams();
