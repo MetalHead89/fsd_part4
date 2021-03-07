@@ -73,15 +73,30 @@ describe('Refresh slider state', () => {
     model.refreshSliderState(settings);
     expect(model['min']).toBe(7);
   });
+  test('Min should be 10', () => {
+    settings.min = 50;
+    model.refreshSliderState(settings);
+    expect(model['min']).toBe(10);
+  });
   test('Max should be 40', () => {
     settings.max = 40;
     model.refreshSliderState(settings);
     expect(model['max']).toBe(40);
   });
+  test('Max should be 0', () => {
+    settings.max = -50;
+    model.refreshSliderState(settings);
+    expect(model['max']).toBe(0);
+  });
   test('Step should be 8', () => {
     settings.step = 8;
     model.refreshSliderState(settings);
     expect(model['step']).toBe(8);
+  });
+  test('Step should be 1', () => {
+    settings.step = 0;
+    model.refreshSliderState(settings);
+    expect(model['step']).toBe(1);
   });
   test('ThumbOneValue should be 6', () => {
     settings.thumbOneValue = 6;
