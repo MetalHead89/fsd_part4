@@ -417,3 +417,50 @@ describe('Get thumb values', () => {
     expect(model.getThumbsValues().thumbTwo).toBe(9);
   });
 });
+
+describe('Get scale points', () => {
+  test('Length of the scale points array should be 11', () => {
+    const scalePoints = model.getScalePoints({ width: 10, height: 10 });
+    expect(scalePoints.length).toBe(11);
+  });
+  test('The value of the 5th element of the array of scale points should be 5', () => {
+    const scalePoints = model.getScalePoints({ width: 10, height: 10 });
+    expect(scalePoints[5].value).toBe(5);
+  });
+  test('The size of the 5th element of the array of scale points should be {width: 10, height: 10}', () => {
+    const scalePoints = model.getScalePoints({ width: 10, height: 10 });
+    expect(scalePoints[5].size.width).toBe(10);
+    expect(scalePoints[5].size.height).toBe(10);
+  });
+  test('The paddings of the 5th element of the array of scale points should be {left: 0, top: 20}', () => {
+    const scalePoints = model.getScalePoints({ width: 10, height: 10 });
+    expect(scalePoints[5].paddings.left).toBe(0);
+    expect(scalePoints[5].paddings.top).toBe(20);
+  });
+  test('The position of the 5th element of the array of scale points should be {left: 0, top: 20}', () => {
+    const scalePoints = model.getScalePoints({ width: 10, height: 10 });
+    expect(scalePoints[5].position.left).toBe(245);
+    expect(scalePoints[5].position.top).toBe(0);
+  });
+  test('Length of the scale points array should be 14', () => {
+    settings.orientation = 'vertical';
+    settings.sliderSize = { width: 10, height: 500 };
+    settings.max = 13;
+    model.refreshSliderState(settings);
+    const scalePoints = model.getScalePoints({ width: 10, height: 10 });
+    expect(scalePoints.length).toBe(14);
+  });
+  test('Length of the scale points array should be 45', () => {
+    settings.max = 354;
+    model.refreshSliderState(settings);
+    const scalePoints = model.getScalePoints({ width: 10, height: 10 });
+    expect(scalePoints.length).toBe(45);
+  });
+  test('Length of the scale points array should be 25', () => {
+    settings.max = 354;
+    settings.step = 15;
+    model.refreshSliderState(settings);
+    const scalePoints = model.getScalePoints({ width: 10, height: 10 });
+    expect(scalePoints.length).toBe(25);
+  });
+});
