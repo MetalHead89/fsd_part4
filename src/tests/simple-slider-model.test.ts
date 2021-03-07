@@ -27,6 +27,18 @@ beforeEach(() => {
 });
 
 describe('Refresh slider state', () => {
+  test('SliderSize should be {width: 500, height: 10}', () => {
+    delete settings.sliderSize;
+    model.refreshSliderState(settings);
+    expect(model['sliderSize'].width).toBe(500);
+    expect(model['sliderSize'].height).toBe(10);
+  });
+  test('ThumbSize should be {width: 20, height: 20}', () => {
+    delete settings.thumbSize;
+    model.refreshSliderState(settings);
+    expect(model['thumbSize'].width).toBe(20);
+    expect(model['thumbSize'].height).toBe(20);
+  });
   test('Orientation should be vertical', () => {
     settings.orientation = 'vertical';
     model.refreshSliderState(settings);
@@ -36,6 +48,15 @@ describe('Refresh slider state', () => {
     settings.type = 'single';
     model.refreshSliderState(settings);
     expect(model['type']).toBe('single');
+  });
+  test('ThumbTwoValue should be equal thumbValueOne', () => {
+    settings.type = 'single';
+    settings.thumbOneValue = 9;
+    model.refreshSliderState(settings);
+    settings.type = 'range';
+    settings.thumbOneValue = 10;
+    model.refreshSliderState(settings);
+    expect(model['thumbOneValue'] === model['thumbTwoValue']).toBe(true);
   });
   test('Scale should be false', () => {
     settings.scale = false;
