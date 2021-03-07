@@ -116,7 +116,9 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
    * @param {ISize} size - объект с шириной и высотой слайдера
    */
   setSliderSize(size: ISize): void {
-    this.sliderSize = size;
+    const width = size.width >= 0 ? size.width : 0;
+    const height = size.height >= 0 ? size.height : 0;
+    this.sliderSize = { width, height };
   }
 
   /**
