@@ -16,7 +16,7 @@ import {
 } from '../interfaces';
 import Subject from '../subject/subject';
 
-class SimpleSliderModel implements ISimpleSliderModel {
+export default class SimpleSliderModel implements ISimpleSliderModel {
   subject: ISubject;
   private orientation = 'horizontal';
   private type = 'range';
@@ -33,22 +33,6 @@ class SimpleSliderModel implements ISimpleSliderModel {
   constructor(settings: ISliderSettings) {
     this.subject = new Subject();
     this.refreshSliderState(settings);
-  }
-
-  /**
-   * Устанавливает размер слайдера
-   * @param {ISize} size - объект с шириной и высотой слайдера
-   */
-  setSliderSize(size: ISize): void {
-    this.sliderSize = size;
-  }
-
-  /**
-   * Устанавливает размер бегунков
-   * @param {ISize} size - объект с шириной и высотой бегунка
-   */
-  setThumbSize(size: ISize): void {
-    this.thumbSize = size;
   }
 
   /**
@@ -102,42 +86,45 @@ class SimpleSliderModel implements ISimpleSliderModel {
   }
 
   /**
-   * Устанавливает минимальное значение слайдера
-   * @param {number} value - новое значение минимума
+   * Обновление состояния бегунков и оповещение наблюдателей об изменении
+   * @param {IThumbsPositions} positions - текущая позиция бегунков
    */
-  private updateMinValue(value: number): void {
-    let newMin = value;
-    if (this.type === 'range' && newMin > this.max) {
-      newMin = this.max;
+  updateThumbsState(positions: IThumbsPositions): void {
+    const thumbOneValue = this.valueWithStep(
+      this.posByOrientation(positions.thumbOne)
+    );
+    let thumbTwoValue: null | number = null;
+
+    if (positions.thumbTwo !== null) {
+      thumbTwoValue = this.valueWithStep(
+        this.posByOrientation(positions.thumbTwo)
+      );
     }
-    this.min = newMin;
-    this.subject.notify('minIsUpdated');
+
+    if (thumbTwoValue === null || thumbOneValue <= thumbTwoValue) {
+      this.thumbOneValue = thumbOneValue;
+      if (thumbTwoValue !== null) {
+        this.thumbTwoValue = thumbTwoValue;
+      }
+    }
+
+    this.subject.notify('thumbsPosIsUpdated');
   }
 
   /**
-   * Устанавливает максимальное значение слайдера
-   * @param {number} value - новое значение максимума
+   * Устанавливает размер слайдера
+   * @param {ISize} size - объект с шириной и высотой слайдера
    */
-  private updateMaxValue(value: number): void {
-    let newMax = value;
-    if (this.type === 'range' && newMax < this.min) {
-      newMax = this.min;
-    }
-    this.max = newMax;
-    this.subject.notify('maxIsUpdated');
+  setSliderSize(size: ISize): void {
+    this.sliderSize = size;
   }
 
   /**
-   * Устанавливает размер шага бегунка
-   * @param {number} value - новое значение шага
+   * Устанавливает размер бегунков
+   * @param {ISize} size - объект с шириной и высотой бегунка
    */
-  private updateStep(value: number): void {
-    let newStep = value;
-    if (newStep <= 0) {
-      newStep = 1;
-    }
-    this.step = newStep;
-    this.subject.notify('stepIsUpdated');
+  setThumbSize(size: ISize): void {
+    this.thumbSize = size;
   }
 
   /**
@@ -283,32 +270,6 @@ class SimpleSliderModel implements ISimpleSliderModel {
   }
 
   /**
-   * Обновление состояния бегунков и оповещение наблюдателей об изменении
-   * @param {IThumbsPositions} positions - текущая позиция бегунков
-   */
-  updateThumbsState(positions: IThumbsPositions): void {
-    const thumbOneValue = this.valueWithStep(
-      this.posByOrientation(positions.thumbOne)
-    );
-    let thumbTwoValue: null | number = null;
-
-    if (positions.thumbTwo !== null) {
-      thumbTwoValue = this.valueWithStep(
-        this.posByOrientation(positions.thumbTwo)
-      );
-    }
-
-    if (thumbTwoValue === null || thumbOneValue <= thumbTwoValue) {
-      this.thumbOneValue = thumbOneValue;
-      if (thumbTwoValue !== null) {
-        this.thumbTwoValue = thumbTwoValue;
-      }
-    }
-
-    this.subject.notify('thumbsPosIsUpdated');
-  }
-
-  /**
    * Возвращает позицию попапа
    * @param {IPosition} thumbPosition - объект с позицией бегунка,
    * рядом с которым будет распологаться попап
@@ -325,6 +286,97 @@ class SimpleSliderModel implements ISimpleSliderModel {
     }
 
     return { left, top };
+  }
+
+  /**
+   * Возвращает массив объектов с настройками делений шкалы
+   * @param {ISize} scalePointSize - объект с размерами шкалы
+   * @returns {IScalePointParams[]} - массив объектов с настройками делений шкалы
+   */
+  getScalePoints(scalePointSize: ISize): IScalePointParams[] {
+    const scaleParams = [];
+    const stepsCount = this.getStepsCount();
+    const stepSize: number = this.getStepSize();
+    let prevPointPos = 0;
+
+    let position =
+      this.sizeByOrientation(this.thumbSize) / 2 -
+      this.sizeByOrientation(scalePointSize) / 2;
+
+    const scalePointsCount = stepsCount + 1;
+
+    for (let i = 0; i <= Math.round(scalePointsCount - 1); i += 1) {
+      const pointValue = this.thumbPosToValue(
+        position -
+          this.sizeByOrientation(this.thumbSize) / 2 +
+          this.sizeByOrientation(scalePointSize) / 2
+      );
+
+      position = this.getNextScalePointPos(position, scalePointSize);
+
+      if (i === 0 || this.isPointFits(position, prevPointPos, scalePointSize)) {
+        const pointPos = { left: 0, top: 0 };
+        const paddings = { left: 0, top: 0 };
+        if (this.orientation === 'horizontal') {
+          pointPos.left = position;
+          paddings.top = this.thumbSize.height;
+        } else {
+          pointPos.top = position;
+          paddings.left = this.thumbSize.width;
+        }
+
+        scaleParams.push({
+          position: pointPos,
+          paddings,
+          size: scalePointSize,
+          value: pointValue,
+        });
+
+        prevPointPos = position;
+      }
+
+      position += stepSize;
+    }
+    return scaleParams;
+  }
+
+  /**
+   * Устанавливает минимальное значение слайдера
+   * @param {number} value - новое значение минимума
+   */
+  private updateMinValue(value: number): void {
+    let newMin = value;
+    if (this.type === 'range' && newMin > this.max) {
+      newMin = this.max;
+    }
+    this.min = newMin;
+    this.subject.notify('minIsUpdated');
+  }
+
+  /**
+   * Устанавливает максимальное значение слайдера
+   * @param {number} value - новое значение максимума
+   */
+  private updateMaxValue(value: number): void {
+    let newMax = value;
+    if (this.type === 'range' && newMax < this.min) {
+      newMax = this.min;
+    }
+    this.max = newMax;
+    this.subject.notify('maxIsUpdated');
+  }
+
+  /**
+   * Устанавливает размер шага бегунка
+   * @param {number} value - новое значение шага
+   */
+  private updateStep(value: number): void {
+    let newStep = value;
+    if (newStep <= 0) {
+      newStep = 1;
+    }
+    this.step = newStep;
+    this.subject.notify('stepIsUpdated');
   }
 
   /**
@@ -454,58 +506,6 @@ class SimpleSliderModel implements ISimpleSliderModel {
   }
 
   /**
-   * Возвращает массив объектов с настройками делений шкалы
-   * @param {ISize} scalePointSize - объект с размерами шкалы
-   * @returns {IScalePointParams[]} - массив объектов с настройками делений шкалы
-   */
-  getScalePoints(scalePointSize: ISize): IScalePointParams[] {
-    const scaleParams = [];
-    const stepsCount = this.getStepsCount();
-    const stepSize: number = this.getStepSize();
-    let prevPointPos = 0;
-
-    let position =
-      this.sizeByOrientation(this.thumbSize) / 2 -
-      this.sizeByOrientation(scalePointSize) / 2;
-
-    const scalePointsCount = stepsCount + 1;
-
-    for (let i = 0; i <= Math.round(scalePointsCount - 1); i += 1) {
-      const pointValue = this.thumbPosToValue(
-        position -
-          this.sizeByOrientation(this.thumbSize) / 2 +
-          this.sizeByOrientation(scalePointSize) / 2
-      );
-
-      position = this.getNextScalePointPos(position, scalePointSize);
-
-      if (i === 0 || this.isPointFits(position, prevPointPos, scalePointSize)) {
-        const pointPos = { left: 0, top: 0 };
-        const paddings = { left: 0, top: 0 };
-        if (this.orientation === 'horizontal') {
-          pointPos.left = position;
-          paddings.top = this.thumbSize.height;
-        } else {
-          pointPos.top = position;
-          paddings.left = this.thumbSize.width;
-        }
-
-        scaleParams.push({
-          position: pointPos,
-          paddings,
-          size: scalePointSize,
-          value: pointValue,
-        });
-
-        prevPointPos = position;
-      }
-
-      position += stepSize;
-    }
-    return scaleParams;
-  }
-
-  /**
    * Проверяет момещается ли точка на шкале без пересечения других точек, если нет, то она
    * не добавляется на шкалу
    */
@@ -538,5 +538,3 @@ class SimpleSliderModel implements ISimpleSliderModel {
     return newPosition;
   }
 }
-
-export default SimpleSliderModel;
