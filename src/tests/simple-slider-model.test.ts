@@ -167,6 +167,29 @@ describe('Set thumb size', () => {
   });
 });
 
+describe('Set thumb values', () => {
+  test('Should be {thumbOne: 1, thumbTwo: 8}', () => {
+    model.setThumbsValues({ thumbOne: 1, thumbTwo: 8 });
+    expect(model['thumbOneValue']).toBe(1);
+    expect(model['thumbTwoValue']).toBe(8);
+  });
+  test('Should be {thumbOne: 0, thumbTwo: 10}', () => {
+    model.setThumbsValues({ thumbOne: -5, thumbTwo: 15 });
+    expect(model['thumbOneValue']).toBe(0);
+    expect(model['thumbTwoValue']).toBe(10);
+  });
+  test('Should be {thumbOne: 3, thumbTwo: 7}', () => {
+    model.setThumbsValues({ thumbOne: 9, thumbTwo: 7 });
+    expect(model['thumbOneValue']).toBe(3);
+    expect(model['thumbTwoValue']).toBe(7);
+  });
+  test('Should be {thumbOne: 3, thumbTwo: 7}', () => {
+    model.setThumbsValues({ thumbOne: 3, thumbTwo: 1 });
+    expect(model['thumbOneValue']).toBe(3);
+    expect(model['thumbTwoValue']).toBe(7);
+  });
+});
+
 describe('Get progress bar params', () => {
   test('Should be position: {{left: 100, top: 0} and size: {width: 212, height: 10}}', () => {
     const progressParams = model.getProgressBarParams();
