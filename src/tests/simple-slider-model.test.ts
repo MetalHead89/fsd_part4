@@ -183,6 +183,11 @@ describe('Set slider size', () => {
     expect(model['sliderSize'].width).toBe(80);
     expect(model['sliderSize'].height).toBe(0);
   });
+  test('Should be {width: 500, height: 0}', () => {
+    model.setSliderSize({ width: 500, height: -20 });
+    expect(model['sliderSize'].width).toBe(500);
+    expect(model['sliderSize'].height).toBe(0);
+  });
 });
 
 describe('Set thumb size', () => {
