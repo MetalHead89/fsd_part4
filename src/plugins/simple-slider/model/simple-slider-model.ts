@@ -273,37 +273,6 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
   }
 
   /**
-   * Возвращает корректный размер в соответствии с заданным минимумом
-   * @param {ISize} size - объект с шириной и высотой
-   * @param {number} min - минимальное значение ширины и высоты
-   * @returns {ISize} - объект с корректными размерами
-   */
-  private static getCorrectSize(size: ISize, min: number): ISize {
-    const width = size.width >= min ? size.width : min;
-    const height = size.height >= min ? size.height : min;
-    return { width, height };
-  }
-
-  /**
-   * Возвращает позицию попапа
-   * @param {IPosition} thumbPosition - объект с позицией бегунка,
-   * рядом с которым будет распологаться попап
-   * @returns {IPosition} - объект с позицией попапа
-   */
-  private getPopUpPosition(thumbPosition: IPosition): IPosition {
-    let left = 0;
-    let top = 0;
-
-    if (this.orientation === 'horizontal') {
-      left = thumbPosition.left + this.thumbSize.width / 2;
-    } else {
-      top = thumbPosition.top + this.thumbSize.height / 2;
-    }
-
-    return { left, top };
-  }
-
-  /**
    * Возвращает массив объектов с настройками делений шкалы
    * @param {ISize} scalePointSize - объект с размерами шкалы
    * @returns {IScalePointParams[]} - массив объектов с настройками делений шкалы
@@ -353,6 +322,37 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
       position += stepSize;
     }
     return scaleParams;
+  }
+
+  /**
+   * Возвращает корректный размер в соответствии с заданным минимумом
+   * @param {ISize} size - объект с шириной и высотой
+   * @param {number} min - минимальное значение ширины и высоты
+   * @returns {ISize} - объект с корректными размерами
+   */
+  private static getCorrectSize(size: ISize, min: number): ISize {
+    const width = size.width >= min ? size.width : min;
+    const height = size.height >= min ? size.height : min;
+    return { width, height };
+  }
+
+  /**
+   * Возвращает позицию попапа
+   * @param {IPosition} thumbPosition - объект с позицией бегунка,
+   * рядом с которым будет распологаться попап
+   * @returns {IPosition} - объект с позицией попапа
+   */
+  private getPopUpPosition(thumbPosition: IPosition): IPosition {
+    let left = 0;
+    let top = 0;
+
+    if (this.orientation === 'horizontal') {
+      left = thumbPosition.left + this.thumbSize.width / 2;
+    } else {
+      top = thumbPosition.top + this.thumbSize.height / 2;
+    }
+
+    return { left, top };
   }
 
   /**
