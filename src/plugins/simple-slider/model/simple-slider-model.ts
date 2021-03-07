@@ -116,9 +116,7 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
    * @param {ISize} size - объект с шириной и высотой слайдера
    */
   setSliderSize(size: ISize): void {
-    const width = size.width >= 0 ? size.width : 0;
-    const height = size.height >= 0 ? size.height : 0;
-    this.sliderSize = { width, height };
+    this.sliderSize = SimpleSliderModel.getCorrectSize(size, 0);
   }
 
   /**
@@ -126,7 +124,7 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
    * @param {ISize} size - объект с шириной и высотой бегунка
    */
   setThumbSize(size: ISize): void {
-    this.thumbSize = size;
+    this.thumbSize = SimpleSliderModel.getCorrectSize(size, 0);
   }
 
   /**
@@ -269,6 +267,18 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
    */
   getThumbsValues(): IThumbsValues {
     return { thumbOne: this.thumbOneValue, thumbTwo: this.thumbTwoValue };
+  }
+
+  /**
+   * Возвращает корректный размер в соответствии с заданным минимумом
+   * @param {ISize} size - объект с шириной и высотой
+   * @param {number} min - минимальное значение ширины и высоты
+   * @returns {ISize} - объект с корректными размерами
+   */
+  private static getCorrectSize(size: ISize, min: number): ISize {
+    const width = size.width >= min ? size.width : min;
+    const height = size.height >= min ? size.height : min;
+    return { width, height };
   }
 
   /**
