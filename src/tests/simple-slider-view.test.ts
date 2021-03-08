@@ -377,3 +377,14 @@ describe('Update pop ups', () => {
     expect(spy).toBeCalledTimes(2);
   });
 });
+
+describe('Get scale point size', () => {
+  test('ScalePointSize should be {width: 0, height: 0}', () => {
+    view.disableScale();
+    expect(view.getScalePointSize(10).width).toBe(0);
+    expect(view.getScalePointSize(10).height).toBe(0);
+  });
+  test('ScalePointSize should be true', () => {
+    expect(view.getScalePointSize(10)).toBe(true);
+  });
+});
