@@ -1,7 +1,9 @@
 /* eslint-disable arrow-body-style */
 export default jest.fn(() => {
   return {
-    register: () => true,
+    subject: {
+      register: () => true,
+    },
     getElement: () => {
       const div = document.createElement('div');
       div.classList.add('slider__thumb');
