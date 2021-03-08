@@ -206,9 +206,20 @@ describe('Switch to single', () => {
 
 describe('Switch to range', () => {
   test('ThumbTwo should be defined', () => {
+    view.switchToRange();
+    expect(view['thumbTwo']).not.toBeNull();
+  });
+  test('ThumbTwo should be defined', () => {
     view.switchToSingle();
     view.switchToRange();
     expect(view['thumbTwo']).not.toBeNull();
+  });
+  test('ThumbTwo should be defined ana popUpTwo should be null', () => {
+    view.switchToSingle();
+    view['popUpOne'] = null;
+    view.switchToRange();
+    expect(view['thumbTwo']).not.toBeNull();
+    expect(view['popUpTwo']).toBeNull();
   });
 });
 
