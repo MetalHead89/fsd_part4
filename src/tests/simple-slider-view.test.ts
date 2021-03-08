@@ -267,6 +267,19 @@ describe('Disable scale', () => {
   });
 });
 
+describe('Enable scale', () => {
+  test('Scale should be defined', () => {
+    view.enableScale();
+    view.enableScale();
+    expect(view['scale']).toBeDefined();
+  });
+  test('Scale should be defined', () => {
+    view.disableScale();
+    view.enableScale();
+    expect(view['scale']).toBeDefined();
+  });
+});
+
 describe('Get thumb size', () => {
   test('Should be true', () => {
     expect(view.getThumbSize()).toBe(true);
