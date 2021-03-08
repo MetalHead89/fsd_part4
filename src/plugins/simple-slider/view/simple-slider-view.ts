@@ -20,7 +20,7 @@ import ProgressBar from './progress-bar/progress-bar';
 import Scale from './scale/scale';
 import Subject from '../subject/subject';
 
-class SimpleSliderView implements ISimpleSliderView, IObserver {
+export default class SimpleSliderView implements ISimpleSliderView, IObserver {
   subject: ISubject;
   private container: Container;
   private sliderWrapper: HTMLDivElement;
@@ -54,19 +54,6 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
   }
 
   /**
-   * Перехватывание и реагирование на уведомления от субъектов, на которые подписано View
-   * @param {string} eventType - тип уведомления
-   */
-  update(eventType: string): void {
-    if (eventType === 'thumbIsDragged') {
-      this.subject.notify('thumbIsDragged');
-    } else if (eventType === 'thumbIsCatched') {
-      this.thumbOne.resetZIndex();
-      this.thumbTwo?.resetZIndex();
-    }
-  }
-
-  /**
    * Сборка слайдера из отдельных контролов
    */
   private assembleSlider(): void {
@@ -87,6 +74,19 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
     }
 
     this.sliderWrapper.append(this.container.getElement());
+  }
+
+  /**
+   * Перехватывание и реагирование на уведомления от субъектов, на которые подписано View
+   * @param {string} eventType - тип уведомления
+   */
+  update(eventType: string): void {
+    if (eventType === 'thumbIsDragged') {
+      this.subject.notify('thumbIsDragged');
+    } else if (eventType === 'thumbIsCatched') {
+      this.thumbOne.resetZIndex();
+      this.thumbTwo?.resetZIndex();
+    }
   }
 
   /**
@@ -274,5 +274,3 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
     this.scale?.addPoints(points);
   }
 }
-
-export default SimpleSliderView;
