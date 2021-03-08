@@ -129,6 +129,65 @@ describe('Switch to horizontal', () => {
   });
 });
 
+describe('Switch to vertical', () => {
+  test('The container must contain a class slider_vertical', () => {
+    view.switchToVertical();
+    expect(
+      view['container'].getElement().classList.contains('slider_vertical')
+    ).toBe(true);
+  });
+  test('The track must contain a class slider__track_horizontal', () => {
+    view.switchToVertical();
+    expect(
+      view['track'].getElement().classList.contains('slider__track_vertical')
+    ).toBe(true);
+  });
+  test('The thumbOne must contain a class slider__thumb_vertical', () => {
+    view.switchToVertical();
+    expect(
+      view['thumbOne'].getElement().classList.contains('slider__thumb_vertical')
+    ).toBe(true);
+  });
+  test('The thumbTwo must contain a class slider__thumb_vertical', () => {
+    view.switchToVertical();
+    expect(
+      view['thumbTwo']
+        ?.getElement()
+        .classList.contains('slider__thumb_vertical')
+    ).toBe(true);
+  });
+  test('The popUpOne must contain a class slider__pop-up_vertical', () => {
+    view.switchToVertical();
+    expect(
+      view['popUpOne']
+        ?.getElement()
+        .classList.contains('slider__pop-up_vertical')
+    ).toBe(true);
+  });
+  test('The popUpTwo must contain a class slider__pop-up_vertical', () => {
+    view.switchToVertical();
+    expect(
+      view['popUpTwo']
+        ?.getElement()
+        .classList.contains('slider__pop-up_vertical')
+    ).toBe(true);
+  });
+  test('The progressBar must contain a class slider__progress-bar_vertical', () => {
+    view.switchToVertical();
+    expect(
+      view['progressBar']
+        .getElement()
+        .classList.contains('slider__progress-bar_vertical')
+    ).toBe(true);
+  });
+  test('The scale must contain a class slider__scale_vertical', () => {
+    view.switchToVertical();
+    expect(
+      view['scale']?.getElement().classList.contains('slider__scale_vertical')
+    ).toBe(true);
+  });
+});
+
 describe('Get thumb size', () => {
   test('Should be true', () => {
     expect(view.getThumbSize()).toBe(true);
