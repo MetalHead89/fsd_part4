@@ -223,6 +223,18 @@ describe('Switch to range', () => {
   });
 });
 
+describe('Disable pop ups', () => {
+  test('PopUpOne should be null', () => {
+    view.disablePopUps();
+    expect(view['popUpOne']).toBeNull();
+  });
+  test('PopUpTwo should be null', () => {
+    view.switchToRange();
+    view.disablePopUps();
+    expect(view['popUpTwo']).toBeNull();
+  });
+});
+
 describe('Get thumb size', () => {
   test('Should be true', () => {
     expect(view.getThumbSize()).toBe(true);
