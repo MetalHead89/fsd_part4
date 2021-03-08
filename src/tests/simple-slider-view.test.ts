@@ -68,6 +68,67 @@ describe('Update method', () => {
   });
 });
 
+describe('Switch to horizontal', () => {
+  test('The container must contain a class slider_horizontal', () => {
+    view.switchToHorizontal();
+    expect(
+      view['container'].getElement().classList.contains('slider_horizontal')
+    ).toBe(true);
+  });
+  test('The track must contain a class slider__track_horizontal', () => {
+    view.switchToHorizontal();
+    expect(
+      view['track'].getElement().classList.contains('slider__track_horizontal')
+    ).toBe(true);
+  });
+  test('The thumbOne must contain a class slider__thumb_horizontal', () => {
+    view.switchToHorizontal();
+    expect(
+      view['thumbOne']
+        .getElement()
+        .classList.contains('slider__thumb_horizontal')
+    ).toBe(true);
+  });
+  test('The thumbTwo must contain a class slider__thumb_horizontal', () => {
+    view.switchToHorizontal();
+    expect(
+      view['thumbTwo']
+        ?.getElement()
+        .classList.contains('slider__thumb_horizontal')
+    ).toBe(true);
+  });
+  test('The popUpOne must contain a class slider__pop-up_horizontal', () => {
+    view.switchToHorizontal();
+    expect(
+      view['popUpOne']
+        ?.getElement()
+        .classList.contains('slider__pop-up_horizontal')
+    ).toBe(true);
+  });
+  test('The popUpTwo must contain a class slider__pop-up_horizontal', () => {
+    view.switchToHorizontal();
+    expect(
+      view['popUpTwo']
+        ?.getElement()
+        .classList.contains('slider__pop-up_horizontal')
+    ).toBe(true);
+  });
+  test('The progressBar must contain a class slider__progress-bar_horizontal', () => {
+    view.switchToHorizontal();
+    expect(
+      view['progressBar']
+        .getElement()
+        .classList.contains('slider__progress-bar_horizontal')
+    ).toBe(true);
+  });
+  test('The scale must contain a class slider__scale_horizontal', () => {
+    view.switchToHorizontal();
+    expect(
+      view['scale']?.getElement().classList.contains('slider__scale_horizontal')
+    ).toBe(true);
+  });
+});
+
 describe('Get thumb size', () => {
   test('Should be true', () => {
     expect(view.getThumbSize()).toBe(true);
