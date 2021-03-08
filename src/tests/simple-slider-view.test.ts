@@ -255,6 +255,18 @@ describe('Enable pop ups', () => {
   });
 });
 
+describe('Disable scale', () => {
+  test('Scale should be null', () => {
+    view.disableScale();
+    expect(view['scale']).toBeNull();
+  });
+  test('Scale should be null', () => {
+    view.enableScale();
+    view.disableScale();
+    expect(view['scale']).toBeNull();
+  });
+});
+
 describe('Get thumb size', () => {
   test('Should be true', () => {
     expect(view.getThumbSize()).toBe(true);
