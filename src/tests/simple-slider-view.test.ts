@@ -61,6 +61,11 @@ describe('Update method', () => {
       expect(spy).toBeCalledTimes(2);
     }
   });
+  test('Notify method of the SimpleSliderView class not should be called', () => {
+    const spy = spyOn(view.subject, 'notify');
+    view.update('emptyEvent');
+    expect(spy).toBeCalledTimes(0);
+  });
 });
 
 describe('Get thumb size', () => {
