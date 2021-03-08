@@ -40,6 +40,15 @@ describe('Assemble slider', () => {
   test('Wrapper should be contain a scale element', () => {
     expect(wrapper.querySelector('.slider__scale')).not.toBeNull();
   });
+  test('Wrapper should be contain a slider element', () => {
+    view['container'].remove();
+    view['thumbTwo'] = null;
+    view['popUpOne'] = null;
+    view['popUpTwo'] = null;
+    view['scale'] = null;
+    view['assembleSlider']();
+    expect(wrapper.querySelector('.slider')).not.toBeNull();
+  });
 });
 
 describe('Update method', () => {
