@@ -1,22 +1,15 @@
-export default class Container {
-  element: HTMLDivElement;
-  testOk: boolean;
+import Element from '../../element/element';
+
+jest.mock('../../element/element');
+
+export default class Container extends Element {
+  testOk = true;
 
   constructor() {
-    this.testOk = true;
-    this.element = document.createElement('div');
-    this.element.classList.add('slider');
+    super('slider');
   }
 
   append(element: HTMLDivElement): void {
     this.element.append(element);
-  }
-
-  getElement(): HTMLDivElement {
-    return this.element;
-  }
-
-  getSize(): boolean {
-    return this.testOk;
   }
 }
