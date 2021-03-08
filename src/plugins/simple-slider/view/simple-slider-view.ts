@@ -81,11 +81,16 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
    * @param {string} eventType - тип уведомления
    */
   update(eventType: string): void {
-    if (eventType === 'thumbIsDragged') {
-      this.subject.notify('thumbIsDragged');
-    } else if (eventType === 'thumbIsCatched') {
-      this.thumbOne.resetZIndex();
-      this.thumbTwo?.resetZIndex();
+    switch (eventType) {
+      case 'thumbIsDragged':
+        this.subject.notify('thumbIsDragged');
+        break;
+      case 'thumbIsCatched':
+        this.thumbOne.resetZIndex();
+        this.thumbTwo?.resetZIndex();
+        break;
+      default:
+        break;
     }
   }
 
