@@ -235,6 +235,26 @@ describe('Disable pop ups', () => {
   });
 });
 
+describe('Enable pop ups', () => {
+  test('PopUpOne should be defined', () => {
+    view.disablePopUps();
+    view.enablePopUps();
+    expect(view['popUpOne']).toBeDefined();
+  });
+  test('PopUpTwo should be null', () => {
+    view.switchToSingle();
+    view.enablePopUps();
+    expect(view['popUpTwo']).toBeNull();
+  });
+  test('PopUpTwo should be defined', () => {
+    view.switchToSingle();
+    view.switchToRange();
+    view.disablePopUps();
+    view.enablePopUps();
+    expect(view['popUpTwo']).toBeDefined();
+  });
+});
+
 describe('Get thumb size', () => {
   test('Should be true', () => {
     expect(view.getThumbSize()).toBe(true);
