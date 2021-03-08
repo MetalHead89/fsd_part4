@@ -188,6 +188,21 @@ describe('Switch to vertical', () => {
   });
 });
 
+describe('Switch to single', () => {
+  test('ThumbTwo should be null', () => {
+    view.switchToSingle();
+    expect(view['thumbTwo']).toBeNull();
+  });
+});
+
+describe('Switch to range', () => {
+  test('ThumbTwo should be defined', () => {
+    view.switchToSingle();
+    view.switchToRange();
+    expect(view['thumbTwo']).not.toBeNull();
+  });
+});
+
 describe('Get thumb size', () => {
   test('Should be true', () => {
     expect(view.getThumbSize()).toBe(true);
