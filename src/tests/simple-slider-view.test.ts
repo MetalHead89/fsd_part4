@@ -399,6 +399,23 @@ describe('Update pop ups', () => {
     });
     expect(spy).toBeCalledTimes(2);
   });
+  test('The update method of the popUpOne object should be called zero times', () => {
+    let spy1;
+    let spy2;
+    view.disablePopUps();
+    if (view['popUpOne'] !== null) {
+      spy1 = spyOn(view['popUpOne'], 'update');
+    }
+    if (view['popUpTwo'] !== null) {
+      spy2 = spyOn(view['popUpTwo'], 'update');
+    }
+    view.updatePopUps({
+      popUpOne: { value: 0, position: { left: 0, top: 0 } },
+      popUpTwo: { value: 0, position: { left: 0, top: 0 } },
+    });
+    expect(spy1).toBeUndefined();
+    expect(spy2).toBeUndefined();
+  });
 });
 
 describe('Get scale point size', () => {
