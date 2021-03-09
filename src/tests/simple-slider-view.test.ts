@@ -5,7 +5,6 @@
 /* eslint-disable dot-notation */
 
 import SimpleSliderView from '../plugins/simple-slider/view/simple-slider-view';
-import Thumb from '../plugins/simple-slider/view/thumb/thumb';
 
 jest.mock('../plugins/simple-slider/view/container/container');
 jest.mock('../plugins/simple-slider/view/track/track');
