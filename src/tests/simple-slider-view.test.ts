@@ -5,6 +5,7 @@
 /* eslint-disable dot-notation */
 
 import SimpleSliderView from '../plugins/simple-slider/view/simple-slider-view';
+import Thumb from '../plugins/simple-slider/view/thumb/thumb';
 
 jest.mock('../plugins/simple-slider/view/container/container');
 jest.mock('../plugins/simple-slider/view/track/track');
@@ -321,6 +322,16 @@ describe('Update thumbs', () => {
       thumbTwo: { left: 0, top: 0 },
     });
     expect(spy).toBeCalledTimes(1);
+  });
+  test('The moveTo method of the thumbTwo object must be called zero times', () => {
+    if (view['thumbTwo'] !== null) {
+      const spy = spyOn(view['thumbTwo'], 'moveTo');
+      view.updateThumbs({
+        thumbOne: { left: 0, top: 0 },
+        thumbTwo: null,
+      });
+      expect(spy).toBeCalledTimes(0);
+    }
   });
   test('The moveTo method of thumbTwo should be called twice', () => {
     if (view['thumbTwo'] !== null) {
