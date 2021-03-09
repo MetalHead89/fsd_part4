@@ -2,6 +2,11 @@ export default class Element {
   protected element: HTMLDivElement;
   protected mainClass: string;
   protected TEST_OK = true;
+  subject = {
+    register: (): boolean => true,
+    unsubscribe: (): boolean => true,
+    notify: (): boolean => true,
+  };
 
   constructor(name: string) {
     const element = document.createElement('div');

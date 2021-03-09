@@ -1,12 +1,15 @@
 import { IPosition, ISize } from '../../interfaces';
+import Subject from '../../subject/subject';
 
 export default class Element {
   protected element: HTMLDivElement;
   protected lastPosition: IPosition;
+  subject: Subject;
 
   constructor(name: string, orientation?: string) {
     const element = document.createElement('div');
     this.element = element;
+    this.subject = new Subject();
     this.lastPosition = { left: 0, top: 0 };
 
     let orientationClass = `${name}_horizontal`;

@@ -1,11 +1,9 @@
 /* eslint operator-linebreak: ["error", "after"] */
 /* eslint-disable comma-dangle */
 import { IPosition } from '../../interfaces';
-import Subject from '../../subject/subject';
 import Element from '../element/element';
 
 class Thumb extends Element {
-  subject = new Subject();
   private shift = { shiftX: 0, shiftY: 0 };
   private onMouseMoveHandler = this.drag.bind(this);
   private onMouseUpHandler = this.endDrag.bind(this);
@@ -100,28 +98,7 @@ class Thumb extends Element {
     super.setPosition(cursorPosition);
     this.lastPosition.left -= this.shift.shiftX;
     this.lastPosition.top -= this.shift.shiftY;
-
-    // const positionInsideParent: IPosition = {
-    //   left: cursorPosition.left,
-    //   top: cursorPosition.top,
-    // };
-
-    // const parrent: HTMLElement | null = this.element.parentElement;
-
-    // if (parrent !== null) {
-    //   const parrentCoords: DOMRect = parrent.getBoundingClientRect();
-    //   positionInsideParent.left =
-    //     positionInsideParent.left - parrentCoords.left - this.shift.shiftX;
-    //   positionInsideParent.top =
-    //     positionInsideParent.top - parrentCoords.top - this.shift.shiftY;
-    // }
-
-    // this.position = positionInsideParent;
   }
-
-  // getPosition(): IPosition {
-  //   return this.position;
-  // }
 
   /**
    * Завершает передвижение бегунка, удаляя слушателей событий, которые больше не нужны
