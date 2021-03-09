@@ -9,7 +9,6 @@ class Thumb extends Element {
   private shift = { shiftX: 0, shiftY: 0 };
   private onMouseMoveHandler = this.drag.bind(this);
   private onMouseUpHandler = this.endDrag.bind(this);
-  private position = { left: 0, top: 0 };
 
   constructor(orientation?: string) {
     super('slider__thumb', orientation);
@@ -97,28 +96,32 @@ class Thumb extends Element {
    * @returns {ICursorPosition} - объект с позицией курсора относительно
    * левого и верхнего края родительского контейнера
    */
-  private setPosition(cursorPosition: IPosition): void {
-    const positionInsideParent: IPosition = {
-      left: cursorPosition.left,
-      top: cursorPosition.top,
-    };
+  protected setPosition(cursorPosition: IPosition): void {
+    super.setPosition(cursorPosition);
+    this.lastPosition.left -= this.shift.shiftX;
+    this.lastPosition.top -= this.shift.shiftY;
 
-    const parrent: HTMLElement | null = this.element.parentElement;
+    // const positionInsideParent: IPosition = {
+    //   left: cursorPosition.left,
+    //   top: cursorPosition.top,
+    // };
 
-    if (parrent !== null) {
-      const parrentCoords: DOMRect = parrent.getBoundingClientRect();
-      positionInsideParent.left =
-        positionInsideParent.left - parrentCoords.left - this.shift.shiftX;
-      positionInsideParent.top =
-        positionInsideParent.top - parrentCoords.top - this.shift.shiftY;
-    }
+    // const parrent: HTMLElement | null = this.element.parentElement;
 
-    this.position = positionInsideParent;
+    // if (parrent !== null) {
+    //   const parrentCoords: DOMRect = parrent.getBoundingClientRect();
+    //   positionInsideParent.left =
+    //     positionInsideParent.left - parrentCoords.left - this.shift.shiftX;
+    //   positionInsideParent.top =
+    //     positionInsideParent.top - parrentCoords.top - this.shift.shiftY;
+    // }
+
+    // this.position = positionInsideParent;
   }
 
-  getPosition(): IPosition {
-    return this.position;
-  }
+  // getPosition(): IPosition {
+  //   return this.position;
+  // }
 
   /**
    * Завершает передвижение бегунка, удаляя слушателей событий, которые больше не нужны
@@ -128,24 +131,24 @@ class Thumb extends Element {
 
     document.removeEventListener(
       'mousemove',
-      this.onMouseMoveHandler as EventListenerOrEventListenerObject
+      this.onMouseMoveHandler as EventListenerOrEventListenerObject,
     );
     document.removeEventListener(
       'mouseup',
-      this.onMouseUpHandler as EventListenerOrEventListenerObject
+      this.onMouseUpHandler as EventListenerOrEventListenerObject,
     );
     document.removeEventListener(
       'touchmove',
-      this.onMouseMoveHandler as EventListenerOrEventListenerObject
+      this.onMouseMoveHandler as EventListenerOrEventListenerObject,
     );
     document.removeEventListener(
       'touchend',
-      this.onMouseUpHandler as EventListenerOrEventListenerObject
+      this.onMouseUpHandler as EventListenerOrEventListenerObject,
     );
   }
 
   moveTo(position: IPosition): void {
-    this.position = position;
+    this.lastPosition = position;
     this.element.style.left = `${position.left}px`;
     this.element.style.top = `${position.top}px`;
   }

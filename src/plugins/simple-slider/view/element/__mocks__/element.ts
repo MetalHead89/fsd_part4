@@ -10,6 +10,10 @@ export default class Element {
     this.element.classList.add(`${name}`);
   }
 
+  getPosition(): boolean {
+    return this.TEST_OK;
+  }
+
   getElement(): HTMLDivElement {
     return this.element;
   }

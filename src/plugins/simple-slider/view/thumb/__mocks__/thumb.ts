@@ -14,10 +14,6 @@ export default class Thumb extends Element {
     super('slider__thumb');
   }
 
-  getPosition(): boolean {
-    return this.TEST_OK;
-  }
-
   resetZIndex(): boolean {
     return this.TEST_OK;
   }
