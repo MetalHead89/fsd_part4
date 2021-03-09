@@ -303,6 +303,14 @@ describe('Get thumbs positions', () => {
   test('ThumbTwo should be true', () => {
     expect(view.getThumbsPos().thumbTwo).toBe(true);
   });
+  test('ThumbTwo should be true', () => {
+    view.switchToSingle();
+    expect(view.getThumbsPos().thumbOne).toBe(true);
+  });
+  test('ThumbTwo should be true', () => {
+    view.switchToSingle();
+    expect(view.getThumbsPos().thumbTwo).toBe(null);
+  });
 });
 
 describe('Update thumbs', () => {
