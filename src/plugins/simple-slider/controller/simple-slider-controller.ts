@@ -65,6 +65,7 @@ class SimpleSliderController implements IObserver {
     this.modelSubject.register('orientationIsUpdated', this);
     this.modelSubject.register('scaleStateIsUpdated', this);
     this.modelSubject.register('popUpsStateIsUpdated', this);
+    this.view.subject.register('clickToTrack', this);
   }
 
   /**
@@ -99,6 +100,9 @@ class SimpleSliderController implements IObserver {
         break;
       case 'popUpsStateIsUpdated':
         this.updatePopUpsSate();
+        break;
+      case 'clickToTrack':
+        this.model.setThumbPosOnClickPos(this.view.getTrackClickPosition());
         break;
       default:
         break;

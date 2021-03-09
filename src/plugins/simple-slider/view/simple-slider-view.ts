@@ -49,6 +49,7 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
     this.thumbTwo.subject.register('thumbIsDragged', this);
     this.thumbOne.subject.register('thumbIsCatched', this);
     this.thumbTwo.subject.register('thumbIsCatched', this);
+    this.track.subject.register('clickToTrack', this);
 
     this.assembleSlider();
   }
@@ -88,6 +89,9 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
       case 'thumbIsCatched':
         this.thumbOne.resetZIndex();
         this.thumbTwo?.resetZIndex();
+        break;
+      case 'clickToTrack':
+        this.subject.notify('clickToTrack');
         break;
       default:
         break;
@@ -272,10 +276,14 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
   }
 
   /**
-   * Добаавляет деления к шкале
+   * Добавляет деления к шкале
    * @param {IScalePointParams[]} points - массив объектов с параметрами делений шкалы
    */
   addScalePoints(points: IScalePointParams[]): void {
     this.scale?.addPoints(points);
+  }
+
+  getTrackClickPosition(): IPosition {
+    return this.track.getClickPosition();
   }
 }

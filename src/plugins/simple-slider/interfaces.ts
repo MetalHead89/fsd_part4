@@ -83,6 +83,7 @@ export interface ISimpleSliderModel {
   getPopUpsParams(): IPopUps;
   getScalePoints(scalePointSize: ISize): IScalePointParams[];
   getOrientation(): string;
+  setThumbPosOnClickPos(clickPosition: IPosition): void;
 }
 
 export interface ISimpleSliderView {
@@ -103,6 +104,7 @@ export interface ISimpleSliderView {
   updatePopUps(params: IPopUps): void;
   getScalePointSize(value: number): ISize;
   addScalePoints(points: IScalePointParams[]): void;
+  getTrackClickPosition(): IPosition;
 }
 
 export interface IControllerParams {
