@@ -324,6 +324,36 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
     return scaleParams;
   }
 
+  setThumbPosOnClickPos(clickPosition: IPosition): void {
+    const position = {
+      left: clickPosition.left - this.thumbSize.width / 2,
+      top: clickPosition.top - this.thumbSize.height / 2,
+    };
+    let thumbOne = this.thumbOneValue;
+    let thumbTwo = this.thumbTwoValue;
+
+    if (this.type === 'range' && this.thumbTwoIsNearToClick(position)) {
+      thumbTwo = this.thumbPosToValue(this.posByOrientation(position));
+    } else {
+      thumbOne = this.thumbPosToValue(this.posByOrientation(position));
+    }
+
+    this.setThumbsValues({ thumbOne, thumbTwo });
+  }
+
+  private thumbTwoIsNearToClick(position: IPosition): boolean {
+    return (
+      Math.abs(
+        this.posByOrientation(position) -
+          this.posByOrientation(this.thumbValueToPos(this.thumbTwoValue))
+      ) <
+      Math.abs(
+        this.posByOrientation(position) -
+          this.posByOrientation(this.thumbValueToPos(this.thumbOneValue))
+      )
+    );
+  }
+
   /**
    * Возвращает корректный размер в соответствии с заданным минимумом
    * @param {ISize} size - объект с шириной и высотой
