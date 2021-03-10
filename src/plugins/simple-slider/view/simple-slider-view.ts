@@ -291,7 +291,7 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
   }
 
   getTrackClickPosition(): IPosition {
-    return this.track.getClickPosition();
+    return this.track.getPosition();
   }
 
   getScaleClickPosition(): IPosition {
