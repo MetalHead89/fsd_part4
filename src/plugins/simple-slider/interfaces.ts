@@ -104,6 +104,7 @@ export interface ISimpleSliderView {
   getScalePointSize(value: number): ISize;
   addScalePoints(points: IScalePointParams[]): void;
   getTrackClickPosition(): IPosition;
+  getScaleClickPosition(): IPosition;
 }
 
 export interface IControllerParams {

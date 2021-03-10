@@ -66,6 +66,7 @@ class SimpleSliderController implements IObserver {
     this.modelSubject.register('scaleStateIsUpdated', this);
     this.modelSubject.register('popUpsStateIsUpdated', this);
     this.view.subject.register('clickToTrack', this);
+    this.view.subject.register('clickToScale', this);
   }
 
   /**
@@ -104,6 +105,9 @@ class SimpleSliderController implements IObserver {
       case 'clickToTrack':
         this.model.setThumbPosOnClickPos(this.view.getTrackClickPosition());
         break;
+      case 'clickToScale':
+        this.model.setThumbPosOnClickPos(this.view.getScaleClickPosition());
+        break;
       default:
         break;
     }
@@ -119,7 +123,7 @@ class SimpleSliderController implements IObserver {
       this.view.enableScale();
       const max = this.model.getMax();
       const points = this.model.getScalePoints(
-        this.view.getScalePointSize(max)
+        this.view.getScalePointSize(max),
       );
       this.view.addScalePoints(points);
     } else {

@@ -5,6 +5,16 @@ import Element from '../element/element';
 class Scale extends Element {
   constructor(orientation?: string) {
     super('slider__scale', orientation);
+    this.init();
+  }
+
+  private init(): void {
+    this.element.addEventListener('click', this.clickToScale.bind(this));
+  }
+
+  private clickToScale(event: MouseEvent): void {
+    this.setPosition({ left: event.clientX, top: event.clientY });
+    this.subject.notify('clickToScale');
   }
 
   getPointSize(value: number): ISize {

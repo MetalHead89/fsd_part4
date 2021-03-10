@@ -50,6 +50,7 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
     this.thumbOne.subject.register('thumbIsCatched', this);
     this.thumbTwo.subject.register('thumbIsCatched', this);
     this.track.subject.register('clickToTrack', this);
+    this.scale?.subject.register('clickToScale', this);
 
     this.assembleSlider();
   }
@@ -92,6 +93,10 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
         break;
       case 'clickToTrack':
         this.subject.notify('clickToTrack');
+        break;
+      case 'clickToScale':
+        console.log('sdfsd');
+        this.subject.notify('clickToScale');
         break;
       default:
         break;
@@ -186,6 +191,7 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
    * Отключает шкалу
    */
   disableScale(): void {
+    this.scale?.subject.unsubscribe('clickToScale', this);
     this.scale?.remove();
     this.scale = null;
   }
@@ -199,6 +205,7 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
     }
     this.scale = new Scale(this.container.getOrientation());
     this.container.append(this.scale.getElement());
+    this.scale.subject.register('clickToScale', this);
   }
 
   /**
@@ -285,5 +292,11 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
 
   getTrackClickPosition(): IPosition {
     return this.track.getClickPosition();
+  }
+
+  getScaleClickPosition(): IPosition {
+    const position =
+      this.scale === null ? { left: 0, top: 0 } : this.scale.getPosition();
+    return position;
   }
 }
