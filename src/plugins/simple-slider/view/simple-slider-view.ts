@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 /* eslint-disable comma-dangle */
 
 import {
@@ -95,7 +96,6 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
         this.subject.notify('clickToTrack');
         break;
       case 'clickToScale':
-        console.log('sdfsd');
         this.subject.notify('clickToScale');
         break;
       default:
@@ -290,10 +290,18 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
     this.scale?.addPoints(points);
   }
 
+  /**
+   * Возвращает позицию последнего клика по треку
+   * @returns {IPosition} - объект с позицией последнего клика по треку
+   */
   getTrackClickPosition(): IPosition {
     return this.track.getPosition();
   }
 
+  /**
+   * Возвращает позицию последнего клика по шкале
+   * @returns {IPosition} - объект с позицией последнего клика по шкале
+   */
   getScaleClickPosition(): IPosition {
     const position =
       this.scale === null ? { left: 0, top: 0 } : this.scale.getPosition();

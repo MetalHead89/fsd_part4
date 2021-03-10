@@ -91,13 +91,13 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
    */
   updateThumbsState(positions: IThumbsPositions): void {
     const thumbOneValue = this.valueWithStep(
-      this.posByOrientation(positions.thumbOne)
+      this.posByOrientation(positions.thumbOne),
     );
     let thumbTwoValue: null | number = null;
 
     if (positions.thumbTwo !== null) {
       thumbTwoValue = this.valueWithStep(
-        this.posByOrientation(positions.thumbTwo)
+        this.posByOrientation(positions.thumbTwo),
       );
     }
 
@@ -252,13 +252,13 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
       popUpOne: {
         value: this.thumbOneValue,
         position: this.getPopUpPosition(
-          this.thumbValueToPos(this.thumbOneValue)
+          this.thumbValueToPos(this.thumbOneValue),
         ),
       },
       popUpTwo: {
         value: this.thumbTwoValue,
         position: this.getPopUpPosition(
-          this.thumbValueToPos(this.thumbTwoValue)
+          this.thumbValueToPos(this.thumbTwoValue),
         ),
       },
     };
@@ -293,7 +293,7 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
       const pointValue = this.thumbPosToValue(
         position -
           this.sizeByOrientation(this.thumbSize) / 2 +
-          this.sizeByOrientation(scalePointSize) / 2
+          this.sizeByOrientation(scalePointSize) / 2,
       );
 
       position = this.getNextScalePointPos(position, scalePointSize);
@@ -320,6 +320,10 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
     return scaleParams;
   }
 
+  /**
+   * Сохраняет значение бегунка, ближайшего к месту клика по шкале, либо треку
+   * @param {IPosition} clickPosition - объект с позицией клика
+   */
   setThumbPosOnClickPos(clickPosition: IPosition): void {
     const position = {
       left: clickPosition.left - this.thumbSize.width / 2,
@@ -337,15 +341,21 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
     this.setThumbsValues({ thumbOne, thumbTwo });
   }
 
+  /**
+   * Вычисляет, находится ли второй бегунок ближе к месту клика по шкале или треку
+   * @param {IPosition} position - объект с позицией клика
+   * @returns {boolean} - значение показывающее истинность того, что второй бегунок находится ближе
+   * к месту клика, чем первый
+   */
   private thumbTwoIsNearToClick(position: IPosition): boolean {
     return (
       Math.abs(
         this.posByOrientation(position) -
-          this.posByOrientation(this.thumbValueToPos(this.thumbTwoValue))
+          this.posByOrientation(this.thumbValueToPos(this.thumbTwoValue)),
       ) <
       Math.abs(
         this.posByOrientation(position) -
-          this.posByOrientation(this.thumbValueToPos(this.thumbOneValue))
+          this.posByOrientation(this.thumbValueToPos(this.thumbOneValue)),
       )
     );
   }
@@ -470,7 +480,7 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
 
     let newValue = Math.round(
       this.min +
-        ((this.max - this.min) / 100) * Math.round(position / pixelsPerValue)
+        ((this.max - this.min) / 100) * Math.round(position / pixelsPerValue),
     );
 
     newValue = newValue < this.min ? this.min : newValue;
@@ -553,7 +563,7 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
   private isPointFits(
     pointPos: number,
     prevpointPos: number,
-    scalePointSize: ISize
+    scalePointSize: ISize,
   ): boolean {
     return pointPos - prevpointPos > this.sizeByOrientation(scalePointSize);
   }
