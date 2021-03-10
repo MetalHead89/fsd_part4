@@ -20,11 +20,9 @@ export default class Element {
   }
 
   /**
-   * Возвращает позицию курсора
-   * @param {ICursorPosition} cursorPosition - объект с позицией курсора
+   * Сохраняет позицию курсора относительно левого и верхнего края родительского контейнера
+   * @param {IPosition} cursorPosition - объект с позицией курсора
    * относительно левого и верхнего края экрана
-   * @returns {ICursorPosition} - объект с позицией курсора относительно
-   * левого и верхнего края родительского контейнера
    */
   protected setPosition(cursorPosition: IPosition): void {
     const positionInsideParent = {
@@ -43,14 +41,27 @@ export default class Element {
     this.lastPosition = positionInsideParent;
   }
 
+  /**
+   * Возвращает последнюю сохранённую позицию курсора
+   * @returns {ICursorPosition} - объект с позицией курсора относительно
+   * левого и верхнего края родительского контейнера
+   */
   getPosition(): IPosition {
     return this.lastPosition;
   }
 
+  /**
+   * Возвращает div элемент
+   * @returns {HTMLDivElement} - HTML div элемент
+   */
   getElement(): HTMLDivElement {
     return this.element;
   }
 
+  /**
+   * Возвращает размер элемента
+   * @returns {ISize} - объект с шириной и высотой элемента
+   */
   getSize(): ISize {
     return {
       width: this.element.offsetWidth,
@@ -58,22 +69,35 @@ export default class Element {
     };
   }
 
+  /**
+   * Меняет ориентацию элемента на горизонтальную
+   */
   switchToHorizontal(): void {
     const mainClass = this.element.classList[0];
     this.element.classList.remove(`${mainClass}_vertical`);
     this.element.classList.add(`${mainClass}_horizontal`);
   }
 
+  /**
+   * Меняет ориентацию элемента на вертикальную
+   */
   switchToVertical(): void {
     const mainClass = this.element.classList[0];
     this.element.classList.remove(`${mainClass}_horizontal`);
     this.element.classList.add(`${mainClass}_vertical`);
   }
 
+  /**
+   * Удаляет элемент
+   */
   remove(): void {
     this.element.remove();
   }
 
+  /**
+   * Возвращает текущую ориентацию элемента
+   * @returns {string} - текущая ориентация элемента
+   */
   getOrientation(): string {
     const mainClass = this.element.classList[0];
     const classWithOrientation = this.element.classList[1];
