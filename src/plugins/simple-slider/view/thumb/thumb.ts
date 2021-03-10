@@ -3,7 +3,7 @@
 import { IPosition } from '../../interfaces';
 import Element from '../element/element';
 
-class Thumb extends Element {
+export default class Thumb extends Element {
   private shift = { shiftX: 0, shiftY: 0 };
   private onMouseMoveHandler = this.drag.bind(this);
   private onMouseUpHandler = this.endDrag.bind(this);
@@ -15,6 +15,10 @@ class Thumb extends Element {
     this.disableDragAndDrop();
   }
 
+  /**
+   * Устанавливает z-index
+   * @param {number} index - новое значение z-индекса
+   */
   setZIndex(index: number): void {
     this.element.style.zIndex = index.toString();
   }
@@ -55,6 +59,9 @@ class Thumb extends Element {
     this.increaseZIndex();
   }
 
+  /**
+   * Увеличивает z-index на единицу
+   */
   private increaseZIndex() {
     const zIndex = document.defaultView
       ?.getComputedStyle(this.element, null)
@@ -64,6 +71,9 @@ class Thumb extends Element {
     }
   }
 
+  /**
+   * Возвращает z-index к значению по-умолчанию
+   */
   resetZIndex(): void {
     this.element.style.zIndex = '';
   }
@@ -88,11 +98,9 @@ class Thumb extends Element {
   }
 
   /**
-   * Возвращает позицию курсора
+   * Устанавливает позицию курсора
    * @param {ICursorPosition} cursorPosition - объект с позицией курсора
    * относительно левого и верхнего края экрана
-   * @returns {ICursorPosition} - объект с позицией курсора относительно
-   * левого и верхнего края родительского контейнера
    */
   protected setPosition(cursorPosition: IPosition): void {
     super.setPosition(cursorPosition);
@@ -108,22 +116,26 @@ class Thumb extends Element {
 
     document.removeEventListener(
       'mousemove',
-      this.onMouseMoveHandler as EventListenerOrEventListenerObject,
+      this.onMouseMoveHandler as EventListenerOrEventListenerObject
     );
     document.removeEventListener(
       'mouseup',
-      this.onMouseUpHandler as EventListenerOrEventListenerObject,
+      this.onMouseUpHandler as EventListenerOrEventListenerObject
     );
     document.removeEventListener(
       'touchmove',
-      this.onMouseMoveHandler as EventListenerOrEventListenerObject,
+      this.onMouseMoveHandler as EventListenerOrEventListenerObject
     );
     document.removeEventListener(
       'touchend',
-      this.onMouseUpHandler as EventListenerOrEventListenerObject,
+      this.onMouseUpHandler as EventListenerOrEventListenerObject
     );
   }
 
+  /**
+   * Перемещает бегунок на новую позицию
+   * @param {IPosition} position - объект с новой позицией бегунка
+   */
   moveTo(position: IPosition): void {
     this.lastPosition = position;
     this.element.style.left = `${position.left}px`;
@@ -146,5 +158,3 @@ class Thumb extends Element {
     document.onmousedown = null;
   }
 }
-
-export default Thumb;
