@@ -485,3 +485,14 @@ describe('Get track click position', () => {
     expect(view.getTrackClickPosition()).toBe(true);
   });
 });
+
+describe('Get scale click position', () => {
+  test('Function should be return true', () => {
+    expect(view.getScaleClickPosition()).toBe(true);
+  });
+  test('Function should be return {left: 0, top: 0}', () => {
+    view.disableScale();
+    expect(view.getScaleClickPosition().left).toBe(0);
+    expect(view.getScaleClickPosition().top).toBe(0);
+  });
+});
