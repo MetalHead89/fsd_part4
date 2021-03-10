@@ -479,3 +479,9 @@ describe('Add scale point', () => {
     ).toBe(3);
   });
 });
+
+describe('Get track click position', () => {
+  test('Function should be return true', () => {
+    expect(view.getTrackClickPosition()).toBe(true);
+  });
+});
