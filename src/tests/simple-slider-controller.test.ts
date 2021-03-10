@@ -89,6 +89,31 @@ describe('Init method', () => {
   });
 });
 
+describe('updateView method', () => {
+  test('The updateThumbsState method from the SimpleSliderModel class should be called once', () => {
+    const spy = jest.spyOn(model, 'updateThumbsState');
+    controller = new SimpleSliderController({ model, view });
+    expect(spy).toBeCalledTimes(1);
+  });
+  test('The enableScale method from the SimpleSliderView class should be called once', () => {
+    const spy = jest.spyOn(view, 'enableScale');
+    controller = new SimpleSliderController({ model, view });
+    expect(spy).toBeCalledTimes(1);
+  });
+  test('The addScalePoints method from the SimpleSliderView class should be called once', () => {
+    const spy = jest.spyOn(view, 'addScalePoints');
+    controller = new SimpleSliderController({ model, view });
+    expect(spy).toBeCalledTimes(1);
+  });
+  test('The disableScale method from the SimpleSliderView class should be called once', () => {
+    const spy = jest.spyOn(view, 'disableScale');
+    settings.scale = false;
+    model = new SimpleSliderModel(settings);
+    controller = new SimpleSliderController({ model, view });
+    expect(spy).toBeCalledTimes(1);
+  });
+});
+
 // describe('Update method', () => {
 //   test('The updateThumbsState method from the SimpleSliderModel class must be called once', () => {
 //     controller = new SimpleSliderController({ model, view });
