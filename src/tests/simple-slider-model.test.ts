@@ -473,3 +473,28 @@ describe('Get scale points', () => {
     expect(scalePoints.length).toBe(25);
   });
 });
+
+describe('Set thumb position on click position', () => {
+  test('ThumbOne position value should be 3', () => {
+    model.setThumbPosOnClickPos({ left: 100, top: 0 });
+    expect(model.getThumbsValues().thumbOne).toBe(2);
+  });
+  test('ThumbTwo should be not change position', () => {
+    model.setThumbPosOnClickPos({ left: 100, top: 0 });
+    expect(model.getThumbsValues().thumbTwo).toBe(7);
+  });
+  test('ThumbOne should be not change position', () => {
+    model.setThumbPosOnClickPos({ left: 100, top: 0 });
+    expect(model.getThumbsValues().thumbOne).toBe(2);
+  });
+  test('ThumbTwo position value should be 8', () => {
+    model.setThumbPosOnClickPos({ left: 400, top: 0 });
+    expect(model.getThumbsValues().thumbTwo).toBe(8);
+  });
+  test('ThumbTwo position value should be 8', () => {
+    settings.type = 'single';
+    model.refreshSliderState(settings);
+    model.setThumbPosOnClickPos({ left: 400, top: 0 });
+    expect(model.getThumbsValues().thumbOne).toBe(8);
+  });
+});
