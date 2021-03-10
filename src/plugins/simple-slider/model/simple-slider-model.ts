@@ -300,18 +300,14 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
 
       if (i === 0 || this.isPointFits(position, prevPointPos, scalePointSize)) {
         const pointPos = { left: 0, top: 0 };
-        const paddings = { left: 0, top: 0 };
         if (this.orientation === 'horizontal') {
           pointPos.left = position;
-          paddings.top = this.thumbSize.height;
         } else {
           pointPos.top = position;
-          paddings.left = this.thumbSize.width;
         }
 
         scaleParams.push({
           position: pointPos,
-          paddings,
           size: scalePointSize,
           value: pointValue,
         });

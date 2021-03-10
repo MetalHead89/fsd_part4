@@ -446,11 +446,6 @@ describe('Get scale points', () => {
     expect(scalePoints[5].size.width).toBe(10);
     expect(scalePoints[5].size.height).toBe(10);
   });
-  test('The paddings of the 5th element of the array of scale points should be {left: 0, top: 20}', () => {
-    const scalePoints = model.getScalePoints({ width: 10, height: 10 });
-    expect(scalePoints[5].paddings.left).toBe(0);
-    expect(scalePoints[5].paddings.top).toBe(20);
-  });
   test('The position of the 5th element of the array of scale points should be {left: 0, top: 20}', () => {
     const scalePoints = model.getScalePoints({ width: 10, height: 10 });
     expect(scalePoints[5].position.left).toBe(245);

@@ -2,6 +2,11 @@
   user-select: none;
   position: relative;
   box-sizing: content-box;
+  flex: none;
+}
+
+.slider__scale_horizontal {
+  margin-top: 10px;
 }
 
 .slider__scale-point {

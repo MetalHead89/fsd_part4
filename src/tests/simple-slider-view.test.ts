@@ -433,13 +433,11 @@ describe('Add scale point', () => {
     view.addScalePoints([
       {
         position: { left: 0, top: 0 },
-        paddings: { left: 0, top: 0 },
         size: { width: 0, height: 0 },
         value: 0,
       },
       {
         position: { left: 0, top: 0 },
-        paddings: { left: 0, top: 0 },
         size: { width: 0, height: 0 },
         value: 0,
       },
@@ -452,19 +450,16 @@ describe('Add scale point', () => {
     view.addScalePoints([
       {
         position: { left: 0, top: 0 },
-        paddings: { left: 0, top: 0 },
         size: { width: 0, height: 0 },
         value: 0,
       },
       {
         position: { left: 0, top: 0 },
-        paddings: { left: 0, top: 0 },
         size: { width: 0, height: 0 },
         value: 0,
       },
       {
         position: { left: 0, top: 0 },
-        paddings: { left: 0, top: 0 },
         size: { width: 0, height: 0 },
         value: 0,
       },
