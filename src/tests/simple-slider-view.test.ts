@@ -75,6 +75,16 @@ describe('Update method', () => {
     view.update('emptyEvent');
     expect(spy).toBeCalledTimes(0);
   });
+  test('Notify method of the SimpleSliderView class should be called once', () => {
+    const spy = spyOn(view.subject, 'notify');
+    view.update('clickToTrack');
+    expect(spy).toBeCalledTimes(1);
+  });
+  test('Notify method of the SimpleSliderView class should be called once', () => {
+    const spy = spyOn(view.subject, 'notify');
+    view.update('clickToScale');
+    expect(spy).toBeCalledTimes(1);
+  });
 });
 
 describe('Switch to horizontal', () => {
