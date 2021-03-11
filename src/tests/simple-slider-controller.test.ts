@@ -183,6 +183,31 @@ describe('Update thumbs pos', () => {
   });
 });
 
+describe('Update slider orientation', () => {
+  test('The switchToHorizontal method from the SimpleSliderView class should be called once', () => {
+    const spy = jest.spyOn(view, 'switchToHorizontal');
+    controller.update('orientationIsUpdated');
+    expect(spy).toBeCalledTimes(1);
+  });
+  test('The switchToVertical method from the SimpleSliderView class should not be called', () => {
+    const spy = jest.spyOn(view, 'switchToVertical');
+    controller.update('orientationIsUpdated');
+    expect(spy).toBeCalledTimes(0);
+  });
+  test('The switchToHorizontal method from the SimpleSliderView class should not be called', () => {
+    model['settings'].orientation = 'vertical';
+    const spy = jest.spyOn(view, 'switchToHorizontal');
+    controller.update('orientationIsUpdated');
+    expect(spy).toBeCalledTimes(0);
+  });
+  test('The switchToVertical method from the SimpleSliderView class should be called once', () => {
+    model['settings'].orientation = 'vertical';
+    const spy = jest.spyOn(view, 'switchToVertical');
+    controller.update('orientationIsUpdated');
+    expect(spy).toBeCalledTimes(1);
+  });
+});
+
 // describe('Update method', () => {
 //   test('The updateThumbsState method from the SimpleSliderModel class must be called once', () => {
 //     controller = new SimpleSliderController({ model, view });
