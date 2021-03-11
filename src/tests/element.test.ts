@@ -2,11 +2,38 @@
  * @jest-environment jsdom
  */
 
+/* eslint-disable comma-dangle */
+/* eslint-disable func-names */
+/* eslint-disable object-shorthand */
 /* eslint-disable dot-notation */
 
 import Element from '../plugins/simple-slider/view/element/element';
 
 let element: Element;
+
+// Расширение HTML элементов дополнительными геттерами для тестирования
+Object.defineProperties(window.HTMLElement.prototype, {
+  offsetLeft: {
+    get: function () {
+      return parseFloat(window.getComputedStyle(this).marginLeft) || 0;
+    },
+  },
+  offsetTop: {
+    get: function () {
+      return parseFloat(window.getComputedStyle(this).marginTop) || 0;
+    },
+  },
+  offsetHeight: {
+    get: function () {
+      return parseFloat(window.getComputedStyle(this).height) || 0;
+    },
+  },
+  offsetWidth: {
+    get: function () {
+      return parseFloat(window.getComputedStyle(this).width) || 0;
+    },
+  },
+});
 
 beforeEach(() => {
   element = new Element('some-element');
@@ -18,13 +45,13 @@ describe('Constructor', () => {
   });
   test('Element should have a class some-element_horizontal', () => {
     expect(
-      element['element'].classList.contains('some-element_horizontal'),
+      element['element'].classList.contains('some-element_horizontal')
     ).toBe(true);
   });
   test('Element should have a class some-element_vertical', () => {
     element = new Element('some-element', 'vertical');
     expect(element['element'].classList.contains('some-element_vertical')).toBe(
-      true,
+      true
     );
   });
 });
@@ -53,5 +80,71 @@ describe('Get element', () => {
   test('Element should be exist', () => {
     element = new Element('some-element', 'vertical');
     expect(element.getElement()).not.toBeNull();
+  });
+});
+
+describe('Get size', () => {
+  test('Element size should be {width: 400, height: 50}', () => {
+    element['element'].style.width = '400px';
+    element['element'].style.height = '50px';
+    expect(element.getSize().width).toBe(400);
+    expect(element.getSize().height).toBe(50);
+  });
+  test('Element size should be {width: 250, height: 40}', () => {
+    element['element'].style.width = '250px';
+    element['element'].style.height = '40px';
+    expect(element.getSize().width).toBe(250);
+    expect(element.getSize().height).toBe(40);
+  });
+});
+
+describe('Switch to horizontal', () => {
+  test('Element should be not contain class some-element_vertical', () => {
+    element = new Element('some-element', 'vertical');
+    element.switchToHorizontal();
+    expect(element['element'].classList.contains('some-element_vertical')).toBe(
+      false
+    );
+  });
+  test('Element should be contain class some-element_horizontal', () => {
+    element = new Element('some-element', 'vertical');
+    element.switchToHorizontal();
+    expect(
+      element['element'].classList.contains('some-element_horizontal')
+    ).toBe(true);
+  });
+});
+
+describe('Switch to vertical', () => {
+  test('Element should be not contain class some-element_horizontal', () => {
+    element.switchToVertical();
+    expect(
+      element['element'].classList.contains('some-element_horizontal')
+    ).toBe(false);
+  });
+  test('Element should be contain class some-element_vertical', () => {
+    element.switchToVertical();
+    expect(element['element'].classList.contains('some-element_vertical')).toBe(
+      true
+    );
+  });
+});
+
+describe('Remove', () => {
+  test('Element should be not exist in the DOM', () => {
+    const body = document.querySelector('body');
+    body?.append(element.getElement());
+    element.remove();
+    expect(document.querySelector('.some-element')).toBe(null);
+  });
+});
+
+describe('Get orientation', () => {
+  test('Element orientation should be horizontal', () => {
+    expect(element.getOrientation()).toBe('horizontal');
+  });
+  test('Element orientation should be vertical', () => {
+    element = new Element('some-element', 'vertical');
+    expect(element.getOrientation()).toBe('vertical');
   });
 });
