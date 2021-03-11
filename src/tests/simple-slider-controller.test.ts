@@ -257,3 +257,28 @@ describe('Update scale state', () => {
     expect(spy).toBeCalledTimes(1);
   });
 });
+
+describe('Update pop ups sate', () => {
+  test('The enablePopUps method from the SimpleSliderView class should be called once', () => {
+    const spy = jest.spyOn(view, 'enablePopUps');
+    controller.update('popUpsStateIsUpdated');
+    expect(spy).toBeCalledTimes(1);
+  });
+  test('The disablePopUps method from the SimpleSliderView class should not be called', () => {
+    const spy = jest.spyOn(view, 'disablePopUps');
+    controller.update('popUpsStateIsUpdated');
+    expect(spy).toBeCalledTimes(0);
+  });
+  test('The enablePopUps method from the SimpleSliderView class should not be called', () => {
+    model['settings'].popUps = false;
+    const spy = jest.spyOn(view, 'enablePopUps');
+    controller.update('popUpsStateIsUpdated');
+    expect(spy).toBeCalledTimes(0);
+  });
+  test('The disablePopUps method from the SimpleSliderView class should be called once', () => {
+    model['settings'].popUps = false;
+    const spy = jest.spyOn(view, 'disablePopUps');
+    controller.update('popUpsStateIsUpdated');
+    expect(spy).toBeCalledTimes(1);
+  });
+});
