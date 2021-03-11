@@ -41,6 +41,14 @@ export default class Model {
     return this.TEST_OK;
   }
 
+  getPopUpsParams(): boolean {
+    return this.TEST_OK;
+  }
+
+  getProgressBarParams(): boolean {
+    return this.TEST_OK;
+  }
+
   updateThumbsState(): boolean {
     return this.TEST_OK;
   }

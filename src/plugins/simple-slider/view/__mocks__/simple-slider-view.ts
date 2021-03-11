@@ -70,4 +70,16 @@ export default class View {
   addScalePoints(): boolean {
     return this.TEST_OK;
   }
+
+  updateThumbs(): boolean {
+    return this.TEST_OK;
+  }
+
+  updatePopUps(): boolean {
+    return this.TEST_OK;
+  }
+
+  updateProgressBar(): boolean {
+    return this.TEST_OK;
+  }
 }

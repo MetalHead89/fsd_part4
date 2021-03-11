@@ -165,6 +165,24 @@ describe('Update method', () => {
   });
 });
 
+describe('Update thumbs pos', () => {
+  test('The updateThumbs method from the SimpleSliderView class should be called once', () => {
+    const spy = jest.spyOn(view, 'updateThumbs');
+    controller.update('thumbsPosIsUpdated');
+    expect(spy).toBeCalledTimes(1);
+  });
+  test('The updatePopUps method from the SimpleSliderView class should be called once', () => {
+    const spy = jest.spyOn(view, 'updatePopUps');
+    controller.update('thumbsPosIsUpdated');
+    expect(spy).toBeCalledTimes(1);
+  });
+  test('The updateProgressBar method from the SimpleSliderView class should be called once', () => {
+    const spy = jest.spyOn(view, 'updateProgressBar');
+    controller.update('thumbsPosIsUpdated');
+    expect(spy).toBeCalledTimes(1);
+  });
+});
+
 // describe('Update method', () => {
 //   test('The updateThumbsState method from the SimpleSliderModel class must be called once', () => {
 //     controller = new SimpleSliderController({ model, view });
