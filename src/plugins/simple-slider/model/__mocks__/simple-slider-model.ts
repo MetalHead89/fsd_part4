@@ -21,6 +21,10 @@ export default class Model {
     return this.TEST_OK;
   }
 
+  setThumbPosOnClickPos(): boolean {
+    return this.TEST_OK;
+  }
+
   getOrientation(): string {
     return this.settings.orientation;
   }

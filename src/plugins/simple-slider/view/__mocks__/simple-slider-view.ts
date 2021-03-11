@@ -19,6 +19,18 @@ export default class View {
     return this.TEST_OK;
   }
 
+  getThumbsPos(): boolean {
+    return this.TEST_OK;
+  }
+
+  getTrackClickPosition(): boolean {
+    return this.TEST_OK;
+  }
+
+  getScaleClickPosition(): boolean {
+    return this.TEST_OK;
+  }
+
   switchToHorizontal(): boolean {
     return this.TEST_OK;
   }

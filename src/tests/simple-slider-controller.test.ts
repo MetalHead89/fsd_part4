@@ -89,7 +89,7 @@ describe('Init method', () => {
   });
 });
 
-describe('updateView method', () => {
+describe('Update view method', () => {
   test('The updateThumbsState method from the SimpleSliderModel class should be called once', () => {
     const spy = jest.spyOn(model, 'updateThumbsState');
     controller = new SimpleSliderController({ model, view });
@@ -111,6 +111,57 @@ describe('updateView method', () => {
     model = new SimpleSliderModel(settings);
     controller = new SimpleSliderController({ model, view });
     expect(spy).toBeCalledTimes(1);
+  });
+});
+
+describe('Update method', () => {
+  test('The updateThumbsState method from the SimpleSliderModel class should be called once', () => {
+    const spy = jest.spyOn(model, 'updateThumbsState');
+    controller.update('thumbIsDragged');
+    expect(spy).toBeCalledTimes(1);
+  });
+  test('The setThumbPosOnClickPos method from the SimpleSliderModel class should be called once', () => {
+    const spy = jest.spyOn(model, 'setThumbPosOnClickPos');
+    controller.update('clickToTrack');
+    expect(spy).toBeCalledTimes(1);
+  });
+  test('The setThumbPosOnClickPos method from the SimpleSliderModel class should be called once', () => {
+    const spy = jest.spyOn(model, 'setThumbPosOnClickPos');
+    controller.update('clickToScale');
+    expect(spy).toBeCalledTimes(1);
+  });
+  test('Other methods should not be called', () => {
+    const spy1 = jest.spyOn(model, 'updateThumbsState');
+    controller.update('emptyEvent');
+    expect(spy1).toBeCalledTimes(0);
+
+    const spy2 = jest.spyOn(model, 'setThumbPosOnClickPos');
+    controller.update('emptyEvent');
+    expect(spy2).toBeCalledTimes(0);
+
+    const spy3 = spyOn<any>(controller, 'updateThumbsPos');
+    controller.update('emptyEvent');
+    expect(spy3).toBeCalledTimes(0);
+
+    const spy4 = spyOn<any>(controller, 'updateView');
+    controller.update('emptyEvent');
+    expect(spy4).toBeCalledTimes(0);
+
+    const spy5 = spyOn<any>(controller, 'updateSliderOrientation');
+    controller.update('emptyEvent');
+    expect(spy5).toBeCalledTimes(0);
+
+    const spy6 = spyOn<any>(controller, 'updateSliderType');
+    controller.update('emptyEvent');
+    expect(spy6).toBeCalledTimes(0);
+
+    const spy7 = spyOn<any>(controller, 'updateScaleState');
+    controller.update('emptyEvent');
+    expect(spy7).toBeCalledTimes(0);
+
+    const spy8 = spyOn<any>(controller, 'updatePopUpsSate');
+    controller.update('emptyEvent');
+    expect(spy8).toBeCalledTimes(0);
   });
 });
 
