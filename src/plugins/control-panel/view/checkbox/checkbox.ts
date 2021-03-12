@@ -15,6 +15,11 @@ export default class Checkbox extends Subject {
     this.init(params);
   }
 
+  /**
+   * Инициализирует контрол. Добавляет классы, слушатели событий, лейблы и т.п.
+   * для составляющих контрола и компунует все в единый элемент
+   * @param {ICheckboxParams} params - параметры чекбокса
+   */
   private init(params: ICheckboxParams): void {
     this.control.classList.add('control-panel__checkbox-wrapper');
 
@@ -31,10 +36,18 @@ export default class Checkbox extends Subject {
     this.control.append(this.label);
   }
 
+  /**
+   * Возвращает контрол чекбокса
+   * @returns {HTMLDivElement} - группа HTML элементов обернутая в div
+   */
   getControl(): HTMLDivElement {
     return this.control;
   }
 
+  /**
+   * Добавляет/удаляет галочку, в зависимости от состояния чекбокса.
+   * Оповещает подписчиков об изменении состояния чекбокса
+   */
   private onChange(): void {
     if (this.checkbox.checked) {
       this.label.classList.add('control-panel__checkbox-label_checked');
@@ -45,11 +58,19 @@ export default class Checkbox extends Subject {
     this.notify('controlPanelDataUpdated');
   }
 
+  /**
+   * Переводит чекбокс в состояние выбран/не выбран в зависимости от полученного состояния
+   * @param {boolean} state - состояние радиокнопки
+   */
   setState(state: boolean): void {
     this.checkbox.checked = state;
     this.onChange();
   }
 
+  /**
+   * Возвращает состояение чекбокса
+   * @returns {boolean} - состояние чекбокса
+   */
   getState(): boolean {
     return this.checkbox.checked;
   }
