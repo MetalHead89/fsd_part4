@@ -14,18 +14,35 @@ export default class TextField extends Subject {
     this.init(labelText);
   }
 
+  /**
+   * Возвращает контрол текстового поля
+   * @returns {HTMLDivElement} - группа HTML элементов обернутая в div
+   */
   getControl(): HTMLDivElement {
     return this.control;
   }
 
+  /**
+   * Возвращает значение введённое в текстовое поле
+   * @returns {number} - значение введённое в текстовое поле
+   */
   getValue(): number {
     return parseInt(this.field.value, 10);
   }
 
+  /**
+   * Записывает значение в текстовое поле
+   * @param {number} value - значение которое должно быть записано в текстовое поле
+   */
   setValue(value: number): void {
     this.field.value = `${value}`;
   }
 
+  /**
+   * Инициализирует контрол. Добавляет классы, слушатели событий, лейблы и т.п.
+   * для составляющих контрола и компунует все в единый элемент
+   * @param {string} labelText - текст лейбла
+   */
   private init(labelText: string) {
     this.control.classList.add('slider-panel__text-field-control');
 
@@ -40,10 +57,17 @@ export default class TextField extends Subject {
     this.control.append(this.label);
   }
 
+  /**
+   * Оповещает подписчиков, об изменении данных
+   */
   private reportChanges() {
     this.notify('controlPanelDataUpdated');
   }
 
+  /**
+   * Удаляет из текстового поля символы, не являющиеся цифрами
+   * @param {KeyboardEvent} event - событие клавиатуры
+   */
   private static removeNonDigitChar(event: KeyboardEvent): boolean {
     return /[-\d]/.test(event.key);
   }
