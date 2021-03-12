@@ -14,6 +14,9 @@ export default class ControlPanelController implements IObserver {
     this.view.register('controlPanelDataUpdated', this);
   }
 
+  /**
+   * Инициализация контролов во View данными из Model
+   */
   init(): void {
     this.view.setThumbsValues(this.model.getThumbsValues());
     this.view.setMinValue(this.model.getMin());
@@ -25,6 +28,10 @@ export default class ControlPanelController implements IObserver {
     this.view.setOrientationRadio(this.model.getOrientation());
   }
 
+  /**
+   * Обновляет данные слайдера или панели управления в соответствии с полученным событием
+   * @param {string} eventType - событие
+   */
   update(eventType: string): void {
     if (eventType === 'thumbsPosIsUpdated') {
       this.view.setThumbsValues(this.model.getThumbsValues());
