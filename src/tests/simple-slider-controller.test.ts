@@ -196,13 +196,13 @@ describe('Update slider orientation', () => {
     expect(spy).toBeCalledTimes(0);
   });
   test('The switchToHorizontal method from the SimpleSliderView class should not be called', () => {
-    model['settings'].orientation = 'vertical';
+    model['orientation'] = 'vertical';
     const spy = jest.spyOn(view, 'switchToHorizontal');
     controller.update('orientationIsUpdated');
     expect(spy).toBeCalledTimes(0);
   });
   test('The switchToVertical method from the SimpleSliderView class should be called once', () => {
-    model['settings'].orientation = 'vertical';
+    model['orientation'] = 'vertical';
     const spy = jest.spyOn(view, 'switchToVertical');
     controller.update('orientationIsUpdated');
     expect(spy).toBeCalledTimes(1);
@@ -221,13 +221,13 @@ describe('Update slider type', () => {
     expect(spy).toBeCalledTimes(0);
   });
   test('The switchToRange method from the SimpleSliderView class should not be called', () => {
-    model['settings'].type = 'single';
+    model['type'] = 'single';
     const spy = jest.spyOn(view, 'switchToRange');
     controller.update('typeIsUpdated');
     expect(spy).toBeCalledTimes(0);
   });
   test('The switchToSingle method from the SimpleSliderView class should be called once', () => {
-    model['settings'].type = 'single';
+    model['type'] = 'single';
     const spy = jest.spyOn(view, 'switchToSingle');
     controller.update('typeIsUpdated');
     expect(spy).toBeCalledTimes(1);
@@ -246,13 +246,13 @@ describe('Update scale state', () => {
     expect(spy).toBeCalledTimes(0);
   });
   test('The enableScale method from the SimpleSliderView class should not be called', () => {
-    model['settings'].scale = false;
+    model['scale'] = false;
     const spy = jest.spyOn(view, 'enableScale');
     controller.update('scaleStateIsUpdated');
     expect(spy).toBeCalledTimes(0);
   });
   test('The disableScale method from the SimpleSliderView class should be called once', () => {
-    model['settings'].scale = false;
+    model['scale'] = false;
     const spy = jest.spyOn(view, 'disableScale');
     controller.update('scaleStateIsUpdated');
     expect(spy).toBeCalledTimes(1);
@@ -271,13 +271,13 @@ describe('Update pop ups sate', () => {
     expect(spy).toBeCalledTimes(0);
   });
   test('The enablePopUps method from the SimpleSliderView class should not be called', () => {
-    model['settings'].popUps = false;
+    model['popUps'] = false;
     const spy = jest.spyOn(view, 'enablePopUps');
     controller.update('popUpsStateIsUpdated');
     expect(spy).toBeCalledTimes(0);
   });
   test('The disablePopUps method from the SimpleSliderView class should be called once', () => {
-    model['settings'].popUps = false;
+    model['popUps'] = false;
     const spy = jest.spyOn(view, 'disablePopUps');
     controller.update('popUpsStateIsUpdated');
     expect(spy).toBeCalledTimes(1);
