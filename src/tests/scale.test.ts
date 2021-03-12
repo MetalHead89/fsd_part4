@@ -141,3 +141,15 @@ describe('Add points', () => {
     ).not.toBe(null);
   });
 });
+
+describe('Get point size', () => {
+  test('Scale point size should be {width: 0, height: 0}', () => {
+    expect(scale.getPointSize(10).width).toBe(0);
+    expect(scale.getPointSize(10).height).toBe(0);
+  });
+  test('Scale point size should be {width: 0, height: 0}', () => {
+    scale.remove();
+    expect(scale.getPointSize(10).width).toBe(0);
+    expect(scale.getPointSize(10).height).toBe(0);
+  });
+});
