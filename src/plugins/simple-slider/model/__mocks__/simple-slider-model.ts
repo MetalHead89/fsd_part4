@@ -1,7 +1,13 @@
 import { ISliderSettings } from '../../interfaces';
 
 export default class Model {
-  private settings: ISliderSettings;
+  private orientation;
+  private type;
+  private scale;
+  private popUps;
+  private min;
+  private max;
+  private step;
   private TEST_OK = true;
   subject = {
     register: (): boolean => true,
@@ -10,7 +16,13 @@ export default class Model {
   };
 
   constructor(settings: ISliderSettings) {
-    this.settings = settings;
+    this.orientation = settings.orientation;
+    this.type = settings.type;
+    this.scale = settings.scale;
+    this.popUps = settings.popUps;
+    this.min = settings.min;
+    this.max = settings.max;
+    this.step = settings.step;
   }
 
   setSliderSize(): boolean {
@@ -26,15 +38,15 @@ export default class Model {
   }
 
   getOrientation(): string {
-    return this.settings.orientation;
+    return this.orientation;
   }
 
   getType(): string {
-    return this.settings.type;
+    return this.type;
   }
 
   getPopUpsState(): boolean {
-    return this.settings.popUps;
+    return this.popUps;
   }
 
   getThumbsPos(): boolean {
@@ -54,19 +66,19 @@ export default class Model {
   }
 
   getScaleState(): boolean {
-    return this.settings.scale;
+    return this.scale;
   }
 
   getMin(): number {
-    return this.settings.min;
+    return this.min;
   }
 
   getMax(): number {
-    return this.settings.max;
+    return this.max;
   }
 
   getStep(): number {
-    return this.settings.step;
+    return this.step;
   }
 
   getScalePoints(): boolean {
