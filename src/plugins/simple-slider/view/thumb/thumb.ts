@@ -75,8 +75,8 @@ export default class Thumb extends Element {
     const zIndex = document.defaultView
       ?.getComputedStyle(this.element, null)
       .getPropertyValue('z-index');
-    if (zIndex !== undefined) {
-      this.element.style.zIndex = (zIndex + 1).toString();
+    if (zIndex !== undefined && zIndex !== '') {
+      this.element.style.zIndex = (parseInt(zIndex, 10) + 1).toString();
     }
   }
 
