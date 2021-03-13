@@ -87,3 +87,18 @@ describe('Increase z-index', () => {
     expect(thumb.getElement().style.zIndex).toBe('');
   });
 });
+
+describe('Drag', () => {
+  test('SetPosition method should be called once', () => {
+    const spy = spyOn<any>(thumb, 'setPosition');
+    const moveEvt = new window.MouseEvent('pointermove') as PointerEvent;
+    thumb['drag'](moveEvt);
+    expect(spy).toBeCalledTimes(1);
+  });
+  test('Notify method should be called once', () => {
+    const spy = spyOn<any>(thumb.subject, 'notify');
+    const moveEvt = new window.MouseEvent('pointermove') as PointerEvent;
+    thumb['drag'](moveEvt);
+    expect(spy).toBeCalledTimes(1);
+  });
+});
