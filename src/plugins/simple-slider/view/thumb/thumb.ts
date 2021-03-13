@@ -1,5 +1,6 @@
 /* eslint operator-linebreak: ["error", "after"] */
 /* eslint-disable comma-dangle */
+
 import { IPosition } from '../../interfaces';
 import Element from '../element/element';
 
@@ -104,14 +105,8 @@ export default class Thumb extends Element {
   private endDrag(): void {
     Thumb.enableSelection();
 
-    document.removeEventListener(
-      'pointermove',
-      this.onMouseMoveHandler as EventListenerOrEventListenerObject
-    );
-    document.removeEventListener(
-      'pointerup',
-      this.onMouseUpHandler as EventListenerOrEventListenerObject
-    );
+    document.removeEventListener('pointermove', this.onMouseMoveHandler);
+    document.removeEventListener('pointerup', this.onMouseUpHandler);
   }
 
   /**
