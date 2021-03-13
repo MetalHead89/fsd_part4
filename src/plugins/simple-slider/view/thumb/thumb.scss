@@ -5,6 +5,7 @@
   border-radius: 50%;
   background: rgb(85, 196, 153);
   z-index: 2;
+  touch-action: none;
 }
 
 .slider__thumb_horizontal {
