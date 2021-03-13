@@ -44,3 +44,10 @@ describe('Move to', () => {
     expect(thumb.getElement().style.top).toBe('54px');
   });
 });
+
+describe('Thumb dragstart event should return false', () => {
+  test('Event should return false', () => {
+    const evt = new window.Event('dragstart');
+    expect(thumb.getElement().dispatchEvent(evt)).toBe(false);
+  });
+});
