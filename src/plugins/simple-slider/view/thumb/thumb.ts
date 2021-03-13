@@ -52,9 +52,6 @@ export default class Thumb extends Element {
     document.addEventListener('pointermove', this.onMouseMoveHandler);
     document.addEventListener('pointerup', this.onMouseUpHandler);
 
-    // document.addEventListener('touchmove', this.onMouseMoveHandler);
-    // document.addEventListener('touchend', this.onMouseUpHandler);
-
     this.subject.notify('thumbIsCatched');
     this.increaseZIndex();
   }
@@ -115,14 +112,6 @@ export default class Thumb extends Element {
       'pointerup',
       this.onMouseUpHandler as EventListenerOrEventListenerObject
     );
-    // document.removeEventListener(
-    //   'touchmove',
-    //   this.onMouseMoveHandler as EventListenerOrEventListenerObject
-    // );
-    // document.removeEventListener(
-    //   'touchend',
-    //   this.onMouseUpHandler as EventListenerOrEventListenerObject
-    // );
   }
 
   /**
