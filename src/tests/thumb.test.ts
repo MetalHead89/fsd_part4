@@ -47,7 +47,7 @@ describe('Move to', () => {
   });
 });
 
-describe('Thumb dragstart event should return false', () => {
+describe('Thumb dragstart event', () => {
   test('Event should return false', () => {
     const evt = new window.Event('dragstart');
     expect(thumb.getElement().dispatchEvent(evt)).toBe(false);
@@ -64,5 +64,26 @@ describe('Set thumb shift', () => {
     thumb['setThumbShift']({ left: 100, top: 80 }, { left: 95, top: 77 });
     expect(thumb['shift'].shiftX).toBe(5);
     expect(thumb['shift'].shiftY).toBe(3);
+  });
+});
+
+describe('Increase z-index', () => {
+  test('z-index should be 3', () => {
+    thumb.getElement().style.zIndex = '2';
+    const evt = new window.Event('pointerdown');
+    thumb.getElement().dispatchEvent(evt);
+    expect(thumb.getElement().style.zIndex).toBe('3');
+  });
+  test('z-index should be 10', () => {
+    thumb.getElement().style.zIndex = '9';
+    const evt = new window.Event('pointerdown');
+    thumb.getElement().dispatchEvent(evt);
+    expect(thumb.getElement().style.zIndex).toBe('10');
+  });
+  test('z-index should be ""', () => {
+    thumb.getElement().style.zIndex = '';
+    const evt = new window.Event('pointerdown');
+    thumb.getElement().dispatchEvent(evt);
+    expect(thumb.getElement().style.zIndex).toBe('');
   });
 });
