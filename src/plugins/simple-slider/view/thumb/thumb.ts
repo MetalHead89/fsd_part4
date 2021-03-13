@@ -34,14 +34,14 @@ export default class Thumb extends Element {
    * Добавляет событие на нажатие кнопки мыши на бегунке
    */
   private addMousedownEventListener(): void {
-    this.element.addEventListener('mousedown', this.clickToThumb.bind(this));
+    this.element.addEventListener('pointerdown', this.clickToThumb.bind(this));
   }
 
   /**
    * Обработка касания бегунка мышкой
-   * @param {MouseEvent} event - объект события клика
+   * @param {PointerEvent} event - объект события клика
    */
-  private clickToThumb(event: MouseEvent): void {
+  private clickToThumb(event: PointerEvent): void {
     Thumb.disableSelection();
 
     const thumbCoords: DOMRect = this.element.getBoundingClientRect();
@@ -49,11 +49,11 @@ export default class Thumb extends Element {
     this.shift.shiftX = event.clientX - thumbCoords.left;
     this.shift.shiftY = event.clientY - thumbCoords.top;
 
-    document.addEventListener('mousemove', this.onMouseMoveHandler);
-    document.addEventListener('mouseup', this.onMouseUpHandler);
+    document.addEventListener('pointermove', this.onMouseMoveHandler);
+    document.addEventListener('pointerup', this.onMouseUpHandler);
 
-    document.addEventListener('touchmove', this.onMouseMoveHandler);
-    document.addEventListener('touchend', this.onMouseUpHandler);
+    // document.addEventListener('touchmove', this.onMouseMoveHandler);
+    // document.addEventListener('touchend', this.onMouseUpHandler);
 
     this.subject.notify('thumbIsCatched');
     this.increaseZIndex();
@@ -81,25 +81,18 @@ export default class Thumb extends Element {
   /**
    *  Оповещает подписчиков о том, что бегунок пытаются переместить
    */
-  private drag(event: MouseEvent | TouchEvent): void {
-    if (event instanceof MouseEvent) {
-      this.setPosition({
-        left: event.clientX,
-        top: event.clientY,
-      });
-    } else {
-      this.setPosition({
-        left: event.targetTouches[0].pageX,
-        top: event.targetTouches[0].pageY,
-      });
-    }
+  private drag(event: PointerEvent): void {
+    this.setPosition({
+      left: event.clientX,
+      top: event.clientY,
+    });
 
     this.subject.notify('thumbIsDragged');
   }
 
   /**
    * Устанавливает позицию курсора
-   * @param {ICursorPosition} cursorPosition - объект с позицией курсора
+   * @param {IPosition} cursorPosition - объект с позицией курсора
    * относительно левого и верхнего края экрана
    */
   protected setPosition(cursorPosition: IPosition): void {
@@ -115,21 +108,21 @@ export default class Thumb extends Element {
     Thumb.enableSelection();
 
     document.removeEventListener(
-      'mousemove',
+      'pointermove',
       this.onMouseMoveHandler as EventListenerOrEventListenerObject
     );
     document.removeEventListener(
-      'mouseup',
+      'pointerup',
       this.onMouseUpHandler as EventListenerOrEventListenerObject
     );
-    document.removeEventListener(
-      'touchmove',
-      this.onMouseMoveHandler as EventListenerOrEventListenerObject
-    );
-    document.removeEventListener(
-      'touchend',
-      this.onMouseUpHandler as EventListenerOrEventListenerObject
-    );
+    // document.removeEventListener(
+    //   'touchmove',
+    //   this.onMouseMoveHandler as EventListenerOrEventListenerObject
+    // );
+    // document.removeEventListener(
+    //   'touchend',
+    //   this.onMouseUpHandler as EventListenerOrEventListenerObject
+    // );
   }
 
   /**
@@ -147,7 +140,7 @@ export default class Thumb extends Element {
    */
   private static disableSelection() {
     document.onselectstart = () => false;
-    document.onmousedown = () => false;
+    document.onpointerdown = () => false;
   }
 
   /**
@@ -155,6 +148,6 @@ export default class Thumb extends Element {
    */
   private static enableSelection() {
     document.onselectstart = null;
-    document.onmousedown = null;
+    document.onpointerdown = null;
   }
 }
