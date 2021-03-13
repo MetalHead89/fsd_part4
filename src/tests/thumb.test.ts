@@ -28,3 +28,19 @@ describe('Reset z-index', () => {
     expect(thumb.getElement().style.zIndex).toBe('');
   });
 });
+
+describe('Move to', () => {
+  test('Thumb last position should be {left: 40, top: 11}', () => {
+    thumb.moveTo({ left: 40, top: 11 });
+    expect(thumb.getPosition().left).toBe(40);
+    expect(thumb.getPosition().top).toBe(11);
+  });
+  test('Thumb element left should be 80px', () => {
+    thumb.moveTo({ left: 80, top: 11 });
+    expect(thumb.getElement().style.left).toBe('80px');
+  });
+  test('Thumb element top should be 54px', () => {
+    thumb.moveTo({ left: 80, top: 54 });
+    expect(thumb.getElement().style.top).toBe('54px');
+  });
+});
