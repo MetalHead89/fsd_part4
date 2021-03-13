@@ -20,3 +20,11 @@ describe('Set z-index', () => {
     expect(thumb.getElement().style.zIndex).toBe('8');
   });
 });
+
+describe('Reset z-index', () => {
+  test('Thumb z-inex should be ""', () => {
+    thumb.setZIndex(4);
+    thumb.resetZIndex();
+    expect(thumb.getElement().style.zIndex).toBe('');
+  });
+});
