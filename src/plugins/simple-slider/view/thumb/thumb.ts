@@ -46,15 +46,26 @@ export default class Thumb extends Element {
     Thumb.disableSelection();
 
     const thumbCoords: DOMRect = this.element.getBoundingClientRect();
-
-    this.shift.shiftX = event.clientX - thumbCoords.left;
-    this.shift.shiftY = event.clientY - thumbCoords.top;
+    this.setThumbShift(
+      { left: event.clientX, top: event.clientY },
+      { left: thumbCoords.left, top: thumbCoords.top }
+    );
 
     document.addEventListener('pointermove', this.onMouseMoveHandler);
     document.addEventListener('pointerup', this.onMouseUpHandler);
 
     this.subject.notify('thumbIsCatched');
     this.increaseZIndex();
+  }
+
+  /**
+   * Сохраняет разницу между позициями бегунка и курсора
+   * @param {IPosition} cursorPos - позиция курсора
+   * @param {IPosition} thumbPos - позиция бегунка
+   */
+  private setThumbShift(cursorPos: IPosition, thumbPos: IPosition) {
+    this.shift.shiftX = cursorPos.left - thumbPos.left;
+    this.shift.shiftY = cursorPos.top - thumbPos.top;
   }
 
   /**
