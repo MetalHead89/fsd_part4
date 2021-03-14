@@ -117,3 +117,14 @@ describe('Set position', () => {
     expect(thumb.getPosition().top).toBe(137);
   });
 });
+
+describe('Enable selection', () => {
+  test('Document onselectstart event should be null', () => {
+    thumb['endDrag']();
+    expect(document.onselectstart).toBe(null);
+  });
+  test('Document pointerdown event should be null', () => {
+    thumb['endDrag']();
+    expect(document.onpointerdown).toBe(null);
+  });
+});
