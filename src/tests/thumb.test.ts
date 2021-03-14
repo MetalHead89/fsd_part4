@@ -102,3 +102,11 @@ describe('Drag', () => {
     expect(spy).toBeCalledTimes(1);
   });
 });
+
+describe('Set position', () => {
+  test('Thumb position should be {left: 45, top: 20}', () => {
+    thumb['setPosition']({ left: 45, top: 20 });
+    expect(thumb.getPosition().left).toBe(45);
+    expect(thumb.getPosition().top).toBe(20);
+  });
+});
