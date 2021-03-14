@@ -104,9 +104,16 @@ describe('Drag', () => {
 });
 
 describe('Set position', () => {
-  test('Thumb position should be {left: 45, top: 20}', () => {
+  test('Thumb position should be {left: 40, top: 17}', () => {
+    thumb['shift'] = { shiftX: 5, shiftY: 3 };
     thumb['setPosition']({ left: 45, top: 20 });
-    expect(thumb.getPosition().left).toBe(45);
-    expect(thumb.getPosition().top).toBe(20);
+    expect(thumb.getPosition().left).toBe(40);
+    expect(thumb.getPosition().top).toBe(17);
+  });
+  test('Thumb position should be {left: 45, top: 20}', () => {
+    thumb['shift'] = { shiftX: 8, shiftY: 9 };
+    thumb['setPosition']({ left: 146, top: 146 });
+    expect(thumb.getPosition().left).toBe(138);
+    expect(thumb.getPosition().top).toBe(137);
   });
 });
