@@ -128,3 +128,34 @@ describe('Enable selection', () => {
     expect(document.onpointerdown).toBe(null);
   });
 });
+
+describe('Disable selection', () => {
+  test('Document pointerdown event not should be null', () => {
+    const evt = new window.Event('pointerdown');
+    thumb.getElement().dispatchEvent(evt);
+    expect(document.onselectstart).not.toBe(null);
+  });
+  test('Document selectstart event should return false', () => {
+    const evt = new window.Event('pointerdown');
+    thumb.getElement().dispatchEvent(evt);
+
+    if (document.onselectstart !== null) {
+      const docEvt = new window.Event('selectstart');
+      expect(document.onselectstart(docEvt)).toBe(false);
+    }
+  });
+  test('Document pointerdown event should return false', () => {
+    const evt = new window.Event('pointerdown');
+    thumb.getElement().dispatchEvent(evt);
+
+    if (document.onpointerdown !== null) {
+      const docEvt = new window.Event('pointerdown') as PointerEvent;
+      expect(document.onpointerdown(docEvt)).toBe(false);
+    }
+  });
+  // test('Document pointerdown event should return false', () => {
+  //   document.onselectstart = () => false;
+  //   const docEvt = new window.Event('selectstart');
+  //   expect(document.onselectstart(docEvt)).toBe(false);
+  // });
+});
