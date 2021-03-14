@@ -18,6 +18,58 @@ body {
   background-blend-mode: screen;
 }
 
+.button-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.add-new-slider-btn__icon {
+  transition: transform 0.2s ease-in;
+}
+
+.add-new-slider-btn {
+  padding: 0 8px;
+  width: 40px;
+  height: 40px;
+  background: white;
+  color: #575757;
+  border: none;
+  border-radius: 8px;
+  font-size: 20px;
+  -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  transition: background 0.2s ease-in;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    background: rgba(240, 243, 243, 0.9);
+    & .add-new-slider-btn__icon {
+      transform: none;
+      transform: rotate(90deg);
+    }
+  }
+  &:active,
+  &:focus {
+    outline: none;
+    padding: 0 8px;
+  }
+}
+
+.add-new-slider-btn_margin-top {
+  margin-top: 20px;
+}
+
+.help-image {
+  display: block;
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
 // .slider-wrapper {
 //   width: 100%;
 //   max-width: 500px;
@@ -49,57 +101,6 @@ body {
 //     max-width:  500px;
 //     margin: 0 auto;
 // }
-
-// .button-wrapper {
-//     width: 100%;
-//     display: flex;
-//     justify-content: center;
-// }
-
-// .add-new-slider-btn__icon {
-//     transition: transform .2s ease-in;
-// }
-
-// .add-new-slider-btn {
-//     padding: 0 8px;
-//     width: 40px;
-//     height: 40px;
-//     background: white;
-//     color: #575757;
-//     border: none;
-//     border-radius: 8px;
-//     font-size: 20px;
-//     -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
-//     -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
-//     box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
-//     transition: background .2s ease-in;
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     &:hover {
-//         background: rgba(240, 243, 243, 0.9);
-//         & .add-new-slider-btn__icon {
-//             transform: none;
-//             transform: rotate(90deg);
-//         }
-//     }
-//     &:active, &:focus {
-//         outline: none;
-//         padding: 0 8px;
-//     }
-// }
-
-// .add-new-slider-btn_margin-top {
-//     margin-top: 20px;
-// }
-
-.help-image {
-  display: block;
-  width: 100%;
-  max-width: 440px;
-  margin: 0 auto;
-  padding: 10px;
-}
 
 // .remove-slider-button__icon {
 //     transition: transform .2s ease-in;
