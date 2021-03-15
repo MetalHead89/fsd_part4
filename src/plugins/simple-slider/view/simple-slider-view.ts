@@ -46,14 +46,20 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
     this.progressBar = new ProgressBar();
     this.scale = new Scale();
 
+    this.subscribeToEvents();
+    this.assembleSlider();
+  }
+
+  /**
+   * Подписывает Controller на необходимые события, возникающие во View и Model
+   */
+  subscribeToEvents(): void {
     this.thumbOne.subject.register('thumbIsDragged', this);
-    this.thumbTwo.subject.register('thumbIsDragged', this);
+    this.thumbTwo?.subject.register('thumbIsDragged', this);
     this.thumbOne.subject.register('thumbIsCatched', this);
-    this.thumbTwo.subject.register('thumbIsCatched', this);
+    this.thumbTwo?.subject.register('thumbIsCatched', this);
     this.track.subject.register('clickToTrack', this);
     this.scale?.subject.register('clickToScale', this);
-
-    this.assembleSlider();
   }
 
   /**
