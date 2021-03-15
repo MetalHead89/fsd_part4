@@ -111,3 +111,10 @@ export interface IControllerParams {
   model: ISimpleSliderModel;
   view: ISimpleSliderView;
 }
+
+export interface ISliderMargins {
+  left: number;
+  top: number;
+  right: number;
+  bottom: number;
+}
