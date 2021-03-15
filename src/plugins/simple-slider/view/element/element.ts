@@ -103,4 +103,8 @@ export default class Element {
     const classWithOrientation = this.element.classList[1];
     return classWithOrientation.replace(`${mainClass}_`, '');
   }
+
+  getRect(): DOMRect {
+    return this.element.getBoundingClientRect();
+  }
 }
