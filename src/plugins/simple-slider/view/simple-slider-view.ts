@@ -9,6 +9,7 @@ import {
   IScalePointParams,
   ISimpleSliderView,
   ISize,
+  ISliderMargins,
   ISubject,
   IThumbsPositions,
 } from '../interfaces';
@@ -176,6 +177,8 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
     this.popUpOne = null;
     this.popUpTwo?.remove();
     this.popUpTwo = null;
+
+    this.container.setMargins(this.getMargins());
   }
 
   /**
@@ -191,6 +194,8 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
       this.popUpTwo = new PopUp(this.container.getOrientation());
       this.container.append(this.popUpTwo.getElement());
     }
+
+    this.container.setMargins(this.getMargins());
   }
 
   /**
@@ -200,6 +205,8 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
     this.scale?.subject.unsubscribe('clickToScale', this);
     this.scale?.remove();
     this.scale = null;
+
+    this.container.setMargins(this.getMargins());
   }
 
   /**
@@ -212,6 +219,8 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
     this.scale = new Scale(this.container.getOrientation());
     this.container.append(this.scale.getElement());
     this.scale.subject.register('clickToScale', this);
+
+    this.container.setMargins(this.getMargins());
   }
 
   /**
@@ -294,6 +303,7 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
    */
   addScalePoints(points: IScalePointParams[]): void {
     this.scale?.addPoints(points);
+    this.container.setMargins(this.getMargins());
   }
 
   /**
@@ -312,5 +322,35 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
     const position =
       this.scale === null ? { left: 0, top: 0 } : this.scale.getPosition();
     return position;
+  }
+
+  private getMargins(): ISliderMargins {
+    const margins = {
+      left: 0,
+      top: 0,
+      right: 0,
+      bottom: 0,
+    };
+    const sliderRect = this.container.getRect();
+    const popUpRect = this.popUpOne !== null ? this.popUpOne.getRect() : null;
+    const scaleRect = this.scale !== null ? this.scale.getRect() : null;
+
+    if (this.container.getOrientation() === 'horizontal') {
+      if (popUpRect !== null) {
+        margins.top = sliderRect.top - popUpRect.top;
+      }
+      if (scaleRect !== null) {
+        margins.bottom = scaleRect.bottom - sliderRect.bottom;
+      }
+    } else {
+      if (popUpRect !== null) {
+        margins.left = sliderRect.left - popUpRect.left;
+      }
+      if (scaleRect !== null) {
+        margins.right = scaleRect.right - sliderRect.right;
+      }
+    }
+
+    return margins;
   }
 }
