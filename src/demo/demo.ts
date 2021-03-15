@@ -1,8 +1,3 @@
-// const sliderWrapper = document.querySelectorAll('.slider-wrapper');
-// if (sliderWrapper !== null) {
-//   $(sliderWrapper).simpleSlider().controlPanel();
-// }
-
 const addNewSliderBtn = document.querySelector('.add-new-slider-btn');
 let helpImage = document.querySelector('.help-image');
 const buttonWrapper = document.querySelector('.button-wrapper');
