@@ -91,13 +91,13 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
    */
   updateThumbsState(positions: IThumbsPositions): void {
     const thumbOneValue = this.valueWithStep(
-      this.posByOrientation(positions.thumbOne),
+      this.posByOrientation(positions.thumbOne)
     );
     let thumbTwoValue: null | number = null;
 
     if (positions.thumbTwo !== null) {
       thumbTwoValue = this.valueWithStep(
-        this.posByOrientation(positions.thumbTwo),
+        this.posByOrientation(positions.thumbTwo)
       );
     }
 
@@ -252,13 +252,13 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
       popUpOne: {
         value: this.thumbOneValue,
         position: this.getPopUpPosition(
-          this.thumbValueToPos(this.thumbOneValue),
+          this.thumbValueToPos(this.thumbOneValue)
         ),
       },
       popUpTwo: {
         value: this.thumbTwoValue,
         position: this.getPopUpPosition(
-          this.thumbValueToPos(this.thumbTwoValue),
+          this.thumbValueToPos(this.thumbTwoValue)
         ),
       },
     };
@@ -293,7 +293,7 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
       const pointValue = this.thumbPosToValue(
         position -
           this.sizeByOrientation(this.thumbSize) / 2 +
-          this.sizeByOrientation(scalePointSize) / 2,
+          this.sizeByOrientation(scalePointSize) / 2
       );
 
       position = this.getNextScalePointPos(position, scalePointSize);
@@ -351,11 +351,11 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
     return (
       Math.abs(
         this.posByOrientation(position) -
-          this.posByOrientation(this.thumbValueToPos(this.thumbTwoValue)),
+          this.posByOrientation(this.thumbValueToPos(this.thumbTwoValue))
       ) <
       Math.abs(
         this.posByOrientation(position) -
-          this.posByOrientation(this.thumbValueToPos(this.thumbOneValue)),
+          this.posByOrientation(this.thumbValueToPos(this.thumbOneValue))
       )
     );
   }
@@ -480,7 +480,8 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
 
     let newValue = Math.round(
       this.min +
-        ((this.max - this.min) / 100) * Math.round(position / pixelsPerValue),
+        ((this.max - this.min) / this.max) *
+          Math.round(position / pixelsPerValue)
     );
 
     newValue = newValue < this.min ? this.min : newValue;
@@ -507,7 +508,7 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
     }
 
     const posValue =
-      ((thumbValue - this.min) / (this.max - this.min)) * pxPerVal * 100;
+      ((thumbValue - this.min) / (this.max - this.min)) * pxPerVal * this.max;
 
     if (this.orientation === 'horizontal') {
       position.left = posValue;
@@ -526,7 +527,7 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
     return (
       (this.sizeByOrientation(this.sliderSize) -
         this.sizeByOrientation(this.thumbSize)) /
-      100
+      this.max
     );
   }
 
@@ -563,7 +564,7 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
   private isPointFits(
     pointPos: number,
     prevpointPos: number,
-    scalePointSize: ISize,
+    scalePointSize: ISize
   ): boolean {
     return pointPos - prevpointPos > this.sizeByOrientation(scalePointSize);
   }
