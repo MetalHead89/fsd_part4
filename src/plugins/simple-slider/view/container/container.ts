@@ -1,3 +1,4 @@
+import { ISliderMargins } from '../../interfaces';
 import Element from '../element/element';
 
 export default class Container extends Element {
@@ -11,5 +12,12 @@ export default class Container extends Element {
    */
   append(control: HTMLDivElement): void {
     this.element.append(control);
+  }
+
+  setMargins(margins: ISliderMargins): void {
+    this.element.style.marginLeft = `${margins.left}px`;
+    this.element.style.marginTop = `${margins.top}px`;
+    this.element.style.marginRight = `${margins.right}px`;
+    this.element.style.marginBottom = `${margins.bottom}px`;
   }
 }
