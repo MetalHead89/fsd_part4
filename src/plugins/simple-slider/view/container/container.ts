@@ -20,4 +20,8 @@ export default class Container extends Element {
     this.element.style.marginRight = `${margins.right}px`;
     this.element.style.marginBottom = `${margins.bottom}px`;
   }
+
+  resetMargins(): void {
+    this.element.style.margin = '0';
+  }
 }

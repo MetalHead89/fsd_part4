@@ -114,6 +114,7 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
    * Меняет ориентацию слайдера на горизонтальную
    */
   switchToHorizontal(): void {
+    this.container.resetMargins();
     this.container.switchToHorizontal();
     this.track.switchToHorizontal();
     this.thumbOne.switchToHorizontal();
@@ -128,6 +129,7 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
    * Меняет ориентацию слайдера на вертикальную
    */
   switchToVertical(): void {
+    this.container.resetMargins();
     this.container.switchToVertical();
     this.track.switchToVertical();
     this.thumbOne.switchToVertical();
