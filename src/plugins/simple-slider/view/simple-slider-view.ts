@@ -33,6 +33,7 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
   private popUpTwo: PopUp | null;
   private progressBar: ProgressBar;
   private scale: Scale | null;
+  private MARGIN: number;
 
   constructor(wrapper: HTMLDivElement) {
     this.subject = new Subject();
@@ -46,6 +47,7 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
     this.popUpTwo = new PopUp();
     this.progressBar = new ProgressBar();
     this.scale = new Scale();
+    this.MARGIN = 10;
 
     this.subscribeToEvents();
     this.assembleSlider();
@@ -333,28 +335,29 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
    */
   private getMargins(): ISliderMargins {
     const margins = {
-      left: 0,
-      top: 0,
-      right: 0,
-      bottom: 0,
+      left: this.MARGIN,
+      top: this.MARGIN,
+      right: this.MARGIN,
+      bottom: this.MARGIN,
     };
+
     const sliderRect = this.container.getRect();
     const popUpRect = this.popUpOne !== null ? this.popUpOne.getRect() : null;
     const scaleRect = this.scale !== null ? this.scale.getRect() : null;
 
     if (this.container.getOrientation() === 'horizontal') {
       if (popUpRect !== null) {
-        margins.top = sliderRect.top - popUpRect.top;
+        margins.top += sliderRect.top - popUpRect.top;
       }
       if (scaleRect !== null) {
-        margins.bottom = scaleRect.bottom - sliderRect.bottom;
+        margins.bottom += scaleRect.bottom - sliderRect.bottom;
       }
     } else {
       if (popUpRect !== null) {
-        margins.left = sliderRect.left - popUpRect.left;
+        margins.left += sliderRect.left - popUpRect.left;
       }
       if (scaleRect !== null) {
-        margins.right = scaleRect.right - sliderRect.right;
+        margins.right += scaleRect.right - sliderRect.right;
       }
     }
 
