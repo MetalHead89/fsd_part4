@@ -6,6 +6,7 @@
 /* eslint-disable func-names */
 /* eslint-disable object-shorthand */
 /* eslint-disable dot-notation */
+/* eslint-disable arrow-body-style */
 
 import Element from '../plugins/simple-slider/view/element/element';
 
@@ -45,13 +46,13 @@ describe('Constructor', () => {
   });
   test('Element should have a class some-element_horizontal', () => {
     expect(
-      element['element'].classList.contains('some-element_horizontal')
+      element['element'].classList.contains('some-element_horizontal'),
     ).toBe(true);
   });
   test('Element should have a class some-element_vertical', () => {
     element = new Element('some-element', 'vertical');
     expect(element['element'].classList.contains('some-element_vertical')).toBe(
-      true
+      true,
     );
   });
 });
@@ -103,14 +104,14 @@ describe('Switch to horizontal', () => {
     element = new Element('some-element', 'vertical');
     element.switchToHorizontal();
     expect(element['element'].classList.contains('some-element_vertical')).toBe(
-      false
+      false,
     );
   });
   test('Element should be contain class some-element_horizontal', () => {
     element = new Element('some-element', 'vertical');
     element.switchToHorizontal();
     expect(
-      element['element'].classList.contains('some-element_horizontal')
+      element['element'].classList.contains('some-element_horizontal'),
     ).toBe(true);
   });
 });
@@ -119,13 +120,13 @@ describe('Switch to vertical', () => {
   test('Element should be not contain class some-element_horizontal', () => {
     element.switchToVertical();
     expect(
-      element['element'].classList.contains('some-element_horizontal')
+      element['element'].classList.contains('some-element_horizontal'),
     ).toBe(false);
   });
   test('Element should be contain class some-element_vertical', () => {
     element.switchToVertical();
     expect(element['element'].classList.contains('some-element_vertical')).toBe(
-      true
+      true,
     );
   });
 });
@@ -146,5 +147,46 @@ describe('Get orientation', () => {
   test('Element orientation should be vertical', () => {
     element = new Element('some-element', 'vertical');
     expect(element.getOrientation()).toBe('vertical');
+  });
+});
+
+describe('Get rect', () => {
+  test('Element rect should be {top: 40, left: 45, bottom: 50, right: 55}', () => {
+    element['element'].getBoundingClientRect = jest.fn(() => {
+      return {
+        width: 120,
+        height: 120,
+        top: 40,
+        left: 45,
+        bottom: 50,
+        right: 55,
+        x: 35,
+        y: 48,
+        toJSON: () => null,
+      };
+    });
+    expect(element.getRect().top).toBe(40);
+    expect(element.getRect().left).toBe(45);
+    expect(element.getRect().bottom).toBe(50);
+    expect(element.getRect().right).toBe(55);
+  });
+  test('Element rect should be {top: 11, left: 49, bottom: 60, right: 5}', () => {
+    element['element'].getBoundingClientRect = jest.fn(() => {
+      return {
+        width: 120,
+        height: 120,
+        top: 11,
+        left: 49,
+        bottom: 60,
+        right: 5,
+        x: 35,
+        y: 48,
+        toJSON: () => null,
+      };
+    });
+    expect(element.getRect().top).toBe(11);
+    expect(element.getRect().left).toBe(49);
+    expect(element.getRect().bottom).toBe(60);
+    expect(element.getRect().right).toBe(5);
   });
 });
