@@ -111,4 +111,14 @@ export default class Element {
   getRect(): DOMRect {
     return this.element.getBoundingClientRect();
   }
+
+  /**
+   * Возвращает значение запрашиваемого стиля
+   * @returns {string | undefined} - значение запрашиваемого стиля
+   */
+  getStyle(styleName: string): string | undefined {
+    return document.defaultView
+      ?.getComputedStyle(this.element, null)
+      .getPropertyValue(styleName);
+  }
 }

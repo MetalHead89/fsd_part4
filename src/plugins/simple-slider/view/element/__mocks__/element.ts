@@ -48,4 +48,8 @@ export default class Element {
   getRect(): boolean {
     return this.TEST_OK;
   }
+
+  getStyle(): boolean {
+    return this.TEST_OK;
+  }
 }

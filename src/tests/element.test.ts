@@ -190,3 +190,13 @@ describe('Get rect', () => {
     expect(element.getRect().right).toBe(5);
   });
 });
+
+describe('Get style', () => {
+  test('Element width style should be 138px', () => {
+    element['element'].style.width = '138px';
+    expect(element.getStyle('width')).toBe('138px');
+  });
+  test('Element width style should be ""', () => {
+    expect(element.getStyle('someStyle')).toBe('');
+  });
+});

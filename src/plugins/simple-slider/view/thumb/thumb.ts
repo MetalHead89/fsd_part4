@@ -48,7 +48,7 @@ export default class Thumb extends Element {
     const thumbCoords: DOMRect = this.element.getBoundingClientRect();
     this.setThumbShift(
       { left: event.clientX, top: event.clientY },
-      { left: thumbCoords.left, top: thumbCoords.top }
+      { left: thumbCoords.left, top: thumbCoords.top },
     );
 
     document.addEventListener('pointermove', this.onMouseMoveHandler);
@@ -72,9 +72,7 @@ export default class Thumb extends Element {
    * Увеличивает z-index на единицу
    */
   private increaseZIndex() {
-    const zIndex = document.defaultView
-      ?.getComputedStyle(this.element, null)
-      .getPropertyValue('z-index');
+    const zIndex = this.getStyle('z-index');
     if (zIndex !== undefined && zIndex !== '') {
       this.element.style.zIndex = (parseInt(zIndex, 10) + 1).toString();
     }
