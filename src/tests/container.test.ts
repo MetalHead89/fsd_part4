@@ -66,12 +66,12 @@ describe('Reset margins', () => {
 
     container.resetMargins();
 
-    expect(container['element'].style.marginLeft).toBe('0');
-    expect(container['element'].style.marginTop).toBe('0');
-    expect(container['element'].style.marginRight).toBe('0');
-    expect(container['element'].style.marginBottom).toBe('0');
+    expect(container['element'].style.marginLeft).toBe('0px');
+    expect(container['element'].style.marginTop).toBe('0px');
+    expect(container['element'].style.marginRight).toBe('0px');
+    expect(container['element'].style.marginBottom).toBe('0px');
   });
-  test('Container margins should be {left: 0, top: 0, right: 0, bottom: 0}', () => {
+  test('Container margins should be {left: 0px, top: 0, right: 0, bottom: 0}', () => {
     container.setMargins({
       left: 84,
       top: 97,
@@ -79,9 +79,11 @@ describe('Reset margins', () => {
       bottom: 73,
     });
 
-    expect(container['element'].style.marginLeft).toBe('0');
-    expect(container['element'].style.marginTop).toBe('0');
-    expect(container['element'].style.marginRight).toBe('0');
-    expect(container['element'].style.marginBottom).toBe('0');
+    container.resetMargins();
+
+    expect(container['element'].style.marginLeft).toBe('0px');
+    expect(container['element'].style.marginTop).toBe('0px');
+    expect(container['element'].style.marginRight).toBe('0px');
+    expect(container['element'].style.marginBottom).toBe('0px');
   });
 });
