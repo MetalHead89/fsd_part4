@@ -44,4 +44,8 @@ export default class Element {
   getOrientation(): boolean {
     return this.TEST_OK;
   }
+
+  getRect(): boolean {
+    return this.TEST_OK;
+  }
 }
