@@ -104,6 +104,10 @@ export default class Element {
     return classWithOrientation.replace(`${mainClass}_`, '');
   }
 
+  /**
+   * Возвращает DOMRect ообъект элемента
+   * @returns {DOMRect} - DOMRect ообъект элемента
+   */
   getRect(): DOMRect {
     return this.element.getBoundingClientRect();
   }
