@@ -3,6 +3,7 @@
  */
 
 /* eslint-disable dot-notation */
+/* eslint-disable arrow-body-style */
 
 import SimpleSliderView from '../plugins/simple-slider/view/simple-slider-view';
 
@@ -494,5 +495,93 @@ describe('Get scale click position', () => {
     view.disableScale();
     expect(view.getScaleClickPosition().left).toBe(0);
     expect(view.getScaleClickPosition().top).toBe(0);
+  });
+});
+
+describe('Get margins', () => {
+  beforeEach(() => {
+    view['MARGIN'] = 10;
+    view['container'].getRect = jest.fn(() => {
+      return {
+        width: 120,
+        height: 120,
+        top: 25,
+        left: 49,
+        bottom: 60,
+        right: 5,
+        x: 35,
+        y: 48,
+        toJSON: () => null,
+      };
+    });
+
+    if (view['scale'] !== null) {
+      view['scale'].getRect = jest.fn(() => {
+        return {
+          width: 120,
+          height: 120,
+          top: 11,
+          left: 49,
+          bottom: 87,
+          right: 45,
+          x: 35,
+          y: 48,
+          toJSON: () => null,
+        };
+      });
+    }
+
+    if (view['popUpOne'] !== null) {
+      view['popUpOne'].getRect = jest.fn(() => {
+        return {
+          width: 120,
+          height: 120,
+          top: 13,
+          left: 21,
+          bottom: 87,
+          right: 5,
+          x: 35,
+          y: 48,
+          toJSON: () => null,
+        };
+      });
+    }
+  });
+
+  test('Slider margin-bottom should be 37', () => {
+    view['container'].getOrientation = jest.fn(() => 'horizontal');
+    expect(view['getMargins']().bottom).toBe(37);
+  });
+  test('Slider margin-bottom should be 10', () => {
+    view['container'].getOrientation = jest.fn(() => 'horizontal');
+    view.disableScale();
+    expect(view['getMargins']().bottom).toBe(10);
+  });
+  test('Slider margin-top should be 22', () => {
+    view['container'].getOrientation = jest.fn(() => 'horizontal');
+    expect(view['getMargins']().top).toBe(22);
+  });
+  test('Slider margin-top should be 10', () => {
+    view['container'].getOrientation = jest.fn(() => 'horizontal');
+    view.disablePopUps();
+    expect(view['getMargins']().top).toBe(10);
+  });
+  test('Slider margin-left should be 38', () => {
+    view['container'].getOrientation = jest.fn(() => 'vertical');
+    expect(view['getMargins']().left).toBe(38);
+  });
+  test('Slider margin-left should be 10', () => {
+    view['container'].getOrientation = jest.fn(() => 'vertical');
+    view.disablePopUps();
+    expect(view['getMargins']().left).toBe(10);
+  });
+  test('Slider margin-right should be 50', () => {
+    view['container'].getOrientation = jest.fn(() => 'vertical');
+    expect(view['getMargins']().right).toBe(50);
+  });
+  test('Slider margin-right should be 10', () => {
+    view['container'].getOrientation = jest.fn(() => 'vertical');
+    view.disableScale();
+    expect(view['getMargins']().right).toBe(10);
   });
 });
