@@ -21,4 +21,20 @@ export default class Container {
   append(control: HTMLDivElement): void {
     this.element.append(control);
   }
+
+  /**
+   * Переключает панель в горизонтальный режим
+   */
+  switchToHorizontal(): void {
+    this.element.classList.remove('control-panel_vertical');
+    this.element.classList.add('control-panel_horizontal');
+  }
+
+  /**
+   * Переключает панель в вертикальный режим
+   */
+  switchToVertical(): void {
+    this.element.classList.remove('control-panel_horizontal');
+    this.element.classList.add('control-panel_vertical');
+  }
 }

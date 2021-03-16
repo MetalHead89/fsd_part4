@@ -10,6 +10,7 @@ import Subject from '../../simple-slider/subject/subject';
 
 export default class ControlPanelView extends Subject implements IObserver {
   private sliderWrapper: HTMLDivElement;
+  private container: Container;
   private thumbOneValue: TextField;
   private thumbTwoValue: TextField;
   private min: TextField;
@@ -22,6 +23,7 @@ export default class ControlPanelView extends Subject implements IObserver {
 
   constructor(sliderWrapper: HTMLDivElement) {
     super();
+    this.container = new Container();
     this.sliderWrapper = sliderWrapper;
     this.thumbOneValue = new TextField('First thumb value');
     this.thumbTwoValue = new TextField('Second thumb value');
@@ -54,9 +56,7 @@ export default class ControlPanelView extends Subject implements IObserver {
   }
 
   private createPanel(): void {
-    const container = new Container();
-
-    container.append(
+    this.container.append(
       groupElements({
         wrapperClass: 'control-panel__text-fields-group',
         elements: [
@@ -66,7 +66,7 @@ export default class ControlPanelView extends Subject implements IObserver {
       })
     );
 
-    container.append(
+    this.container.append(
       groupElements({
         wrapperClass: 'control-panel__text-fields-group',
         elements: [
@@ -103,14 +103,14 @@ export default class ControlPanelView extends Subject implements IObserver {
       ],
     });
 
-    container.append(
+    this.container.append(
       groupElements({
         wrapperClass: 'control-panel__checkboxes-and-radios-wrapper',
         elements: [allRadiosGroup, checkboxesGroup],
       })
     );
 
-    this.sliderWrapper.append(container.getElement());
+    this.sliderWrapper.append(this.container.getElement());
   }
 
   private subscribeToEvents(): void {
@@ -128,6 +128,15 @@ export default class ControlPanelView extends Subject implements IObserver {
   update(eventType: string): void {
     if (eventType === 'controlPanelDataUpdated') {
       this.notify('controlPanelDataUpdated');
+      this.switchOrientation();
+    }
+  }
+
+  private switchOrientation(): void {
+    if (this.getOrientation() === 'horizontal') {
+      this.container.switchToHorizontal();
+    } else {
+      this.container.switchToVertical();
     }
   }
 
