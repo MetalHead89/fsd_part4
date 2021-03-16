@@ -33,7 +33,6 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
   private popUpTwo: PopUp | null;
   private progressBar: ProgressBar;
   private scale: Scale | null;
-  private MARGIN: number;
 
   constructor(wrapper: HTMLDivElement) {
     this.subject = new Subject();
@@ -47,7 +46,6 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
     this.popUpTwo = new PopUp();
     this.progressBar = new ProgressBar();
     this.scale = new Scale();
-    this.MARGIN = 10;
 
     this.subscribeToEvents();
     this.assembleSlider();
@@ -335,10 +333,10 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
    */
   private getMargins(): ISliderMargins {
     const margins = {
-      left: this.MARGIN,
-      top: this.MARGIN,
-      right: this.MARGIN,
-      bottom: this.MARGIN,
+      left: 0,
+      top: 0,
+      right: 0,
+      bottom: 0,
     };
 
     const sliderRect = this.container.getRect();
