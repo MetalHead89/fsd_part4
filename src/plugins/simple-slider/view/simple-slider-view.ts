@@ -326,6 +326,11 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
     return position;
   }
 
+  /**
+   * Вовращает объект с отступами от левой, верхней, правой и нижней границ слайдера
+   * @returns {ISliderMargins} - объект с отсупами от левой, верхней, правой
+   * и нижней границ слайдера
+   */
   private getMargins(): ISliderMargins {
     const margins = {
       left: 0,
