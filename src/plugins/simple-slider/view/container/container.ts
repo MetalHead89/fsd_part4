@@ -14,6 +14,11 @@ export default class Container extends Element {
     this.element.append(control);
   }
 
+  /**
+   * Устанавливает отступы от левой, верхней, правой и нижней границ слайдера
+   * @param {ISliderMargins} margins - объект с отсупами от левой, верхней, правой
+   * и нижней границ слайдера
+   */
   setMargins(margins: ISliderMargins): void {
     this.element.style.marginLeft = `${margins.left}px`;
     this.element.style.marginTop = `${margins.top}px`;
@@ -21,6 +26,9 @@ export default class Container extends Element {
     this.element.style.marginBottom = `${margins.bottom}px`;
   }
 
+  /**
+   * Сбрасывет отсупы от границ слайдера на 0
+   */
   resetMargins(): void {
     this.element.style.margin = '0';
   }
