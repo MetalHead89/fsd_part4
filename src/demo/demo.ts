@@ -35,7 +35,7 @@ function clickToAddNewSliderBtn(): void {
     );
     sliderWrapper.append(removeSliderButton);
 
-    $(sliderWrapper).simpleSlider().controlPanel();
+    $(sliderWrapper).simpleSlider({ step: 2, min: 3 }).controlPanel();
   }
 }
 

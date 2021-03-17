@@ -78,14 +78,14 @@ import SimpleSliderView from './view/simple-slider-view';
   // eslint-disable-next-line no-param-reassign
   $.fn.simpleSlider = function plug(
     action?: string | ISliderSettings,
-    args?
+    args?,
   ): any {
     let method: any;
 
     if (typeof action === 'string' && methods[action]) {
       method = methods[action].call(this, args);
     } else if (typeof action === 'object' || !action) {
-      method = methods.init.call(this, args);
+      method = methods.init.call(this, action);
     } else {
       $.error(`Метод с именем ${action} не существует для jQuery.simpleSlider`);
       method = this;
