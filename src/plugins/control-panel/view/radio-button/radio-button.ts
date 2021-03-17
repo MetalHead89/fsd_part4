@@ -20,14 +20,12 @@ export default class RadioButton extends Subject {
   }
 
   getValue(): string {
-    let value = '';
     for (let radio = 0; radio < this.radios.length; radio += 1) {
       if (this.radios[radio].checked) {
-        value = this.radios[radio].value;
-        break;
+        return this.radios[radio].value;
       }
     }
-    return value;
+    return '';
   }
 
   private init(name: string, params: IRadioParams[]) {
