@@ -49,6 +49,21 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
 
     this.subscribeToEvents();
     this.assembleSlider();
+    this.addWindowResizeEventListener();
+  }
+
+  /**
+   * Добавляет событие на изменение размера окна
+   */
+  private addWindowResizeEventListener(): void {
+    window.addEventListener('resize', this.windowResize.bind(this));
+  }
+
+  /**
+   * Обработка изменения размера окна
+   */
+  private windowResize(): void {
+    this.subject.notify('windowResized');
   }
 
   /**
