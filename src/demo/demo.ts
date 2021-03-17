@@ -5,9 +5,7 @@ const buttonWrapper = document.querySelector('.button-wrapper');
 function removeSlider(sliderWrapper: HTMLDivElement) {
   sliderWrapper.remove();
   if (document.querySelectorAll('.slider-wrapper').length === 0) {
-    if (addNewSliderBtn !== null) {
-      addNewSliderBtn.classList.add('add-new-slider-btn_margin-top');
-    }
+    addNewSliderBtn?.classList.add('add-new-slider-btn_margin-top');
   }
 }
 
