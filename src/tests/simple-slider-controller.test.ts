@@ -106,6 +106,11 @@ describe('Update method', () => {
     controller.update('clickToScale');
     expect(spy).toBeCalledTimes(1);
   });
+  test('The init method from the SimpleSliderController class should be called once', () => {
+    const spy = spyOn<any>(controller, 'init');
+    controller.update('windowResized');
+    expect(spy).toBeCalledTimes(1);
+  });
   test('Other methods should not be called', () => {
     const spy1 = jest.spyOn(model, 'updateThumbsState');
     controller.update('emptyEvent');
