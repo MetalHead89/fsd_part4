@@ -22,6 +22,15 @@ beforeEach(() => {
   view = new SimpleSliderView(wrapper);
 });
 
+describe('Window resize', () => {
+  test('Notify method of the SimpleSliderView class should be called once', () => {
+    const spy = spyOn(view.subject, 'notify');
+    const evt = new window.Event('resize');
+    window.dispatchEvent(evt);
+    expect(spy).toBeCalledTimes(1);
+  });
+});
+
 describe('Assemble slider', () => {
   test('Wrapper should be contain a slider element', () => {
     expect(wrapper.querySelector('.slider')).not.toBeNull();
