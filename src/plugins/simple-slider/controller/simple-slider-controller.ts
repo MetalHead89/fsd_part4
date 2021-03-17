@@ -28,14 +28,14 @@ class SimpleSliderController implements IObserver {
    * Инициализация слайдера в соответстви с первичными настройками
    */
   private init(): void {
-    this.model.setSliderSize(this.view.getSliderSize());
-    this.model.setThumbSize(this.view.getThumbSize());
-
     if (this.model.getOrientation() === 'horizontal') {
       this.view.switchToHorizontal();
     } else {
       this.view.switchToVertical();
     }
+
+    this.model.setSliderSize(this.view.getSliderSize());
+    this.model.setThumbSize(this.view.getThumbSize());
 
     if (this.model.getType() === 'single') {
       this.view.switchToSingle();
