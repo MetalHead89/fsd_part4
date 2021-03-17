@@ -33,9 +33,7 @@ function clickToAddNewSliderBtn(): void {
     );
     sliderWrapper.append(removeSliderButton);
 
-    $(sliderWrapper)
-      .simpleSlider({ step: 2, min: 3, orientation: 'vertical' })
-      .controlPanel();
+    $(sliderWrapper).simpleSlider().controlPanel();
   }
 }
 
