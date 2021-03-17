@@ -1,3 +1,5 @@
+/* eslint-disable comma-dangle */
+
 import Subject from '../../../simple-slider/subject/subject';
 import { IRadioParams } from '../../interfaces';
 
@@ -41,7 +43,7 @@ export default class RadioButton extends Subject {
       radioButton.type = 'radio';
       radioButton.name = name;
       radioButton.value = params[radio].value;
-      if (radio === 0 || params[radio].checked) {
+      if (RadioButton.radioIsFirstOrChecked(radio, params[radio].checked)) {
         radioButton.checked = true;
       }
       radioButton.classList.add('control-panel__radio-button');
@@ -52,6 +54,13 @@ export default class RadioButton extends Subject {
       radioWrapper.append(label);
       this.control.append(radioWrapper);
     }
+  }
+
+  private static radioIsFirstOrChecked(
+    index: number,
+    checked: boolean | undefined
+  ) {
+    return index === 0 || checked;
   }
 
   private onChange(): void {
