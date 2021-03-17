@@ -10,6 +10,14 @@ export default class ControlPanelController implements IObserver {
     this.view = view;
     this.model = model;
     this.init();
+
+    this.subscribeToEvents();
+  }
+
+  /**
+   * Подписывает Controller на необходимые события, возникающие во View и Model
+   */
+  private subscribeToEvents(): void {
     this.model.register('thumbsPosIsUpdated', this);
     this.view.register('controlPanelDataUpdated', this);
   }
