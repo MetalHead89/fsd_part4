@@ -52,7 +52,7 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
     }
     if (this.type !== settings.type) {
       this.type = settings.type;
-      if (this.type === 'range' && this.thumbTwoValue < this.thumbOneValue) {
+      if (this.typeIsRangeAndSecondThumbValueLessThanFirst()) {
         this.thumbTwoValue = this.thumbOneValue;
       }
       this.subject.notify('typeIsUpdated');
@@ -86,22 +86,36 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
   }
 
   /**
+   * Возвращает истину, если тип слайдра - диапазон и значение второго
+   * бегунка меньше значения первого
+   * @returns {boolean} - результат вычисления логического выражения
+   */
+  private typeIsRangeAndSecondThumbValueLessThanFirst(): boolean {
+    return this.type === 'range' && this.thumbTwoValue < this.thumbOneValue;
+  }
+
+  /**
    * Обновление состояния бегунков и оповещение наблюдателей об изменении
    * @param {IThumbsPositions} positions - текущая позиция бегунков
    */
   updateThumbsState(positions: IThumbsPositions): void {
     const thumbOneValue = this.valueWithStep(
-      this.posByOrientation(positions.thumbOne)
+      this.posByOrientation(positions.thumbOne),
     );
     let thumbTwoValue: null | number = null;
 
     if (positions.thumbTwo !== null) {
       thumbTwoValue = this.valueWithStep(
-        this.posByOrientation(positions.thumbTwo)
+        this.posByOrientation(positions.thumbTwo),
       );
     }
 
-    if (thumbTwoValue === null || thumbOneValue <= thumbTwoValue) {
+    if (
+      SimpleSliderModel.valueTwoIsNullOrMoreOrEqualThenValueOne(
+        thumbOneValue,
+        thumbTwoValue,
+      )
+    ) {
       this.thumbOneValue = thumbOneValue;
       if (thumbTwoValue !== null) {
         this.thumbTwoValue = thumbTwoValue;
@@ -109,6 +123,17 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
     }
 
     this.subject.notify('thumbsPosIsUpdated');
+  }
+
+  /**
+   * Возвращает истину, значение второго равно нулю или меньше либо равно значению первого
+   * @returns {boolean} - результат вычисления логического выражения
+   */
+  private static valueTwoIsNullOrMoreOrEqualThenValueOne(
+    valueOne: number,
+    valueTwo: number | null,
+  ): boolean {
+    return valueTwo === null || valueOne <= valueTwo;
   }
 
   /**
@@ -252,13 +277,13 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
       popUpOne: {
         value: this.thumbOneValue,
         position: this.getPopUpPosition(
-          this.thumbValueToPos(this.thumbOneValue)
+          this.thumbValueToPos(this.thumbOneValue),
         ),
       },
       popUpTwo: {
         value: this.thumbTwoValue,
         position: this.getPopUpPosition(
-          this.thumbValueToPos(this.thumbTwoValue)
+          this.thumbValueToPos(this.thumbTwoValue),
         ),
       },
     };
@@ -293,12 +318,12 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
       const pointValue = this.thumbPosToValue(
         position -
           this.sizeByOrientation(this.thumbSize) / 2 +
-          this.sizeByOrientation(scalePointSize) / 2
+          this.sizeByOrientation(scalePointSize) / 2,
       );
 
       position = this.getNextScalePointPos(position, scalePointSize);
 
-      if (i === 0 || this.isPointFits(position, prevPointPos, scalePointSize)) {
+      if (this.isPointFits(i, position, prevPointPos, scalePointSize)) {
         const pointPos = { left: 0, top: 0 };
         if (this.orientation === 'horizontal') {
           pointPos.left = position;
@@ -321,6 +346,27 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
   }
 
   /**
+   * Проверяет помещается ли точка на шкале без пересечения с другими точками, если нет, то она
+   * не добавляется на шкалу
+   * @param {number} index - индекс точки
+   * @param {number} pointPos - текущая позиция точки
+   * @param {number} prevPointPos - позиция предыдущей точки
+   * @param {ISize} scalePointSize - объект с размером точки
+   * @returns {boolean} - результат логического выражения
+   */
+  private isPointFits(
+    index: number,
+    pointPos: number,
+    prevPointPos: number,
+    scalePointSize: ISize,
+  ): boolean {
+    return (
+      index === 0 ||
+      pointPos - prevPointPos > this.sizeByOrientation(scalePointSize)
+    );
+  }
+
+  /**
    * Сохраняет значение бегунка, ближайшего к месту клика по шкале, либо треку
    * @param {IPosition} clickPosition - объект с позицией клика
    */
@@ -332,7 +378,7 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
     let thumbOne = this.thumbOneValue;
     let thumbTwo = this.thumbTwoValue;
 
-    if (this.type === 'range' && this.thumbTwoIsNearToClick(position)) {
+    if (this.thumbTwoIsNearToClick(position)) {
       thumbTwo = this.thumbPosToValue(this.posByOrientation(position));
     } else {
       thumbOne = this.thumbPosToValue(this.posByOrientation(position));
@@ -348,16 +394,20 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
    * к месту клика, чем первый
    */
   private thumbTwoIsNearToClick(position: IPosition): boolean {
-    return (
-      Math.abs(
-        this.posByOrientation(position) -
-          this.posByOrientation(this.thumbValueToPos(this.thumbTwoValue))
-      ) <
-      Math.abs(
-        this.posByOrientation(position) -
-          this.posByOrientation(this.thumbValueToPos(this.thumbOneValue))
-      )
-    );
+    if (this.type === 'range') {
+      return (
+        Math.abs(
+          this.posByOrientation(position) -
+            this.posByOrientation(this.thumbValueToPos(this.thumbTwoValue)),
+        ) <
+        Math.abs(
+          this.posByOrientation(position) -
+            this.posByOrientation(this.thumbValueToPos(this.thumbOneValue)),
+        )
+      );
+    }
+
+    return false;
   }
 
   /**
@@ -397,8 +447,8 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
    */
   private updateMinValue(value: number): void {
     let newMin = value;
-    if (this.type === 'range' && newMin > this.max) {
-      newMin = this.max;
+    if (newMin >= this.max) {
+      newMin = this.max - 1;
     }
     this.min = newMin;
     this.subject.notify('minIsUpdated');
@@ -410,8 +460,8 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
    */
   private updateMaxValue(value: number): void {
     let newMax = value;
-    if (this.type === 'range' && newMax < this.min) {
-      newMax = this.min;
+    if (newMax <= this.min) {
+      newMax = this.min + 1;
     }
     this.max = newMax;
     this.subject.notify('maxIsUpdated');
@@ -481,7 +531,7 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
     let newValue = Math.round(
       this.min +
         ((this.max - this.min) / this.max) *
-          Math.round(position / pixelsPerValue)
+          Math.round(position / pixelsPerValue),
     );
 
     newValue = newValue < this.min ? this.min : newValue;
@@ -555,18 +605,6 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
     }
 
     return position.top;
-  }
-
-  /**
-   * Проверяет момещается ли точка на шкале без пересечения других точек, если нет, то она
-   * не добавляется на шкалу
-   */
-  private isPointFits(
-    pointPos: number,
-    prevpointPos: number,
-    scalePointSize: ISize
-  ): boolean {
-    return pointPos - prevpointPos > this.sizeByOrientation(scalePointSize);
   }
 
   /**
