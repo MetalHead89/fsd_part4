@@ -1,9 +1,10 @@
 /* eslint-disable comma-dangle */
 
+import { map } from 'jquery';
 import Subject from '../../../simple-slider/subject/subject';
 import { IRadioParams } from '../../interfaces';
 
-export default class RadioButton extends Subject {
+class RadioButton extends Subject {
   private control: HTMLDivElement;
   private radios: HTMLInputElement[];
 
@@ -58,7 +59,7 @@ export default class RadioButton extends Subject {
 
   private static radioIsFirstOrChecked(
     index: number,
-    checked: boolean | undefined
+    checked: boolean | undefined,
   ) {
     return index === 0 || checked;
   }
@@ -102,3 +103,5 @@ export default class RadioButton extends Subject {
     return uniqueName;
   }
 }
+
+export default RadioButton;
