@@ -6,7 +6,7 @@ import {
 } from '../../simple-slider/interfaces';
 import Subject from '../../simple-slider/subject/subject';
 
-export default class ControlPanelModel extends Subject implements IObserver {
+class ControlPanelModel extends Subject implements IObserver {
   private slider: JQuery<HTMLElement>;
   private subject: ISubject;
 
@@ -59,3 +59,5 @@ export default class ControlPanelModel extends Subject implements IObserver {
     this.slider.simpleSlider('refreshSliderState', sliderSettings);
   }
 }
+
+export default ControlPanelModel;
