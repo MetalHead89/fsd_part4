@@ -80,11 +80,11 @@ describe('Increase z-index', () => {
     thumb.getElement().dispatchEvent(evt);
     expect(thumb.getElement().style.zIndex).toBe('10');
   });
-  test('z-index should be ""', () => {
+  test('z-index should be 1', () => {
     thumb.getElement().style.zIndex = '';
     const evt = new window.Event('pointerdown');
     thumb.getElement().dispatchEvent(evt);
-    expect(thumb.getElement().style.zIndex).toBe('');
+    expect(thumb.getElement().style.zIndex).toBe('1');
   });
 });
 
@@ -153,9 +153,4 @@ describe('Disable selection', () => {
       expect(document.onpointerdown(docEvt)).toBe(false);
     }
   });
-  // test('Document pointerdown event should return false', () => {
-  //   document.onselectstart = () => false;
-  //   const docEvt = new window.Event('selectstart');
-  //   expect(document.onselectstart(docEvt)).toBe(false);
-  // });
 });
