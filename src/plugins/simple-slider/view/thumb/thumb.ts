@@ -73,7 +73,7 @@ export default class Thumb extends Element {
    */
   private increaseZIndex() {
     const zIndex = this.getStyle('z-index');
-    if (zIndex !== undefined && zIndex !== '') {
+    if (zIndex !== undefined) {
       this.element.style.zIndex = (parseInt(zIndex, 10) + 1).toString();
     }
   }
