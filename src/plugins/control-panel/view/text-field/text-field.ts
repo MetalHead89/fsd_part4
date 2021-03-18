@@ -1,6 +1,6 @@
 import Subject from '../../../simple-slider/subject/subject';
 
-export default class TextField extends Subject {
+class TextField extends Subject {
   private control: HTMLDivElement;
   private field: HTMLInputElement;
   private label: HTMLLabelElement;
@@ -15,7 +15,7 @@ export default class TextField extends Subject {
   }
 
   /**
-   * Возвращает контрол текстового поля
+   * Возвращает компонент текстового поля
    * @returns {HTMLDivElement} - группа HTML элементов обернутая в div
    */
   getControl(): HTMLDivElement {
@@ -39,8 +39,8 @@ export default class TextField extends Subject {
   }
 
   /**
-   * Инициализирует контрол. Добавляет классы, слушатели событий, лейблы и т.п.
-   * для составляющих контрола и компунует все в единый элемент
+   * Инициализирует текстовое поле. Добавляет классы, слушатели событий, лейблы и т.п.
+   * для его составляющих и компонует все в единый элемент
    * @param {string} labelText - текст лейбла
    */
   private init(labelText: string) {
@@ -72,3 +72,5 @@ export default class TextField extends Subject {
     return /[-\d]/.test(event.key);
   }
 }
+
+export default TextField;
