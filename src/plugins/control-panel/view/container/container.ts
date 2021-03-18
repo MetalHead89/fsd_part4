@@ -1,4 +1,4 @@
-export default class Container {
+class Container {
   private element: HTMLDivElement;
 
   constructor() {
@@ -38,3 +38,5 @@ export default class Container {
     this.element.classList.add('control-panel_vertical');
   }
 }
+
+export default Container;
