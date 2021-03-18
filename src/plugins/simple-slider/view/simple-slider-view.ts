@@ -207,12 +207,21 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
       this.container.append(this.popUpOne.getElement());
     }
 
-    if (this.popUpTwo === null && this.thumbTwo !== null) {
+    if (this.popUpTwoIsNullAndThumbTwoIsNotNull()) {
       this.popUpTwo = new PopUp(this.container.getOrientation());
       this.container.append(this.popUpTwo.getElement());
     }
 
     this.container.setMargins(this.getMargins());
+  }
+
+  /**
+   * Возвращает истину, если всплывающая подсказка над вторым бегунком равна null,
+   * а второй бегунок не равен null
+   * @returns {boolean} - результат вычисления логического выражения
+   */
+  private popUpTwoIsNullAndThumbTwoIsNotNull(): boolean {
+    return this.popUpTwo === null && this.thumbTwo !== null;
   }
 
   /**
