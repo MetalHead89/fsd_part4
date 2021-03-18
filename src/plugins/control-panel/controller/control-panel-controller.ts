@@ -2,7 +2,7 @@ import { IObserver } from '../../simple-slider/interfaces';
 import ControlPanelModel from '../model/control-panel-model';
 import ControlPanelView from '../view/control-panel-view';
 
-export default class ControlPanelController implements IObserver {
+class ControlPanelController implements IObserver {
   private view: ControlPanelView;
   private model: ControlPanelModel;
 
@@ -61,3 +61,5 @@ export default class ControlPanelController implements IObserver {
     }
   }
 }
+
+export default ControlPanelController;
