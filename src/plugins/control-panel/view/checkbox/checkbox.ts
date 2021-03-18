@@ -1,7 +1,7 @@
 import Subject from '../../../simple-slider/subject/subject';
 import { ICheckboxParams } from '../../interfaces';
 
-export default class Checkbox extends Subject {
+class Checkbox extends Subject {
   private control: HTMLDivElement;
   private checkbox: HTMLInputElement;
   private label: HTMLLabelElement;
@@ -16,8 +16,8 @@ export default class Checkbox extends Subject {
   }
 
   /**
-   * Инициализирует контрол. Добавляет классы, слушатели событий, лейблы и т.п.
-   * для составляющих контрола и компунует все в единый элемент
+   * Инициализирует чекбокс. Добавляет классы, слушатели событий, лейблы и т.п.
+   * для его составляющих и компонует все в единый элемент
    * @param {ICheckboxParams} params - параметры чекбокса
    */
   private init(params: ICheckboxParams): void {
@@ -37,7 +37,7 @@ export default class Checkbox extends Subject {
   }
 
   /**
-   * Возвращает контрол чекбокса
+   * Возвращает компонент чекбокса
    * @returns {HTMLDivElement} - группа HTML элементов обернутая в div
    */
   getControl(): HTMLDivElement {
@@ -68,10 +68,12 @@ export default class Checkbox extends Subject {
   }
 
   /**
-   * Возвращает состояение чекбокса
+   * Возвращает состояние чекбокса
    * @returns {boolean} - состояние чекбокса
    */
   getState(): boolean {
     return this.checkbox.checked;
   }
 }
+
+export default Checkbox;
