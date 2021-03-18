@@ -1,6 +1,5 @@
 /* eslint-disable comma-dangle */
 
-import { map } from 'jquery';
 import Subject from '../../../simple-slider/subject/subject';
 import { IRadioParams } from '../../interfaces';
 
