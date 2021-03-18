@@ -23,7 +23,7 @@ class ControlPanelController implements IObserver {
   }
 
   /**
-   * Инициализация контролов во View данными из Model
+   * Инициализация элементов слайдера во View данными из Model
    */
   init(): void {
     this.view.setThumbsValues(this.model.getThumbsValues());
