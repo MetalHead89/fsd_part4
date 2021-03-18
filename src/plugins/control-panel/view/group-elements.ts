@@ -6,7 +6,7 @@ import { IGroupElements } from '../interfaces';
  * @param {HTMLElement[]} - массив элементов, которые требуется обернуть
  * @returns {HTMLDivElement} - элементы в обёртке
  */
-export default function groupElements(params: IGroupElements): HTMLDivElement {
+function groupElements(params: IGroupElements): HTMLDivElement {
   const wrapper: HTMLDivElement = document.createElement('div');
   wrapper.className = params.wrapperClass;
 
@@ -27,3 +27,5 @@ export default function groupElements(params: IGroupElements): HTMLDivElement {
 
   return wrapper;
 }
+
+export default groupElements;
