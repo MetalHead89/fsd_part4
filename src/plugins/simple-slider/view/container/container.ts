@@ -1,7 +1,7 @@
 import { ISliderMargins } from '../../interfaces';
 import Element from '../element/element';
 
-export default class Container extends Element {
+class Container extends Element {
   constructor() {
     super('slider');
   }
@@ -16,7 +16,7 @@ export default class Container extends Element {
 
   /**
    * Устанавливает отступы от левой, верхней, правой и нижней границ слайдера
-   * @param {ISliderMargins} margins - объект с отсупами от левой, верхней, правой
+   * @param {ISliderMargins} margins - объект с отступами от левой, верхней, правой
    * и нижней границ слайдера
    */
   setMargins(margins: ISliderMargins): void {
@@ -27,9 +27,11 @@ export default class Container extends Element {
   }
 
   /**
-   * Сбрасывет отсупы от границ слайдера на 0
+   * Сбрасывает отступы от границ слайдера на 0
    */
   resetMargins(): void {
     this.element.style.margin = '0';
   }
 }
+
+export default Container;
