@@ -1,9 +1,9 @@
-export interface ISize {
+interface ISize {
   width: number;
   height: number;
 }
 
-export interface ISliderSettings {
+interface ISliderSettings {
   orientation: string;
   type: string;
   scale: boolean;
@@ -17,57 +17,57 @@ export interface ISliderSettings {
   thumbSize?: ISize;
 }
 
-export interface IObserver {
+interface IObserver {
   update(eventType: string): void;
 }
 
-export interface IObserversList {
+interface IObserversList {
   [index: string]: IObserver[];
 }
 
-export interface IThumbsValues {
+interface IThumbsValues {
   thumbOne: number;
   thumbTwo: number;
 }
 
-export interface ISubject {
+interface ISubject {
   register(eventType: string, observer: IObserver): void;
   unsubscribe(eventType: string, observer: IObserver): void;
   notify(eventType: string): void;
 }
 
-export interface IPosition {
+interface IPosition {
   left: number;
   top: number;
 }
 
-export interface IThumbsPositions {
+interface IThumbsPositions {
   thumbOne: IPosition;
   thumbTwo: IPosition | null;
 }
 
-export interface IProgressBarParams {
+interface IProgressBarParams {
   position: IPosition;
   size: ISize;
 }
 
-export interface IPopUpParams {
+interface IPopUpParams {
   value: number;
   position: IPosition;
 }
 
-export interface IPopUps {
+interface IPopUps {
   popUpOne: IPopUpParams;
   popUpTwo: IPopUpParams;
 }
 
-export interface IScalePointParams {
+interface IScalePointParams {
   position: IPosition;
   size: ISize;
   value: number;
 }
 
-export interface ISimpleSliderModel {
+interface ISimpleSliderModel {
   subject: ISubject;
   setSliderSize(size: ISize): void;
   setThumbSize(size: ISize): void;
@@ -85,7 +85,7 @@ export interface ISimpleSliderModel {
   setThumbPosOnClickPos(clickPosition: IPosition): void;
 }
 
-export interface ISimpleSliderView {
+interface ISimpleSliderView {
   subject: ISubject;
   switchToHorizontal(): void;
   switchToVertical(): void;
@@ -107,14 +107,33 @@ export interface ISimpleSliderView {
   getScaleClickPosition(): IPosition;
 }
 
-export interface IControllerParams {
+interface IControllerParams {
   model: ISimpleSliderModel;
   view: ISimpleSliderView;
 }
 
-export interface ISliderMargins {
+interface ISliderMargins {
   left: number;
   top: number;
   right: number;
   bottom: number;
 }
+
+export {
+  ISize,
+  ISliderSettings,
+  IObserver,
+  IObserversList,
+  IThumbsValues,
+  ISubject,
+  IPosition,
+  IThumbsPositions,
+  IProgressBarParams,
+  IPopUpParams,
+  IPopUps,
+  IScalePointParams,
+  ISimpleSliderModel,
+  ISimpleSliderView,
+  IControllerParams,
+  ISliderMargins,
+};
