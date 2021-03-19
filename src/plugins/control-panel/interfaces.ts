@@ -1,17 +1,19 @@
-export interface IRadioParams {
+interface IRadioParams {
   label: string;
   value: string;
   checked?: boolean;
 }
 
-export interface ICheckboxParams {
+interface ICheckboxParams {
   label: string;
   name: string;
   value: string;
 }
 
-export interface IGroupElements {
+interface IGroupElements {
   header?: string;
   wrapperClass: string;
   elements: HTMLDivElement[];
 }
+
+export { IRadioParams, ICheckboxParams, IGroupElements };
