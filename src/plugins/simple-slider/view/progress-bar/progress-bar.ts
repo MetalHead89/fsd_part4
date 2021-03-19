@@ -1,14 +1,14 @@
 import { IProgressBarParams } from '../../interfaces';
 import Element from '../element/element';
 
-export default class ProgressBar extends Element {
+class ProgressBar extends Element {
   constructor() {
     super('slider__progress-bar');
   }
 
   /**
-   * Обновляет положение и размер прогрессбара
-   * @param {IProgressBarParams} params - объект с размером и положением прогрессбара
+   * Обновляет положение и размер прогресс-бара
+   * @param {IProgressBarParams} params - объект с размером и положением прогресс-бара
    */
   update(params: IProgressBarParams): void {
     this.element.style.left = `${params.position.left}px`;
@@ -17,3 +17,5 @@ export default class ProgressBar extends Element {
     this.element.style.height = `${params.size.height}px`;
   }
 }
+
+export default ProgressBar;
