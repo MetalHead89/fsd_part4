@@ -25,7 +25,7 @@ class SimpleSliderController implements IObserver {
   }
 
   /**
-   * Инициализация слайдера в соответстви с первичными настройками
+   * Инициализация слайдера в соответствии с первичными настройками
    */
   private init(): void {
     if (this.model.getOrientation() === 'horizontal') {
@@ -118,7 +118,7 @@ class SimpleSliderController implements IObserver {
   }
 
   /**
-   * Обновляет бегунки, прогрессбар и шкалу во View в соответствии с их состоянием
+   * Обновляет бегунки, прогресс-бар и шкалу во View в соответствии с их состоянием
    */
   private updateView(): void {
     this.model.updateThumbsState(this.model.getThumbsPos());
