@@ -1,6 +1,6 @@
 import Element from '../element/element';
 
-export default class Track extends Element {
+class Track extends Element {
   constructor() {
     super('slider__track');
     this.init();
@@ -22,3 +22,5 @@ export default class Track extends Element {
     this.subject.notify('clickToTrack');
   }
 }
+
+export default Track;
