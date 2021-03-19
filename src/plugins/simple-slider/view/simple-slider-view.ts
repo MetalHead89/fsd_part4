@@ -22,7 +22,7 @@ import ProgressBar from './progress-bar/progress-bar';
 import Scale from './scale/scale';
 import Subject from '../subject/subject';
 
-export default class SimpleSliderView implements ISimpleSliderView, IObserver {
+class SimpleSliderView implements ISimpleSliderView, IObserver {
   subject: ISubject;
   private container: Container;
   private sliderWrapper: HTMLDivElement;
@@ -79,7 +79,7 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
   }
 
   /**
-   * Сборка слайдера из отдельных контролов
+   * Сборка слайдера из отдельных элементов
    */
   private assembleSlider(): void {
     this.container.append(this.track.getElement());
@@ -251,7 +251,7 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
 
   /**
    * Возвращение размера бегунка
-   * @returns {ISize} - объкт с шириной и высотой бегунка
+   * @returns {ISize} - объект с шириной и высотой бегунка
    */
   getThumbSize(): ISize {
     return this.thumbOne.getSize();
@@ -267,7 +267,7 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
   }
 
   /**
-   * Взвращение позиций бегунков
+   * Возвращение позиций бегунков
    * @returns {IThumbsPositions} - объект с позициями бегунков
    */
   getThumbsPos(): IThumbsPositions {
@@ -291,16 +291,16 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
   }
 
   /**
-   * Обновляет позицию и размер прогрессбара
-   * @param {IProgressBarParams} thumbsPositions - объект с позицей и размером прогрессбара
+   * Обновляет позицию и размер прогресс-бара
+   * @param {IProgressBarParams} thumbsPositions - объект с позицией и размером прогресс-бара
    */
   updateProgressBar(params: IProgressBarParams): void {
     this.progressBar.update(params);
   }
 
   /**
-   * Обновляет значения попапов
-   * @param {IProgressBarParams} thumbsPositions - объект со значениями попапов
+   * Обновляет значения всплывающих подсказок
+   * @param {IProgressBarParams} thumbsPositions - объект со значениями всплывающих подсказок
    */
   updatePopUps(params: IPopUps): void {
     if (this.popUpOne !== null) {
@@ -351,8 +351,8 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
   }
 
   /**
-   * Вовращает объект с отступами от левой, верхней, правой и нижней границ слайдера
-   * @returns {ISliderMargins} - объект с отсупами от левой, верхней, правой
+   * Возвращает объект с отступами от левой, верхней, правой и нижней границ слайдера
+   * @returns {ISliderMargins} - объект с отступами от левой, верхней, правой
    * и нижней границ слайдера
    */
   private getMargins(): ISliderMargins {
@@ -386,3 +386,5 @@ export default class SimpleSliderView implements ISimpleSliderView, IObserver {
     return margins;
   }
 }
+
+export default SimpleSliderView;
