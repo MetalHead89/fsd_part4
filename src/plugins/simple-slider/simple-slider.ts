@@ -1,8 +1,8 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable comma-dangle */
 
 import { ISliderSettings, ISubject, IThumbsValues } from './interfaces';
-
 import SimpleSliderModel from './model/simple-slider-model';
 import SimpleSliderController from './controller/simple-slider-controller';
 import SimpleSliderView from './view/simple-slider-view';
@@ -23,10 +23,10 @@ import SimpleSliderView from './view/simple-slider-view';
     thumbSize: { width: 20, height: 20 },
   };
 
-  // API мотоды плагина
+  // API методы плагина
   const methods: any = {
     init(options: ISliderSettings): void {
-      // Обновление настроек плагина в соответсвии с полученными параметрами
+      // Обновление настроек плагина в соответствии с полученными параметрами
       const settings: ISliderSettings = $.extend(defaultSettings, options);
 
       // Создание слайдеров
@@ -75,7 +75,6 @@ import SimpleSliderView from './view/simple-slider-view';
     },
   };
 
-  // eslint-disable-next-line no-param-reassign
   $.fn.simpleSlider = function plug(
     action?: string | ISliderSettings,
     args?,
