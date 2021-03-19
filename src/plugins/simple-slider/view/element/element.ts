@@ -1,7 +1,7 @@
 import { IPosition, ISize } from '../../interfaces';
 import Subject from '../../subject/subject';
 
-export default class Element {
+class Element {
   protected element: HTMLDivElement;
   protected lastPosition: IPosition;
   subject: Subject;
@@ -30,12 +30,12 @@ export default class Element {
       top: cursorPosition.top,
     };
 
-    const parrent: HTMLElement | null = this.element.parentElement;
+    const parent: HTMLElement | null = this.element.parentElement;
 
-    if (parrent !== null) {
-      const parrentCoords: DOMRect = parrent.getBoundingClientRect();
-      positionInsideParent.left -= parrentCoords.left;
-      positionInsideParent.top -= parrentCoords.top;
+    if (parent !== null) {
+      const parentCoords: DOMRect = parent.getBoundingClientRect();
+      positionInsideParent.left -= parentCoords.left;
+      positionInsideParent.top -= parentCoords.top;
     }
 
     this.lastPosition = positionInsideParent;
@@ -105,8 +105,8 @@ export default class Element {
   }
 
   /**
-   * Возвращает DOMRect ообъект элемента
-   * @returns {DOMRect} - DOMRect ообъект элемента
+   * Возвращает DOMRect объект элемента
+   * @returns {DOMRect} - DOMRect объект элемента
    */
   getRect(): DOMRect {
     return this.element.getBoundingClientRect();
@@ -122,3 +122,5 @@ export default class Element {
       .getPropertyValue(styleName);
   }
 }
+
+export default Element;
