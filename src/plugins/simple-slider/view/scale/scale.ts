@@ -2,7 +2,7 @@
 import { IScalePointParams, ISize } from '../../interfaces';
 import Element from '../element/element';
 
-export default class Scale extends Element {
+class Scale extends Element {
   constructor(orientation?: string) {
     super('slider__scale', orientation);
     this.init();
@@ -63,17 +63,17 @@ export default class Scale extends Element {
    * @param point - объект с параметрами одного деления шкалы
    */
   private addPoint(point: IScalePointParams): void {
-    const orienation = this.getOrientation();
+    const orientation = this.getOrientation();
     const scalePoint: HTMLElement = document.createElement('div');
     scalePoint.classList.add(
       'slider__scale-point',
-      `slider__scale-point_${orienation}`,
+      `slider__scale-point_${orientation}`,
     );
     if (point.size.width > 0) {
       scalePoint.style.width = `${point.size.width}px`;
     }
 
-    if (orienation === 'horizontal') {
+    if (orientation === 'horizontal') {
       this.element.style.height = `${point.size.height}px`;
     } else {
       this.element.style.width = `${point.size.width}px`;
@@ -85,7 +85,7 @@ export default class Scale extends Element {
     const divisionLabel: HTMLElement = document.createElement('div');
     divisionLabel.classList.add(
       'slider__scale-point-label',
-      `slider__scale-point-label_${orienation}`,
+      `slider__scale-point-label_${orientation}`,
     );
     divisionLabel.innerText = point.value.toString();
 
@@ -97,3 +97,5 @@ export default class Scale extends Element {
     this.element.append(scalePoint);
   }
 }
+
+export default Scale;
