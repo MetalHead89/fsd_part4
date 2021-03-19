@@ -16,7 +16,7 @@ import {
 } from '../interfaces';
 import Subject from '../subject/subject';
 
-export default class SimpleSliderModel implements ISimpleSliderModel {
+class SimpleSliderModel implements ISimpleSliderModel {
   subject: ISubject;
   private orientation = 'horizontal';
   private type = 'range';
@@ -86,7 +86,7 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
   }
 
   /**
-   * Возвращает истину, если тип слайдра - диапазон и значение второго
+   * Возвращает истину, если тип слайдера - диапазон и значение второго
    * бегунка меньше значения первого
    * @returns {boolean} - результат вычисления логического выражения
    */
@@ -198,8 +198,8 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
   }
 
   /**
-   * Возвращает состояние попапов (выключены или отключены)
-   * @returns {boolean} - состояние попапов
+   * Возвращает состояние всплывающих подсказок (выключены или отключены)
+   * @returns {boolean} - состояние всплывающих подсказок над бегунками
    */
   getPopUpsState(): boolean {
     return this.popUps;
@@ -222,8 +222,8 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
   }
 
   /**
-   * Возвращает объект с параметрами для прогрессбара
-   * @returns {IProgressBarParams} - Объект с позицией и размерами прогрессбара
+   * Возвращает объект с параметрами для прогресс-бара
+   * @returns {IProgressBarParams} - Объект с позицией и размерами прогресс-бара
    */
   getProgressBarParams(): IProgressBarParams {
     const thumbOnePos = this.thumbValueToPos(this.thumbOneValue);
@@ -258,7 +258,7 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
 
   /**
    * Возврат объекта с позициями бегунков
-   * @returns {IThumbsPositions} - объект с позициями бегунков относительно левого и вернего края
+   * @returns {IThumbsPositions} - объект с позициями бегунков относительно левого и верхнего края
    * родительского контейнера
    */
   getThumbsPos(): IThumbsPositions {
@@ -269,8 +269,8 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
   }
 
   /**
-   * Возвращает объект с параметрами для попапов
-   * @returns {IPopUps} - объект с позицииями и значениями попапов
+   * Возвращает объект с параметрами для всплывающих подсказок
+   * @returns {IPopUps} - объект с позициями и значениями всплывающих подсказок
    */
   getPopUpsParams(): IPopUps {
     return {
@@ -290,8 +290,8 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
   }
 
   /**
-   * Возвращает объект с текущими значеними бегунков
-   * @returns {IThumbsValues} - объект со значеними бегунков
+   * Возвращает объект с текущими значениями бегунков
+   * @returns {IThumbsValues} - объект со значениями бегунков
    */
   getThumbsValues(): IThumbsValues {
     return { thumbOne: this.thumbOneValue, thumbTwo: this.thumbTwoValue };
@@ -423,10 +423,10 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
   }
 
   /**
-   * Возвращает позицию попапа
+   * Возвращает позицию всплывающей подсказки
    * @param {IPosition} thumbPosition - объект с позицией бегунка,
-   * рядом с которым будет распологаться попап
-   * @returns {IPosition} - объект с позицией попапа
+   * рядом с которым будет располагаться всплывающая подсказка
+   * @returns {IPosition} - объект с позицией всплывающей подсказки
    */
   private getPopUpPosition(thumbPosition: IPosition): IPosition {
     let left = 0;
@@ -499,7 +499,7 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
   }
 
   /**
-   * Возваращает количество шагов бегунка
+   * Возвращает количество шагов бегунка
    * @returns {number} - количество шагов бегунка
    */
   private getStepsCount(): number {
@@ -543,7 +543,7 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
   /**
    * Возвращение позиции бегунка исходя из его значения
    * @param {number} value - значение бегунка
-   * @returns {IThumbPosition} - объект с позицией бегунка относительно левого и вернего края
+   * @returns {IThumbPosition} - объект с позицией бегунка относительно левого и верхнего края
    * родительского контейнера
    */
   private thumbValueToPos(value: number): IPosition {
@@ -609,7 +609,7 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
 
   /**
    * Возвращает позицию следующего деления шкалы
-   * @param {number} position - позиция последнго деления
+   * @param {number} position - позиция последнего деления
    * @param {ISize} pointSize - объект с размерами деления
    * @returns {number} - позиция следующего деления
    */
@@ -628,3 +628,5 @@ export default class SimpleSliderModel implements ISimpleSliderModel {
     return newPosition;
   }
 }
+
+export default SimpleSliderModel;
