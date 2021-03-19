@@ -4,7 +4,7 @@
 import { IPosition } from '../../interfaces';
 import Element from '../element/element';
 
-export default class Thumb extends Element {
+class Thumb extends Element {
   private shift = { shiftX: 0, shiftY: 0 };
   private onMouseMoveHandler = this.drag.bind(this);
   private onMouseUpHandler = this.endDrag.bind(this);
@@ -142,3 +142,5 @@ export default class Thumb extends Element {
     document.onpointerdown = null;
   }
 }
+
+export default Thumb;
