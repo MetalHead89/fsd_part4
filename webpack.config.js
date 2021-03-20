@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -32,6 +34,7 @@ module.exports = {
   plugins: [
     new HTMLWebpackPlugin({
       template: path.resolve(__dirname, 'src/demo/index.pug'),
+      favicon: path.resolve(__dirname, 'favicon.ico'),
     }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin([{ filename: '[name].css' }]),
