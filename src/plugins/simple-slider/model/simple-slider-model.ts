@@ -530,8 +530,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
 
     let newValue = Math.round(
       this.min +
-        ((this.max - this.min) / this.max) *
-          Math.round(position / pixelsPerValue),
+        ((this.max - this.min) / this.max) * (position / pixelsPerValue),
     );
 
     newValue = newValue < this.min ? this.min : newValue;
