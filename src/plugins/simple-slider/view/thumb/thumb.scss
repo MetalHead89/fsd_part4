@@ -6,22 +6,24 @@
   background: rgb(85, 196, 153);
   z-index: 2;
   touch-action: none;
-}
 
-.slider__thumb_horizontal {
-  top: 0;
-  transform: translate(0, -25%);
-  &:hover,
-  &:active {
-    transform: translate(0, -25%) scale(1.2);
+  &_horizontal {
+    top: 0;
+    transform: translate(0, -25%);
+
+    &:hover,
+    &:active {
+      transform: translate(0, -25%) scale(1.2);
+    }
   }
-}
 
-.slider__thumb_vertical {
-  left: 0;
-  transform: translate(-25%, 0);
-  &:hover,
-  &:active {
-    transform: translate(-25%, 0) scale(1.2);
+  &_vertical {
+    left: 0;
+    transform: translate(-25%, 0);
+
+    &:hover,
+    &:active {
+      transform: translate(-25%, 0) scale(1.2);
+    }
   }
 }

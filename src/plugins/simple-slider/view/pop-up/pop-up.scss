@@ -1,18 +1,18 @@
 .slider__pop-up {
-    position: absolute;
-    font-size: 1.5rem;
-    color: rgb(196, 196, 196);
-    user-select: none;
-}
+  position: absolute;
+  font-size: 1.5rem;
+  color: rgb(196, 196, 196);
+  user-select: none;
 
-.slider__pop-up_horizontal {
+  &_horizontal {
     transform: translate(-50%, -30px);
-    transition: left .2s cubic-bezier(0,1.73,.32,.74);
-}
+    transition: left 0.2s cubic-bezier(0, 1.73, 0.32, 0.74);
+  }
 
-.slider__pop-up_vertical {
+  &_vertical {
     left: 0;
     transform: translate(-100%, -50%);
     padding-right: 15px;
-    transition: top .2s cubic-bezier(0,1.73,.32,.74);
+    transition: top 0.2s cubic-bezier(0, 1.73, 0.32, 0.74);
+  }
 }
