@@ -29,7 +29,7 @@ function clickToAddNewSliderBtn(): void {
     removeSliderButton.append(icon);
     removeSliderButton.addEventListener(
       'click',
-      removeSlider.bind(removeSliderButton, sliderWrapper),
+      removeSlider.bind(removeSliderButton, sliderWrapper)
     );
     sliderWrapper.append(removeSliderButton);
 
