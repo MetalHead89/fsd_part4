@@ -26,10 +26,6 @@ body {
   padding: 10px;
 }
 
-.add-new-slider-btn__icon {
-  transition: transform 0.2s ease-in;
-}
-
 .add-new-slider-btn {
   padding: 0 8px;
   width: 40px;
@@ -46,6 +42,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+
   &:hover {
     background: rgba(240, 243, 243, 0.9);
     & .add-new-slider-btn__icon {
@@ -53,15 +50,20 @@ body {
       transform: rotate(90deg);
     }
   }
+
   &:active,
   &:focus {
     outline: none;
     padding: 0 8px;
   }
-}
 
-.add-new-slider-btn_margin-top {
-  margin-top: 20px;
+  &_margin-top {
+    margin-top: 20px;
+  }
+
+  &__icon {
+    transition: transform 0.2s ease-in;
+  }
 }
 
 .help-image {
@@ -70,13 +72,6 @@ body {
   max-width: 440px;
   margin: 0 auto;
   padding: 10px;
-}
-
-.remove-slider-button__icon {
-  transition: transform 0.2s ease-in;
-  pointer-events: none;
-  font-size: 21px;
-  user-select: none;
 }
 
 .remove-slider-button {
@@ -92,15 +87,24 @@ body {
   align-items: center;
   justify-content: center;
   user-select: none;
+
   &:hover {
     & .remove-slider-button__icon {
       transform: rotate(90deg);
     }
   }
+
   &:active,
   &:focus {
     outline: none;
     padding: 0;
+  }
+
+  &__icon {
+    transition: transform 0.2s ease-in;
+    pointer-events: none;
+    font-size: 21px;
+    user-select: none;
   }
 }
 
@@ -118,12 +122,12 @@ body {
   -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
   -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
   box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
-}
 
-.slider-wrapper_horizontal {
-  flex-wrap: wrap;
-}
+  &_horizontal {
+    flex-wrap: wrap;
+  }
 
-.slider-wrapper_vertical {
-  flex-wrap: nowrap;
+  &_vertical {
+    flex-wrap: nowrap;
+  }
 }
