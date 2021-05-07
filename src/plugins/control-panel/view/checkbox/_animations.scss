@@ -1,0 +1,8 @@
+@keyframes jump-up {
+  50% {
+    -webkit-transform: scale(1.2) rotate(45deg);
+  }
+  100% {
+    -webkit-transform: scale(1) rotate(45deg);
+  }
+}

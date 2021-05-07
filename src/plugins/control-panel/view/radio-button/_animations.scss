@@ -1,0 +1,8 @@
+@keyframes radio-jump {
+  50% {
+    -webkit-transform: translate(0, -50%) scale(1.2);
+  }
+  100% {
+    -webkit-transform: translate(0, -50%) scale(1);
+  }
+}

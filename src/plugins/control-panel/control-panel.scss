@@ -3,26 +3,28 @@
 @import './view/radio-button/radio-button.scss';
 @import './view/checkbox/checkbox.scss';
 
-.control-panel__text-fields-group {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  padding: 5px 0;
-}
+.control-panel {
+  &__text-fields-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 5px 0;
+  }
 
-.control-panel__radio-group-header {
-  display: block;
-  font-family: 'Roboto';
-  color: rgb(87, 87, 87);
-  font-size: 1rem;
-  text-transform: uppercase;
-  margin: 10px 0 2px;
-}
+  &__radio-group-header {
+    display: block;
+    font-family: 'Roboto';
+    color: rgb(87, 87, 87);
+    font-size: 1rem;
+    text-transform: uppercase;
+    margin: 10px 0 2px;
+  }
 
-.control-panel__checkboxes-and-radios-wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: flex-start;
-  flex-wrap: wrap;
+  &__checkboxes-and-radios-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
 }

@@ -1,72 +1,73 @@
-.control-panel__checkbox-wrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 3px 0;
-}
+@import './animations';
 
-.control-panel__checkbox-label {
-  font-family: 'Roboto';
-  position: relative;
-  font-size: 1.2rem;
-  display: block;
-  color: rgb(155, 155, 155);
-  transition: color 0.5s ease;
-  margin-left: 20px;
-  cursor: pointer;
-  &:hover {
-    color: rgb(87, 87, 87);
+.control-panel {
+  &__checkbox-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 3px 0;
   }
-  &:before {
-    content: '';
-    width: 13px;
-    height: 13px;
-    border: 1px solid rgb(155, 155, 155);
-    position: absolute;
-    left: -20px;
-    top: 0px;
-    border-radius: 2px;
-    transition: border-color 0.5s ease;
-  }
-  &:hover::before {
-    border-color: rgb(87, 87, 87);
-  }
-  &:after {
-    content: '';
-    position: absolute;
-    left: -15px;
-    top: 2px;
-    width: 3px;
-    height: 7px;
-    border-right: 2px solid;
-    border-bottom: 2px solid;
-    transition: 0.2s ease;
-    transform: rotate(45deg) scale(0);
-    border-image-source: rgb(87, 87, 87);
-    border-image-slice: 1;
-  }
-}
 
-.control-panel__checkbox-label_checked {
-  color: rgb(87, 87, 87);
-  &:before {
-    border-color: rgb(87, 87, 87);
-  }
-  &:after {
-    transform: rotate(45deg) scale(1);
-    animation: jumpUp 0.2s ease;
-  }
-}
+  &__checkbox-label {
+    font-family: 'Roboto';
+    position: relative;
+    font-size: 1.2rem;
+    display: block;
+    color: rgb(155, 155, 155);
+    transition: color 0.5s ease;
+    margin-left: 20px;
+    cursor: pointer;
 
-.control-panel__checkbox {
-  display: none;
-}
+    &:hover {
+      color: rgb(87, 87, 87);
 
-@keyframes jumpUp {
-  50% {
-    -webkit-transform: scale(1.2) rotate(45deg);
+      &:before {
+        border-color: rgb(87, 87, 87);
+      }
+    }
+
+    &:before {
+      content: '';
+      width: 13px;
+      height: 13px;
+      border: 1px solid rgb(155, 155, 155);
+      position: absolute;
+      left: -20px;
+      top: 0px;
+      border-radius: 2px;
+      transition: border-color 0.5s ease;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      left: -15px;
+      top: 2px;
+      width: 3px;
+      height: 7px;
+      border-right: 2px solid;
+      border-bottom: 2px solid;
+      transition: 0.2s ease;
+      transform: rotate(45deg) scale(0);
+      border-image-source: rgb(87, 87, 87);
+      border-image-slice: 1;
+    }
+
+    &_checked {
+      color: rgb(87, 87, 87);
+
+      &:before {
+        border-color: rgb(87, 87, 87);
+      }
+
+      &:after {
+        transform: rotate(45deg) scale(1);
+        animation: jump-up 0.2s ease;
+      }
+    }
   }
-  100% {
-    -webkit-transform: scale(1) rotate(45deg);
+
+  &__checkbox {
+    display: none;
   }
 }
