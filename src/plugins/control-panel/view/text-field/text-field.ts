@@ -46,6 +46,7 @@ class TextField extends Subject {
   private init(labelText: string) {
     this.control.classList.add('slider-panel__text-field-control');
 
+    this.field.type = 'number';
     this.field.classList.add('control-panel__text-field');
     this.field.addEventListener('blur', this.reportChanges.bind(this));
     this.field.onkeypress = TextField.removeNonDigitChar;

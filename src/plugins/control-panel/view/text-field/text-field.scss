@@ -32,6 +32,12 @@
     order: 1;
     transition: border-color 0.5s ease;
     outline: none;
+    -moz-appearance: textfield;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      display: none;
+    }
 
     &:hover {
       border-color: rgb(155, 155, 155);
