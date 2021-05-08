@@ -19,6 +19,13 @@
 }
 
 .control-panel {
+  &__text-fields-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 5px 0;
+  }
+
   &__text-field {
     user-select: none;
     text-align: center;

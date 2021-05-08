@@ -12,7 +12,7 @@ function groupElements(params: IGroupElements): HTMLDivElement {
 
   if (params.header !== undefined) {
     const header = document.createElement('label');
-    header.classList.add('control-panel__radio-group-header');
+    header.classList.add('control-panel__radio-group-title');
     header.innerText = params.header;
     wrapper.append(header);
   }
