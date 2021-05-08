@@ -1,9 +1,6 @@
-import '@/plugins/simple-slider/simple-slider.ts';
-import '@/plugins/control-panel/control-panel.ts';
-import '@/demo/demo.ts';
+require.context('@', true, /\.scss$/);
 
-import '@/demo/scss/style.scss';
-import '@/demo/scss/normalize.scss';
-import '@/fonts/fonts.scss';
-import '@/plugins/simple-slider/simple-slider.scss';
-import '@/plugins/control-panel/control-panel.scss';
+const scripts = require.context('@', true, /[^d]\.ts$/);
+scripts.keys().forEach((script) => {
+  scripts(script);
+});
