@@ -13,7 +13,7 @@ module.exports = {
   entry: '@/index.ts',
   devtool: 'inline-source-map',
   output: {
-    filename: '[name].[contenthash].js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
   },
   resolve: {
@@ -36,7 +36,7 @@ module.exports = {
       favicon: path.resolve(__dirname, 'favicon.ico'),
     }),
     new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin([{ filename: '[name].css' }]),
+    new MiniCssExtractPlugin([{ filename: 'styles.css' }]),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
@@ -44,12 +44,8 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, 'src/fonts'),
-          to: path.resolve(__dirname, 'dist/fonts'),
-        },
-        {
-          from: path.resolve(__dirname, 'src/demo/images'),
-          to: path.resolve(__dirname, 'dist/src/images'),
+          from: path.resolve(__dirname, 'src/demo/images/help-image.png'),
+          to: path.resolve(__dirname, 'dist/src/images/help-image.png'),
         },
       ],
     }),
@@ -128,14 +124,17 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: '[name].[ext]',
+              name: 'fonts/[name]/[name].[ext]',
             },
           },
         ],
       },
       {
         test: /\.(png|jpg|svg|gif)$/,
-        use: ['file-loader'],
+        loader: 'file-loader',
+        options: {
+          name: 'src/images/[name].[ext]',
+        },
       },
     ],
   },
