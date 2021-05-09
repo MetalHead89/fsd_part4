@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "private": false,
+  "files": [
+    "dist/fonts",
+    "dist/main.css",
+    "dist/main.js"
+  ],
   "scripts": {
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
