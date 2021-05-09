@@ -6,7 +6,8 @@
   "files": [
     "dist/fonts",
     "dist/main.css",
-    "dist/main.js"
+    "dist/main.js",
+    "LICENSE"
   ],
   "scripts": {
     "dev": "webpack --mode development",
