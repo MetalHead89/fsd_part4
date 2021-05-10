@@ -10,7 +10,7 @@ const webpack = require('webpack');
 module.exports = {
   context: path.resolve(__dirname, 'src'),
   mode: 'development',
-  entry: '@/index.ts',
+  entry: path.resolve(__dirname, 'src/index.ts'),
   devtool: 'inline-source-map',
   output: {
     filename: '[name].js',
@@ -18,9 +18,6 @@ module.exports = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
-    alias: {
-      '@': path.resolve(__dirname, 'src'),
-    },
   },
   optimization: {
     splitChunks: {
