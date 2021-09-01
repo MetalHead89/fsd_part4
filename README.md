@@ -29,10 +29,10 @@ https://metalhead89.github.io/fsd_demo_slider_page/
 
 ## Зависимости
 
-Node.js v14.16.1 - https://nodejs.org/
-npm v7.11.2 - https://www.npmjs.com/
-jQuery v3.5.1 - https://jquery.com/
-TypeScript v4.0.3 - https://www.typescriptlang.org/
+1. Node.js v14.16.1 - https://nodejs.org/
+2. npm v7.11.2 - https://www.npmjs.com/
+3. jQuery v3.5.1 - https://jquery.com/
+4. TypeScript v4.0.3 - https://www.typescriptlang.org/
 
 ## Работа с проектом
 
