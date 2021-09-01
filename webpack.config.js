@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 /* eslint-disable @typescript-eslint/no-var-requires */
 
 const path = require('path');
@@ -5,6 +6,7 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const StylelintPlugin = require('stylelint-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
@@ -57,6 +59,9 @@ module.exports = {
           to: path.resolve(__dirname, 'dist/src/images/help-image.png'),
         },
       ],
+    }),
+    new StylelintPlugin({
+      configFile: path.resolve(__dirname, './stylelint.config.js'),
     }),
   ],
   module: {
