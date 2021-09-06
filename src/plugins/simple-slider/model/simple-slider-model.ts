@@ -100,20 +100,20 @@ class SimpleSliderModel implements ISimpleSliderModel {
    */
   updateThumbsState(positions: IThumbsPositions): void {
     const thumbOneValue = this.valueWithStep(
-      this.posByOrientation(positions.thumbOne),
+      this.posByOrientation(positions.thumbOne)
     );
     let thumbTwoValue: null | number = null;
 
     if (positions.thumbTwo !== null) {
       thumbTwoValue = this.valueWithStep(
-        this.posByOrientation(positions.thumbTwo),
+        this.posByOrientation(positions.thumbTwo)
       );
     }
 
     if (
       SimpleSliderModel.valueTwoIsNullOrMoreOrEqualThenValueOne(
         thumbOneValue,
-        thumbTwoValue,
+        thumbTwoValue
       )
     ) {
       this.thumbOneValue = thumbOneValue;
@@ -131,7 +131,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
    */
   private static valueTwoIsNullOrMoreOrEqualThenValueOne(
     valueOne: number,
-    valueTwo: number | null,
+    valueTwo: number | null
   ): boolean {
     return valueTwo === null || valueOne <= valueTwo;
   }
@@ -277,13 +277,13 @@ class SimpleSliderModel implements ISimpleSliderModel {
       popUpOne: {
         value: this.thumbOneValue,
         position: this.getPopUpPosition(
-          this.thumbValueToPos(this.thumbOneValue),
+          this.thumbValueToPos(this.thumbOneValue)
         ),
       },
       popUpTwo: {
         value: this.thumbTwoValue,
         position: this.getPopUpPosition(
-          this.thumbValueToPos(this.thumbTwoValue),
+          this.thumbValueToPos(this.thumbTwoValue)
         ),
       },
     };
@@ -318,7 +318,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
       const pointValue = this.thumbPosToValue(
         position -
           this.sizeByOrientation(this.thumbSize) / 2 +
-          this.sizeByOrientation(scalePointSize) / 2,
+          this.sizeByOrientation(scalePointSize) / 2
       );
 
       position = this.getNextScalePointPos(position, scalePointSize);
@@ -346,6 +346,15 @@ class SimpleSliderModel implements ISimpleSliderModel {
   }
 
   /**
+   * Пересчитывает значение шага. Если текущее значение шага больше максимально-допустимого
+   * количества шагов в слайдере, то оно приравнивается к максимально-допустимому количеству шагов
+   */
+  recalculateStep(): void {
+    const stepsCount = this.max - this.min;
+    this.step = this.step > stepsCount ? stepsCount : this.step;
+  }
+
+  /**
    * Проверяет помещается ли точка на шкале без пересечения с другими точками, если нет, то она
    * не добавляется на шкалу
    * @param {number} index - индекс точки
@@ -358,7 +367,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
     index: number,
     pointPos: number,
     prevPointPos: number,
-    scalePointSize: ISize,
+    scalePointSize: ISize
   ): boolean {
     return (
       index === 0 ||
@@ -398,11 +407,11 @@ class SimpleSliderModel implements ISimpleSliderModel {
       return (
         Math.abs(
           this.posByOrientation(position) -
-            this.posByOrientation(this.thumbValueToPos(this.thumbTwoValue)),
+            this.posByOrientation(this.thumbValueToPos(this.thumbTwoValue))
         ) <
         Math.abs(
           this.posByOrientation(position) -
-            this.posByOrientation(this.thumbValueToPos(this.thumbOneValue)),
+            this.posByOrientation(this.thumbValueToPos(this.thumbOneValue))
         )
       );
     }
@@ -446,11 +455,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
    * @param {number} value - новое значение минимума
    */
   private updateMinValue(value: number): void {
-    let newMin = value;
-    if (newMin >= this.max) {
-      newMin = this.max - 1;
-    }
-    this.min = newMin;
+    this.min = value < this.max ? value : this.min;
     this.subject.notify('minIsUpdated');
   }
 
@@ -459,11 +464,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
    * @param {number} value - новое значение максимума
    */
   private updateMaxValue(value: number): void {
-    let newMax = value;
-    if (newMax <= this.min) {
-      newMax = this.min + 1;
-    }
-    this.max = newMax;
+    this.max = value > this.min ? value : this.max;
     this.subject.notify('maxIsUpdated');
   }
 
@@ -472,11 +473,8 @@ class SimpleSliderModel implements ISimpleSliderModel {
    * @param {number} value - новое значение шага
    */
   private updateStep(value: number): void {
-    let newStep = value;
-    if (newStep <= 0) {
-      newStep = 1;
-    }
-    this.step = newStep;
+    const stepsCount = this.max - this.min;
+    this.step = value > 0 && value < stepsCount ? value : this.step;
     this.subject.notify('stepIsUpdated');
   }
 
@@ -530,7 +528,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
 
     let newValue = Math.round(
       this.min +
-        ((this.max - this.min) / this.max) * (position / pixelsPerValue),
+        ((this.max - this.min) / this.max) * (position / pixelsPerValue)
     );
 
     newValue = newValue < this.min ? this.min : newValue;

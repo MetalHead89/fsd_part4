@@ -84,9 +84,11 @@ class SimpleSliderController implements IObserver {
         break;
       case 'minIsUpdated':
         this.updateView();
+        this.model.recalculateStep();
         break;
       case 'maxIsUpdated':
         this.updateView();
+        this.model.recalculateStep();
         break;
       case 'stepIsUpdated':
         this.updateView();
@@ -127,7 +129,7 @@ class SimpleSliderController implements IObserver {
       this.view.enableScale();
       const max = this.model.getMax();
       const points = this.model.getScalePoints(
-        this.view.getScalePointSize(max),
+        this.view.getScalePointSize(max)
       );
       this.view.addScalePoints(points);
     } else {

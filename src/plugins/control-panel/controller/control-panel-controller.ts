@@ -19,6 +19,9 @@ class ControlPanelController implements IObserver {
    */
   private subscribeToEvents(): void {
     this.model.register('thumbsPosIsUpdated', this);
+    this.model.register('minIsUpdated', this);
+    this.model.register('maxIsUpdated', this);
+    this.model.register('stepIsUpdated', this);
     this.view.register('controlPanelDataUpdated', this);
   }
 
@@ -43,6 +46,12 @@ class ControlPanelController implements IObserver {
   update(eventType: string): void {
     if (eventType === 'thumbsPosIsUpdated') {
       this.view.setThumbsValues(this.model.getThumbsValues());
+    } else if (eventType === 'minIsUpdated') {
+      this.view.setMinValue(this.model.getMin());
+    } else if (eventType === 'maxIsUpdated') {
+      this.view.setMaxValue(this.model.getMax());
+    } else if (eventType === 'stepIsUpdated') {
+      this.view.setStep(this.model.getStep());
     }
 
     if (eventType === 'controlPanelDataUpdated') {

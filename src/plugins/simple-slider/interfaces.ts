@@ -83,6 +83,7 @@ interface ISimpleSliderModel {
   getScalePoints(scalePointSize: ISize): IScalePointParams[];
   getOrientation(): string;
   setThumbPosOnClickPos(clickPosition: IPosition): void;
+  recalculateStep(): void;
 }
 
 interface ISimpleSliderView {
