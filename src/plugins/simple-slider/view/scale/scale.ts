@@ -1,8 +1,8 @@
 /* eslint-disable comma-dangle */
 import { IScalePointParams, ISize } from '../../interfaces';
-import Element from '../element/element';
+import UIControl from '../ui-control/ui-control';
 
-class Scale extends Element {
+class Scale extends UIControl {
   constructor(orientation?: string) {
     super('scale', orientation);
     this.init();
@@ -12,7 +12,7 @@ class Scale extends Element {
    * Инициализация шкалы, подключение обработчиков событий
    */
   private init(): void {
-    this.element.addEventListener('click', this.clickToScale.bind(this));
+    this.control.addEventListener('click', this.clickToScale.bind(this));
   }
 
   /**
@@ -37,7 +37,7 @@ class Scale extends Element {
     });
 
     const pointSize = { width: 0, height: 0 };
-    const scalePoint: HTMLDivElement | null = this.element.querySelector(
+    const scalePoint: HTMLDivElement | null = this.control.querySelector(
       '.scale__point',
     );
 
@@ -74,9 +74,9 @@ class Scale extends Element {
     }
 
     if (orientation === 'horizontal') {
-      this.element.style.height = `${point.size.height}px`;
+      this.control.style.height = `${point.size.height}px`;
     } else {
-      this.element.style.width = `${point.size.width}px`;
+      this.control.style.width = `${point.size.width}px`;
     }
 
     const divisionMarker: HTMLElement = document.createElement('div');
@@ -94,7 +94,7 @@ class Scale extends Element {
 
     scalePoint.append(divisionMarker);
     scalePoint.append(divisionLabel);
-    this.element.append(scalePoint);
+    this.control.append(scalePoint);
   }
 }
 

@@ -1,8 +1,8 @@
-import Element from '../../element/element';
+import UIControl from '../../ui-control/ui-control';
 
-jest.mock('../../element/element');
+jest.mock('../../ui-control/ui-control');
 
-export default class Track extends Element {
+export default class Track extends UIControl {
   constructor() {
     super('slider__track');
   }

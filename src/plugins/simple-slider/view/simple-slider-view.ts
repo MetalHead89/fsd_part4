@@ -82,23 +82,23 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
    * Сборка слайдера из отдельных элементов
    */
   private assembleSlider(): void {
-    this.slider.append(this.track.getElement());
-    this.slider.append(this.thumbOne.getElement());
+    this.slider.append(this.track.getControl());
+    this.slider.append(this.thumbOne.getControl());
     if (this.thumbTwo !== null) {
-      this.slider.append(this.thumbTwo.getElement());
+      this.slider.append(this.thumbTwo.getControl());
     }
     if (this.popUpOne !== null) {
-      this.slider.append(this.popUpOne.getElement());
+      this.slider.append(this.popUpOne.getControl());
     }
     if (this.popUpTwo !== null) {
-      this.slider.append(this.popUpTwo.getElement());
+      this.slider.append(this.popUpTwo.getControl());
     }
-    this.slider.append(this.progressBar.getElement());
+    this.slider.append(this.progressBar.getControl());
     if (this.scale !== null) {
-      this.slider.append(this.scale.getElement());
+      this.slider.append(this.scale.getControl());
     }
 
-    this.sliderWrapper.append(this.slider.getElement());
+    this.sliderWrapper.append(this.slider.getControl());
   }
 
   /**
@@ -174,11 +174,11 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
   switchToRange(): void {
     if (this.thumbTwo === null) {
       this.thumbTwo = new Thumb(this.slider.getOrientation());
-      this.slider.append(this.thumbTwo.getElement());
+      this.slider.append(this.thumbTwo.getControl());
 
       if (this.popUpOne !== null) {
         this.popUpTwo = new PopUp(this.slider.getOrientation());
-        this.slider.append(this.popUpTwo.getElement());
+        this.slider.append(this.popUpTwo.getControl());
       }
 
       this.thumbTwo.subject.register('thumbIsDragged', this);
@@ -204,12 +204,12 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
   enablePopUps(): void {
     if (this.popUpOne === null) {
       this.popUpOne = new PopUp(this.slider.getOrientation());
-      this.slider.append(this.popUpOne.getElement());
+      this.slider.append(this.popUpOne.getControl());
     }
 
     if (this.popUpTwoIsNullAndThumbTwoIsNotNull()) {
       this.popUpTwo = new PopUp(this.slider.getOrientation());
-      this.slider.append(this.popUpTwo.getElement());
+      this.slider.append(this.popUpTwo.getControl());
     }
 
     this.slider.setMargins(this.getMargins());
@@ -243,7 +243,7 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
       this.scale?.remove();
     }
     this.scale = new Scale(this.slider.getOrientation());
-    this.slider.append(this.scale.getElement());
+    this.slider.append(this.scale.getControl());
     this.scale.subject.register('clickToScale', this);
 
     this.slider.setMargins(this.getMargins());

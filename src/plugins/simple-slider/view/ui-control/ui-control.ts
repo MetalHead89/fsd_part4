@@ -1,14 +1,14 @@
 import { IPosition, ISize } from '../../interfaces';
 import Subject from '../../subject/subject';
 
-class Element {
-  protected element: HTMLDivElement;
+class UIControl {
+  protected control: HTMLDivElement;
   protected lastPosition: IPosition;
   subject: Subject;
 
   constructor(name: string, orientation?: string) {
-    const element = document.createElement('div');
-    this.element = element;
+    const control = document.createElement('div');
+    this.control = control;
     this.subject = new Subject();
     this.lastPosition = { left: 0, top: 0 };
 
@@ -16,7 +16,7 @@ class Element {
     if (orientation) {
       orientationClass = `${name}_${orientation}`;
     }
-    this.element.classList.add(`${name}`, orientationClass);
+    this.control.classList.add(`${name}`, orientationClass);
   }
 
   /**
@@ -30,7 +30,7 @@ class Element {
       top: cursorPosition.top,
     };
 
-    const parent: HTMLElement | null = this.element.parentElement;
+    const parent: HTMLElement | null = this.control.parentElement;
 
     if (parent !== null) {
       const parentCoords: DOMRect = parent.getBoundingClientRect();
@@ -54,8 +54,8 @@ class Element {
    * Возвращает div элемент
    * @returns {HTMLDivElement} - HTML div элемент
    */
-  getElement(): HTMLDivElement {
-    return this.element;
+  getControl(): HTMLDivElement {
+    return this.control;
   }
 
   /**
@@ -64,8 +64,8 @@ class Element {
    */
   getSize(): ISize {
     return {
-      width: this.element.offsetWidth,
-      height: this.element.offsetHeight,
+      width: this.control.offsetWidth,
+      height: this.control.offsetHeight,
     };
   }
 
@@ -73,25 +73,25 @@ class Element {
    * Меняет ориентацию элемента на горизонтальную
    */
   switchToHorizontal(): void {
-    const mainClass = this.element.classList[0];
-    this.element.classList.remove(`${mainClass}_vertical`);
-    this.element.classList.add(`${mainClass}_horizontal`);
+    const mainClass = this.control.classList[0];
+    this.control.classList.remove(`${mainClass}_vertical`);
+    this.control.classList.add(`${mainClass}_horizontal`);
   }
 
   /**
    * Меняет ориентацию элемента на вертикальную
    */
   switchToVertical(): void {
-    const mainClass = this.element.classList[0];
-    this.element.classList.remove(`${mainClass}_horizontal`);
-    this.element.classList.add(`${mainClass}_vertical`);
+    const mainClass = this.control.classList[0];
+    this.control.classList.remove(`${mainClass}_horizontal`);
+    this.control.classList.add(`${mainClass}_vertical`);
   }
 
   /**
    * Удаляет элемент
    */
   remove(): void {
-    this.element.remove();
+    this.control.remove();
   }
 
   /**
@@ -99,8 +99,8 @@ class Element {
    * @returns {string} - текущая ориентация элемента
    */
   getOrientation(): string {
-    const mainClass = this.element.classList[0];
-    const classWithOrientation = this.element.classList[1];
+    const mainClass = this.control.classList[0];
+    const classWithOrientation = this.control.classList[1];
     return classWithOrientation.replace(`${mainClass}_`, '');
   }
 
@@ -109,7 +109,7 @@ class Element {
    * @returns {DOMRect} - DOMRect объект элемента
    */
   getRect(): DOMRect {
-    return this.element.getBoundingClientRect();
+    return this.control.getBoundingClientRect();
   }
 
   /**
@@ -118,9 +118,9 @@ class Element {
    */
   getStyle(styleName: string): string | undefined {
     return document.defaultView
-      ?.getComputedStyle(this.element, null)
+      ?.getComputedStyle(this.control, null)
       .getPropertyValue(styleName);
   }
 }
 
-export default Element;
+export default UIControl;

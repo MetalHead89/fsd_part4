@@ -40,7 +40,7 @@ describe('Click on track', () => {
     const spy = spyOn<any>(track, 'setPosition');
 
     initEvt(evt);
-    track['element'].dispatchEvent(evt);
+    track['control'].dispatchEvent(evt);
 
     expect(spy).toBeCalledTimes(1);
   });
@@ -49,14 +49,14 @@ describe('Click on track', () => {
     const spy = spyOn<any>(track.subject, 'notify');
 
     initEvt(evt);
-    track['element'].dispatchEvent(evt);
+    track['control'].dispatchEvent(evt);
 
     expect(spy).toBeCalledTimes(1);
   });
   test('Position should be {left: 50, top: 80}', () => {
     const evt = document.createEvent('MouseEvent');
     initEvt(evt);
-    track['element'].dispatchEvent(evt);
+    track['control'].dispatchEvent(evt);
 
     expect(track.getPosition().left).toBe(50);
     expect(track.getPosition().top).toBe(80);

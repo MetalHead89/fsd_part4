@@ -1,8 +1,8 @@
-import Element from '../../element/element';
+import UIControl from '../../ui-control/ui-control';
 
-jest.mock('../../element/element');
+jest.mock('../../ui-control/ui-control');
 
-export default class PopUp extends Element {
+export default class PopUp extends UIControl {
   private TEST_OK = true;
 
   constructor() {

@@ -1,16 +1,16 @@
-import Element from '../../element/element';
+import UIControl from '../../ui-control/ui-control';
 
-jest.mock('../../element/element');
+jest.mock('../../ui-control/ui-control');
 
-export default class Slider extends Element {
+export default class Slider extends UIControl {
   TEST_OK = true;
 
   constructor() {
     super('slider');
   }
 
-  append(element: HTMLDivElement): void {
-    this.element.append(element);
+  append(control: HTMLDivElement): void {
+    this.control.append(control);
   }
 
   resetMargins(): boolean {

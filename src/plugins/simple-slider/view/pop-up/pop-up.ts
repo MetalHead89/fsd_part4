@@ -1,7 +1,7 @@
 import { IPopUpParams, IPosition } from '../../interfaces';
-import Element from '../element/element';
+import UIControl from '../ui-control/ui-control';
 
-class PopUp extends Element {
+class PopUp extends UIControl {
   constructor(orientation?: string) {
     super('pop-up', orientation);
   }
@@ -20,7 +20,7 @@ class PopUp extends Element {
    * @param {number} value - новое значение всплывающей подсказки
    */
   private updateValue(value: number): void {
-    this.element.innerHTML = `${value}`;
+    this.control.innerHTML = `${value}`;
   }
 
   /**
@@ -28,8 +28,8 @@ class PopUp extends Element {
    * @param {IPosition} position - объект с новой позицией всплывающей подсказки
    */
   private updatePosition(position: IPosition): void {
-    this.element.style.left = `${position.left}px`;
-    this.element.style.top = `${position.top}px`;
+    this.control.style.left = `${position.left}px`;
+    this.control.style.top = `${position.top}px`;
   }
 }
 

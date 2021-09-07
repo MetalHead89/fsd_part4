@@ -17,7 +17,7 @@ describe('Update', () => {
       size: { width: 50, height: 30 },
     };
     progressBar?.update(params);
-    expect(progressBar?.getElement().style.left).toBe('10px');
+    expect(progressBar?.getControl().style.left).toBe('10px');
   });
   test('progressBar top should be 5px', () => {
     const params = {
@@ -25,7 +25,7 @@ describe('Update', () => {
       size: { width: 50, height: 30 },
     };
     progressBar.update(params);
-    expect(progressBar.getElement().style.top).toBe('5px');
+    expect(progressBar.getControl().style.top).toBe('5px');
   });
   test('progressBar width should be 50px', () => {
     const params = {
@@ -33,7 +33,7 @@ describe('Update', () => {
       size: { width: 50, height: 30 },
     };
     progressBar.update(params);
-    expect(progressBar.getElement().style.width).toBe('50px');
+    expect(progressBar.getControl().style.width).toBe('50px');
   });
   test('progressBar height should be 30px', () => {
     const params = {
@@ -41,6 +41,6 @@ describe('Update', () => {
       size: { width: 50, height: 30 },
     };
     progressBar.update(params);
-    expect(progressBar.getElement().style.height).toBe('30px');
+    expect(progressBar.getControl().style.height).toBe('30px');
   });
 });

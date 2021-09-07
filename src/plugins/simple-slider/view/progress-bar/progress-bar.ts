@@ -1,7 +1,7 @@
 import { IProgressBarParams } from '../../interfaces';
-import Element from '../element/element';
+import UIControl from '../ui-control/ui-control';
 
-class ProgressBar extends Element {
+class ProgressBar extends UIControl {
   constructor() {
     super('progress-bar');
   }
@@ -11,10 +11,10 @@ class ProgressBar extends Element {
    * @param {IProgressBarParams} params - объект с размером и положением прогресс-бара
    */
   update(params: IProgressBarParams): void {
-    this.element.style.left = `${params.position.left}px`;
-    this.element.style.top = `${params.position.top}px`;
-    this.element.style.width = `${params.size.width}px`;
-    this.element.style.height = `${params.size.height}px`;
+    this.control.style.left = `${params.position.left}px`;
+    this.control.style.top = `${params.position.top}px`;
+    this.control.style.width = `${params.size.width}px`;
+    this.control.style.height = `${params.size.height}px`;
   }
 }
 

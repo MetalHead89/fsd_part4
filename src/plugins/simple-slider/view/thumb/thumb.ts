@@ -2,9 +2,9 @@
 /* eslint-disable comma-dangle */
 
 import { IPosition } from '../../interfaces';
-import Element from '../element/element';
+import UIControl from '../ui-control/ui-control';
 
-class Thumb extends Element {
+class Thumb extends UIControl {
   private shift = { shiftX: 0, shiftY: 0 };
   private onMouseMoveHandler = this.drag.bind(this);
   private onMouseUpHandler = this.endDrag.bind(this);
@@ -21,21 +21,21 @@ class Thumb extends Element {
    * @param {number} index - новое значение z-индекса
    */
   setZIndex(index: number): void {
-    this.element.style.zIndex = index.toString();
+    this.control.style.zIndex = index.toString();
   }
 
   /**
    * Отключает html5 Drag and Drop
    */
   private disableDragAndDrop(): void {
-    this.element.ondragstart = () => false;
+    this.control.ondragstart = () => false;
   }
 
   /**
    * Добавляет событие на нажатие кнопки мыши на бегунке
    */
   private addMousedownEventListener(): void {
-    this.element.addEventListener('pointerdown', this.clickToThumb.bind(this));
+    this.control.addEventListener('pointerdown', this.clickToThumb.bind(this));
   }
 
   /**
@@ -45,7 +45,7 @@ class Thumb extends Element {
   private clickToThumb(event: PointerEvent): void {
     Thumb.disableSelection();
 
-    const thumbCoords: DOMRect = this.element.getBoundingClientRect();
+    const thumbCoords: DOMRect = this.control.getBoundingClientRect();
     this.setThumbShift(
       { left: event.clientX, top: event.clientY },
       { left: thumbCoords.left, top: thumbCoords.top },
@@ -73,14 +73,14 @@ class Thumb extends Element {
    */
   private increaseZIndex() {
     const zIndex = this.getStyle('z-index');
-    this.element.style.zIndex = (parseInt(zIndex || '0', 10) + 1).toString();
+    this.control.style.zIndex = (parseInt(zIndex || '0', 10) + 1).toString();
   }
 
   /**
    * Возвращает z-index к значению по-умолчанию
    */
   resetZIndex(): void {
-    this.element.style.zIndex = '';
+    this.control.style.zIndex = '';
   }
 
   /**
@@ -122,8 +122,8 @@ class Thumb extends Element {
    */
   moveTo(position: IPosition): void {
     this.lastPosition = position;
-    this.element.style.left = `${position.left}px`;
-    this.element.style.top = `${position.top}px`;
+    this.control.style.left = `${position.left}px`;
+    this.control.style.top = `${position.top}px`;
   }
 
   /**

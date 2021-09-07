@@ -39,7 +39,7 @@ describe('Click on scale', () => {
     const spy = spyOn<any>(scale, 'setPosition');
 
     initEvt(evt);
-    scale['element'].dispatchEvent(evt);
+    scale['control'].dispatchEvent(evt);
 
     expect(spy).toBeCalledTimes(1);
   });
@@ -48,14 +48,14 @@ describe('Click on scale', () => {
     const spy = spyOn<any>(scale.subject, 'notify');
 
     initEvt(evt);
-    scale['element'].dispatchEvent(evt);
+    scale['control'].dispatchEvent(evt);
 
     expect(spy).toBeCalledTimes(1);
   });
   test('Scale position should be {left: 50, top: 80}', () => {
     const evt = document.createEvent('MouseEvent');
     initEvt(evt);
-    scale['element'].dispatchEvent(evt);
+    scale['control'].dispatchEvent(evt);
 
     expect(scale.getPosition().left).toBe(50);
     expect(scale.getPosition().top).toBe(80);
@@ -84,7 +84,7 @@ describe('Add points', () => {
     scale.addPoints(points);
 
     expect(
-      scale['element'].querySelectorAll('.slider__scale-point').length,
+      scale['control'].querySelectorAll('.slider__scale-point').length,
     ).toBe(3);
   });
   test('Scale point size should be {left: 50px, top: 100px}', () => {
@@ -96,7 +96,7 @@ describe('Add points', () => {
       },
     ];
     scale.addPoints(points);
-    const point: HTMLDivElement | null = scale['element'].querySelector(
+    const point: HTMLDivElement | null = scale['control'].querySelector(
       '.slider__scale-point',
     );
     expect(point?.style.left).toBe('50px');
@@ -112,7 +112,7 @@ describe('Add points', () => {
       },
     ];
     scale.addPoints(points);
-    expect(scale['element'].style.width).toBe('30px');
+    expect(scale['control'].style.width).toBe('30px');
   });
   test('Scale should contain an element with the slider__scale-point-label class', () => {
     const points = [
@@ -124,7 +124,7 @@ describe('Add points', () => {
     ];
     scale.addPoints(points);
     expect(
-      scale['element'].querySelector('.slider__scale-point-label'),
+      scale['control'].querySelector('.slider__scale-point-label'),
     ).not.toBe(null);
   });
   test('Scale should contain an element with the slider__scale-point-marker class', () => {
@@ -137,7 +137,7 @@ describe('Add points', () => {
     ];
     scale.addPoints(points);
     expect(
-      scale['element'].querySelector('.slider__scale-point-marker'),
+      scale['control'].querySelector('.slider__scale-point-marker'),
     ).not.toBe(null);
   });
 });

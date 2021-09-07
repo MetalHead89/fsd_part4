@@ -1,9 +1,9 @@
 import { IScalePointParams } from '../../../interfaces';
-import Element from '../../element/element';
+import UIControl from '../../ui-control/ui-control';
 
-jest.mock('../../element/element');
+jest.mock('../../ui-control/ui-control');
 
-export default class PopUp extends Element {
+export default class PopUp extends UIControl {
   private TEST_OK = true;
 
   constructor() {
@@ -18,7 +18,7 @@ export default class PopUp extends Element {
     for (let i = 0; i < points.length; i += 1) {
       const div = document.createElement('div');
       div.classList.add('scale-point');
-      this.element.append(div);
+      this.control.append(div);
     }
   }
 }

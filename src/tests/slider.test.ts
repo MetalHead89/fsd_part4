@@ -16,13 +16,13 @@ describe('Append', () => {
     const elem = document.createElement('div');
     elem.classList.add('new-elem');
     slider.append(elem);
-    expect(slider.getElement().querySelector('.new-elem')).not.toBeNull();
+    expect(slider.getControl().querySelector('.new-elem')).not.toBeNull();
   });
   test('Slider should contain element with class second-elem', () => {
     const elem = document.createElement('div');
     elem.classList.add('second-elem');
     slider.append(elem);
-    expect(slider.getElement().querySelector('.second-elem')).not.toBeNull();
+    expect(slider.getControl().querySelector('.second-elem')).not.toBeNull();
   });
 });
 
@@ -35,10 +35,10 @@ describe('Set margins', () => {
       bottom: 2,
     });
 
-    expect(slider['element'].style.marginLeft).toBe('25px');
-    expect(slider['element'].style.marginTop).toBe('77px');
-    expect(slider['element'].style.marginRight).toBe('13px');
-    expect(slider['element'].style.marginBottom).toBe('2px');
+    expect(slider['control'].style.marginLeft).toBe('25px');
+    expect(slider['control'].style.marginTop).toBe('77px');
+    expect(slider['control'].style.marginRight).toBe('13px');
+    expect(slider['control'].style.marginBottom).toBe('2px');
   });
   test('Slider margins should be {left: 84, top: 97, right: 67, bottom: 73}', () => {
     slider.setMargins({
@@ -48,10 +48,10 @@ describe('Set margins', () => {
       bottom: 73,
     });
 
-    expect(slider['element'].style.marginLeft).toBe('84px');
-    expect(slider['element'].style.marginTop).toBe('97px');
-    expect(slider['element'].style.marginRight).toBe('67px');
-    expect(slider['element'].style.marginBottom).toBe('73px');
+    expect(slider['control'].style.marginLeft).toBe('84px');
+    expect(slider['control'].style.marginTop).toBe('97px');
+    expect(slider['control'].style.marginRight).toBe('67px');
+    expect(slider['control'].style.marginBottom).toBe('73px');
   });
 });
 
@@ -66,10 +66,10 @@ describe('Reset margins', () => {
 
     slider.resetMargins();
 
-    expect(slider['element'].style.marginLeft).toBe('0px');
-    expect(slider['element'].style.marginTop).toBe('0px');
-    expect(slider['element'].style.marginRight).toBe('0px');
-    expect(slider['element'].style.marginBottom).toBe('0px');
+    expect(slider['control'].style.marginLeft).toBe('0px');
+    expect(slider['control'].style.marginTop).toBe('0px');
+    expect(slider['control'].style.marginRight).toBe('0px');
+    expect(slider['control'].style.marginBottom).toBe('0px');
   });
   test('Slider margins should be {left: 0px, top: 0, right: 0, bottom: 0}', () => {
     slider.setMargins({
@@ -81,9 +81,9 @@ describe('Reset margins', () => {
 
     slider.resetMargins();
 
-    expect(slider['element'].style.marginLeft).toBe('0px');
-    expect(slider['element'].style.marginTop).toBe('0px');
-    expect(slider['element'].style.marginRight).toBe('0px');
-    expect(slider['element'].style.marginBottom).toBe('0px');
+    expect(slider['control'].style.marginLeft).toBe('0px');
+    expect(slider['control'].style.marginTop).toBe('0px');
+    expect(slider['control'].style.marginRight).toBe('0px');
+    expect(slider['control'].style.marginBottom).toBe('0px');
   });
 });

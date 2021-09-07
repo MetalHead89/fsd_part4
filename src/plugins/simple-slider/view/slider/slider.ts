@@ -1,7 +1,7 @@
 import { ISliderMargins } from '../../interfaces';
-import Element from '../element/element';
+import UIControl from '../ui-control/ui-control';
 
-class Slider extends Element {
+class Slider extends UIControl {
   constructor() {
     super('slider');
   }
@@ -11,7 +11,7 @@ class Slider extends Element {
    * @param {HTMLDivElement} control - div элемент, который должен быть добавлен в контейнер
    */
   append(control: HTMLDivElement): void {
-    this.element.append(control);
+    this.control.append(control);
   }
 
   /**
@@ -20,17 +20,17 @@ class Slider extends Element {
    * и нижней границ слайдера
    */
   setMargins(margins: ISliderMargins): void {
-    this.element.style.marginLeft = `${margins.left}px`;
-    this.element.style.marginTop = `${margins.top}px`;
-    this.element.style.marginRight = `${margins.right}px`;
-    this.element.style.marginBottom = `${margins.bottom}px`;
+    this.control.style.marginLeft = `${margins.left}px`;
+    this.control.style.marginTop = `${margins.top}px`;
+    this.control.style.marginRight = `${margins.right}px`;
+    this.control.style.marginBottom = `${margins.bottom}px`;
   }
 
   /**
    * Сбрасывает отступы от границ слайдера на 0
    */
   resetMargins(): void {
-    this.element.style.margin = '0';
+    this.control.style.margin = '0';
   }
 }
 

@@ -15,11 +15,11 @@ beforeEach(() => {
 describe('Set z-index', () => {
   test('Thumb z-inex should be 5', () => {
     thumb.setZIndex(5);
-    expect(thumb.getElement().style.zIndex).toBe('5');
+    expect(thumb.getControl().style.zIndex).toBe('5');
   });
   test('Thumb z-inex should be 8', () => {
     thumb.setZIndex(8);
-    expect(thumb.getElement().style.zIndex).toBe('8');
+    expect(thumb.getControl().style.zIndex).toBe('8');
   });
 });
 
@@ -27,7 +27,7 @@ describe('Reset z-index', () => {
   test('Thumb z-inex should be ""', () => {
     thumb.setZIndex(4);
     thumb.resetZIndex();
-    expect(thumb.getElement().style.zIndex).toBe('');
+    expect(thumb.getControl().style.zIndex).toBe('');
   });
 });
 
@@ -39,18 +39,18 @@ describe('Move to', () => {
   });
   test('Thumb element left should be 80px', () => {
     thumb.moveTo({ left: 80, top: 11 });
-    expect(thumb.getElement().style.left).toBe('80px');
+    expect(thumb.getControl().style.left).toBe('80px');
   });
   test('Thumb element top should be 54px', () => {
     thumb.moveTo({ left: 80, top: 54 });
-    expect(thumb.getElement().style.top).toBe('54px');
+    expect(thumb.getControl().style.top).toBe('54px');
   });
 });
 
 describe('Thumb dragstart event', () => {
   test('Event should return false', () => {
     const evt = new window.Event('dragstart');
-    expect(thumb.getElement().dispatchEvent(evt)).toBe(false);
+    expect(thumb.getControl().dispatchEvent(evt)).toBe(false);
   });
 });
 
@@ -69,22 +69,22 @@ describe('Set thumb shift', () => {
 
 describe('Increase z-index', () => {
   test('z-index should be 3', () => {
-    thumb.getElement().style.zIndex = '2';
+    thumb.getControl().style.zIndex = '2';
     const evt = new window.Event('pointerdown');
-    thumb.getElement().dispatchEvent(evt);
-    expect(thumb.getElement().style.zIndex).toBe('3');
+    thumb.getControl().dispatchEvent(evt);
+    expect(thumb.getControl().style.zIndex).toBe('3');
   });
   test('z-index should be 10', () => {
-    thumb.getElement().style.zIndex = '9';
+    thumb.getControl().style.zIndex = '9';
     const evt = new window.Event('pointerdown');
-    thumb.getElement().dispatchEvent(evt);
-    expect(thumb.getElement().style.zIndex).toBe('10');
+    thumb.getControl().dispatchEvent(evt);
+    expect(thumb.getControl().style.zIndex).toBe('10');
   });
   test('z-index should be 1', () => {
-    thumb.getElement().style.zIndex = '';
+    thumb.getControl().style.zIndex = '';
     const evt = new window.Event('pointerdown');
-    thumb.getElement().dispatchEvent(evt);
-    expect(thumb.getElement().style.zIndex).toBe('1');
+    thumb.getControl().dispatchEvent(evt);
+    expect(thumb.getControl().style.zIndex).toBe('1');
   });
 });
 
@@ -132,12 +132,12 @@ describe('Enable selection', () => {
 describe('Disable selection', () => {
   test('Document pointerdown event not should be null', () => {
     const evt = new window.Event('pointerdown');
-    thumb.getElement().dispatchEvent(evt);
+    thumb.getControl().dispatchEvent(evt);
     expect(document.onselectstart).not.toBe(null);
   });
   test('Document selectstart event should return false', () => {
     const evt = new window.Event('pointerdown');
-    thumb.getElement().dispatchEvent(evt);
+    thumb.getControl().dispatchEvent(evt);
 
     if (document.onselectstart !== null) {
       const docEvt = new window.Event('selectstart');
@@ -146,7 +146,7 @@ describe('Disable selection', () => {
   });
   test('Document pointerdown event should return false', () => {
     const evt = new window.Event('pointerdown');
-    thumb.getElement().dispatchEvent(evt);
+    thumb.getControl().dispatchEvent(evt);
 
     if (document.onpointerdown !== null) {
       const docEvt = new window.Event('pointerdown') as PointerEvent;

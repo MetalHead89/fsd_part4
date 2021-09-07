@@ -1,6 +1,6 @@
-import Element from '../element/element';
+import UIControl from '../ui-control/ui-control';
 
-class Track extends Element {
+class Track extends UIControl {
   constructor() {
     super('track');
     this.init();
@@ -10,7 +10,7 @@ class Track extends Element {
    * Инициализация трека, подключение обработчиков событий
    */
   private init(): void {
-    this.element.addEventListener('click', this.clickToTrack.bind(this));
+    this.control.addEventListener('click', this.clickToTrack.bind(this));
   }
 
   /**
