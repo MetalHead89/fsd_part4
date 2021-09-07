@@ -474,7 +474,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
    */
   private updateStep(value: number): void {
     const stepsCount = this.max - this.min;
-    this.step = value > 0 && value < stepsCount ? value : this.step;
+    this.step = value > 0 && value <= stepsCount ? value : this.step;
     this.subject.notify('stepIsUpdated');
   }
 
