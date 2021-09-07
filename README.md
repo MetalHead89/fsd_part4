@@ -68,7 +68,7 @@ Production сборка:
 
 Запуск тестов с покрытием:
 
-	nom run coverage
+	npm run coverage
 
 ## Добавление плагина в проект
 
