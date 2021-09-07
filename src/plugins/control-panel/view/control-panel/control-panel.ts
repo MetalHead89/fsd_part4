@@ -1,4 +1,4 @@
-class Container {
+class ControlPanel {
   private element: HTMLDivElement;
 
   constructor() {
@@ -39,4 +39,4 @@ class Container {
   }
 }
 
-export default Container;
+export default ControlPanel;

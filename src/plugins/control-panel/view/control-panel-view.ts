@@ -1,6 +1,6 @@
 /* eslint-disable comma-dangle */
 
-import Container from './container/container';
+import ControlPanel from './control-panel/control-panel';
 import TextField from './text-field/text-field';
 import groupElements from './group-elements';
 import RadioButton from './radio-button/radio-button';
@@ -10,7 +10,7 @@ import Subject from '../../simple-slider/subject/subject';
 
 class ControlPanelView extends Subject implements IObserver {
   private sliderWrapper: HTMLDivElement;
-  private container: Container;
+  private controlPanel: ControlPanel;
   private thumbOneValue: TextField;
   private thumbTwoValue: TextField;
   private min: TextField;
@@ -23,7 +23,7 @@ class ControlPanelView extends Subject implements IObserver {
 
   constructor(sliderWrapper: HTMLDivElement) {
     super();
-    this.container = new Container();
+    this.controlPanel = new ControlPanel();
     this.sliderWrapper = sliderWrapper;
     this.thumbOneValue = new TextField('First thumb value');
     this.thumbTwoValue = new TextField('Second thumb value');
@@ -56,7 +56,7 @@ class ControlPanelView extends Subject implements IObserver {
   }
 
   private createPanel(): void {
-    this.container.append(
+    this.controlPanel.append(
       groupElements({
         wrapperClass: 'control-panel__text-fields-group',
         elements: [
@@ -66,7 +66,7 @@ class ControlPanelView extends Subject implements IObserver {
       }),
     );
 
-    this.container.append(
+    this.controlPanel.append(
       groupElements({
         wrapperClass: 'control-panel__text-fields-group',
         elements: [
@@ -103,14 +103,14 @@ class ControlPanelView extends Subject implements IObserver {
       ],
     });
 
-    this.container.append(
+    this.controlPanel.append(
       groupElements({
         wrapperClass: 'control-panel__checkboxes-and-radios-wrapper',
         elements: [allRadiosGroup, checkboxesGroup],
       }),
     );
 
-    this.sliderWrapper.append(this.container.getElement());
+    this.sliderWrapper.append(this.controlPanel.getElement());
   }
 
   private subscribeToEvents(): void {
@@ -134,11 +134,11 @@ class ControlPanelView extends Subject implements IObserver {
 
   private switchOrientation(): void {
     if (this.getOrientation() === 'horizontal') {
-      this.container.switchToHorizontal();
+      this.controlPanel.switchToHorizontal();
       this.sliderWrapper.classList.remove('slider-wrapper_vertical');
       this.sliderWrapper.classList.add('slider-wrapper_horizontal');
     } else {
-      this.container.switchToVertical();
+      this.controlPanel.switchToVertical();
       this.sliderWrapper.classList.remove('slider-wrapper_horizontal');
       this.sliderWrapper.classList.add('slider-wrapper_vertical');
     }
