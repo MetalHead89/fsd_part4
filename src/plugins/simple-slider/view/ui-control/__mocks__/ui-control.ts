@@ -1,5 +1,5 @@
-export default class Element {
-  protected element: HTMLDivElement;
+export default class UIControl {
+  protected control: HTMLDivElement;
   protected mainClass: string;
   protected TEST_OK = true;
   subject = {
@@ -9,18 +9,18 @@ export default class Element {
   };
 
   constructor(name: string) {
-    const element = document.createElement('div');
-    this.element = element;
+    const control = document.createElement('div');
+    this.control = control;
     this.mainClass = name;
-    this.element.classList.add(`${name}`);
+    this.control.classList.add(`${name}`);
   }
 
   getPosition(): boolean {
     return this.TEST_OK;
   }
 
-  getElement(): HTMLDivElement {
-    return this.element;
+  getControl(): HTMLDivElement {
+    return this.control;
   }
 
   getSize(): boolean {
@@ -28,17 +28,17 @@ export default class Element {
   }
 
   switchToHorizontal(): void {
-    this.element.classList.remove(`${this.mainClass}_vertical`);
-    this.element.classList.add(`${this.mainClass}_horizontal`);
+    this.control.classList.remove(`${this.mainClass}_vertical`);
+    this.control.classList.add(`${this.mainClass}_horizontal`);
   }
 
   switchToVertical(): void {
-    this.element.classList.remove(`${this.mainClass}_horizontal`);
-    this.element.classList.add(`${this.mainClass}_vertical`);
+    this.control.classList.remove(`${this.mainClass}_horizontal`);
+    this.control.classList.add(`${this.mainClass}_vertical`);
   }
 
   remove(): void {
-    this.element.remove();
+    this.control.remove();
   }
 
   getOrientation(): boolean {

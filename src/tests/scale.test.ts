@@ -4,6 +4,7 @@
 
 /* eslint-disable dot-notation */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable comma-dangle */
 
 import Scale from '../plugins/simple-slider/view/scale/scale';
 
@@ -25,7 +26,7 @@ const initEvt = (evt: MouseEvent) => {
     false,
     false,
     0,
-    null,
+    null
   );
 };
 
@@ -83,9 +84,7 @@ describe('Add points', () => {
     ];
     scale.addPoints(points);
 
-    expect(
-      scale['control'].querySelectorAll('.slider__scale-point').length,
-    ).toBe(3);
+    expect(scale['control'].querySelectorAll('.scale__point').length).toBe(3);
   });
   test('Scale point size should be {left: 50px, top: 100px}', () => {
     const points = [
@@ -96,9 +95,8 @@ describe('Add points', () => {
       },
     ];
     scale.addPoints(points);
-    const point: HTMLDivElement | null = scale['control'].querySelector(
-      '.slider__scale-point',
-    );
+    const point: HTMLDivElement | null =
+      scale['control'].querySelector('.scale__point');
     expect(point?.style.left).toBe('50px');
     expect(point?.style.top).toBe('100px');
   });
@@ -114,7 +112,7 @@ describe('Add points', () => {
     scale.addPoints(points);
     expect(scale['control'].style.width).toBe('30px');
   });
-  test('Scale should contain an element with the slider__scale-point-label class', () => {
+  test('Scale should contain an element with the scale__point-label class', () => {
     const points = [
       {
         position: { left: 50, top: 100 },
@@ -123,11 +121,9 @@ describe('Add points', () => {
       },
     ];
     scale.addPoints(points);
-    expect(
-      scale['control'].querySelector('.slider__scale-point-label'),
-    ).not.toBe(null);
+    expect(scale['control'].querySelector('.scale__point-label')).not.toBe(null);
   });
-  test('Scale should contain an element with the slider__scale-point-marker class', () => {
+  test('Scale should contain an element with the scale__point-marker class', () => {
     const points = [
       {
         position: { left: 50, top: 100 },
@@ -136,9 +132,9 @@ describe('Add points', () => {
       },
     ];
     scale.addPoints(points);
-    expect(
-      scale['control'].querySelector('.slider__scale-point-marker'),
-    ).not.toBe(null);
+    expect(scale['control'].querySelector('.scale__point-marker')).not.toBe(
+      null
+    );
   });
 });
 

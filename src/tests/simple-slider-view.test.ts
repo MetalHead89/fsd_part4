@@ -4,6 +4,7 @@
 
 /* eslint-disable dot-notation */
 /* eslint-disable arrow-body-style */
+/* eslint-disable comma-dangle */
 
 import SimpleSliderView from '../plugins/simple-slider/view/simple-slider-view';
 
@@ -101,13 +102,13 @@ describe('Switch to horizontal', () => {
   test('The slider must contain a class slider_horizontal', () => {
     view.switchToHorizontal();
     expect(
-      view['slider'].getControl().classList.contains('slider_horizontal'),
+      view['slider'].getControl().classList.contains('slider_horizontal')
     ).toBe(true);
   });
   test('The track must contain a class slider__track_horizontal', () => {
     view.switchToHorizontal();
     expect(
-      view['track'].getControl().classList.contains('slider__track_horizontal'),
+      view['track'].getControl().classList.contains('slider__track_horizontal')
     ).toBe(true);
   });
   test('The thumbOne must contain a class slider__thumb_horizontal', () => {
@@ -115,7 +116,7 @@ describe('Switch to horizontal', () => {
     expect(
       view['thumbOne']
         .getControl()
-        .classList.contains('slider__thumb_horizontal'),
+        .classList.contains('slider__thumb_horizontal')
     ).toBe(true);
   });
   test('The thumbTwo must contain a class slider__thumb_horizontal', () => {
@@ -123,7 +124,7 @@ describe('Switch to horizontal', () => {
     expect(
       view['thumbTwo']
         ?.getControl()
-        .classList.contains('slider__thumb_horizontal'),
+        .classList.contains('slider__thumb_horizontal')
     ).toBe(true);
   });
   test('The popUpOne must contain a class slider__pop-up_horizontal', () => {
@@ -131,7 +132,7 @@ describe('Switch to horizontal', () => {
     expect(
       view['popUpOne']
         ?.getControl()
-        .classList.contains('slider__pop-up_horizontal'),
+        .classList.contains('slider__pop-up_horizontal')
     ).toBe(true);
   });
   test('The popUpTwo must contain a class slider__pop-up_horizontal', () => {
@@ -139,7 +140,7 @@ describe('Switch to horizontal', () => {
     expect(
       view['popUpTwo']
         ?.getControl()
-        .classList.contains('slider__pop-up_horizontal'),
+        .classList.contains('slider__pop-up_horizontal')
     ).toBe(true);
   });
   test('The progressBar must contain a class slider__progress-bar_horizontal', () => {
@@ -147,15 +148,13 @@ describe('Switch to horizontal', () => {
     expect(
       view['progressBar']
         .getControl()
-        .classList.contains('slider__progress-bar_horizontal'),
+        .classList.contains('slider__progress-bar_horizontal')
     ).toBe(true);
   });
   test('The scale must contain a class slider__scale_horizontal', () => {
     view.switchToHorizontal();
     expect(
-      view['scale']
-        ?.getControl()
-        .classList.contains('slider__scale_horizontal'),
+      view['scale']?.getControl().classList.contains('slider__scale_horizontal')
     ).toBe(true);
   });
 });
@@ -164,21 +163,19 @@ describe('Switch to vertical', () => {
   test('The slider must contain a class slider_vertical', () => {
     view.switchToVertical();
     expect(
-      view['slider'].getControl().classList.contains('slider_vertical'),
+      view['slider'].getControl().classList.contains('slider_vertical')
     ).toBe(true);
   });
   test('The track must contain a class slider__track_horizontal', () => {
     view.switchToVertical();
     expect(
-      view['track'].getControl().classList.contains('slider__track_vertical'),
+      view['track'].getControl().classList.contains('slider__track_vertical')
     ).toBe(true);
   });
   test('The thumbOne must contain a class slider__thumb_vertical', () => {
     view.switchToVertical();
     expect(
-      view['thumbOne']
-        .getControl()
-        .classList.contains('slider__thumb_vertical'),
+      view['thumbOne'].getControl().classList.contains('slider__thumb_vertical')
     ).toBe(true);
   });
   test('The thumbTwo must contain a class slider__thumb_vertical', () => {
@@ -186,7 +183,7 @@ describe('Switch to vertical', () => {
     expect(
       view['thumbTwo']
         ?.getControl()
-        .classList.contains('slider__thumb_vertical'),
+        .classList.contains('slider__thumb_vertical')
     ).toBe(true);
   });
   test('The popUpOne must contain a class slider__pop-up_vertical', () => {
@@ -194,7 +191,7 @@ describe('Switch to vertical', () => {
     expect(
       view['popUpOne']
         ?.getControl()
-        .classList.contains('slider__pop-up_vertical'),
+        .classList.contains('slider__pop-up_vertical')
     ).toBe(true);
   });
   test('The popUpTwo must contain a class slider__pop-up_vertical', () => {
@@ -202,7 +199,7 @@ describe('Switch to vertical', () => {
     expect(
       view['popUpTwo']
         ?.getControl()
-        .classList.contains('slider__pop-up_vertical'),
+        .classList.contains('slider__pop-up_vertical')
     ).toBe(true);
   });
   test('The progressBar must contain a class slider__progress-bar_vertical', () => {
@@ -210,13 +207,13 @@ describe('Switch to vertical', () => {
     expect(
       view['progressBar']
         .getControl()
-        .classList.contains('slider__progress-bar_vertical'),
+        .classList.contains('slider__progress-bar_vertical')
     ).toBe(true);
   });
   test('The scale must contain a class slider__scale_vertical', () => {
     view.switchToVertical();
     expect(
-      view['scale']?.getControl().classList.contains('slider__scale_vertical'),
+      view['scale']?.getControl().classList.contains('slider__scale_vertical')
     ).toBe(true);
   });
 });
@@ -463,7 +460,7 @@ describe('Add scale point', () => {
       },
     ]);
     expect(
-      view['scale']?.getControl().querySelectorAll('.scale-point').length,
+      view['scale']?.getControl().querySelectorAll('.scale-point').length
     ).toBe(2);
   });
   test('The length of the scale points array must be 3', () => {
@@ -485,7 +482,7 @@ describe('Add scale point', () => {
       },
     ]);
     expect(
-      view['scale']?.getControl().querySelectorAll('.scale-point').length,
+      view['scale']?.getControl().querySelectorAll('.scale-point').length
     ).toBe(3);
   });
 });
