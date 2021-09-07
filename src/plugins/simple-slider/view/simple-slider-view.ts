@@ -14,7 +14,7 @@ import {
   IThumbsPositions,
 } from '../interfaces';
 
-import Container from './container/container';
+import Slider from './slider/slider';
 import Track from './track/track';
 import Thumb from './thumb/thumb';
 import PopUp from './pop-up/pop-up';
@@ -24,7 +24,7 @@ import Subject from '../subject/subject';
 
 class SimpleSliderView implements ISimpleSliderView, IObserver {
   subject: ISubject;
-  private container: Container;
+  private slider: Slider;
   private sliderWrapper: HTMLDivElement;
   private track: Track;
   private thumbOne: Thumb;
@@ -38,7 +38,7 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
     this.subject = new Subject();
     this.sliderWrapper = wrapper;
 
-    this.container = new Container();
+    this.slider = new Slider();
     this.track = new Track();
     this.thumbOne = new Thumb();
     this.thumbTwo = new Thumb();
@@ -82,23 +82,23 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
    * Сборка слайдера из отдельных элементов
    */
   private assembleSlider(): void {
-    this.container.append(this.track.getElement());
-    this.container.append(this.thumbOne.getElement());
+    this.slider.append(this.track.getElement());
+    this.slider.append(this.thumbOne.getElement());
     if (this.thumbTwo !== null) {
-      this.container.append(this.thumbTwo.getElement());
+      this.slider.append(this.thumbTwo.getElement());
     }
     if (this.popUpOne !== null) {
-      this.container.append(this.popUpOne.getElement());
+      this.slider.append(this.popUpOne.getElement());
     }
     if (this.popUpTwo !== null) {
-      this.container.append(this.popUpTwo.getElement());
+      this.slider.append(this.popUpTwo.getElement());
     }
-    this.container.append(this.progressBar.getElement());
+    this.slider.append(this.progressBar.getElement());
     if (this.scale !== null) {
-      this.container.append(this.scale.getElement());
+      this.slider.append(this.scale.getElement());
     }
 
-    this.sliderWrapper.append(this.container.getElement());
+    this.sliderWrapper.append(this.slider.getElement());
   }
 
   /**
@@ -129,8 +129,8 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
    * Меняет ориентацию слайдера на горизонтальную
    */
   switchToHorizontal(): void {
-    this.container.resetMargins();
-    this.container.switchToHorizontal();
+    this.slider.resetMargins();
+    this.slider.switchToHorizontal();
     this.track.switchToHorizontal();
     this.thumbOne.switchToHorizontal();
     this.thumbTwo?.switchToHorizontal();
@@ -144,8 +144,8 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
    * Меняет ориентацию слайдера на вертикальную
    */
   switchToVertical(): void {
-    this.container.resetMargins();
-    this.container.switchToVertical();
+    this.slider.resetMargins();
+    this.slider.switchToVertical();
     this.track.switchToVertical();
     this.thumbOne.switchToVertical();
     this.thumbTwo?.switchToVertical();
@@ -173,12 +173,12 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
    */
   switchToRange(): void {
     if (this.thumbTwo === null) {
-      this.thumbTwo = new Thumb(this.container.getOrientation());
-      this.container.append(this.thumbTwo.getElement());
+      this.thumbTwo = new Thumb(this.slider.getOrientation());
+      this.slider.append(this.thumbTwo.getElement());
 
       if (this.popUpOne !== null) {
-        this.popUpTwo = new PopUp(this.container.getOrientation());
-        this.container.append(this.popUpTwo.getElement());
+        this.popUpTwo = new PopUp(this.slider.getOrientation());
+        this.slider.append(this.popUpTwo.getElement());
       }
 
       this.thumbTwo.subject.register('thumbIsDragged', this);
@@ -195,7 +195,7 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
     this.popUpTwo?.remove();
     this.popUpTwo = null;
 
-    this.container.setMargins(this.getMargins());
+    this.slider.setMargins(this.getMargins());
   }
 
   /**
@@ -203,16 +203,16 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
    */
   enablePopUps(): void {
     if (this.popUpOne === null) {
-      this.popUpOne = new PopUp(this.container.getOrientation());
-      this.container.append(this.popUpOne.getElement());
+      this.popUpOne = new PopUp(this.slider.getOrientation());
+      this.slider.append(this.popUpOne.getElement());
     }
 
     if (this.popUpTwoIsNullAndThumbTwoIsNotNull()) {
-      this.popUpTwo = new PopUp(this.container.getOrientation());
-      this.container.append(this.popUpTwo.getElement());
+      this.popUpTwo = new PopUp(this.slider.getOrientation());
+      this.slider.append(this.popUpTwo.getElement());
     }
 
-    this.container.setMargins(this.getMargins());
+    this.slider.setMargins(this.getMargins());
   }
 
   /**
@@ -232,7 +232,7 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
     this.scale?.remove();
     this.scale = null;
 
-    this.container.setMargins(this.getMargins());
+    this.slider.setMargins(this.getMargins());
   }
 
   /**
@@ -242,11 +242,11 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
     if (this.scale !== null) {
       this.scale?.remove();
     }
-    this.scale = new Scale(this.container.getOrientation());
-    this.container.append(this.scale.getElement());
+    this.scale = new Scale(this.slider.getOrientation());
+    this.slider.append(this.scale.getElement());
     this.scale.subject.register('clickToScale', this);
 
-    this.container.setMargins(this.getMargins());
+    this.slider.setMargins(this.getMargins());
   }
 
   /**
@@ -263,7 +263,7 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
    * контейнера
    */
   getSliderSize(): ISize {
-    return this.container.getSize();
+    return this.slider.getSize();
   }
 
   /**
@@ -329,7 +329,7 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
    */
   addScalePoints(points: IScalePointParams[]): void {
     this.scale?.addPoints(points);
-    this.container.setMargins(this.getMargins());
+    this.slider.setMargins(this.getMargins());
   }
 
   /**
@@ -363,11 +363,11 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
       bottom: 0,
     };
 
-    const sliderRect = this.container.getRect();
+    const sliderRect = this.slider.getRect();
     const popUpRect = this.popUpOne !== null ? this.popUpOne.getRect() : null;
     const scaleRect = this.scale !== null ? this.scale.getRect() : null;
 
-    if (this.container.getOrientation() === 'horizontal') {
+    if (this.slider.getOrientation() === 'horizontal') {
       if (popUpRect !== null) {
         margins.top += sliderRect.top - popUpRect.top;
       }

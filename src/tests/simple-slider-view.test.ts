@@ -7,7 +7,7 @@
 
 import SimpleSliderView from '../plugins/simple-slider/view/simple-slider-view';
 
-jest.mock('../plugins/simple-slider/view/container/container');
+jest.mock('../plugins/simple-slider/view/slider/slider');
 jest.mock('../plugins/simple-slider/view/track/track');
 jest.mock('../plugins/simple-slider/view/thumb/thumb');
 jest.mock('../plugins/simple-slider/view/pop-up/pop-up');
@@ -51,7 +51,7 @@ describe('Assemble slider', () => {
     expect(wrapper.querySelector('.slider__scale')).not.toBeNull();
   });
   test('Wrapper should be contain a slider element', () => {
-    view['container'].remove();
+    view['slider'].remove();
     view['thumbTwo'] = null;
     view['popUpOne'] = null;
     view['popUpTwo'] = null;
@@ -98,10 +98,10 @@ describe('Update method', () => {
 });
 
 describe('Switch to horizontal', () => {
-  test('The container must contain a class slider_horizontal', () => {
+  test('The slider must contain a class slider_horizontal', () => {
     view.switchToHorizontal();
     expect(
-      view['container'].getElement().classList.contains('slider_horizontal'),
+      view['slider'].getElement().classList.contains('slider_horizontal'),
     ).toBe(true);
   });
   test('The track must contain a class slider__track_horizontal', () => {
@@ -161,10 +161,10 @@ describe('Switch to horizontal', () => {
 });
 
 describe('Switch to vertical', () => {
-  test('The container must contain a class slider_vertical', () => {
+  test('The slider must contain a class slider_vertical', () => {
     view.switchToVertical();
     expect(
-      view['container'].getElement().classList.contains('slider_vertical'),
+      view['slider'].getElement().classList.contains('slider_vertical'),
     ).toBe(true);
   });
   test('The track must contain a class slider__track_horizontal', () => {
@@ -509,7 +509,7 @@ describe('Get scale click position', () => {
 
 describe('Get margins', () => {
   beforeEach(() => {
-    view['container'].getRect = jest.fn(() => {
+    view['slider'].getRect = jest.fn(() => {
       return {
         width: 120,
         height: 120,
@@ -557,38 +557,38 @@ describe('Get margins', () => {
   });
 
   test('Slider margin-bottom should be 27', () => {
-    view['container'].getOrientation = jest.fn(() => 'horizontal');
+    view['slider'].getOrientation = jest.fn(() => 'horizontal');
     expect(view['getMargins']().bottom).toBe(27);
   });
   test('Slider margin-bottom should be 0', () => {
-    view['container'].getOrientation = jest.fn(() => 'horizontal');
+    view['slider'].getOrientation = jest.fn(() => 'horizontal');
     view.disableScale();
     expect(view['getMargins']().bottom).toBe(0);
   });
   test('Slider margin-top should be 12', () => {
-    view['container'].getOrientation = jest.fn(() => 'horizontal');
+    view['slider'].getOrientation = jest.fn(() => 'horizontal');
     expect(view['getMargins']().top).toBe(12);
   });
   test('Slider margin-top should be 0', () => {
-    view['container'].getOrientation = jest.fn(() => 'horizontal');
+    view['slider'].getOrientation = jest.fn(() => 'horizontal');
     view.disablePopUps();
     expect(view['getMargins']().top).toBe(0);
   });
   test('Slider margin-left should be 28', () => {
-    view['container'].getOrientation = jest.fn(() => 'vertical');
+    view['slider'].getOrientation = jest.fn(() => 'vertical');
     expect(view['getMargins']().left).toBe(28);
   });
   test('Slider margin-left should be 0', () => {
-    view['container'].getOrientation = jest.fn(() => 'vertical');
+    view['slider'].getOrientation = jest.fn(() => 'vertical');
     view.disablePopUps();
     expect(view['getMargins']().left).toBe(0);
   });
   test('Slider margin-right should be 40', () => {
-    view['container'].getOrientation = jest.fn(() => 'vertical');
+    view['slider'].getOrientation = jest.fn(() => 'vertical');
     expect(view['getMargins']().right).toBe(40);
   });
   test('Slider margin-right should be 0', () => {
-    view['container'].getOrientation = jest.fn(() => 'vertical');
+    view['slider'].getOrientation = jest.fn(() => 'vertical');
     view.disableScale();
     expect(view['getMargins']().right).toBe(0);
   });

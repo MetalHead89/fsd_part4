@@ -1,7 +1,7 @@
 import { ISliderMargins } from '../../interfaces';
 import Element from '../element/element';
 
-class Container extends Element {
+class Slider extends Element {
   constructor() {
     super('slider');
   }
@@ -34,4 +34,4 @@ class Container extends Element {
   }
 }
 
-export default Container;
+export default Slider;

@@ -2,7 +2,7 @@ import Element from '../../element/element';
 
 jest.mock('../../element/element');
 
-export default class Container extends Element {
+export default class Slider extends Element {
   TEST_OK = true;
 
   constructor() {
