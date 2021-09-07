@@ -76,17 +76,17 @@ describe('Refresh slider state', () => {
   test('Min should be 10', () => {
     settings.min = 50;
     model.refreshSliderState(settings);
-    expect(model['min']).toBe(9);
+    expect(model['min']).toBe(0);
   });
   test('Max should be 40', () => {
     settings.max = 40;
     model.refreshSliderState(settings);
     expect(model['max']).toBe(40);
   });
-  test('Max should be 0', () => {
+  test('Max should be 10', () => {
     settings.max = -50;
     model.refreshSliderState(settings);
-    expect(model['max']).toBe(1);
+    expect(model['max']).toBe(10);
   });
   test('Step should be 8', () => {
     settings.step = 8;

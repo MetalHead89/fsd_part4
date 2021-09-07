@@ -84,4 +84,8 @@ export default class Model {
   getScalePoints(): boolean {
     return this.TEST_OK;
   }
+
+  recalculateStep(): boolean {
+    return this.TEST_OK;
+  }
 }
