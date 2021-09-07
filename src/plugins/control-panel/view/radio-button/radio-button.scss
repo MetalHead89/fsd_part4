@@ -1,42 +1,26 @@
 @import './animations';
 
-$control-panel: '.control-panel';
-
-#{$control-panel} {
-  &__radio-group-title {
-    display: block;
-    font-family: 'Roboto';
-    color: rgb(87, 87, 87);
-    font-size: 1rem;
-    text-transform: uppercase;
-    margin: 10px 0 2px;
-  }
-
-  &__radio-group {
-    display: flex;
-    flex-direction: row;
-    padding: 0 0 5px;
-
-    & #{$control-panel}__radio-wrapper {
-      margin-right: 10px;
-
-      &:last-child {
-        margin-left: 0px;
-      }
-    }
-  }
+.radio-button {
+  display: flex;
+  flex-direction: row;
+  padding: 0 0 5px;
 
   &__radio-wrapper {
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin-right: 10px;
+
+    &:last-child {
+      margin-right: 0px;
+    }
   }
 
   &__radio-button {
     display: none;
   }
 
-  &__radio-label {
+  &__label {
     font-family: 'Roboto';
     font-size: 1.2rem;
     color: rgb(155, 155, 155);

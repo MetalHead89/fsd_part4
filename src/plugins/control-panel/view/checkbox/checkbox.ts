@@ -21,15 +21,15 @@ class Checkbox extends Subject {
    * @param {ICheckboxParams} params - параметры чекбокса
    */
   private init(params: ICheckboxParams): void {
-    this.control.classList.add('control-panel__checkbox-wrapper');
+    this.control.classList.add('checkbox');
 
-    this.label.classList.add('control-panel__checkbox-label');
+    this.label.classList.add('checkbox__label');
     this.label.innerText = params.label;
 
     this.checkbox.type = 'checkbox';
     this.checkbox.name = params.name;
     this.checkbox.value = params.value;
-    this.checkbox.classList.add('control-panel__checkbox');
+    this.checkbox.classList.add('checkbox__check');
     this.checkbox.addEventListener('change', this.onChange.bind(this));
 
     this.label.append(this.checkbox);
@@ -50,9 +50,9 @@ class Checkbox extends Subject {
    */
   private onChange(): void {
     if (this.checkbox.checked) {
-      this.label.classList.add('control-panel__checkbox-label_checked');
+      this.label.classList.add('checkbox__label_checked');
     } else {
-      this.label.classList.remove('control-panel__checkbox-label_checked');
+      this.label.classList.remove('checkbox__label_checked');
     }
 
     this.notify('controlPanelDataUpdated');

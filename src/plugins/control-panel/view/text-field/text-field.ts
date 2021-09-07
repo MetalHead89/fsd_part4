@@ -44,14 +44,14 @@ class TextField extends Subject {
    * @param {string} labelText - текст лейбла
    */
   private init(labelText: string) {
-    this.control.classList.add('slider-panel__text-field-control');
+    this.control.classList.add('text-field');
 
     this.field.type = 'number';
-    this.field.classList.add('control-panel__text-field');
+    this.field.classList.add('text-field__input');
     this.field.addEventListener('blur', this.reportChanges.bind(this));
     this.field.onkeypress = TextField.removeNonDigitChar;
 
-    this.label.classList.add('slider-panel__text-field-label');
+    this.label.classList.add('text-field__label');
     this.label.innerText = labelText;
     this.label.append(this.field);
 

@@ -3,7 +3,7 @@ import Element from '../element/element';
 
 class ProgressBar extends Element {
   constructor() {
-    super('slider__progress-bar');
+    super('progress-bar');
   }
 
   /**

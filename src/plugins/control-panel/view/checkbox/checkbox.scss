@@ -1,14 +1,12 @@
 @import './animations';
 
-.control-panel {
-  &__checkbox-wrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 3px 0;
-  }
+.checkbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 3px 0;
 
-  &__checkbox-label {
+  &__label {
     font-family: 'Roboto';
     position: relative;
     font-size: 1.2rem;
@@ -67,7 +65,7 @@
     }
   }
 
-  &__checkbox {
+  &__check {
     display: none;
   }
 }

@@ -3,7 +3,7 @@ import Element from '../element/element';
 
 class PopUp extends Element {
   constructor(orientation?: string) {
-    super('slider__pop-up', orientation);
+    super('pop-up', orientation);
   }
 
   /**

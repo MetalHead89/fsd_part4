@@ -1,32 +1,21 @@
-.slider-panel {
-  &__text-field-control {
-    display: flex;
-    flex-direction: column;
-    padding: 3px;
-    margin: 0 5px;
-    width: 100%;
-    max-width: 100px;
-    align-items: center;
-  }
+.text-field {
+  display: flex;
+  flex-direction: column;
+  padding: 3px;
+  margin: 0 5px;
+  width: 100%;
+  max-width: 100px;
+  align-items: center;
 
-  &__text-field-label {
+  &__label {
     font-family: 'Roboto';
     color: rgb(87, 87, 87);
     font-size: 1rem;
     text-transform: uppercase;
     text-align: center;
   }
-}
 
-.control-panel {
-  &__text-fields-group {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    padding: 5px 0;
-  }
-
-  &__text-field {
+  &__input {
     user-select: none;
     text-align: center;
     width: 100%;

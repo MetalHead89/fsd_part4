@@ -1,20 +1,18 @@
-.slider {
-  &__scale {
-    user-select: none;
-    position: relative;
-    box-sizing: content-box;
-    flex: none;
+.scale {
+  user-select: none;
+  position: relative;
+  box-sizing: content-box;
+  flex: none;
 
-    &_horizontal {
-      margin-top: 10px;
-    }
-
-    &_vertical {
-      margin-left: 10px;
-    }
+  &_horizontal {
+    margin-top: 10px;
   }
 
-  &__scale-point {
+  &_vertical {
+    margin-left: 10px;
+  }
+
+  &__point {
     position: absolute;
     display: flex;
 
@@ -29,7 +27,7 @@
     }
   }
 
-  &__scale-point-marker {
+  &__point-marker {
     flex: none;
     border-radius: 50%;
     width: 10px;
@@ -37,7 +35,7 @@
     background: rgb(211, 211, 211);
   }
 
-  &__scale-point-label {
+  &__point-label {
     display: block;
     font-family: 'Roboto';
     font-weight: 400;

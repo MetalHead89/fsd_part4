@@ -10,7 +10,7 @@ class Thumb extends Element {
   private onMouseUpHandler = this.endDrag.bind(this);
 
   constructor(orientation?: string) {
-    super('slider__thumb', orientation);
+    super('thumb', orientation);
 
     this.addMousedownEventListener();
     this.disableDragAndDrop();

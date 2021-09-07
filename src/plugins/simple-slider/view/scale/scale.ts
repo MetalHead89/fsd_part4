@@ -4,7 +4,7 @@ import Element from '../element/element';
 
 class Scale extends Element {
   constructor(orientation?: string) {
-    super('slider__scale', orientation);
+    super('scale', orientation);
     this.init();
   }
 
@@ -38,7 +38,7 @@ class Scale extends Element {
 
     const pointSize = { width: 0, height: 0 };
     const scalePoint: HTMLDivElement | null = this.element.querySelector(
-      '.slider__scale-point',
+      '.scale__point',
     );
 
     pointSize.width = scalePoint?.offsetWidth || 0;
@@ -66,8 +66,8 @@ class Scale extends Element {
     const orientation = this.getOrientation();
     const scalePoint: HTMLElement = document.createElement('div');
     scalePoint.classList.add(
-      'slider__scale-point',
-      `slider__scale-point_${orientation}`,
+      'scale__point',
+      `scale__point_${orientation}`,
     );
     if (point.size.width > 0) {
       scalePoint.style.width = `${point.size.width}px`;
@@ -80,12 +80,12 @@ class Scale extends Element {
     }
 
     const divisionMarker: HTMLElement = document.createElement('div');
-    divisionMarker.classList.add('slider__scale-point-marker');
+    divisionMarker.classList.add('scale__point-marker');
 
     const divisionLabel: HTMLElement = document.createElement('div');
     divisionLabel.classList.add(
-      'slider__scale-point-label',
-      `slider__scale-point-label_${orientation}`,
+      'scale__point-label',
+      `scale__point-label_${orientation}`,
     );
     divisionLabel.innerText = point.value.toString();
 

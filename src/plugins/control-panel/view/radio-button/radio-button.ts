@@ -11,7 +11,7 @@ class RadioButton extends Subject {
     super();
     const uniqueName = RadioButton.generateName(name);
     this.control = document.createElement('div');
-    this.control.classList.add('control-panel__radio-group');
+    this.control.classList.add('radio-button');
     this.radios = [];
 
     this.init(uniqueName, params);
@@ -33,10 +33,10 @@ class RadioButton extends Subject {
   private init(name: string, params: IRadioParams[]) {
     for (let radio = 0; radio < params.length; radio += 1) {
       const radioWrapper = document.createElement('div');
-      radioWrapper.classList.add('control-panel__radio-wrapper');
+      radioWrapper.classList.add('radio-button__radio-wrapper');
 
       const label = document.createElement('label');
-      label.classList.add('control-panel__radio-label');
+      label.classList.add('radio-button__label');
       label.innerText = params[radio].label;
 
       const radioButton = document.createElement('input');
@@ -46,7 +46,7 @@ class RadioButton extends Subject {
       if (RadioButton.radioIsFirstOrChecked(radio, params[radio].checked)) {
         radioButton.checked = true;
       }
-      radioButton.classList.add('control-panel__radio-button');
+      radioButton.classList.add('radio-button__radio-button');
       radioButton.addEventListener('change', this.onChange.bind(this));
       this.radios.push(radioButton);
 
@@ -68,9 +68,9 @@ class RadioButton extends Subject {
       const label = this.radios[radio].parentElement;
 
       if (this.radios[radio].checked) {
-        label?.classList.add('control-panel__radio-label_checked');
+        label?.classList.add('radio-button__label_checked');
       } else {
-        label?.classList.remove('control-panel__radio-label_checked');
+        label?.classList.remove('radio-button__label_checked');
       }
     }
 
