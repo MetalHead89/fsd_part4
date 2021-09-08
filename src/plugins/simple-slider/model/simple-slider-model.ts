@@ -111,7 +111,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
     }
 
     if (
-      SimpleSliderModel.valueTwoIsNullOrMoreOrEqualThenValueOne(
+      SimpleSliderModel.secondValueIsIncorrect(
         thumbOneValue,
         thumbTwoValue
       )
@@ -129,7 +129,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
    * Возвращает истину, значение второго равно нулю или меньше либо равно значению первого
    * @returns {boolean} - результат вычисления логического выражения
    */
-  private static valueTwoIsNullOrMoreOrEqualThenValueOne(
+  private static secondValueIsIncorrect(
     valueOne: number,
     valueTwo: number | null
   ): boolean {
