@@ -1,4 +1,7 @@
+import { ISize } from '../../interfaces';
+
 export default class View {
+  private scalePointSize = { width: 10, height: 10 };
   private wrapper: HTMLDivElement;
   private TEST_OK = true;
   subject = {
@@ -63,8 +66,8 @@ export default class View {
     return this.TEST_OK;
   }
 
-  getScalePointSize(): boolean {
-    return this.TEST_OK;
+  getScalePointSize(): ISize {
+    return this.scalePointSize;
   }
 
   addScalePoints(): boolean {

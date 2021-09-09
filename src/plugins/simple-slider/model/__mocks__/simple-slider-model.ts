@@ -1,4 +1,4 @@
-import { ISliderSettings } from '../../interfaces';
+import { ISize, ISliderSettings } from '../../interfaces';
 
 export default class Model {
   private orientation;
@@ -8,6 +8,7 @@ export default class Model {
   private min;
   private max;
   private step;
+  private scalePointSize = { width: 0, height: 0 };
   private TEST_OK = true;
   subject = {
     register: (): boolean => true,
@@ -83,6 +84,10 @@ export default class Model {
 
   getScalePoints(): boolean {
     return this.TEST_OK;
+  }
+
+  setScalePointSize(size: ISize): void {
+    this.scalePointSize = size;
   }
 
   recalculateStep(): boolean {
