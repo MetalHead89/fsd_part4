@@ -80,7 +80,8 @@ interface ISimpleSliderModel {
   updateThumbsState(positions: IThumbsPositions): void;
   getProgressBarParams(): IProgressBarParams;
   getPopUpsParams(): IPopUps;
-  getScalePoints(scalePointSize: ISize): IScalePointParams[];
+  getScalePoints(): IScalePointParams[];
+  setScalePointSize(size: ISize): void;
   getOrientation(): string;
   setThumbPositionOnClickPosition(clickPosition: IPosition): void;
   recalculateStep(): void;

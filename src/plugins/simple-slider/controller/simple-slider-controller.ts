@@ -49,6 +49,9 @@ class SimpleSliderController implements IObserver {
       this.view.disablePopUps();
     }
 
+    const max = this.model.getMax();
+    this.model.setScalePointSize(this.view.getScalePointSize(max));
+
     this.updateView();
   }
 
@@ -106,10 +109,14 @@ class SimpleSliderController implements IObserver {
         this.updatePopUpsSate();
         break;
       case 'clickToTrack':
-        this.model.setThumbPositionOnClickPosition(this.view.getTrackClickPosition());
+        this.model.setThumbPositionOnClickPosition(
+          this.view.getTrackClickPosition()
+        );
         break;
       case 'clickToScale':
-        this.model.setThumbPositionOnClickPosition(this.view.getScaleClickPosition());
+        this.model.setThumbPositionOnClickPosition(
+          this.view.getScaleClickPosition()
+        );
         break;
       case 'windowResized':
         this.init();
@@ -127,10 +134,7 @@ class SimpleSliderController implements IObserver {
 
     if (this.model.getScaleState()) {
       this.view.enableScale();
-      const max = this.model.getMax();
-      const points = this.model.getScalePoints(
-        this.view.getScalePointSize(max)
-      );
+      const points = this.model.getScalePoints();
       this.view.addScalePoints(points);
     } else {
       this.view.disableScale();

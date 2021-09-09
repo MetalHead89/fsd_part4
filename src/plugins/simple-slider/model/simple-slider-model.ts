@@ -29,6 +29,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
   private thumbTwoValue = 7;
   private sliderSize = { width: 500, height: 10 };
   private thumbSize = { width: 20, height: 10 };
+  private scalePointSize = { width: 0, height: 0 };
 
   constructor(settings: ISliderSettings) {
     this.subject = new Subject();
@@ -299,10 +300,9 @@ class SimpleSliderModel implements ISimpleSliderModel {
 
   /**
    * Возвращает массив объектов с настройками делений шкалы
-   * @param {ISize} scalePointSize - объект с размерами одного деления
    * @returns {IScalePointParams[]} - массив объектов с настройками делений шкалы
    */
-  getScalePoints(scalePointSize: ISize): IScalePointParams[] {
+  getScalePoints(): IScalePointParams[] {
     const scalePoints = [];
     const stepsCount = this.getStepsCount();
     const stepSize: number = this.getStepSize();
@@ -311,27 +311,20 @@ class SimpleSliderModel implements ISimpleSliderModel {
 
     let currentPointPosition =
       this.sizeByOrientation(this.thumbSize) / 2 -
-      this.sizeByOrientation(scalePointSize) / 2;
+      this.sizeByOrientation(this.scalePointSize) / 2;
 
     for (let i = 0; i <= Math.round(scalePointsCount - 1); i += 1) {
       const currentPointValue = this.thumbPositionToValue(
         currentPointPosition -
           this.sizeByOrientation(this.thumbSize) / 2 +
-          this.sizeByOrientation(scalePointSize) / 2
+          this.sizeByOrientation(this.scalePointSize) / 2
       );
 
-      currentPointPosition = this.getCorrectPointPosition(
-        currentPointPosition,
-        scalePointSize
-      );
+      currentPointPosition = this.getCorrectPointPosition(currentPointPosition);
 
       if (
         i === 0 ||
-        this.pointsDoNotIntersect(
-          currentPointPosition,
-          previousPointPosition,
-          scalePointSize
-        )
+        this.pointsDoNotIntersect(currentPointPosition, previousPointPosition)
       ) {
         const fullPointPosition = { left: 0, top: 0 };
         if (this.orientation === 'horizontal') {
@@ -342,7 +335,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
 
         scalePoints.push({
           position: fullPointPosition,
-          size: scalePointSize,
+          size: this.scalePointSize,
           value: currentPointValue,
         });
 
@@ -352,6 +345,10 @@ class SimpleSliderModel implements ISimpleSliderModel {
       currentPointPosition += stepSize;
     }
     return scalePoints;
+  }
+
+  setScalePointSize(size: ISize): void {
+    this.scalePointSize = size;
   }
 
   /**
@@ -374,12 +371,11 @@ class SimpleSliderModel implements ISimpleSliderModel {
    */
   private pointsDoNotIntersect(
     currentPosition: number,
-    previousPosition: number,
-    scalePointSize: ISize
+    previousPosition: number
   ): boolean {
     return (
       currentPosition - previousPosition >
-      this.sizeByOrientation(scalePointSize)
+      this.sizeByOrientation(this.scalePointSize)
     );
   }
 
@@ -623,14 +619,13 @@ class SimpleSliderModel implements ISimpleSliderModel {
   /**
    * Отслеживает позицию деления, не давая ему выйти за пределы шкалы
    * @param {number} position - позиция деления шкалы
-   * @param {ISize} pointSize - объект с размерами деления
    * @returns {number} - позиция следующего деления
    */
-  private getCorrectPointPosition(position: number, pointSize: ISize): number {
+  private getCorrectPointPosition(position: number): number {
     const extremePosition =
       this.sizeByOrientation(this.sliderSize) -
       this.sizeByOrientation(this.thumbSize) / 2 -
-      this.sizeByOrientation(pointSize) / 2;
+      this.sizeByOrientation(this.scalePointSize) / 2;
 
     if (position > extremePosition) {
       position = extremePosition;
