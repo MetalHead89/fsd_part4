@@ -52,7 +52,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
     }
     if (this.type !== settings.type) {
       this.type = settings.type;
-      if (this.typeIsRangeAndSecondThumbValueLessThanFirst()) {
+      if (this.rangeValuesIsCorrect()) {
         this.thumbTwoValue = this.thumbOneValue;
       }
       this.subject.notify('typeIsUpdated');
@@ -90,7 +90,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
    * бегунка меньше значения первого
    * @returns {boolean} - результат вычисления логического выражения
    */
-  private typeIsRangeAndSecondThumbValueLessThanFirst(): boolean {
+  private rangeValuesIsCorrect(): boolean {
     return this.type === 'range' && this.thumbTwoValue < this.thumbOneValue;
   }
 
