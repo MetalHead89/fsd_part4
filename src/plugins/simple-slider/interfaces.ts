@@ -76,13 +76,13 @@ interface ISimpleSliderModel {
   getPopUpsState(): boolean;
   getScaleState(): boolean;
   refreshSliderState(settings: ISliderSettings): void;
-  getThumbsPos(): IThumbsPositions;
+  getThumbsPositions(): IThumbsPositions;
   updateThumbsState(positions: IThumbsPositions): void;
   getProgressBarParams(): IProgressBarParams;
   getPopUpsParams(): IPopUps;
   getScalePoints(scalePointSize: ISize): IScalePointParams[];
   getOrientation(): string;
-  setThumbPosOnClickPos(clickPosition: IPosition): void;
+  setThumbPositionOnClickPosition(clickPosition: IPosition): void;
   recalculateStep(): void;
 }
 
@@ -98,7 +98,7 @@ interface ISimpleSliderView {
   disableScale(): void;
   getThumbSize(): ISize;
   getSliderSize(): ISize;
-  getThumbsPos(): IThumbsPositions;
+  getThumbsPositions(): IThumbsPositions;
   updateThumbs(thumbsPositions: IThumbsPositions): void;
   updateProgressBar(params: IProgressBarParams): void;
   updatePopUps(params: IPopUps): void;

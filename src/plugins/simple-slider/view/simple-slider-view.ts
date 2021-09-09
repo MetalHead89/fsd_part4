@@ -270,7 +270,7 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
    * Возвращение позиций бегунков
    * @returns {IThumbsPositions} - объект с позициями бегунков
    */
-  getThumbsPos(): IThumbsPositions {
+  getThumbsPositions(): IThumbsPositions {
     const thumbOne = this.thumbOne.getPosition();
     let thumbTwo: IPosition | null = null;
     if (this.thumbTwo !== null) {

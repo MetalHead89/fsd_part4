@@ -33,7 +33,7 @@ export default class Model {
     return this.TEST_OK;
   }
 
-  setThumbPosOnClickPos(): boolean {
+  setThumbPositionOnClickPosition(): boolean {
     return this.TEST_OK;
   }
 
@@ -49,7 +49,7 @@ export default class Model {
     return this.popUps;
   }
 
-  getThumbsPos(): boolean {
+  getThumbsPositions(): boolean {
     return this.TEST_OK;
   }
 

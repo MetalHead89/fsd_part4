@@ -100,21 +100,18 @@ class SimpleSliderModel implements ISimpleSliderModel {
    */
   updateThumbsState(positions: IThumbsPositions): void {
     const thumbOneValue = this.valueWithStep(
-      this.posByOrientation(positions.thumbOne)
+      this.positionByOrientation(positions.thumbOne)
     );
     let thumbTwoValue: null | number = null;
 
     if (positions.thumbTwo !== null) {
       thumbTwoValue = this.valueWithStep(
-        this.posByOrientation(positions.thumbTwo)
+        this.positionByOrientation(positions.thumbTwo)
       );
     }
 
     if (
-      SimpleSliderModel.secondValueIsIncorrect(
-        thumbOneValue,
-        thumbTwoValue
-      )
+      SimpleSliderModel.secondValueIsIncorrect(thumbOneValue, thumbTwoValue)
     ) {
       this.thumbOneValue = thumbOneValue;
       if (thumbTwoValue !== null) {
@@ -122,7 +119,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
       }
     }
 
-    this.subject.notify('thumbsPosIsUpdated');
+    this.subject.notify('thumbsPositionsIsUpdated');
   }
 
   /**
@@ -157,12 +154,15 @@ class SimpleSliderModel implements ISimpleSliderModel {
    * @param {IThumbsValues} thumbs - объект со значениями бегунков
    */
   setThumbsValues(thumbs: IThumbsValues): void {
-    const thumbOnePos = this.thumbValueToPos(thumbs.thumbOne);
-    let thumbTwoPos = null;
+    const thumbOnePosition = this.thumbValueToPosition(thumbs.thumbOne);
+    let thumbTwoPosition = null;
     if (this.type === 'range') {
-      thumbTwoPos = this.thumbValueToPos(thumbs.thumbTwo);
+      thumbTwoPosition = this.thumbValueToPosition(thumbs.thumbTwo);
     }
-    this.updateThumbsState({ thumbOne: thumbOnePos, thumbTwo: thumbTwoPos });
+    this.updateThumbsState({
+      thumbOne: thumbOnePosition,
+      thumbTwo: thumbTwoPosition,
+    });
   }
 
   /**
@@ -226,8 +226,8 @@ class SimpleSliderModel implements ISimpleSliderModel {
    * @returns {IProgressBarParams} - Объект с позицией и размерами прогресс-бара
    */
   getProgressBarParams(): IProgressBarParams {
-    const thumbOnePos = this.thumbValueToPos(this.thumbOneValue);
-    const thumbTwoPos = this.thumbValueToPos(this.thumbTwoValue);
+    const thumbOnePosition = this.thumbValueToPosition(this.thumbOneValue);
+    const thumbTwoPosition = this.thumbValueToPosition(this.thumbTwoValue);
     const size = { ...this.sliderSize };
     const position = { left: 0, top: 0 };
     let start = 0;
@@ -235,13 +235,13 @@ class SimpleSliderModel implements ISimpleSliderModel {
 
     if (this.type === 'single') {
       end =
-        this.posByOrientation(thumbOnePos) +
+        this.positionByOrientation(thumbOnePosition) +
         this.sizeByOrientation(this.thumbSize);
     } else {
-      start = this.posByOrientation(thumbOnePos);
+      start = this.positionByOrientation(thumbOnePosition);
       end =
-        this.posByOrientation(thumbTwoPos) -
-        this.posByOrientation(thumbOnePos) +
+        this.positionByOrientation(thumbTwoPosition) -
+        this.positionByOrientation(thumbOnePosition) +
         this.sizeByOrientation(this.thumbSize);
     }
 
@@ -261,10 +261,10 @@ class SimpleSliderModel implements ISimpleSliderModel {
    * @returns {IThumbsPositions} - объект с позициями бегунков относительно левого и верхнего края
    * родительского контейнера
    */
-  getThumbsPos(): IThumbsPositions {
+  getThumbsPositions(): IThumbsPositions {
     return {
-      thumbOne: this.thumbValueToPos(this.thumbOneValue),
-      thumbTwo: this.thumbValueToPos(this.thumbTwoValue),
+      thumbOne: this.thumbValueToPosition(this.thumbOneValue),
+      thumbTwo: this.thumbValueToPosition(this.thumbTwoValue),
     };
   }
 
@@ -277,13 +277,13 @@ class SimpleSliderModel implements ISimpleSliderModel {
       popUpOne: {
         value: this.thumbOneValue,
         position: this.getPopUpPosition(
-          this.thumbValueToPos(this.thumbOneValue)
+          this.thumbValueToPosition(this.thumbOneValue)
         ),
       },
       popUpTwo: {
         value: this.thumbTwoValue,
         position: this.getPopUpPosition(
-          this.thumbValueToPos(this.thumbTwoValue)
+          this.thumbValueToPosition(this.thumbTwoValue)
         ),
       },
     };
@@ -299,50 +299,59 @@ class SimpleSliderModel implements ISimpleSliderModel {
 
   /**
    * Возвращает массив объектов с настройками делений шкалы
-   * @param {ISize} scalePointSize - объект с размерами шкалы
+   * @param {ISize} scalePointSize - объект с размерами одного деления
    * @returns {IScalePointParams[]} - массив объектов с настройками делений шкалы
    */
   getScalePoints(scalePointSize: ISize): IScalePointParams[] {
-    const scaleParams = [];
+    const scalePoints = [];
     const stepsCount = this.getStepsCount();
     const stepSize: number = this.getStepSize();
-    let prevPointPos = 0;
+    const scalePointsCount = stepsCount + 1;
+    let previousPointPosition = 0;
 
-    let position =
+    let currentPointPosition =
       this.sizeByOrientation(this.thumbSize) / 2 -
       this.sizeByOrientation(scalePointSize) / 2;
 
-    const scalePointsCount = stepsCount + 1;
-
     for (let i = 0; i <= Math.round(scalePointsCount - 1); i += 1) {
-      const pointValue = this.thumbPosToValue(
-        position -
+      const currentPointValue = this.thumbPositionToValue(
+        currentPointPosition -
           this.sizeByOrientation(this.thumbSize) / 2 +
           this.sizeByOrientation(scalePointSize) / 2
       );
 
-      position = this.getNextScalePointPos(position, scalePointSize);
+      currentPointPosition = this.getCorrectPointPosition(
+        currentPointPosition,
+        scalePointSize
+      );
 
-      if (this.isPointFits(i, position, prevPointPos, scalePointSize)) {
-        const pointPos = { left: 0, top: 0 };
+      if (
+        i === 0 ||
+        this.pointsDoNotIntersect(
+          currentPointPosition,
+          previousPointPosition,
+          scalePointSize
+        )
+      ) {
+        const fullPointPosition = { left: 0, top: 0 };
         if (this.orientation === 'horizontal') {
-          pointPos.left = position;
+          fullPointPosition.left = currentPointPosition;
         } else {
-          pointPos.top = position;
+          fullPointPosition.top = currentPointPosition;
         }
 
-        scaleParams.push({
-          position: pointPos,
+        scalePoints.push({
+          position: fullPointPosition,
           size: scalePointSize,
-          value: pointValue,
+          value: currentPointValue,
         });
 
-        prevPointPos = position;
+        previousPointPosition = currentPointPosition;
       }
 
-      position += stepSize;
+      currentPointPosition += stepSize;
     }
-    return scaleParams;
+    return scalePoints;
   }
 
   /**
@@ -358,20 +367,19 @@ class SimpleSliderModel implements ISimpleSliderModel {
    * Проверяет помещается ли точка на шкале без пересечения с другими точками, если нет, то она
    * не добавляется на шкалу
    * @param {number} index - индекс точки
-   * @param {number} pointPos - текущая позиция точки
-   * @param {number} prevPointPos - позиция предыдущей точки
+   * @param {number} currentPosition - текущая позиция точки
+   * @param {number} previousPosition - позиция предыдущей точки
    * @param {ISize} scalePointSize - объект с размером точки
    * @returns {boolean} - результат логического выражения
    */
-  private isPointFits(
-    index: number,
-    pointPos: number,
-    prevPointPos: number,
+  private pointsDoNotIntersect(
+    currentPosition: number,
+    previousPosition: number,
     scalePointSize: ISize
   ): boolean {
     return (
-      index === 0 ||
-      pointPos - prevPointPos > this.sizeByOrientation(scalePointSize)
+      currentPosition - previousPosition >
+      this.sizeByOrientation(scalePointSize)
     );
   }
 
@@ -379,7 +387,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
    * Сохраняет значение бегунка, ближайшего к месту клика по шкале, либо треку
    * @param {IPosition} clickPosition - объект с позицией клика
    */
-  setThumbPosOnClickPos(clickPosition: IPosition): void {
+  setThumbPositionOnClickPosition(clickPosition: IPosition): void {
     const position = {
       left: clickPosition.left - this.thumbSize.width / 2,
       top: clickPosition.top - this.thumbSize.height / 2,
@@ -388,9 +396,13 @@ class SimpleSliderModel implements ISimpleSliderModel {
     let thumbTwo = this.thumbTwoValue;
 
     if (this.thumbTwoIsNearToClick(position)) {
-      thumbTwo = this.thumbPosToValue(this.posByOrientation(position));
+      thumbTwo = this.thumbPositionToValue(
+        this.positionByOrientation(position)
+      );
     } else {
-      thumbOne = this.thumbPosToValue(this.posByOrientation(position));
+      thumbOne = this.thumbPositionToValue(
+        this.positionByOrientation(position)
+      );
     }
 
     this.setThumbsValues({ thumbOne, thumbTwo });
@@ -406,12 +418,16 @@ class SimpleSliderModel implements ISimpleSliderModel {
     if (this.type === 'range') {
       return (
         Math.abs(
-          this.posByOrientation(position) -
-            this.posByOrientation(this.thumbValueToPos(this.thumbTwoValue))
+          this.positionByOrientation(position) -
+            this.positionByOrientation(
+              this.thumbValueToPosition(this.thumbTwoValue)
+            )
         ) <
         Math.abs(
-          this.posByOrientation(position) -
-            this.posByOrientation(this.thumbValueToPos(this.thumbOneValue))
+          this.positionByOrientation(position) -
+            this.positionByOrientation(
+              this.thumbValueToPosition(this.thumbOneValue)
+            )
         )
       );
     }
@@ -486,14 +502,14 @@ class SimpleSliderModel implements ISimpleSliderModel {
    * @returns {number} - значение бегунка в соответствии с заданным шагом
    */
   private valueWithStep(position: number): number {
-    if (this.thumbPosToValue(position) >= this.max) {
-      return this.thumbPosToValue(position);
+    if (this.thumbPositionToValue(position) >= this.max) {
+      return this.thumbPositionToValue(position);
     }
 
     const stepSize = this.getStepSize();
     const newPosition = Math.round(position / stepSize) * stepSize;
 
-    return this.thumbPosToValue(newPosition);
+    return this.thumbPositionToValue(newPosition);
   }
 
   /**
@@ -523,7 +539,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
    * края родительского контейнера
    * @returns {number} - значение бегунка
    */
-  private thumbPosToValue(position: number): number {
+  private thumbPositionToValue(position: number): number {
     const pixelsPerValue = this.getPxPerValue();
 
     let newValue = Math.round(
@@ -543,7 +559,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
    * @returns {IThumbPosition} - объект с позицией бегунка относительно левого и верхнего края
    * родительского контейнера
    */
-  private thumbValueToPos(value: number): IPosition {
+  private thumbValueToPosition(value: number): IPosition {
     const position = { left: 0, top: 0 };
     const pxPerVal = this.getPxPerValue();
     let thumbValue = value;
@@ -554,13 +570,13 @@ class SimpleSliderModel implements ISimpleSliderModel {
       thumbValue = this.max;
     }
 
-    const posValue =
+    const positionValue =
       ((thumbValue - this.min) / (this.max - this.min)) * pxPerVal * this.max;
 
     if (this.orientation === 'horizontal') {
-      position.left = posValue;
+      position.left = positionValue;
     } else {
-      position.top = posValue;
+      position.top = positionValue;
     }
 
     return position;
@@ -596,7 +612,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
    * @param {IPosition} position - объект с позицией
    * @returns {number} - значение левого или верхнего отступа объекта
    */
-  private posByOrientation(position: IPosition): number {
+  private positionByOrientation(position: IPosition): number {
     if (this.orientation === 'horizontal') {
       return position.left;
     }
@@ -605,24 +621,22 @@ class SimpleSliderModel implements ISimpleSliderModel {
   }
 
   /**
-   * Возвращает позицию следующего деления шкалы
-   * @param {number} position - позиция последнего деления
+   * Отслеживает позицию деления, не давая ему выйти за пределы шкалы
+   * @param {number} position - позиция деления шкалы
    * @param {ISize} pointSize - объект с размерами деления
    * @returns {number} - позиция следующего деления
    */
-  private getNextScalePointPos(position: number, pointSize: ISize): number {
-    let newPosition = position;
-
+  private getCorrectPointPosition(position: number, pointSize: ISize): number {
     const extremePosition =
       this.sizeByOrientation(this.sliderSize) -
       this.sizeByOrientation(this.thumbSize) / 2 -
       this.sizeByOrientation(pointSize) / 2;
 
-    if (newPosition > extremePosition) {
-      newPosition = extremePosition;
+    if (position > extremePosition) {
+      position = extremePosition;
     }
 
-    return newPosition;
+    return position;
   }
 }
 

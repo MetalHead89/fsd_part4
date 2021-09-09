@@ -19,7 +19,7 @@ export default class View {
     return this.TEST_OK;
   }
 
-  getThumbsPos(): boolean {
+  getThumbsPositions(): boolean {
     return this.TEST_OK;
   }
 

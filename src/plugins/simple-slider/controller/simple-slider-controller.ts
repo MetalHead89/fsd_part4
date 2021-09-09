@@ -57,7 +57,7 @@ class SimpleSliderController implements IObserver {
    */
   private subscribeToEvents(): void {
     this.viewSubject.register('thumbIsDragged', this);
-    this.modelSubject.register('thumbsPosIsUpdated', this);
+    this.modelSubject.register('thumbsPositionsIsUpdated', this);
     this.modelSubject.register('minIsUpdated', this);
     this.modelSubject.register('maxIsUpdated', this);
     this.modelSubject.register('stepIsUpdated', this);
@@ -77,9 +77,9 @@ class SimpleSliderController implements IObserver {
   update(eventType: string): void {
     switch (eventType) {
       case 'thumbIsDragged':
-        this.model.updateThumbsState(this.view.getThumbsPos());
+        this.model.updateThumbsState(this.view.getThumbsPositions());
         break;
-      case 'thumbsPosIsUpdated':
+      case 'thumbsPositionsIsUpdated':
         this.updateThumbsPos();
         break;
       case 'minIsUpdated':
@@ -106,10 +106,10 @@ class SimpleSliderController implements IObserver {
         this.updatePopUpsSate();
         break;
       case 'clickToTrack':
-        this.model.setThumbPosOnClickPos(this.view.getTrackClickPosition());
+        this.model.setThumbPositionOnClickPosition(this.view.getTrackClickPosition());
         break;
       case 'clickToScale':
-        this.model.setThumbPosOnClickPos(this.view.getScaleClickPosition());
+        this.model.setThumbPositionOnClickPosition(this.view.getScaleClickPosition());
         break;
       case 'windowResized':
         this.init();
@@ -123,7 +123,7 @@ class SimpleSliderController implements IObserver {
    * Обновляет бегунки, прогресс-бар и шкалу во View в соответствии с их состоянием
    */
   private updateView(): void {
-    this.model.updateThumbsState(this.model.getThumbsPos());
+    this.model.updateThumbsState(this.model.getThumbsPositions());
 
     if (this.model.getScaleState()) {
       this.view.enableScale();
@@ -141,7 +141,7 @@ class SimpleSliderController implements IObserver {
    * Обновляет позиции бегунков во view
    */
   private updateThumbsPos(): void {
-    this.view.updateThumbs(this.model.getThumbsPos());
+    this.view.updateThumbs(this.model.getThumbsPositions());
     this.view.updatePopUps(this.model.getPopUpsParams());
     this.view.updateProgressBar(this.model.getProgressBarParams());
   }
@@ -170,7 +170,7 @@ class SimpleSliderController implements IObserver {
       this.view.switchToRange();
     }
 
-    this.model.updateThumbsState(this.model.getThumbsPos());
+    this.model.updateThumbsState(this.model.getThumbsPositions());
   }
 
   /**
@@ -191,7 +191,7 @@ class SimpleSliderController implements IObserver {
   private updatePopUpsSate(): void {
     if (this.model.getPopUpsState()) {
       this.view.enablePopUps();
-      this.model.updateThumbsState(this.model.getThumbsPos());
+      this.model.updateThumbsState(this.model.getThumbsPositions());
     } else {
       this.view.disablePopUps();
     }

@@ -96,13 +96,13 @@ describe('Update method', () => {
     controller.update('thumbIsDragged');
     expect(spy).toBeCalledTimes(1);
   });
-  test('The setThumbPosOnClickPos method from the SimpleSliderModel class should be called once', () => {
-    const spy = jest.spyOn(model, 'setThumbPosOnClickPos');
+  test('The setThumbPositionOnClickPosition method from the SimpleSliderModel class should be called once', () => {
+    const spy = jest.spyOn(model, 'setThumbPositionOnClickPosition');
     controller.update('clickToTrack');
     expect(spy).toBeCalledTimes(1);
   });
-  test('The setThumbPosOnClickPos method from the SimpleSliderModel class should be called once', () => {
-    const spy = jest.spyOn(model, 'setThumbPosOnClickPos');
+  test('The setThumbPositionOnClickPosition method from the SimpleSliderModel class should be called once', () => {
+    const spy = jest.spyOn(model, 'setThumbPositionOnClickPosition');
     controller.update('clickToScale');
     expect(spy).toBeCalledTimes(1);
   });
@@ -116,7 +116,7 @@ describe('Update method', () => {
     controller.update('emptyEvent');
     expect(spy1).toBeCalledTimes(0);
 
-    const spy2 = jest.spyOn(model, 'setThumbPosOnClickPos');
+    const spy2 = jest.spyOn(model, 'setThumbPositionOnClickPosition');
     controller.update('emptyEvent');
     expect(spy2).toBeCalledTimes(0);
 
@@ -174,17 +174,17 @@ describe('Update view method', () => {
 describe('Update thumbs pos', () => {
   test('The updateThumbs method from the SimpleSliderView class should be called once', () => {
     const spy = jest.spyOn(view, 'updateThumbs');
-    controller.update('thumbsPosIsUpdated');
+    controller.update('thumbsPositionsIsUpdated');
     expect(spy).toBeCalledTimes(1);
   });
   test('The updatePopUps method from the SimpleSliderView class should be called once', () => {
     const spy = jest.spyOn(view, 'updatePopUps');
-    controller.update('thumbsPosIsUpdated');
+    controller.update('thumbsPositionsIsUpdated');
     expect(spy).toBeCalledTimes(1);
   });
   test('The updateProgressBar method from the SimpleSliderView class should be called once', () => {
     const spy = jest.spyOn(view, 'updateProgressBar');
-    controller.update('thumbsPosIsUpdated');
+    controller.update('thumbsPositionsIsUpdated');
     expect(spy).toBeCalledTimes(1);
   });
 });

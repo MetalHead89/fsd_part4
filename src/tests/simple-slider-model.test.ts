@@ -361,7 +361,7 @@ describe('Get thumbs positions', () => {
   test('Should be thumbOne: {left: 126, top: 0} and thumbTwo: {left: 294, top: 0}', () => {
     model['sliderSize'] = { width: 440, height: 10 };
     model['thumbSize'] = { width: 20, height: 20 };
-    const pos = model.getThumbsPos();
+    const pos = model.getThumbsPositions();
 
     expect(pos.thumbOne.left).toBeCloseTo(126);
     expect(pos.thumbOne.top).toBe(0);
@@ -377,7 +377,7 @@ describe('Get thumbs positions', () => {
     model['thumbSize'] = { width: 20, height: 20 };
     model['thumbOneValue'] = -5;
     model['thumbTwoValue'] = 77;
-    const pos = model.getThumbsPos();
+    const pos = model.getThumbsPositions();
 
     expect(pos.thumbOne.left).toBe(0);
     expect(pos.thumbOne.top).toBe(0);
@@ -476,25 +476,25 @@ describe('Get scale points', () => {
 
 describe('Set thumb position on click position', () => {
   test('ThumbOne position value should be 3', () => {
-    model.setThumbPosOnClickPos({ left: 100, top: 0 });
+    model.setThumbPositionOnClickPosition({ left: 100, top: 0 });
     expect(model.getThumbsValues().thumbOne).toBe(2);
   });
   test('ThumbTwo should be not change position', () => {
-    model.setThumbPosOnClickPos({ left: 100, top: 0 });
+    model.setThumbPositionOnClickPosition({ left: 100, top: 0 });
     expect(model.getThumbsValues().thumbTwo).toBe(7);
   });
   test('ThumbOne should be not change position', () => {
-    model.setThumbPosOnClickPos({ left: 100, top: 0 });
+    model.setThumbPositionOnClickPosition({ left: 100, top: 0 });
     expect(model.getThumbsValues().thumbOne).toBe(2);
   });
   test('ThumbTwo position value should be 8', () => {
-    model.setThumbPosOnClickPos({ left: 400, top: 0 });
+    model.setThumbPositionOnClickPosition({ left: 400, top: 0 });
     expect(model.getThumbsValues().thumbTwo).toBe(8);
   });
   test('ThumbTwo position value should be 8', () => {
     settings.type = 'single';
     model.refreshSliderState(settings);
-    model.setThumbPosOnClickPos({ left: 400, top: 0 });
+    model.setThumbPositionOnClickPosition({ left: 400, top: 0 });
     expect(model.getThumbsValues().thumbOne).toBe(8);
   });
 });

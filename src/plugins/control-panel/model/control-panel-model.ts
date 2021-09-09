@@ -14,15 +14,15 @@ class ControlPanelModel extends Subject implements IObserver {
     super();
     this.slider = slider;
     this.subject = slider.simpleSlider('getModelSubject');
-    this.subject.register('thumbsPosIsUpdated', this);
+    this.subject.register('thumbsPositionsIsUpdated', this);
     this.subject.register('minIsUpdated', this);
     this.subject.register('maxIsUpdated', this);
     this.subject.register('stepIsUpdated', this);
   }
 
   update(eventType: string): void {
-    if (eventType === 'thumbsPosIsUpdated') {
-      this.notify('thumbsPosIsUpdated');
+    if (eventType === 'thumbsPositionsIsUpdated') {
+      this.notify('thumbsPositionsIsUpdated');
     } else if (eventType === 'minIsUpdated') {
       this.notify('minIsUpdated');
     } else if (eventType === 'maxIsUpdated') {

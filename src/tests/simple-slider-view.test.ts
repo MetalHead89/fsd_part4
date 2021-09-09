@@ -315,18 +315,18 @@ describe('Get slider size', () => {
 
 describe('Get thumbs positions', () => {
   test('ThumbOne should be true', () => {
-    expect(view.getThumbsPos().thumbOne).toBe(true);
+    expect(view.getThumbsPositions().thumbOne).toBe(true);
   });
   test('ThumbTwo should be true', () => {
-    expect(view.getThumbsPos().thumbTwo).toBe(true);
-  });
-  test('ThumbTwo should be true', () => {
-    view.switchToSingle();
-    expect(view.getThumbsPos().thumbOne).toBe(true);
+    expect(view.getThumbsPositions().thumbTwo).toBe(true);
   });
   test('ThumbTwo should be true', () => {
     view.switchToSingle();
-    expect(view.getThumbsPos().thumbTwo).toBe(null);
+    expect(view.getThumbsPositions().thumbOne).toBe(true);
+  });
+  test('ThumbTwo should be true', () => {
+    view.switchToSingle();
+    expect(view.getThumbsPositions().thumbTwo).toBe(null);
   });
 });
 

@@ -18,7 +18,7 @@ class ControlPanelController implements IObserver {
    * Подписывает Controller на необходимые события, возникающие во View и Model
    */
   private subscribeToEvents(): void {
-    this.model.register('thumbsPosIsUpdated', this);
+    this.model.register('thumbsPositionsIsUpdated', this);
     this.model.register('minIsUpdated', this);
     this.model.register('maxIsUpdated', this);
     this.model.register('stepIsUpdated', this);
@@ -44,7 +44,7 @@ class ControlPanelController implements IObserver {
    * @param {string} eventType - событие
    */
   update(eventType: string): void {
-    if (eventType === 'thumbsPosIsUpdated') {
+    if (eventType === 'thumbsPositionsIsUpdated') {
       this.view.setThumbsValues(this.model.getThumbsValues());
     } else if (eventType === 'minIsUpdated') {
       this.view.setMinValue(this.model.getMin());
