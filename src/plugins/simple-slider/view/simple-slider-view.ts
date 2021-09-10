@@ -185,7 +185,7 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
       this.slider.append(this.popUpOne.getControl());
     }
 
-    if (this.popUpTwoIsNullAndThumbTwoIsNotNull()) {
+    if (this.thumbTwoIsWithoutPopup()) {
       this.popUpTwo = new PopUp(this.slider.getOrientation());
       this.slider.append(this.popUpTwo.getControl());
     }
@@ -195,10 +195,10 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
 
   /**
    * Возвращает истину, если всплывающая подсказка над вторым бегунком равна null,
-   * а второй бегунок не равен null
+   * но сам второй бегунок не равен null
    * @returns {boolean} - результат вычисления логического выражения
    */
-  private popUpTwoIsNullAndThumbTwoIsNotNull(): boolean {
+  private thumbTwoIsWithoutPopup(): boolean {
     return this.popUpTwo === null && this.thumbTwo !== null;
   }
 
