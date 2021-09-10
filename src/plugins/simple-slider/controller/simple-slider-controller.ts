@@ -46,9 +46,6 @@ class SimpleSliderController implements IObserver {
       this.view.disablePopUps();
     }
 
-    const max = this.model.getMax();
-    this.model.setScalePointSize(this.view.getScalePointSize(max));
-
     this.updateView();
   }
 
@@ -128,6 +125,10 @@ class SimpleSliderController implements IObserver {
 
     if (this.model.getScaleState()) {
       this.view.enableScale();
+
+      const max = this.model.getMax();
+      this.model.setScalePointSize(this.view.getScalePointSize(max));
+
       const points = this.model.getScalePoints();
       this.view.addScalePoints(points);
     } else {
