@@ -124,7 +124,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
   }
 
   /**
-   * Возвращает истину, значение второго равно нулю или меньше либо равно значению первого
+   * Возвращает истину, если второе значение равно null или меньше либо равно первому значению
    * @returns {boolean} - результат вычисления логического выражения
    */
   private static secondValueIsIncorrect(
@@ -134,26 +134,14 @@ class SimpleSliderModel implements ISimpleSliderModel {
     return valueTwo === null || valueOne <= valueTwo;
   }
 
-  /**
-   * Устанавливает размер слайдера
-   * @param {ISize} size - объект с шириной и высотой слайдера
-   */
   setSliderSize(size: ISize): void {
     this.sliderSize = SimpleSliderModel.getCorrectSize(size, 0);
   }
 
-  /**
-   * Устанавливает размер бегунков
-   * @param {ISize} size - объект с шириной и высотой бегунка
-   */
   setThumbSize(size: ISize): void {
     this.thumbSize = SimpleSliderModel.getCorrectSize(size, 0);
   }
 
-  /**
-   * Сохраняет значения бегунков
-   * @param {IThumbsValues} thumbs - объект со значениями бегунков
-   */
   setThumbsValues(thumbs: IThumbsValues): void {
     const thumbOnePosition = this.thumbValueToPosition(thumbs.thumbOne);
     let thumbTwoPosition = null;
@@ -166,66 +154,34 @@ class SimpleSliderModel implements ISimpleSliderModel {
     });
   }
 
-  /**
-   * Возвращает минимальное значение слайдера
-   * @returns {number} - минимальное значение
-   */
   getMin(): number {
     return this.min;
   }
 
-  /**
-   * Возвращает максимальное значение слайдера
-   * @returns {number} - максимальное значение
-   */
   getMax(): number {
     return this.max;
   }
 
-  /**
-   * Возвращает шаг с которым перемещается бегунок
-   * @returns {number} - значение шага
-   */
   getStep(): number {
     return this.step;
   }
 
-  /**
-   * Возвращает состояние шкалы (выключена или включена)
-   * @returns {boolean} - состояние шкалы
-   */
   getScaleState(): boolean {
     return this.scale;
   }
 
-  /**
-   * Возвращает состояние всплывающих подсказок (выключены или отключены)
-   * @returns {boolean} - состояние всплывающих подсказок над бегунками
-   */
   getPopUpsState(): boolean {
     return this.popUps;
   }
 
-  /**
-   * Возвращает тип слайдера (одиночный или диапазон)
-   * @returns {string} - тип слайдера
-   */
   getType(): string {
     return this.type;
   }
 
-  /**
-   * Возвращает ориентацию слайдера (горизонтальный или вертикальный)
-   * @returns {string} - ориентация слайдера
-   */
   getOrientation(): string {
     return this.orientation;
   }
 
-  /**
-   * Возвращает объект с параметрами для прогресс-бара
-   * @returns {IProgressBarParams} - Объект с позицией и размерами прогресс-бара
-   */
   getProgressBarParams(): IProgressBarParams {
     const thumbOnePosition = this.thumbValueToPosition(this.thumbOneValue);
     const thumbTwoPosition = this.thumbValueToPosition(this.thumbTwoValue);
@@ -257,11 +213,6 @@ class SimpleSliderModel implements ISimpleSliderModel {
     return { position, size };
   }
 
-  /**
-   * Возврат объекта с позициями бегунков
-   * @returns {IThumbsPositions} - объект с позициями бегунков относительно левого и верхнего края
-   * родительского контейнера
-   */
   getThumbsPositions(): IThumbsPositions {
     return {
       thumbOne: this.thumbValueToPosition(this.thumbOneValue),
@@ -269,10 +220,6 @@ class SimpleSliderModel implements ISimpleSliderModel {
     };
   }
 
-  /**
-   * Возвращает объект с параметрами для всплывающих подсказок
-   * @returns {IPopUps} - объект с позициями и значениями всплывающих подсказок
-   */
   getPopUpsParams(): IPopUps {
     return {
       popUpOne: {
@@ -290,18 +237,10 @@ class SimpleSliderModel implements ISimpleSliderModel {
     };
   }
 
-  /**
-   * Возвращает объект с текущими значениями бегунков
-   * @returns {IThumbsValues} - объект со значениями бегунков
-   */
   getThumbsValues(): IThumbsValues {
     return { thumbOne: this.thumbOneValue, thumbTwo: this.thumbTwoValue };
   }
 
-  /**
-   * Возвращает массив объектов с настройками делений шкалы
-   * @returns {IScalePointParams[]} - массив объектов с настройками делений шкалы
-   */
   getScalePoints(): IScalePointParams[] {
     const scalePoints = [];
     const stepsCount = this.getStepsCount();
@@ -363,10 +302,8 @@ class SimpleSliderModel implements ISimpleSliderModel {
   /**
    * Проверяет помещается ли точка на шкале без пересечения с другими точками, если нет, то она
    * не добавляется на шкалу
-   * @param {number} index - индекс точки
    * @param {number} currentPosition - текущая позиция точки
    * @param {number} previousPosition - позиция предыдущей точки
-   * @param {ISize} scalePointSize - объект с размером точки
    * @returns {boolean} - результат логического выражения
    */
   private pointsDoNotIntersect(
@@ -443,12 +380,6 @@ class SimpleSliderModel implements ISimpleSliderModel {
     return { width, height };
   }
 
-  /**
-   * Возвращает позицию всплывающей подсказки
-   * @param {IPosition} thumbPosition - объект с позицией бегунка,
-   * рядом с которым будет располагаться всплывающая подсказка
-   * @returns {IPosition} - объект с позицией всплывающей подсказки
-   */
   private getPopUpPosition(thumbPosition: IPosition): IPosition {
     let left = 0;
     let top = 0;
@@ -462,28 +393,16 @@ class SimpleSliderModel implements ISimpleSliderModel {
     return { left, top };
   }
 
-  /**
-   * Устанавливает минимальное значение слайдера
-   * @param {number} value - новое значение минимума
-   */
   private updateMinValue(value: number): void {
     this.min = value < this.max ? value : this.min;
     this.subject.notify('minIsUpdated');
   }
 
-  /**
-   * Устанавливает максимальное значение слайдера
-   * @param {number} value - новое значение максимума
-   */
   private updateMaxValue(value: number): void {
     this.max = value > this.min ? value : this.max;
     this.subject.notify('maxIsUpdated');
   }
 
-  /**
-   * Устанавливает размер шага бегунка
-   * @param {number} value - новое значение шага
-   */
   private updateStep(value: number): void {
     const stepsCount = this.max - this.min;
     this.step = value > 0 && value <= stepsCount ? value : this.step;
@@ -508,18 +427,10 @@ class SimpleSliderModel implements ISimpleSliderModel {
     return this.thumbPositionToValue(newPosition);
   }
 
-  /**
-   * Возвращает количество шагов бегунка
-   * @returns {number} - количество шагов бегунка
-   */
   private getStepsCount(): number {
     return (this.max - this.min) / this.step;
   }
 
-  /**
-   * Возвращает размер одного шага бегунка
-   * @returns {number} - размер одного шага бегунка
-   */
   private getStepSize(): number {
     const stepsCount = this.getStepsCount();
     return (
