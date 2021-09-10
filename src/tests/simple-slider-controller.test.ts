@@ -120,7 +120,7 @@ describe('Update method', () => {
     controller.update('emptyEvent');
     expect(spy2).toBeCalledTimes(0);
 
-    const spy3 = spyOn<any>(controller, 'updateThumbsPos');
+    const spy3 = spyOn<any>(controller, 'updateThumbsPositions');
     controller.update('emptyEvent');
     expect(spy3).toBeCalledTimes(0);
 
@@ -140,7 +140,7 @@ describe('Update method', () => {
     controller.update('emptyEvent');
     expect(spy7).toBeCalledTimes(0);
 
-    const spy8 = spyOn<any>(controller, 'updatePopUpsSate');
+    const spy8 = spyOn<any>(controller, 'updatePopUpsState');
     controller.update('emptyEvent');
     expect(spy8).toBeCalledTimes(0);
   });
