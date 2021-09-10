@@ -24,9 +24,6 @@ class SimpleSliderController implements IObserver {
     this.init();
   }
 
-  /**
-   * Инициализация слайдера в соответствии с первичными настройками
-   */
   private init(): void {
     if (this.model.getOrientation() === 'horizontal') {
       this.view.switchToHorizontal();
@@ -55,9 +52,6 @@ class SimpleSliderController implements IObserver {
     this.updateView();
   }
 
-  /**
-   * Подписывает Controller на необходимые события, возникающие во View и Model
-   */
   private subscribeToEvents(): void {
     this.viewSubject.register('thumbIsDragged', this);
     this.modelSubject.register('thumbsPositionsIsUpdated', this);
@@ -83,7 +77,7 @@ class SimpleSliderController implements IObserver {
         this.model.updateThumbsState(this.view.getThumbsPositions());
         break;
       case 'thumbsPositionsIsUpdated':
-        this.updateThumbsPos();
+        this.updateThumbsPositions();
         break;
       case 'minIsUpdated':
         this.updateView();
@@ -106,7 +100,7 @@ class SimpleSliderController implements IObserver {
         this.updateScaleState();
         break;
       case 'popUpsStateIsUpdated':
-        this.updatePopUpsSate();
+        this.updatePopUpsState();
         break;
       case 'clickToTrack':
         this.model.setThumbPositionOnClickPosition(
@@ -141,18 +135,12 @@ class SimpleSliderController implements IObserver {
     }
   }
 
-  /**
-   * Обновляет позиции бегунков во view
-   */
-  private updateThumbsPos(): void {
+  private updateThumbsPositions(): void {
     this.view.updateThumbs(this.model.getThumbsPositions());
     this.view.updatePopUps(this.model.getPopUpsParams());
     this.view.updateProgressBar(this.model.getProgressBarParams());
   }
 
-  /**
-   * Обновляет ориентацию слайдера и его элементов во view
-   */
   private updateSliderOrientation(): void {
     if (this.model.getOrientation() === 'horizontal') {
       this.view.switchToHorizontal();
@@ -164,9 +152,6 @@ class SimpleSliderController implements IObserver {
     this.updateView();
   }
 
-  /**
-   * Обновляет слайдер во view в соответствии с типом
-   */
   private updateSliderType(): void {
     if (this.model.getType() === 'single') {
       this.view.switchToSingle();
@@ -178,7 +163,7 @@ class SimpleSliderController implements IObserver {
   }
 
   /**
-   * Обновляет отображение шкалы слайдера во view
+   * Отображает/скрывает шкалу
    */
   private updateScaleState() {
     if (this.model.getScaleState()) {
@@ -190,9 +175,9 @@ class SimpleSliderController implements IObserver {
   }
 
   /**
-   * Обновляет отображение всплывающих подсказок во view
+   * Отображает/скрывает попапы
    */
-  private updatePopUpsSate(): void {
+  private updatePopUpsState(): void {
     if (this.model.getPopUpsState()) {
       this.view.enablePopUps();
       this.model.updateThumbsState(this.model.getThumbsPositions());
