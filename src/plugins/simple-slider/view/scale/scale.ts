@@ -8,18 +8,12 @@ class Scale extends UIControl {
     this.init();
   }
 
-  /**
-   * Инициализация шкалы, подключение обработчиков событий
-   */
   private init(): void {
-    this.control.addEventListener('click', this.clickToScale.bind(this));
+    this.handleScaleClick = this.handleScaleClick.bind(this);
+    this.control.addEventListener('click', this.handleScaleClick);
   }
 
-  /**
-   * Обработка клика по шкале
-   * @param {MouseEvent} event - объект события click
-   */
-  private clickToScale(event: MouseEvent): void {
+  private handleScaleClick(event: MouseEvent): void {
     this.setPosition({ left: event.clientX, top: event.clientY });
     this.subject.notify('clickToScale');
   }
@@ -37,9 +31,8 @@ class Scale extends UIControl {
     });
 
     const pointSize = { width: 0, height: 0 };
-    const scalePoint: HTMLDivElement | null = this.control.querySelector(
-      '.scale__point',
-    );
+    const scalePoint: HTMLDivElement | null =
+      this.control.querySelector('.scale__point');
 
     pointSize.width = scalePoint?.offsetWidth || 0;
     pointSize.height = scalePoint?.offsetHeight || 0;
@@ -48,27 +41,14 @@ class Scale extends UIControl {
     return pointSize;
   }
 
-  /**
-   * Добавляет деления на шкалу
-   * @param {IScalePointParams} points - массив объектов с параметрами всех делений шкалы
-   */
   addPoints(points: IScalePointParams[]): void {
-    for (let point = 0; point < points.length; point += 1) {
-      this.addPoint(points[point]);
-    }
+    points.forEach((point) => this.addPoint(point));
   }
 
-  /**
-   * Добавляет на шкалу одно деление
-   * @param point - объект с параметрами одного деления шкалы
-   */
   private addPoint(point: IScalePointParams): void {
     const orientation = this.getOrientation();
     const scalePoint: HTMLElement = document.createElement('div');
-    scalePoint.classList.add(
-      'scale__point',
-      `scale__point_${orientation}`,
-    );
+    scalePoint.classList.add('scale__point', `scale__point_${orientation}`);
     if (point.size.width > 0) {
       scalePoint.style.width = `${point.size.width}px`;
     }
@@ -85,7 +65,7 @@ class Scale extends UIControl {
     const divisionLabel: HTMLElement = document.createElement('div');
     divisionLabel.classList.add(
       'scale__point-label',
-      `scale__point-label_${orientation}`,
+      `scale__point-label_${orientation}`
     );
     divisionLabel.innerText = point.value.toString();
 

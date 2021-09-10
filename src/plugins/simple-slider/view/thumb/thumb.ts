@@ -6,20 +6,25 @@ import UIControl from '../ui-control/ui-control';
 
 class Thumb extends UIControl {
   private shift = { shiftX: 0, shiftY: 0 };
-  private onMouseMoveHandler = this.drag.bind(this);
-  private onMouseUpHandler = this.endDrag.bind(this);
+  private handleDocumentPointermove: (event: PointerEvent) => void;
+  private handleDocumentPointerup: () => void;
 
   constructor(orientation?: string) {
     super('thumb', orientation);
 
-    this.addMousedownEventListener();
+    this.handleDocumentPointermove = this.drag.bind(this);
+    this.handleDocumentPointerup = this.endDrag.bind(this);
+
+    this.init();
+  }
+
+  private init() {
+    this.handleThumbPointerdown = this.handleThumbPointerdown.bind(this);
+    this.control.addEventListener('pointerdown', this.handleThumbPointerdown);
+
     this.disableDragAndDrop();
   }
 
-  /**
-   * Устанавливает z-index
-   * @param {number} index - новое значение z-индекса
-   */
   setZIndex(index: number): void {
     this.control.style.zIndex = index.toString();
   }
@@ -31,28 +36,17 @@ class Thumb extends UIControl {
     this.control.ondragstart = () => false;
   }
 
-  /**
-   * Добавляет событие на нажатие кнопки мыши на бегунке
-   */
-  private addMousedownEventListener(): void {
-    this.control.addEventListener('pointerdown', this.clickToThumb.bind(this));
-  }
-
-  /**
-   * Обработка касания бегунка мышкой
-   * @param {PointerEvent} event - объект события клика
-   */
-  private clickToThumb(event: PointerEvent): void {
+  private handleThumbPointerdown(event: PointerEvent): void {
     Thumb.disableSelection();
 
     const thumbCoords: DOMRect = this.control.getBoundingClientRect();
     this.setThumbShift(
       { left: event.clientX, top: event.clientY },
-      { left: thumbCoords.left, top: thumbCoords.top },
+      { left: thumbCoords.left, top: thumbCoords.top }
     );
 
-    document.addEventListener('pointermove', this.onMouseMoveHandler);
-    document.addEventListener('pointerup', this.onMouseUpHandler);
+    document.addEventListener('pointermove', this.handleDocumentPointermove);
+    document.addEventListener('pointerup', this.handleDocumentPointerup);
 
     this.subject.notify('thumbIsCatched');
     this.increaseZIndex();
@@ -68,24 +62,15 @@ class Thumb extends UIControl {
     this.shift.shiftY = cursorPos.top - thumbPos.top;
   }
 
-  /**
-   * Увеличивает z-index на единицу
-   */
   private increaseZIndex() {
     const zIndex = this.getStyle('z-index');
     this.control.style.zIndex = (parseInt(zIndex || '0', 10) + 1).toString();
   }
 
-  /**
-   * Возвращает z-index к значению по-умолчанию
-   */
   resetZIndex(): void {
     this.control.style.zIndex = '';
   }
 
-  /**
-   *  Оповещает подписчиков о том, что бегунок пытаются переместить
-   */
   private drag(event: PointerEvent): void {
     this.setPosition({
       left: event.clientX,
@@ -95,31 +80,19 @@ class Thumb extends UIControl {
     this.subject.notify('thumbIsDragged');
   }
 
-  /**
-   * Устанавливает позицию курсора
-   * @param {IPosition} cursorPosition - объект с позицией курсора
-   * относительно левого и верхнего края экрана
-   */
   protected setPosition(cursorPosition: IPosition): void {
     super.setPosition(cursorPosition);
     this.lastPosition.left -= this.shift.shiftX;
     this.lastPosition.top -= this.shift.shiftY;
   }
 
-  /**
-   * Завершает передвижение бегунка, удаляя слушателей событий, которые больше не нужны
-   */
   private endDrag(): void {
     Thumb.enableSelection();
 
-    document.removeEventListener('pointermove', this.onMouseMoveHandler);
-    document.removeEventListener('pointerup', this.onMouseUpHandler);
+    document.removeEventListener('pointermove', this.handleDocumentPointermove);
+    document.removeEventListener('pointerup', this.handleDocumentPointerup);
   }
 
-  /**
-   * Перемещает бегунок на новую позицию
-   * @param {IPosition} position - объект с новой позицией бегунка
-   */
   moveTo(position: IPosition): void {
     this.lastPosition = position;
     this.control.style.left = `${position.left}px`;

@@ -47,28 +47,24 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
     this.progressBar = new ProgressBar();
     this.scale = new Scale();
 
-    this.subscribeToEvents();
-    this.assembleSlider();
-    this.addWindowResizeEventListener();
+    this.init();
   }
 
-  /**
-   * Добавляет событие на изменение размера окна
-   */
-  private addWindowResizeEventListener(): void {
-    window.addEventListener('resize', this.windowResize.bind(this));
+  private init() {
+    this.subscribeToEvents();
+    this.assembleSlider();
+
+    this.handleWindowResize = this.handleWindowResize.bind(this);
+    window.addEventListener('resize', this.handleWindowResize);
   }
 
   /**
    * Обработка изменения размера окна
    */
-  private windowResize(): void {
+  private handleWindowResize(): void {
     this.subject.notify('windowResized');
   }
 
-  /**
-   * Подписывает Controller на необходимые события, возникающие во View и Model
-   */
   subscribeToEvents(): void {
     this.thumbOne.subject.register('thumbIsDragged', this);
     this.thumbTwo?.subject.register('thumbIsDragged', this);
@@ -125,9 +121,6 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
     }
   }
 
-  /**
-   * Меняет ориентацию слайдера на горизонтальную
-   */
   switchToHorizontal(): void {
     this.slider.resetMargins();
     this.slider.switchToHorizontal();
@@ -140,9 +133,6 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
     this.scale?.switchToHorizontal();
   }
 
-  /**
-   * Меняет ориентацию слайдера на вертикальную
-   */
   switchToVertical(): void {
     this.slider.resetMargins();
     this.slider.switchToVertical();
@@ -155,9 +145,6 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
     this.scale?.switchToVertical();
   }
 
-  /**
-   * Меняет тип слайдера на одиночный, удаляя второй бегунок
-   */
   switchToSingle(): void {
     this.thumbTwo?.subject.unsubscribe('thumbIsCatched', this);
     this.thumbTwo?.subject.unsubscribe('thumbIsCatched', this);
@@ -168,9 +155,6 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
     this.popUpTwo = null;
   }
 
-  /**
-   * Меняет тип слайдера на диапазон, добавляя второй бегунок, если он отсутствует
-   */
   switchToRange(): void {
     if (this.thumbTwo === null) {
       this.thumbTwo = new Thumb(this.slider.getOrientation());
@@ -186,9 +170,6 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
     }
   }
 
-  /**
-   * Отключает всплывающие подсказки над бегунками
-   */
   disablePopUps(): void {
     this.popUpOne?.remove();
     this.popUpOne = null;
@@ -198,9 +179,6 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
     this.slider.setMargins(this.getMargins());
   }
 
-  /**
-   * Включает всплывающие подсказки над бегунками
-   */
   enablePopUps(): void {
     if (this.popUpOne === null) {
       this.popUpOne = new PopUp(this.slider.getOrientation());
@@ -224,9 +202,6 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
     return this.popUpTwo === null && this.thumbTwo !== null;
   }
 
-  /**
-   * Отключает шкалу
-   */
   disableScale(): void {
     this.scale?.subject.unsubscribe('clickToScale', this);
     this.scale?.remove();
@@ -235,9 +210,6 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
     this.slider.setMargins(this.getMargins());
   }
 
-  /**
-   * Включает шкалу
-   */
   enableScale(): void {
     if (this.scale !== null) {
       this.scale?.remove();
@@ -249,27 +221,14 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
     this.slider.setMargins(this.getMargins());
   }
 
-  /**
-   * Возвращение размера бегунка
-   * @returns {ISize} - объект с шириной и высотой бегунка
-   */
   getThumbSize(): ISize {
     return this.thumbOne.getSize();
   }
 
-  /**
-   * Возвращение размера слайдера
-   * @returns {IPosition} - объект с отступами от левого и верхнего края родительского
-   * контейнера
-   */
   getSliderSize(): ISize {
     return this.slider.getSize();
   }
 
-  /**
-   * Возвращение позиций бегунков
-   * @returns {IThumbsPositions} - объект с позициями бегунков
-   */
   getThumbsPositions(): IThumbsPositions {
     const thumbOne = this.thumbOne.getPosition();
     let thumbTwo: IPosition | null = null;
@@ -279,10 +238,6 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
     return { thumbOne, thumbTwo };
   }
 
-  /**
-   * Обновляет позиции бегунков
-   * @param {IThumbsPositions} thumbsPositions - объект с позициями бегунков
-   */
   updateThumbs(thumbsPositions: IThumbsPositions): void {
     this.thumbOne.moveTo(thumbsPositions.thumbOne);
     if (thumbsPositions.thumbTwo !== null) {
@@ -290,18 +245,10 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
     }
   }
 
-  /**
-   * Обновляет позицию и размер прогресс-бара
-   * @param {IProgressBarParams} thumbsPositions - объект с позицией и размером прогресс-бара
-   */
   updateProgressBar(params: IProgressBarParams): void {
     this.progressBar.update(params);
   }
 
-  /**
-   * Обновляет значения всплывающих подсказок
-   * @param {IProgressBarParams} thumbsPositions - объект со значениями всплывающих подсказок
-   */
   updatePopUps(params: IPopUps): void {
     if (this.popUpOne !== null) {
       this.popUpOne.update(params.popUpOne);
@@ -311,11 +258,6 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
     }
   }
 
-  /**
-   * Возвращает объект с шириной и высотой одного деления шкалы (включая маркер деления и значение)
-   * @param {number} value - максимальное значение слайдера
-   * @returns {ISize} - объект с шириной и высотой одного деления шкалы
-   */
   getScalePointSize(value: number): ISize {
     if (this.scale !== null) {
       return this.scale.getPointSize(value);
@@ -323,10 +265,6 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
     return { width: 0, height: 0 };
   }
 
-  /**
-   * Добавляет деления к шкале
-   * @param {IScalePointParams[]} points - массив объектов с параметрами делений шкалы
-   */
   addScalePoints(points: IScalePointParams[]): void {
     this.scale?.addPoints(points);
     this.slider.setMargins(this.getMargins());

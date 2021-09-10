@@ -14,11 +14,6 @@ class Slider extends UIControl {
     this.control.append(control);
   }
 
-  /**
-   * Устанавливает отступы от левой, верхней, правой и нижней границ слайдера
-   * @param {ISliderMargins} margins - объект с отступами от левой, верхней, правой
-   * и нижней границ слайдера
-   */
   setMargins(margins: ISliderMargins): void {
     this.control.style.marginLeft = `${margins.left}px`;
     this.control.style.marginTop = `${margins.top}px`;
@@ -26,9 +21,6 @@ class Slider extends UIControl {
     this.control.style.marginBottom = `${margins.bottom}px`;
   }
 
-  /**
-   * Сбрасывает отступы от границ слайдера на 0
-   */
   resetMargins(): void {
     this.control.style.margin = '0';
   }

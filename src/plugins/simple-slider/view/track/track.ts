@@ -6,18 +6,12 @@ class Track extends UIControl {
     this.init();
   }
 
-  /**
-   * Инициализация трека, подключение обработчиков событий
-   */
   private init(): void {
-    this.control.addEventListener('click', this.clickToTrack.bind(this));
+    this.handleTrackClick = this.handleTrackClick.bind(this);
+    this.control.addEventListener('click', this.handleTrackClick);
   }
 
-  /**
-   * Обработка клика по треку
-   * @param {MouseEvent} event - объект события click
-   */
-  private clickToTrack(event: MouseEvent): void {
+  private handleTrackClick(event: MouseEvent): void {
     this.setPosition({ left: event.clientX, top: event.clientY });
     this.subject.notify('clickToTrack');
   }
