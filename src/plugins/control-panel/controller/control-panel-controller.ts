@@ -14,9 +14,6 @@ class ControlPanelController implements IObserver {
     this.subscribeToEvents();
   }
 
-  /**
-   * Подписывает Controller на необходимые события, возникающие во View и Model
-   */
   private subscribeToEvents(): void {
     this.model.register('thumbsPositionsIsUpdated', this);
     this.model.register('minIsUpdated', this);
@@ -25,9 +22,6 @@ class ControlPanelController implements IObserver {
     this.view.register('controlPanelDataUpdated', this);
   }
 
-  /**
-   * Инициализация элементов слайдера во View данными из Model
-   */
   init(): void {
     this.view.setThumbsValues(this.model.getThumbsValues());
     this.view.setMinValue(this.model.getMin());
