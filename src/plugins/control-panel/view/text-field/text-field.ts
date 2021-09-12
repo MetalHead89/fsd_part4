@@ -14,41 +14,25 @@ class TextField extends Subject {
     this.init(labelText);
   }
 
-  /**
-   * Возвращает компонент текстового поля
-   * @returns {HTMLDivElement} - группа HTML элементов обернутая в div
-   */
   getControl(): HTMLDivElement {
     return this.control;
   }
 
-  /**
-   * Возвращает значение введённое в текстовое поле
-   * @returns {number} - значение введённое в текстовое поле
-   */
   getValue(): number {
     return parseInt(this.field.value, 10);
   }
 
-  /**
-   * Записывает значение в текстовое поле
-   * @param {number} value - значение которое должно быть записано в текстовое поле
-   */
   setValue(value: number): void {
     this.field.value = `${value}`;
   }
 
-  /**
-   * Инициализирует текстовое поле. Добавляет классы, слушатели событий, лейблы и т.п.
-   * для его составляющих и компонует все в единый элемент
-   * @param {string} labelText - текст лейбла
-   */
   private init(labelText: string) {
     this.control.classList.add('text-field');
 
     this.field.type = 'number';
     this.field.classList.add('text-field__input');
-    this.field.addEventListener('blur', this.reportChanges.bind(this));
+    this.handleTextFieldBlur = this.handleTextFieldBlur.bind(this);
+    this.field.addEventListener('blur', this.handleTextFieldBlur);
     this.field.onkeypress = TextField.removeNonDigitChar;
 
     this.label.classList.add('text-field__label');
@@ -58,10 +42,7 @@ class TextField extends Subject {
     this.control.append(this.label);
   }
 
-  /**
-   * Оповещает подписчиков, об изменении данных
-   */
-  private reportChanges() {
+  private handleTextFieldBlur() {
     this.notify('controlPanelDataUpdated');
   }
 

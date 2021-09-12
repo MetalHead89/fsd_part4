@@ -17,13 +17,9 @@ function groupElements(params: IGroupElements): HTMLDivElement {
     wrapper.append(header);
   }
 
-  for (
-    let elementIndex = 0;
-    elementIndex < params.elements.length;
-    elementIndex += 1
-  ) {
-    wrapper.append(params.elements[elementIndex]);
-  }
+  params.elements.forEach((element) => {
+    wrapper.append(element);
+  });
 
   return wrapper;
 }

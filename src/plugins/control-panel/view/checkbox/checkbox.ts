@@ -15,11 +15,6 @@ class Checkbox extends Subject {
     this.init(params);
   }
 
-  /**
-   * Инициализирует чекбокс. Добавляет классы, слушатели событий, лейблы и т.п.
-   * для его составляющих и компонует все в единый элемент
-   * @param {ICheckboxParams} params - параметры чекбокса
-   */
   private init(params: ICheckboxParams): void {
     this.control.classList.add('checkbox');
 
@@ -30,25 +25,18 @@ class Checkbox extends Subject {
     this.checkbox.name = params.name;
     this.checkbox.value = params.value;
     this.checkbox.classList.add('checkbox__check');
-    this.checkbox.addEventListener('change', this.onChange.bind(this));
+    this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
+    this.checkbox.addEventListener('change', this.handleCheckboxChange);
 
     this.label.append(this.checkbox);
     this.control.append(this.label);
   }
 
-  /**
-   * Возвращает компонент чекбокса
-   * @returns {HTMLDivElement} - группа HTML элементов обернутая в div
-   */
   getControl(): HTMLDivElement {
     return this.control;
   }
 
-  /**
-   * Добавляет/удаляет галочку, в зависимости от состояния чекбокса.
-   * Оповещает подписчиков об изменении состояния чекбокса
-   */
-  private onChange(): void {
+  private handleCheckboxChange(): void {
     if (this.checkbox.checked) {
       this.label.classList.add('checkbox__label_checked');
     } else {
@@ -58,19 +46,11 @@ class Checkbox extends Subject {
     this.notify('controlPanelDataUpdated');
   }
 
-  /**
-   * Переводит чекбокс в состояние выбран/не выбран в зависимости от полученного состояния
-   * @param {boolean} state - состояние радиокнопки
-   */
   setState(state: boolean): void {
     this.checkbox.checked = state;
-    this.onChange();
+    this.handleCheckboxChange();
   }
 
-  /**
-   * Возвращает состояние чекбокса
-   * @returns {boolean} - состояние чекбокса
-   */
   getState(): boolean {
     return this.checkbox.checked;
   }

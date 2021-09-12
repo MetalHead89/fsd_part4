@@ -22,69 +22,65 @@ class RadioButton extends Subject {
   }
 
   getValue(): string {
-    for (let radio = 0; radio < this.radios.length; radio += 1) {
-      if (this.radios[radio].checked) {
-        return this.radios[radio].value;
+    let value = '';
+
+    this.radios.forEach((radio) => {
+      if (radio.checked) {
+        value = radio.value;
       }
-    }
-    return '';
+    });
+
+    return value;
   }
 
   private init(name: string, params: IRadioParams[]) {
-    for (let radio = 0; radio < params.length; radio += 1) {
+    params.forEach((radio) => {
       const radioWrapper = document.createElement('div');
       radioWrapper.classList.add('radio-button__radio-wrapper');
 
       const label = document.createElement('label');
       label.classList.add('radio-button__label');
-      label.innerText = params[radio].label;
+      label.innerText = radio.label;
 
       const radioButton = document.createElement('input');
       radioButton.type = 'radio';
       radioButton.name = name;
-      radioButton.value = params[radio].value;
-      if (RadioButton.radioIsFirstOrChecked(radio, params[radio].checked)) {
+      radioButton.value = radio.value;
+      if (params[0] === radio || radio.checked) {
         radioButton.checked = true;
       }
       radioButton.classList.add('radio-button__radio-button');
-      radioButton.addEventListener('change', this.onChange.bind(this));
+      this.handleRadioButtonChange = this.handleRadioButtonChange.bind(this);
+      radioButton.addEventListener('change', this.handleRadioButtonChange);
       this.radios.push(radioButton);
 
       label.append(radioButton);
       radioWrapper.append(label);
       this.control.append(radioWrapper);
-    }
+    });
   }
 
-  private static radioIsFirstOrChecked(
-    index: number,
-    checked: boolean | undefined,
-  ) {
-    return index === 0 || checked;
-  }
+  private handleRadioButtonChange(): void {
+    this.radios.forEach((radio) => {
+      const label = radio.parentElement;
 
-  private onChange(): void {
-    for (let radio = 0; radio < this.radios.length; radio += 1) {
-      const label = this.radios[radio].parentElement;
-
-      if (this.radios[radio].checked) {
+      if (radio.checked) {
         label?.classList.add('radio-button__label_checked');
       } else {
         label?.classList.remove('radio-button__label_checked');
       }
-    }
+    });
 
     this.notify('controlPanelDataUpdated');
   }
 
   switchTo(value: string): void {
-    for (let radio = 0; radio < this.radios.length; radio += 1) {
-      if (this.radios[radio].value === value) {
-        this.radios[radio].checked = true;
-        this.onChange();
-        break;
+    this.radios.forEach((radio) => {
+      if (radio.value === value) {
+        radio.checked = true;
+        this.handleRadioButtonChange();
       }
-    }
+    });
   }
 
   private static generateName(name: string): string {
