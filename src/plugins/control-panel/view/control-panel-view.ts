@@ -90,13 +90,13 @@ class ControlPanelView extends Subject implements IObserver {
     });
 
     const allRadiosGroup = groupElements({
-      wrapperClass: '',
+      wrapperClass: 'control-panel__wrapper',
       elements: [typeRadioGroup, orientationRadioGroup],
     });
 
     const checkboxesGroup = groupElements({
       header: 'on/off elements',
-      wrapperClass: '',
+      wrapperClass: 'control-panel__wrapper',
       elements: [
         this.scaleCheckbox.getControl(),
         this.popUpsCheckbox.getControl(),

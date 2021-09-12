@@ -13,7 +13,8 @@
   border-radius: 5px;
   padding: 20px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-around;
   user-select: none;
 
@@ -35,11 +36,20 @@
   }
 
   &__checkboxes-and-radios-wrapper {
+    max-width: 500px;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: flex-start;
     flex-wrap: wrap;
+    margin: 0, 20px;
+    @media screen and (max-width: 1085px) {
+      width: 100%;
+    }
+  }
+
+  &__wrapper {
+    margin: 0 10px;
   }
 
   &__text-fields-group {
@@ -47,5 +57,6 @@
     flex-direction: row;
     justify-content: space-evenly;
     padding: 5px 0;
+    margin: 0 20px;
   }
 }
