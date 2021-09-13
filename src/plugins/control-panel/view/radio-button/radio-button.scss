@@ -5,6 +5,10 @@
   flex-direction: row;
   padding: 0 0 5px;
 
+  @media screen and (max-width: 410px) {
+    flex-direction: column;
+  }
+
   &__radio-wrapper {
     display: flex;
     flex-direction: row;
@@ -25,7 +29,7 @@
     font-size: 1.2rem;
     color: rgb(155, 155, 155);
     position: relative;
-    margin-left: 20px;
+    margin: 2px 0 2px 20px;
     transition: 0.5s ease;
     cursor: pointer;
 

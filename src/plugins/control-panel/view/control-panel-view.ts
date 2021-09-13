@@ -79,13 +79,13 @@ class ControlPanelView extends Subject implements IObserver {
 
     const typeRadioGroup = groupElements({
       header: 'type',
-      wrapperClass: '',
+      wrapperClass: 'control-panel__radio-group',
       elements: [this.typeRadio.getControl()],
     });
 
     const orientationRadioGroup = groupElements({
       header: 'orientation',
-      wrapperClass: '',
+      wrapperClass: 'control-panel__radio-group',
       elements: [this.orientationRadio.getControl()],
     });
 

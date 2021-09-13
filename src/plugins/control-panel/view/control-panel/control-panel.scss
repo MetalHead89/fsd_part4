@@ -1,4 +1,6 @@
-.control-panel {
+$control-panel: '.control-panel';
+
+#{$control-panel} {
   flex: auto;
   box-sizing: border-box;
   border: 1px solid transparent;
@@ -24,6 +26,12 @@
 
   &_vertical {
     margin-left: 10px;
+
+    #{$control-panel}__text-fields-group {
+      @media screen and (max-width: 415px) {
+        flex-wrap: wrap;
+      }
+    }
   }
 
   &__group-title {
@@ -58,5 +66,9 @@
     justify-content: space-evenly;
     padding: 5px 0;
     margin: 0 20px;
+
+    @media screen and (max-width: 340px) {
+      flex-wrap: wrap;
+    }
   }
 }
