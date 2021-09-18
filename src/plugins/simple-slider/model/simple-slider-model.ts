@@ -94,11 +94,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
   private rangeValuesIsCorrect(): boolean {
     return this.type === 'range' && this.thumbTwoValue < this.thumbOneValue;
   }
-
-  /**
-   * Обновление состояния бегунков и оповещение наблюдателей об изменении
-   * @param {IThumbsPositions} positions - текущая позиция бегунков
-   */
+  
   updateThumbsState(positions: IThumbsPositions): void {
     const thumbOneValue = this.valueWithStep(
       this.positionByOrientation(positions.thumbOne)

@@ -18,11 +18,6 @@ class Scale extends UIControl {
     this.subject.notify('clickToScale');
   }
 
-  /**
-   * Возвращает размер одного деления шкалы
-   * @param {number} value - значение деления шкалы
-   * @returns {ISize} - объект с шириной и высотой одного деления шкалы
-   */
   getPointSize(value: number): ISize {
     this.addPoint({
       position: { left: 0, top: 0 },

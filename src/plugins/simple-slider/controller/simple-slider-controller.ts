@@ -64,10 +64,6 @@ class SimpleSliderController implements IObserver {
     this.view.subject.register('windowResized', this);
   }
 
-  /**
-   * Перехватывание и реагирование на события, возникающие в Model и View
-   * @param {string} eventType - тип уведомления
-   */
   update(eventType: string): void {
     switch (eventType) {
       case 'thumbIsDragged':
@@ -117,9 +113,6 @@ class SimpleSliderController implements IObserver {
     }
   }
 
-  /**
-   * Обновляет бегунки, прогресс-бар и шкалу во View в соответствии с их состоянием
-   */
   private updateView(): void {
     this.model.updateThumbsState(this.model.getThumbsPositions());
 
@@ -163,9 +156,6 @@ class SimpleSliderController implements IObserver {
     this.model.updateThumbsState(this.model.getThumbsPositions());
   }
 
-  /**
-   * Отображает/скрывает шкалу
-   */
   private updateScaleState() {
     if (this.model.getScaleState()) {
       this.view.enableScale();
@@ -175,9 +165,6 @@ class SimpleSliderController implements IObserver {
     }
   }
 
-  /**
-   * Отображает/скрывает попапы
-   */
   private updatePopUpsState(): void {
     if (this.model.getPopUpsState()) {
       this.view.enablePopUps();

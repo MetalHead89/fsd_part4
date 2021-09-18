@@ -33,10 +33,6 @@ class ControlPanelController implements IObserver {
     this.view.setOrientationRadio(this.model.getOrientation());
   }
 
-  /**
-   * Обновляет данные слайдера или панели управления в соответствии с полученным событием
-   * @param {string} eventType - событие
-   */
   update(eventType: string): void {
     if (eventType === 'thumbsPositionsIsUpdated') {
       this.view.setThumbsValues(this.model.getThumbsValues());

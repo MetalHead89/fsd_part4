@@ -58,9 +58,6 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
     window.addEventListener('resize', this.handleWindowResize);
   }
 
-  /**
-   * Обработка изменения размера окна
-   */
   private handleWindowResize(): void {
     this.subject.notify('windowResized');
   }
@@ -74,9 +71,6 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
     this.scale?.subject.register('clickToScale', this);
   }
 
-  /**
-   * Сборка слайдера из отдельных элементов
-   */
   private assembleSlider(): void {
     this.slider.append(this.track.getControl());
     this.slider.append(this.thumbOne.getControl());
@@ -97,10 +91,6 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
     this.sliderWrapper.append(this.slider.getControl());
   }
 
-  /**
-   * Перехватывание и реагирование на уведомления от субъектов, на которые подписано View
-   * @param {string} eventType - тип уведомления
-   */
   update(eventType: string): void {
     switch (eventType) {
       case 'thumbIsDragged':
