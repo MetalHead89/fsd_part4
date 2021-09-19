@@ -37,11 +37,7 @@ class Checkbox extends Subject {
   }
 
   private handleCheckboxChange(): void {
-    if (this.checkbox.checked) {
-      this.label.classList.add('checkbox__label_checked');
-    } else {
-      this.label.classList.remove('checkbox__label_checked');
-    }
+    this.label.classList.toggle('checkbox__label_checked');
 
     this.notify('controlPanelDataUpdated');
   }
