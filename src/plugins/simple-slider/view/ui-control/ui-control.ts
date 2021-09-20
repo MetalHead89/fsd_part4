@@ -32,7 +32,7 @@ class UIControl {
 
     const parent: HTMLElement | null = this.control.parentElement;
 
-    if (parent !== null) {
+    if (parent) {
       const parentCoords: DOMRect = parent.getBoundingClientRect();
       positionInsideParent.left -= parentCoords.left;
       positionInsideParent.top -= parentCoords.top;

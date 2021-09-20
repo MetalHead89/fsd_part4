@@ -85,17 +85,17 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
   private assembleSlider(): void {
     this.slider.append(this.track.getControl());
     this.slider.append(this.thumbOne.getControl());
-    if (this.thumbTwo !== null) {
+    if (this.thumbTwo) {
       this.slider.append(this.thumbTwo.getControl());
     }
-    if (this.popUpOne !== null) {
+    if (this.popUpOne) {
       this.slider.append(this.popUpOne.getControl());
     }
-    if (this.popUpTwo !== null) {
+    if (this.popUpTwo) {
       this.slider.append(this.popUpTwo.getControl());
     }
     this.slider.append(this.progressBar.getControl());
-    if (this.scale !== null) {
+    if (this.scale) {
       this.slider.append(this.scale.getControl());
     }
 
@@ -145,7 +145,7 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
       this.thumbTwo = new Thumb(this.slider.getOrientation());
       this.slider.append(this.thumbTwo.getControl());
 
-      if (this.popUpOne !== null) {
+      if (this.popUpOne) {
         this.popUpTwo = new PopUp(this.slider.getOrientation());
         this.slider.append(this.popUpTwo.getControl());
       }
@@ -196,7 +196,7 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
   }
 
   enableScale(): void {
-    if (this.scale !== null) {
+    if (this.scale) {
       this.scale?.remove();
     }
     this.scale = new Scale(this.slider.getOrientation());
@@ -217,7 +217,7 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
   getThumbsPositions(): IThumbsPositions {
     const thumbOne = this.thumbOne.getPosition();
     let thumbTwo: IPosition | null = null;
-    if (this.thumbTwo !== null) {
+    if (this.thumbTwo) {
       thumbTwo = this.thumbTwo.getPosition();
     }
     return { thumbOne, thumbTwo };
@@ -225,7 +225,7 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
 
   updateThumbs(thumbsPositions: IThumbsPositions): void {
     this.thumbOne.moveTo(thumbsPositions.thumbOne);
-    if (thumbsPositions.thumbTwo !== null) {
+    if (thumbsPositions.thumbTwo) {
       this.thumbTwo?.moveTo(thumbsPositions.thumbTwo);
     }
   }
@@ -235,16 +235,16 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
   }
 
   updatePopUps(params: IPopUps): void {
-    if (this.popUpOne !== null) {
+    if (this.popUpOne) {
       this.popUpOne.update(params.popUpOne);
     }
-    if (this.popUpTwo !== null) {
+    if (this.popUpTwo) {
       this.popUpTwo.update(params.popUpTwo);
     }
   }
 
   getScalePointSize(value: number): ISize {
-    if (this.scale !== null) {
+    if (this.scale) {
       return this.scale.getPointSize(value);
     }
     return { width: 0, height: 0 };
@@ -287,21 +287,21 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
     };
 
     const sliderRect = this.slider.getRect();
-    const popUpRect = this.popUpOne !== null ? this.popUpOne.getRect() : null;
-    const scaleRect = this.scale !== null ? this.scale.getRect() : null;
+    const popUpRect = this.popUpOne ? this.popUpOne.getRect() : null;
+    const scaleRect = this.scale ? this.scale.getRect() : null;
 
     if (this.slider.getOrientation() === 'horizontal') {
-      if (popUpRect !== null) {
+      if (popUpRect) {
         margins.top += sliderRect.top - popUpRect.top;
       }
-      if (scaleRect !== null) {
+      if (scaleRect) {
         margins.bottom += scaleRect.bottom - sliderRect.bottom;
       }
     } else {
-      if (popUpRect !== null) {
+      if (popUpRect) {
         margins.left += sliderRect.left - popUpRect.left;
       }
-      if (scaleRect !== null) {
+      if (scaleRect) {
         margins.right += scaleRect.right - sliderRect.right;
       }
     }

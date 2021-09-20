@@ -94,14 +94,14 @@ class SimpleSliderModel implements ISimpleSliderModel {
   private rangeValuesIsCorrect(): boolean {
     return this.type === 'range' && this.thumbTwoValue < this.thumbOneValue;
   }
-  
+
   updateThumbsState(positions: IThumbsPositions): void {
     const thumbOneValue = this.valueWithStep(
       this.positionByOrientation(positions.thumbOne)
     );
     let thumbTwoValue: null | number = null;
 
-    if (positions.thumbTwo !== null) {
+    if (positions.thumbTwo) {
       thumbTwoValue = this.valueWithStep(
         this.positionByOrientation(positions.thumbTwo)
       );
@@ -111,7 +111,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
       SimpleSliderModel.secondValueIsIncorrect(thumbOneValue, thumbTwoValue)
     ) {
       this.thumbOneValue = thumbOneValue;
-      if (thumbTwoValue !== null) {
+      if (thumbTwoValue) {
         this.thumbTwoValue = thumbTwoValue;
       }
     }
