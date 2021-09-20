@@ -10,31 +10,33 @@ function removeSlider(sliderWrapper: HTMLDivElement) {
 }
 
 function clickToAddNewSliderBtn(): void {
-  if (buttonWrapper !== null) {
-    helpImage?.remove();
-    helpImage = null;
-
-    addNewSliderBtn?.classList.remove('add-new-slider-btn_margin-top');
-
-    const sliderWrapper = document.createElement('div');
-    sliderWrapper.classList.add('slider-wrapper');
-    buttonWrapper.before(sliderWrapper);
-
-    const icon = document.createElement('span');
-    icon.classList.add('material-icons', 'remove-slider-button__icon');
-    icon.innerText = 'clear';
-
-    const removeSliderButton = document.createElement('button');
-    removeSliderButton.classList.add('remove-slider-button');
-    removeSliderButton.append(icon);
-    removeSliderButton.addEventListener(
-      'click',
-      removeSlider.bind(removeSliderButton, sliderWrapper)
-    );
-    sliderWrapper.append(removeSliderButton);
-
-    $(sliderWrapper).simpleSlider().controlPanel();
+  if (buttonWrapper === null) {
+    return;
   }
+
+  helpImage?.remove();
+  helpImage = null;
+
+  addNewSliderBtn?.classList.remove('add-new-slider-btn_margin-top');
+
+  const sliderWrapper = document.createElement('div');
+  sliderWrapper.classList.add('slider-wrapper');
+  buttonWrapper.before(sliderWrapper);
+
+  const icon = document.createElement('span');
+  icon.classList.add('material-icons', 'remove-slider-button__icon');
+  icon.innerText = 'clear';
+
+  const removeSliderButton = document.createElement('button');
+  removeSliderButton.classList.add('remove-slider-button');
+  removeSliderButton.append(icon);
+  removeSliderButton.addEventListener(
+    'click',
+    removeSlider.bind(removeSliderButton, sliderWrapper)
+  );
+  sliderWrapper.append(removeSliderButton);
+
+  $(sliderWrapper).simpleSlider().controlPanel();
 }
 
 addNewSliderBtn?.addEventListener('click', clickToAddNewSliderBtn);
