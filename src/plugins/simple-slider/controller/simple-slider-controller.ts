@@ -6,6 +6,7 @@ import {
   ISimpleSliderModel,
   ISimpleSliderView,
   ISubject,
+  ISubjectEvents,
 } from '../interfaces';
 
 class SimpleSliderController implements IObserver {
@@ -13,6 +14,37 @@ class SimpleSliderController implements IObserver {
   private view: ISimpleSliderView;
   private modelSubject: ISubject;
   private viewSubject: ISubject;
+
+  private events: ISubjectEvents = {
+    thumbIsDragged: () => {
+      this.model.updateThumbsState(this.view.getThumbsPositions());
+    },
+    thumbsPositionsIsUpdated: () => this.updateThumbsPositions(),
+    minIsUpdated: () => {
+      this.updateView();
+      this.model.recalculateStep();
+    },
+    maxIsUpdated: () => {
+      this.updateView();
+      this.model.recalculateStep();
+    },
+    stepIsUpdated: () => this.updateView(),
+    orientationIsUpdated: () => this.updateSliderOrientation(),
+    typeIsUpdated: () => this.updateSliderType(),
+    scaleStateIsUpdated: () => this.updateScaleState(),
+    popUpsStateIsUpdated: () => this.updatePopUpsState(),
+    clickToTrack: () => {
+      this.model.setThumbPositionOnClickPosition(
+        this.view.getTrackClickPosition()
+      );
+    },
+    clickToScale: () => {
+      this.model.setThumbPositionOnClickPosition(
+        this.view.getScaleClickPosition()
+      );
+    },
+    windowResized: () => this.init(),
+  };
 
   constructor(params: IControllerParams) {
     this.model = params.model;
@@ -65,52 +97,7 @@ class SimpleSliderController implements IObserver {
   }
 
   update(eventType: string): void {
-    switch (eventType) {
-      case 'thumbIsDragged':
-        this.model.updateThumbsState(this.view.getThumbsPositions());
-        break;
-      case 'thumbsPositionsIsUpdated':
-        this.updateThumbsPositions();
-        break;
-      case 'minIsUpdated':
-        this.updateView();
-        this.model.recalculateStep();
-        break;
-      case 'maxIsUpdated':
-        this.updateView();
-        this.model.recalculateStep();
-        break;
-      case 'stepIsUpdated':
-        this.updateView();
-        break;
-      case 'orientationIsUpdated':
-        this.updateSliderOrientation();
-        break;
-      case 'typeIsUpdated':
-        this.updateSliderType();
-        break;
-      case 'scaleStateIsUpdated':
-        this.updateScaleState();
-        break;
-      case 'popUpsStateIsUpdated':
-        this.updatePopUpsState();
-        break;
-      case 'clickToTrack':
-        this.model.setThumbPositionOnClickPosition(
-          this.view.getTrackClickPosition()
-        );
-        break;
-      case 'clickToScale':
-        this.model.setThumbPositionOnClickPosition(
-          this.view.getScaleClickPosition()
-        );
-        break;
-      case 'windowResized':
-        this.init();
-        break;
-      default:
-        break;
-    }
+    this.events[eventType]();
   }
 
   private updateView(): void {

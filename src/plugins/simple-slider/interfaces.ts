@@ -25,6 +25,10 @@ interface IObserversList {
   [index: string]: IObserver[];
 }
 
+interface ISubjectEvents {
+  [key: string]: () => void;
+}
+
 interface IThumbsValues {
   thumbOne: number;
   thumbTwo: number;
@@ -126,6 +130,7 @@ export {
   ISliderSettings,
   IObserver,
   IObserversList,
+  ISubjectEvents,
   IThumbsValues,
   ISubject,
   IPosition,

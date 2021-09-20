@@ -11,6 +11,7 @@ import {
   ISize,
   ISliderMargins,
   ISubject,
+  ISubjectEvents,
   IThumbsPositions,
 } from '../interfaces';
 
@@ -33,6 +34,16 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
   private popUpTwo: PopUp | null;
   private progressBar: ProgressBar;
   private scale: Scale | null;
+
+  private events: ISubjectEvents = {
+    thumbIsDragged: () => this.subject.notify('thumbIsDragged'),
+    thumbIsCatched: () => {
+      this.thumbOne.resetZIndex();
+      this.thumbTwo?.resetZIndex();
+    },
+    clickToTrack: () => this.subject.notify('clickToTrack'),
+    clickToScale: () => this.subject.notify('clickToScale'),
+  };
 
   constructor(wrapper: HTMLDivElement) {
     this.subject = new Subject();
@@ -92,23 +103,7 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
   }
 
   update(eventType: string): void {
-    switch (eventType) {
-      case 'thumbIsDragged':
-        this.subject.notify('thumbIsDragged');
-        break;
-      case 'thumbIsCatched':
-        this.thumbOne.resetZIndex();
-        this.thumbTwo?.resetZIndex();
-        break;
-      case 'clickToTrack':
-        this.subject.notify('clickToTrack');
-        break;
-      case 'clickToScale':
-        this.subject.notify('clickToScale');
-        break;
-      default:
-        break;
-    }
+    this.events[eventType]();
   }
 
   switchToHorizontal(): void {

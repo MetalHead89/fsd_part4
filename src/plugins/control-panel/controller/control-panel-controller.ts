@@ -1,10 +1,34 @@
 import { IObserver } from '../../simple-slider/interfaces';
+import { ISubjectEvents } from '../interfaces';
 import ControlPanelModel from '../model/control-panel-model';
 import ControlPanelView from '../view/control-panel-view';
 
 class ControlPanelController implements IObserver {
   private view: ControlPanelView;
   private model: ControlPanelModel;
+
+  private events: ISubjectEvents = {
+    thumbsPositionsIsUpdated: () => {
+      this.view.setThumbsValues(this.model.getThumbsValues());
+    },
+    minIsUpdated: () => this.view.setMinValue(this.model.getMin()),
+    maxIsUpdated: () => this.view.setMaxValue(this.model.getMax()),
+    stepIsUpdated: () => this.view.setStep(this.model.getStep()),
+    controlPanelDataUpdated: () => {
+      const sliderSettings = {
+        orientation: this.view.getOrientation(),
+        type: this.view.getType(),
+        scale: this.view.getScaleState(),
+        popUps: this.view.getPopUpsState(),
+        min: this.view.getMin(),
+        max: this.view.getMax(),
+        step: this.view.getStep(),
+        thumbOneValue: this.view.getThumbOneValue(),
+        thumbTwoValue: this.view.getThumbTwoValue(),
+      };
+      this.model.refreshSliderState(sliderSettings);
+    },
+  };
 
   constructor(view: ControlPanelView, model: ControlPanelModel) {
     this.view = view;
@@ -34,30 +58,7 @@ class ControlPanelController implements IObserver {
   }
 
   update(eventType: string): void {
-    if (eventType === 'thumbsPositionsIsUpdated') {
-      this.view.setThumbsValues(this.model.getThumbsValues());
-    } else if (eventType === 'minIsUpdated') {
-      this.view.setMinValue(this.model.getMin());
-    } else if (eventType === 'maxIsUpdated') {
-      this.view.setMaxValue(this.model.getMax());
-    } else if (eventType === 'stepIsUpdated') {
-      this.view.setStep(this.model.getStep());
-    }
-
-    if (eventType === 'controlPanelDataUpdated') {
-      const sliderSettings = {
-        orientation: this.view.getOrientation(),
-        type: this.view.getType(),
-        scale: this.view.getScaleState(),
-        popUps: this.view.getPopUpsState(),
-        min: this.view.getMin(),
-        max: this.view.getMax(),
-        step: this.view.getStep(),
-        thumbOneValue: this.view.getThumbOneValue(),
-        thumbTwoValue: this.view.getThumbTwoValue(),
-      };
-      this.model.refreshSliderState(sliderSettings);
-    }
+    this.events[eventType]();
   }
 }
 

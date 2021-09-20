@@ -1,3 +1,7 @@
+interface ISubjectEvents {
+  [key: string]: () => void;
+}
+
 interface IRadioParams {
   label: string;
   value: string;
@@ -16,4 +20,4 @@ interface IGroupElements {
   elements: HTMLDivElement[];
 }
 
-export { IRadioParams, ICheckboxParams, IGroupElements };
+export { ISubjectEvents, IRadioParams, ICheckboxParams, IGroupElements };

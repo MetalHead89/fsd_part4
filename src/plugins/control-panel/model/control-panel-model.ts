@@ -5,10 +5,18 @@ import {
   IThumbsValues,
 } from '../../simple-slider/interfaces';
 import Subject from '../../simple-slider/subject/subject';
+import { ISubjectEvents } from '../interfaces';
 
 class ControlPanelModel extends Subject implements IObserver {
   private slider: JQuery<HTMLElement>;
   private subject: ISubject;
+
+  private events: ISubjectEvents = {
+    thumbsPositionsIsUpdated: () => this.notify('thumbsPositionsIsUpdated'),
+    minIsUpdated: () => this.notify('minIsUpdated'),
+    maxIsUpdated: () => this.notify('maxIsUpdated'),
+    stepIsUpdated: () => this.notify('stepIsUpdated'),
+  };
 
   constructor(slider: JQuery<HTMLElement>) {
     super();
@@ -21,15 +29,7 @@ class ControlPanelModel extends Subject implements IObserver {
   }
 
   update(eventType: string): void {
-    if (eventType === 'thumbsPositionsIsUpdated') {
-      this.notify('thumbsPositionsIsUpdated');
-    } else if (eventType === 'minIsUpdated') {
-      this.notify('minIsUpdated');
-    } else if (eventType === 'maxIsUpdated') {
-      this.notify('maxIsUpdated');
-    } else if (eventType === 'stepIsUpdated') {
-      this.notify('stepIsUpdated');
-    }
+    this.events[eventType]();
   }
 
   getThumbsValues(): IThumbsValues {
