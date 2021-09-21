@@ -49,14 +49,14 @@ describe('Refresh slider state', () => {
     model.refreshSliderState(settings);
     expect(model['type']).toBe('single');
   });
-  test('ThumbTwoValue should be equal thumbValueOne', () => {
+  test('ThumbTwoValue should be not equal thumbValueOne', () => {
     settings.type = 'single';
     settings.thumbOneValue = 9;
     model.refreshSliderState(settings);
     settings.type = 'range';
     settings.thumbOneValue = 10;
     model.refreshSliderState(settings);
-    expect(model['thumbOneValue'] === model['thumbTwoValue']).toBe(true);
+    expect(model['thumbOneValue'] !== model['thumbTwoValue']).toBe(true);
   });
   test('Scale should be false', () => {
     settings.scale = false;
@@ -132,16 +132,16 @@ describe('Update thumbs state', () => {
     expect(model['thumbOneValue']).toBe(5);
     expect(model['thumbTwoValue']).toBe(9);
   });
-  test('Should be thumbOne: 3 and thumbTwo: 7', () => {
+  test('Should be thumbOne: 5 and thumbTwo: 9', () => {
     const position = {
       thumbOne: { left: 450, top: 0 },
       thumbTwo: { left: 250, top: 0 },
     };
     model.updateThumbsState(position);
-    expect(model['thumbOneValue']).toBe(3);
-    expect(model['thumbTwoValue']).toBe(7);
+    expect(model['thumbOneValue']).toBe(5);
+    expect(model['thumbTwoValue']).toBe(9);
   });
-  test('Should be thumbOne: 0 and thumbTwo: 0', () => {
+  test('Should be thumbOne: 0 and thumbTwo: 7', () => {
     settings.orientation = 'vertical';
     settings.sliderSize = { width: 10, height: 500 };
     model.refreshSliderState(settings);
@@ -151,7 +151,7 @@ describe('Update thumbs state', () => {
     };
     model.updateThumbsState(position);
     expect(model['thumbOneValue']).toBe(0);
-    expect(model['thumbTwoValue']).toBe(0);
+    expect(model['thumbTwoValue']).toBe(7);
   });
   test('Should be thumbOne: 0 and thumbTwo: 0', () => {
     settings.orientation = 'vertical';
@@ -228,15 +228,15 @@ describe('Set thumb values', () => {
     expect(model['thumbOneValue']).toBe(0);
     expect(model['thumbTwoValue']).toBe(10);
   });
-  test('Should be {thumbOne: 3, thumbTwo: 7}', () => {
+  test('Should be {thumbOne: 7, thumbTwo: 9}', () => {
     model.setThumbsValues({ thumbOne: 9, thumbTwo: 7 });
-    expect(model['thumbOneValue']).toBe(3);
-    expect(model['thumbTwoValue']).toBe(7);
+    expect(model['thumbOneValue']).toBe(7);
+    expect(model['thumbTwoValue']).toBe(9);
   });
-  test('Should be {thumbOne: 3, thumbTwo: 7}', () => {
+  test('Should be {thumbOne: 1, thumbTwo: 3}', () => {
     model.setThumbsValues({ thumbOne: 3, thumbTwo: 1 });
-    expect(model['thumbOneValue']).toBe(3);
-    expect(model['thumbTwoValue']).toBe(7);
+    expect(model['thumbOneValue']).toBe(1);
+    expect(model['thumbTwoValue']).toBe(3);
   });
 });
 
