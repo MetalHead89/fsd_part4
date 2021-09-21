@@ -1,15 +1,15 @@
-const addNewSliderBtn = document.querySelector('.add-new-slider-btn');
+const addNewSliderButton = document.querySelector('.add-new-slider-button');
 let helpImage = document.querySelector('.help-image');
 const buttonWrapper = document.querySelector('.button-wrapper');
 
 function removeSlider(sliderWrapper: HTMLDivElement) {
   sliderWrapper.remove();
   if (document.querySelectorAll('.slider-wrapper').length === 0) {
-    addNewSliderBtn?.classList.add('add-new-slider-btn_margin-top');
+    addNewSliderButton?.classList.add('add-new-slider-button_margin-top');
   }
 }
 
-function clickToAddNewSliderBtn(): void {
+function clickToaddNewSliderButton(): void {
   if (buttonWrapper === null) {
     return;
   }
@@ -17,7 +17,7 @@ function clickToAddNewSliderBtn(): void {
   helpImage?.remove();
   helpImage = null;
 
-  addNewSliderBtn?.classList.remove('add-new-slider-btn_margin-top');
+  addNewSliderButton?.classList.remove('add-new-slider-button_margin-top');
 
   const sliderWrapper = document.createElement('div');
   sliderWrapper.classList.add('slider-wrapper');
@@ -39,4 +39,4 @@ function clickToAddNewSliderBtn(): void {
   $(sliderWrapper).simpleSlider().controlPanel();
 }
 
-addNewSliderBtn?.addEventListener('click', clickToAddNewSliderBtn);
+addNewSliderButton?.addEventListener('click', clickToaddNewSliderButton);
