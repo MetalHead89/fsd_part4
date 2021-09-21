@@ -99,7 +99,9 @@ class SimpleSliderController implements IObserver {
   }
 
   update(eventType: string): void {
-    this.events[eventType]();
+    if (eventType in this.events) {
+      this.events[eventType]();
+    }
   }
 
   private updateView(): void {

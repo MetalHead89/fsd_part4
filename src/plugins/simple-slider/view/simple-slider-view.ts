@@ -103,10 +103,12 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
   }
 
   update(eventType: string): void {
-    this.events[eventType]();
+    if (eventType in this.events) {
+      this.events[eventType]();
+    }
   }
 
-  swapThumbs() {
+  swapThumbs(): void {
     if (this.thumbTwo) {
       [this.thumbOne, this.thumbTwo] = [this.thumbTwo, this.thumbOne];
     }

@@ -58,7 +58,9 @@ class ControlPanelController implements IObserver {
   }
 
   update(eventType: string): void {
-    this.events[eventType]();
+    if (eventType in this.events) {
+      this.events[eventType]();
+    }
   }
 }
 
