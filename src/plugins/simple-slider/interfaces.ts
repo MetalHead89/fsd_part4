@@ -100,6 +100,7 @@ interface ISimpleSliderView {
   disablePopUps(): void;
   enablePopUps(): void;
   enableScale(): void;
+  swapThumbs(): void;
   disableScale(): void;
   getThumbSize(): ISize;
   getSliderSize(): ISize;

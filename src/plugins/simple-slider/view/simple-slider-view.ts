@@ -106,6 +106,12 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
     this.events[eventType]();
   }
 
+  swapThumbs() {
+    if (this.thumbTwo) {
+      [this.thumbOne, this.thumbTwo] = [this.thumbTwo, this.thumbOne];
+    }
+  }
+
   switchToHorizontal(): void {
     this.slider.resetMargins();
     this.slider.switchToHorizontal();

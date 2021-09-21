@@ -43,6 +43,7 @@ class SimpleSliderController implements IObserver {
         this.view.getScaleClickPosition()
       );
     },
+    thumbsSwapped: () => this.view.swapThumbs(),
     windowResized: () => this.init(),
   };
 
@@ -91,6 +92,7 @@ class SimpleSliderController implements IObserver {
     this.modelSubject.register('orientationIsUpdated', this);
     this.modelSubject.register('scaleStateIsUpdated', this);
     this.modelSubject.register('popUpsStateIsUpdated', this);
+    this.modelSubject.register('thumbsSwapped', this);
     this.view.subject.register('clickToTrack', this);
     this.view.subject.register('clickToScale', this);
     this.view.subject.register('windowResized', this);

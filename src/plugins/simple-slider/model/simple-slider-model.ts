@@ -96,7 +96,7 @@ class SimpleSliderModel implements ISimpleSliderModel {
   }
 
   updateThumbsState(positions: IThumbsPositions): void {
-    const thumbOneValue = this.valueWithStep(
+    let thumbOneValue = this.valueWithStep(
       this.positionByOrientation(positions.thumbOne)
     );
     let thumbTwoValue: null | number = null;
@@ -107,27 +107,17 @@ class SimpleSliderModel implements ISimpleSliderModel {
       );
     }
 
-    if (
-      SimpleSliderModel.secondValueIsIncorrect(thumbOneValue, thumbTwoValue)
-    ) {
-      this.thumbOneValue = thumbOneValue;
-      if (thumbTwoValue) {
-        this.thumbTwoValue = thumbTwoValue;
-      }
+    if (thumbTwoValue && thumbOneValue > thumbTwoValue) {
+      this.subject.notify('thumbsSwapped');
+      [thumbOneValue, thumbTwoValue] = [thumbTwoValue, thumbOneValue];
+    }
+
+    this.thumbOneValue = thumbOneValue;
+    if (thumbTwoValue) {
+      this.thumbTwoValue = thumbTwoValue;
     }
 
     this.subject.notify('thumbsPositionsIsUpdated');
-  }
-
-  /**
-   * Возвращает истину, если второе значение равно null или меньше либо равно первому значению
-   * @returns {boolean} - результат вычисления логического выражения
-   */
-  private static secondValueIsIncorrect(
-    valueOne: number,
-    valueTwo: number | null
-  ): boolean {
-    return valueTwo === null || valueOne <= valueTwo;
   }
 
   setSliderSize(size: ISize): void {
