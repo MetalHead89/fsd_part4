@@ -1,3 +1,5 @@
+import Demo from './demo/demo';
+
 require.context('', true, /\.scss$/);
 
 const scripts = require.context('', true, /[^d]\.ts$/);
@@ -8,3 +10,5 @@ scripts.keys().forEach((script) => {
     scripts(script);
   }
 });
+
+const demo = new Demo();
