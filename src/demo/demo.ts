@@ -47,7 +47,6 @@ class Demo {
 
     const sliderWrapper = document.createElement('div');
     sliderWrapper.classList.add('slider-wrapper');
-    this.buttonWrapper.before(sliderWrapper);
 
     const icon = document.createElement('span');
     icon.classList.add('material-icons', 'remove-slider-button__icon');
@@ -60,7 +59,9 @@ class Demo {
       'click',
       this.handleRemoveSliderButtonClick.bind(removeSliderButton, sliderWrapper)
     );
+
     sliderWrapper.append(removeSliderButton);
+    this.buttonWrapper.before(sliderWrapper);
 
     $(sliderWrapper).simpleSlider().controlPanel();
   }
