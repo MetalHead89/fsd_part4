@@ -1,4 +1,4 @@
-import { IObserver } from '../../simple-slider/interfaces';
+import { IObserver, ISliderSettings } from '../../simple-slider/interfaces';
 import { ISubjectEvents } from '../interfaces';
 import ControlPanelModel from '../model/control-panel-model';
 import ControlPanelView from '../view/control-panel-view';
@@ -14,18 +14,7 @@ class ControlPanelController implements IObserver {
     maxIsUpdated: () => this.view.setMaxValue(this.model.getMax()),
     stepIsUpdated: () => this.view.setStep(this.model.getStep()),
     controlPanelDataUpdated: () => {
-      const sliderSettings = {
-        orientation: this.view.getOrientation(),
-        type: this.view.getType(),
-        scale: this.view.getScaleState(),
-        popUps: this.view.getPopUpsState(),
-        min: this.view.getMin(),
-        max: this.view.getMax(),
-        step: this.view.getStep(),
-        thumbOneValue: this.view.getThumbOneValue(),
-        thumbTwoValue: this.view.getThumbTwoValue(),
-      };
-      this.model.refreshSliderState(sliderSettings);
+      this.model.refreshSliderState(this.getSliderSettings());
     },
   };
 
@@ -52,6 +41,20 @@ class ControlPanelController implements IObserver {
     if (eventType in this.events) {
       this.events[eventType]();
     }
+  }
+
+  private getSliderSettings(): ISliderSettings {
+    return {
+      orientation: this.view.getOrientation(),
+      type: this.view.getType(),
+      scale: this.view.getScaleState(),
+      popUps: this.view.getPopUpsState(),
+      min: this.view.getMin(),
+      max: this.view.getMax(),
+      step: this.view.getStep(),
+      thumbOneValue: this.view.getThumbOneValue(),
+      thumbTwoValue: this.view.getThumbTwoValue(),
+    };
   }
 
   private subscribeToEvents(): void {
