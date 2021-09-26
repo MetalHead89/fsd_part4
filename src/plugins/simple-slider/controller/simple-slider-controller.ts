@@ -58,26 +58,11 @@ class SimpleSliderController implements IObserver {
   }
 
   private init(): void {
-    if (this.model.getOrientation() === 'horizontal') {
-      this.view.switchToHorizontal();
-    } else {
-      this.view.switchToVertical();
-    }
-
+    this.updateSliderOrientation();
     this.model.setSliderSize(this.view.getSliderSize());
     this.model.setThumbSize(this.view.getThumbSize());
-
-    if (this.model.getType() === 'single') {
-      this.view.switchToSingle();
-    } else {
-      this.view.switchToRange();
-    }
-
-    if (this.model.getPopUpsState()) {
-      this.view.enablePopUps();
-    } else {
-      this.view.disablePopUps();
-    }
+    this.updateSliderType();
+    this.updatePopUpsState();
 
     this.updateView();
   }
