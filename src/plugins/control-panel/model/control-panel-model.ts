@@ -10,7 +10,6 @@ import { ISubjectEvents } from '../interfaces';
 class ControlPanelModel extends Subject implements IObserver {
   private slider: JQuery<HTMLElement>;
   private subject: ISubject;
-
   private events: ISubjectEvents = {
     thumbsPositionsIsUpdated: () => this.notify('thumbsPositionsIsUpdated'),
     minIsUpdated: () => this.notify('minIsUpdated'),

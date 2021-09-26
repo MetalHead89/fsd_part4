@@ -82,10 +82,6 @@ class SimpleSliderModel implements ISimpleSliderModel {
     }
   }
 
-  private rangeValuesIsCorrect(): boolean {
-    return this.type === 'range' && this.thumbTwoValue < this.thumbOneValue;
-  }
-
   updateThumbsState(positions: IThumbsPositions): void {
     let thumbOneValue = this.valueWithStep(
       this.positionByOrientation(positions.thumbOne)
@@ -272,16 +268,6 @@ class SimpleSliderModel implements ISimpleSliderModel {
     this.step = this.step > stepsCount ? stepsCount : this.step;
   }
 
-  private pointsDoNotIntersect(
-    currentPosition: number,
-    previousPosition: number
-  ): boolean {
-    return (
-      currentPosition - previousPosition >
-      this.sizeByOrientation(this.scalePointSize)
-    );
-  }
-
   setThumbPositionOnClickPosition(clickPosition: IPosition): void {
     const position = {
       left: clickPosition.left - this.thumbSize.width / 2,
@@ -301,6 +287,20 @@ class SimpleSliderModel implements ISimpleSliderModel {
     }
 
     this.setThumbsValues({ thumbOne, thumbTwo });
+  }
+
+  private pointsDoNotIntersect(
+    currentPosition: number,
+    previousPosition: number
+  ): boolean {
+    return (
+      currentPosition - previousPosition >
+      this.sizeByOrientation(this.scalePointSize)
+    );
+  }
+
+  private rangeValuesIsCorrect(): boolean {
+    return this.type === 'range' && this.thumbTwoValue < this.thumbOneValue;
   }
 
   private thumbTwoIsNearToClick(position: IPosition): boolean {

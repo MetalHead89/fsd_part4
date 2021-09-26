@@ -33,6 +33,15 @@ class RadioButton extends Subject {
     return value;
   }
 
+  switchTo(value: string): void {
+    this.radios.forEach((radio) => {
+      if (radio.value === value) {
+        radio.checked = true;
+        this.handleRadioButtonChange();
+      }
+    });
+  }
+
   private init(name: string, params: IRadioParams[]) {
     params.forEach((radio) => {
       const radioWrapper = document.createElement('div');
@@ -72,15 +81,6 @@ class RadioButton extends Subject {
     });
 
     this.notify('controlPanelDataUpdated');
-  }
-
-  switchTo(value: string): void {
-    this.radios.forEach((radio) => {
-      if (radio.value === value) {
-        radio.checked = true;
-        this.handleRadioButtonChange();
-      }
-    });
   }
 
   private static generateName(name: string): string {

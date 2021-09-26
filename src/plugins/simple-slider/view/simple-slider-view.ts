@@ -34,7 +34,6 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
   private popUpTwo: PopUp | null;
   private progressBar: ProgressBar;
   private scale: Scale | null;
-
   private events: ISubjectEvents = {
     thumbIsDragged: () => this.subject.notify('thumbIsDragged'),
     thumbIsCatched: () => {
@@ -59,47 +58,6 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
     this.scale = new Scale();
 
     this.init();
-  }
-
-  private init() {
-    this.subscribeToEvents();
-    this.assembleSlider();
-
-    this.handleWindowResize = this.handleWindowResize.bind(this);
-    window.addEventListener('resize', this.handleWindowResize);
-  }
-
-  private handleWindowResize(): void {
-    this.subject.notify('windowResized');
-  }
-
-  subscribeToEvents(): void {
-    this.thumbOne.subject.register('thumbIsDragged', this);
-    this.thumbTwo?.subject.register('thumbIsDragged', this);
-    this.thumbOne.subject.register('thumbIsCatched', this);
-    this.thumbTwo?.subject.register('thumbIsCatched', this);
-    this.track.subject.register('clickToTrack', this);
-    this.scale?.subject.register('clickToScale', this);
-  }
-
-  private assembleSlider(): void {
-    this.slider.append(this.track.getControl());
-    this.slider.append(this.thumbOne.getControl());
-    if (this.thumbTwo) {
-      this.slider.append(this.thumbTwo.getControl());
-    }
-    if (this.popUpOne) {
-      this.slider.append(this.popUpOne.getControl());
-    }
-    if (this.popUpTwo) {
-      this.slider.append(this.popUpTwo.getControl());
-    }
-    this.slider.append(this.progressBar.getControl());
-    if (this.scale) {
-      this.slider.append(this.scale.getControl());
-    }
-
-    this.sliderWrapper.append(this.slider.getControl());
   }
 
   update(eventType: string): void {
@@ -186,10 +144,6 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
     this.slider.setMargins(this.getMargins());
   }
 
-  private thumbTwoIsWithoutPopup(): boolean {
-    return this.popUpTwo === null && this.thumbTwo !== null;
-  }
-
   disableScale(): void {
     this.scale?.subject.unsubscribe('clickToScale', this);
     this.scale?.remove();
@@ -266,6 +220,51 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
     const position =
       this.scale === null ? { left: 0, top: 0 } : this.scale.getPosition();
     return position;
+  }
+
+  private init() {
+    this.subscribeToEvents();
+    this.assembleSlider();
+
+    this.handleWindowResize = this.handleWindowResize.bind(this);
+    window.addEventListener('resize', this.handleWindowResize);
+  }
+
+  private thumbTwoIsWithoutPopup(): boolean {
+    return this.popUpTwo === null && this.thumbTwo !== null;
+  }
+
+  private subscribeToEvents(): void {
+    this.thumbOne.subject.register('thumbIsDragged', this);
+    this.thumbTwo?.subject.register('thumbIsDragged', this);
+    this.thumbOne.subject.register('thumbIsCatched', this);
+    this.thumbTwo?.subject.register('thumbIsCatched', this);
+    this.track.subject.register('clickToTrack', this);
+    this.scale?.subject.register('clickToScale', this);
+  }
+
+  private handleWindowResize(): void {
+    this.subject.notify('windowResized');
+  }
+
+  private assembleSlider(): void {
+    this.slider.append(this.track.getControl());
+    this.slider.append(this.thumbOne.getControl());
+    if (this.thumbTwo) {
+      this.slider.append(this.thumbTwo.getControl());
+    }
+    if (this.popUpOne) {
+      this.slider.append(this.popUpOne.getControl());
+    }
+    if (this.popUpTwo) {
+      this.slider.append(this.popUpTwo.getControl());
+    }
+    this.slider.append(this.progressBar.getControl());
+    if (this.scale) {
+      this.slider.append(this.scale.getControl());
+    }
+
+    this.sliderWrapper.append(this.slider.getControl());
   }
 
   private getMargins(): ISliderMargins {

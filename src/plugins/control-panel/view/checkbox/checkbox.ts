@@ -15,6 +15,19 @@ class Checkbox extends Subject {
     this.init(params);
   }
 
+  getControl(): HTMLDivElement {
+    return this.control;
+  }
+
+  setState(state: boolean): void {
+    this.checkbox.checked = state;
+    this.handleCheckboxChange();
+  }
+
+  getState(): boolean {
+    return this.checkbox.checked;
+  }
+
   private init(params: ICheckboxParams): void {
     this.control.classList.add('checkbox');
 
@@ -32,23 +45,10 @@ class Checkbox extends Subject {
     this.control.append(this.label);
   }
 
-  getControl(): HTMLDivElement {
-    return this.control;
-  }
-
   private handleCheckboxChange(): void {
     this.label.classList.toggle('checkbox__label_checked');
 
     this.notify('controlPanelDataUpdated');
-  }
-
-  setState(state: boolean): void {
-    this.checkbox.checked = state;
-    this.handleCheckboxChange();
-  }
-
-  getState(): boolean {
-    return this.checkbox.checked;
   }
 }
 

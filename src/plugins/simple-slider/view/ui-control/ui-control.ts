@@ -2,9 +2,9 @@ import { IPosition, ISize } from '../../interfaces';
 import Subject from '../../subject/subject';
 
 class UIControl {
+  subject: Subject;
   protected control: HTMLDivElement;
   protected lastPosition: IPosition;
-  subject: Subject;
 
   constructor(name: string, orientation?: string) {
     const control = document.createElement('div');
@@ -17,23 +17,6 @@ class UIControl {
       orientationClass = `${name}_${orientation}`;
     }
     this.control.classList.add(`${name}`, orientationClass);
-  }
-
-  protected setPosition(cursorPosition: IPosition): void {
-    const positionInsideParent = {
-      left: cursorPosition.left,
-      top: cursorPosition.top,
-    };
-
-    const parent: HTMLElement | null = this.control.parentElement;
-
-    if (parent) {
-      const parentCoords: DOMRect = parent.getBoundingClientRect();
-      positionInsideParent.left -= parentCoords.left;
-      positionInsideParent.top -= parentCoords.top;
-    }
-
-    this.lastPosition = positionInsideParent;
   }
 
   getPosition(): IPosition {
@@ -81,6 +64,23 @@ class UIControl {
     return document.defaultView
       ?.getComputedStyle(this.control, null)
       .getPropertyValue(styleName);
+  }
+
+  protected setPosition(cursorPosition: IPosition): void {
+    const positionInsideParent = {
+      left: cursorPosition.left,
+      top: cursorPosition.top,
+    };
+
+    const parent: HTMLElement | null = this.control.parentElement;
+
+    if (parent) {
+      const parentCoords: DOMRect = parent.getBoundingClientRect();
+      positionInsideParent.left -= parentCoords.left;
+      positionInsideParent.top -= parentCoords.top;
+    }
+
+    this.lastPosition = positionInsideParent;
   }
 }
 

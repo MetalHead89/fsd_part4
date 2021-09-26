@@ -18,6 +18,36 @@ class Thumb extends UIControl {
     this.init();
   }
 
+  setZIndex(index: number): void {
+    this.control.style.zIndex = index.toString();
+  }
+
+  resetZIndex(): void {
+    this.control.style.zIndex = '';
+  }
+
+  moveTo(position: IPosition): void {
+    this.lastPosition = position;
+    this.control.style.left = `${position.left}px`;
+    this.control.style.top = `${position.top}px`;
+  }
+
+  protected setPosition(cursorPosition: IPosition): void {
+    super.setPosition(cursorPosition);
+    this.lastPosition.left -= this.shift.shiftX;
+    this.lastPosition.top -= this.shift.shiftY;
+  }
+
+  private static disableSelection() {
+    document.onselectstart = () => false;
+    document.onpointerdown = () => false;
+  }
+
+  private static enableSelection() {
+    document.onselectstart = null;
+    document.onpointerdown = null;
+  }
+
   private init() {
     this.handleThumbPointerdown = this.handleThumbPointerdown.bind(this);
     this.control.addEventListener('pointerdown', this.handleThumbPointerdown);
@@ -25,10 +55,6 @@ class Thumb extends UIControl {
     this.disableDragAndDrop();
   }
 
-  setZIndex(index: number): void {
-    this.control.style.zIndex = index.toString();
-  }
-  
   private disableDragAndDrop(): void {
     this.control.ondragstart = () => false;
   }
@@ -48,7 +74,7 @@ class Thumb extends UIControl {
     this.subject.notify('thumbIsCatched');
     this.increaseZIndex();
   }
-  
+
   private setThumbShift(cursorPos: IPosition, thumbPos: IPosition) {
     this.shift.shiftX = cursorPos.left - thumbPos.left;
     this.shift.shiftY = cursorPos.top - thumbPos.top;
@@ -57,10 +83,6 @@ class Thumb extends UIControl {
   private increaseZIndex() {
     const zIndex = this.getStyle('z-index');
     this.control.style.zIndex = (parseInt(zIndex || '0', 10) + 1).toString();
-  }
-
-  resetZIndex(): void {
-    this.control.style.zIndex = '';
   }
 
   private drag(event: PointerEvent): void {
@@ -72,33 +94,11 @@ class Thumb extends UIControl {
     this.subject.notify('thumbIsDragged');
   }
 
-  protected setPosition(cursorPosition: IPosition): void {
-    super.setPosition(cursorPosition);
-    this.lastPosition.left -= this.shift.shiftX;
-    this.lastPosition.top -= this.shift.shiftY;
-  }
-
   private endDrag(): void {
     Thumb.enableSelection();
 
     document.removeEventListener('pointermove', this.handleDocumentPointermove);
     document.removeEventListener('pointerup', this.handleDocumentPointerup);
-  }
-
-  moveTo(position: IPosition): void {
-    this.lastPosition = position;
-    this.control.style.left = `${position.left}px`;
-    this.control.style.top = `${position.top}px`;
-  }
-  
-  private static disableSelection() {
-    document.onselectstart = () => false;
-    document.onpointerdown = () => false;
-  }
-  
-  private static enableSelection() {
-    document.onselectstart = null;
-    document.onpointerdown = null;
   }
 }
 

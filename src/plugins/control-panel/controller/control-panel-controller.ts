@@ -6,7 +6,6 @@ import ControlPanelView from '../view/control-panel-view';
 class ControlPanelController implements IObserver {
   private view: ControlPanelView;
   private model: ControlPanelModel;
-
   private events: ISubjectEvents = {
     thumbsPositionsIsUpdated: () => {
       this.view.setThumbsValues(this.model.getThumbsValues());
@@ -38,14 +37,6 @@ class ControlPanelController implements IObserver {
     this.subscribeToEvents();
   }
 
-  private subscribeToEvents(): void {
-    this.model.register('thumbsPositionsIsUpdated', this);
-    this.model.register('minIsUpdated', this);
-    this.model.register('maxIsUpdated', this);
-    this.model.register('stepIsUpdated', this);
-    this.view.register('controlPanelDataUpdated', this);
-  }
-
   init(): void {
     this.view.setThumbsValues(this.model.getThumbsValues());
     this.view.setMinValue(this.model.getMin());
@@ -61,6 +52,14 @@ class ControlPanelController implements IObserver {
     if (eventType in this.events) {
       this.events[eventType]();
     }
+  }
+
+  private subscribeToEvents(): void {
+    this.model.register('thumbsPositionsIsUpdated', this);
+    this.model.register('minIsUpdated', this);
+    this.model.register('maxIsUpdated', this);
+    this.model.register('stepIsUpdated', this);
+    this.view.register('controlPanelDataUpdated', this);
   }
 }
 

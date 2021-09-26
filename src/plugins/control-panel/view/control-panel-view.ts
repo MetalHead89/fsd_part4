@@ -33,12 +33,12 @@ class ControlPanelView extends Subject implements IObserver {
     this.typeRadio = new RadioButton(
       'type',
       { label: 'single', value: 'single' },
-      { label: 'range', value: 'range' },
+      { label: 'range', value: 'range' }
     );
     this.orientationRadio = new RadioButton(
       'orientation',
       { label: 'horizontal', value: 'horizontal' },
-      { label: 'vertical', value: 'vertical' },
+      { label: 'vertical', value: 'vertical' }
     );
     this.scaleCheckbox = new Checkbox({
       label: 'scale',
@@ -55,92 +55,10 @@ class ControlPanelView extends Subject implements IObserver {
     this.createPanel();
   }
 
-  private createPanel(): void {
-    this.controlPanel.append(
-      groupElements({
-        wrapperClass: 'control-panel__text-fields-group',
-        elements: [
-          this.thumbOneValue.getControl(),
-          this.thumbTwoValue.getControl(),
-        ],
-      }),
-    );
-
-    this.controlPanel.append(
-      groupElements({
-        wrapperClass: 'control-panel__text-fields-group',
-        elements: [
-          this.min.getControl(),
-          this.max.getControl(),
-          this.step.getControl(),
-        ],
-      }),
-    );
-
-    const typeRadioGroup = groupElements({
-      header: 'type',
-      wrapperClass: 'control-panel__radio-group',
-      elements: [this.typeRadio.getControl()],
-    });
-
-    const orientationRadioGroup = groupElements({
-      header: 'orientation',
-      wrapperClass: 'control-panel__radio-group',
-      elements: [this.orientationRadio.getControl()],
-    });
-
-    const allRadiosGroup = groupElements({
-      wrapperClass: 'control-panel__wrapper',
-      elements: [typeRadioGroup, orientationRadioGroup],
-    });
-
-    const checkboxesGroup = groupElements({
-      header: 'on/off elements',
-      wrapperClass: 'control-panel__wrapper',
-      elements: [
-        this.scaleCheckbox.getControl(),
-        this.popUpsCheckbox.getControl(),
-      ],
-    });
-
-    this.controlPanel.append(
-      groupElements({
-        wrapperClass: 'control-panel__checkboxes-and-radios-wrapper',
-        elements: [allRadiosGroup, checkboxesGroup],
-      }),
-    );
-
-    this.sliderWrapper.append(this.controlPanel.getElement());
-  }
-
-  private subscribeToEvents(): void {
-    this.thumbOneValue.register('controlPanelDataUpdated', this);
-    this.thumbTwoValue.register('controlPanelDataUpdated', this);
-    this.min.register('controlPanelDataUpdated', this);
-    this.max.register('controlPanelDataUpdated', this);
-    this.step.register('controlPanelDataUpdated', this);
-    this.typeRadio.register('controlPanelDataUpdated', this);
-    this.orientationRadio.register('controlPanelDataUpdated', this);
-    this.scaleCheckbox.register('controlPanelDataUpdated', this);
-    this.popUpsCheckbox.register('controlPanelDataUpdated', this);
-  }
-
   update(eventType: string): void {
     if (eventType === 'controlPanelDataUpdated') {
       this.notify('controlPanelDataUpdated');
       this.switchOrientation();
-    }
-  }
-
-  private switchOrientation(): void {
-    if (this.getOrientation() === 'horizontal') {
-      this.controlPanel.switchToHorizontal();
-      this.sliderWrapper.classList.remove('slider-wrapper_vertical');
-      this.sliderWrapper.classList.add('slider-wrapper_horizontal');
-    } else {
-      this.controlPanel.switchToVertical();
-      this.sliderWrapper.classList.remove('slider-wrapper_horizontal');
-      this.sliderWrapper.classList.add('slider-wrapper_vertical');
     }
   }
 
@@ -218,6 +136,88 @@ class ControlPanelView extends Subject implements IObserver {
       thumbOne: this.thumbOneValue.getValue(),
       thumbTwo: this.thumbTwoValue.getValue(),
     };
+  }
+
+  private createPanel(): void {
+    this.controlPanel.append(
+      groupElements({
+        wrapperClass: 'control-panel__text-fields-group',
+        elements: [
+          this.thumbOneValue.getControl(),
+          this.thumbTwoValue.getControl(),
+        ],
+      })
+    );
+
+    this.controlPanel.append(
+      groupElements({
+        wrapperClass: 'control-panel__text-fields-group',
+        elements: [
+          this.min.getControl(),
+          this.max.getControl(),
+          this.step.getControl(),
+        ],
+      })
+    );
+
+    const typeRadioGroup = groupElements({
+      header: 'type',
+      wrapperClass: 'control-panel__radio-group',
+      elements: [this.typeRadio.getControl()],
+    });
+
+    const orientationRadioGroup = groupElements({
+      header: 'orientation',
+      wrapperClass: 'control-panel__radio-group',
+      elements: [this.orientationRadio.getControl()],
+    });
+
+    const allRadiosGroup = groupElements({
+      wrapperClass: 'control-panel__wrapper',
+      elements: [typeRadioGroup, orientationRadioGroup],
+    });
+
+    const checkboxesGroup = groupElements({
+      header: 'on/off elements',
+      wrapperClass: 'control-panel__wrapper',
+      elements: [
+        this.scaleCheckbox.getControl(),
+        this.popUpsCheckbox.getControl(),
+      ],
+    });
+
+    this.controlPanel.append(
+      groupElements({
+        wrapperClass: 'control-panel__checkboxes-and-radios-wrapper',
+        elements: [allRadiosGroup, checkboxesGroup],
+      })
+    );
+
+    this.sliderWrapper.append(this.controlPanel.getElement());
+  }
+
+  private subscribeToEvents(): void {
+    this.thumbOneValue.register('controlPanelDataUpdated', this);
+    this.thumbTwoValue.register('controlPanelDataUpdated', this);
+    this.min.register('controlPanelDataUpdated', this);
+    this.max.register('controlPanelDataUpdated', this);
+    this.step.register('controlPanelDataUpdated', this);
+    this.typeRadio.register('controlPanelDataUpdated', this);
+    this.orientationRadio.register('controlPanelDataUpdated', this);
+    this.scaleCheckbox.register('controlPanelDataUpdated', this);
+    this.popUpsCheckbox.register('controlPanelDataUpdated', this);
+  }
+
+  private switchOrientation(): void {
+    if (this.getOrientation() === 'horizontal') {
+      this.controlPanel.switchToHorizontal();
+      this.sliderWrapper.classList.remove('slider-wrapper_vertical');
+      this.sliderWrapper.classList.add('slider-wrapper_horizontal');
+    } else {
+      this.controlPanel.switchToVertical();
+      this.sliderWrapper.classList.remove('slider-wrapper_horizontal');
+      this.sliderWrapper.classList.add('slider-wrapper_vertical');
+    }
   }
 }
 

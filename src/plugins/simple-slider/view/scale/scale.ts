@@ -8,16 +8,6 @@ class Scale extends UIControl {
     this.init();
   }
 
-  private init(): void {
-    this.handleScaleClick = this.handleScaleClick.bind(this);
-    this.control.addEventListener('click', this.handleScaleClick);
-  }
-
-  private handleScaleClick(event: MouseEvent): void {
-    this.setPosition({ left: event.clientX, top: event.clientY });
-    this.subject.notify('clickToScale');
-  }
-
   getPointSize(value: number): ISize {
     this.addPoint({
       position: { left: 0, top: 0 },
@@ -38,6 +28,16 @@ class Scale extends UIControl {
 
   addPoints(points: IScalePointParams[]): void {
     points.forEach((point) => this.addPoint(point));
+  }
+
+  private init(): void {
+    this.handleScaleClick = this.handleScaleClick.bind(this);
+    this.control.addEventListener('click', this.handleScaleClick);
+  }
+
+  private handleScaleClick(event: MouseEvent): void {
+    this.setPosition({ left: event.clientX, top: event.clientY });
+    this.subject.notify('clickToScale');
   }
 
   private addPoint(point: IScalePointParams): void {

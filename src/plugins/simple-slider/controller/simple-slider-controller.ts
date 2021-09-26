@@ -14,7 +14,6 @@ class SimpleSliderController implements IObserver {
   private view: ISimpleSliderView;
   private modelSubject: ISubject;
   private viewSubject: ISubject;
-
   private events: ISubjectEvents = {
     thumbIsDragged: () => {
       this.model.updateThumbsState(this.view.getThumbsPositions());
@@ -57,6 +56,12 @@ class SimpleSliderController implements IObserver {
     this.init();
   }
 
+  update(eventType: string): void {
+    if (eventType in this.events) {
+      this.events[eventType]();
+    }
+  }
+
   private init(): void {
     this.updateSliderOrientation();
     this.model.setSliderSize(this.view.getSliderSize());
@@ -81,12 +86,6 @@ class SimpleSliderController implements IObserver {
     this.view.subject.register('clickToTrack', this);
     this.view.subject.register('clickToScale', this);
     this.view.subject.register('windowResized', this);
-  }
-
-  update(eventType: string): void {
-    if (eventType in this.events) {
-      this.events[eventType]();
-    }
   }
 
   private updateView(): void {
