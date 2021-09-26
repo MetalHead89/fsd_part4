@@ -19,11 +19,6 @@ class UIControl {
     this.control.classList.add(`${name}`, orientationClass);
   }
 
-  /**
-   * Сохраняет позицию курсора относительно левого и верхнего края родительского контейнера
-   * @param {IPosition} cursorPosition - объект с позицией курсора
-   * относительно левого и верхнего края экрана
-   */
   protected setPosition(cursorPosition: IPosition): void {
     const positionInsideParent = {
       left: cursorPosition.left,
@@ -41,11 +36,6 @@ class UIControl {
     this.lastPosition = positionInsideParent;
   }
 
-  /**
-   * Возвращает последнюю сохранённую позицию курсора
-   * @returns {ICursorPosition} - объект с позицией курсора относительно
-   * левого и верхнего края родительского контейнера
-   */
   getPosition(): IPosition {
     return this.lastPosition;
   }
@@ -87,10 +77,6 @@ class UIControl {
     return this.control.getBoundingClientRect();
   }
 
-  /**
-   * Возвращает значение запрашиваемого стиля
-   * @returns {string | undefined} - значение запрашиваемого стиля
-   */
   getStyle(styleName: string): string | undefined {
     return document.defaultView
       ?.getComputedStyle(this.control, null)

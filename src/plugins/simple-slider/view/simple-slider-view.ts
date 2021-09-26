@@ -186,11 +186,6 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
     this.slider.setMargins(this.getMargins());
   }
 
-  /**
-   * Возвращает истину, если всплывающая подсказка над вторым бегунком равна null,
-   * но сам второй бегунок не равен null
-   * @returns {boolean} - результат вычисления логического выражения
-   */
   private thumbTwoIsWithoutPopup(): boolean {
     return this.popUpTwo === null && this.thumbTwo !== null;
   }
@@ -263,29 +258,16 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
     this.slider.setMargins(this.getMargins());
   }
 
-  /**
-   * Возвращает позицию последнего клика по треку
-   * @returns {IPosition} - объект с позицией последнего клика по треку
-   */
   getTrackClickPosition(): IPosition {
     return this.track.getPosition();
   }
 
-  /**
-   * Возвращает позицию последнего клика по шкале
-   * @returns {IPosition} - объект с позицией последнего клика по шкале
-   */
   getScaleClickPosition(): IPosition {
     const position =
       this.scale === null ? { left: 0, top: 0 } : this.scale.getPosition();
     return position;
   }
 
-  /**
-   * Возвращает объект с отступами от левой, верхней, правой и нижней границ слайдера
-   * @returns {ISliderMargins} - объект с отступами от левой, верхней, правой
-   * и нижней границ слайдера
-   */
   private getMargins(): ISliderMargins {
     const margins = {
       left: 0,

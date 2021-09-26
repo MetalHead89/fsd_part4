@@ -6,10 +6,6 @@ class Slider extends UIControl {
     super('slider');
   }
 
-  /**
-   * Добавляет принятый div элемент в конец контейнера
-   * @param {HTMLDivElement} control - div элемент, который должен быть добавлен в контейнер
-   */
   append(control: HTMLDivElement): void {
     this.control.append(control);
   }

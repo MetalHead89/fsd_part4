@@ -36,10 +36,6 @@ class SimpleSliderModel implements ISimpleSliderModel {
     this.refreshSliderState(settings);
   }
 
-  /**
-   * Полностью обновляет состояние модели в соответствии с полученным объектом
-   * @param settings - объект с настройками модели
-   */
   refreshSliderState(settings: ISliderSettings): void {
     if (settings.sliderSize !== undefined) {
       this.sliderSize = settings.sliderSize;
@@ -86,11 +82,6 @@ class SimpleSliderModel implements ISimpleSliderModel {
     }
   }
 
-  /**
-   * Возвращает истину, если тип слайдера - диапазон и значение второго
-   * бегунка меньше значения первого
-   * @returns {boolean} - результат вычисления логического выражения
-   */
   private rangeValuesIsCorrect(): boolean {
     return this.type === 'range' && this.thumbTwoValue < this.thumbOneValue;
   }
@@ -276,22 +267,11 @@ class SimpleSliderModel implements ISimpleSliderModel {
     this.scalePointSize = size;
   }
 
-  /**
-   * Пересчитывает значение шага. Если текущее значение шага больше максимально-допустимого
-   * количества шагов в слайдере, то оно приравнивается к максимально-допустимому количеству шагов
-   */
   recalculateStep(): void {
     const stepsCount = this.max - this.min;
     this.step = this.step > stepsCount ? stepsCount : this.step;
   }
 
-  /**
-   * Проверяет помещается ли точка на шкале без пересечения с другими точками, если нет, то она
-   * не добавляется на шкалу
-   * @param {number} currentPosition - текущая позиция точки
-   * @param {number} previousPosition - позиция предыдущей точки
-   * @returns {boolean} - результат логического выражения
-   */
   private pointsDoNotIntersect(
     currentPosition: number,
     previousPosition: number
@@ -302,10 +282,6 @@ class SimpleSliderModel implements ISimpleSliderModel {
     );
   }
 
-  /**
-   * Сохраняет значение бегунка, ближайшего к месту клика по шкале, либо треку
-   * @param {IPosition} clickPosition - объект с позицией клика
-   */
   setThumbPositionOnClickPosition(clickPosition: IPosition): void {
     const position = {
       left: clickPosition.left - this.thumbSize.width / 2,
@@ -327,12 +303,6 @@ class SimpleSliderModel implements ISimpleSliderModel {
     this.setThumbsValues({ thumbOne, thumbTwo });
   }
 
-  /**
-   * Вычисляет, находится ли второй бегунок ближе к месту клика по шкале или треку
-   * @param {IPosition} position - объект с позицией клика
-   * @returns {boolean} - значение показывающее истинность того, что второй бегунок находится ближе
-   * к месту клика, чем первый
-   */
   private thumbTwoIsNearToClick(position: IPosition): boolean {
     if (this.type === 'range') {
       return (
@@ -354,12 +324,6 @@ class SimpleSliderModel implements ISimpleSliderModel {
     return false;
   }
 
-  /**
-   * Возвращает корректный размер в соответствии с заданным минимумом
-   * @param {ISize} size - объект с шириной и высотой
-   * @param {number} min - минимальное значение ширины и высоты
-   * @returns {ISize} - объект с корректными размерами
-   */
   private static getCorrectSize(size: ISize, min: number): ISize {
     const width = size.width >= min ? size.width : min;
     const height = size.height >= min ? size.height : min;
@@ -395,13 +359,6 @@ class SimpleSliderModel implements ISimpleSliderModel {
     this.subject.notify('stepIsUpdated');
   }
 
-  /**
-   * Возвращение значение бегунка в соответствии с заданным шагом исходя из
-   * его позиции
-   * @param {number} position - позиция бегунка относительно левого или верхнего
-   * края родительского контейнера
-   * @returns {number} - значение бегунка в соответствии с заданным шагом
-   */
   private valueWithStep(position: number): number {
     if (this.thumbPositionToValue(position) >= this.max) {
       return this.thumbPositionToValue(position);
@@ -426,12 +383,6 @@ class SimpleSliderModel implements ISimpleSliderModel {
     );
   }
 
-  /**
-   * Возвращение значения бегунка исходя из его позиции
-   * @param {number} position - позиция бегунка относительно левого или верхнего
-   * края родительского контейнера
-   * @returns {number} - значение бегунка
-   */
   private thumbPositionToValue(position: number): number {
     const pixelsPerValue = this.getPxPerValue();
 
@@ -446,12 +397,6 @@ class SimpleSliderModel implements ISimpleSliderModel {
     return newValue;
   }
 
-  /**
-   * Возвращение позиции бегунка исходя из его значения
-   * @param {number} value - значение бегунка
-   * @returns {IThumbPosition} - объект с позицией бегунка относительно левого и верхнего края
-   * родительского контейнера
-   */
   private thumbValueToPosition(value: number): IPosition {
     const position = { left: 0, top: 0 };
     const pxPerVal = this.getPxPerValue();
@@ -487,11 +432,6 @@ class SimpleSliderModel implements ISimpleSliderModel {
     );
   }
 
-  /**
-   * Возвращение ширины или высоты объекта, в зависимости от ориентации слайдера
-   * @param {ISize} size - объект с шириной и высотой объекта
-   * @returns {number} - значение ширины или высоты объекта
-   */
   private sizeByOrientation(size: ISize): number {
     if (this.orientation === 'horizontal') {
       return size.width;
@@ -500,11 +440,6 @@ class SimpleSliderModel implements ISimpleSliderModel {
     return size.height;
   }
 
-  /**
-   * Возвращение левого или верхнего отступа объекта, в зависимости от ориентации слайдера
-   * @param {IPosition} position - объект с позицией
-   * @returns {number} - значение левого или верхнего отступа объекта
-   */
   private positionByOrientation(position: IPosition): number {
     if (this.orientation === 'horizontal') {
       return position.left;
@@ -513,11 +448,6 @@ class SimpleSliderModel implements ISimpleSliderModel {
     return position.top;
   }
 
-  /**
-   * Отслеживает позицию деления, не давая ему выйти за пределы шкалы
-   * @param {number} position - позиция деления шкалы
-   * @returns {number} - позиция следующего деления
-   */
   private getCorrectPointPosition(position: number): number {
     const extremePosition =
       this.sizeByOrientation(this.sliderSize) -

@@ -46,10 +46,6 @@ class TextField extends Subject {
     this.notify('controlPanelDataUpdated');
   }
 
-  /**
-   * Удаляет из текстового поля символы, не являющиеся цифрами
-   * @param {KeyboardEvent} event - событие клавиатуры
-   */
   private static removeNonDigitChar(event: KeyboardEvent): boolean {
     return /[-\d]/.test(event.key);
   }

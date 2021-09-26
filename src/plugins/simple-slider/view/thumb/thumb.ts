@@ -28,10 +28,7 @@ class Thumb extends UIControl {
   setZIndex(index: number): void {
     this.control.style.zIndex = index.toString();
   }
-
-  /**
-   * Отключает html5 Drag and Drop
-   */
+  
   private disableDragAndDrop(): void {
     this.control.ondragstart = () => false;
   }
@@ -51,12 +48,7 @@ class Thumb extends UIControl {
     this.subject.notify('thumbIsCatched');
     this.increaseZIndex();
   }
-
-  /**
-   * Сохраняет разницу между позициями бегунка и курсора
-   * @param {IPosition} cursorPos - позиция курсора
-   * @param {IPosition} thumbPos - позиция бегунка
-   */
+  
   private setThumbShift(cursorPos: IPosition, thumbPos: IPosition) {
     this.shift.shiftX = cursorPos.left - thumbPos.left;
     this.shift.shiftY = cursorPos.top - thumbPos.top;
@@ -98,18 +90,12 @@ class Thumb extends UIControl {
     this.control.style.left = `${position.left}px`;
     this.control.style.top = `${position.top}px`;
   }
-
-  /**
-   * Отключение выделения при перетягивании бегунка
-   */
+  
   private static disableSelection() {
     document.onselectstart = () => false;
     document.onpointerdown = () => false;
   }
-
-  /**
-   * Включение выделения текста
-   */
+  
   private static enableSelection() {
     document.onselectstart = null;
     document.onpointerdown = null;

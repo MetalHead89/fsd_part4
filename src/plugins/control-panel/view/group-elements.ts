@@ -1,11 +1,5 @@
 import { IGroupElements } from '../interfaces';
 
-/**
- * Оборачивает полученные элементы в div с заданным классом
- * @param {string} wrapperClass - класс, который будет назначен обёртке
- * @param {HTMLElement[]} - массив элементов, которые требуется обернуть
- * @returns {HTMLDivElement} - элементы в обёртке
- */
 function groupElements(params: IGroupElements): HTMLDivElement {
   const wrapper: HTMLDivElement = document.createElement('div');
   wrapper.className = params.wrapperClass;
