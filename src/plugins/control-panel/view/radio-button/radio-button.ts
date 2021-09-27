@@ -22,15 +22,8 @@ class RadioButton extends Subject {
   }
 
   getValue(): string {
-    let value = '';
-
-    this.radios.forEach((radio) => {
-      if (radio.checked) {
-        value = radio.value;
-      }
-    });
-
-    return value;
+    const checkedRadio = this.radios.find((radio) => radio.checked);
+    return checkedRadio !== undefined ? checkedRadio.value : '';
   }
 
   switchTo(value: string): void {
@@ -56,9 +49,7 @@ class RadioButton extends Subject {
         radioButton.type = 'radio';
         radioButton.name = name;
         radioButton.value = value;
-        if (index === 0 || checked) {
-          radioButton.checked = true;
-        }
+        radioButton.checked = index === 0 || Boolean(checked);
         radioButton.classList.add('radio-button__radio-button');
         this.handleRadioButtonChange = this.handleRadioButtonChange.bind(this);
         radioButton.addEventListener('change', this.handleRadioButtonChange);
@@ -91,9 +82,11 @@ class RadioButton extends Subject {
 
     while (uniqueName === '') {
       const newName = `${name}${counter}`;
+
       if (document.querySelector(`[name="${newName}"]`) === null) {
         uniqueName = newName;
       }
+
       counter += 1;
     }
 

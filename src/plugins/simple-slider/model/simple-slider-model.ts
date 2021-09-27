@@ -127,10 +127,9 @@ class SimpleSliderModel implements ISimpleSliderModel {
 
   setThumbsValues({ thumbOne, thumbTwo }: IThumbsValues): void {
     const thumbOnePosition = this.thumbValueToPosition(thumbOne);
-    let thumbTwoPosition = null;
-    if (this.type === 'range') {
-      thumbTwoPosition = this.thumbValueToPosition(thumbTwo);
-    }
+    const thumbTwoPosition =
+      this.type === 'range' ? this.thumbValueToPosition(thumbTwo) : null;
+
     this.updateThumbsState({
       thumbOne: thumbOnePosition,
       thumbTwo: thumbTwoPosition,

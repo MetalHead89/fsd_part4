@@ -11,11 +11,9 @@ class UIControl {
     this.control = control;
     this.subject = new Subject();
     this.lastPosition = { left: 0, top: 0 };
-
-    let orientationClass = `${name}_horizontal`;
-    if (orientation) {
-      orientationClass = `${name}_${orientation}`;
-    }
+    const orientationClass = orientation
+      ? `${name}_${orientation}`
+      : `${name}_horizontal`;
     this.control.classList.add(`${name}`, orientationClass);
   }
 

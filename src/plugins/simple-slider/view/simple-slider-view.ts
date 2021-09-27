@@ -173,10 +173,8 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
 
   getThumbsPositions(): IThumbsPositions {
     const thumbOne = this.thumbOne.getPosition();
-    let thumbTwo: IPosition | null = null;
-    if (this.thumbTwo) {
-      thumbTwo = this.thumbTwo.getPosition();
-    }
+    const thumbTwo = this.thumbTwo ? this.thumbTwo.getPosition() : null;
+
     return { thumbOne, thumbTwo };
   }
 
@@ -201,10 +199,9 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
   }
 
   getScalePointSize(value: number): ISize {
-    if (this.scale) {
-      return this.scale.getPointSize(value);
-    }
-    return { width: 0, height: 0 };
+    return this.scale
+      ? this.scale.getPointSize(value)
+      : { width: 0, height: 0 };
   }
 
   addScalePoints(points: IScalePointParams[]): void {
