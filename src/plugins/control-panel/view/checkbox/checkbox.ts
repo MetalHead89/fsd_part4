@@ -28,15 +28,15 @@ class Checkbox extends Subject {
     return this.checkbox.checked;
   }
 
-  private init(params: ICheckboxParams): void {
+  private init({ label, name, value }: ICheckboxParams): void {
     this.control.classList.add('checkbox');
 
     this.label.classList.add('checkbox__label');
-    this.label.innerText = params.label;
+    this.label.innerText = label;
 
     this.checkbox.type = 'checkbox';
-    this.checkbox.name = params.name;
-    this.checkbox.value = params.value;
+    this.checkbox.name = name;
+    this.checkbox.value = value;
     this.checkbox.classList.add('checkbox__check');
     this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
     this.checkbox.addEventListener('change', this.handleCheckboxChange);

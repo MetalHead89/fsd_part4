@@ -36,62 +36,72 @@ class SimpleSliderModel implements ISimpleSliderModel {
     this.refreshSliderState(settings);
   }
 
-  refreshSliderState(settings: ISliderSettings): void {
-    if (settings.sliderSize !== undefined) {
-      this.sliderSize = settings.sliderSize;
+  refreshSliderState({
+    orientation,
+    type,
+    scale,
+    popUps,
+    min,
+    max,
+    step,
+    thumbOneValue,
+    thumbTwoValue,
+    sliderSize,
+    thumbSize,
+  }: ISliderSettings): void {
+    if (sliderSize !== undefined) {
+      this.sliderSize = sliderSize;
     }
-    if (settings.thumbSize !== undefined) {
-      this.thumbSize = settings.thumbSize;
+    if (thumbSize !== undefined) {
+      this.thumbSize = thumbSize;
     }
-    if (this.orientation !== settings.orientation) {
-      this.orientation = settings.orientation;
+    if (this.orientation !== orientation) {
+      this.orientation = orientation;
       this.subject.notify('orientationIsUpdated');
     }
-    if (this.type !== settings.type) {
-      this.type = settings.type;
+    if (this.type !== type) {
+      this.type = type;
       if (this.rangeValuesIsCorrect()) {
         this.thumbTwoValue = this.thumbOneValue;
       }
       this.subject.notify('typeIsUpdated');
     }
-    if (this.min !== settings.min) {
-      this.updateMinValue(settings.min);
+    if (this.min !== min) {
+      this.updateMinValue(min);
     }
-    if (this.max !== settings.max) {
-      this.updateMaxValue(settings.max);
+    if (this.max !== max) {
+      this.updateMaxValue(max);
     }
-    if (this.step !== settings.step) {
-      this.updateStep(settings.step);
+    if (this.step !== step) {
+      this.updateStep(step);
     }
-    if (this.scale !== settings.scale) {
-      this.scale = settings.scale;
+    if (this.scale !== scale) {
+      this.scale = scale;
       this.subject.notify('scaleStateIsUpdated');
     }
-    if (this.popUps !== settings.popUps) {
-      this.popUps = settings.popUps;
+    if (this.popUps !== popUps) {
+      this.popUps = popUps;
       this.subject.notify('popUpsStateIsUpdated');
     }
     if (
-      this.thumbOneValue !== settings.thumbOneValue ||
-      this.thumbTwoValue !== settings.thumbTwoValue
+      this.thumbOneValue !== thumbOneValue ||
+      this.thumbTwoValue !== thumbTwoValue
     ) {
       this.setThumbsValues({
-        thumbOne: settings.thumbOneValue,
-        thumbTwo: settings.thumbTwoValue,
+        thumbOne: thumbOneValue,
+        thumbTwo: thumbTwoValue,
       });
     }
   }
 
-  updateThumbsState(positions: IThumbsPositions): void {
+  updateThumbsState({ thumbOne, thumbTwo }: IThumbsPositions): void {
     let thumbOneValue = this.valueWithStep(
-      this.positionByOrientation(positions.thumbOne)
+      this.positionByOrientation(thumbOne)
     );
     let thumbTwoValue: null | number = null;
 
-    if (positions.thumbTwo) {
-      thumbTwoValue = this.valueWithStep(
-        this.positionByOrientation(positions.thumbTwo)
-      );
+    if (thumbTwo) {
+      thumbTwoValue = this.valueWithStep(this.positionByOrientation(thumbTwo));
     }
 
     if (thumbTwoValue && thumbOneValue > thumbTwoValue) {
@@ -115,11 +125,11 @@ class SimpleSliderModel implements ISimpleSliderModel {
     this.thumbSize = SimpleSliderModel.getCorrectSize(size, 0);
   }
 
-  setThumbsValues(thumbs: IThumbsValues): void {
-    const thumbOnePosition = this.thumbValueToPosition(thumbs.thumbOne);
+  setThumbsValues({ thumbOne, thumbTwo }: IThumbsValues): void {
+    const thumbOnePosition = this.thumbValueToPosition(thumbOne);
     let thumbTwoPosition = null;
     if (this.type === 'range') {
-      thumbTwoPosition = this.thumbValueToPosition(thumbs.thumbTwo);
+      thumbTwoPosition = this.thumbValueToPosition(thumbTwo);
     }
     this.updateThumbsState({
       thumbOne: thumbOnePosition,
@@ -268,10 +278,10 @@ class SimpleSliderModel implements ISimpleSliderModel {
     this.step = this.step > stepsCount ? stepsCount : this.step;
   }
 
-  setThumbPositionOnClickPosition(clickPosition: IPosition): void {
+  setThumbPositionOnClickPosition({ left, top }: IPosition): void {
     const position = {
-      left: clickPosition.left - this.thumbSize.width / 2,
-      top: clickPosition.top - this.thumbSize.height / 2,
+      left: left - this.thumbSize.width / 2,
+      top: top - this.thumbSize.height / 2,
     };
     let thumbOne = this.thumbOneValue;
     let thumbTwo = this.thumbTwoValue;
@@ -324,20 +334,19 @@ class SimpleSliderModel implements ISimpleSliderModel {
     return false;
   }
 
-  private static getCorrectSize(size: ISize, min: number): ISize {
-    const width = size.width >= min ? size.width : min;
-    const height = size.height >= min ? size.height : min;
+  private static getCorrectSize({ width, height }: ISize, min: number): ISize {
+    width = width >= min ? width : min;
+    height = height >= min ? height : min;
     return { width, height };
   }
 
-  private getPopUpPosition(thumbPosition: IPosition): IPosition {
-    let left = 0;
-    let top = 0;
-
+  private getPopUpPosition({ left, top }: IPosition): IPosition {
     if (this.orientation === 'horizontal') {
-      left = thumbPosition.left + this.thumbSize.width / 2;
+      left += this.thumbSize.width / 2;
+      top = 0;
     } else {
-      top = thumbPosition.top + this.thumbSize.height / 2;
+      left = 0;
+      top += this.thumbSize.height / 2;
     }
 
     return { left, top };
@@ -440,12 +449,12 @@ class SimpleSliderModel implements ISimpleSliderModel {
     return size.height;
   }
 
-  private positionByOrientation(position: IPosition): number {
+  private positionByOrientation({ left, top }: IPosition): number {
     if (this.orientation === 'horizontal') {
-      return position.left;
+      return left;
     }
 
-    return position.top;
+    return top;
   }
 
   private getCorrectPointPosition(position: number): number {

@@ -6,18 +6,18 @@ class PopUp extends UIControl {
     super('pop-up', orientation);
   }
 
-  update(params: IPopUpParams): void {
-    this.updateValue(params.value);
-    this.updatePosition(params.position);
+  update({ value, position }: IPopUpParams): void {
+    this.updateValue(value);
+    this.updatePosition(position);
   }
 
   private updateValue(value: number): void {
     this.control.innerHTML = `${value}`;
   }
 
-  private updatePosition(position: IPosition): void {
-    this.control.style.left = `${position.left}px`;
-    this.control.style.top = `${position.top}px`;
+  private updatePosition({ left, top }: IPosition): void {
+    this.control.style.left = `${left}px`;
+    this.control.style.top = `${top}px`;
   }
 }
 

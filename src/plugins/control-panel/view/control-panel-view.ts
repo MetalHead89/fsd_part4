@@ -32,13 +32,13 @@ class ControlPanelView extends Subject implements IObserver {
     this.step = new TextField('step');
     this.typeRadio = new RadioButton(
       'type',
-      { label: 'single', value: 'single' },
-      { label: 'range', value: 'range' }
+      { labelText: 'single', value: 'single' },
+      { labelText: 'range', value: 'range' }
     );
     this.orientationRadio = new RadioButton(
       'orientation',
-      { label: 'horizontal', value: 'horizontal' },
-      { label: 'vertical', value: 'vertical' }
+      { labelText: 'horizontal', value: 'horizontal' },
+      { labelText: 'vertical', value: 'vertical' }
     );
     this.scaleCheckbox = new Checkbox({
       label: 'scale',
@@ -62,9 +62,9 @@ class ControlPanelView extends Subject implements IObserver {
     }
   }
 
-  setThumbsValues(thumbsValues: IThumbsValues): void {
-    this.thumbOneValue.setValue(thumbsValues.thumbOne);
-    this.thumbTwoValue.setValue(thumbsValues.thumbTwo);
+  setThumbsValues({ thumbOne, thumbTwo }: IThumbsValues): void {
+    this.thumbOneValue.setValue(thumbOne);
+    this.thumbTwoValue.setValue(thumbTwo);
   }
 
   setMinValue(value: number): void {

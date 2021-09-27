@@ -66,11 +66,8 @@ class UIControl {
       .getPropertyValue(styleName);
   }
 
-  protected setPosition(cursorPosition: IPosition): void {
-    const positionInsideParent = {
-      left: cursorPosition.left,
-      top: cursorPosition.top,
-    };
+  protected setPosition({ left, top }: IPosition): void {
+    const positionInsideParent = { left, top };
 
     const parent: HTMLElement | null = this.control.parentElement;
 

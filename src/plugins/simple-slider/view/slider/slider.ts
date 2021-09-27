@@ -10,11 +10,11 @@ class Slider extends UIControl {
     this.control.append(control);
   }
 
-  setMargins(margins: ISliderMargins): void {
-    this.control.style.marginLeft = `${margins.left}px`;
-    this.control.style.marginTop = `${margins.top}px`;
-    this.control.style.marginRight = `${margins.right}px`;
-    this.control.style.marginBottom = `${margins.bottom}px`;
+  setMargins({ left, top, right, bottom }: ISliderMargins): void {
+    this.control.style.marginLeft = `${left}px`;
+    this.control.style.marginTop = `${top}px`;
+    this.control.style.marginRight = `${right}px`;
+    this.control.style.marginBottom = `${bottom}px`;
   }
 
   resetMargins(): void {

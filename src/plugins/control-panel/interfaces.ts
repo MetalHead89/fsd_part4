@@ -3,7 +3,7 @@ interface ISubjectEvents {
 }
 
 interface IRadioParams {
-  label: string;
+  labelText: string;
   value: string;
   checked?: boolean;
 }

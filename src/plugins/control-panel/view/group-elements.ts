@@ -1,17 +1,21 @@
 import { IGroupElements } from '../interfaces';
 
-function groupElements(params: IGroupElements): HTMLDivElement {
+function groupElements({
+  header,
+  wrapperClass,
+  elements,
+}: IGroupElements): HTMLDivElement {
   const wrapper: HTMLDivElement = document.createElement('div');
-  wrapper.className = params.wrapperClass;
+  wrapper.className = wrapperClass;
 
-  if (params.header !== undefined) {
-    const header = document.createElement('label');
-    header.classList.add('control-panel__group-title');
-    header.innerText = params.header;
-    wrapper.append(header);
+  if (header !== undefined) {
+    const title = document.createElement('label');
+    title.classList.add('control-panel__group-title');
+    title.innerText = header;
+    wrapper.append(title);
   }
 
-  params.elements.forEach((element) => {
+  elements.forEach((element) => {
     wrapper.append(element);
   });
 

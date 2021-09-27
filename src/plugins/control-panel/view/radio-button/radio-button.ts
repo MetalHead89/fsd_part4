@@ -43,30 +43,32 @@ class RadioButton extends Subject {
   }
 
   private init(name: string, params: IRadioParams[]) {
-    params.forEach((radio) => {
-      const radioWrapper = document.createElement('div');
-      radioWrapper.classList.add('radio-button__radio-wrapper');
+    params.forEach(
+      ({ labelText, value, checked }: IRadioParams, index: number) => {
+        const radioWrapper = document.createElement('div');
+        radioWrapper.classList.add('radio-button__radio-wrapper');
 
-      const label = document.createElement('label');
-      label.classList.add('radio-button__label');
-      label.innerText = radio.label;
+        const label = document.createElement('label');
+        label.classList.add('radio-button__label');
+        label.innerText = labelText;
 
-      const radioButton = document.createElement('input');
-      radioButton.type = 'radio';
-      radioButton.name = name;
-      radioButton.value = radio.value;
-      if (params[0] === radio || radio.checked) {
-        radioButton.checked = true;
+        const radioButton = document.createElement('input');
+        radioButton.type = 'radio';
+        radioButton.name = name;
+        radioButton.value = value;
+        if (index === 0 || checked) {
+          radioButton.checked = true;
+        }
+        radioButton.classList.add('radio-button__radio-button');
+        this.handleRadioButtonChange = this.handleRadioButtonChange.bind(this);
+        radioButton.addEventListener('change', this.handleRadioButtonChange);
+        this.radios.push(radioButton);
+
+        label.append(radioButton);
+        radioWrapper.append(label);
+        this.control.append(radioWrapper);
       }
-      radioButton.classList.add('radio-button__radio-button');
-      this.handleRadioButtonChange = this.handleRadioButtonChange.bind(this);
-      radioButton.addEventListener('change', this.handleRadioButtonChange);
-      this.radios.push(radioButton);
-
-      label.append(radioButton);
-      radioWrapper.append(label);
-      this.control.append(radioWrapper);
-    });
+    );
   }
 
   private handleRadioButtonChange(): void {

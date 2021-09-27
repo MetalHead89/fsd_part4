@@ -40,18 +40,18 @@ class Scale extends UIControl {
     this.subject.notify('clickToScale');
   }
 
-  private addPoint(point: IScalePointParams): void {
+  private addPoint({ position, size, value }: IScalePointParams): void {
     const orientation = this.getOrientation();
     const scalePoint: HTMLElement = document.createElement('div');
     scalePoint.classList.add('scale__point', `scale__point_${orientation}`);
-    if (point.size.width > 0) {
-      scalePoint.style.width = `${point.size.width}px`;
+    if (size.width > 0) {
+      scalePoint.style.width = `${size.width}px`;
     }
 
     if (orientation === 'horizontal') {
-      this.control.style.height = `${point.size.height}px`;
+      this.control.style.height = `${size.height}px`;
     } else {
-      this.control.style.width = `${point.size.width}px`;
+      this.control.style.width = `${size.width}px`;
     }
 
     const divisionMarker: HTMLElement = document.createElement('div');
@@ -62,10 +62,10 @@ class Scale extends UIControl {
       'scale__point-label',
       `scale__point-label_${orientation}`
     );
-    divisionLabel.innerText = point.value.toString();
+    divisionLabel.innerText = value.toString();
 
-    scalePoint.style.left = `${point.position.left}px`;
-    scalePoint.style.top = `${point.position.top}px`;
+    scalePoint.style.left = `${position.left}px`;
+    scalePoint.style.top = `${position.top}px`;
 
     scalePoint.append(divisionMarker);
     scalePoint.append(divisionLabel);

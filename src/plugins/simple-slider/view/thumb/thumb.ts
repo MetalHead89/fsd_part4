@@ -26,10 +26,10 @@ class Thumb extends UIControl {
     this.control.style.zIndex = '';
   }
 
-  moveTo(position: IPosition): void {
-    this.lastPosition = position;
-    this.control.style.left = `${position.left}px`;
-    this.control.style.top = `${position.top}px`;
+  moveTo({ left, top }: IPosition): void {
+    this.lastPosition = { left, top };
+    this.control.style.left = `${left}px`;
+    this.control.style.top = `${top}px`;
   }
 
   protected setPosition(cursorPosition: IPosition): void {
@@ -75,9 +75,9 @@ class Thumb extends UIControl {
     this.increaseZIndex();
   }
 
-  private setThumbShift(cursorPos: IPosition, thumbPos: IPosition) {
-    this.shift.shiftX = cursorPos.left - thumbPos.left;
-    this.shift.shiftY = cursorPos.top - thumbPos.top;
+  private setThumbShift(cursorPosition: IPosition, thumbPosition: IPosition) {
+    this.shift.shiftX = cursorPosition.left - thumbPosition.left;
+    this.shift.shiftY = cursorPosition.top - thumbPosition.top;
   }
 
   private increaseZIndex() {

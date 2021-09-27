@@ -6,11 +6,11 @@ class ProgressBar extends UIControl {
     super('progress-bar');
   }
 
-  update(params: IProgressBarParams): void {
-    this.control.style.left = `${params.position.left}px`;
-    this.control.style.top = `${params.position.top}px`;
-    this.control.style.width = `${params.size.width}px`;
-    this.control.style.height = `${params.size.height}px`;
+  update({ position, size }: IProgressBarParams): void {
+    this.control.style.left = `${position.left}px`;
+    this.control.style.top = `${position.top}px`;
+    this.control.style.width = `${size.width}px`;
+    this.control.style.height = `${size.height}px`;
   }
 }
 
