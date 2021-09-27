@@ -42,10 +42,10 @@ beforeEach(() => {
 });
 
 describe('Init method', () => {
-  test('The setSliderSize method from the SimpleSliderModel class should be called once', () => {
+  test('The setSliderSize method from the SimpleSliderModel class should be called twice', () => {
     const spy = jest.spyOn(model, 'setSliderSize');
     controller = new SimpleSliderController({ model, view });
-    expect(spy).toBeCalledTimes(1);
+    expect(spy).toBeCalledTimes(2);
   });
   test('The setThumbSize method from the SimpleSliderModel class should be called once', () => {
     const spy = jest.spyOn(model, 'setThumbSize');
@@ -162,12 +162,12 @@ describe('Update view method', () => {
     controller.update('stepIsUpdated');
     expect(spy).toBeCalledTimes(1);
   });
-  test('The disableScale method from the SimpleSliderView class should be called once', () => {
+  test('The disableScale method from the SimpleSliderView class should be called twice', () => {
     const spy = jest.spyOn(view, 'disableScale');
     settings.scale = false;
     model = new SimpleSliderModel(settings);
     controller = new SimpleSliderController({ model, view });
-    expect(spy).toBeCalledTimes(1);
+    expect(spy).toBeCalledTimes(2);
   });
 });
 
