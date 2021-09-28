@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable comma-dangle */
 /* eslint-disable @typescript-eslint/no-var-requires */
 
@@ -64,74 +65,4 @@ module.exports = {
       configFile: path.resolve(__dirname, './stylelint.config.js'),
     }),
   ],
-  // module: {
-  //   rules: [
-  //     {
-  //       test: /\.tsx?$/,
-  //       use: 'ts-loader',
-  //       exclude: /node_modules/,
-  //     },
-  //     {
-  //       test: /\.js$/,
-  //       exclude: /node_modules/,
-  //       use: {
-  //         loader: 'babel-loader',
-  //         options: {
-  //           presets: ['@babel/preset-env'],
-  //         },
-  //       },
-  //     },
-  //     {
-  //       test: /\.scss$/,
-  //       use: [
-  //         'style-loader',
-  //         MiniCssExtractPlugin.loader,
-  //         {
-  //           loader: 'css-loader',
-  //           options: { sourceMap: true },
-  //         },
-  //         {
-  //           loader: 'sass-loader',
-  //           options: { sourceMap: true },
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       test: /\.css$/,
-  //       use: [
-  //         'style-loader',
-  //         MiniCssExtractPlugin.loader,
-  //         {
-  //           loader: 'css-loader',
-  //           options: { sourceMap: true },
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       test: /\.pug$/,
-  //       loader: 'pug-loader',
-  //       options: {
-  //         pretty: true,
-  //       },
-  //     },
-  //     {
-  //       test: /\.(woff(2)?|ttf|eot)$/,
-  //       use: [
-  //         {
-  //           loader: 'file-loader',
-  //           options: {
-  //             name: 'fonts/[name]/[name].[ext]',
-  //           },
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       test: /\.(png|jpg|svg|gif)$/,
-  //       loader: 'file-loader',
-  //       options: {
-  //         name: 'src/images/[name].[ext]',
-  //       },
-  //     },
-  //   ],
-  // },
 };
