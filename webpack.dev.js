@@ -11,6 +11,7 @@ module.exports = merge(common, {
   devServer: {
     port: 4200,
   },
+  plugins: [new MiniCssExtractPlugin({ filename: '[name]/styles.css' })],
   module: {
     rules: [
       {

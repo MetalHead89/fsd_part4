@@ -1,13 +1,14 @@
 import Demo from './demo';
 
-require.context('./', true, /\.scss$/);
+require.context('', true, /\.scss$/);
+require.context('../fonts', true, /\.scss$/);
 
-const scripts = require.context('./', true, /[^d]\.ts$/);
-scripts.keys().forEach((script) => {
+const demoScripts = require.context('', true, /[^d]\.ts$/);
+demoScripts.keys().forEach((script) => {
   const directories = script.split('/');
 
   if (!directories.includes('__mocks__') && !directories.includes('tests')) {
-    scripts(script);
+    demoScripts(script);
   }
 });
 
