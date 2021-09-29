@@ -13,10 +13,13 @@ const webpack = require('webpack');
 module.exports = {
   context: path.resolve(__dirname, 'src'),
   mode: 'development',
-  entry: path.resolve(__dirname, 'src/index.ts'),
+  entry: {
+    slider: path.resolve(__dirname, 'src/index.ts'),
+    demo: path.resolve(__dirname, 'src/demo/index.ts'),
+  },
   devtool: 'inline-source-map',
   output: {
-    filename: '[name].js',
+    filename: '[name]/[name].js',
     path: path.resolve(__dirname, 'dist'),
   },
   resolve: {
@@ -45,10 +48,10 @@ module.exports = {
   plugins: [
     new HTMLWebpackPlugin({
       template: path.resolve(__dirname, 'src/demo/index.pug'),
-      favicon: path.resolve(__dirname, 'favicon.ico'),
+      filename: path.resolve(__dirname, 'dist/demo/index.html'),
     }),
     new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin([{ filename: 'styles.css' }]),
+    new MiniCssExtractPlugin([{ filename: '[name]/styles.css' }]),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
@@ -58,6 +61,10 @@ module.exports = {
         {
           from: path.resolve(__dirname, 'src/demo/images/help-image.png'),
           to: path.resolve(__dirname, 'dist/src/images/help-image.png'),
+        },
+        {
+          from: path.resolve(__dirname, 'favicon.ico'),
+          to: path.resolve(__dirname, 'dist/demo/favicon.ico'),
         },
       ],
     }),
