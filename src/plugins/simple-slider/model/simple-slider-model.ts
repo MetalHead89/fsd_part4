@@ -104,13 +104,13 @@ class SimpleSliderModel implements ISimpleSliderModel {
       thumbTwoValue = this.valueWithStep(this.positionByOrientation(thumbTwo));
     }
 
-    if (thumbTwoValue && thumbOneValue > thumbTwoValue) {
+    if (thumbTwoValue !== null && thumbOneValue > thumbTwoValue) {
       this.subject.notify('thumbsSwapped');
       [thumbOneValue, thumbTwoValue] = [thumbTwoValue, thumbOneValue];
     }
 
     this.thumbOneValue = thumbOneValue;
-    if (thumbTwoValue) {
+    if (thumbTwoValue !== null) {
       this.thumbTwoValue = thumbTwoValue;
     }
 
