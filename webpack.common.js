@@ -15,7 +15,6 @@ module.exports = {
   mode: 'development',
   entry: {
     slider: path.resolve(__dirname, 'src/plugins/simple-slider/index.ts'),
-    panel: path.resolve(__dirname, 'src/plugins/control-panel/index.ts'),
     demo: path.resolve(__dirname, 'src/demo/index.ts'),
   },
   devtool: 'inline-source-map',

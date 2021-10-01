@@ -1,6 +1,3 @@
-require('../plugins/simple-slider/simple-slider');
-require('../plugins/control-panel/control-panel');
-
 class Demo {
   private addNewSliderButton: HTMLDivElement | null = null;
   private helpImage: HTMLDivElement | null = null;
