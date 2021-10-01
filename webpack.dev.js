@@ -80,7 +80,10 @@ module.exports = merge(common, {
         test: /\.(png|jpg|svg|gif)$/,
         loader: 'file-loader',
         options: {
-          name: 'src/images/[name].[ext]',
+          useRelativePath: true,
+          name: 'images/[name].[ext]',
+          outputPath: 'demo',
+          publicPath: './',
         },
       },
     ],

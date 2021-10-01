@@ -61,7 +61,7 @@ module.exports = {
       patterns: [
         {
           from: path.resolve(__dirname, 'src/demo/images/help-image.png'),
-          to: path.resolve(__dirname, 'dist/demo/src/images/help-image.png'),
+          to: path.resolve(__dirname, 'dist/demo/images/help-image.png'),
         },
         {
           from: path.resolve(__dirname, 'favicon.ico'),
