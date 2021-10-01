@@ -1,7 +1,6 @@
 import Demo from './demo';
 
-require.context('../fonts', true, /\.scss$/);
-require.context('', true, /\.scss$/);
+require.context('../', true, /\.scss$/);
 
 const demoScripts = require.context('../', true, /[^d]\.ts$/);
 demoScripts.keys().forEach((script) => {
