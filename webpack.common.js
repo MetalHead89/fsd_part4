@@ -11,21 +11,16 @@ const webpack = require('webpack');
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
-  mode: 'development',
   entry: {
     slider: path.resolve(__dirname, 'src/plugins/simple-slider/index.ts'),
     demo: path.resolve(__dirname, 'src/demo/index.ts'),
   },
-  devtool: 'inline-source-map',
   output: {
     filename: '[name]/[name].js',
     path: path.resolve(__dirname, 'dist'),
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
-  },
-  devServer: {
-    port: 4200,
   },
   plugins: [
     new HTMLWebpackPlugin({
