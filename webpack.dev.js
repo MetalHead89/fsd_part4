@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-var-requires */
 
+const path = require('path');
 const { merge } = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const common = require('./webpack.common.js');
@@ -10,6 +11,8 @@ module.exports = merge(common, {
   devtool: 'inline-source-map',
   devServer: {
     port: 4200,
+    contentBase: path.resolve(__dirname, 'dist'),
+    openPage: 'demo/index.html',
   },
   plugins: [new MiniCssExtractPlugin({ filename: '[name]/styles.css' })],
   module: {
