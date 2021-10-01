@@ -5,7 +5,6 @@
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const StylelintPlugin = require('stylelint-webpack-plugin');
 const webpack = require('webpack');
@@ -25,23 +24,6 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
   },
-  // optimization: {
-  //   splitChunks: {
-  //     chunks: 'all',
-  //     cacheGroups: {
-  //       vendor: {
-  //         test: /[\\/]node_modules[\\/]/,
-  //         name(module) {
-  //           const packageName = module.context.match(
-  //             /[\\/]node_modules[\\/](.*?)([\\/]|$)/
-  //           )[1];
-
-  //           return `npm.${packageName.replace('@', '')}`;
-  //         },
-  //       },
-  //     },
-  //   },
-  // },
   devServer: {
     port: 4200,
   },
@@ -51,7 +33,6 @@ module.exports = {
       filename: path.resolve(__dirname, 'dist/demo/index.html'),
     }),
     new CleanWebpackPlugin(),
-    // new MiniCssExtractPlugin([{ filename: 'styles.css' }]),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
@@ -72,19 +53,54 @@ module.exports = {
       configFile: path.resolve(__dirname, './stylelint.config.js'),
     }),
   ],
-  // module: {
-  //   rules: [
-  //     {
-  //       test: /\.(woff(2)?|ttf|eot)$/,
-  //       use: [
-  //         {
-  //           loader: 'file-loader',
-  //           options: {
-  //             name: 'fonts/[name]/[name].[ext]',
-  //           },
-  //         },
-  //       ],
-  //     },
-  //   ],
-  // },
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          },
+        },
+      },
+      {
+        test: /\.pug$/,
+        loader: 'pug-loader',
+        options: {
+          pretty: true,
+        },
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              useRelativePath: true,
+              name: '[path][name].[ext]',
+              outputPath: 'demo',
+              publicPath: './',
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(png|jpg|svg|gif)$/,
+        loader: 'file-loader',
+        options: {
+          useRelativePath: true,
+          name: 'images/[name].[ext]',
+          outputPath: 'demo',
+          publicPath: './',
+        },
+      },
+    ],
+  },
 };

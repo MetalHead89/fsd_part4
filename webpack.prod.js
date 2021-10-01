@@ -13,21 +13,6 @@ module.exports = merge(common, {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/,
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-          },
-        },
-      },
-      {
         test: /\.scss$/,
         use: [
           'style-loader',
@@ -70,37 +55,6 @@ module.exports = merge(common, {
             },
           },
         ],
-      },
-      {
-        test: /\.pug$/,
-        loader: 'pug-loader',
-        options: {
-          pretty: true,
-        },
-      },
-      {
-        test: /\.(woff(2)?|ttf|eot)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              useRelativePath: true,
-              name: '[path][name].[ext]',
-              outputPath: 'demo',
-              publicPath: './',
-            },
-          },
-        ],
-      },
-      {
-        test: /\.(png|jpg|svg|gif)$/,
-        loader: 'file-loader',
-        options: {
-          useRelativePath: true,
-          name: 'images/[name].[ext]',
-          outputPath: 'demo',
-          publicPath: './',
-        },
       },
     ],
   },
