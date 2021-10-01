@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-var-requires */
 
+const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
@@ -8,6 +9,7 @@ const common = require('./webpack.common.js');
 module.exports = merge(common, {
   mode: 'production',
   devtool: 'source-map',
+  plugins: [new MiniCssExtractPlugin({ filename: '[name]/styles.css' })],
   module: {
     rules: [
       {
@@ -35,6 +37,15 @@ module.exports = merge(common, {
             options: { sourceMap: true },
           },
           {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
+              postcssOptions: {
+                config: path.resolve(__dirname, 'postcss.config.js'),
+              },
+            },
+          },
+          {
             loader: 'sass-loader',
             options: { sourceMap: true },
           },
@@ -48,6 +59,15 @@ module.exports = merge(common, {
           {
             loader: 'css-loader',
             options: { sourceMap: true },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
+              postcssOptions: {
+                config: path.resolve(__dirname, 'postcss.config.js'),
+              },
+            },
           },
         ],
       },
@@ -64,7 +84,10 @@ module.exports = merge(common, {
           {
             loader: 'file-loader',
             options: {
-              name: 'fonts/[name]/[name].[ext]',
+              useRelativePath: true,
+              name: '[path][name].[ext]',
+              outputPath: 'demo',
+              publicPath: './',
             },
           },
         ],
@@ -73,7 +96,10 @@ module.exports = merge(common, {
         test: /\.(png|jpg|svg|gif)$/,
         loader: 'file-loader',
         options: {
-          name: 'src/images/[name].[ext]',
+          useRelativePath: true,
+          name: 'images/[name].[ext]',
+          outputPath: 'demo',
+          publicPath: './',
         },
       },
     ],
