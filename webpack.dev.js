@@ -68,7 +68,10 @@ module.exports = merge(common, {
           {
             loader: 'file-loader',
             options: {
-              name: 'fonts/[name]/[name].[ext]',
+              useRelativePath: true,
+              name: '[path][name].[ext]',
+              outputPath: 'demo',
+              publicPath: './',
             },
           },
         ],
