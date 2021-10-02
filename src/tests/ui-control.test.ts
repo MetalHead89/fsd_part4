@@ -40,16 +40,16 @@ beforeEach(() => {
   control = new UIControl('some-element');
 });
 
-describe('Constructor', () => {
-  test('UI-Control should have a class some-element', () => {
+describe('Конструктор класса UIControl', () => {
+  test('Элемент UIControl должен содержать элемент с классом some-element', () => {
     expect(control['control'].classList.contains('some-element')).toBe(true);
   });
-  test('UI-Control should have a class some-element_horizontal', () => {
+  test('Элемент UIControl должен содержать элемент с классом some-element_horizontal', () => {
     expect(
       control['control'].classList.contains('some-element_horizontal'),
     ).toBe(true);
   });
-  test('UI-Control should have a class some-element_vertical', () => {
+  test('Элемент UIControl должен содержать элемент с классом some-element_vertical', () => {
     control = new UIControl('some-element', 'vertical');
     expect(control['control'].classList.contains('some-element_vertical')).toBe(
       true,
@@ -57,8 +57,8 @@ describe('Constructor', () => {
   });
 });
 
-describe('Set position and get position', () => {
-  test('UI-Control position should be {left: 80, top: 20}', () => {
+describe('Методы setPosition and getPosition класса UIControl', () => {
+  test('Позиция элемента UIControl должна соответствовать переданному в метод setPosition объекту', () => {
     const elementParrent = document.createElement('div');
     elementParrent.style.left = '100px';
     elementParrent.style.top = '40px';
@@ -67,31 +67,31 @@ describe('Set position and get position', () => {
     expect(control.getPosition().left).toBe(80);
     expect(control.getPosition().top).toBe(20);
   });
-  test('UI-Control position should be {left: 20, top: 10}', () => {
+  test('Позиция элемента UIControl должна соответствовать переданному в метод setPosition объекту', () => {
     control['setPosition']({ left: 20, top: 10 });
     expect(control.getPosition().left).toBe(20);
     expect(control.getPosition().top).toBe(10);
   });
 });
 
-describe('Get element', () => {
-  test('UI-Control should be exist', () => {
+describe('Метод getControl класса UIControl', () => {
+  test('Элемент UIControl должен существовать', () => {
     expect(control.getControl()).not.toBeNull();
   });
-  test('UI-Control should be exist', () => {
+  test('Элемент UIControl должен существовать', () => {
     control = new UIControl('some-element', 'vertical');
     expect(control.getControl()).not.toBeNull();
   });
 });
 
-describe('Get size', () => {
-  test('UIControl size should be {width: 400, height: 50}', () => {
+describe('Метод getSize класса UIControl', () => {
+  test('Метод должен возвращать  объект соответствующий свойствам style.width и style.height элемента UIControl', () => {
     control['control'].style.width = '400px';
     control['control'].style.height = '50px';
     expect(control.getSize().width).toBe(400);
     expect(control.getSize().height).toBe(50);
   });
-  test('UI-Control size should be {width: 250, height: 40}', () => {
+  test('Метод должен возвращать  объект соответствующий свойствам style.width и style.height элемента UIControl', () => {
     control['control'].style.width = '250px';
     control['control'].style.height = '40px';
     expect(control.getSize().width).toBe(250);
@@ -99,15 +99,15 @@ describe('Get size', () => {
   });
 });
 
-describe('Switch to horizontal', () => {
-  test('UI-Control should be not contain class some-element_vertical', () => {
+describe('Метод switchToHorizontal класса UIControl', () => {
+  test('Элемент UIControl не должен содержать класс some-element_vertical', () => {
     control = new UIControl('some-element', 'vertical');
     control.switchToHorizontal();
     expect(control['control'].classList.contains('some-element_vertical')).toBe(
       false,
     );
   });
-  test('UI-Control should be contain class some-element_horizontal', () => {
+  test('Элемент UIControl должен содержать класс some-element_horizontal', () => {
     control = new UIControl('some-element', 'vertical');
     control.switchToHorizontal();
     expect(
@@ -116,14 +116,14 @@ describe('Switch to horizontal', () => {
   });
 });
 
-describe('Switch to vertical', () => {
-  test('UI-Control should be not contain class some-element_horizontal', () => {
+describe('Метод switchToVertical класса UIControl', () => {
+  test('Элемент UIControl не должен содержать класс some-element_horizontal', () => {
     control.switchToVertical();
     expect(
       control['control'].classList.contains('some-element_horizontal'),
     ).toBe(false);
   });
-  test('UI-Control should be contain class some-element_vertical', () => {
+  test('Элемент UIControl должен содержать класс some-element_vertical', () => {
     control.switchToVertical();
     expect(control['control'].classList.contains('some-element_vertical')).toBe(
       true,
@@ -131,8 +131,8 @@ describe('Switch to vertical', () => {
   });
 });
 
-describe('Remove', () => {
-  test('UI-Control should be not exist in the DOM', () => {
+describe('Метод remove класса UIControl', () => {
+  test('Элемент UIControl не должен существовать в DOM', () => {
     const body = document.querySelector('body');
     body?.append(control.getControl());
     control.remove();
@@ -140,18 +140,18 @@ describe('Remove', () => {
   });
 });
 
-describe('Get orientation', () => {
-  test('UI-Control orientation should be horizontal', () => {
+describe('Метод getOrientation класса UIControl', () => {
+  test('Метод должен возвращать текущую ориентацию элемента', () => {
     expect(control.getOrientation()).toBe('horizontal');
   });
-  test('UI-Control orientation should be vertical', () => {
+  test('Метод должен возвращать текущую ориентацию элемента', () => {
     control = new UIControl('some-element', 'vertical');
     expect(control.getOrientation()).toBe('vertical');
   });
 });
 
-describe('Get rect', () => {
-  test('UI-Control rect should be {top: 40, left: 45, bottom: 50, right: 55}', () => {
+describe('Метод getRect класса UIControl', () => {
+  test('Метод должен возвращать объект с позицией прямоугольника в который вписан элемент UIControl', () => {
     control['control'].getBoundingClientRect = jest.fn(() => {
       return {
         width: 120,
@@ -170,7 +170,7 @@ describe('Get rect', () => {
     expect(control.getRect().bottom).toBe(50);
     expect(control.getRect().right).toBe(55);
   });
-  test('UI-Control rect should be {top: 11, left: 49, bottom: 60, right: 5}', () => {
+  test('Метод должен возвращать объект с позицией прямоугольника в который вписан элемент UIControl', () => {
     control['control'].getBoundingClientRect = jest.fn(() => {
       return {
         width: 120,
@@ -191,12 +191,12 @@ describe('Get rect', () => {
   });
 });
 
-describe('Get style', () => {
-  test('UI-Control width style should be 138px', () => {
+describe('Метод getStyle класса UIControl', () => {
+  test('Метод должен возвращать значение стилевого свойства, переданного в параметрах', () => {
     control['control'].style.width = '138px';
     expect(control.getStyle('width')).toBe('138px');
   });
-  test('UI-Control width style should be ""', () => {
+  test('Метод должен возвращать значение стилевого свойства, переданного в параметрах', () => {
     expect(control.getStyle('someStyle')).toBe('');
   });
 });

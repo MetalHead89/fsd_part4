@@ -34,8 +34,8 @@ beforeEach(() => {
   track = new Track();
 });
 
-describe('Click on track', () => {
-  test('SetPosition method should be called once', () => {
+describe('Клик по элементу Track', () => {
+  test('Метод setPosition должен быть вызван один раз', () => {
     const evt = document.createEvent('MouseEvent');
     const spy = spyOn<any>(track, 'setPosition');
 
@@ -44,7 +44,7 @@ describe('Click on track', () => {
 
     expect(spy).toBeCalledTimes(1);
   });
-  test('Notify method should be called once', () => {
+  test('Метод notify должен быть вызван один раз', () => {
     const evt = document.createEvent('MouseEvent');
     const spy = spyOn<any>(track.subject, 'notify');
 
@@ -53,7 +53,7 @@ describe('Click on track', () => {
 
     expect(spy).toBeCalledTimes(1);
   });
-  test('Position should be {left: 50, top: 80}', () => {
+  test('Позиция элемента Track должна соответствовать позиции из события MouseEvent', () => {
     const evt = document.createEvent('MouseEvent');
     initEvt(evt);
     track['control'].dispatchEvent(evt);
