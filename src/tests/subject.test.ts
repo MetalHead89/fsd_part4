@@ -8,8 +8,8 @@ beforeEach(() => {
   subject = new Subject();
 });
 
-describe('Register', () => {
-  test('Observers must be added', () => {
+describe('Метод register класса Subject', () => {
+  test('Должны быть добавлены наблюдатели события thumbMove', () => {
     const newObserverOne = {
       update(): void {
         /* some operations */
@@ -37,8 +37,8 @@ describe('Register', () => {
   });
 });
 
-describe('Remove', () => {
-  test('Observers must be removed', () => {
+describe('Метод remove класса Subject', () => {
+  test('Наблюдатели события thumbMove должны быть удалены', () => {
     const newObserverOne = {
       update(): void {
         /* some operations */
@@ -72,8 +72,8 @@ describe('Remove', () => {
   });
 });
 
-describe('Notify', () => {
-  test('Observers must be notified', () => {
+describe('Метод notify класса Subject', () => {
+  test('Наблюдатели события thumbMove должны быть оповещены о наступлении события', () => {
     let numberOfNotifiedObservers = 0;
 
     const newObserverOne = {

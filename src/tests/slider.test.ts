@@ -11,14 +11,14 @@ beforeEach(() => {
   slider = new Slider();
 });
 
-describe('Append', () => {
-  test('Slider should contain element with class new-elem', () => {
+describe('Метод append класса Slider', () => {
+  test('Элемент Slider должен содержать элемент с классом new-elem', () => {
     const elem = document.createElement('div');
     elem.classList.add('new-elem');
     slider.append(elem);
     expect(slider.getControl().querySelector('.new-elem')).not.toBeNull();
   });
-  test('Slider should contain element with class second-elem', () => {
+  test('Элемент Slider должен содержать элемент с классом second-elem', () => {
     const elem = document.createElement('div');
     elem.classList.add('second-elem');
     slider.append(elem);
@@ -26,8 +26,8 @@ describe('Append', () => {
   });
 });
 
-describe('Set margins', () => {
-  test('Slider margins should be {left: 25, top: 77, right: 13, bottom: 2}', () => {
+describe('Метод setMargins класса Slider', () => {
+  test('Отступы элемента ProgressBar должны быть изменены в соответствии с переданным в методе объектом', () => {
     slider.setMargins({
       left: 25,
       top: 77,
@@ -40,7 +40,7 @@ describe('Set margins', () => {
     expect(slider['control'].style.marginRight).toBe('13px');
     expect(slider['control'].style.marginBottom).toBe('2px');
   });
-  test('Slider margins should be {left: 84, top: 97, right: 67, bottom: 73}', () => {
+  test('Отступы элемента ProgressBar должны быть изменены в соответствии с переданным в методе объектом', () => {
     slider.setMargins({
       left: 84,
       top: 97,
@@ -55,8 +55,8 @@ describe('Set margins', () => {
   });
 });
 
-describe('Reset margins', () => {
-  test('Slider margins should be {left: 0, top: 0, right: 0, bottom: 0}', () => {
+describe('Метод resetMargins класса Slider', () => {
+  test('Отступы элемента Slider должны быть равны 0', () => {
     slider.setMargins({
       left: 25,
       top: 77,
@@ -71,7 +71,7 @@ describe('Reset margins', () => {
     expect(slider['control'].style.marginRight).toBe('0px');
     expect(slider['control'].style.marginBottom).toBe('0px');
   });
-  test('Slider margins should be {left: 0px, top: 0, right: 0, bottom: 0}', () => {
+  test('Отступы элемента Slider должны быть равны 0', () => {
     slider.setMargins({
       left: 84,
       top: 97,
