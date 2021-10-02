@@ -36,10 +36,6 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
   private scale: Scale | null;
   private events: ISubjectEvents = {
     thumbIsDragged: () => this.subject.notify('thumbIsDragged'),
-    thumbIsCatched: () => {
-      this.thumbOne.resetZIndex();
-      this.thumbTwo?.resetZIndex();
-    },
     clickToTrack: () => this.subject.notify('clickToTrack'),
     clickToScale: () => this.subject.notify('clickToScale'),
   };

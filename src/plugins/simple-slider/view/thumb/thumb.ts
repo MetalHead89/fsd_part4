@@ -18,14 +18,6 @@ class Thumb extends UIControl {
     this.init();
   }
 
-  setZIndex(index: number): void {
-    this.control.style.zIndex = index.toString();
-  }
-
-  resetZIndex(): void {
-    this.control.style.zIndex = '';
-  }
-
   moveTo({ left, top }: IPosition): void {
     this.lastPosition = { left, top };
     this.control.style.left = `${left}px`;
@@ -72,17 +64,11 @@ class Thumb extends UIControl {
     document.addEventListener('pointerup', this.handleDocumentPointerup);
 
     this.subject.notify('thumbIsCatched');
-    this.increaseZIndex();
   }
 
   private setThumbShift(cursorPosition: IPosition, thumbPosition: IPosition) {
     this.shift.shiftX = cursorPosition.left - thumbPosition.left;
     this.shift.shiftY = cursorPosition.top - thumbPosition.top;
-  }
-
-  private increaseZIndex() {
-    const zIndex = this.getStyle('z-index');
-    this.control.style.zIndex = (parseInt(zIndex || '0', 10) + 1).toString();
   }
 
   private drag(event: PointerEvent): void {
