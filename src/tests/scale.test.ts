@@ -34,8 +34,8 @@ beforeEach(() => {
   scale = new Scale();
 });
 
-describe('Click on scale', () => {
-  test('SetPosition method should be called once', () => {
+describe('Клик по элементу Scale', () => {
+  test('Метод setPosition должен быть вызван один раз', () => {
     const evt = document.createEvent('MouseEvent');
     const spy = spyOn<any>(scale, 'setPosition');
 
@@ -44,7 +44,7 @@ describe('Click on scale', () => {
 
     expect(spy).toBeCalledTimes(1);
   });
-  test('Notify method should be called once', () => {
+  test('Метод notify объекта subject должен быть вызван один раз', () => {
     const evt = document.createEvent('MouseEvent');
     const spy = spyOn<any>(scale.subject, 'notify');
 
@@ -53,7 +53,7 @@ describe('Click on scale', () => {
 
     expect(spy).toBeCalledTimes(1);
   });
-  test('Scale position should be {left: 50, top: 80}', () => {
+  test('Координаты возвращенные методом getPosition должны соответствовать координатам из объекта события MouseEvent', () => {
     const evt = document.createEvent('MouseEvent');
     initEvt(evt);
     scale['control'].dispatchEvent(evt);
@@ -63,8 +63,8 @@ describe('Click on scale', () => {
   });
 });
 
-describe('Add points', () => {
-  test('The number of added points should be 3', () => {
+describe('Метод addPoint класса Scale', () => {
+  test('Количество добавленных делений на шкалу должно быть равно 3', () => {
     const points = [
       {
         position: { left: 50, top: 100 },
@@ -86,7 +86,7 @@ describe('Add points', () => {
 
     expect(scale['control'].querySelectorAll('.scale__point').length).toBe(3);
   });
-  test('Scale point size should be {left: 50px, top: 100px}', () => {
+  test('Свойство style элемента Scale должно быть изменено в соответствии с переданным в методе объектом', () => {
     const points = [
       {
         position: { left: 50, top: 100 },
@@ -100,7 +100,7 @@ describe('Add points', () => {
     expect(point?.style.left).toBe('50px');
     expect(point?.style.top).toBe('100px');
   });
-  test('Scale width should be 30px', () => {
+  test('Ширина элемента Scale должна быть изменена в соответствии с переданным в методе объектом', () => {
     scale = new Scale('vertical');
     const points = [
       {
@@ -112,7 +112,7 @@ describe('Add points', () => {
     scale.addPoints(points);
     expect(scale['control'].style.width).toBe('30px');
   });
-  test('Scale should contain an element with the scale__point-label class', () => {
+  test('Элемент Scale должен содержать в себе элемент с классом scale__point-label', () => {
     const points = [
       {
         position: { left: 50, top: 100 },
@@ -121,9 +121,11 @@ describe('Add points', () => {
       },
     ];
     scale.addPoints(points);
-    expect(scale['control'].querySelector('.scale__point-label')).not.toBe(null);
+    expect(scale['control'].querySelector('.scale__point-label')).not.toBe(
+      null
+    );
   });
-  test('Scale should contain an element with the scale__point-marker class', () => {
+  test('Элемент Scale должен содержать в себе элемент с классом scale__point-marker', () => {
     const points = [
       {
         position: { left: 50, top: 100 },
@@ -138,7 +140,7 @@ describe('Add points', () => {
   });
 });
 
-describe('Get point size', () => {
+describe('Метод getPointSize класса Scale', () => {
   test('Scale point size should be {width: 0, height: 0}', () => {
     expect(scale.getPointSize(10).width).toBe(0);
     expect(scale.getPointSize(10).height).toBe(0);

@@ -10,8 +10,8 @@ beforeEach(() => {
   progressBar = new ProgressBar();
 });
 
-describe('Update', () => {
-  test('progressBar left should be 10px', () => {
+describe('Метод Update класса ProgressBar', () => {
+  test('Свойство style.left элемента ProgressBar должно быть изменено в соответствии с переданным в методе объектом', () => {
     const params = {
       position: { left: 10, top: 5 },
       size: { width: 50, height: 30 },
@@ -19,7 +19,7 @@ describe('Update', () => {
     progressBar?.update(params);
     expect(progressBar?.getControl().style.left).toBe('10px');
   });
-  test('progressBar top should be 5px', () => {
+  test('Свойство style.top элемента ProgressBar должно быть изменено в соответствии с переданным в методе объектом', () => {
     const params = {
       position: { left: 10, top: 5 },
       size: { width: 50, height: 30 },
@@ -27,7 +27,7 @@ describe('Update', () => {
     progressBar.update(params);
     expect(progressBar.getControl().style.top).toBe('5px');
   });
-  test('progressBar width should be 50px', () => {
+  test('Свойство style.width элемента ProgressBar должно быть изменено в соответствии с переданным в методе объектом', () => {
     const params = {
       position: { left: 10, top: 5 },
       size: { width: 50, height: 30 },
@@ -35,7 +35,7 @@ describe('Update', () => {
     progressBar.update(params);
     expect(progressBar.getControl().style.width).toBe('50px');
   });
-  test('progressBar height should be 30px', () => {
+  test('Свойство style.height элемента ProgressBar должно быть изменено в соответствии с переданным в методе объектом', () => {
     const params = {
       position: { left: 10, top: 5 },
       size: { width: 50, height: 30 },
