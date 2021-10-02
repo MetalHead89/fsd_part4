@@ -68,19 +68,6 @@ describe('Update method', () => {
     view.update('thumbIsDragged');
     expect(spy).toBeCalledTimes(1);
   });
-  test('The resetZIndex method of the thumbOne object should be called once', () => {
-    const spy = spyOn(view['thumbOne'], 'resetZIndex');
-    view.update('thumbIsCatched');
-    expect(spy).toBeCalledTimes(1);
-  });
-  test('The resetZIndex method of thumbTwo must be called twice', () => {
-    if (view['thumbTwo'] !== null) {
-      const spy = spyOn(view['thumbTwo'], 'resetZIndex');
-      view.update('thumbIsCatched');
-      view.update('thumbIsCatched');
-      expect(spy).toBeCalledTimes(2);
-    }
-  });
   test('Notify method of the SimpleSliderView class not should be called', () => {
     const spy = spyOn(view.subject, 'notify');
     view.update('emptyEvent');

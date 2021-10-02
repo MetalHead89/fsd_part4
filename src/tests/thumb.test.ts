@@ -12,25 +12,6 @@ beforeEach(() => {
   thumb = new Thumb();
 });
 
-describe('Set z-index', () => {
-  test('Thumb z-inex should be 5', () => {
-    thumb.setZIndex(5);
-    expect(thumb.getControl().style.zIndex).toBe('5');
-  });
-  test('Thumb z-inex should be 8', () => {
-    thumb.setZIndex(8);
-    expect(thumb.getControl().style.zIndex).toBe('8');
-  });
-});
-
-describe('Reset z-index', () => {
-  test('Thumb z-inex should be ""', () => {
-    thumb.setZIndex(4);
-    thumb.resetZIndex();
-    expect(thumb.getControl().style.zIndex).toBe('');
-  });
-});
-
 describe('Move to', () => {
   test('Thumb last position should be {left: 40, top: 11}', () => {
     thumb.moveTo({ left: 40, top: 11 });
@@ -64,27 +45,6 @@ describe('Set thumb shift', () => {
     thumb['setThumbShift']({ left: 100, top: 80 }, { left: 95, top: 77 });
     expect(thumb['shift'].shiftX).toBe(5);
     expect(thumb['shift'].shiftY).toBe(3);
-  });
-});
-
-describe('Increase z-index', () => {
-  test('z-index should be 3', () => {
-    thumb.getControl().style.zIndex = '2';
-    const evt = new window.Event('pointerdown');
-    thumb.getControl().dispatchEvent(evt);
-    expect(thumb.getControl().style.zIndex).toBe('3');
-  });
-  test('z-index should be 10', () => {
-    thumb.getControl().style.zIndex = '9';
-    const evt = new window.Event('pointerdown');
-    thumb.getControl().dispatchEvent(evt);
-    expect(thumb.getControl().style.zIndex).toBe('10');
-  });
-  test('z-index should be 1', () => {
-    thumb.getControl().style.zIndex = '';
-    const evt = new window.Event('pointerdown');
-    thumb.getControl().dispatchEvent(evt);
-    expect(thumb.getControl().style.zIndex).toBe('1');
   });
 });
 
