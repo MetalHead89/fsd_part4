@@ -23,8 +23,8 @@ beforeEach(() => {
   view = new SimpleSliderView(wrapper);
 });
 
-describe('Window resize', () => {
-  test('Notify method of the SimpleSliderView class should be called once', () => {
+describe('Событие windowResized из класса SimpleSliderView', () => {
+  test('Метод notify должен быть вызван один раз', () => {
     const spy = spyOn(view.subject, 'notify');
     const evt = new window.Event('resize');
     window.dispatchEvent(evt);
@@ -32,26 +32,26 @@ describe('Window resize', () => {
   });
 });
 
-describe('Assemble slider', () => {
-  test('Wrapper should be contain a slider element', () => {
+describe('Метод assembleSlider из класса SimpleSliderView', () => {
+  test('Wrapper должен содержать элемент с классом slider', () => {
     expect(wrapper.querySelector('.slider')).not.toBeNull();
   });
-  test('Wrapper should be contain a track element', () => {
+  test('Wrapper должен содержать элемент с классом slider__track', () => {
     expect(wrapper.querySelector('.slider__track')).not.toBeNull();
   });
-  test('Wrapper should be contain a thumb element', () => {
+  test('Wrapper должен содержать элемент с классом slider__thumb', () => {
     expect(wrapper.querySelector('.slider__thumb')).not.toBeNull();
   });
-  test('Wrapper should be contain a pop-up element', () => {
+  test('Wrapper должен содержать элемент с классом slider__pop-up', () => {
     expect(wrapper.querySelector('.slider__pop-up')).not.toBeNull();
   });
-  test('Wrapper should be contain a progress-bar element', () => {
+  test('Wrapper должен содержать элемент с классом slider__progress', () => {
     expect(wrapper.querySelector('.slider__progress-bar')).not.toBeNull();
   });
-  test('Wrapper should be contain a scale element', () => {
+  test('Wrapper должен содержать элемент с классом slider__scale', () => {
     expect(wrapper.querySelector('.slider__scale')).not.toBeNull();
   });
-  test('Wrapper should be contain a slider element', () => {
+  test('Wrapper должен содержать элемент с классом slider', () => {
     view['slider'].remove();
     view['thumbTwo'] = null;
     view['popUpOne'] = null;
@@ -62,43 +62,43 @@ describe('Assemble slider', () => {
   });
 });
 
-describe('Update method', () => {
-  test('Notify method of the SimpleSliderView class should be called once', () => {
+describe('Метод update из класса SimpleSliderView', () => {
+  test('Оповещение о событии thumbIsDragged должно сработать один раз', () => {
     const spy = spyOn(view.subject, 'notify');
     view.update('thumbIsDragged');
     expect(spy).toBeCalledTimes(1);
   });
-  test('Notify method of the SimpleSliderView class not should be called', () => {
+  test('Метод notify не должен быть вызван', () => {
     const spy = spyOn(view.subject, 'notify');
     view.update('emptyEvent');
     expect(spy).toBeCalledTimes(0);
   });
-  test('Notify method of the SimpleSliderView class should be called once', () => {
+  test('Оповещение о событии clickToTrack должно сработать один раз', () => {
     const spy = spyOn(view.subject, 'notify');
     view.update('clickToTrack');
     expect(spy).toBeCalledTimes(1);
   });
-  test('Notify method of the SimpleSliderView class should be called once', () => {
+  test('Оповещение о событии clickToScale должно сработать один раз', () => {
     const spy = spyOn(view.subject, 'notify');
     view.update('clickToScale');
     expect(spy).toBeCalledTimes(1);
   });
 });
 
-describe('Switch to horizontal', () => {
-  test('The slider must contain a class slider_horizontal', () => {
+describe('Метод switchToHorizontal из класса SimpleSliderView', () => {
+  test('Слайдер должен содержать элемент с классом slider_horizontal', () => {
     view.switchToHorizontal();
     expect(
       view['slider'].getControl().classList.contains('slider_horizontal')
     ).toBe(true);
   });
-  test('The track must contain a class slider__track_horizontal', () => {
+  test('Track должен содержать элемент с классом slider__track_horizontal', () => {
     view.switchToHorizontal();
     expect(
       view['track'].getControl().classList.contains('slider__track_horizontal')
     ).toBe(true);
   });
-  test('The thumbOne must contain a class slider__thumb_horizontal', () => {
+  test('ThumbOne должен содержать элемент с классом slider__thumb_horizontal', () => {
     view.switchToHorizontal();
     expect(
       view['thumbOne']
@@ -106,7 +106,7 @@ describe('Switch to horizontal', () => {
         .classList.contains('slider__thumb_horizontal')
     ).toBe(true);
   });
-  test('The thumbTwo must contain a class slider__thumb_horizontal', () => {
+  test('ThumbTwo должен содержать элемент с классом slider__thumb_horizontal', () => {
     view.switchToHorizontal();
     expect(
       view['thumbTwo']
@@ -114,7 +114,7 @@ describe('Switch to horizontal', () => {
         .classList.contains('slider__thumb_horizontal')
     ).toBe(true);
   });
-  test('The popUpOne must contain a class slider__pop-up_horizontal', () => {
+  test('PopUpOne должен содержать элемент с классом slider__pop-up_horizontal', () => {
     view.switchToHorizontal();
     expect(
       view['popUpOne']
@@ -122,7 +122,7 @@ describe('Switch to horizontal', () => {
         .classList.contains('slider__pop-up_horizontal')
     ).toBe(true);
   });
-  test('The popUpTwo must contain a class slider__pop-up_horizontal', () => {
+  test('PopUpTwo должен содержать элемент с классом slider__pop-up_horizontal', () => {
     view.switchToHorizontal();
     expect(
       view['popUpTwo']
@@ -130,7 +130,7 @@ describe('Switch to horizontal', () => {
         .classList.contains('slider__pop-up_horizontal')
     ).toBe(true);
   });
-  test('The progressBar must contain a class slider__progress-bar_horizontal', () => {
+  test('ProgressBar должен содержать элемент с классом slider__progress-bar_horizontal', () => {
     view.switchToHorizontal();
     expect(
       view['progressBar']
@@ -138,7 +138,7 @@ describe('Switch to horizontal', () => {
         .classList.contains('slider__progress-bar_horizontal')
     ).toBe(true);
   });
-  test('The scale must contain a class slider__scale_horizontal', () => {
+  test('Scale должен содержать элемент с классом slider__scale_horizontal', () => {
     view.switchToHorizontal();
     expect(
       view['scale']?.getControl().classList.contains('slider__scale_horizontal')
@@ -146,26 +146,26 @@ describe('Switch to horizontal', () => {
   });
 });
 
-describe('Switch to vertical', () => {
-  test('The slider must contain a class slider_vertical', () => {
+describe('Метод switchToVertical из класса SimpleSliderView', () => {
+  test('Слайдер должен содержать элемент с классом slider_vertical', () => {
     view.switchToVertical();
     expect(
       view['slider'].getControl().classList.contains('slider_vertical')
     ).toBe(true);
   });
-  test('The track must contain a class slider__track_horizontal', () => {
+  test('Track должен содержать элемент с классом slider__track_vertical', () => {
     view.switchToVertical();
     expect(
       view['track'].getControl().classList.contains('slider__track_vertical')
     ).toBe(true);
   });
-  test('The thumbOne must contain a class slider__thumb_vertical', () => {
+  test('ThumbOne должен содержать элемент с классом slider__thumb_vertical', () => {
     view.switchToVertical();
     expect(
       view['thumbOne'].getControl().classList.contains('slider__thumb_vertical')
     ).toBe(true);
   });
-  test('The thumbTwo must contain a class slider__thumb_vertical', () => {
+  test('ThumbTwo должен содержать элемент с классом slider__thumb_vertical', () => {
     view.switchToVertical();
     expect(
       view['thumbTwo']
@@ -173,7 +173,7 @@ describe('Switch to vertical', () => {
         .classList.contains('slider__thumb_vertical')
     ).toBe(true);
   });
-  test('The popUpOne must contain a class slider__pop-up_vertical', () => {
+  test('PopUpOne должен содержать элемент с классом slider__pop-up_vertical', () => {
     view.switchToVertical();
     expect(
       view['popUpOne']
@@ -181,7 +181,7 @@ describe('Switch to vertical', () => {
         .classList.contains('slider__pop-up_vertical')
     ).toBe(true);
   });
-  test('The popUpTwo must contain a class slider__pop-up_vertical', () => {
+  test('PopUpTwo должен содержать элемент с классом slider__pop-up_vertical', () => {
     view.switchToVertical();
     expect(
       view['popUpTwo']
@@ -189,7 +189,7 @@ describe('Switch to vertical', () => {
         .classList.contains('slider__pop-up_vertical')
     ).toBe(true);
   });
-  test('The progressBar must contain a class slider__progress-bar_vertical', () => {
+  test('ProgressBar должен содержать элемент с классом slider__progress-bar_vertical', () => {
     view.switchToVertical();
     expect(
       view['progressBar']
@@ -197,7 +197,7 @@ describe('Switch to vertical', () => {
         .classList.contains('slider__progress-bar_vertical')
     ).toBe(true);
   });
-  test('The scale must contain a class slider__scale_vertical', () => {
+  test('Scale должен содержать элемент с классом slider__scale_vertical', () => {
     view.switchToVertical();
     expect(
       view['scale']?.getControl().classList.contains('slider__scale_vertical')
@@ -205,24 +205,24 @@ describe('Switch to vertical', () => {
   });
 });
 
-describe('Switch to single', () => {
-  test('ThumbTwo should be null', () => {
+describe('Метод switchToSingle из класса SimpleSliderView', () => {
+  test('ThumbTwo должна быть null', () => {
     view.switchToSingle();
     expect(view['thumbTwo']).toBeNull();
   });
 });
 
-describe('Switch to range', () => {
-  test('ThumbTwo should be defined', () => {
+describe('Метод switchToRange из класса SimpleSliderView', () => {
+  test('ThumbTwo не должна быть null', () => {
     view.switchToRange();
     expect(view['thumbTwo']).not.toBeNull();
   });
-  test('ThumbTwo should be defined', () => {
+  test('ThumbTwo не должна быть null', () => {
     view.switchToSingle();
     view.switchToRange();
     expect(view['thumbTwo']).not.toBeNull();
   });
-  test('ThumbTwo should be defined ana popUpTwo should be null', () => {
+  test('ThumbTwo не должна быть null, а popUpTwo должна быть null', () => {
     view.switchToSingle();
     view['popUpOne'] = null;
     view.switchToRange();
@@ -231,30 +231,30 @@ describe('Switch to range', () => {
   });
 });
 
-describe('Disable pop ups', () => {
-  test('PopUpOne should be null', () => {
+describe('Метод disablePopUps из класса SimpleSliderView', () => {
+  test('PopUpOne должна быть null', () => {
     view.disablePopUps();
     expect(view['popUpOne']).toBeNull();
   });
-  test('PopUpTwo should be null', () => {
+  test('PopUpTwo должна быть null', () => {
     view.switchToRange();
     view.disablePopUps();
     expect(view['popUpTwo']).toBeNull();
   });
 });
 
-describe('Enable pop ups', () => {
-  test('PopUpOne should be defined', () => {
+describe('Метод enablePopUps из класса SimpleSliderView', () => {
+  test('PopUpOne не должна быть null', () => {
     view.disablePopUps();
     view.enablePopUps();
     expect(view['popUpOne']).toBeDefined();
   });
-  test('PopUpTwo should be null', () => {
+  test('PopUpTwo должна быть null', () => {
     view.switchToSingle();
     view.enablePopUps();
     expect(view['popUpTwo']).toBeNull();
   });
-  test('PopUpTwo should be defined', () => {
+  test('PopUpTwo не должна быть null', () => {
     view.switchToSingle();
     view.switchToRange();
     view.disablePopUps();
@@ -263,62 +263,62 @@ describe('Enable pop ups', () => {
   });
 });
 
-describe('Disable scale', () => {
-  test('Scale should be null', () => {
+describe('Метод disableScale из класса SimpleSliderView', () => {
+  test('Scale должна быть отключена', () => {
     view.disableScale();
     expect(view['scale']).toBeNull();
   });
-  test('Scale should be null', () => {
+  test('Scale должна быть отключена', () => {
     view.enableScale();
     view.disableScale();
     expect(view['scale']).toBeNull();
   });
 });
 
-describe('Enable scale', () => {
-  test('Scale should be defined', () => {
+describe('Метод enableScale из класса SimpleSliderView', () => {
+  test('Scale должна быть включена', () => {
     view.enableScale();
     view.enableScale();
     expect(view['scale']).toBeDefined();
   });
-  test('Scale should be defined', () => {
+  test('Scale должна быть включена', () => {
     view.disableScale();
     view.enableScale();
     expect(view['scale']).toBeDefined();
   });
 });
 
-describe('Get thumb size', () => {
-  test('Should be true', () => {
+describe('Метод getThumbSize из класса SimpleSliderView', () => {
+  test('Метод должен возвратить true', () => {
     expect(view.getThumbSize()).toBe(true);
   });
 });
 
-describe('Get slider size', () => {
-  test('Should be true', () => {
+describe('Метод getSliderSize из класса SimpleSliderView', () => {
+  test('Метод должен возвратить true', () => {
     expect(view.getSliderSize()).toBe(true);
   });
 });
 
-describe('Get thumbs positions', () => {
-  test('ThumbOne should be true', () => {
+describe('Метод getThumbsPositions из класса SimpleSliderView', () => {
+  test('Метод должен возвратить объект в котором ThumbOne true', () => {
     expect(view.getThumbsPositions().thumbOne).toBe(true);
   });
-  test('ThumbTwo should be true', () => {
+  test('Метод должен возвратить объект в котором ThumbTwo true', () => {
     expect(view.getThumbsPositions().thumbTwo).toBe(true);
   });
-  test('ThumbTwo should be true', () => {
+  test('Метод должен возвратить объект в котором ThumbOne true', () => {
     view.switchToSingle();
     expect(view.getThumbsPositions().thumbOne).toBe(true);
   });
-  test('ThumbTwo should be true', () => {
+  test('Метод должен возвратить объект в котором ThumbTwo равен null', () => {
     view.switchToSingle();
     expect(view.getThumbsPositions().thumbTwo).toBe(null);
   });
 });
 
-describe('Update thumbs', () => {
-  test('The moveTo method of the thumbOne object should be called once', () => {
+describe('Метод updateThumbs из класса SimpleSliderView', () => {
+  test('Метод moveTo объекта thumbOne должен быть вызван один раз', () => {
     const spy = spyOn(view['thumbOne'], 'moveTo');
     view.updateThumbs({
       thumbOne: { left: 0, top: 0 },
@@ -326,7 +326,7 @@ describe('Update thumbs', () => {
     });
     expect(spy).toBeCalledTimes(1);
   });
-  test('The moveTo method of the thumbTwo object must be called zero times', () => {
+  test('Метод moveTo объекта thumbTwo не должен быть вызван', () => {
     if (view['thumbTwo'] !== null) {
       const spy = spyOn(view['thumbTwo'], 'moveTo');
       view.updateThumbs({
@@ -336,7 +336,7 @@ describe('Update thumbs', () => {
       expect(spy).toBeCalledTimes(0);
     }
   });
-  test('The moveTo method of thumbTwo should be called twice', () => {
+  test('Метод moveTo объекта thumbOne должен быть вызван два раза', () => {
     if (view['thumbTwo'] !== null) {
       const spy = spyOn(view['thumbTwo'], 'moveTo');
       view.updateThumbs({
@@ -352,8 +352,8 @@ describe('Update thumbs', () => {
   });
 });
 
-describe('Update progress bar', () => {
-  test('The update method of the progressBar object should be called once', () => {
+describe('Метод updateProgressBar из класса SimpleSliderView', () => {
+  test('Метод update должен быть вызван один раз', () => {
     const spy = spyOn(view['progressBar'], 'update');
     view.updateProgressBar({
       position: { left: 0, top: 0 },
@@ -361,7 +361,7 @@ describe('Update progress bar', () => {
     });
     expect(spy).toBeCalledTimes(1);
   });
-  test('The update method of the progressBar object should be called twice', () => {
+  test('Метод update должен быть вызван два раза', () => {
     const spy = spyOn(view['progressBar'], 'update');
     view.updateProgressBar({
       position: { left: 0, top: 0 },
@@ -375,8 +375,8 @@ describe('Update progress bar', () => {
   });
 });
 
-describe('Update pop ups', () => {
-  test('The update method of the popUpOne object should be called once', () => {
+describe('Метод updatePopUps из класса SimpleSliderView', () => {
+  test('Метод update должен быть вызван один раз', () => {
     let spy;
     if (view['popUpOne'] !== null) {
       spy = spyOn(view['popUpOne'], 'update');
@@ -387,7 +387,7 @@ describe('Update pop ups', () => {
     });
     expect(spy).toBeCalledTimes(1);
   });
-  test('The update method of the popUpTwo object should be called twice', () => {
+  test('Метод update должен быть вызван два раза', () => {
     let spy;
     if (view['popUpTwo'] !== null) {
       spy = spyOn(view['popUpTwo'], 'update');
@@ -402,7 +402,7 @@ describe('Update pop ups', () => {
     });
     expect(spy).toBeCalledTimes(2);
   });
-  test('The update method of the popUpOne object should be called zero times', () => {
+  test('Метод update не должен быть вызван', () => {
     let spy1;
     let spy2;
     view.disablePopUps();
@@ -421,19 +421,19 @@ describe('Update pop ups', () => {
   });
 });
 
-describe('Get scale point size', () => {
-  test('ScalePointSize should be {width: 0, height: 0}', () => {
+describe('Метод getScalePointSize из класса SimpleSliderView', () => {
+  test('Должен быть возвращен объект с размерами scalePoint', () => {
     view.disableScale();
     expect(view.getScalePointSize(10).width).toBe(0);
     expect(view.getScalePointSize(10).height).toBe(0);
   });
-  test('ScalePointSize should be true', () => {
+  test('Должен быть возвращен объект с размерами scalePoint', () => {
     expect(view.getScalePointSize(10)).toBe(true);
   });
 });
 
-describe('Add scale point', () => {
-  test('The length of the scale points array must be 3', () => {
+describe('Метод addScalePoints из класса SimpleSliderView', () => {
+  test('Должны добавляться scalePoints', () => {
     view.addScalePoints([
       {
         position: { left: 0, top: 0 },
@@ -450,7 +450,7 @@ describe('Add scale point', () => {
       view['scale']?.getControl().querySelectorAll('.scale-point').length
     ).toBe(2);
   });
-  test('The length of the scale points array must be 3', () => {
+  test('Должны добавляться scalePoints', () => {
     view.addScalePoints([
       {
         position: { left: 0, top: 0 },
@@ -474,24 +474,24 @@ describe('Add scale point', () => {
   });
 });
 
-describe('Get track click position', () => {
-  test('Function should be return true', () => {
+describe('Метод getTrackClickPosition из класса SimpleSliderView', () => {
+  test('Метод должен вернуть true', () => {
     expect(view.getTrackClickPosition()).toBe(true);
   });
 });
 
-describe('Get scale click position', () => {
-  test('Function should be return true', () => {
+describe('Метод getScaleClickPosition из класса SimpleSliderView', () => {
+  test('Метод должен вернуть true', () => {
     expect(view.getScaleClickPosition()).toBe(true);
   });
-  test('Function should be return {left: 0, top: 0}', () => {
+  test('Метод должен вернуть объект свойства которого равны 0', () => {
     view.disableScale();
     expect(view.getScaleClickPosition().left).toBe(0);
     expect(view.getScaleClickPosition().top).toBe(0);
   });
 });
 
-describe('Get margins', () => {
+describe('Метод getMargins из класса SimpleSliderView', () => {
   beforeEach(() => {
     view['slider'].getRect = jest.fn(() => {
       return {
@@ -540,38 +540,38 @@ describe('Get margins', () => {
     }
   });
 
-  test('Slider margin-bottom should be 27', () => {
+  test('Размер отступов должен вычисляться корректно', () => {
     view['slider'].getOrientation = jest.fn(() => 'horizontal');
     expect(view['getMargins']().bottom).toBe(27);
   });
-  test('Slider margin-bottom should be 0', () => {
+  test('Размер отступов должен вычисляться корректно', () => {
     view['slider'].getOrientation = jest.fn(() => 'horizontal');
     view.disableScale();
     expect(view['getMargins']().bottom).toBe(0);
   });
-  test('Slider margin-top should be 12', () => {
+  test('Размер отступов должен вычисляться корректно', () => {
     view['slider'].getOrientation = jest.fn(() => 'horizontal');
     expect(view['getMargins']().top).toBe(12);
   });
-  test('Slider margin-top should be 0', () => {
+  test('Размер отступов должен вычисляться корректно', () => {
     view['slider'].getOrientation = jest.fn(() => 'horizontal');
     view.disablePopUps();
     expect(view['getMargins']().top).toBe(0);
   });
-  test('Slider margin-left should be 28', () => {
+  test('Размер отступов должен вычисляться корректно', () => {
     view['slider'].getOrientation = jest.fn(() => 'vertical');
     expect(view['getMargins']().left).toBe(28);
   });
-  test('Slider margin-left should be 0', () => {
+  test('Размер отступов должен вычисляться корректно', () => {
     view['slider'].getOrientation = jest.fn(() => 'vertical');
     view.disablePopUps();
     expect(view['getMargins']().left).toBe(0);
   });
-  test('Slider margin-right should be 40', () => {
+  test('Размер отступов должен вычисляться корректно', () => {
     view['slider'].getOrientation = jest.fn(() => 'vertical');
     expect(view['getMargins']().right).toBe(40);
   });
-  test('Slider margin-right should be 0', () => {
+  test('Размер отступов должен вычисляться корректно', () => {
     view['slider'].getOrientation = jest.fn(() => 'vertical');
     view.disableScale();
     expect(view['getMargins']().right).toBe(0);
