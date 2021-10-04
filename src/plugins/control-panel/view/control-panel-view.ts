@@ -103,12 +103,12 @@ class ControlPanelView extends Subject implements IObserver {
     return this.typeRadio.getValue();
   }
 
-  getScaleState(): boolean {
-    return this.scaleCheckbox.getState();
+  isScaleEnabled(): boolean {
+    return this.scaleCheckbox.isEnabled();
   }
 
-  getPopUpsState(): boolean {
-    return this.popUpsCheckbox.getState();
+  isPopUpsEnabled(): boolean {
+    return this.popUpsCheckbox.isEnabled();
   }
 
   getMin(): number {

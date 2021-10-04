@@ -24,7 +24,7 @@ class Checkbox extends Subject {
     this.handleCheckboxChange();
   }
 
-  getState(): boolean {
+  isEnabled(): boolean {
     return this.checkbox.checked;
   }
 

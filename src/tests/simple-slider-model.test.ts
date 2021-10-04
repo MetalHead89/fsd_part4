@@ -11,8 +11,8 @@ beforeEach(() => {
   settings = {
     orientation: 'horizontal',
     type: 'range',
-    scale: true,
-    popUps: true,
+    isScale: true,
+    isPopUps: true,
     min: 0,
     max: 10,
     step: 1,
@@ -59,14 +59,14 @@ describe('Метод refreshSliderState класса SimpleSliderModel', () => {
     expect(model['thumbOneValue'] !== model['thumbTwoValue']).toBe(true);
   });
   test('Scale должен быть отключен', () => {
-    settings.scale = false;
+    settings.isScale = false;
     model.refreshSliderState(settings);
-    expect(model['scale']).toBe(false);
+    expect(model['isScale']).toBe(false);
   });
   test('PopUps должны быть отключены', () => {
-    settings.popUps = false;
+    settings.isPopUps = false;
     model.refreshSliderState(settings);
-    expect(model['popUps']).toBe(false);
+    expect(model['isPopUps']).toBe(false);
   });
   test('Минимальное значение Slider должно соответствовать минимальному значению из объекта settings', () => {
     settings.min = 7;
@@ -273,25 +273,25 @@ describe('Метод getStep класса SimpleSliderModel', () => {
   });
 });
 
-describe('Метод getScaleState класса SimpleSliderModel', () => {
+describe('Метод isScaleEnabled класса SimpleSliderModel', () => {
   test('Должно возвращаться значение соответствующее значению scale в объекте settings', () => {
-    expect(model.getScaleState()).toBe(true);
+    expect(model.isScaleEnabled()).toBe(true);
   });
   test('Должно возвращаться значение соответствующее значению scale в объекте settings', () => {
-    settings.scale = false;
+    settings.isScale = false;
     model = new SimpleSliderModel(settings);
-    expect(model.getScaleState()).toBe(false);
+    expect(model.isScaleEnabled()).toBe(false);
   });
 });
 
-describe('Метод getPopUpsState класса SimpleSliderModel', () => {
+describe('Метод isPopUpsEnabled класса SimpleSliderModel', () => {
   test('Должно возвращаться значение соответствующее значению popUps в объекте settings', () => {
-    expect(model.getPopUpsState()).toBe(true);
+    expect(model.isPopUpsEnabled()).toBe(true);
   });
   test('Должно возвращаться значение соответствующее значению popUps в объекте settings', () => {
-    settings.popUps = false;
+    settings.isPopUps = false;
     model = new SimpleSliderModel(settings);
-    expect(model.getPopUpsState()).toBe(false);
+    expect(model.isPopUpsEnabled()).toBe(false);
   });
 });
 

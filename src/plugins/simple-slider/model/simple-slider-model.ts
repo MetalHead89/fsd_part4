@@ -20,8 +20,8 @@ class SimpleSliderModel implements ISimpleSliderModel {
   subject: ISubject;
   private orientation = 'horizontal';
   private type = 'range';
-  private scale = true;
-  private popUps = true;
+  private isScale = true;
+  private isPopUps = true;
   private min = 0;
   private max = 10;
   private step = 1;
@@ -39,8 +39,8 @@ class SimpleSliderModel implements ISimpleSliderModel {
   refreshSliderState({
     orientation,
     type,
-    scale,
-    popUps,
+    isScale,
+    isPopUps,
     min,
     max,
     step,
@@ -75,12 +75,12 @@ class SimpleSliderModel implements ISimpleSliderModel {
     if (this.step !== step) {
       this.updateStep(step);
     }
-    if (this.scale !== scale) {
-      this.scale = scale;
+    if (this.isScale !== isScale) {
+      this.isScale = isScale;
       this.subject.notify('scaleStateIsUpdated');
     }
-    if (this.popUps !== popUps) {
-      this.popUps = popUps;
+    if (this.isPopUps !== isPopUps) {
+      this.isPopUps = isPopUps;
       this.subject.notify('popUpsStateIsUpdated');
     }
     if (
@@ -148,12 +148,12 @@ class SimpleSliderModel implements ISimpleSliderModel {
     return this.step;
   }
 
-  getScaleState(): boolean {
-    return this.scale;
+  isScaleEnabled(): boolean {
+    return this.isScale;
   }
 
-  getPopUpsState(): boolean {
-    return this.popUps;
+  isPopUpsEnabled(): boolean {
+    return this.isPopUps;
   }
 
   getType(): string {

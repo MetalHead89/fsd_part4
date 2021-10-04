@@ -25,8 +25,8 @@ beforeEach(() => {
   settings = {
     orientation: 'horizontal',
     type: 'range',
-    scale: true,
-    popUps: true,
+    isScale: true,
+    isPopUps: true,
     min: 0,
     max: 10,
     step: 1,
@@ -83,7 +83,7 @@ describe('Метод init класса SimpleSliderController', () => {
   });
   test('Метод disablePopUps из класса SimpleSliderView должен быть вызван один раз', () => {
     const spy = jest.spyOn(view, 'disablePopUps');
-    settings.popUps = false;
+    settings.isPopUps = false;
     model = new SimpleSliderModel(settings);
     controller = new SimpleSliderController({ model, view });
     expect(spy).toBeCalledTimes(1);
@@ -164,7 +164,7 @@ describe('Метод updateView класса SimpleSliderController', () => {
   });
   test('Метод disableScale из класса SimpleSliderView должен быть вызван один раз', () => {
     const spy = jest.spyOn(view, 'disableScale');
-    settings.scale = false;
+    settings.isScale = false;
     model = new SimpleSliderModel(settings);
     controller = new SimpleSliderController({ model, view });
     expect(spy).toBeCalledTimes(2);
@@ -251,13 +251,13 @@ describe('Метод updateScaleState класса SimpleSliderController', () =
     expect(spy).toBeCalledTimes(0);
   });
   test('Метод enableScale из класса SimpleSliderView не должен быть вызван', () => {
-    model['scale'] = false;
+    model['isScale'] = false;
     const spy = jest.spyOn(view, 'enableScale');
     controller.update('scaleStateIsUpdated');
     expect(spy).toBeCalledTimes(0);
   });
   test('Метод disableScale из класса SimpleSliderView должен быть вызван один раз', () => {
-    model['scale'] = false;
+    model['isScale'] = false;
     const spy = jest.spyOn(view, 'disableScale');
     controller.update('scaleStateIsUpdated');
     expect(spy).toBeCalledTimes(1);
@@ -276,13 +276,13 @@ describe('Метод updatePopUpsState класса SimpleSliderController', () 
     expect(spy).toBeCalledTimes(0);
   });
   test('Метод enablePopUps из класса SimpleSliderView не должен быть вызван', () => {
-    model['popUps'] = false;
+    model['isPopUps'] = false;
     const spy = jest.spyOn(view, 'enablePopUps');
     controller.update('popUpsStateIsUpdated');
     expect(spy).toBeCalledTimes(0);
   });
   test('Метод disablePopUps из класса SimpleSliderView должен быть вызван один раз', () => {
-    model['popUps'] = false;
+    model['isPopUps'] = false;
     const spy = jest.spyOn(view, 'disablePopUps');
     controller.update('popUpsStateIsUpdated');
     expect(spy).toBeCalledTimes(1);

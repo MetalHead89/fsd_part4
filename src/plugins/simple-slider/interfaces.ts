@@ -6,8 +6,8 @@ interface ISize {
 interface ISliderSettings {
   orientation: string;
   type: string;
-  scale: boolean;
-  popUps: boolean;
+  isScale: boolean;
+  isPopUps: boolean;
   min: number;
   max: number;
   step: number;
@@ -77,8 +77,8 @@ interface ISimpleSliderModel {
   setThumbSize(size: ISize): void;
   getMax(): number;
   getType(): string;
-  getPopUpsState(): boolean;
-  getScaleState(): boolean;
+  isScaleEnabled(): boolean;
+  isPopUpsEnabled(): boolean;
   refreshSliderState(settings: ISliderSettings): void;
   getThumbsPositions(): IThumbsPositions;
   updateThumbsState(positions: IThumbsPositions): void;

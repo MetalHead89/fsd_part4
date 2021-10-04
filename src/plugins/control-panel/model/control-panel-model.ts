@@ -49,12 +49,12 @@ class ControlPanelModel extends Subject implements IObserver {
     return this.slider.simpleSlider('getStep');
   }
 
-  getScaleState(): boolean {
-    return this.slider.simpleSlider('getScaleState');
+  isScaleEnabled(): boolean {
+    return this.slider.simpleSlider('isScaleEnabled');
   }
 
-  getPopUpsState(): boolean {
-    return this.slider.simpleSlider('getPopUpsState');
+  isPopUpsEnabled(): boolean {
+    return this.slider.simpleSlider('isPopUpsEnabled');
   }
 
   getType(): string {

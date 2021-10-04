@@ -3,8 +3,8 @@ import { ISize, ISliderSettings } from '../../interfaces';
 export default class Model {
   private orientation;
   private type;
-  private scale;
-  private popUps;
+  private isScale;
+  private isPopUps;
   private min;
   private max;
   private step;
@@ -19,8 +19,8 @@ export default class Model {
   constructor(settings: ISliderSettings) {
     this.orientation = settings.orientation;
     this.type = settings.type;
-    this.scale = settings.scale;
-    this.popUps = settings.popUps;
+    this.isScale = settings.isScale;
+    this.isPopUps = settings.isPopUps;
     this.min = settings.min;
     this.max = settings.max;
     this.step = settings.step;
@@ -46,8 +46,8 @@ export default class Model {
     return this.type;
   }
 
-  getPopUpsState(): boolean {
-    return this.popUps;
+  isPopUpsEnabled(): boolean {
+    return this.isPopUps;
   }
 
   getThumbsPositions(): boolean {
@@ -66,8 +66,8 @@ export default class Model {
     return this.TEST_OK;
   }
 
-  getScaleState(): boolean {
-    return this.scale;
+  isScaleEnabled(): boolean {
+    return this.isScale;
   }
 
   getMin(): number {

@@ -31,8 +31,8 @@ class ControlPanelController implements IObserver {
     this.view.setMinValue(this.model.getMin());
     this.view.setMaxValue(this.model.getMax());
     this.view.setStep(this.model.getStep());
-    this.view.setScaleState(this.model.getScaleState());
-    this.view.setPopUpsState(this.model.getPopUpsState());
+    this.view.setScaleState(this.model.isScaleEnabled());
+    this.view.setPopUpsState(this.model.isPopUpsEnabled());
     this.view.setTypeRadio(this.model.getType());
     this.view.setOrientationRadio(this.model.getOrientation());
   }
@@ -47,8 +47,8 @@ class ControlPanelController implements IObserver {
     return {
       orientation: this.view.getOrientation(),
       type: this.view.getType(),
-      scale: this.view.getScaleState(),
-      popUps: this.view.getPopUpsState(),
+      isScale: this.view.isScaleEnabled(),
+      isPopUps: this.view.isPopUpsEnabled(),
       min: this.view.getMin(),
       max: this.view.getMax(),
       step: this.view.getStep(),

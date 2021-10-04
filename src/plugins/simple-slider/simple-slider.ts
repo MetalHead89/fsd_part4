@@ -12,8 +12,8 @@ import SimpleSliderView from './view/simple-slider-view';
   const defaultSettings = {
     orientation: 'horizontal',
     type: 'range',
-    scale: true,
-    popUps: true,
+    isScale: true,
+    isPopUps: true,
     min: 0,
     max: 10,
     step: 1,
@@ -58,11 +58,11 @@ import SimpleSliderView from './view/simple-slider-view';
     getStep(): number {
       return $(this).data().model.getStep();
     },
-    getScaleState(): boolean {
-      return $(this).data().model.getScaleState();
+    isScaleEnabled(): boolean {
+      return $(this).data().model.isScaleEnabled();
     },
-    getPopUpsState(): boolean {
-      return $(this).data().model.getPopUpsState();
+    isPopUpsEnabled(): boolean {
+      return $(this).data().model.isPopUpsEnabled();
     },
     getType(): string {
       return $(this).data().model.getType();

@@ -91,7 +91,7 @@ class SimpleSliderController implements IObserver {
   private updateView(): void {
     this.model.updateThumbsState(this.model.getThumbsPositions());
 
-    if (this.model.getScaleState()) {
+    if (this.model.isScaleEnabled()) {
       this.view.enableScale();
 
       const max = this.model.getMax();
@@ -132,7 +132,7 @@ class SimpleSliderController implements IObserver {
   }
 
   private updateScaleState() {
-    if (this.model.getScaleState()) {
+    if (this.model.isScaleEnabled()) {
       this.view.enableScale();
       this.updateView();
     } else {
@@ -141,7 +141,7 @@ class SimpleSliderController implements IObserver {
   }
 
   private updatePopUpsState(): void {
-    if (this.model.getPopUpsState()) {
+    if (this.model.isPopUpsEnabled()) {
       this.view.enablePopUps();
       this.model.updateThumbsState(this.model.getThumbsPositions());
     } else {
