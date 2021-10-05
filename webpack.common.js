@@ -22,6 +22,9 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
   },
+  externals: {
+    jquery: '$',
+  },
   plugins: [
     new HTMLWebpackPlugin({
       template: path.resolve(__dirname, 'src/demo/index.pug'),
@@ -31,6 +34,7 @@ module.exports = {
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
+      'window.jQuery': 'jquery',
     }),
     new CopyWebpackPlugin({
       patterns: [
