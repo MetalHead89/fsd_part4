@@ -12,8 +12,8 @@ const webpack = require('webpack');
 module.exports = {
   context: path.resolve(__dirname, 'src'),
   entry: {
-    slider: path.resolve(__dirname, 'src/plugins/simple-slider/index.ts'),
     demo: path.resolve(__dirname, 'src/demo/index.ts'),
+    slider: path.resolve(__dirname, 'src/plugins/simple-slider/index.ts'),
   },
   output: {
     filename: '[name]/[name].js',
@@ -45,6 +45,11 @@ module.exports = {
         {
           from: path.resolve(__dirname, 'favicon.ico'),
           to: path.resolve(__dirname, 'dist/demo/favicon.ico'),
+        },
+
+        {
+          from: path.resolve(__dirname, 'dist/demo/fonts'),
+          to: path.resolve(__dirname, 'dist/slider/fonts'),
         },
       ],
     }),
