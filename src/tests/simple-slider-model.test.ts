@@ -151,7 +151,7 @@ describe('Метод updateThumbsState класса SimpleSliderModel', () => {
     };
     model.updateThumbsState(position);
     expect(model['thumbOneValue']).toBe(0);
-    expect(model['thumbTwoValue']).toBe(7);
+    expect(model['thumbTwoValue']).toBe(0);
   });
   test('Значения Thumbs должны корректно изменяться в зависимости от полученной позиции', () => {
     settings.orientation = 'vertical';
