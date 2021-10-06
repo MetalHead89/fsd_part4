@@ -111,6 +111,11 @@ describe('Метод update класса SimpleSliderController', () => {
     controller.update('windowResized');
     expect(spy).toBeCalledTimes(1);
   });
+  test('Метод swapThumbs method из класса SimpleSliderView должен быть вызван один раз', () => {
+    const spy = spyOn<any>(view, 'swapThumbs');
+    controller.update('thumbsSwapped');
+    expect(spy).toBeCalledTimes(1);
+  });
   test('Различные методы класса Controller должны быть вызваны', () => {
     const spy1 = jest.spyOn(model, 'updateThumbsState');
     controller.update('emptyEvent');

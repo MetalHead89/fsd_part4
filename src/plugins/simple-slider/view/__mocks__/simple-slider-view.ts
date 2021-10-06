@@ -85,4 +85,8 @@ export default class View {
   updateProgressBar(): boolean {
     return this.TEST_OK;
   }
+
+  swapThumbs(): boolean {
+    return this.TEST_OK;
+  }
 }
