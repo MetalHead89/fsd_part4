@@ -9,7 +9,7 @@ const common = require('./webpack.common.js');
 module.exports = merge(common, {
   mode: 'production',
   devtool: 'source-map',
-  plugins: [new MiniCssExtractPlugin({ filename: '[name]/styles.css' })],
+  plugins: [new MiniCssExtractPlugin({ filename: '[name]/style.css' })],
   module: {
     rules: [
       {

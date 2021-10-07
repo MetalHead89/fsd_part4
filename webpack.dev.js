@@ -14,7 +14,7 @@ module.exports = merge(common, {
     contentBase: path.resolve(__dirname, 'dist'),
     openPage: 'demo/index.html',
   },
-  plugins: [new MiniCssExtractPlugin({ filename: '[name]/styles.css' })],
+  plugins: [new MiniCssExtractPlugin({ filename: '[name]/style.css' })],
   module: {
     rules: [
       {
