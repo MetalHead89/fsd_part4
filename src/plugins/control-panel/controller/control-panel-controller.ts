@@ -1,4 +1,4 @@
-import { IObserver, ISliderSettings } from '../../simple-slider/interfaces';
+import { IObserver, ISliderSettings } from '../../simple-js-slider/interfaces';
 import { ISubjectEvents } from '../interfaces';
 import ControlPanelModel from '../model/control-panel-model';
 import ControlPanelView from '../view/control-panel-view';

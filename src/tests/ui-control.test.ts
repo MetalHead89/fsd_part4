@@ -8,7 +8,7 @@
 /* eslint-disable dot-notation */
 /* eslint-disable arrow-body-style */
 
-import UIControl from '../plugins/simple-slider/view/ui-control/ui-control';
+import UIControl from '../plugins/simple-js-slider/view/ui-control/ui-control';
 
 let control: UIControl;
 

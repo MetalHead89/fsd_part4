@@ -3,8 +3,8 @@ import {
   ISliderSettings,
   ISubject,
   IThumbsValues,
-} from '../../simple-slider/interfaces';
-import Subject from '../../simple-slider/subject/subject';
+} from '../../simple-js-slider/interfaces';
+import Subject from '../../simple-js-slider/subject/subject';
 import { ISubjectEvents } from '../interfaces';
 
 class ControlPanelModel extends Subject implements IObserver {

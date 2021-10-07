@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import ProgressBar from '../plugins/simple-slider/view/progress-bar/progress-bar';
+import ProgressBar from '../plugins/simple-js-slider/view/progress-bar/progress-bar';
 
 let progressBar: ProgressBar;
 

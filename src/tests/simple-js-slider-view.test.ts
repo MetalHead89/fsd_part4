@@ -6,14 +6,14 @@
 /* eslint-disable arrow-body-style */
 /* eslint-disable comma-dangle */
 
-import SimpleSliderView from '../plugins/simple-slider/view/simple-slider-view';
+import SimpleSliderView from '../plugins/simple-js-slider/view/simple-js-slider-view';
 
-jest.mock('../plugins/simple-slider/view/slider/slider');
-jest.mock('../plugins/simple-slider/view/track/track');
-jest.mock('../plugins/simple-slider/view/thumb/thumb');
-jest.mock('../plugins/simple-slider/view/pop-up/pop-up');
-jest.mock('../plugins/simple-slider/view/progress-bar/progress-bar');
-jest.mock('../plugins/simple-slider/view/scale/scale');
+jest.mock('../plugins/simple-js-slider/view/slider/slider');
+jest.mock('../plugins/simple-js-slider/view/track/track');
+jest.mock('../plugins/simple-js-slider/view/thumb/thumb');
+jest.mock('../plugins/simple-js-slider/view/pop-up/pop-up');
+jest.mock('../plugins/simple-js-slider/view/progress-bar/progress-bar');
+jest.mock('../plugins/simple-js-slider/view/scale/scale');
 
 let wrapper: HTMLDivElement;
 let view: SimpleSliderView;

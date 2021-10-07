@@ -4,7 +4,7 @@
 
 /* eslint-disable dot-notation */
 
-import Thumb from '../plugins/simple-slider/view/thumb/thumb';
+import Thumb from '../plugins/simple-js-slider/view/thumb/thumb';
 
 let thumb: Thumb;
 

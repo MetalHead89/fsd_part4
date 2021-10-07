@@ -6,7 +6,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable comma-dangle */
 
-import Scale from '../plugins/simple-slider/view/scale/scale';
+import Scale from '../plugins/simple-js-slider/view/scale/scale';
 
 let scale: Scale;
 

@@ -1,6 +1,6 @@
 /* eslint-disable comma-dangle */
 
-import Subject from '../../../simple-slider/subject/subject';
+import Subject from '../../../simple-js-slider/subject/subject';
 import { IRadioParams } from '../../interfaces';
 
 class RadioButton extends Subject {

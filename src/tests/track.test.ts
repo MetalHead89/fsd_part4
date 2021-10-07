@@ -6,7 +6,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable comma-dangle */
 
-import Track from '../plugins/simple-slider/view/track/track';
+import Track from '../plugins/simple-js-slider/view/track/track';
 
 let track: Track;
 

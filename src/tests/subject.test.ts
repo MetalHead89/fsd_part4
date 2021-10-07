@@ -1,6 +1,6 @@
 /* eslint-disable dot-notation */
 
-import Subject from '../plugins/simple-slider/subject/subject';
+import Subject from '../plugins/simple-js-slider/subject/subject';
 
 let subject = new Subject();
 

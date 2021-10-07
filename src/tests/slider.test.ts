@@ -3,7 +3,7 @@
  */
 /* eslint-disable dot-notation */
 
-import Slider from '../plugins/simple-slider/view/slider/slider';
+import Slider from '../plugins/simple-js-slider/view/slider/slider';
 
 let slider: Slider;
 

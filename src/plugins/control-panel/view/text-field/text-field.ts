@@ -1,4 +1,4 @@
-import Subject from '../../../simple-slider/subject/subject';
+import Subject from '../../../simple-js-slider/subject/subject';
 
 class TextField extends Subject {
   private control: HTMLDivElement;

@@ -1,4 +1,4 @@
-import Subject from '../../../simple-slider/subject/subject';
+import Subject from '../../../simple-js-slider/subject/subject';
 import { ICheckboxParams } from '../../interfaces';
 
 class Checkbox extends Subject {

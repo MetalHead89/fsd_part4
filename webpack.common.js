@@ -13,7 +13,7 @@ module.exports = {
   context: path.resolve(__dirname, 'src'),
   entry: {
     demo: path.resolve(__dirname, 'src/demo/index.ts'),
-    slider: path.resolve(__dirname, 'src/plugins/simple-slider/index.ts'),
+    slider: path.resolve(__dirname, 'src/plugins/simple-js-slider/index.ts'),
   },
   output: {
     filename: '[name]/[name].js',

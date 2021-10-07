@@ -1,8 +1,8 @@
 /* eslint-disable dot-notation */
 // /* eslint-disable comma-dangle */
 
-import { ISliderSettings } from '../plugins/simple-slider/interfaces';
-import SimpleSliderModel from '../plugins/simple-slider/model/simple-slider-model';
+import { ISliderSettings } from '../plugins/simple-js-slider/interfaces';
+import SimpleSliderModel from '../plugins/simple-js-slider/model/simple-js-slider-model';
 
 let settings: ISliderSettings;
 let model: SimpleSliderModel;

@@ -5,8 +5,8 @@ import TextField from './text-field/text-field';
 import groupElements from './group-elements';
 import RadioButton from './radio-button/radio-button';
 import Checkbox from './checkbox/checkbox';
-import { IObserver, IThumbsValues } from '../../simple-slider/interfaces';
-import Subject from '../../simple-slider/subject/subject';
+import { IObserver, IThumbsValues } from '../../simple-js-slider/interfaces';
+import Subject from '../../simple-js-slider/subject/subject';
 
 class ControlPanelView extends Subject implements IObserver {
   private sliderWrapper: HTMLDivElement;
