@@ -48,7 +48,7 @@ module.exports = {
         },
 
         {
-          from: path.resolve(__dirname, 'dist/demo/fonts'),
+          from: path.resolve(__dirname, 'src/fonts'),
           to: path.resolve(__dirname, 'dist/slider/fonts'),
         },
       ],
