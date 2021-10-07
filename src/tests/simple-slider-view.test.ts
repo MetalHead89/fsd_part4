@@ -577,3 +577,24 @@ describe('Метод getMargins из класса SimpleSliderView', () => {
     expect(view['getMargins']().right).toBe(0);
   });
 });
+
+describe('Метод swapThumbs из класса SimpleSliderView', () => {
+  test('Значения Thumbs должны поменяться местами', () => {
+    const thumbOne = view['thumbOne'];
+    const thumbTwo = view['thumbTwo'];
+
+    view.swapThumbs();
+    expect(thumbOne).toBe(view['thumbTwo']);
+    expect(thumbTwo).toBe(view['thumbOne']);
+  });
+  test('Значения Thumbs не должны поменяться местами', () => {
+    view['thumbTwo'] = null;
+
+    const thumbOne = view['thumbOne'];
+    const thumbTwo = view['thumbTwo'];
+
+    view.swapThumbs();
+    expect(thumbOne).toBe(view['thumbOne']);
+    expect(thumbTwo).toBe(null);
+  });
+});
