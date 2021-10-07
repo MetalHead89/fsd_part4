@@ -1,3 +1,3 @@
 interface JQuery {
-  simpleSlider(action?: string | IPluginSettings, args?): any;
+  simpleJsSlider(action?: string | IPluginSettings, args?): any;
 }

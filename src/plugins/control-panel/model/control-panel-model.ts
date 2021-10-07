@@ -20,7 +20,7 @@ class ControlPanelModel extends Subject implements IObserver {
   constructor(slider: JQuery<HTMLElement>) {
     super();
     this.slider = slider;
-    this.subject = slider.simpleSlider('getModelSubject');
+    this.subject = slider.simpleJsSlider('getModelSubject');
     this.subject.register('thumbsPositionsIsUpdated', this);
     this.subject.register('minIsUpdated', this);
     this.subject.register('maxIsUpdated', this);
@@ -34,39 +34,39 @@ class ControlPanelModel extends Subject implements IObserver {
   }
 
   getThumbsValues(): IThumbsValues {
-    return this.slider.simpleSlider('getThumbsValues');
+    return this.slider.simpleJsSlider('getThumbsValues');
   }
 
   getMin(): number {
-    return this.slider.simpleSlider('getMin');
+    return this.slider.simpleJsSlider('getMin');
   }
 
   getMax(): number {
-    return this.slider.simpleSlider('getMax');
+    return this.slider.simpleJsSlider('getMax');
   }
 
   getStep(): number {
-    return this.slider.simpleSlider('getStep');
+    return this.slider.simpleJsSlider('getStep');
   }
 
   isScaleEnabled(): boolean {
-    return this.slider.simpleSlider('isScaleEnabled');
+    return this.slider.simpleJsSlider('isScaleEnabled');
   }
 
   isPopUpsEnabled(): boolean {
-    return this.slider.simpleSlider('isPopUpsEnabled');
+    return this.slider.simpleJsSlider('isPopUpsEnabled');
   }
 
   getType(): string {
-    return this.slider.simpleSlider('getType');
+    return this.slider.simpleJsSlider('getType');
   }
 
   getOrientation(): string {
-    return this.slider.simpleSlider('getOrientation');
+    return this.slider.simpleJsSlider('getOrientation');
   }
 
   refreshSliderState(sliderSettings: ISliderSettings): void {
-    this.slider.simpleSlider('refreshSliderState', sliderSettings);
+    this.slider.simpleJsSlider('refreshSliderState', sliderSettings);
   }
 }
 

@@ -63,7 +63,7 @@ class Demo {
     sliderWrapper.append(removeSliderButton);
     this.buttonWrapper.before(sliderWrapper);
 
-    $(sliderWrapper).simpleSlider().controlPanel();
+    $(sliderWrapper).simpleJsSlider().controlPanel();
   }
 }
 
