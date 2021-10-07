@@ -3,9 +3,9 @@
 /* eslint-disable comma-dangle */
 
 import { ISliderSettings, ISubject, IThumbsValues } from './interfaces';
-import SimpleSliderModel from './model/simple-js-slider-model';
-import SimpleSliderController from './controller/simple-js-slider-controller';
-import SimpleSliderView from './view/simple-js-slider-view';
+import SimpleJsSliderModel from './model/simple-js-slider-model';
+import SimpleJsSliderController from './controller/simple-js-slider-controller';
+import SimpleJsSliderView from './view/simple-js-slider-view';
 
 (($) => {
   // Настройки плагина по умолчанию
@@ -31,9 +31,9 @@ import SimpleSliderView from './view/simple-js-slider-view';
 
       // Создание слайдеров
       return this.each(function createSlider(this: HTMLDivElement) {
-        const model = new SimpleSliderModel(settings);
-        const view = new SimpleSliderView(this);
-        const controller = new SimpleSliderController({
+        const model = new SimpleJsSliderModel(settings);
+        const view = new SimpleJsSliderView(this);
+        const controller = new SimpleJsSliderController({
           model,
           view,
         });

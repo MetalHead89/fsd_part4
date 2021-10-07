@@ -2,10 +2,10 @@
 // /* eslint-disable comma-dangle */
 
 import { ISliderSettings } from '../plugins/simple-js-slider/interfaces';
-import SimpleSliderModel from '../plugins/simple-js-slider/model/simple-js-slider-model';
+import SimpleJsSliderModel from '../plugins/simple-js-slider/model/simple-js-slider-model';
 
 let settings: ISliderSettings;
-let model: SimpleSliderModel;
+let model: SimpleJsSliderModel;
 
 beforeEach(() => {
   settings = {
@@ -22,11 +22,11 @@ beforeEach(() => {
     thumbSize: { width: 20, height: 20 },
   };
 
-  model = new SimpleSliderModel(settings);
+  model = new SimpleJsSliderModel(settings);
   model.refreshSliderState(settings);
 });
 
-describe('Метод refreshSliderState класса SimpleSliderModel', () => {
+describe('Метод refreshSliderState класса SimpleJsSliderModel', () => {
   test('Размер Slider должен соответствовать размеру из объекта settings', () => {
     delete settings.sliderSize;
     model.refreshSliderState(settings);
@@ -122,7 +122,7 @@ describe('Метод refreshSliderState класса SimpleSliderModel', () => {
   });
 });
 
-describe('Метод updateThumbsState класса SimpleSliderModel', () => {
+describe('Метод updateThumbsState класса SimpleJsSliderModel', () => {
   test('Значения Thumbs должны корректно изменяться в зависимости от полученной позиции', () => {
     const position = {
       thumbOne: { left: 250, top: 0 },
@@ -176,7 +176,7 @@ describe('Метод updateThumbsState класса SimpleSliderModel', () => {
   });
 });
 
-describe('Метод setSliderSize класса SimpleSliderModel', () => {
+describe('Метод setSliderSize класса SimpleJsSliderModel', () => {
   test('Размер слайдера должен корректно изменяться в зависимости от полученного объекта', () => {
     model.setSliderSize({ width: 80, height: 15 });
     expect(model['sliderSize'].width).toBe(80);
@@ -199,7 +199,7 @@ describe('Метод setSliderSize класса SimpleSliderModel', () => {
   });
 });
 
-describe('Метод setThumbSize класса SimpleSliderModel', () => {
+describe('Метод setThumbSize класса SimpleJsSliderModel', () => {
   test('Размер Thumb должен корректно изменяться в зависимости от полученного объекта', () => {
     model.setThumbSize({ width: 80, height: 15 });
     expect(model['thumbSize'].width).toBe(80);
@@ -217,7 +217,7 @@ describe('Метод setThumbSize класса SimpleSliderModel', () => {
   });
 });
 
-describe('Метод setThumbsValues класса SimpleSliderModel', () => {
+describe('Метод setThumbsValues класса SimpleJsSliderModel', () => {
   test('Значения Thumbs должны корректно изменяться в зависимости от полученного объекта', () => {
     model.setThumbsValues({ thumbOne: 1, thumbTwo: 8 });
     expect(model['thumbOneValue']).toBe(1);
@@ -240,84 +240,84 @@ describe('Метод setThumbsValues класса SimpleSliderModel', () => {
   });
 });
 
-describe('Метод getMin класса SimpleSliderModel', () => {
+describe('Метод getMin класса SimpleJsSliderModel', () => {
   test('Должно возвращаться значение соответствующее значению min в объекте settings', () => {
     expect(model.getMin()).toBe(0);
   });
   test('Должно возвращаться значение соответствующее значению min в объекте settings', () => {
     settings.min = 2;
-    model = new SimpleSliderModel(settings);
+    model = new SimpleJsSliderModel(settings);
     expect(model.getMin()).toBe(2);
   });
 });
 
-describe('Метод getMax класса SimpleSliderModel', () => {
+describe('Метод getMax класса SimpleJsSliderModel', () => {
   test('Должно возвращаться значение соответствующее значению max в объекте settings', () => {
     expect(model.getMax()).toBe(10);
   });
   test('Должно возвращаться значение соответствующее значению max в объекте settings', () => {
     settings.max = 5;
-    model = new SimpleSliderModel(settings);
+    model = new SimpleJsSliderModel(settings);
     expect(model.getMax()).toBe(5);
   });
 });
 
-describe('Метод getStep класса SimpleSliderModel', () => {
+describe('Метод getStep класса SimpleJsSliderModel', () => {
   test('Должно возвращаться значение соответствующее значению step в объекте settings', () => {
     expect(model.getStep()).toBe(1);
   });
   test('Должно возвращаться значение соответствующее значению step в объекте settings', () => {
     settings.step = 2;
-    model = new SimpleSliderModel(settings);
+    model = new SimpleJsSliderModel(settings);
     expect(model.getStep()).toBe(2);
   });
 });
 
-describe('Метод isScaleEnabled класса SimpleSliderModel', () => {
+describe('Метод isScaleEnabled класса SimpleJsSliderModel', () => {
   test('Должно возвращаться значение соответствующее значению scale в объекте settings', () => {
     expect(model.isScaleEnabled()).toBe(true);
   });
   test('Должно возвращаться значение соответствующее значению scale в объекте settings', () => {
     settings.isScale = false;
-    model = new SimpleSliderModel(settings);
+    model = new SimpleJsSliderModel(settings);
     expect(model.isScaleEnabled()).toBe(false);
   });
 });
 
-describe('Метод isPopUpsEnabled класса SimpleSliderModel', () => {
+describe('Метод isPopUpsEnabled класса SimpleJsSliderModel', () => {
   test('Должно возвращаться значение соответствующее значению popUps в объекте settings', () => {
     expect(model.isPopUpsEnabled()).toBe(true);
   });
   test('Должно возвращаться значение соответствующее значению popUps в объекте settings', () => {
     settings.isPopUps = false;
-    model = new SimpleSliderModel(settings);
+    model = new SimpleJsSliderModel(settings);
     expect(model.isPopUpsEnabled()).toBe(false);
   });
 });
 
-describe('Метод getType класса SimpleSliderModel', () => {
+describe('Метод getType класса SimpleJsSliderModel', () => {
   test('Должно возвращаться значение соответствующее значению type в объекте settings', () => {
     expect(model.getType()).toBe('range');
   });
   test('Должно возвращаться значение соответствующее значению type в объекте settings', () => {
     settings.type = 'single';
-    model = new SimpleSliderModel(settings);
+    model = new SimpleJsSliderModel(settings);
     expect(model.getType()).toBe('single');
   });
 });
 
-describe('Метод getOrientation класса SimpleSliderModel', () => {
+describe('Метод getOrientation класса SimpleJsSliderModel', () => {
   test('Должно возвращаться значение соответствующее значению orientation в объекте settings', () => {
     expect(model.getOrientation()).toBe('horizontal');
   });
   test('Должно возвращаться значение соответствующее значению orientation в объекте settings', () => {
     settings.orientation = 'vertical';
-    model = new SimpleSliderModel(settings);
+    model = new SimpleJsSliderModel(settings);
     expect(model.getOrientation()).toBe('vertical');
   });
 });
 
-describe('Метод getProgressBarParams класса SimpleSliderModel', () => {
+describe('Метод getProgressBarParams класса SimpleJsSliderModel', () => {
   test('Должны вычисляться корректные параметры progressBar', () => {
     const progressParams = model.getProgressBarParams();
     expect(progressParams.position.left).toBeCloseTo(144, 0);
@@ -357,7 +357,7 @@ describe('Метод getProgressBarParams класса SimpleSliderModel', () =>
   });
 });
 
-describe('Метод getThumbsPositions класса SimpleSliderModel', () => {
+describe('Метод getThumbsPositions класса SimpleJsSliderModel', () => {
   test('Должны вычисляться корректные позиции Thumbs', () => {
     model['sliderSize'] = { width: 440, height: 10 };
     model['thumbSize'] = { width: 20, height: 20 };
@@ -389,7 +389,7 @@ describe('Метод getThumbsPositions класса SimpleSliderModel', () => {
   });
 });
 
-describe('Метод getPopUpsParams класса SimpleSliderModel', () => {
+describe('Метод getPopUpsParams класса SimpleJsSliderModel', () => {
   test('Должны вычисляться корректные параметры popUps', () => {
     const params = model.getPopUpsParams();
     expect(params.popUpOne.position.left).toBeCloseTo(154, 0);
@@ -420,7 +420,7 @@ describe('Метод getPopUpsParams класса SimpleSliderModel', () => {
   });
 });
 
-describe('Метод getThumbsValues класса SimpleSliderModel', () => {
+describe('Метод getThumbsValues класса SimpleJsSliderModel', () => {
   test('Должны возвращаться значения соответствующие значениям thumbOneValue и thumbTwoValue', () => {
     expect(model.getThumbsValues().thumbOne).toBe(3);
     expect(model.getThumbsValues().thumbTwo).toBe(7);
@@ -432,7 +432,7 @@ describe('Метод getThumbsValues класса SimpleSliderModel', () => {
   });
 });
 
-describe('Метод getScalePoints класса SimpleSliderModel', () => {
+describe('Метод getScalePoints класса SimpleJsSliderModel', () => {
   test('Количество scalePoints должно корректно вычисляться', () => {
     const scalePoints = model.getScalePoints();
     expect(scalePoints.length).toBe(11);
@@ -477,7 +477,7 @@ describe('Метод getScalePoints класса SimpleSliderModel', () => {
   });
 });
 
-describe('Метод setThumbPositionOnClickPosition класса SimpleSliderModel', () => {
+describe('Метод setThumbPositionOnClickPosition класса SimpleJsSliderModel', () => {
   test('Значения Thumbs должны корректно изменяться в зависимости от позиции клика', () => {
     model.setThumbPositionOnClickPosition({ left: 100, top: 0 });
     expect(model.getThumbsValues().thumbOne).toBe(2);

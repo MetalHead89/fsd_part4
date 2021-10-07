@@ -6,7 +6,7 @@
 /* eslint-disable arrow-body-style */
 /* eslint-disable comma-dangle */
 
-import SimpleSliderView from '../plugins/simple-js-slider/view/simple-js-slider-view';
+import SimpleJsSliderView from '../plugins/simple-js-slider/view/simple-js-slider-view';
 
 jest.mock('../plugins/simple-js-slider/view/slider/slider');
 jest.mock('../plugins/simple-js-slider/view/track/track');
@@ -16,14 +16,14 @@ jest.mock('../plugins/simple-js-slider/view/progress-bar/progress-bar');
 jest.mock('../plugins/simple-js-slider/view/scale/scale');
 
 let wrapper: HTMLDivElement;
-let view: SimpleSliderView;
+let view: SimpleJsSliderView;
 
 beforeEach(() => {
   wrapper = document.createElement('div');
-  view = new SimpleSliderView(wrapper);
+  view = new SimpleJsSliderView(wrapper);
 });
 
-describe('Событие windowResized из класса SimpleSliderView', () => {
+describe('Событие windowResized из класса SimpleJsSliderView', () => {
   test('Метод notify должен быть вызван один раз', () => {
     const spy = spyOn(view.subject, 'notify');
     const evt = new window.Event('resize');
@@ -32,7 +32,7 @@ describe('Событие windowResized из класса SimpleSliderView', () =
   });
 });
 
-describe('Метод assembleSlider из класса SimpleSliderView', () => {
+describe('Метод assembleSlider из класса SimpleJsSliderView', () => {
   test('Wrapper должен содержать элемент с классом slider', () => {
     expect(wrapper.querySelector('.slider')).not.toBeNull();
   });
@@ -62,7 +62,7 @@ describe('Метод assembleSlider из класса SimpleSliderView', () => {
   });
 });
 
-describe('Метод update из класса SimpleSliderView', () => {
+describe('Метод update из класса SimpleJsSliderView', () => {
   test('Оповещение о событии thumbIsDragged должно сработать один раз', () => {
     const spy = spyOn(view.subject, 'notify');
     view.update('thumbIsDragged');
@@ -85,7 +85,7 @@ describe('Метод update из класса SimpleSliderView', () => {
   });
 });
 
-describe('Метод switchToHorizontal из класса SimpleSliderView', () => {
+describe('Метод switchToHorizontal из класса SimpleJsSliderView', () => {
   test('Слайдер должен содержать элемент с классом slider_horizontal', () => {
     view.switchToHorizontal();
     expect(
@@ -146,7 +146,7 @@ describe('Метод switchToHorizontal из класса SimpleSliderView', () 
   });
 });
 
-describe('Метод switchToVertical из класса SimpleSliderView', () => {
+describe('Метод switchToVertical из класса SimpleJsSliderView', () => {
   test('Слайдер должен содержать элемент с классом slider_vertical', () => {
     view.switchToVertical();
     expect(
@@ -205,14 +205,14 @@ describe('Метод switchToVertical из класса SimpleSliderView', () =>
   });
 });
 
-describe('Метод switchToSingle из класса SimpleSliderView', () => {
+describe('Метод switchToSingle из класса SimpleJsSliderView', () => {
   test('ThumbTwo должна быть null', () => {
     view.switchToSingle();
     expect(view['thumbTwo']).toBeNull();
   });
 });
 
-describe('Метод switchToRange из класса SimpleSliderView', () => {
+describe('Метод switchToRange из класса SimpleJsSliderView', () => {
   test('ThumbTwo не должна быть null', () => {
     view.switchToRange();
     expect(view['thumbTwo']).not.toBeNull();
@@ -231,7 +231,7 @@ describe('Метод switchToRange из класса SimpleSliderView', () => {
   });
 });
 
-describe('Метод disablePopUps из класса SimpleSliderView', () => {
+describe('Метод disablePopUps из класса SimpleJsSliderView', () => {
   test('PopUpOne должна быть null', () => {
     view.disablePopUps();
     expect(view['popUpOne']).toBeNull();
@@ -243,7 +243,7 @@ describe('Метод disablePopUps из класса SimpleSliderView', () => {
   });
 });
 
-describe('Метод enablePopUps из класса SimpleSliderView', () => {
+describe('Метод enablePopUps из класса SimpleJsSliderView', () => {
   test('PopUpOne не должна быть null', () => {
     view.disablePopUps();
     view.enablePopUps();
@@ -263,7 +263,7 @@ describe('Метод enablePopUps из класса SimpleSliderView', () => {
   });
 });
 
-describe('Метод disableScale из класса SimpleSliderView', () => {
+describe('Метод disableScale из класса SimpleJsSliderView', () => {
   test('Scale должна быть отключена', () => {
     view.disableScale();
     expect(view['scale']).toBeNull();
@@ -275,7 +275,7 @@ describe('Метод disableScale из класса SimpleSliderView', () => {
   });
 });
 
-describe('Метод enableScale из класса SimpleSliderView', () => {
+describe('Метод enableScale из класса SimpleJsSliderView', () => {
   test('Scale должна быть включена', () => {
     view.enableScale();
     view.enableScale();
@@ -288,19 +288,19 @@ describe('Метод enableScale из класса SimpleSliderView', () => {
   });
 });
 
-describe('Метод getThumbSize из класса SimpleSliderView', () => {
+describe('Метод getThumbSize из класса SimpleJsSliderView', () => {
   test('Метод должен возвратить true', () => {
     expect(view.getThumbSize()).toBe(true);
   });
 });
 
-describe('Метод getSliderSize из класса SimpleSliderView', () => {
+describe('Метод getSliderSize из класса SimpleJsSliderView', () => {
   test('Метод должен возвратить true', () => {
     expect(view.getSliderSize()).toBe(true);
   });
 });
 
-describe('Метод getThumbsPositions из класса SimpleSliderView', () => {
+describe('Метод getThumbsPositions из класса SimpleJsSliderView', () => {
   test('Метод должен возвратить объект в котором ThumbOne true', () => {
     expect(view.getThumbsPositions().thumbOne).toBe(true);
   });
@@ -317,7 +317,7 @@ describe('Метод getThumbsPositions из класса SimpleSliderView', () 
   });
 });
 
-describe('Метод updateThumbs из класса SimpleSliderView', () => {
+describe('Метод updateThumbs из класса SimpleJsSliderView', () => {
   test('Метод moveTo объекта thumbOne должен быть вызван один раз', () => {
     const spy = spyOn(view['thumbOne'], 'moveTo');
     view.updateThumbs({
@@ -352,7 +352,7 @@ describe('Метод updateThumbs из класса SimpleSliderView', () => {
   });
 });
 
-describe('Метод updateProgressBar из класса SimpleSliderView', () => {
+describe('Метод updateProgressBar из класса SimpleJsSliderView', () => {
   test('Метод update должен быть вызван один раз', () => {
     const spy = spyOn(view['progressBar'], 'update');
     view.updateProgressBar({
@@ -375,7 +375,7 @@ describe('Метод updateProgressBar из класса SimpleSliderView', () =
   });
 });
 
-describe('Метод updatePopUps из класса SimpleSliderView', () => {
+describe('Метод updatePopUps из класса SimpleJsSliderView', () => {
   test('Метод update должен быть вызван один раз', () => {
     let spy;
     if (view['popUpOne'] !== null) {
@@ -421,7 +421,7 @@ describe('Метод updatePopUps из класса SimpleSliderView', () => {
   });
 });
 
-describe('Метод getScalePointSize из класса SimpleSliderView', () => {
+describe('Метод getScalePointSize из класса SimpleJsSliderView', () => {
   test('Должен быть возвращен объект с размерами scalePoint', () => {
     view.disableScale();
     expect(view.getScalePointSize(10).width).toBe(0);
@@ -432,7 +432,7 @@ describe('Метод getScalePointSize из класса SimpleSliderView', () =
   });
 });
 
-describe('Метод addScalePoints из класса SimpleSliderView', () => {
+describe('Метод addScalePoints из класса SimpleJsSliderView', () => {
   test('Должны добавляться scalePoints', () => {
     view.addScalePoints([
       {
@@ -474,13 +474,13 @@ describe('Метод addScalePoints из класса SimpleSliderView', () => {
   });
 });
 
-describe('Метод getTrackClickPosition из класса SimpleSliderView', () => {
+describe('Метод getTrackClickPosition из класса SimpleJsSliderView', () => {
   test('Метод должен вернуть true', () => {
     expect(view.getTrackClickPosition()).toBe(true);
   });
 });
 
-describe('Метод getScaleClickPosition из класса SimpleSliderView', () => {
+describe('Метод getScaleClickPosition из класса SimpleJsSliderView', () => {
   test('Метод должен вернуть true', () => {
     expect(view.getScaleClickPosition()).toBe(true);
   });
@@ -491,7 +491,7 @@ describe('Метод getScaleClickPosition из класса SimpleSliderView', 
   });
 });
 
-describe('Метод getMargins из класса SimpleSliderView', () => {
+describe('Метод getMargins из класса SimpleJsSliderView', () => {
   beforeEach(() => {
     view['slider'].getRect = jest.fn(() => {
       return {
@@ -578,7 +578,7 @@ describe('Метод getMargins из класса SimpleSliderView', () => {
   });
 });
 
-describe('Метод swapThumbs из класса SimpleSliderView', () => {
+describe('Метод swapThumbs из класса SimpleJsSliderView', () => {
   test('Значения Thumbs должны поменяться местами', () => {
     const thumbOne = view['thumbOne'];
     const thumbTwo = view['thumbTwo'];

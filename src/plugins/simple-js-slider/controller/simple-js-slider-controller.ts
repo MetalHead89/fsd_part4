@@ -3,15 +3,15 @@
 import {
   IControllerParams,
   IObserver,
-  ISimpleSliderModel,
-  ISimpleSliderView,
+  ISimpleJsSliderModel,
+  ISimpleJsSliderView,
   ISubject,
   ISubjectEvents,
 } from '../interfaces';
 
-class SimpleSliderController implements IObserver {
-  private model: ISimpleSliderModel;
-  private view: ISimpleSliderView;
+class SimpleJsSliderController implements IObserver {
+  private model: ISimpleJsSliderModel;
+  private view: ISimpleJsSliderView;
   private modelSubject: ISubject;
   private viewSubject: ISubject;
   private events: ISubjectEvents = {
@@ -150,4 +150,4 @@ class SimpleSliderController implements IObserver {
   }
 }
 
-export default SimpleSliderController;
+export default SimpleJsSliderController;

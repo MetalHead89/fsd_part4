@@ -3,7 +3,7 @@
 /* eslint-disable comma-dangle */
 
 import {
-  ISimpleSliderModel,
+  ISimpleJsSliderModel,
   ISize,
   IThumbsPositions,
   IPosition,
@@ -16,7 +16,7 @@ import {
 } from '../interfaces';
 import Subject from '../subject/subject';
 
-class SimpleSliderModel implements ISimpleSliderModel {
+class SimpleJsSliderModel implements ISimpleJsSliderModel {
   subject: ISubject;
   private orientation = 'horizontal';
   private type = 'range';
@@ -118,11 +118,11 @@ class SimpleSliderModel implements ISimpleSliderModel {
   }
 
   setSliderSize(size: ISize): void {
-    this.sliderSize = SimpleSliderModel.getCorrectSize(size, 0);
+    this.sliderSize = SimpleJsSliderModel.getCorrectSize(size, 0);
   }
 
   setThumbSize(size: ISize): void {
-    this.thumbSize = SimpleSliderModel.getCorrectSize(size, 0);
+    this.thumbSize = SimpleJsSliderModel.getCorrectSize(size, 0);
   }
 
   setThumbsValues({ thumbOne, thumbTwo }: IThumbsValues): void {
@@ -470,4 +470,4 @@ class SimpleSliderModel implements ISimpleSliderModel {
   }
 }
 
-export default SimpleSliderModel;
+export default SimpleJsSliderModel;

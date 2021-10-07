@@ -7,7 +7,7 @@ import {
   IPosition,
   IProgressBarParams,
   IScalePointParams,
-  ISimpleSliderView,
+  ISimpleJsSliderView,
   ISize,
   ISliderMargins,
   ISubject,
@@ -23,7 +23,7 @@ import ProgressBar from './progress-bar/progress-bar';
 import Scale from './scale/scale';
 import Subject from '../subject/subject';
 
-class SimpleSliderView implements ISimpleSliderView, IObserver {
+class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
   subject: ISubject;
   private slider: Slider;
   private sliderWrapper: HTMLDivElement;
@@ -292,4 +292,4 @@ class SimpleSliderView implements ISimpleSliderView, IObserver {
   }
 }
 
-export default SimpleSliderView;
+export default SimpleJsSliderView;

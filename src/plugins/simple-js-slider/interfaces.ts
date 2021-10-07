@@ -71,7 +71,7 @@ interface IScalePointParams {
   value: number;
 }
 
-interface ISimpleSliderModel {
+interface ISimpleJsSliderModel {
   subject: ISubject;
   setSliderSize(size: ISize): void;
   setThumbSize(size: ISize): void;
@@ -91,7 +91,7 @@ interface ISimpleSliderModel {
   recalculateStep(): void;
 }
 
-interface ISimpleSliderView {
+interface ISimpleJsSliderView {
   subject: ISubject;
   switchToHorizontal(): void;
   switchToVertical(): void;
@@ -115,8 +115,8 @@ interface ISimpleSliderView {
 }
 
 interface IControllerParams {
-  model: ISimpleSliderModel;
-  view: ISimpleSliderView;
+  model: ISimpleJsSliderModel;
+  view: ISimpleJsSliderView;
 }
 
 interface ISliderMargins {
@@ -140,8 +140,8 @@ export {
   IPopUpParams,
   IPopUps,
   IScalePointParams,
-  ISimpleSliderModel,
-  ISimpleSliderView,
+  ISimpleJsSliderModel,
+  ISimpleJsSliderView,
   IControllerParams,
   ISliderMargins,
 };

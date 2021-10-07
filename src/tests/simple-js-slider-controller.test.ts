@@ -7,17 +7,17 @@
 /* eslint-disable dot-notation */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import SimpleSliderController from '../plugins/simple-js-slider/controller/simple-js-slider-controller';
+import SimpleJsSliderController from '../plugins/simple-js-slider/controller/simple-js-slider-controller';
 import { ISliderSettings } from '../plugins/simple-js-slider/interfaces';
-import SimpleSliderModel from '../plugins/simple-js-slider/model/simple-js-slider-model';
-import SimpleSliderView from '../plugins/simple-js-slider/view/simple-js-slider-view';
+import SimpleJsSliderModel from '../plugins/simple-js-slider/model/simple-js-slider-model';
+import SimpleJsSliderView from '../plugins/simple-js-slider/view/simple-js-slider-view';
 
 jest.mock('../plugins/simple-js-slider/model/simple-js-slider-model');
 jest.mock('../plugins/simple-js-slider/view/simple-js-slider-view');
 
-let controller: SimpleSliderController;
-let model: SimpleSliderModel;
-let view: SimpleSliderView;
+let controller: SimpleJsSliderController;
+let model: SimpleJsSliderModel;
+let view: SimpleJsSliderView;
 let wrapper: HTMLDivElement;
 let settings: ISliderSettings;
 
@@ -36,82 +36,82 @@ beforeEach(() => {
     thumbSize: { width: 20, height: 20 },
   };
   wrapper = document.createElement('div');
-  view = new SimpleSliderView(wrapper);
-  model = new SimpleSliderModel(settings);
-  controller = new SimpleSliderController({ model, view });
+  view = new SimpleJsSliderView(wrapper);
+  model = new SimpleJsSliderModel(settings);
+  controller = new SimpleJsSliderController({ model, view });
 });
 
-describe('Метод init класса SimpleSliderController', () => {
-  test('Метод setSliderSize из класса SimpleSliderModel должен быть вызван один раз', () => {
+describe('Метод init класса SimpleJsSliderController', () => {
+  test('Метод setSliderSize из класса SimpleJsSliderModel должен быть вызван один раз', () => {
     const spy = jest.spyOn(model, 'setSliderSize');
-    controller = new SimpleSliderController({ model, view });
+    controller = new SimpleJsSliderController({ model, view });
     expect(spy).toBeCalledTimes(2);
   });
-  test('Метод setThumbSize из класса SimpleSliderModel должен быть вызван один раз', () => {
+  test('Метод setThumbSize из класса SimpleJsSliderModel должен быть вызван один раз', () => {
     const spy = jest.spyOn(model, 'setThumbSize');
-    controller = new SimpleSliderController({ model, view });
+    controller = new SimpleJsSliderController({ model, view });
     expect(spy).toBeCalledTimes(1);
   });
-  test('Метод switchToHorizontal из класса SimpleSliderView должен быть вызван один раз', () => {
+  test('Метод switchToHorizontal из класса SimpleJsSliderView должен быть вызван один раз', () => {
     const spy = jest.spyOn(view, 'switchToHorizontal');
-    controller = new SimpleSliderController({ model, view });
+    controller = new SimpleJsSliderController({ model, view });
     expect(spy).toBeCalledTimes(1);
   });
-  test('Метод switchToVertical из класса SimpleSliderView должен быть вызван один раз', () => {
+  test('Метод switchToVertical из класса SimpleJsSliderView должен быть вызван один раз', () => {
     const spy = jest.spyOn(view, 'switchToVertical');
     settings.orientation = 'vertical';
-    model = new SimpleSliderModel(settings);
-    controller = new SimpleSliderController({ model, view });
+    model = new SimpleJsSliderModel(settings);
+    controller = new SimpleJsSliderController({ model, view });
     expect(spy).toBeCalledTimes(1);
   });
-  test('Метод switchToSingle из класса SimpleSliderView должен быть вызван один раз', () => {
+  test('Метод switchToSingle из класса SimpleJsSliderView должен быть вызван один раз', () => {
     const spy = jest.spyOn(view, 'switchToSingle');
     settings.type = 'single';
-    model = new SimpleSliderModel(settings);
-    controller = new SimpleSliderController({ model, view });
+    model = new SimpleJsSliderModel(settings);
+    controller = new SimpleJsSliderController({ model, view });
     expect(spy).toBeCalledTimes(1);
   });
-  test('Метод switchToRange из класса SimpleSliderView должен быть вызван один раз', () => {
+  test('Метод switchToRange из класса SimpleJsSliderView должен быть вызван один раз', () => {
     const spy = jest.spyOn(view, 'switchToRange');
-    controller = new SimpleSliderController({ model, view });
+    controller = new SimpleJsSliderController({ model, view });
     expect(spy).toBeCalledTimes(1);
   });
-  test('Метод enablePopUps из класса SimpleSliderView должен быть вызван один раз', () => {
+  test('Метод enablePopUps из класса SimpleJsSliderView должен быть вызван один раз', () => {
     const spy = jest.spyOn(view, 'enablePopUps');
-    controller = new SimpleSliderController({ model, view });
+    controller = new SimpleJsSliderController({ model, view });
     expect(spy).toBeCalledTimes(1);
   });
-  test('Метод disablePopUps из класса SimpleSliderView должен быть вызван один раз', () => {
+  test('Метод disablePopUps из класса SimpleJsSliderView должен быть вызван один раз', () => {
     const spy = jest.spyOn(view, 'disablePopUps');
     settings.isPopUps = false;
-    model = new SimpleSliderModel(settings);
-    controller = new SimpleSliderController({ model, view });
+    model = new SimpleJsSliderModel(settings);
+    controller = new SimpleJsSliderController({ model, view });
     expect(spy).toBeCalledTimes(1);
   });
 });
 
-describe('Метод update класса SimpleSliderController', () => {
-  test('Метод updateThumbsState из класса SimpleSliderModel должен быть вызван один раз', () => {
+describe('Метод update класса SimpleJsSliderController', () => {
+  test('Метод updateThumbsState из класса SimpleJsSliderModel должен быть вызван один раз', () => {
     const spy = jest.spyOn(model, 'updateThumbsState');
     controller.update('thumbIsDragged');
     expect(spy).toBeCalledTimes(1);
   });
-  test('Метод setThumbPositionOnClickPosition из класса SimpleSliderModel должен быть вызван один раз', () => {
+  test('Метод setThumbPositionOnClickPosition из класса SimpleJsSliderModel должен быть вызван один раз', () => {
     const spy = jest.spyOn(model, 'setThumbPositionOnClickPosition');
     controller.update('clickToTrack');
     expect(spy).toBeCalledTimes(1);
   });
-  test('Метод setThumbPositionOnClickPosition из класса SimpleSliderModel должен быть вызван один раз', () => {
+  test('Метод setThumbPositionOnClickPosition из класса SimpleJsSliderModel должен быть вызван один раз', () => {
     const spy = jest.spyOn(model, 'setThumbPositionOnClickPosition');
     controller.update('clickToScale');
     expect(spy).toBeCalledTimes(1);
   });
-  test('Метод init method из класса SimpleSliderController должен быть вызван один раз', () => {
+  test('Метод init method из класса SimpleJsSliderController должен быть вызван один раз', () => {
     const spy = spyOn<any>(controller, 'init');
     controller.update('windowResized');
     expect(spy).toBeCalledTimes(1);
   });
-  test('Метод swapThumbs method из класса SimpleSliderView должен быть вызван один раз', () => {
+  test('Метод swapThumbs method из класса SimpleJsSliderView должен быть вызван один раз', () => {
     const spy = spyOn<any>(view, 'swapThumbs');
     controller.update('thumbsSwapped');
     expect(spy).toBeCalledTimes(1);
@@ -151,67 +151,67 @@ describe('Метод update класса SimpleSliderController', () => {
   });
 });
 
-describe('Метод updateView класса SimpleSliderController', () => {
-  test('Метод updateThumbsState из класса SimpleSliderModel должен быть вызван один раз', () => {
+describe('Метод updateView класса SimpleJsSliderController', () => {
+  test('Метод updateThumbsState из класса SimpleJsSliderModel должен быть вызван один раз', () => {
     const spy = jest.spyOn(model, 'updateThumbsState');
     controller.update('minIsUpdated');
     expect(spy).toBeCalledTimes(1);
   });
-  test('Метод enableScale из класса SimpleSliderView должен быть вызван один раз', () => {
+  test('Метод enableScale из класса SimpleJsSliderView должен быть вызван один раз', () => {
     const spy = jest.spyOn(view, 'enableScale');
     controller.update('maxIsUpdated');
     expect(spy).toBeCalledTimes(1);
   });
-  test('Метод addScalePoints из класса SimpleSliderView должен быть вызван один раз', () => {
+  test('Метод addScalePoints из класса SimpleJsSliderView должен быть вызван один раз', () => {
     const spy = jest.spyOn(view, 'addScalePoints');
     controller.update('stepIsUpdated');
     expect(spy).toBeCalledTimes(1);
   });
-  test('Метод disableScale из класса SimpleSliderView должен быть вызван один раз', () => {
+  test('Метод disableScale из класса SimpleJsSliderView должен быть вызван один раз', () => {
     const spy = jest.spyOn(view, 'disableScale');
     settings.isScale = false;
-    model = new SimpleSliderModel(settings);
-    controller = new SimpleSliderController({ model, view });
+    model = new SimpleJsSliderModel(settings);
+    controller = new SimpleJsSliderController({ model, view });
     expect(spy).toBeCalledTimes(2);
   });
 });
 
-describe('Метод updateThumbsPositions класса SimpleSliderController', () => {
-  test('Метод updateThumbs из класса SimpleSliderView должен быть вызван один раз', () => {
+describe('Метод updateThumbsPositions класса SimpleJsSliderController', () => {
+  test('Метод updateThumbs из класса SimpleJsSliderView должен быть вызван один раз', () => {
     const spy = jest.spyOn(view, 'updateThumbs');
     controller.update('thumbsPositionsIsUpdated');
     expect(spy).toBeCalledTimes(1);
   });
-  test('Метод updatePopUps из класса SimpleSliderView должен быть вызван один раз', () => {
+  test('Метод updatePopUps из класса SimpleJsSliderView должен быть вызван один раз', () => {
     const spy = jest.spyOn(view, 'updatePopUps');
     controller.update('thumbsPositionsIsUpdated');
     expect(spy).toBeCalledTimes(1);
   });
-  test('Метод updateProgressBar из класса SimpleSliderView должен быть вызван один раз', () => {
+  test('Метод updateProgressBar из класса SimpleJsSliderView должен быть вызван один раз', () => {
     const spy = jest.spyOn(view, 'updateProgressBar');
     controller.update('thumbsPositionsIsUpdated');
     expect(spy).toBeCalledTimes(1);
   });
 });
 
-describe('Метод updateSliderOrientation класса SimpleSliderController', () => {
-  test('Метод switchToHorizontal из класса SimpleSliderView должен быть вызван один раз', () => {
+describe('Метод updateSliderOrientation класса SimpleJsSliderController', () => {
+  test('Метод switchToHorizontal из класса SimpleJsSliderView должен быть вызван один раз', () => {
     const spy = jest.spyOn(view, 'switchToHorizontal');
     controller.update('orientationIsUpdated');
     expect(spy).toBeCalledTimes(1);
   });
-  test('Метод switchToVertical из класса SimpleSliderView не должен быть вызван', () => {
+  test('Метод switchToVertical из класса SimpleJsSliderView не должен быть вызван', () => {
     const spy = jest.spyOn(view, 'switchToVertical');
     controller.update('orientationIsUpdated');
     expect(spy).toBeCalledTimes(0);
   });
-  test('Метод switchToHorizontal из класса SimpleSliderView не должен быть вызван', () => {
+  test('Метод switchToHorizontal из класса SimpleJsSliderView не должен быть вызван', () => {
     model['orientation'] = 'vertical';
     const spy = jest.spyOn(view, 'switchToHorizontal');
     controller.update('orientationIsUpdated');
     expect(spy).toBeCalledTimes(0);
   });
-  test('Метод switchToVertical из класса SimpleSliderView должен быть вызван один раз', () => {
+  test('Метод switchToVertical из класса SimpleJsSliderView должен быть вызван один раз', () => {
     model['orientation'] = 'vertical';
     const spy = jest.spyOn(view, 'switchToVertical');
     controller.update('orientationIsUpdated');
@@ -219,24 +219,24 @@ describe('Метод updateSliderOrientation класса SimpleSliderController
   });
 });
 
-describe('Метод updateSliderType класса SimpleSliderController', () => {
-  test('Метод switchToRange method from the SimpleSliderView должен быть вызван один раз', () => {
+describe('Метод updateSliderType класса SimpleJsSliderController', () => {
+  test('Метод switchToRange method from the SimpleJsSliderView должен быть вызван один раз', () => {
     const spy = jest.spyOn(view, 'switchToRange');
     controller.update('typeIsUpdated');
     expect(spy).toBeCalledTimes(1);
   });
-  test('Метод switchToSingle из класса SimpleSliderView не должен быть вызван', () => {
+  test('Метод switchToSingle из класса SimpleJsSliderView не должен быть вызван', () => {
     const spy = jest.spyOn(view, 'switchToSingle');
     controller.update('typeIsUpdated');
     expect(spy).toBeCalledTimes(0);
   });
-  test('Метод switchToRange из класса SimpleSliderView не должен быть вызван', () => {
+  test('Метод switchToRange из класса SimpleJsSliderView не должен быть вызван', () => {
     model['type'] = 'single';
     const spy = jest.spyOn(view, 'switchToRange');
     controller.update('typeIsUpdated');
     expect(spy).toBeCalledTimes(0);
   });
-  test('Метод switchToSingle из класса SimpleSliderView должен быть вызван один раз', () => {
+  test('Метод switchToSingle из класса SimpleJsSliderView должен быть вызван один раз', () => {
     model['type'] = 'single';
     const spy = jest.spyOn(view, 'switchToSingle');
     controller.update('typeIsUpdated');
@@ -244,24 +244,24 @@ describe('Метод updateSliderType класса SimpleSliderController', () =
   });
 });
 
-describe('Метод updateScaleState класса SimpleSliderController', () => {
-  test('Метод enableScale из класса SimpleSliderView должен быть вызван один раз', () => {
+describe('Метод updateScaleState класса SimpleJsSliderController', () => {
+  test('Метод enableScale из класса SimpleJsSliderView должен быть вызван один раз', () => {
     const spy = jest.spyOn(view, 'enableScale');
     controller.update('scaleStateIsUpdated');
     expect(spy).toBeCalledTimes(2);
   });
-  test('Метод disableScale из класса SimpleSliderView не должен быть вызван', () => {
+  test('Метод disableScale из класса SimpleJsSliderView не должен быть вызван', () => {
     const spy = jest.spyOn(view, 'disableScale');
     controller.update('scaleStateIsUpdated');
     expect(spy).toBeCalledTimes(0);
   });
-  test('Метод enableScale из класса SimpleSliderView не должен быть вызван', () => {
+  test('Метод enableScale из класса SimpleJsSliderView не должен быть вызван', () => {
     model['isScale'] = false;
     const spy = jest.spyOn(view, 'enableScale');
     controller.update('scaleStateIsUpdated');
     expect(spy).toBeCalledTimes(0);
   });
-  test('Метод disableScale из класса SimpleSliderView должен быть вызван один раз', () => {
+  test('Метод disableScale из класса SimpleJsSliderView должен быть вызван один раз', () => {
     model['isScale'] = false;
     const spy = jest.spyOn(view, 'disableScale');
     controller.update('scaleStateIsUpdated');
@@ -269,24 +269,24 @@ describe('Метод updateScaleState класса SimpleSliderController', () =
   });
 });
 
-describe('Метод updatePopUpsState класса SimpleSliderController', () => {
-  test('Метод enablePopUps из класса SimpleSliderView должен быть вызван один раз', () => {
+describe('Метод updatePopUpsState класса SimpleJsSliderController', () => {
+  test('Метод enablePopUps из класса SimpleJsSliderView должен быть вызван один раз', () => {
     const spy = jest.spyOn(view, 'enablePopUps');
     controller.update('popUpsStateIsUpdated');
     expect(spy).toBeCalledTimes(1);
   });
-  test('Метод disablePopUps из класса SimpleSliderView не должен быть вызван', () => {
+  test('Метод disablePopUps из класса SimpleJsSliderView не должен быть вызван', () => {
     const spy = jest.spyOn(view, 'disablePopUps');
     controller.update('popUpsStateIsUpdated');
     expect(spy).toBeCalledTimes(0);
   });
-  test('Метод enablePopUps из класса SimpleSliderView не должен быть вызван', () => {
+  test('Метод enablePopUps из класса SimpleJsSliderView не должен быть вызван', () => {
     model['isPopUps'] = false;
     const spy = jest.spyOn(view, 'enablePopUps');
     controller.update('popUpsStateIsUpdated');
     expect(spy).toBeCalledTimes(0);
   });
-  test('Метод disablePopUps из класса SimpleSliderView должен быть вызван один раз', () => {
+  test('Метод disablePopUps из класса SimpleJsSliderView должен быть вызван один раз', () => {
     model['isPopUps'] = false;
     const spy = jest.spyOn(view, 'disablePopUps');
     controller.update('popUpsStateIsUpdated');
