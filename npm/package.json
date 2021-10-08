@@ -1,0 +1,20 @@
+{
+  "name": "simple-js-slider",
+  "main": "simple-js-slider.js",
+  "version": "1.1.2",
+  "description": "",
+  "keywords": "",
+  "author": "Vitalij Bakalov",
+  "private": false,
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MetalHead89/fsd_part4"
+  },
+  "bugs": {
+    "url": "https://github.com/MetalHead89/fsd_part4/issues"
+  },
+  "peerDependencies": {
+    "jquery": "^3.5.1"
+  }
+}

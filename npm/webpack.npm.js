@@ -41,6 +41,10 @@ module.exports = {
           from: path.resolve(__dirname, '../npm/README.md'),
           to: path.resolve(__dirname, '../npm-build'),
         },
+        {
+          from: path.resolve(__dirname, '../npm/package.json'),
+          to: path.resolve(__dirname, '../npm-build'),
+        },
       ],
     }),
     new StylelintPlugin({
