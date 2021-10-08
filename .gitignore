@@ -1,6 +1,6 @@
 .cache/
 *~
 dist/
-npm/
+npm-build/
 node_modules/
 coverage/
