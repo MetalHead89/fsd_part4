@@ -224,31 +224,18 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
   }
 
   getScalePoints(): IScalePointParams[] {
-    // debugger;
     const scalePoints = [];
     const stepsCount = this.max - this.min;
-    const scaleSize = this.sizeByOrientation(this.sliderSize);
-    const pointSize = this.sizeByOrientation(this.scalePointSize);
     const scalePointsAmount = stepsCount + 1;
-    const maxScalePointsAmount = Math.floor(scaleSize / pointSize);
     const stepSize = this.getStepSize(stepsCount);
-    let pointsInEmptySegment = 0;
-    let pointsCounter = 0;
-
-    if (maxScalePointsAmount < scalePointsAmount) {
-      for (let points = maxScalePointsAmount; points > 2; points -= 1) {
-        const emptyPointsAmount = scalePointsAmount - points;
-
-        if (emptyPointsAmount % (points - 1) === 0) {
-          pointsInEmptySegment = emptyPointsAmount / (points - 1);
-          break;
-        }
-      }
-    }
+    const pointsInEmptySegment =
+      this.getPointsInEmptySegmentAmount(scalePointsAmount);
 
     let currentPointPosition =
       this.sizeByOrientation(this.thumbSize) / 2 -
       this.sizeByOrientation(this.scalePointSize) / 2;
+
+    let pointsCounter = 0;
 
     for (let i = 0; i <= Math.round(scalePointsAmount - 1); i += 1) {
       pointsCounter =
@@ -282,49 +269,6 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
     }
 
     return scalePoints;
-
-    // const scalePoints = [];
-    // const stepsCount = this.getStepsCount();
-    // const stepSize: number = this.getStepSize();
-    // const scalePointsCount = stepsCount + 1;
-    // let previousPointPosition = 0;
-
-    // let currentPointPosition =
-    //   this.sizeByOrientation(this.thumbSize) / 2 -
-    //   this.sizeByOrientation(this.scalePointSize) / 2;
-
-    // for (let i = 0; i <= Math.round(scalePointsCount - 1); i += 1) {
-    //   const currentPointValue = this.thumbPositionToValue(
-    //     currentPointPosition -
-    //       this.sizeByOrientation(this.thumbSize) / 2 +
-    //       this.sizeByOrientation(this.scalePointSize) / 2
-    //   );
-
-    //   currentPointPosition = this.getCorrectPointPosition(currentPointPosition);
-
-    //   if (
-    //     i === 0 ||
-    //     this.pointsDoNotIntersect(currentPointPosition, previousPointPosition)
-    //   ) {
-    //     const fullPointPosition = { left: 0, top: 0 };
-    //     if (this.orientation === 'horizontal') {
-    //       fullPointPosition.left = currentPointPosition;
-    //     } else {
-    //       fullPointPosition.top = currentPointPosition;
-    //     }
-
-    //     scalePoints.push({
-    //       position: fullPointPosition,
-    //       size: this.scalePointSize,
-    //       value: currentPointValue,
-    //     });
-
-    //     previousPointPosition = currentPointPosition;
-    //   }
-
-    //   currentPointPosition += stepSize;
-    // }
-    // return scalePoints;
   }
 
   setScalePointSize(size: ISize): void {
@@ -357,14 +301,32 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
     this.setThumbsValues({ thumbOne, thumbTwo });
   }
 
-  private pointsDoNotIntersect(
-    currentPosition: number,
-    previousPosition: number
-  ): boolean {
-    return (
-      currentPosition - previousPosition >
-      this.sizeByOrientation(this.scalePointSize)
-    );
+  // private pointsDoNotIntersect(
+  //   currentPosition: number,
+  //   previousPosition: number
+  // ): boolean {
+  //   return (
+  //     currentPosition - previousPosition >
+  //     this.sizeByOrientation(this.scalePointSize)
+  //   );
+  // }
+
+  private getPointsInEmptySegmentAmount(scalePointsAmount: number): number {
+    const scaleSize = this.sizeByOrientation(this.sliderSize);
+    const pointSize = this.sizeByOrientation(this.scalePointSize);
+    const maxScalePointsAmount = Math.floor(scaleSize / pointSize);
+
+    if (maxScalePointsAmount < scalePointsAmount) {
+      for (let points = maxScalePointsAmount; points > 2; points -= 1) {
+        const emptyPointsAmount = scalePointsAmount - points;
+
+        if (emptyPointsAmount % (points - 1) === 0) {
+          return emptyPointsAmount / (points - 1);
+        }
+      }
+    }
+
+    return 0;
   }
 
   private rangeValuesIsCorrect(): boolean {
