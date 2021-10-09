@@ -93,9 +93,6 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
   }
 
   switchToSingle(): void {
-    this.thumbTwo?.subject.unsubscribe('thumbIsCatched', this);
-    this.thumbTwo?.subject.unsubscribe('thumbIsCatched', this);
-
     this.thumbTwo?.remove();
     this.thumbTwo = null;
     this.popUpTwo?.remove();
@@ -113,7 +110,6 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
       }
 
       this.thumbTwo.subject.register('thumbIsDragged', this);
-      this.thumbTwo.subject.register('thumbIsCatched', this);
     }
   }
 
@@ -230,8 +226,6 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
   private subscribeToEvents(): void {
     this.thumbOne.subject.register('thumbIsDragged', this);
     this.thumbTwo?.subject.register('thumbIsDragged', this);
-    this.thumbOne.subject.register('thumbIsCatched', this);
-    this.thumbTwo?.subject.register('thumbIsCatched', this);
     this.track.subject.register('clickToTrack', this);
     this.scale?.subject.register('clickToScale', this);
   }
