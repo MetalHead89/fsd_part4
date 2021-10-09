@@ -4,12 +4,14 @@ class TextField extends Subject {
   private control: HTMLDivElement;
   private field: HTMLInputElement;
   private label: HTMLLabelElement;
+  private value: number;
 
   constructor(labelText: string) {
     super();
     this.control = document.createElement('div');
     this.field = document.createElement('input');
     this.label = document.createElement('label');
+    this.value = 0;
 
     this.init(labelText);
   }
@@ -19,10 +21,11 @@ class TextField extends Subject {
   }
 
   getValue(): number {
-    return parseInt(this.field.value, 10);
+    return this.value;
   }
 
   setValue(value: number): void {
+    this.value = value;
     this.field.value = `${value}`;
   }
 
@@ -43,7 +46,12 @@ class TextField extends Subject {
   }
 
   private handleTextFieldBlur() {
-    this.notify('controlPanelDataUpdated');
+    if (this.field.value === '') {
+      this.field.value = this.value.toString();
+    } else {
+      this.value = parseInt(this.field.value, 10);
+      this.notify('controlPanelDataUpdated');
+    }
   }
 
   private static removeNonDigitChar(event: KeyboardEvent): boolean {
