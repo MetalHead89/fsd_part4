@@ -463,7 +463,7 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
       this.sizeByOrientation(this.scalePointSize) / 2;
 
     if (position > extremePosition) {
-      position = extremePosition;
+      return extremePosition;
     }
 
     return position;
