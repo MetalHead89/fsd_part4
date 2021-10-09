@@ -334,8 +334,8 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
   }
 
   private static getCorrectSize({ width, height }: ISize, min: number): ISize {
-    width = width >= min ? width : min;
-    height = height >= min ? height : min;
+    width = Math.max(width, min);
+    height = Math.max(height, min);
     return { width, height };
   }
 
@@ -399,8 +399,8 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
         ((this.max - this.min) / this.max) * (position / pixelsPerValue)
     );
 
-    newValue = newValue < this.min ? this.min : newValue;
-    newValue = newValue > this.max ? this.max : newValue;
+    newValue = Math.max(newValue, this.min);
+    newValue = Math.min(newValue, this.max);
 
     return newValue;
   }
