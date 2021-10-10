@@ -13,6 +13,7 @@
   }
 
   &__point {
+    padding: 2px;
     position: absolute;
     display: flex;
 
@@ -33,6 +34,13 @@
     width: 10px;
     height: 10px;
     background: rgb(211, 211, 211);
+
+    &_empty {
+      margin-top: 3px;
+      width: 4px;
+      height: 4px;
+      background: rgb(228, 228, 228);
+    }
   }
 
   &__point-label {

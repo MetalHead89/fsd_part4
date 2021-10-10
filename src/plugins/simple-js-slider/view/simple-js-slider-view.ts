@@ -3,6 +3,7 @@
 
 import {
   IObserver,
+  IPointsSize,
   IPopUps,
   IPosition,
   IProgressBarParams,
@@ -190,10 +191,10 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
     }
   }
 
-  getScalePointSize(value: number): ISize {
+  getScalePointsSize(value: number): IPointsSize {
     return this.scale
-      ? this.scale.getPointSize(value)
-      : { width: 0, height: 0 };
+      ? this.scale.getPointsSize(value)
+      : { point: { width: 0, height: 0 }, emptyPoint: { width: 0, height: 0 } };
   }
 
   addScalePoints(points: IScalePointParams[]): void {

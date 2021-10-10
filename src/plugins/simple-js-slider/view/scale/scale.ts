@@ -1,5 +1,5 @@
 /* eslint-disable comma-dangle */
-import { IScalePointParams, ISize } from '../../interfaces';
+import { IPointsSize, IScalePointParams, ISize } from '../../interfaces';
 import UIControl from '../ui-control/ui-control';
 
 class Scale extends UIControl {
@@ -8,22 +8,11 @@ class Scale extends UIControl {
     this.init();
   }
 
-  getPointSize(value: number): ISize {
-    this.addPoint({
-      position: { left: 0, top: 0 },
-      size: { width: 0, height: 0 },
-      value,
-    });
-
-    const pointSize = { width: 0, height: 0 };
-    const scalePoint: HTMLDivElement | null =
-      this.control.querySelector('.scale__point');
-
-    pointSize.width = scalePoint?.offsetWidth || 0;
-    pointSize.height = scalePoint?.offsetHeight || 0;
-    scalePoint?.remove();
-
-    return pointSize;
+  getPointsSize(value: number): IPointsSize {
+    return {
+      point: this.getPointSize(value),
+      emptyPoint: this.getPointSize(value, true),
+    };
   }
 
   addPoints(points: IScalePointParams[]): void {
@@ -40,7 +29,33 @@ class Scale extends UIControl {
     this.subject.notify('clickToScale');
   }
 
-  private addPoint({ position, size, value }: IScalePointParams): void {
+  private getPointSize(value: number, isEmpty = false): ISize {
+    this.addPoint(
+      {
+        isEmpty,
+        position: { left: 0, top: 0 },
+        size: { width: 0, height: 0 },
+        value,
+      },
+    );
+
+    const pointSize = { width: 0, height: 0 };
+    const scalePoint: HTMLDivElement | null =
+      this.control.querySelector('.scale__point');
+
+    pointSize.width = scalePoint?.offsetWidth || 0;
+    pointSize.height = scalePoint?.offsetHeight || 0;
+    scalePoint?.remove();
+
+    return pointSize;
+  }
+
+  private addPoint({
+    position,
+    size,
+    value,
+    isEmpty,
+  }: IScalePointParams): void {
     const orientation = this.getOrientation();
     const scalePoint: HTMLElement = document.createElement('div');
     scalePoint.classList.add('scale__point', `scale__point_${orientation}`);
@@ -62,7 +77,12 @@ class Scale extends UIControl {
       'scale__point-label',
       `scale__point-label_${orientation}`
     );
-    divisionLabel.innerText = value.toString();
+    if (isEmpty) {
+      divisionMarker.classList.add('scale__point-marker_empty');
+      divisionLabel.innerText = '';
+    } else {
+      divisionLabel.innerText = value.toString();
+    }
 
     scalePoint.style.left = `${position.left}px`;
     scalePoint.style.top = `${position.top}px`;
