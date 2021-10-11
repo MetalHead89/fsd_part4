@@ -10,10 +10,11 @@
     "LICENSE"
   ],
   "scripts": {
-    "dev": "webpack --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js",
-    "watch": "webpack --mode development --watch",
-    "start": "webpack-dev-server --config webpack.dev.js --open",
+    "demo-dev": "webpack --config webpack.demo.dev.js",
+    "demo-prod": "webpack --config webpack.demo.prod.js",
+    "start": "webpack-dev-server --config webpack.demo.dev.js --open",
+    "slider-dev": "webpack --config webpack.slider.dev.js",
+    "slider-prod": "webpack --config webpack.slider.prod.js",
     "test": "jest",
     "coverage": "jest --coverage",
     "npm-build": "webpack --config npm/webpack.npm.js"
