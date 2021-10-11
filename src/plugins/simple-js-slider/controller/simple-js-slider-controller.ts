@@ -95,7 +95,7 @@ class SimpleJsSliderController implements IObserver {
       this.view.enableScale();
 
       const max = this.model.getMax();
-      this.model.setScalePointsSize(this.view.getScalePointsSize(max));
+      this.model.setScalePointSize(this.view.getScalePointSize(max));
 
       const points = this.model.getScalePoints();
       this.view.addScalePoints(points);

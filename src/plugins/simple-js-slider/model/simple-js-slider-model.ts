@@ -13,7 +13,6 @@ import {
   IScalePointParams,
   IThumbsValues,
   ISubject,
-  IPointsSize,
 } from '../interfaces';
 import Subject from '../subject/subject';
 
@@ -31,7 +30,6 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
   private sliderSize = { width: 500, height: 10 };
   private thumbSize = { width: 20, height: 10 };
   private scalePointSize = { width: 0, height: 0 };
-  private emptyScalePointSize = { width: 0, height: 0 };
 
   constructor(settings: ISliderSettings) {
     this.subject = new Subject();
@@ -233,7 +231,6 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
     const pointsInEmptySegment =
       this.getPointsInEmptySegmentAmount(scalePointsAmount);
 
-    let previousPointPosition = 0;
     let currentPointPosition =
       this.sizeByOrientation(this.thumbSize) / 2 -
       this.sizeByOrientation(this.scalePointSize) / 2;
@@ -252,8 +249,6 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
 
       currentPointPosition = this.getCorrectPointPosition(currentPointPosition);
 
-      const isEmpty = pointsCounter !== 0;
-
       const fullPointPosition = { left: 0, top: 0 };
       if (this.orientation === 'horizontal') {
         fullPointPosition.left = currentPointPosition;
@@ -261,18 +256,12 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
         fullPointPosition.top = currentPointPosition;
       }
 
-      if (
-        !isEmpty ||
-        this.emptyPointsDoNotIntersect(currentPointPosition, previousPointPosition)
-      ) {
+      if (pointsCounter === 0) {
         scalePoints.push({
-          isEmpty,
           position: fullPointPosition,
           size: this.scalePointSize,
           value: currentPointValue,
         });
-
-        previousPointPosition = currentPointPosition;
       }
 
       pointsCounter += 1;
@@ -282,9 +271,8 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
     return scalePoints;
   }
 
-  setScalePointsSize(pointsSize: IPointsSize): void {
-    this.scalePointSize = pointsSize.point;
-    this.emptyScalePointSize = pointsSize.emptyPoint;
+  setScalePointSize(pointSize: ISize): void {
+    this.scalePointSize = pointSize;
   }
 
   recalculateStep(): void {
@@ -311,16 +299,6 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
     }
 
     this.setThumbsValues({ thumbOne, thumbTwo });
-  }
-
-  private emptyPointsDoNotIntersect(
-    currentPosition: number,
-    previousPosition: number
-  ): boolean {
-    return (
-      currentPosition - previousPosition >
-      this.sizeByOrientation(this.emptyScalePointSize)
-    );
   }
 
   private getPointsInEmptySegmentAmount(scalePointsAmount: number): number {
@@ -416,7 +394,6 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
   }
 
   private getStepSize(stepsCount = this.getStepsCount()): number {
-    // const stepsCount = this.getStepsCount();
     return (
       (this.sizeByOrientation(this.sliderSize) -
         this.sizeByOrientation(this.thumbSize)) /
