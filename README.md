@@ -54,13 +54,21 @@ https://metalhead89.github.io/fsd_demo_slider_page/
 
 	npm start
 
-Development сборка:
+Development сборка слайдера:
 
-	npm run dev
+	npm run slider-dev
 
-Production сборка:
+Production сборка слайдера:
 
-	npm run build
+	npm run slider-prod
+
+Development сборка демо-страницы:
+
+	npm run demo-dev
+
+Production сборка демо-страницы:
+
+	npm run demo-prod
 
 Запуск тестов:
 
@@ -69,6 +77,10 @@ Production сборка:
 Запуск тестов с покрытием:
 
 	npm run coverage
+
+Сборка npm пакета:
+  
+  npm run npm-prod
 
 ## Добавление плагина в проект
 
