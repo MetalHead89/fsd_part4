@@ -5,15 +5,17 @@
   background: rgb(85, 196, 153);
   z-index: 1;
 
-  &_horizontal {
-    top: 0;
-    width: 0px;
-    height: 10px;
-  }
+  &_orientation {
+    &_horizontal {
+      top: 0;
+      width: 0px;
+      height: 10px;
+    }
 
-  &_vertical {
-    left: 0;
-    width: 10px;
-    height: 0px;
+    &_vertical {
+      left: 0;
+      width: 10px;
+      height: 0px;
+    }
   }
 }
