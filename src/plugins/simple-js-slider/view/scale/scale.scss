@@ -4,12 +4,14 @@
   box-sizing: content-box;
   flex: none;
 
-  &_horizontal {
-    margin-top: 10px;
-  }
+  &_orientation {
+    &_horizontal {
+      margin-top: 10px;
+    }
 
-  &_vertical {
-    margin-left: 10px;
+    &_vertical {
+      margin-left: 10px;
+    }
   }
 
   &__point {
@@ -17,14 +19,16 @@
     position: absolute;
     display: flex;
 
-    &_horizontal {
-      flex-direction: column;
-      align-items: center;
-    }
+    &_orientation {
+      &_horizontal {
+        flex-direction: column;
+        align-items: center;
+      }
 
-    &_vertical {
-      flex-direction: row;
-      align-items: center;
+      &_vertical {
+        flex-direction: row;
+        align-items: center;
+      }
     }
   }
 
@@ -43,12 +47,14 @@
     font-size: 1.3rem;
     color: rgb(211, 211, 211);
 
-    &_horizontal {
-      margin-top: 3px;
-    }
+    &_orientation {
+      &_horizontal {
+        margin-top: 3px;
+      }
 
-    &_vertical {
-      margin-left: 3px;
+      &_vertical {
+        margin-left: 3px;
+      }
     }
   }
 }

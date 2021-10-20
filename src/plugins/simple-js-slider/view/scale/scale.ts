@@ -1,4 +1,6 @@
+/* eslint-disable operator-linebreak */
 /* eslint-disable comma-dangle */
+
 import { IScalePointParams, ISize } from '../../interfaces';
 import UIControl from '../ui-control/ui-control';
 
@@ -43,7 +45,10 @@ class Scale extends UIControl {
   private addPoint({ position, size, value }: IScalePointParams): void {
     const orientation = this.getOrientation();
     const scalePoint: HTMLElement = document.createElement('div');
-    scalePoint.classList.add('scale__point', `scale__point_${orientation}`);
+    scalePoint.classList.add(
+      'scale__point',
+      `scale__point_orientation_${orientation}`
+    );
     if (size.width > 0) {
       scalePoint.style.width = `${size.width}px`;
     }
@@ -60,7 +65,7 @@ class Scale extends UIControl {
     const divisionLabel: HTMLElement = document.createElement('div');
     divisionLabel.classList.add(
       'scale__point-label',
-      `scale__point-label_${orientation}`
+      `scale__point-label_orientation_${orientation}`
     );
     divisionLabel.innerText = value.toString();
 
