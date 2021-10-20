@@ -12,8 +12,8 @@ class UIControl {
     this.subject = new Subject();
     this.lastPosition = { left: 0, top: 0 };
     const orientationClass = orientation
-      ? `${name}_${orientation}`
-      : `${name}_horizontal`;
+      ? `${name}_orientation_${orientation}`
+      : `${name}_orientation_horizontal`;
     this.control.classList.add(`${name}`, orientationClass);
   }
 
@@ -34,14 +34,14 @@ class UIControl {
 
   switchToHorizontal(): void {
     const mainClass = this.control.classList[0];
-    this.control.classList.remove(`${mainClass}_vertical`);
-    this.control.classList.add(`${mainClass}_horizontal`);
+    this.control.classList.remove(`${mainClass}_orientation_vertical`);
+    this.control.classList.add(`${mainClass}_orientation_horizontal`);
   }
 
   switchToVertical(): void {
     const mainClass = this.control.classList[0];
-    this.control.classList.remove(`${mainClass}_horizontal`);
-    this.control.classList.add(`${mainClass}_vertical`);
+    this.control.classList.remove(`${mainClass}_orientation_horizontal`);
+    this.control.classList.add(`${mainClass}_orientation_vertical`);
   }
 
   remove(): void {
