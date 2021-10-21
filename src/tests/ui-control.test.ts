@@ -44,14 +44,14 @@ describe('Конструктор класса UIControl', () => {
   test('Элемент UIControl должен содержать элемент с классом some-element', () => {
     expect(control['control'].classList.contains('some-element')).toBe(true);
   });
-  test('Элемент UIControl должен содержать элемент с классом some-element_horizontal', () => {
+  test('Элемент UIControl должен содержать элемент с классом some-element_orientation_horizontal', () => {
     expect(
-      control['control'].classList.contains('some-element_horizontal'),
+      control['control'].classList.contains('some-element_orientation_horizontal'),
     ).toBe(true);
   });
-  test('Элемент UIControl должен содержать элемент с классом some-element_vertical', () => {
+  test('Элемент UIControl должен содержать элемент с классом some-element_orientation_vertical', () => {
     control = new UIControl('some-element', 'vertical');
-    expect(control['control'].classList.contains('some-element_vertical')).toBe(
+    expect(control['control'].classList.contains('some-element_orientation_vertical')).toBe(
       true,
     );
   });
@@ -100,32 +100,32 @@ describe('Метод getSize класса UIControl', () => {
 });
 
 describe('Метод switchToHorizontal класса UIControl', () => {
-  test('Элемент UIControl не должен содержать класс some-element_vertical', () => {
+  test('Элемент UIControl не должен содержать класс some-element_orientation_vertical', () => {
     control = new UIControl('some-element', 'vertical');
     control.switchToHorizontal();
-    expect(control['control'].classList.contains('some-element_vertical')).toBe(
+    expect(control['control'].classList.contains('some-element_orientation_vertical')).toBe(
       false,
     );
   });
-  test('Элемент UIControl должен содержать класс some-element_horizontal', () => {
+  test('Элемент UIControl должен содержать класс some-element_orientation_horizontal', () => {
     control = new UIControl('some-element', 'vertical');
     control.switchToHorizontal();
     expect(
-      control['control'].classList.contains('some-element_horizontal'),
+      control['control'].classList.contains('some-element_orientation_horizontal'),
     ).toBe(true);
   });
 });
 
 describe('Метод switchToVertical класса UIControl', () => {
-  test('Элемент UIControl не должен содержать класс some-element_horizontal', () => {
+  test('Элемент UIControl не должен содержать класс some-element_orientation_horizontal', () => {
     control.switchToVertical();
     expect(
-      control['control'].classList.contains('some-element_horizontal'),
+      control['control'].classList.contains('some-element_orientation_horizontal'),
     ).toBe(false);
   });
-  test('Элемент UIControl должен содержать класс some-element_vertical', () => {
+  test('Элемент UIControl должен содержать класс some-element_orientation_vertical', () => {
     control.switchToVertical();
-    expect(control['control'].classList.contains('some-element_vertical')).toBe(
+    expect(control['control'].classList.contains('some-element_orientation_vertical')).toBe(
       true,
     );
   });

@@ -86,121 +86,121 @@ describe('Метод update из класса SimpleJsSliderView', () => {
 });
 
 describe('Метод switchToHorizontal из класса SimpleJsSliderView', () => {
-  test('Слайдер должен содержать элемент с классом slider_horizontal', () => {
+  test('Слайдер должен содержать элемент с классом slider_orientation_horizontal', () => {
     view.switchToHorizontal();
     expect(
-      view['slider'].getControl().classList.contains('slider_horizontal')
+      view['slider'].getControl().classList.contains('slider_orientation_horizontal')
     ).toBe(true);
   });
-  test('Track должен содержать элемент с классом slider__track_horizontal', () => {
+  test('Track должен содержать элемент с классом slider__track_orientation_horizontal', () => {
     view.switchToHorizontal();
     expect(
-      view['track'].getControl().classList.contains('slider__track_horizontal')
+      view['track'].getControl().classList.contains('slider__track_orientation_horizontal')
     ).toBe(true);
   });
-  test('ThumbOne должен содержать элемент с классом slider__thumb_horizontal', () => {
+  test('ThumbOne должен содержать элемент с классом slider__thumb_orientation_horizontal', () => {
     view.switchToHorizontal();
     expect(
       view['thumbOne']
         .getControl()
-        .classList.contains('slider__thumb_horizontal')
+        .classList.contains('slider__thumb_orientation_horizontal')
     ).toBe(true);
   });
-  test('ThumbTwo должен содержать элемент с классом slider__thumb_horizontal', () => {
+  test('ThumbTwo должен содержать элемент с классом slider__thumb_orientation_horizontal', () => {
     view.switchToHorizontal();
     expect(
       view['thumbTwo']
         ?.getControl()
-        .classList.contains('slider__thumb_horizontal')
+        .classList.contains('slider__thumb_orientation_horizontal')
     ).toBe(true);
   });
-  test('PopUpOne должен содержать элемент с классом slider__pop-up_horizontal', () => {
+  test('PopUpOne должен содержать элемент с классом slider__pop-up_orientation_horizontal', () => {
     view.switchToHorizontal();
     expect(
       view['popUpOne']
         ?.getControl()
-        .classList.contains('slider__pop-up_horizontal')
+        .classList.contains('slider__pop-up_orientation_horizontal')
     ).toBe(true);
   });
-  test('PopUpTwo должен содержать элемент с классом slider__pop-up_horizontal', () => {
+  test('PopUpTwo должен содержать элемент с классом slider__pop-up_orientation_horizontal', () => {
     view.switchToHorizontal();
     expect(
       view['popUpTwo']
         ?.getControl()
-        .classList.contains('slider__pop-up_horizontal')
+        .classList.contains('slider__pop-up_orientation_horizontal')
     ).toBe(true);
   });
-  test('ProgressBar должен содержать элемент с классом slider__progress-bar_horizontal', () => {
+  test('ProgressBar должен содержать элемент с классом slider__progress-bar_orientation_horizontal', () => {
     view.switchToHorizontal();
     expect(
       view['progressBar']
         .getControl()
-        .classList.contains('slider__progress-bar_horizontal')
+        .classList.contains('slider__progress-bar_orientation_horizontal')
     ).toBe(true);
   });
-  test('Scale должен содержать элемент с классом slider__scale_horizontal', () => {
+  test('Scale должен содержать элемент с классом slider__scale_orientation_horizontal', () => {
     view.switchToHorizontal();
     expect(
-      view['scale']?.getControl().classList.contains('slider__scale_horizontal')
+      view['scale']?.getControl().classList.contains('slider__scale_orientation_horizontal')
     ).toBe(true);
   });
 });
 
 describe('Метод switchToVertical из класса SimpleJsSliderView', () => {
-  test('Слайдер должен содержать элемент с классом slider_vertical', () => {
+  test('Слайдер должен содержать элемент с классом slider_orientation_vertical', () => {
     view.switchToVertical();
     expect(
-      view['slider'].getControl().classList.contains('slider_vertical')
+      view['slider'].getControl().classList.contains('slider_orientation_vertical')
     ).toBe(true);
   });
-  test('Track должен содержать элемент с классом slider__track_vertical', () => {
+  test('Track должен содержать элемент с классом slider__track_orientation_vertical', () => {
     view.switchToVertical();
     expect(
-      view['track'].getControl().classList.contains('slider__track_vertical')
+      view['track'].getControl().classList.contains('slider__track_orientation_vertical')
     ).toBe(true);
   });
-  test('ThumbOne должен содержать элемент с классом slider__thumb_vertical', () => {
+  test('ThumbOne должен содержать элемент с классом slider__thumb_orientation_vertical', () => {
     view.switchToVertical();
     expect(
-      view['thumbOne'].getControl().classList.contains('slider__thumb_vertical')
+      view['thumbOne'].getControl().classList.contains('slider__thumb_orientation_vertical')
     ).toBe(true);
   });
-  test('ThumbTwo должен содержать элемент с классом slider__thumb_vertical', () => {
+  test('ThumbTwo должен содержать элемент с классом slider__thumb_orientation_vertical', () => {
     view.switchToVertical();
     expect(
       view['thumbTwo']
         ?.getControl()
-        .classList.contains('slider__thumb_vertical')
+        .classList.contains('slider__thumb_orientation_vertical')
     ).toBe(true);
   });
-  test('PopUpOne должен содержать элемент с классом slider__pop-up_vertical', () => {
+  test('PopUpOne должен содержать элемент с классом slider__pop-up_orientation_vertical', () => {
     view.switchToVertical();
     expect(
       view['popUpOne']
         ?.getControl()
-        .classList.contains('slider__pop-up_vertical')
+        .classList.contains('slider__pop-up_orientation_vertical')
     ).toBe(true);
   });
-  test('PopUpTwo должен содержать элемент с классом slider__pop-up_vertical', () => {
+  test('PopUpTwo должен содержать элемент с классом slider__pop-up_orientation_vertical', () => {
     view.switchToVertical();
     expect(
       view['popUpTwo']
         ?.getControl()
-        .classList.contains('slider__pop-up_vertical')
+        .classList.contains('slider__pop-up_orientation_vertical')
     ).toBe(true);
   });
-  test('ProgressBar должен содержать элемент с классом slider__progress-bar_vertical', () => {
+  test('ProgressBar должен содержать элемент с классом slider__progress-bar_orientation_vertical', () => {
     view.switchToVertical();
     expect(
       view['progressBar']
         .getControl()
-        .classList.contains('slider__progress-bar_vertical')
+        .classList.contains('slider__progress-bar_orientation_vertical')
     ).toBe(true);
   });
-  test('Scale должен содержать элемент с классом slider__scale_vertical', () => {
+  test('Scale должен содержать элемент с классом slider__scale_orientation_vertical', () => {
     view.switchToVertical();
     expect(
-      view['scale']?.getControl().classList.contains('slider__scale_vertical')
+      view['scale']?.getControl().classList.contains('slider__scale_orientation_vertical')
     ).toBe(true);
   });
 });

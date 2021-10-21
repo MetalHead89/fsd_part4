@@ -20,16 +20,18 @@ $control-panel: '.control-panel';
   justify-content: space-around;
   user-select: none;
 
-  &_horizontal {
-    margin-top: 10px;
-  }
+  &_orientation {
+    &_horizontal {
+      margin-top: 10px;
+    }
 
-  &_vertical {
-    margin-left: 10px;
+    &_vertical {
+      margin-left: 10px;
 
-    #{$control-panel}__text-fields-group {
-      @media screen and (max-width: 415px) {
-        flex-wrap: wrap;
+      #{$control-panel}__text-fields-group {
+        @media screen and (max-width: 415px) {
+          flex-wrap: wrap;
+        }
       }
     }
   }

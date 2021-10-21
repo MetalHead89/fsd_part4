@@ -15,13 +15,13 @@ class ControlPanel {
   }
 
   switchToHorizontal(): void {
-    this.element.classList.remove('control-panel_vertical');
-    this.element.classList.add('control-panel_horizontal');
+    this.element.classList.remove('control-panel_orientation_vertical');
+    this.element.classList.add('control-panel_orientation_horizontal');
   }
 
   switchToVertical(): void {
-    this.element.classList.remove('control-panel_horizontal');
-    this.element.classList.add('control-panel_vertical');
+    this.element.classList.remove('control-panel_orientation_horizontal');
+    this.element.classList.add('control-panel_orientation_vertical');
   }
 }
 

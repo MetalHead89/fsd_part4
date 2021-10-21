@@ -28,13 +28,13 @@ export default class UIControl {
   }
 
   switchToHorizontal(): void {
-    this.control.classList.remove(`${this.mainClass}_vertical`);
-    this.control.classList.add(`${this.mainClass}_horizontal`);
+    this.control.classList.remove(`${this.mainClass}_orientation_vertical`);
+    this.control.classList.add(`${this.mainClass}_orientation_horizontal`);
   }
 
   switchToVertical(): void {
-    this.control.classList.remove(`${this.mainClass}_horizontal`);
-    this.control.classList.add(`${this.mainClass}_vertical`);
+    this.control.classList.remove(`${this.mainClass}_orientation_horizontal`);
+    this.control.classList.add(`${this.mainClass}_orientation_vertical`);
   }
 
   remove(): void {

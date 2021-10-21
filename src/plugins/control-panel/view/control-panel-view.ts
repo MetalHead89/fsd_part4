@@ -211,12 +211,12 @@ class ControlPanelView extends Subject implements IObserver {
   private switchOrientation(): void {
     if (this.getOrientation() === 'horizontal') {
       this.controlPanel.switchToHorizontal();
-      this.sliderWrapper.classList.remove('slider-wrapper_vertical');
-      this.sliderWrapper.classList.add('slider-wrapper_horizontal');
+      this.sliderWrapper.classList.remove('slider-wrapper_orientation_vertical');
+      this.sliderWrapper.classList.add('slider-wrapper_orientation_horizontal');
     } else {
       this.controlPanel.switchToVertical();
-      this.sliderWrapper.classList.remove('slider-wrapper_horizontal');
-      this.sliderWrapper.classList.add('slider-wrapper_vertical');
+      this.sliderWrapper.classList.remove('slider-wrapper_orientation_horizontal');
+      this.sliderWrapper.classList.add('slider-wrapper_orientation_vertical');
     }
   }
 }

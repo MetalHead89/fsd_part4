@@ -51,7 +51,7 @@ class UIControl {
   getOrientation(): string {
     const mainClass = this.control.classList[0];
     const classWithOrientation = this.control.classList[1];
-    return classWithOrientation.replace(`${mainClass}_`, '');
+    return classWithOrientation.replace(`${mainClass}_orientation_`, '');
   }
 
   getRect(): DOMRect {
