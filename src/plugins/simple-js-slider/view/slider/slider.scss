@@ -3,15 +3,17 @@
   position: relative;
   display: flex;
 
-  &_horizontal {
-    width: 100%;
-    height: 10px;
-    flex-direction: column;
-  }
+  &_orientation {
+    &_horizontal {
+      width: 100%;
+      height: 10px;
+      flex-direction: column;
+    }
 
-  &_vertical {
-    width: 10px;
-    height: 300px;
-    flex-direction: row;
+    &_vertical {
+      width: 10px;
+      height: 300px;
+      flex-direction: row;
+    }
   }
 }
