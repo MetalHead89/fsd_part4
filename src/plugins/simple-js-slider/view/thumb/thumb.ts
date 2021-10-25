@@ -62,8 +62,6 @@ class Thumb extends UIControl {
 
     document.addEventListener('pointermove', this.handleDocumentPointermove);
     document.addEventListener('pointerup', this.handleDocumentPointerup);
-
-    this.subject.notify('thumbIsCatched');
   }
 
   private setThumbShift(cursorPosition: IPosition, thumbPosition: IPosition) {
