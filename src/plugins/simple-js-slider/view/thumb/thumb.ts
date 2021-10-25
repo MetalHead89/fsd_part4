@@ -79,6 +79,7 @@ class Thumb extends UIControl {
   }
 
   private endDrag(): void {
+    this.shift = { shiftX: 0, shiftY: 0 };
     Thumb.enableSelection();
 
     document.removeEventListener('pointermove', this.handleDocumentPointermove);
