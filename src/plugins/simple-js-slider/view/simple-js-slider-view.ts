@@ -58,9 +58,19 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
 
   //NEW_METHOD//
   private thumbsDragged() {
+    const thumbOnePercentPosition = this.calculateThumbPercentPosition(this.thumbOne.getPosition());
+    const thumbTwoPercentPosition = this.thumbTwo
+      ? this.calculateThumbPercentPosition(this.thumbOne.getPosition())
+      : null;
+  }
+
+  private calculateThumbPercentPosition(position: IPosition): IPosition {
     const sliderSize = this.slider.getSize();
-    const thumbOnePercentPosition = this.thumbOne.getPosition() * 100 / sliderSize;
-    const thumbTwoPercentPosition = this.thumbTwo ? this.thumbTwo.getPosition() : null;
+
+    return {
+      left: (position.left * 100) / sliderSize.width,
+      top: (position.top * 100) / sliderSize.height,
+    };
   }
 
   update(eventType: string): void {
