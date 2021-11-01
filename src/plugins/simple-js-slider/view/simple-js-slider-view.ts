@@ -56,6 +56,13 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
     this.init();
   }
 
+  //NEW_METHOD//
+  private thumbsDragged() {
+    const sliderSize = this.slider.getSize();
+    const thumbOnePercentPosition = this.thumbOne.getPosition() * 100 / sliderSize;
+    const thumbTwoPercentPosition = this.thumbTwo ? this.thumbTwo.getPosition() : null;
+  }
+
   update(eventType: string): void {
     if (eventType in this.events) {
       this.events[eventType]();
@@ -191,9 +198,7 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
   }
 
   getScalePointSize(value: number): ISize {
-    return this.scale
-      ? this.scale.getPointSize(value)
-      : { width: 0, height: 0 };
+    return this.scale ? this.scale.getPointSize(value) : { width: 0, height: 0 };
   }
 
   addScalePoints(points: IScalePointParams[]): void {
@@ -206,8 +211,7 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
   }
 
   getScaleClickPosition(): IPosition {
-    const position =
-      this.scale === null ? { left: 0, top: 0 } : this.scale.getPosition();
+    const position = this.scale === null ? { left: 0, top: 0 } : this.scale.getPosition();
     return position;
   }
 
