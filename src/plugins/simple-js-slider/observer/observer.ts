@@ -7,7 +7,7 @@ class ObserverNew implements IObserverNew {
     this.observers = {};
   }
 
-  register(event: string, func: () => void): void {
+  register(event: string, func: (args?: any) => void): void {
     this.observers[event] = func;
   }
 
@@ -15,9 +15,9 @@ class ObserverNew implements IObserverNew {
     delete this.observers[event];
   }
 
-  notify(event: string): void {
+  notify(event: string, args?: any): void {
     if (this.observers[event]) {
-      this.observers[event]();
+      this.observers[event](args);
     }
   }
 }
