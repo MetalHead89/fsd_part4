@@ -54,7 +54,14 @@ class SimpleJsSliderController implements IObserver {
 
     this.subscribeToEvents();
     this.init();
+    this.subscribeToEventsNew();
   }
+
+  //NEW_METHODS//
+  private subscribeToEventsNew(): void {
+    this.view.observer.register('thumbIsDragged', this.model.updateThumbsValues);
+  }
+  //END_NEW_METHODS//
 
   update(eventType: string): void {
     if (eventType in this.events) {

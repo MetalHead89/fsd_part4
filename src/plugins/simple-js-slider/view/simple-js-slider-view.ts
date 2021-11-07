@@ -22,9 +22,13 @@ import PopUp from './pop-up/pop-up';
 import ProgressBar from './progress-bar/progress-bar';
 import Scale from './scale/scale';
 import Subject from '../subject/subject';
+import { IObserverNew } from '../new-interfaces';
+import ObserverNew from '../observer/observer';
+import { throwStatement } from '@babel/types';
 
 class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
   subject: ISubject;
+  observer: IObserverNew;
   private slider: Slider;
   private sliderWrapper: HTMLDivElement;
   private track: Track;
@@ -41,6 +45,7 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
   };
 
   constructor(wrapper: HTMLDivElement) {
+    this.observer = new ObserverNew();
     this.subject = new Subject();
     this.sliderWrapper = wrapper;
 
@@ -68,7 +73,10 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
     const thumbTwoPercentPosition = this.thumbTwo
       ? this.calculateThumbPercentPosition(this.thumbOne.getPosition())
       : null;
+
+    this.observer.notify('thumbIsDragged', { thumbOnePercentPosition, thumbTwoPercentPosition });
   }
+  //END_NEW_METHODS//
 
   private calculateThumbPercentPosition(position: IPosition): IPosition {
     const sliderSize = this.slider.getSize();

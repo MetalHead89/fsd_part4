@@ -1,3 +1,5 @@
+import { IObserverNew } from './new-interfaces';
+
 interface ISize {
   width: number;
   height: number;
@@ -72,6 +74,8 @@ interface IScalePointParams {
 }
 
 interface ISimpleJsSliderModel {
+  updateThumbsValues(): void;
+
   subject: ISubject;
   setSliderSize(size: ISize): void;
   setThumbSize(size: ISize): void;
@@ -92,6 +96,8 @@ interface ISimpleJsSliderModel {
 }
 
 interface ISimpleJsSliderView {
+  observer: IObserverNew;
+
   subject: ISubject;
   switchToHorizontal(): void;
   switchToVertical(): void;
