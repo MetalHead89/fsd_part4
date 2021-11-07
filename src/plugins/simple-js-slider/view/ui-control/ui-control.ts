@@ -1,8 +1,10 @@
 import { IPosition, ISize } from '../../interfaces';
+import ObserverNew from '../../observer/observer';
 import Subject from '../../subject/subject';
 
 class UIControl {
   subject: Subject;
+  observer: ObserverNew;
   protected control: HTMLDivElement;
   protected lastPosition: IPosition;
 
@@ -10,6 +12,7 @@ class UIControl {
     const control = document.createElement('div');
     this.control = control;
     this.subject = new Subject();
+    this.observer = new ObserverNew();
     this.lastPosition = { left: 0, top: 0 };
     const orientationClass = orientation
       ? `${name}_orientation_${orientation}`
@@ -59,9 +62,7 @@ class UIControl {
   }
 
   getStyle(styleName: string): string | undefined {
-    return document.defaultView
-      ?.getComputedStyle(this.control, null)
-      .getPropertyValue(styleName);
+    return document.defaultView?.getComputedStyle(this.control, null).getPropertyValue(styleName);
   }
 
   protected setPosition({ left, top }: IPosition): void {

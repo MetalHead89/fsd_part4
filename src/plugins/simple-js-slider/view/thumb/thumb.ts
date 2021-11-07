@@ -76,6 +76,7 @@ class Thumb extends UIControl {
     });
 
     this.subject.notify('thumbIsDragged');
+    this.observer.notify('thumbIsDragged');
   }
 
   private endDrag(): void {
