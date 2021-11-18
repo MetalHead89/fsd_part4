@@ -71,8 +71,8 @@ class Thumb extends UIControl {
 
   private drag(event: PointerEvent): void {
     this.setPosition({
-      left: event.clientX,
-      top: event.clientY,
+      left: event.clientX - this.shift.shiftX,
+      top: event.clientY - this.shift.shiftY,
     });
 
     // this.subject.notify('thumbIsDragged');
