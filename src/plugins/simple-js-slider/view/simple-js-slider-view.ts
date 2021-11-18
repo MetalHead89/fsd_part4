@@ -63,6 +63,13 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
   }
 
   //NEW_METHODS//
+  updateThumbsPositions(
+    thumbOnePercentPosition: IPosition,
+    thumbTwoPercentPosition: IPosition
+  ): void {
+    this.thumbOne.moveTo({ ...this.calculateThumbPosition(thumbOnePercentPosition) });
+  }
+
   private subscribeToEventsNew(): void {
     this.thumbOne.observer.register('thumbIsDragged', this.thumbsDragged.bind(this));
     this.thumbTwo?.observer.register('thumbIsDragged', this.thumbsDragged.bind(this));
@@ -76,7 +83,6 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
 
     this.observer.notify('thumbIsDragged', { thumbOnePercentPosition, thumbTwoPercentPosition });
   }
-  //END_NEW_METHODS//
 
   private calculateThumbPercentPosition(position: IPosition): IPosition {
     const sliderSize = this.slider.getSize();
@@ -86,6 +92,16 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
       top: (position.top * 100) / sliderSize.height,
     };
   }
+
+  private calculateThumbPosition(position: IPosition): IPosition {
+    const sliderSize = this.slider.getSize();
+
+    return {
+      left: (position.left * sliderSize.width) / 100,
+      top: (position.top * sliderSize.height) / 100,
+    };
+  }
+  //END_NEW_METHODS//
 
   update(eventType: string): void {
     if (eventType in this.events) {

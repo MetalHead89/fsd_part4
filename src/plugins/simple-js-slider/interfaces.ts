@@ -74,7 +74,8 @@ interface IScalePointParams {
 }
 
 interface ISimpleJsSliderModel {
-  updateThumbsValues(): void;
+  observer: IObserverNew;
+  updateThumbsValues(thumbOnePercentPosition: IPosition, thumbTwoPercentPosition: IPosition): void;
 
   subject: ISubject;
   setSliderSize(size: ISize): void;
@@ -97,6 +98,10 @@ interface ISimpleJsSliderModel {
 
 interface ISimpleJsSliderView {
   observer: IObserverNew;
+  updateThumbsPositions(
+    thumbOnePercentPosition: IPosition,
+    thumbTwoPercentPosition: IPosition
+  ): void;
 
   subject: ISubject;
   switchToHorizontal(): void;

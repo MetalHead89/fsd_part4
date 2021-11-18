@@ -3,6 +3,7 @@
 import {
   IControllerParams,
   IObserver,
+  IPosition,
   ISimpleJsSliderModel,
   ISimpleJsSliderView,
   ISubject,
@@ -33,14 +34,10 @@ class SimpleJsSliderController implements IObserver {
     scaleStateIsUpdated: () => this.updateScaleState(),
     popUpsStateIsUpdated: () => this.updatePopUpsState(),
     clickToTrack: () => {
-      this.model.setThumbPositionOnClickPosition(
-        this.view.getTrackClickPosition()
-      );
+      this.model.setThumbPositionOnClickPosition(this.view.getTrackClickPosition());
     },
     clickToScale: () => {
-      this.model.setThumbPositionOnClickPosition(
-        this.view.getScaleClickPosition()
-      );
+      this.model.setThumbPositionOnClickPosition(this.view.getScaleClickPosition());
     },
     thumbsSwapped: () => this.view.swapThumbs(),
     windowResized: () => this.init(),
@@ -59,7 +56,18 @@ class SimpleJsSliderController implements IObserver {
 
   //NEW_METHODS//
   private subscribeToEventsNew(): void {
-    this.view.observer.register('thumbIsDragged', this.model.updateThumbsValues);
+    this.view.observer.register(
+      'thumbIsDragged',
+      (args: { thumbOnePercentPosition: IPosition; thumbTwoPercentPosition: IPosition }) =>
+        this.model.updateThumbsValues(args.thumbOnePercentPosition, args.thumbTwoPercentPosition)
+    );
+
+    this.model.observer.register(
+      'thumbIsUpdated',
+      (args: { thumbOnePercentPosition: IPosition; thumbTwoPercentPosition: IPosition }) => {
+        this.view.updateThumbsPositions(args.thumbOnePercentPosition, args.thumbTwoPercentPosition);
+      }
+    );
   }
   //END_NEW_METHODS//
 

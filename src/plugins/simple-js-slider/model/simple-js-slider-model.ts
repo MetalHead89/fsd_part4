@@ -14,10 +14,13 @@ import {
   IThumbsValues,
   ISubject,
 } from '../interfaces';
+import { IObserverNew } from '../new-interfaces';
+import ObserverNew from '../observer/observer';
 import Subject from '../subject/subject';
 
 class SimpleJsSliderModel implements ISimpleJsSliderModel {
   subject: ISubject;
+  observer: IObserverNew;
   private orientation = 'horizontal';
   private type = 'range';
   private isScale = true;
@@ -32,13 +35,21 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
   private scalePointSize = { width: 0, height: 0 };
 
   constructor(settings: ISliderSettings) {
+    this.observer = new ObserverNew();
     this.subject = new Subject();
     this.refreshSliderState(settings);
   }
 
   //NEW_METHODS//
-  updateThumbsValues(): void {
-    console.log('ffff');
+  updateThumbsValues(thumbOnePercentPosition: IPosition, thumbTwoPercentPosition: IPosition): void {
+    const stepCount = (this.max - this.min) / this.step;
+    const stepPercent = 100 / stepCount;
+    const stepLeft = Math.round(thumbOnePercentPosition.left / stepPercent) * stepPercent;
+
+    this.observer.notify('thumbIsUpdated', {
+      thumbOnePercentPosition: { left: stepLeft, top: thumbOnePercentPosition.top },
+      thumbTwoPercentPosition,
+    });
   }
   //END_NEW_METHODS//
 
