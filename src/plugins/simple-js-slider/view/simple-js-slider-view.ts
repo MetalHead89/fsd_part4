@@ -64,27 +64,33 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
 
   //NEW_METHODS//
   moveThumbs({ thumbOne, thumbTwo }: IThumbsPositions): void {
-    this.thumbOne.moveTo({
-      ...this.calculateThumbPosition(thumbOne),
-    });
+    this.thumbOne.moveTo(this.calculateThumbPosition(this.thumbOne, thumbOne));
+
+    if (this.thumbTwo && thumbTwo) {
+      this.thumbTwo.moveTo(
+        this.calculateThumbPosition(this.thumbTwo, thumbTwo)
+      );
+    }
   }
 
   private bindContext(): void {
-    this.thumbsDragged = this.thumbsDragged.bind(this);
+    this.updateThumbsPositions = this.updateThumbsPositions.bind(this);
   }
 
   private subscribeToEventsNew(): void {
-    this.thumbOne.observer.register('thumbIsDragged', this.thumbsDragged);
-    this.thumbTwo?.observer.register('thumbIsDragged', this.thumbsDragged);
+    this.thumbOne.observer.register(
+      'thumbIsDragged',
+      this.updateThumbsPositions
+    );
+    this.thumbTwo?.observer.register(
+      'thumbIsDragged',
+      this.updateThumbsPositions
+    );
   }
 
-  private thumbsDragged() {
-    const thumbOne = this.calculateThumbPercentPosition(
-      this.thumbOne.getPosition()
-    );
-    const thumbTwo = this.thumbTwo
-      ? this.calculateThumbPercentPosition(this.thumbOne.getPosition())
-      : null;
+  private updateThumbsPositions() {
+    const thumbOne = this.calculateThumbPercentPosition(this.thumbOne);
+    const thumbTwo = this.calculateThumbPercentPosition(this.thumbTwo);
 
     this.observer.notify('thumbIsDragged', {
       thumbOne,
@@ -92,21 +98,28 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
     });
   }
 
-  private calculateThumbPercentPosition(position: IPosition): IPosition {
+  private calculateThumbPercentPosition(thumb: Thumb | null): IPosition | null {
+    if (thumb === null) {
+      return null;
+    }
+
     const sliderSize = this.slider.getSize();
+    const position = thumb.getPosition();
+    const size = thumb.getSize();
 
     return {
-      left: (position.left * 100) / sliderSize.width,
-      top: (position.top * 100) / sliderSize.height,
+      left: (position.left * 100) / (sliderSize.width - size.width),
+      top: (position.top * 100) / (sliderSize.height - size.height),
     };
   }
 
-  private calculateThumbPosition(position: IPosition): IPosition {
+  private calculateThumbPosition(thumb: Thumb, position: IPosition): IPosition {
     const sliderSize = this.slider.getSize();
+    const thumbSize = thumb.getSize();
 
     return {
-      left: (position.left * sliderSize.width) / 100,
-      top: (position.top * sliderSize.height) / 100,
+      left: (position.left * (sliderSize.width - thumbSize.width)) / 100,
+      top: (position.top * (sliderSize.height - thumbSize.height)) / 100,
     };
   }
   //END_NEW_METHODS//
