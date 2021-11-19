@@ -24,7 +24,6 @@ import Scale from './scale/scale';
 import Subject from '../subject/subject';
 import { IObserverNew } from '../new-interfaces';
 import ObserverNew from '../observer/observer';
-import { throwStatement } from '@babel/types';
 
 class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
   subject: ISubject;
@@ -59,29 +58,38 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
     this.scale = new Scale();
 
     this.init();
+    this.bindContext();
     this.subscribeToEventsNew();
   }
 
   //NEW_METHODS//
-  updateThumbsPositions(
-    thumbOnePercentPosition: IPosition,
-    thumbTwoPercentPosition: IPosition
-  ): void {
-    this.thumbOne.moveTo({ ...this.calculateThumbPosition(thumbOnePercentPosition) });
+  moveThumbs({ thumbOne, thumbTwo }: IThumbsPositions): void {
+    this.thumbOne.moveTo({
+      ...this.calculateThumbPosition(thumbOne),
+    });
+  }
+
+  private bindContext(): void {
+    this.thumbsDragged = this.thumbsDragged.bind(this);
   }
 
   private subscribeToEventsNew(): void {
-    this.thumbOne.observer.register('thumbIsDragged', this.thumbsDragged.bind(this));
-    this.thumbTwo?.observer.register('thumbIsDragged', this.thumbsDragged.bind(this));
+    this.thumbOne.observer.register('thumbIsDragged', this.thumbsDragged);
+    this.thumbTwo?.observer.register('thumbIsDragged', this.thumbsDragged);
   }
 
   private thumbsDragged() {
-    const thumbOnePercentPosition = this.calculateThumbPercentPosition(this.thumbOne.getPosition());
-    const thumbTwoPercentPosition = this.thumbTwo
+    const thumbOne = this.calculateThumbPercentPosition(
+      this.thumbOne.getPosition()
+    );
+    const thumbTwo = this.thumbTwo
       ? this.calculateThumbPercentPosition(this.thumbOne.getPosition())
       : null;
 
-    this.observer.notify('thumbIsDragged', { thumbOnePercentPosition, thumbTwoPercentPosition });
+    this.observer.notify('thumbIsDragged', {
+      thumbOne,
+      thumbTwo,
+    });
   }
 
   private calculateThumbPercentPosition(position: IPosition): IPosition {
@@ -238,7 +246,9 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
   }
 
   getScalePointSize(value: number): ISize {
-    return this.scale ? this.scale.getPointSize(value) : { width: 0, height: 0 };
+    return this.scale
+      ? this.scale.getPointSize(value)
+      : { width: 0, height: 0 };
   }
 
   addScalePoints(points: IScalePointParams[]): void {
@@ -251,7 +261,8 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
   }
 
   getScaleClickPosition(): IPosition {
-    const position = this.scale === null ? { left: 0, top: 0 } : this.scale.getPosition();
+    const position =
+      this.scale === null ? { left: 0, top: 0 } : this.scale.getPosition();
     return position;
   }
 
