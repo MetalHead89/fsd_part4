@@ -106,7 +106,8 @@ interface ISimpleJsSliderModel {
 interface ISimpleJsSliderView {
   observer: IObserverNew;
   moveThumbs({ thumbOne, thumbTwo }: IThumbsPositionsNew): void;
-  updatePopUps(values: IThumbsValues): void
+  updatePopUps(values: IThumbsValues): void;
+  updateProgressBar(): void;
 
   subject: ISubject;
   switchToHorizontal(): void;
@@ -122,7 +123,7 @@ interface ISimpleJsSliderView {
   getSliderSize(): ISize;
   getThumbsPositions(): IThumbsPositions;
   updateThumbs(thumbsPositions: IThumbsPositions): void;
-  updateProgressBar(params: IProgressBarParams): void;
+  // updateProgressBar(params: IProgressBarParams): void;
   // updatePopUps(params: IPopUps): void;
   getScalePointSize(value: number): ISize;
   addScalePoints(points: IScalePointParams[]): void;

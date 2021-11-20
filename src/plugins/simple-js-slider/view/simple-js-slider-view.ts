@@ -143,6 +143,38 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
     }
   }
 
+  updateProgressBar(): void {
+    const thumbOnePosition = this.thumbOne.getPosition();
+    const thumbTwoPosition = this.thumbTwo ? this.thumbTwo.getPosition() : null;
+    const position = { left: 0, top: 0 };
+    const size = this.slider.getSize();
+    const orientation = this.slider.getOrientation();
+    let start = 0;
+    let end = 0;
+
+    if (this.thumbTwo && thumbTwoPosition) {
+      start = this.positionByOrientation(thumbOnePosition);
+      end =
+        this.positionByOrientation(thumbTwoPosition) -
+        this.positionByOrientation(thumbOnePosition) +
+        this.sizeByOrientation(this.thumbTwo.getSize());
+    } else {
+      end =
+        this.positionByOrientation(thumbOnePosition) +
+        this.sizeByOrientation(this.thumbOne.getSize());
+    }
+
+    if (orientation === 'horizontal') {
+      position.left = start;
+      size.width = end;
+    } else {
+      position.top = start;
+      size.height = end;
+    }
+
+    this.progressBar.update({ position, size });
+  }
+
   private getPopUpPosition(thumb: Thumb): IPosition {
     const thumbPosition = this.positionByOrientation(thumb.getPosition());
     const popUpPosition = thumbPosition + this.sizeByOrientation(thumb.getSize()) / 2;
@@ -298,9 +330,9 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
     }
   }
 
-  updateProgressBar(params: IProgressBarParams): void {
-    this.progressBar.update(params);
-  }
+  // updateProgressBar(params: IProgressBarParams): void {
+  //   this.progressBar.update(params);
+  // }
 
   // updatePopUps(params: IPopUps): void {
   //   if (this.popUpOne) {
