@@ -42,17 +42,46 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
 
   //NEW_METHODS//
   updateThumbsValues({ thumbOne, thumbTwo }: IThumbsPositionsNew): void {
+    const thumbOnePosition = this.getThumbPositionByStep(thumbOne);
+    this.thumbOneValue = this.getThumbValue(thumbOnePosition);
+
+    const thumbTwoPosition = thumbTwo !== null ? this.getThumbPositionByStep(thumbTwo) : null;
+    this.thumbTwoValue = thumbTwoPosition !== null ? thumbTwoPosition : this.thumbTwoValue;
+
     this.observer.notify('thumbIsUpdated', {
-      thumbOne: this.getThumbPositionByStep(thumbOne),
-      thumbTwo: thumbTwo !== null ? this.getThumbPositionByStep(thumbTwo) : null,
+      thumbOne: thumbOnePosition,
+      thumbTwo: thumbTwoPosition,
     });
+  }
+
+  getThumbsPositionsNew(): IThumbsPositionsNew {
+    return {
+      thumbOne: this.valueToPosition(this.thumbOneValue),
+      thumbTwo: this.valueToPosition(this.thumbTwoValue),
+    };
   }
 
   private getThumbPositionByStep(position: number): number {
     const stepCount = (this.max - this.min) / this.step;
     const stepPercent = 100 / stepCount;
+
     return Math.round(position / stepPercent) * stepPercent;
   }
+
+  private valueToPosition(value: number): number {
+    const stepCount = (this.max - this.min) / this.step;
+    const stepPercent = 100 / stepCount;
+
+    return Math.round((value / this.step) * stepPercent);
+  }
+
+  private getThumbValue(position: number): number {
+    const stepCount = (this.max - this.min) / this.step;
+    const stepPercent = 100 / stepCount;
+
+    return Math.round((position / stepPercent) * this.step);
+  }
+
   //END_NEW_METHODS//
 
   refreshSliderState({

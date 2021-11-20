@@ -70,6 +70,10 @@ class SimpleJsSliderController {
       this.view.moveThumbs(args);
     });
   }
+
+  private updateView(): void {
+    this.updateSliderOrientation();
+  }
   //END_NEW_METHODS//
 
   // update(eventType: string): void {
@@ -79,7 +83,9 @@ class SimpleJsSliderController {
   // }
 
   private init(): void {
-    this.updateSliderOrientation();
+    this.updateView();
+    this.view.moveThumbs(this.model.getThumbsPositionsNew());
+
     // this.model.setSliderSize(this.view.getSliderSize());
     // this.model.setThumbSize(this.view.getThumbSize());
     // this.updateSliderType();

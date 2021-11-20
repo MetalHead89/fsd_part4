@@ -76,6 +76,7 @@ interface IScalePointParams {
 interface ISimpleJsSliderModel {
   observer: IObserverNew;
   updateThumbsValues({ thumbOne, thumbTwo }: IThumbsPositionsNew): void;
+  getThumbsPositionsNew(): IThumbsPositionsNew;
 
   subject: ISubject;
   setSliderSize(size: ISize): void;
