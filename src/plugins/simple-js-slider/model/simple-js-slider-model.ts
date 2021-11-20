@@ -61,6 +61,13 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
     };
   }
 
+  getThumbValues(): IThumbsValues {
+    return {
+      thumbOne: this.thumbOneValue,
+      thumbTwo: this.thumbTwoValue,
+    };
+  }
+
   private getThumbPositionByStep(position: number): number {
     const stepCount = (this.max - this.min) / this.step;
     const stepPercent = 100 / stepCount;

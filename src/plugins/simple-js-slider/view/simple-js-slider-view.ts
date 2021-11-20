@@ -5,6 +5,7 @@ import {
   IObserver,
   IPopUpParams,
   IPopUps,
+  IPopUpsValues,
   IPosition,
   IProgressBarParams,
   IScalePointParams,
@@ -14,6 +15,7 @@ import {
   ISubject,
   ISubjectEvents,
   IThumbsPositions,
+  IThumbsValues,
 } from '../interfaces';
 
 import Slider from './slider/slider';
@@ -123,6 +125,22 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
     }
 
     return positionByOrientation < 0 ? 0 : 100;
+  }
+
+  updatePopUps(values: IThumbsValues): void {
+    if (this.popUpOne && this.thumbOne) {
+      this.popUpOne.update({
+        value: values.thumbOne,
+        position: this.getPopUpPosition(this.popUpOne, this.thumbOne),
+      });
+    }
+
+    if (this.popUpTwo && this.thumbTwo) {
+      this.popUpTwo.update({
+        value: values.thumbTwo,
+        position: this.getPopUpPosition(this.popUpTwo, this.thumbTwo),
+      });
+    }
   }
 
   private getPopUpPosition(popUp: PopUp, thumb: Thumb): IPosition {
@@ -284,14 +302,14 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
     this.progressBar.update(params);
   }
 
-  updatePopUps(params: IPopUps): void {
-    if (this.popUpOne) {
-      this.popUpOne.update(params.popUpOne);
-    }
-    if (this.popUpTwo) {
-      this.popUpTwo.update(params.popUpTwo);
-    }
-  }
+  // updatePopUps(params: IPopUps): void {
+  //   if (this.popUpOne) {
+  //     this.popUpOne.update(params.popUpOne);
+  //   }
+  //   if (this.popUpTwo) {
+  //     this.popUpTwo.update(params.popUpTwo);
+  //   }
+  // }
 
   getScalePointSize(value: number): ISize {
     return this.scale ? this.scale.getPointSize(value) : { width: 0, height: 0 };
