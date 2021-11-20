@@ -44,7 +44,7 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
   updateThumbsValues({ thumbOne, thumbTwo }: IThumbsPositionsNew): void {
     this.observer.notify('thumbIsUpdated', {
       thumbOne: this.getThumbPositionByStep(thumbOne),
-      thumbTwo: thumbTwo ? this.getThumbPositionByStep(thumbTwo) : null,
+      thumbTwo: thumbTwo !== null ? this.getThumbPositionByStep(thumbTwo) : null,
     });
   }
 

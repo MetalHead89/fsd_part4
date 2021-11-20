@@ -67,8 +67,8 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
     const thumbOnePosition = this.getFullThumbPosition(thumbOne);
     this.thumbOne.moveTo(this.calculateThumbPosition(this.thumbOne, thumbOnePosition));
 
-    const thumbTwoPosition = thumbTwo ? this.getFullThumbPosition(thumbTwo) : null;
-    if (this.thumbTwo && thumbTwoPosition) {
+    const thumbTwoPosition = thumbTwo !== null ? this.getFullThumbPosition(thumbTwo) : null;
+    if (this.thumbTwo && thumbTwoPosition !== null) {
       this.thumbTwo.moveTo(this.calculateThumbPosition(this.thumbTwo, thumbTwoPosition));
     }
   }
