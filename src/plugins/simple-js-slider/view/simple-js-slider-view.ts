@@ -3,6 +3,7 @@
 
 import {
   IObserver,
+  IPopUpParams,
   IPopUps,
   IPosition,
   IProgressBarParams,
@@ -64,16 +65,16 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
 
   //NEW_METHODS//
   moveThumbs({ thumbOne, thumbTwo }: IThumbsPositionsNew): void {
-    const thumbOnePosition = this.getFullThumbPosition(thumbOne);
+    const thumbOnePosition = this.getFullPosition(thumbOne);
     this.thumbOne.moveTo(this.calculateThumbPosition(this.thumbOne, thumbOnePosition));
 
-    const thumbTwoPosition = thumbTwo !== null ? this.getFullThumbPosition(thumbTwo) : null;
+    const thumbTwoPosition = thumbTwo !== null ? this.getFullPosition(thumbTwo) : null;
     if (this.thumbTwo && thumbTwoPosition !== null) {
       this.thumbTwo.moveTo(this.calculateThumbPosition(this.thumbTwo, thumbTwoPosition));
     }
   }
 
-  private getFullThumbPosition(position: number): IPosition {
+  private getFullPosition(position: number): IPosition {
     const isOrientationHorizontal = this.slider.getOrientation() === 'horizontal';
 
     return {
@@ -122,6 +123,13 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
     }
 
     return positionByOrientation < 0 ? 0 : 100;
+  }
+
+  private getPopUpPosition(popUp: PopUp, thumb: Thumb): IPosition {
+    const thumbPosition = this.positionByOrientation(thumb.getPosition());
+    const popUpPosition = thumbPosition + this.sizeByOrientation(thumb.getSize()) / 2;
+
+    return this.getFullPosition(popUpPosition);
   }
 
   private calculateThumbPosition(thumb: Thumb, position: IPosition): IPosition {
