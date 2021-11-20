@@ -10,6 +10,7 @@ import {
   ISubjectEvents,
   IThumbsPositions,
 } from '../interfaces';
+import { IThumbsPositionsNew } from '../new-interfaces';
 
 class SimpleJsSliderController implements IObserver {
   private model: ISimpleJsSliderModel;
@@ -61,11 +62,11 @@ class SimpleJsSliderController implements IObserver {
 
   //NEW_METHODS//
   private subscribeToEventsNew(): void {
-    this.view.observer.register('thumbIsDragged', (args: IThumbsPositions) => {
+    this.view.observer.register('thumbIsDragged', (args: IThumbsPositionsNew) => {
       this.model.updateThumbsValues(args);
     });
 
-    this.model.observer.register('thumbIsUpdated', (args: IThumbsPositions) => {
+    this.model.observer.register('thumbIsUpdated', (args: IThumbsPositionsNew) => {
       this.view.moveThumbs(args);
     });
   }

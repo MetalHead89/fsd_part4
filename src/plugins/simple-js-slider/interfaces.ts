@@ -1,4 +1,4 @@
-import { IObserverNew } from './new-interfaces';
+import { IObserverNew, IThumbsPositionsNew } from './new-interfaces';
 
 interface ISize {
   width: number;
@@ -75,7 +75,7 @@ interface IScalePointParams {
 
 interface ISimpleJsSliderModel {
   observer: IObserverNew;
-  updateThumbsValues({ thumbOne, thumbTwo }: IThumbsPositions): void;
+  updateThumbsValues({ thumbOne, thumbTwo }: IThumbsPositionsNew): void;
 
   subject: ISubject;
   setSliderSize(size: ISize): void;
@@ -98,7 +98,7 @@ interface ISimpleJsSliderModel {
 
 interface ISimpleJsSliderView {
   observer: IObserverNew;
-  moveThumbs({ thumbOne, thumbTwo }: IThumbsPositions): void;
+  moveThumbs({ thumbOne, thumbTwo }: IThumbsPositionsNew): void;
 
   subject: ISubject;
   switchToHorizontal(): void;

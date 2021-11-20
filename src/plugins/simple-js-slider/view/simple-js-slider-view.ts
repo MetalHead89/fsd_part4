@@ -22,7 +22,7 @@ import PopUp from './pop-up/pop-up';
 import ProgressBar from './progress-bar/progress-bar';
 import Scale from './scale/scale';
 import Subject from '../subject/subject';
-import { IObserverNew } from '../new-interfaces';
+import { IObserverNew, IThumbsPositionsNew } from '../new-interfaces';
 import ObserverNew from '../observer/observer';
 
 class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
@@ -63,14 +63,23 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
   }
 
   //NEW_METHODS//
-  moveThumbs({ thumbOne, thumbTwo }: IThumbsPositions): void {
-    this.thumbOne.moveTo(this.calculateThumbPosition(this.thumbOne, thumbOne));
+  moveThumbs({ thumbOne, thumbTwo }: IThumbsPositionsNew): void {
+    const thumbOnePosition = this.getFullThumbPosition(thumbOne);
+    this.thumbOne.moveTo(this.calculateThumbPosition(this.thumbOne, thumbOnePosition));
 
-    if (this.thumbTwo && thumbTwo) {
-      this.thumbTwo.moveTo(
-        this.calculateThumbPosition(this.thumbTwo, thumbTwo)
-      );
+    const thumbTwoPosition = thumbTwo ? this.getFullThumbPosition(thumbTwo) : null;
+    if (this.thumbTwo && thumbTwoPosition) {
+      this.thumbTwo.moveTo(this.calculateThumbPosition(this.thumbTwo, thumbTwoPosition));
     }
+  }
+
+  private getFullThumbPosition(position: number): IPosition {
+    const isOrientationHorizontal = this.slider.getOrientation() === 'horizontal';
+
+    return {
+      left: isOrientationHorizontal ? position : 0,
+      top: isOrientationHorizontal ? 0 : position,
+    };
   }
 
   private bindContext(): void {
@@ -78,14 +87,8 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
   }
 
   private subscribeToEventsNew(): void {
-    this.thumbOne.observer.register(
-      'thumbIsDragged',
-      this.updateThumbsPositions
-    );
-    this.thumbTwo?.observer.register(
-      'thumbIsDragged',
-      this.updateThumbsPositions
-    );
+    this.thumbOne.observer.register('thumbIsDragged', this.updateThumbsPositions);
+    this.thumbTwo?.observer.register('thumbIsDragged', this.updateThumbsPositions);
   }
 
   private updateThumbsPositions() {
@@ -98,7 +101,7 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
     });
   }
 
-  private calculateThumbPercentPosition(thumb: Thumb | null): IPosition | null {
+  private calculateThumbPercentPosition(thumb: Thumb | null): number | null {
     if (thumb === null) {
       return null;
     }
@@ -107,10 +110,12 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
     const position = thumb.getPosition();
     const size = thumb.getSize();
 
-    return {
+    const percentPosition = {
       left: (position.left * 100) / (sliderSize.width - size.width),
       top: (position.top * 100) / (sliderSize.height - size.height),
     };
+
+    return this.positionByOrientation(percentPosition);
   }
 
   private calculateThumbPosition(thumb: Thumb, position: IPosition): IPosition {
@@ -121,6 +126,22 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
       left: (position.left * (sliderSize.width - thumbSize.width)) / 100,
       top: (position.top * (sliderSize.height - thumbSize.height)) / 100,
     };
+  }
+
+  private sizeByOrientation(size: ISize): number {
+    if (this.slider.getOrientation() === 'horizontal') {
+      return size.width;
+    }
+
+    return size.height;
+  }
+
+  private positionByOrientation({ left, top }: IPosition): number {
+    if (this.slider.getOrientation() === 'horizontal') {
+      return left;
+    }
+
+    return top;
   }
   //END_NEW_METHODS//
 
@@ -259,9 +280,7 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
   }
 
   getScalePointSize(value: number): ISize {
-    return this.scale
-      ? this.scale.getPointSize(value)
-      : { width: 0, height: 0 };
+    return this.scale ? this.scale.getPointSize(value) : { width: 0, height: 0 };
   }
 
   addScalePoints(points: IScalePointParams[]): void {
@@ -274,8 +293,7 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
   }
 
   getScaleClickPosition(): IPosition {
-    const position =
-      this.scale === null ? { left: 0, top: 0 } : this.scale.getPosition();
+    const position = this.scale === null ? { left: 0, top: 0 } : this.scale.getPosition();
     return position;
   }
 

@@ -8,4 +8,9 @@ interface IObserversList {
   [key: string]: (args?: any) => void;
 }
 
-export { IObserverNew, IObserversList };
+interface IThumbsPositionsNew {
+  thumbOne: number;
+  thumbTwo: number | null;
+}
+
+export { IObserverNew, IObserversList, IThumbsPositionsNew };

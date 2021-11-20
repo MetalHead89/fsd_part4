@@ -14,7 +14,7 @@ import {
   IThumbsValues,
   ISubject,
 } from '../interfaces';
-import { IObserverNew } from '../new-interfaces';
+import { IObserverNew, IThumbsPositionsNew } from '../new-interfaces';
 import ObserverNew from '../observer/observer';
 import Subject from '../subject/subject';
 
@@ -41,15 +41,17 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
   }
 
   //NEW_METHODS//
-  updateThumbsValues({ thumbOne, thumbTwo }: IThumbsPositions): void {
+  updateThumbsValues({ thumbOne, thumbTwo }: IThumbsPositionsNew): void {
+    this.observer.notify('thumbIsUpdated', {
+      thumbOne: this.getThumbPositionByStep(thumbOne),
+      thumbTwo: thumbTwo ? this.getThumbPositionByStep(thumbTwo) : null,
+    });
+  }
+
+  private getThumbPositionByStep(position: number): number {
     const stepCount = (this.max - this.min) / this.step;
     const stepPercent = 100 / stepCount;
-    const stepLeft = Math.round(thumbOne.left / stepPercent) * stepPercent;
-
-    this.observer.notify('thumbIsUpdated', {
-      thumbOne: { left: stepLeft, top: thumbOne.top },
-      thumbTwo,
-    });
+    return Math.round(position / stepPercent) * stepPercent;
   }
   //END_NEW_METHODS//
 
@@ -100,10 +102,7 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
       this.isPopUps = isPopUps;
       this.subject.notify('popUpsStateIsUpdated');
     }
-    if (
-      this.thumbOneValue !== thumbOneValue ||
-      this.thumbTwoValue !== thumbTwoValue
-    ) {
+    if (this.thumbOneValue !== thumbOneValue || this.thumbTwoValue !== thumbTwoValue) {
       this.setThumbsValues({
         thumbOne: thumbOneValue,
         thumbTwo: thumbTwoValue,
@@ -112,9 +111,7 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
   }
 
   updateThumbsState({ thumbOne, thumbTwo }: IThumbsPositions): void {
-    let thumbOneValue = this.valueWithStep(
-      this.positionByOrientation(thumbOne)
-    );
+    let thumbOneValue = this.valueWithStep(this.positionByOrientation(thumbOne));
     let thumbTwoValue: null | number = null;
 
     if (thumbTwo) {
@@ -144,8 +141,7 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
 
   setThumbsValues({ thumbOne, thumbTwo }: IThumbsValues): void {
     const thumbOnePosition = this.thumbValueToPosition(thumbOne);
-    const thumbTwoPosition =
-      this.type === 'range' ? this.thumbValueToPosition(thumbTwo) : null;
+    const thumbTwoPosition = this.type === 'range' ? this.thumbValueToPosition(thumbTwo) : null;
 
     this.updateThumbsState({
       thumbOne: thumbOnePosition,
@@ -190,9 +186,7 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
     let end = 0;
 
     if (this.type === 'single') {
-      end =
-        this.positionByOrientation(thumbOnePosition) +
-        this.sizeByOrientation(this.thumbSize);
+      end = this.positionByOrientation(thumbOnePosition) + this.sizeByOrientation(this.thumbSize);
     } else {
       start = this.positionByOrientation(thumbOnePosition);
       end =
@@ -223,15 +217,11 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
     return {
       popUpOne: {
         value: this.thumbOneValue,
-        position: this.getPopUpPosition(
-          this.thumbValueToPosition(this.thumbOneValue)
-        ),
+        position: this.getPopUpPosition(this.thumbValueToPosition(this.thumbOneValue)),
       },
       popUpTwo: {
         value: this.thumbTwoValue,
-        position: this.getPopUpPosition(
-          this.thumbValueToPosition(this.thumbTwoValue)
-        ),
+        position: this.getPopUpPosition(this.thumbValueToPosition(this.thumbTwoValue)),
       },
     };
   }
@@ -245,18 +235,15 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
     const stepsCount = this.max - this.min;
     const scalePointsAmount = stepsCount + 1;
     const stepSize = this.getStepSize(stepsCount);
-    const pointsInEmptySegment =
-      this.getPointsInEmptySegmentAmount(scalePointsAmount);
+    const pointsInEmptySegment = this.getPointsInEmptySegmentAmount(scalePointsAmount);
 
     let currentPointPosition =
-      this.sizeByOrientation(this.thumbSize) / 2 -
-      this.sizeByOrientation(this.scalePointSize) / 2;
+      this.sizeByOrientation(this.thumbSize) / 2 - this.sizeByOrientation(this.scalePointSize) / 2;
 
     let pointsCounter = 0;
 
     for (let i = 0; i <= Math.round(scalePointsAmount - 1); i += 1) {
-      pointsCounter =
-        pointsCounter >= pointsInEmptySegment + 1 ? 0 : pointsCounter;
+      pointsCounter = pointsCounter >= pointsInEmptySegment + 1 ? 0 : pointsCounter;
 
       const currentPointValue = this.thumbPositionToValue(
         currentPointPosition -
@@ -306,13 +293,9 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
     let thumbTwo = this.thumbTwoValue;
 
     if (this.thumbTwoIsNearToClick(position)) {
-      thumbTwo = this.thumbPositionToValue(
-        this.positionByOrientation(position)
-      );
+      thumbTwo = this.thumbPositionToValue(this.positionByOrientation(position));
     } else {
-      thumbOne = this.thumbPositionToValue(
-        this.positionByOrientation(position)
-      );
+      thumbOne = this.thumbPositionToValue(this.positionByOrientation(position));
     }
 
     this.setThumbsValues({ thumbOne, thumbTwo });
@@ -345,15 +328,11 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
       return (
         Math.abs(
           this.positionByOrientation(position) -
-            this.positionByOrientation(
-              this.thumbValueToPosition(this.thumbTwoValue)
-            )
+            this.positionByOrientation(this.thumbValueToPosition(this.thumbTwoValue))
         ) <
         Math.abs(
           this.positionByOrientation(position) -
-            this.positionByOrientation(
-              this.thumbValueToPosition(this.thumbOneValue)
-            )
+            this.positionByOrientation(this.thumbValueToPosition(this.thumbOneValue))
         )
       );
     }
@@ -412,8 +391,7 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
 
   private getStepSize(stepsCount = this.getStepsCount()): number {
     return (
-      (this.sizeByOrientation(this.sliderSize) -
-        this.sizeByOrientation(this.thumbSize)) /
+      (this.sizeByOrientation(this.sliderSize) - this.sizeByOrientation(this.thumbSize)) /
       stepsCount
     );
   }
@@ -422,8 +400,7 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
     const pixelsPerValue = this.getPxPerValue();
 
     let newValue = Math.round(
-      this.min +
-        ((this.max - this.min) / this.max) * (position / pixelsPerValue)
+      this.min + ((this.max - this.min) / this.max) * (position / pixelsPerValue)
     );
 
     newValue = Math.max(newValue, this.min);
@@ -443,8 +420,7 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
       thumbValue = this.max;
     }
 
-    const positionValue =
-      ((thumbValue - this.min) / (this.max - this.min)) * pxPerVal * this.max;
+    const positionValue = ((thumbValue - this.min) / (this.max - this.min)) * pxPerVal * this.max;
 
     if (this.orientation === 'horizontal') {
       position.left = positionValue;
@@ -461,9 +437,7 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
    */
   private getPxPerValue(): number {
     return (
-      (this.sizeByOrientation(this.sliderSize) -
-        this.sizeByOrientation(this.thumbSize)) /
-      this.max
+      (this.sizeByOrientation(this.sliderSize) - this.sizeByOrientation(this.thumbSize)) / this.max
     );
   }
 
