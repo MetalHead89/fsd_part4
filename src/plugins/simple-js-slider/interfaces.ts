@@ -117,7 +117,7 @@ interface ISimpleJsSliderView {
   disablePopUps(): void;
   enablePopUps(): void;
   enableScale(): void;
-  swapThumbs(): void;
+  // swapThumbs(): void;
   disableScale(): void;
   getThumbSize(): ISize;
   getSliderSize(): ISize;

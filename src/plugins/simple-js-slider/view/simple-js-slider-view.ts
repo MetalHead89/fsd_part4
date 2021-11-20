@@ -74,6 +74,10 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
     if (this.thumbTwo && thumbTwoPosition !== null) {
       this.thumbTwo.moveTo(this.calculateThumbPosition(this.thumbTwo, thumbTwoPosition));
     }
+
+    if (thumbTwo !== null && thumbOne > thumbTwo) {
+      this.swapThumbs();
+    }
   }
 
   private getFullPosition(position: number): IPosition {
@@ -207,6 +211,12 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
 
     return top;
   }
+
+  private swapThumbs(): void {
+    if (this.thumbTwo) {
+      [this.thumbOne, this.thumbTwo] = [this.thumbTwo, this.thumbOne];
+    }
+  }
   //END_NEW_METHODS//
 
   update(eventType: string): void {
@@ -215,11 +225,11 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
     }
   }
 
-  swapThumbs(): void {
-    if (this.thumbTwo) {
-      [this.thumbOne, this.thumbTwo] = [this.thumbTwo, this.thumbOne];
-    }
-  }
+  // swapThumbs(): void {
+  //   if (this.thumbTwo) {
+  //     [this.thumbOne, this.thumbTwo] = [this.thumbTwo, this.thumbOne];
+  //   }
+  // }
 
   switchToHorizontal(): void {
     this.slider.resetMargins();
