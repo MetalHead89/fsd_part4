@@ -115,7 +115,13 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
       top: (position.top * 100) / (sliderSize.height - size.height),
     };
 
-    return this.positionByOrientation(percentPosition);
+    const positionByOrientation = this.positionByOrientation(percentPosition);
+
+    if (positionByOrientation >= 0 && positionByOrientation <= 100) {
+      return positionByOrientation;
+    }
+
+    return positionByOrientation < 0 ? 0 : 100;
   }
 
   private calculateThumbPosition(thumb: Thumb, position: IPosition): IPosition {
