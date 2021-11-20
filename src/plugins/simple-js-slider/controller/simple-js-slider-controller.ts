@@ -57,6 +57,7 @@ class SimpleJsSliderController {
 
     this.init();
     // this.subscribeToEvents();
+    this.bindContext();
     this.subscribeToEventsNew();
   }
 
@@ -66,9 +67,11 @@ class SimpleJsSliderController {
       this.model.updateThumbsValues(args);
     });
 
-    this.model.observer.register('thumbIsUpdated', (args: IThumbsPositionsNew) => {
-      this.view.moveThumbs(args);
-    });
+    this.model.observer.register('modelIsUpdated', this.updateView);
+  }
+
+  private bindContext(): void {
+    this.updateView = this.updateView.bind(this);
   }
 
   private updateView(): void {

@@ -46,12 +46,10 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
     this.thumbOneValue = this.getThumbValue(thumbOnePosition);
 
     const thumbTwoPosition = thumbTwo !== null ? this.getThumbPositionByStep(thumbTwo) : null;
-    this.thumbTwoValue = thumbTwoPosition !== null ? thumbTwoPosition : this.thumbTwoValue;
+    this.thumbTwoValue =
+      thumbTwoPosition !== null ? this.getThumbValue(thumbTwoPosition) : this.thumbTwoValue;
 
-    this.observer.notify('thumbIsUpdated', {
-      thumbOne: thumbOnePosition,
-      thumbTwo: thumbTwoPosition,
-    });
+    this.observer.notify('modelIsUpdated');
   }
 
   getThumbsPositionsNew(): IThumbsPositionsNew {

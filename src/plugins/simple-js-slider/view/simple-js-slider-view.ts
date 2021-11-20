@@ -131,19 +131,19 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
     if (this.popUpOne && this.thumbOne) {
       this.popUpOne.update({
         value: values.thumbOne,
-        position: this.getPopUpPosition(this.popUpOne, this.thumbOne),
+        position: this.getPopUpPosition(this.thumbOne),
       });
     }
 
     if (this.popUpTwo && this.thumbTwo) {
       this.popUpTwo.update({
         value: values.thumbTwo,
-        position: this.getPopUpPosition(this.popUpTwo, this.thumbTwo),
+        position: this.getPopUpPosition(this.thumbTwo),
       });
     }
   }
 
-  private getPopUpPosition(popUp: PopUp, thumb: Thumb): IPosition {
+  private getPopUpPosition(thumb: Thumb): IPosition {
     const thumbPosition = this.positionByOrientation(thumb.getPosition());
     const popUpPosition = thumbPosition + this.sizeByOrientation(thumb.getSize()) / 2;
 
