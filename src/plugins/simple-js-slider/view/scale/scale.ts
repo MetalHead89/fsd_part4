@@ -1,7 +1,7 @@
 /* eslint-disable operator-linebreak */
 /* eslint-disable comma-dangle */
 
-import { IScalePointParams, ISize } from '../../interfaces';
+import { IFullPointParams, ISize } from '../../interfaces';
 import UIControl from '../ui-control/ui-control';
 
 class Scale extends UIControl {
@@ -10,25 +10,7 @@ class Scale extends UIControl {
     this.init();
   }
 
-  getPointSize(value: number): ISize {
-    this.addPoint({
-      position: { left: 0, top: 0 },
-      size: { width: 0, height: 0 },
-      value,
-    });
-
-    const pointSize = { width: 0, height: 0 };
-    const scalePoint: HTMLDivElement | null =
-      this.control.querySelector('.scale__point');
-
-    pointSize.width = scalePoint?.offsetWidth || 0;
-    pointSize.height = scalePoint?.offsetHeight || 0;
-    scalePoint?.remove();
-
-    return pointSize;
-  }
-
-  addPoints(points: IScalePointParams[]): void {
+  addPoints(points: IFullPointParams[]): void {
     points.forEach((point) => this.addPoint(point));
   }
 
@@ -42,13 +24,10 @@ class Scale extends UIControl {
     this.subject.notify('clickToScale');
   }
 
-  private addPoint({ position, size, value }: IScalePointParams): void {
+  private addPoint({ position, size, value }: IFullPointParams): void {
     const orientation = this.getOrientation();
     const scalePoint: HTMLElement = document.createElement('div');
-    scalePoint.classList.add(
-      'scale__point',
-      `scale__point_orientation_${orientation}`
-    );
+    scalePoint.classList.add('scale__point', `scale__point_orientation_${orientation}`);
     if (size.width > 0) {
       scalePoint.style.width = `${size.width}px`;
     }
@@ -75,6 +54,25 @@ class Scale extends UIControl {
     scalePoint.append(divisionMarker);
     scalePoint.append(divisionLabel);
     this.control.append(scalePoint);
+  }
+
+  getPointSize(value: number): ISize {
+    this.addPoint({
+      position: { left: 0, top: 0 },
+      size: { width: 0, height: 0 },
+      value,
+    });
+
+    const scalePoint: HTMLDivElement | null = this.control.querySelector('.scale__point');
+
+    const pointSize = {
+      width: scalePoint?.offsetWidth || 0,
+      height: scalePoint?.offsetHeight || 0,
+    };
+
+    scalePoint?.remove();
+
+    return pointSize;
   }
 }
 

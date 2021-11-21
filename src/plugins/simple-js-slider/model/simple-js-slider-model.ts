@@ -13,6 +13,7 @@ import {
   IScalePointParams,
   IThumbsValues,
   ISubject,
+  IPointParams,
 } from '../interfaces';
 import { IObserverNew, IThumbsPositionsNew } from '../new-interfaces';
 import ObserverNew from '../observer/observer';
@@ -64,6 +65,15 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
       thumbOne: this.thumbOneValue,
       thumbTwo: this.thumbTwoValue,
     };
+  }
+
+  getPointsParams(): IPointParams[] {
+    const pointsParams = [];
+    for (let current = this.min; current <= this.max; current += 1) {
+      pointsParams.push({ value: current, position: this.valueToPosition(current) });
+    }
+
+    return pointsParams;
   }
 
   private getThumbPositionByStep(position: number): number {

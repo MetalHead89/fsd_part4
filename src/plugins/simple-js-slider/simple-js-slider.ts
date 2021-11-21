@@ -15,7 +15,7 @@ import SimpleJsSliderView from './view/simple-js-slider-view';
     isScale: true,
     isPopUps: true,
     min: 0,
-    max: 10,
+    max: 20,
     step: 1,
     thumbOneValue: 3,
     thumbTwoValue: 7,

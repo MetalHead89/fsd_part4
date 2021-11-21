@@ -78,11 +78,28 @@ interface IScalePointParams {
   value: number;
 }
 
+interface IPointParams {
+  value: number;
+  position: number;
+}
+
+interface IFullPointParams {
+  value: number;
+  size: ISize;
+  position: IPosition;
+}
+
+interface IFullPointParams {
+  position: IPosition;
+  value: number;
+}
+
 interface ISimpleJsSliderModel {
   observer: IObserverNew;
   updateThumbsValues({ thumbOne, thumbTwo }: IThumbsPositionsNew): void;
   getThumbsPositionsNew(): IThumbsPositionsNew;
   getThumbValues(): IThumbsValues;
+  getPointsParams(): IPointParams[];
 
   subject: ISubject;
   setSliderSize(size: ISize): void;
@@ -108,6 +125,7 @@ interface ISimpleJsSliderView {
   moveThumbs({ thumbOne, thumbTwo }: IThumbsPositionsNew): void;
   updatePopUps(values: IThumbsValues): void;
   updateProgressBar(): void;
+  updateScale(pointsParams: IPointParams[]): void;
 
   subject: ISubject;
   switchToHorizontal(): void;
@@ -125,8 +143,8 @@ interface ISimpleJsSliderView {
   updateThumbs(thumbsPositions: IThumbsPositions): void;
   // updateProgressBar(params: IProgressBarParams): void;
   // updatePopUps(params: IPopUps): void;
-  getScalePointSize(value: number): ISize;
-  addScalePoints(points: IScalePointParams[]): void;
+  // getScalePointSize(value: number): ISize;
+  // addScalePoints(points: IScalePointParams[]): void;
   getTrackClickPosition(): IPosition;
   getScaleClickPosition(): IPosition;
 }
@@ -162,4 +180,6 @@ export {
   IControllerParams,
   ISliderMargins,
   IPopUpsValues,
+  IPointParams,
+  IFullPointParams,
 };

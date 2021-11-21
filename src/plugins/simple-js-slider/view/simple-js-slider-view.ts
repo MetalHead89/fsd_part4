@@ -3,6 +3,7 @@
 
 import {
   IObserver,
+  IPointParams,
   IPopUpParams,
   IPopUps,
   IPopUpsValues,
@@ -196,6 +197,15 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
     };
   }
 
+  private calculateScalePointPosition(size: ISize, position: IPosition): IPosition {
+    const sliderSize = this.slider.getSize();
+
+    return {
+      left: (position.left * (sliderSize.width - size.width)) / 100,
+      top: (position.top * (sliderSize.height - size.height)) / 100,
+    };
+  }
+
   private sizeByOrientation(size: ISize): number {
     if (this.slider.getOrientation() === 'horizontal') {
       return size.width;
@@ -217,6 +227,92 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
       [this.thumbOne, this.thumbTwo] = [this.thumbTwo, this.thumbOne];
     }
   }
+
+  updateScale(pointsParams: IPointParams[]): void {
+    if (this.scale) {
+      const pointSize = this.scale.getPointSize(pointsParams[pointsParams.length - 1].value);
+      const points = pointsParams.map((point) => ({
+        position: this.calculateScalePointPosition(pointSize, this.getFullPosition(point.position)),
+        size: pointSize,
+        value: point.value,
+      }));
+
+      this.scale.addPoints(points);
+    }
+  }
+
+  // getScalePoints(pointsCount: number, gap: number): IScalePointParams[] {
+  //   const scalePoints = [];
+  //   const pointSize = this.scale?.getPointSize()
+  //   const pointsInEmptySegment = this.getPointsInEmptySegmentAmount(pointsCount);
+
+  //   let currentPointPosition =
+  //     this.sizeByOrientation(this.thumbOne.getSize()) / 2 -
+  //     this.sizeByOrientation(this.scalePointSize) / 2;
+
+  //   let pointsCounter = 0;
+
+  //   for (let i = 0; i <= Math.round(pointsCount - 1); i += 1) {
+  //     pointsCounter = pointsCounter >= pointsInEmptySegment + 1 ? 0 : pointsCounter;
+
+  //     const currentPointValue = this.thumbPositionToValue(
+  //       currentPointPosition -
+  //         this.sizeByOrientation(this.thumbSize) / 2 +
+  //         this.sizeByOrientation(this.scalePointSize) / 2
+  //     );
+
+  //     currentPointPosition = this.getCorrectPointPosition(currentPointPosition);
+
+  //     const fullPointPosition = { left: 0, top: 0 };
+  //     if (this.orientation === 'horizontal') {
+  //       fullPointPosition.left = currentPointPosition;
+  //     } else {
+  //       fullPointPosition.top = currentPointPosition;
+  //     }
+
+  //     if (pointsCounter === 0) {
+  //       scalePoints.push({
+  //         position: fullPointPosition,
+  //         size: this.scalePointSize,
+  //         value: currentPointValue,
+  //       });
+  //     }
+
+  //     pointsCounter += 1;
+  //     currentPointPosition += gap;
+  //   }
+
+  //   return scalePoints;
+  // }
+
+  // private getCorrectPointPosition(position: number): number {
+  //   const extremePosition =
+  //     this.sizeByOrientation(this.slider.getSize()) -
+  //     this.sizeByOrientation(this.thumbOne.getSize()) / 2 -
+  //     this.sizeByOrientation(this.scalePointSize) / 2;
+  //   if (position > extremePosition) {
+  //     return extremePosition;
+  //   }
+  //   return position;
+  // }
+
+  // private getPointsInEmptySegmentAmount(scalePointsAmount: number): number {
+  //   // const scaleSize = this.sizeByOrientation(this.sliderSize);
+  //   // const pointSize = this.sizeByOrientation(this.scalePointSize);
+  //   // const maxScalePointsAmount = Math.floor(scaleSize / pointSize);
+
+  //   // if (maxScalePointsAmount < scalePointsAmount) {
+  //   //   for (let points = maxScalePointsAmount; points > 2; points -= 1) {
+  //   //     const emptyPointsAmount = scalePointsAmount - points;
+
+  //   //     if (emptyPointsAmount % (points - 1) === 0) {
+  //   //       return emptyPointsAmount / (points - 1);
+  //   //     }
+  //   //   }
+  //   // }
+
+  //   return 0;
+  // }
   //END_NEW_METHODS//
 
   update(eventType: string): void {
@@ -353,14 +449,14 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
   //   }
   // }
 
-  getScalePointSize(value: number): ISize {
-    return this.scale ? this.scale.getPointSize(value) : { width: 0, height: 0 };
-  }
+  // getScalePointSize(value: number): ISize {
+  //   return this.scale ? this.scale.getPointSize(value) : { width: 0, height: 0 };
+  // }
 
-  addScalePoints(points: IScalePointParams[]): void {
-    this.scale?.addPoints(points);
-    this.slider.setMargins(this.getMargins());
-  }
+  // addScalePoints(points: IScalePointParams[]): void {
+  // this.scale?.addPoints(points);
+  // this.slider.setMargins(this.getMargins());
+  // }
 
   getTrackClickPosition(): IPosition {
     return this.track.getPosition();
