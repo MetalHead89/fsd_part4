@@ -198,12 +198,14 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
   }
 
   private calculateScalePointPosition(size: ISize, position: IPosition): IPosition {
-    const sliderSize = this.slider.getSize();
+    const thumbPosition = this.calculateThumbPosition(this.thumbOne, position);
+    const thumbSize = this.thumbOne.getSize();
 
-    return {
-      left: (position.left * (sliderSize.width - size.width)) / 100,
-      top: (position.top * (sliderSize.height - size.height)) / 100,
-    };
+    const newPosition =
+      this.positionByOrientation(thumbPosition) +
+      (this.sizeByOrientation(thumbSize) / 2 - this.sizeByOrientation(size) / 2);
+
+    return this.getFullPosition(newPosition);
   }
 
   private sizeByOrientation(size: ISize): number {
@@ -229,16 +231,54 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
   }
 
   updateScale(pointsParams: IPointParams[]): void {
-    if (this.scale) {
-      const pointSize = this.scale.getPointSize(pointsParams[pointsParams.length - 1].value);
-      const points = pointsParams.map((point) => ({
-        position: this.calculateScalePointPosition(pointSize, this.getFullPosition(point.position)),
-        size: pointSize,
-        value: point.value,
-      }));
-
-      this.scale.addPoints(points);
+    if (!this.scale) {
+      return;
     }
+
+    const pointSize = this.scale.getPointSize(pointsParams[pointsParams.length - 1].value);
+    // const divider = this.getScalePointsDivider(
+    //   pointsParams.length,
+    //   this.sizeByOrientation(pointSize)
+    // );
+
+    // const visiblePoints = pointsParams.filter(
+    //   (point, index) =>
+    //     index === 0 || index === pointsParams.length - 1 || point.value % divider === 0
+    // );
+
+    const visiblePoints = this.getVisiblePoints(pointsParams, this.sizeByOrientation(pointSize));
+
+    const points = visiblePoints.map((point) => ({
+      position: this.calculateScalePointPosition(pointSize, this.getFullPosition(point.position)),
+      size: pointSize,
+      value: point.value,
+    }));
+
+    this.scale.addPoints(points);
+  }
+
+  private getVisiblePoints(pointsParams: IPointParams[], pointSize: number): IPointParams[] {
+    const scaleSize = this.sizeByOrientation(this.slider.getSize());
+    const pointsAmount = pointsParams.length;
+    const maxPointsAmount = Math.floor(scaleSize / pointSize);
+
+    let divider = 1;
+
+    if (maxPointsAmount < pointsAmount) {
+      // divider = Math.ceil(pointsAmount / maxPointsAmount) + 1;
+      for (let points = maxPointsAmount; points > 2; points -= 1) {
+        const emptyPointsAmount = pointsAmount - points;
+
+        if (emptyPointsAmount % (points - 1) === 0) {
+          divider = emptyPointsAmount / (points - 1) + 1;
+          break;
+        }
+      }
+    }
+
+    return pointsParams.filter(
+      (_, index) => index === 0 || index === pointsAmount - 1 || index % divider === 0
+    );
   }
 
   // getScalePoints(pointsCount: number, gap: number): IScalePointParams[] {

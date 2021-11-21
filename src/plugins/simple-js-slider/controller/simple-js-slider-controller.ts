@@ -81,10 +81,9 @@ class SimpleJsSliderController {
     this.view.updateProgressBar();
   }
 
-  // private updateScale(scalePointsAmount: number, stepSize: number): void {
-  //   const scalePoints = this.getScalePoints(scalePointsAmount, stepSize);
-  //   this.view.updateScale(scalePoints);
-  // }
+  private updateScale() {
+    this.view.updateScale(this.model.getPointsParams());
+  }
   //END_NEW_METHODS//
 
   // update(eventType: string): void {
@@ -95,7 +94,7 @@ class SimpleJsSliderController {
 
   private init(): void {
     this.updateView();
-    this.updateProgressBar();
+    this.updateScale();
     // this.model.setSliderSize(this.view.getSliderSize());
     // this.model.setThumbSize(this.view.getThumbSize());
     // this.updateSliderType();
@@ -153,9 +152,7 @@ class SimpleJsSliderController {
     // this.updateView();
   }
 
-  private updateProgressBar() {
-    this.view.updateScale(this.model.getPointsParams());
-  }
+  
 
   // private updateSliderType(): void {
   //   if (this.model.getType() === 'single') {
