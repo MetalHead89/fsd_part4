@@ -87,7 +87,7 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
     const stepCount = (this.max - this.min) / this.step;
     const stepPercent = 100 / stepCount;
 
-    return Math.round((value / this.step) * stepPercent);
+    return (value / this.step) * stepPercent;
   }
 
   private getThumbValue(position: number): number {
