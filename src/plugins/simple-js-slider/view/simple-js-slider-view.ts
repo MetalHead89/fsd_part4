@@ -252,6 +252,10 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
       return;
     }
 
+    this.disableScale();
+    this.enableScale();
+    // this.scale = new Scale();
+
     const pointSize = this.scale.getPointSize(
       pointsParams[pointsParams.length - 1].value
     );
