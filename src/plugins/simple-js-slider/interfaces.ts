@@ -96,6 +96,7 @@ interface IFullPointParams {
 
 interface ISimpleJsSliderModel {
   observer: IObserverNew;
+  getSliderSettings(): ISliderSettings;
   updateThumbsValues({ thumbOne, thumbTwo }: IThumbsPositionsNew): void;
   getThumbsPositionsNew(): IThumbsPositionsNew;
   getThumbValues(): IThumbsValues;

@@ -15,7 +15,7 @@ import SimpleJsSliderView from './view/simple-js-slider-view';
     isScale: true,
     isPopUps: true,
     min: 0,
-    max: 500,
+    max: 10,
     step: 1,
     thumbOneValue: 3,
     thumbTwoValue: 7,
@@ -42,6 +42,9 @@ import SimpleJsSliderView from './view/simple-js-slider-view';
         $(this).data('controller', controller);
         $(this).data('model', model);
       });
+    },
+    getSliderSettings(): ISliderSettings {
+      return $(this).data().model.getSliderSettings();
     },
     getModelSubject(): ISubject {
       return $(this).data().model.subject;
