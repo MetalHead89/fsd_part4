@@ -75,7 +75,6 @@ class SimpleJsSliderController {
   }
 
   private updateView(): void {
-    this.updateSliderOrientation();
     this.view.moveThumbs(this.model.getThumbsPositionsNew());
     this.view.updatePopUps(this.model.getThumbValues());
     this.view.updateProgressBar();
@@ -93,6 +92,7 @@ class SimpleJsSliderController {
   // }
 
   private init(): void {
+    this.updateSliderOrientation();
     this.updateView();
     this.updateScale();
     // this.model.setSliderSize(this.view.getSliderSize());

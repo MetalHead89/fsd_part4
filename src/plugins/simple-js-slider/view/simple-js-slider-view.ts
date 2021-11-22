@@ -69,11 +69,16 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
   //NEW_METHODS//
   moveThumbs({ thumbOne, thumbTwo }: IThumbsPositionsNew): void {
     const thumbOnePosition = this.getFullPosition(thumbOne);
-    this.thumbOne.moveTo(this.calculateThumbPosition(this.thumbOne, thumbOnePosition));
+    this.thumbOne.moveTo(
+      this.calculateThumbPosition(this.thumbOne, thumbOnePosition)
+    );
 
-    const thumbTwoPosition = thumbTwo !== null ? this.getFullPosition(thumbTwo) : null;
+    const thumbTwoPosition =
+      thumbTwo !== null ? this.getFullPosition(thumbTwo) : null;
     if (this.thumbTwo && thumbTwoPosition !== null) {
-      this.thumbTwo.moveTo(this.calculateThumbPosition(this.thumbTwo, thumbTwoPosition));
+      this.thumbTwo.moveTo(
+        this.calculateThumbPosition(this.thumbTwo, thumbTwoPosition)
+      );
     }
 
     if (thumbTwo !== null && thumbOne > thumbTwo) {
@@ -82,7 +87,8 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
   }
 
   private getFullPosition(position: number): IPosition {
-    const isOrientationHorizontal = this.slider.getOrientation() === 'horizontal';
+    const isOrientationHorizontal =
+      this.slider.getOrientation() === 'horizontal';
 
     return {
       left: isOrientationHorizontal ? position : 0,
@@ -95,8 +101,14 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
   }
 
   private subscribeToEventsNew(): void {
-    this.thumbOne.observer.register('thumbIsDragged', this.updateThumbsPositions);
-    this.thumbTwo?.observer.register('thumbIsDragged', this.updateThumbsPositions);
+    this.thumbOne.observer.register(
+      'thumbIsDragged',
+      this.updateThumbsPositions
+    );
+    this.thumbTwo?.observer.register(
+      'thumbIsDragged',
+      this.updateThumbsPositions
+    );
   }
 
   private updateThumbsPositions() {
@@ -182,7 +194,8 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
 
   private getPopUpPosition(thumb: Thumb): IPosition {
     const thumbPosition = this.positionByOrientation(thumb.getPosition());
-    const popUpPosition = thumbPosition + this.sizeByOrientation(thumb.getSize()) / 2;
+    const popUpPosition =
+      thumbPosition + this.sizeByOrientation(thumb.getSize()) / 2;
 
     return this.getFullPosition(popUpPosition);
   }
@@ -197,13 +210,17 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
     };
   }
 
-  private calculateScalePointPosition(size: ISize, position: IPosition): IPosition {
+  private calculateScalePointPosition(
+    size: ISize,
+    position: IPosition
+  ): IPosition {
     const thumbPosition = this.calculateThumbPosition(this.thumbOne, position);
     const thumbSize = this.thumbOne.getSize();
 
     const newPosition =
       this.positionByOrientation(thumbPosition) +
-      (this.sizeByOrientation(thumbSize) / 2 - this.sizeByOrientation(size) / 2);
+      (this.sizeByOrientation(thumbSize) / 2 -
+        this.sizeByOrientation(size) / 2);
 
     return this.getFullPosition(newPosition);
   }
@@ -235,7 +252,9 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
       return;
     }
 
-    const pointSize = this.scale.getPointSize(pointsParams[pointsParams.length - 1].value);
+    const pointSize = this.scale.getPointSize(
+      pointsParams[pointsParams.length - 1].value
+    );
     // const divider = this.getScalePointsDivider(
     //   pointsParams.length,
     //   this.sizeByOrientation(pointSize)
@@ -246,18 +265,28 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
     //     index === 0 || index === pointsParams.length - 1 || point.value % divider === 0
     // );
 
-    const visiblePoints = this.getVisiblePoints(pointsParams, this.sizeByOrientation(pointSize));
+    const visiblePoints = this.getVisiblePoints(
+      pointsParams,
+      this.sizeByOrientation(pointSize)
+    );
 
     const points = visiblePoints.map((point) => ({
-      position: this.calculateScalePointPosition(pointSize, this.getFullPosition(point.position)),
+      position: this.calculateScalePointPosition(
+        pointSize,
+        this.getFullPosition(point.position)
+      ),
       size: pointSize,
       value: point.value,
     }));
 
     this.scale.addPoints(points);
+    this.slider.setMargins(this.getMargins());
   }
 
-  private getVisiblePoints(pointsParams: IPointParams[], pointSize: number): IPointParams[] {
+  private getVisiblePoints(
+    pointsParams: IPointParams[],
+    pointSize: number
+  ): IPointParams[] {
     const scaleSize = this.sizeByOrientation(this.slider.getSize());
     const pointsAmount = pointsParams.length;
     const maxPointsAmount = Math.floor(scaleSize / pointSize);
@@ -277,7 +306,8 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
     }
 
     return pointsParams.filter(
-      (_, index) => index === 0 || index === pointsAmount - 1 || index % divider === 0
+      (_, index) =>
+        index === 0 || index === pointsAmount - 1 || index % divider === 0
     );
   }
 
@@ -503,7 +533,8 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
   }
 
   getScaleClickPosition(): IPosition {
-    const position = this.scale === null ? { left: 0, top: 0 } : this.scale.getPosition();
+    const position =
+      this.scale === null ? { left: 0, top: 0 } : this.scale.getPosition();
     return position;
   }
 
