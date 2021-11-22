@@ -1,13 +1,14 @@
-import Subject from '../../../simple-js-slider/subject/subject';
+import ObserverNew from '../../../simple-js-slider/observer/observer';
 
-class TextField extends Subject {
+class TextField {
   private control: HTMLDivElement;
   private field: HTMLInputElement;
   private label: HTMLLabelElement;
   private value: number;
+  observer: ObserverNew;
 
   constructor(labelText: string) {
-    super();
+    this.observer = new ObserverNew();
     this.control = document.createElement('div');
     this.field = document.createElement('input');
     this.label = document.createElement('label');
@@ -50,7 +51,7 @@ class TextField extends Subject {
       this.field.value = this.value.toString();
     } else {
       this.value = parseInt(this.field.value, 10);
-      this.notify('controlPanelDataUpdated');
+      this.observer.notify('controlPanelDataUpdated');
     }
   }
 

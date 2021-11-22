@@ -23,7 +23,8 @@ class ControlPanelController {
     this.model = model;
     this.init();
 
-    // this.subscribeToEvents();
+    this.bindContext();
+    this.subscribeToEvents();
   }
 
   init(): void {
@@ -55,16 +56,25 @@ class ControlPanelController {
   //   }
   // }
 
-  // private subscribeToEvents(): void {
-  //   this.model.register('thumbsPositionsIsUpdated', this);
-  //   this.model.register('minIsUpdated', this);
-  //   this.model.register('maxIsUpdated', this);
-  //   this.model.register('stepIsUpdated', this);
-  //   this.view.register('controlPanelDataUpdated', this);
-  // }
+  private bindContext(): void {
+    this.updateSliderPluginSettings =
+      this.updateSliderPluginSettings.bind(this);
+  }
 
-  private getSliderSettings(): ISliderSettings {
-    return {
+  private subscribeToEvents(): void {
+    this.view.observer.register(
+      'controlPanelDataUpdated',
+      this.updateSliderPluginSettings
+    );
+    // this.model.register('thumbsPositionsIsUpdated', this);
+    // this.model.register('minIsUpdated', this);
+    // this.model.register('maxIsUpdated', this);
+    // this.model.register('stepIsUpdated', this);
+    // this.view.register('controlPanelDataUpdated', this);
+  }
+
+  private updateSliderPluginSettings(): void {
+    const sliderSettings = {
       orientation: this.view.getOrientation(),
       type: this.view.getType(),
       isScale: this.view.isScaleEnabled(),
@@ -75,14 +85,22 @@ class ControlPanelController {
       thumbOneValue: this.view.getThumbOneValue(),
       thumbTwoValue: this.view.getThumbTwoValue(),
     };
+
+    this.model.updateSliderPluginSettings(sliderSettings);
   }
 
-  // private subscribeToEvents(): void {
-  //   this.model.register('thumbsPositionsIsUpdated', this);
-  //   this.model.register('minIsUpdated', this);
-  //   this.model.register('maxIsUpdated', this);
-  //   this.model.register('stepIsUpdated', this);
-  //   this.view.register('controlPanelDataUpdated', this);
+  // private getSliderSettings(): ISliderSettings {
+  //   return {
+  //     orientation: this.view.getOrientation(),
+  //     type: this.view.getType(),
+  //     isScale: this.view.isScaleEnabled(),
+  //     isPopUps: this.view.isPopUpsEnabled(),
+  //     min: this.view.getMin(),
+  //     max: this.view.getMax(),
+  //     step: this.view.getStep(),
+  //     thumbOneValue: this.view.getThumbOneValue(),
+  //     thumbTwoValue: this.view.getThumbTwoValue(),
+  //   };
   // }
 }
 
@@ -133,19 +151,19 @@ export default ControlPanelController;
 //     }
 //   }
 
-//   private getSliderSettings(): ISliderSettings {
-//     return {
-//       orientation: this.view.getOrientation(),
-//       type: this.view.getType(),
-//       isScale: this.view.isScaleEnabled(),
-//       isPopUps: this.view.isPopUpsEnabled(),
-//       min: this.view.getMin(),
-//       max: this.view.getMax(),
-//       step: this.view.getStep(),
-//       thumbOneValue: this.view.getThumbOneValue(),
-//       thumbTwoValue: this.view.getThumbTwoValue(),
-//     };
-//   }
+// private getSliderSettings(): ISliderSettings {
+//   return {
+//     orientation: this.view.getOrientation(),
+//     type: this.view.getType(),
+//     isScale: this.view.isScaleEnabled(),
+//     isPopUps: this.view.isPopUpsEnabled(),
+//     min: this.view.getMin(),
+//     max: this.view.getMax(),
+//     step: this.view.getStep(),
+//     thumbOneValue: this.view.getThumbOneValue(),
+//     thumbTwoValue: this.view.getThumbTwoValue(),
+//   };
+// }
 
 //   private subscribeToEvents(): void {
 //     this.model.register('thumbsPositionsIsUpdated', this);

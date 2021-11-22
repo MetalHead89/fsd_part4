@@ -70,6 +70,20 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
     };
   }
 
+  updateSliderSettings(settings: ISliderSettings): void {
+    this.orientation = settings.orientation;
+    this.type = settings.type;
+    this.isScale = settings.isScale;
+    this.isPopUps = settings.isPopUps;
+    this.min = settings.min;
+    this.max = settings.max;
+    this.step = settings.step;
+    this.thumbOneValue = settings.thumbOneValue;
+    this.thumbTwoValue = settings.thumbTwoValue;
+
+    this.observer.notify('settingsIsUpdated');
+  }
+
   getThumbsPositionsNew(): IThumbsPositionsNew {
     return {
       thumbOne: this.valueToPosition(this.thumbOneValue),

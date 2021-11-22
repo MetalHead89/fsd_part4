@@ -5,10 +5,10 @@ import TextField from './text-field/text-field';
 import groupElements from './group-elements';
 import RadioButton from './radio-button/radio-button';
 import Checkbox from './checkbox/checkbox';
-import { IObserver, IThumbsValues } from '../../simple-js-slider/interfaces';
-import Subject from '../../simple-js-slider/subject/subject';
+import { IThumbsValues } from '../../simple-js-slider/interfaces';
+import ObserverNew from '../../simple-js-slider/observer/observer';
 
-class ControlPanelView extends Subject implements IObserver {
+class ControlPanelView {
   private sliderWrapper: HTMLDivElement;
   private controlPanel: ControlPanel;
   private thumbOneValue: TextField;
@@ -20,9 +20,10 @@ class ControlPanelView extends Subject implements IObserver {
   private orientationRadio: RadioButton;
   private scaleCheckbox: Checkbox;
   private popUpsCheckbox: Checkbox;
+  observer: ObserverNew;
 
   constructor(sliderWrapper: HTMLDivElement) {
-    super();
+    this.observer = new ObserverNew();
     this.controlPanel = new ControlPanel();
     this.sliderWrapper = sliderWrapper;
     this.thumbOneValue = new TextField('First thumb value');
@@ -51,16 +52,17 @@ class ControlPanelView extends Subject implements IObserver {
       value: 'popUps',
     });
 
+    this.bindContext();
     this.subscribeToEvents();
     this.createPanel();
   }
 
-  update(eventType: string): void {
-    if (eventType === 'controlPanelDataUpdated') {
-      this.notify('controlPanelDataUpdated');
-      this.switchOrientation();
-    }
-  }
+  // update(eventType: string): void {
+  //   if (eventType === 'controlPanelDataUpdated') {
+  //     this.notify('controlPanelDataUpdated');
+  //     this.switchOrientation();
+  //   }
+  // }
 
   setThumbsValues({ thumbOne, thumbTwo }: IThumbsValues): void {
     this.thumbOneValue.setValue(thumbOne);
@@ -196,26 +198,56 @@ class ControlPanelView extends Subject implements IObserver {
     this.sliderWrapper.append(this.controlPanel.getElement());
   }
 
-  private subscribeToEvents(): void {
-    this.thumbOneValue.register('controlPanelDataUpdated', this);
-    this.thumbTwoValue.register('controlPanelDataUpdated', this);
-    this.min.register('controlPanelDataUpdated', this);
-    this.max.register('controlPanelDataUpdated', this);
-    this.step.register('controlPanelDataUpdated', this);
-    this.typeRadio.register('controlPanelDataUpdated', this);
-    this.orientationRadio.register('controlPanelDataUpdated', this);
-    this.scaleCheckbox.register('controlPanelDataUpdated', this);
-    this.popUpsCheckbox.register('controlPanelDataUpdated', this);
+  private bindContext(): void {
+    this.notifyAboutChange = this.notifyAboutChange.bind(this);
   }
+
+  private subscribeToEvents(): void {
+    this.thumbOneValue.observer.register(
+      'controlPanelDataUpdated',
+      this.notifyAboutChange
+    );
+    this.thumbTwoValue.observer.register(
+      'controlPanelDataUpdated',
+      this.notifyAboutChange
+    );
+    // this.min.register('controlPanelDataUpdated', this);
+    // this.max.register('controlPanelDataUpdated', this);
+    // this.step.register('controlPanelDataUpdated', this);
+    // this.typeRadio.register('controlPanelDataUpdated', this);
+    // this.orientationRadio.register('controlPanelDataUpdated', this);
+    // this.scaleCheckbox.register('controlPanelDataUpdated', this);
+    // this.popUpsCheckbox.register('controlPanelDataUpdated', this);
+  }
+
+  private notifyAboutChange() {
+    this.observer.notify('controlPanelDataUpdated');
+  }
+
+  // private subscribeToEvents(): void {
+  //   this.thumbOneValue.register('controlPanelDataUpdated', this);
+  //   this.thumbTwoValue.register('controlPanelDataUpdated', this);
+  //   this.min.register('controlPanelDataUpdated', this);
+  //   this.max.register('controlPanelDataUpdated', this);
+  //   this.step.register('controlPanelDataUpdated', this);
+  //   this.typeRadio.register('controlPanelDataUpdated', this);
+  //   this.orientationRadio.register('controlPanelDataUpdated', this);
+  //   this.scaleCheckbox.register('controlPanelDataUpdated', this);
+  //   this.popUpsCheckbox.register('controlPanelDataUpdated', this);
+  // }
 
   private switchOrientation(): void {
     if (this.getOrientation() === 'horizontal') {
       this.controlPanel.switchToHorizontal();
-      this.sliderWrapper.classList.remove('slider-wrapper_orientation_vertical');
+      this.sliderWrapper.classList.remove(
+        'slider-wrapper_orientation_vertical'
+      );
       this.sliderWrapper.classList.add('slider-wrapper_orientation_horizontal');
     } else {
       this.controlPanel.switchToVertical();
-      this.sliderWrapper.classList.remove('slider-wrapper_orientation_horizontal');
+      this.sliderWrapper.classList.remove(
+        'slider-wrapper_orientation_horizontal'
+      );
       this.sliderWrapper.classList.add('slider-wrapper_orientation_vertical');
     }
   }

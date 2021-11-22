@@ -101,6 +101,7 @@ interface ISimpleJsSliderModel {
   getThumbsPositionsNew(): IThumbsPositionsNew;
   getThumbValues(): IThumbsValues;
   getPointsParams(): IPointParams[];
+  updateSliderSettings(settings: ISliderSettings): void;
 
   subject: ISubject;
   setSliderSize(size: ISize): void;

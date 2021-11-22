@@ -68,9 +68,9 @@ class ControlPanelModel {
   //   return this.slider.simpleJsSlider('getOrientation');
   // }
 
-  // refreshSliderState(sliderSettings: ISliderSettings): void {
-  //   this.slider.simpleJsSlider('refreshSliderState', sliderSettings);
-  // }
+  updateSliderPluginSettings(sliderSettings: ISliderSettings): void {
+    this.slider.simpleJsSlider('updateSliderSettings', sliderSettings);
+  }
 }
 
 export default ControlPanelModel;

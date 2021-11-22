@@ -63,15 +63,20 @@ class SimpleJsSliderController {
 
   //NEW_METHODS//
   private subscribeToEventsNew(): void {
-    this.view.observer.register('thumbIsDragged', (args: IThumbsPositionsNew) => {
-      this.model.updateThumbsValues(args);
-    });
+    this.view.observer.register(
+      'thumbIsDragged',
+      (args: IThumbsPositionsNew) => {
+        this.model.updateThumbsValues(args);
+      }
+    );
 
     this.model.observer.register('modelIsUpdated', this.updateView);
+    this.model.observer.register('settingsIsUpdated', this.fullViewUpdate);
   }
 
   private bindContext(): void {
     this.updateView = this.updateView.bind(this);
+    this.fullViewUpdate = this.fullViewUpdate.bind(this);
   }
 
   private updateView(): void {
@@ -92,15 +97,19 @@ class SimpleJsSliderController {
   // }
 
   private init(): void {
-    this.updateSliderOrientation();
-    this.updateView();
-    this.updateScale();
+    this.fullViewUpdate();
     // this.model.setSliderSize(this.view.getSliderSize());
     // this.model.setThumbSize(this.view.getThumbSize());
     // this.updateSliderType();
     // this.updatePopUpsState();
 
     // this.updateView();
+  }
+
+  private fullViewUpdate(): void {
+    this.updateSliderOrientation();
+    this.updateView();
+    this.updateScale();
   }
 
   // private subscribeToEvents(): void {
@@ -151,8 +160,6 @@ class SimpleJsSliderController {
     this.model.setSliderSize(this.view.getSliderSize());
     // this.updateView();
   }
-
-  
 
   // private updateSliderType(): void {
   //   if (this.model.getType() === 'single') {
