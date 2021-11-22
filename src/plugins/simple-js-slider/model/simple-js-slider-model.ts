@@ -78,10 +78,18 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
     this.min = settings.min;
     this.max = settings.max;
     this.step = settings.step;
-    this.thumbOneValue = settings.thumbOneValue;
-    this.thumbTwoValue = settings.thumbTwoValue;
+    this.thumbOneValue = this.getCorrectValue(settings.thumbOneValue);
+    this.thumbTwoValue = this.getCorrectValue(settings.thumbTwoValue);
 
     this.observer.notify('settingsIsUpdated');
+  }
+
+  private getCorrectValue(value: number): number {
+    if (value >= this.min && value <= this.max) {
+      return value;
+    }
+
+    return value < this.min ? this.min : this.max;
   }
 
   getThumbsPositionsNew(): IThumbsPositionsNew {
