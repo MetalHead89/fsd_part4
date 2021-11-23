@@ -5,7 +5,7 @@ interface IObserverNew {
 }
 
 interface IObserversList {
-  [key: string]: (args?: any) => void;
+  [key: string]: ((args?: any) => void)[];
 }
 
 interface IThumbsPositionsNew {

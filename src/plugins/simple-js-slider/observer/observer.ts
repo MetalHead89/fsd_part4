@@ -8,7 +8,11 @@ class ObserverNew implements IObserverNew {
   }
 
   register(event: string, func: () => void): void {
-    this.observers[event] = func;
+    if (!this.observers[event]) {
+      this.observers[event] = [];
+    }
+
+    this.observers[event].push(func);
   }
 
   unsubscribe(event: string): void {
@@ -17,7 +21,7 @@ class ObserverNew implements IObserverNew {
 
   notify(event: string, args?: any): void {
     if (this.observers[event]) {
-      this.observers[event](args);
+      this.observers[event].forEach((func) => func(args));
     }
   }
 }
