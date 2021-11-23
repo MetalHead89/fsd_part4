@@ -77,9 +77,9 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
     this.type = settings.type;
     this.isScale = settings.isScale;
     this.isPopUps = settings.isPopUps;
-    this.min = settings.min;
-    this.max = settings.max;
-    this.step = settings.step;
+    this.updateMinValue(settings.min);
+    this.updateMaxValue(settings.max);
+    this.updateStep(settings.step);
     this.thumbOneValue = this.getCorrectValue(settings.thumbOneValue);
     this.thumbTwoValue = this.getCorrectValue(settings.thumbTwoValue);
 
@@ -141,14 +141,14 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
     const stepCount = (this.max - this.min) / this.step;
     const stepPercent = 100 / stepCount;
 
-    return (value / this.step) * stepPercent;
+    return ((value - this.min) / this.step) * stepPercent;
   }
 
   private getThumbValue(position: number): number {
     const stepCount = (this.max - this.min) / this.step;
     const stepPercent = 100 / stepCount;
 
-    return Math.round((position / stepPercent) * this.step);
+    return Math.round((position / stepPercent) * this.step) + this.min;
   }
 
   //END_NEW_METHODS//
@@ -474,6 +474,8 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
     this.step = value > 0 && value <= stepsCount ? value : this.step;
     this.subject.notify('stepIsUpdated');
   }
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
   private valueWithStep(position: number): number {
     if (this.thumbPositionToValue(position) >= this.max) {
