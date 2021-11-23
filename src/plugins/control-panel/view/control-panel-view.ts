@@ -213,6 +213,7 @@ class ControlPanelView {
   }
 
   private notifyAboutChange() {
+    this.switchOrientation();
     this.observer.notify('controlPanelDataUpdated');
   }
 
