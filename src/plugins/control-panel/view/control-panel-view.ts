@@ -144,21 +144,14 @@ class ControlPanelView {
     this.controlPanel.append(
       groupElements({
         wrapperClass: 'control-panel__text-fields-group',
-        elements: [
-          this.thumbOneValue.getControl(),
-          this.thumbTwoValue.getControl(),
-        ],
+        elements: [this.thumbOneValue.getControl(), this.thumbTwoValue.getControl()],
       })
     );
 
     this.controlPanel.append(
       groupElements({
         wrapperClass: 'control-panel__text-fields-group',
-        elements: [
-          this.min.getControl(),
-          this.max.getControl(),
-          this.step.getControl(),
-        ],
+        elements: [this.min.getControl(), this.max.getControl(), this.step.getControl()],
       })
     );
 
@@ -182,10 +175,7 @@ class ControlPanelView {
     const checkboxesGroup = groupElements({
       header: 'on/off elements',
       wrapperClass: 'control-panel__wrapper',
-      elements: [
-        this.scaleCheckbox.getControl(),
-        this.popUpsCheckbox.getControl(),
-      ],
+      elements: [this.scaleCheckbox.getControl(), this.popUpsCheckbox.getControl()],
     });
 
     this.controlPanel.append(
@@ -203,14 +193,16 @@ class ControlPanelView {
   }
 
   private subscribeToEvents(): void {
-    this.thumbOneValue.observer.register(
-      'controlPanelDataUpdated',
-      this.notifyAboutChange
-    );
-    this.thumbTwoValue.observer.register(
-      'controlPanelDataUpdated',
-      this.notifyAboutChange
-    );
+    this.thumbOneValue.observer.register('controlPanelDataUpdated', this.notifyAboutChange);
+    this.thumbTwoValue.observer.register('controlPanelDataUpdated', this.notifyAboutChange);
+    this.min.observer.register('controlPanelDataUpdated', this.notifyAboutChange);
+    this.max.observer.register('controlPanelDataUpdated', this.notifyAboutChange);
+    this.step.observer.register('controlPanelDataUpdated', this.notifyAboutChange);
+    this.scaleCheckbox.observer.register('controlPanelDataUpdated', this.notifyAboutChange);
+    this.popUpsCheckbox.observer.register('controlPanelDataUpdated', this.notifyAboutChange);
+    this.typeRadio.observer.register('controlPanelDataUpdated', this.notifyAboutChange);
+    this.orientationRadio.observer.register('controlPanelDataUpdated', this.notifyAboutChange);
+
     // this.min.register('controlPanelDataUpdated', this);
     // this.max.register('controlPanelDataUpdated', this);
     // this.step.register('controlPanelDataUpdated', this);
@@ -239,15 +231,11 @@ class ControlPanelView {
   private switchOrientation(): void {
     if (this.getOrientation() === 'horizontal') {
       this.controlPanel.switchToHorizontal();
-      this.sliderWrapper.classList.remove(
-        'slider-wrapper_orientation_vertical'
-      );
+      this.sliderWrapper.classList.remove('slider-wrapper_orientation_vertical');
       this.sliderWrapper.classList.add('slider-wrapper_orientation_horizontal');
     } else {
       this.controlPanel.switchToVertical();
-      this.sliderWrapper.classList.remove(
-        'slider-wrapper_orientation_horizontal'
-      );
+      this.sliderWrapper.classList.remove('slider-wrapper_orientation_horizontal');
       this.sliderWrapper.classList.add('slider-wrapper_orientation_vertical');
     }
   }

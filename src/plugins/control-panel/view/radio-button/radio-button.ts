@@ -1,14 +1,15 @@
 /* eslint-disable comma-dangle */
-
-import Subject from '../../../simple-js-slider/subject/subject';
+import { IObserverNew } from '../../../simple-js-slider/new-interfaces';
+import ObserverNew from '../../../simple-js-slider/observer/observer';
 import { IRadioParams } from '../../interfaces';
 
-class RadioButton extends Subject {
+class RadioButton {
   private control: HTMLDivElement;
   private radios: HTMLInputElement[];
+  observer: IObserverNew;
 
   constructor(name: string, ...params: IRadioParams[]) {
-    super();
+    this.observer = new ObserverNew();
     const uniqueName = RadioButton.generateName(name);
     this.control = document.createElement('div');
     this.control.classList.add('radio-button');
@@ -28,7 +29,7 @@ class RadioButton extends Subject {
 
   switchTo(value: string): void {
     this.radios.forEach((radio) => {
-      if (radio.value === value) {
+      if (radio.value === value && !radio.checked) {
         radio.checked = true;
         this.handleRadioButtonChange();
       }
@@ -36,30 +37,30 @@ class RadioButton extends Subject {
   }
 
   private init(name: string, params: IRadioParams[]) {
-    params.forEach(
-      ({ labelText, value, checked }: IRadioParams, index: number) => {
-        const radioWrapper = document.createElement('div');
-        radioWrapper.classList.add('radio-button__radio-wrapper');
+    params.forEach(({ labelText, value, checked }: IRadioParams, index: number) => {
+      const radioWrapper = document.createElement('div');
+      radioWrapper.classList.add('radio-button__radio-wrapper');
 
-        const label = document.createElement('label');
-        label.classList.add('radio-button__label');
-        label.innerText = labelText;
+      const label = document.createElement('label');
+      label.classList.add('radio-button__label');
+      label.innerText = labelText;
 
-        const radioButton = document.createElement('input');
-        radioButton.type = 'radio';
-        radioButton.name = name;
-        radioButton.value = value;
-        radioButton.checked = index === 0 || Boolean(checked);
-        radioButton.classList.add('radio-button__radio-button');
-        this.handleRadioButtonChange = this.handleRadioButtonChange.bind(this);
-        radioButton.addEventListener('change', this.handleRadioButtonChange);
-        this.radios.push(radioButton);
+      const radioButton = document.createElement('input');
+      radioButton.type = 'radio';
+      radioButton.name = name;
+      radioButton.value = value;
+      radioButton.checked = index === 0 || Boolean(checked);
+      radioButton.classList.add('radio-button__radio-button');
+      this.handleRadioButtonChange = this.handleRadioButtonChange.bind(this);
+      radioButton.addEventListener('change', this.handleRadioButtonChange);
+      this.radios.push(radioButton);
 
-        label.append(radioButton);
-        radioWrapper.append(label);
-        this.control.append(radioWrapper);
-      }
-    );
+      label.append(radioButton);
+      radioWrapper.append(label);
+      this.control.append(radioWrapper);
+
+      this.handleRadioButtonChange();
+    });
   }
 
   private handleRadioButtonChange(): void {
@@ -73,7 +74,7 @@ class RadioButton extends Subject {
       }
     });
 
-    this.notify('controlPanelDataUpdated');
+    this.observer.notify('controlPanelDataUpdated');
   }
 
   private static generateName(name: string): string {

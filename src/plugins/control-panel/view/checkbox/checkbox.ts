@@ -1,13 +1,14 @@
-import Subject from '../../../simple-js-slider/subject/subject';
+import ObserverNew from '../../../simple-js-slider/observer/observer';
 import { ICheckboxParams } from '../../interfaces';
 
-class Checkbox extends Subject {
+class Checkbox {
   private control: HTMLDivElement;
   private checkbox: HTMLInputElement;
   private label: HTMLLabelElement;
+  observer: ObserverNew;
 
   constructor(params: ICheckboxParams) {
-    super();
+    this.observer = new ObserverNew();
     this.control = document.createElement('div');
     this.label = document.createElement('label');
     this.checkbox = document.createElement('input');
@@ -52,7 +53,7 @@ class Checkbox extends Subject {
   private handleCheckboxChange(): void {
     this.label.classList.toggle('checkbox__label_checked');
 
-    this.notify('controlPanelDataUpdated');
+    this.observer.notify('controlPanelDataUpdated');
   }
 }
 

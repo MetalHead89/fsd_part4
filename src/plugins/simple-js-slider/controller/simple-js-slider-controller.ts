@@ -63,12 +63,9 @@ class SimpleJsSliderController {
 
   //NEW_METHODS//
   private subscribeToEventsNew(): void {
-    this.view.observer.register(
-      'thumbIsDragged',
-      (args: IThumbsPositionsNew) => {
-        this.model.updateThumbsValues(args);
-      }
-    );
+    this.view.observer.register('thumbIsDragged', (args: IThumbsPositionsNew) => {
+      this.model.updateThumbsValues(args);
+    });
 
     this.model.observer.register('modelIsUpdated', this.updateView);
     this.model.observer.register('settingsIsUpdated', this.fullViewUpdate);
@@ -107,8 +104,11 @@ class SimpleJsSliderController {
   }
 
   private fullViewUpdate(): void {
-    this.updateSliderOrientation();
+    // this.updateSliderOrientation();
+    // this.updateSliderType();
     this.updateView();
+    this.updatePopUpsState();
+    this.updateScaleState();
     this.updateScale();
   }
 
@@ -161,33 +161,33 @@ class SimpleJsSliderController {
     // this.updateView();
   }
 
-  // private updateSliderType(): void {
-  //   if (this.model.getType() === 'single') {
-  //     this.view.switchToSingle();
-  //   } else {
-  //     this.view.switchToRange();
-  //   }
+  private updateSliderType(): void {
+    if (this.model.getType() === 'single') {
+      this.view.switchToSingle();
+    } else {
+      this.view.switchToRange();
+    }
 
-  //   this.model.updateThumbsState(this.model.getThumbsPositions());
-  // }
+    // this.model.updateThumbsState(this.model.getThumbsPositions());
+  }
 
-  // private updateScaleState() {
-  //   if (this.model.isScaleEnabled()) {
-  //     this.view.enableScale();
-  //     this.updateView();
-  //   } else {
-  //     this.view.disableScale();
-  //   }
-  // }
+  private updateScaleState() {
+    if (this.model.isScaleEnabled()) {
+      this.view.enableScale();
+      this.updateView();
+    } else {
+      this.view.disableScale();
+    }
+  }
 
-  // private updatePopUpsState(): void {
-  //   if (this.model.isPopUpsEnabled()) {
-  //     this.view.enablePopUps();
-  //     this.model.updateThumbsState(this.model.getThumbsPositions());
-  //   } else {
-  //     this.view.disablePopUps();
-  //   }
-  // }
+  private updatePopUpsState(): void {
+    if (this.model.isPopUpsEnabled()) {
+      this.view.enablePopUps();
+      this.model.updateThumbsState(this.model.getThumbsPositions());
+    } else {
+      this.view.disablePopUps();
+    }
+  }
 }
 
 export default SimpleJsSliderController;

@@ -448,7 +448,7 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
         this.slider.append(this.popUpTwo.getControl());
       }
 
-      this.thumbTwo.subject.register('thumbIsDragged', this);
+      // this.thumbTwo.subject.register('thumbIsDragged', this);
     }
   }
 
@@ -549,7 +549,7 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
   }
 
   private init() {
-    this.subscribeToEvents();
+    // this.subscribeToEvents();
     this.assembleSlider();
 
     this.handleWindowResize = this.handleWindowResize.bind(this);
@@ -560,12 +560,12 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
     return this.popUpTwo === null && this.thumbTwo !== null;
   }
 
-  private subscribeToEvents(): void {
-    this.thumbOne.subject.register('thumbIsDragged', this);
-    this.thumbTwo?.subject.register('thumbIsDragged', this);
-    this.track.subject.register('clickToTrack', this);
-    this.scale?.subject.register('clickToScale', this);
-  }
+  // private subscribeToEvents(): void {
+  //   this.thumbOne.subject.register('thumbIsDragged', this);
+  //   this.thumbTwo?.subject.register('thumbIsDragged', this);
+  //   this.track.subject.register('clickToTrack', this);
+  //   this.scale?.subject.register('clickToScale', this);
+  // }
 
   private handleWindowResize(): void {
     this.subject.notify('windowResized');

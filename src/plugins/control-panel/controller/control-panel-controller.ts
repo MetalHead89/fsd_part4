@@ -61,17 +61,13 @@ class ControlPanelController {
   // }
 
   private bindContext(): void {
-    this.updateSliderPluginSettings =
-      this.updateSliderPluginSettings.bind(this);
+    this.updateSliderPluginSettings = this.updateSliderPluginSettings.bind(this);
 
     this.updateView = this.updateView.bind(this);
   }
 
   private subscribeToEvents(): void {
-    this.view.observer.register(
-      'controlPanelDataUpdated',
-      this.updateSliderPluginSettings
-    );
+    this.view.observer.register('controlPanelDataUpdated', this.updateSliderPluginSettings);
 
     this.model.observer.register('sliderIsUpdated', this.updateView);
   }
