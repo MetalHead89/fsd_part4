@@ -15,6 +15,7 @@ import {
   ISliderMargins,
   ISubject,
   ISubjectEvents,
+  IThumbsParams,
   IThumbsPositions,
   IThumbsValues,
 } from '../interfaces';
@@ -67,21 +68,26 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
   }
 
   //NEW_METHODS//
-  moveThumbs({ thumbOne, thumbTwo }: IThumbsPositionsNew): void {
-    const thumbOnePosition = this.getFullPosition(thumbOne);
+  moveThumbs({ thumbOne, thumbTwo }: IThumbsParams): void {
+    const thumbOnePosition = this.getFullPosition(thumbOne.position);
     this.thumbOne.moveTo(
       this.calculateThumbPosition(this.thumbOne, thumbOnePosition)
     );
 
-    const thumbTwoPosition =
-      thumbTwo !== null ? this.getFullPosition(thumbTwo) : null;
-    if (this.thumbTwo && thumbTwoPosition !== null) {
+    if (this.thumbTwo) {
+      const thumbTwoPosition = this.getFullPosition(thumbTwo.position);
       this.thumbTwo.moveTo(
         this.calculateThumbPosition(this.thumbTwo, thumbTwoPosition)
       );
     }
 
-    if (thumbTwo !== null && thumbOne > thumbTwo) {
+    // if (this.thumbTwo && thumbOne.position > thumbTwo.position) {
+    //   this.swapThumbs();
+    // }
+
+    this.updatePopUps({ thumbOne: thumbOne.value, thumbTwo: thumbTwo.value });
+
+    if (this.thumbTwo && thumbOne.position > thumbTwo.position) {
       this.swapThumbs();
     }
   }

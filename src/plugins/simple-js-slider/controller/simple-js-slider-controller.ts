@@ -81,7 +81,7 @@ class SimpleJsSliderController {
 
   private updateView(): void {
     this.view.moveThumbs(this.model.getThumbsPositionsNew());
-    this.view.updatePopUps(this.model.getThumbValues());
+    // this.view.updatePopUps(this.model.getThumbValues());
     this.view.updateProgressBar();
   }
 

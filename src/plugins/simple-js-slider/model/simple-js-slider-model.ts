@@ -14,6 +14,7 @@ import {
   IThumbsValues,
   ISubject,
   IPointParams,
+  IThumbsParams,
 } from '../interfaces';
 import { IObserverNew, IThumbsPositionsNew } from '../new-interfaces';
 import ObserverNew from '../observer/observer';
@@ -85,6 +86,13 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
     this.thumbOneValue = this.getCorrectValue(settings.thumbOneValue);
     this.thumbTwoValue = this.getCorrectValue(settings.thumbTwoValue);
 
+    if (this.thumbOneValue > this.thumbTwoValue) {
+      [this.thumbOneValue, this.thumbTwoValue] = [
+        this.thumbTwoValue,
+        this.thumbOneValue,
+      ];
+    }
+
     this.observer.notify('settingsIsUpdated');
   }
 
@@ -96,10 +104,16 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
     return value < this.min ? this.min : this.max;
   }
 
-  getThumbsPositionsNew(): IThumbsPositionsNew {
+  getThumbsPositionsNew(): IThumbsParams {
     return {
-      thumbOne: this.valueToPosition(this.thumbOneValue),
-      thumbTwo: this.valueToPosition(this.thumbTwoValue),
+      thumbOne: {
+        position: this.valueToPosition(this.thumbOneValue),
+        value: this.thumbOneValue,
+      },
+      thumbTwo: {
+        position: this.valueToPosition(this.thumbTwoValue),
+        value: this.thumbTwoValue,
+      },
     };
   }
 

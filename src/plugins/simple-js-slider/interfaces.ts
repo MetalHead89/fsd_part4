@@ -52,6 +52,11 @@ interface IThumbsPositions {
   thumbTwo: IPosition | null;
 }
 
+interface IThumbsParams {
+  thumbOne: { position: number; value: number };
+  thumbTwo: { position: number; value: number };
+}
+
 interface IProgressBarParams {
   position: IPosition;
   size: ISize;
@@ -99,7 +104,7 @@ interface ISimpleJsSliderModel {
   getSliderSettings(): ISliderSettings;
   getObserver(): IObserverNew;
   updateThumbsValues({ thumbOne, thumbTwo }: IThumbsPositionsNew): void;
-  getThumbsPositionsNew(): IThumbsPositionsNew;
+  getThumbsPositionsNew(): IThumbsParams;
   getThumbValues(): IThumbsValues;
   getPointsParams(): IPointParams[];
   updateSliderSettings(settings: ISliderSettings): void;
@@ -125,7 +130,7 @@ interface ISimpleJsSliderModel {
 
 interface ISimpleJsSliderView {
   observer: IObserverNew;
-  moveThumbs({ thumbOne, thumbTwo }: IThumbsPositionsNew): void;
+  moveThumbs({ thumbOne, thumbTwo }: IThumbsParams): void;
   updatePopUps(values: IThumbsValues): void;
   updateProgressBar(): void;
   updateScale(pointsParams: IPointParams[]): void;
@@ -185,4 +190,5 @@ export {
   IPopUpsValues,
   IPointParams,
   IFullPointParams,
+  IThumbsParams,
 };
