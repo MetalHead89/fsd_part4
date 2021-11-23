@@ -20,6 +20,10 @@ class Checkbox extends Subject {
   }
 
   setState(state: boolean): void {
+    if (this.checkbox.checked === state) {
+      return;
+    }
+
     this.checkbox.checked = state;
     this.handleCheckboxChange();
   }

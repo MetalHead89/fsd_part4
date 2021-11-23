@@ -27,7 +27,19 @@ class ControlPanelController {
     this.subscribeToEvents();
   }
 
-  init(): void {
+  private init(): void {
+    this.updateView();
+    // this.view.setThumbsValues(this.model.getThumbsValues());
+    // this.view.setMinValue(this.model.getMin());
+    // this.view.setMaxValue(this.model.getMax());
+    // this.view.setStep(this.model.getStep());
+    // this.view.setScaleState(this.model.isScaleEnabled());
+    // this.view.setPopUpsState(this.model.isPopUpsEnabled());
+    // this.view.setTypeRadio(this.model.getType());
+    // this.view.setOrientationRadio(this.model.getOrientation());
+  }
+
+  private updateView(): void {
     const sliderSettings: ISliderSettings = this.model.getSliderSettings();
     this.view.setThumbsValues({
       thumbOne: sliderSettings.thumbOneValue,
@@ -40,14 +52,6 @@ class ControlPanelController {
     this.view.setPopUpsState(sliderSettings.isPopUps);
     this.view.setTypeRadio(sliderSettings.type);
     this.view.setOrientationRadio(sliderSettings.orientation);
-    // this.view.setThumbsValues(this.model.getThumbsValues());
-    // this.view.setMinValue(this.model.getMin());
-    // this.view.setMaxValue(this.model.getMax());
-    // this.view.setStep(this.model.getStep());
-    // this.view.setScaleState(this.model.isScaleEnabled());
-    // this.view.setPopUpsState(this.model.isPopUpsEnabled());
-    // this.view.setTypeRadio(this.model.getType());
-    // this.view.setOrientationRadio(this.model.getOrientation());
   }
 
   // update(eventType: string): void {
@@ -59,6 +63,8 @@ class ControlPanelController {
   private bindContext(): void {
     this.updateSliderPluginSettings =
       this.updateSliderPluginSettings.bind(this);
+
+    this.updateView = this.updateView.bind(this);
   }
 
   private subscribeToEvents(): void {
@@ -66,11 +72,8 @@ class ControlPanelController {
       'controlPanelDataUpdated',
       this.updateSliderPluginSettings
     );
-    // this.model.register('thumbsPositionsIsUpdated', this);
-    // this.model.register('minIsUpdated', this);
-    // this.model.register('maxIsUpdated', this);
-    // this.model.register('stepIsUpdated', this);
-    // this.view.register('controlPanelDataUpdated', this);
+
+    this.model.observer.register('sliderIsUpdated', this.updateView);
   }
 
   private updateSliderPluginSettings(): void {

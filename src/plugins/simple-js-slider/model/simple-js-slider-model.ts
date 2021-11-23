@@ -56,6 +56,10 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
     this.observer.notify('modelIsUpdated');
   }
 
+  getObserver(): IObserverNew {
+    return this.observer;
+  }
+
   getSliderSettings(): ISliderSettings {
     return {
       orientation: this.orientation,

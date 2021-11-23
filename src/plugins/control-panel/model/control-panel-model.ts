@@ -4,11 +4,15 @@ import {
   ISubject,
   IThumbsValues,
 } from '../../simple-js-slider/interfaces';
+import { IObserverNew } from '../../simple-js-slider/new-interfaces';
+import ObserverNew from '../../simple-js-slider/observer/observer';
 import Subject from '../../simple-js-slider/subject/subject';
 import { ISubjectEvents } from '../interfaces';
 
 class ControlPanelModel {
+  observer: IObserverNew;
   private slider: JQuery<HTMLElement>;
+  private sliderObserver: IObserverNew;
   // private subject: ISubject;
   // private events: ISubjectEvents = {
   //   thumbsPositionsIsUpdated: () => this.notify('thumbsPositionsIsUpdated'),
@@ -18,12 +22,24 @@ class ControlPanelModel {
   // };
 
   constructor(slider: JQuery<HTMLElement>) {
+    this.observer = new ObserverNew();
     this.slider = slider;
+    this.sliderObserver = this.slider.simpleJsSlider('getObserver');
+    this.subscribeToEvents();
     // this.subject = slider.simpleJsSlider('getModelSubject');
     // this.subject.register('thumbsPositionsIsUpdated', this);
     // this.subject.register('minIsUpdated', this);
     // this.subject.register('maxIsUpdated', this);
     // this.subject.register('stepIsUpdated', this);
+  }
+
+  private subscribeToEvents() {
+    this.sliderObserver.register('settingsIsUpdated', () => {
+      this.observer.notify('sliderIsUpdated');
+    });
+    this.sliderObserver.register('modelIsUpdated', () => {
+      this.observer.notify('sliderIsUpdated');
+    });
   }
 
   // update(eventType: string): void {
@@ -32,7 +48,7 @@ class ControlPanelModel {
   //   }
   // }
 
-  getSliderSettings() {
+  getSliderSettings(): ISliderSettings {
     return this.slider.simpleJsSlider('getSliderSettings');
   }
 

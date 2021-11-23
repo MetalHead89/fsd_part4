@@ -6,6 +6,7 @@ import { ISliderSettings, ISubject, IThumbsValues } from './interfaces';
 import SimpleJsSliderModel from './model/simple-js-slider-model';
 import SimpleJsSliderController from './controller/simple-js-slider-controller';
 import SimpleJsSliderView from './view/simple-js-slider-view';
+import { IObserverNew } from './new-interfaces';
 
 (($) => {
   // Настройки плагина по умолчанию
@@ -48,7 +49,10 @@ import SimpleJsSliderView from './view/simple-js-slider-view';
     },
     updateSliderSettings(sliderSettings: ISliderSettings): void {
       $(this).data().model.updateSliderSettings(sliderSettings);
-    }
+    },
+    getObserver(): IObserverNew {
+      return $(this).data().model.getObserver();
+    },
     // getModelSubject(): ISubject {
     //   return $(this).data().model.subject;
     // },
@@ -83,7 +87,7 @@ import SimpleJsSliderView from './view/simple-js-slider-view';
 
   $.fn.simpleJsSlider = function plug(
     action?: string | ISliderSettings,
-    args?,
+    args?
   ): any {
     let method: any;
 
@@ -92,7 +96,9 @@ import SimpleJsSliderView from './view/simple-js-slider-view';
     } else if (typeof action === 'object' || !action) {
       method = methods.init.call(this, action);
     } else {
-      $.error(`Метод с именем ${action} не существует для jQuery.simpleJsSlider`);
+      $.error(
+        `Метод с именем ${action} не существует для jQuery.simpleJsSlider`
+      );
       method = this;
     }
 
