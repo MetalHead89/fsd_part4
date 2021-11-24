@@ -104,8 +104,8 @@ class SimpleJsSliderController {
   }
 
   private fullViewUpdate(): void {
-    // this.updateSliderOrientation();
-    // this.updateSliderType();
+    this.updateSliderOrientation();
+    this.updateSliderType();
     this.updateView();
     this.updatePopUpsState();
     this.updateScaleState();
