@@ -106,8 +106,9 @@ class SimpleJsSliderController {
   private fullViewUpdate(): void {
     this.updateSliderOrientation();
     this.updateSliderType();
-    this.updateView();
     this.updatePopUpsState();
+    this.updateView();
+    // this.updatePopUpsState();
     this.updateScaleState();
     this.updateScale();
   }
@@ -183,7 +184,7 @@ class SimpleJsSliderController {
   private updatePopUpsState(): void {
     if (this.model.isPopUpsEnabled()) {
       this.view.enablePopUps();
-      this.model.updateThumbsState(this.model.getThumbsPositions());
+      // this.model.updateThumbsState(this.model.getThumbsPositions());
     } else {
       this.view.disablePopUps();
     }
