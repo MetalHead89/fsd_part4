@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable comma-dangle */
 
-import { ISliderSettings, ISubject, IThumbsValues } from './interfaces';
+import { ISliderSettings } from './interfaces';
 import SimpleJsSliderModel from './model/simple-js-slider-model';
 import SimpleJsSliderController from './controller/simple-js-slider-controller';
 import SimpleJsSliderView from './view/simple-js-slider-view';
@@ -85,10 +85,7 @@ import { IObserverNew } from './new-interfaces';
     // },
   };
 
-  $.fn.simpleJsSlider = function plug(
-    action?: string | ISliderSettings,
-    args?
-  ): any {
+  $.fn.simpleJsSlider = function plug(action?: string | ISliderSettings, args?): any {
     let method: any;
 
     if (typeof action === 'string' && methods[action]) {
@@ -96,9 +93,7 @@ import { IObserverNew } from './new-interfaces';
     } else if (typeof action === 'object' || !action) {
       method = methods.init.call(this, action);
     } else {
-      $.error(
-        `Метод с именем ${action} не существует для jQuery.simpleJsSlider`
-      );
+      $.error(`Метод с именем ${action} не существует для jQuery.simpleJsSlider`);
       method = this;
     }
 

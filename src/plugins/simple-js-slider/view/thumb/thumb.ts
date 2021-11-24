@@ -75,7 +75,6 @@ class Thumb extends UIControl {
       top: event.clientY - this.shift.shiftY,
     });
 
-    // this.subject.notify('thumbIsDragged');
     this.observer.notify('thumbIsDragged');
   }
 

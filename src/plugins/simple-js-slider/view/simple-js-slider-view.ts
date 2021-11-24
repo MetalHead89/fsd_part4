@@ -13,8 +13,8 @@ import {
   ISimpleJsSliderView,
   ISize,
   ISliderMargins,
-  ISubject,
-  ISubjectEvents,
+  // ISubject,
+  // ISubjectEvents,
   IThumbsParams,
   IThumbsPositions,
   IThumbsValues,
@@ -26,12 +26,12 @@ import Thumb from './thumb/thumb';
 import PopUp from './pop-up/pop-up';
 import ProgressBar from './progress-bar/progress-bar';
 import Scale from './scale/scale';
-import Subject from '../subject/subject';
+// import Subject from '../subject/subject';
 import { IObserverNew, IThumbsPositionsNew } from '../new-interfaces';
 import ObserverNew from '../observer/observer';
 
-class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
-  subject: ISubject;
+class SimpleJsSliderView implements ISimpleJsSliderView {
+  // subject: ISubject;
   observer: IObserverNew;
   private slider: Slider;
   private sliderWrapper: HTMLDivElement;
@@ -42,15 +42,15 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
   private popUpTwo: PopUp | null;
   private progressBar: ProgressBar;
   private scale: Scale | null;
-  private events: ISubjectEvents = {
-    thumbIsDragged: () => this.subject.notify('thumbIsDragged'),
-    clickToTrack: () => this.subject.notify('clickToTrack'),
-    clickToScale: () => this.subject.notify('clickToScale'),
-  };
+  // private events: ISubjectEvents = {
+  //   thumbIsDragged: () => this.subject.notify('thumbIsDragged'),
+  //   clickToTrack: () => this.subject.notify('clickToTrack'),
+  //   clickToScale: () => this.subject.notify('clickToScale'),
+  // };
 
   constructor(wrapper: HTMLDivElement) {
     this.observer = new ObserverNew();
-    this.subject = new Subject();
+    // this.subject = new Subject();
     this.sliderWrapper = wrapper;
 
     this.slider = new Slider();
@@ -99,21 +99,76 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
 
   private bindContext(): void {
     this.updateThumbsPositions = this.updateThumbsPositions.bind(this);
+    this.setThumbPositionOnClickPosition = this.setThumbPositionOnClickPosition.bind(this);
+    // this.notifyAboutThumbsDragged = this.notifyAboutThumbsDragged.bind(this);
   }
 
   private subscribeToEventsNew(): void {
     this.thumbOne.observer.register('thumbIsDragged', this.updateThumbsPositions);
     this.thumbTwo?.observer.register('thumbIsDragged', this.updateThumbsPositions);
+    this.scale?.observer.register('clickToScale', (args: IPosition) =>
+      this.setThumbPositionOnClickPosition(args)
+    );
   }
 
   private updateThumbsPositions() {
     const thumbOne = this.calculateThumbPercentPosition(this.thumbOne);
     const thumbTwo = this.calculateThumbPercentPosition(this.thumbTwo);
 
+    this.notifyAboutThumbsDragged(thumbOne, thumbTwo);
+    // this.observer.notify('thumbIsDragged', {
+    //   thumbOne,
+    //   thumbTwo,
+    // });
+  }
+
+  private notifyAboutThumbsDragged(thumbOne: number | null, thumbTwo: number | null): void {
     this.observer.notify('thumbIsDragged', {
       thumbOne,
       thumbTwo,
     });
+  }
+
+  //////////////////////////////////////////////
+  //////////////////////////////////////////////
+  //////////////////////////////////////////////
+  //////////////////////////////////////////////
+  private setThumbPositionOnClickPosition({ left, top }: IPosition): void {
+    // const position = this.positionByOrientation(this.thumbOne.getPosition());
+    const thumbSize = this.thumbOne.getSize();
+    const position = {
+      left: left - thumbSize.width / 2,
+      top: top - thumbSize.height / 2,
+    };
+    // let thumbOne = this.thumbOneValue;
+    // let thumbTwo = this.thumbTwoValue;
+
+    if (this.thumbTwoIsNearToClick(position)) {
+      this.thumbTwo?.moveTo(position);
+      // thumbTwo = this.thumbPositionToValue(this.positionByOrientation(position));
+    } else {
+      this.thumbOne.moveTo(position);
+      // thumbOne = this.thumbPositionToValue(this.positionByOrientation(position));
+    }
+
+    // this.setThumbsValues({ thumbOne, thumbTwo });
+  }
+
+  private thumbTwoIsNearToClick(position: IPosition): boolean {
+    if (this.thumbTwo) {
+      return (
+        Math.abs(
+          this.positionByOrientation(position) -
+            this.positionByOrientation(this.thumbTwo.getPosition())
+        ) <
+        Math.abs(
+          this.positionByOrientation(position) -
+            this.positionByOrientation(this.thumbOne.getPosition())
+        )
+      );
+    }
+
+    return false;
   }
 
   private calculateThumbPercentPosition(thumb: Thumb | null): number | null {
@@ -367,11 +422,11 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
   // }
   //END_NEW_METHODS//
 
-  update(eventType: string): void {
-    if (eventType in this.events) {
-      this.events[eventType]();
-    }
-  }
+  // update(eventType: string): void {
+  //   if (eventType in this.events) {
+  //     this.events[eventType]();
+  //   }
+  // }
 
   // swapThumbs(): void {
   //   if (this.thumbTwo) {
@@ -448,7 +503,7 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
   }
 
   disableScale(): void {
-    this.scale?.subject.unsubscribe('clickToScale', this);
+    // this.scale?.subject.unsubscribe('clickToScale', this);
     this.scale?.remove();
     this.scale = null;
 
@@ -460,8 +515,14 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
       this.scale?.remove();
     }
     this.scale = new Scale(this.slider.getOrientation());
+    this.scale.observer.register('clickToScale', (args: IPosition) =>
+      this.setThumbPositionOnClickPosition(args)
+    );
     this.slider.append(this.scale.getControl());
-    this.scale.subject.register('clickToScale', this);
+    this.scale.observer.register('clickToScale', (args: IPosition) =>
+      this.setThumbPositionOnClickPosition(args)
+    );
+    // this.scale.subject.register('clickToScale', this);
 
     this.slider.setMargins(this.getMargins());
   }
@@ -539,7 +600,7 @@ class SimpleJsSliderView implements ISimpleJsSliderView, IObserver {
   // }
 
   private handleWindowResize(): void {
-    this.subject.notify('windowResized');
+    // this.subject.notify('windowResized');
   }
 
   private assembleSlider(): void {

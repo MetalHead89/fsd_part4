@@ -134,8 +134,7 @@ interface ISimpleJsSliderView {
   updatePopUps(values: IThumbsValues): void;
   updateProgressBar(): void;
   updateScale(pointsParams: IPointParams[]): void;
-
-  subject: ISubject;
+  
   switchToHorizontal(): void;
   switchToVertical(): void;
   switchToSingle(): void;

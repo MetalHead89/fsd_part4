@@ -20,8 +20,8 @@ class Scale extends UIControl {
   }
 
   private handleScaleClick(event: MouseEvent): void {
-    this.setPosition({ left: event.clientX, top: event.clientY });
-    this.subject.notify('clickToScale');
+    // this.setPosition({ left: event.clientX, top: event.clientY });
+    this.observer.notify('clickToScale', { left: event.clientX, top: event.clientY });
   }
 
   private addPoint({ position, size, value }: IFullPointParams): void {

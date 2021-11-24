@@ -1,9 +1,7 @@
 import { IPosition, ISize } from '../../interfaces';
 import ObserverNew from '../../observer/observer';
-import Subject from '../../subject/subject';
 
 class UIControl {
-  subject: Subject;
   observer: ObserverNew;
   protected control: HTMLDivElement;
   protected lastPosition: IPosition;
@@ -11,7 +9,6 @@ class UIControl {
   constructor(name: string, orientation?: string) {
     const control = document.createElement('div');
     this.control = control;
-    this.subject = new Subject();
     this.observer = new ObserverNew();
     this.lastPosition = { left: 0, top: 0 };
     const orientationClass = orientation

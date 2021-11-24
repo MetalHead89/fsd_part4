@@ -13,7 +13,6 @@ class Track extends UIControl {
 
   private handleTrackClick(event: MouseEvent): void {
     this.setPosition({ left: event.clientX, top: event.clientY });
-    this.subject.notify('clickToTrack');
   }
 }
 

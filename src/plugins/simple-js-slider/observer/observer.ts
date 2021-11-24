@@ -7,7 +7,7 @@ class ObserverNew implements IObserverNew {
     this.observers = {};
   }
 
-  register(event: string, func: () => void): void {
+  register(event: string, func: (args?: any) => void): void {
     if (!this.observers[event]) {
       this.observers[event] = [];
     }
