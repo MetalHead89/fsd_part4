@@ -129,11 +129,6 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
 
     return pointsParams;
   }
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
 
   private getThumbPositionByStep(position: number): number {
     const stepCount = (this.max - this.min) / this.step;
@@ -141,7 +136,7 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
 
     const newPosition = Math.round(position / stepPercent) * stepPercent;
 
-    return this.getThumbValue(newPosition) > this.max
+    return this.getThumbValue(newPosition) > this.max || this.getThumbValue(position) >= this.max
       ? this.valueToPosition(this.max)
       : newPosition;
   }
