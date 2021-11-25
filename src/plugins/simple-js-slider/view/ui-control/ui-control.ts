@@ -62,11 +62,24 @@ class UIControl {
     return document.defaultView?.getComputedStyle(this.control, null).getPropertyValue(styleName);
   }
 
+  protected getPositionInsideParent({ left, top }: IPosition): IPosition {
+    const positionInsideParent = { left, top };
+
+    const parent: HTMLElement | null = this.control.parentElement;
+    if (parent) {
+      const parentCoords: DOMRect = parent.getBoundingClientRect();
+      positionInsideParent.left -= parentCoords.left;
+      positionInsideParent.top -= parentCoords.top;
+    }
+
+    return positionInsideParent;
+  }
+
   protected setPosition({ left, top }: IPosition): void {
     const positionInsideParent = { left, top };
 
     const parent: HTMLElement | null = this.control.parentElement;
-
+    // debugger;
     if (parent) {
       const parentCoords: DOMRect = parent.getBoundingClientRect();
       positionInsideParent.left -= parentCoords.left;

@@ -157,6 +157,7 @@ class SimpleJsSliderView implements ISimpleJsSliderView {
       left: left - thumbSize.width / 2,
       top: top - thumbSize.height / 2,
     };
+    // debugger;
     const percentPosition = this.calculateThumbPercentPosition(position, this.thumbOne.getSize());
     // let thumbOne = this.thumbOneValue;
     // let thumbTwo = this.thumbTwoValue;
