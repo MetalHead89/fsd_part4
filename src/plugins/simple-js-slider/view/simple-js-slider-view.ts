@@ -112,17 +112,34 @@ class SimpleJsSliderView implements ISimpleJsSliderView {
   }
 
   private updateThumbsPositions() {
-    const thumbOne = this.calculateThumbPercentPosition(this.thumbOne);
-    const thumbTwo = this.calculateThumbPercentPosition(this.thumbTwo);
-
-    this.notifyAboutThumbsDragged(thumbOne, thumbTwo);
+    // const thumbOne = this.calculateThumbPercentPosition(
+    //   this.thumbOne.getPosition(),
+    //   this.thumbOne.getSize()
+    // );
+    // const thumbTwo = this.thumbTwo
+    //   ? this.calculateThumbPercentPosition(this.thumbTwo.getPosition(), this.thumbTwo.getSize())
+    //   : null;
+    const thumbs = this.getThumbsPercentPositions();
+    this.notifyAboutThumbsDragged(thumbs.thumbOne, thumbs.thumbTwo);
     // this.observer.notify('thumbIsDragged', {
     //   thumbOne,
     //   thumbTwo,
     // });
   }
 
-  private notifyAboutThumbsDragged(thumbOne: number | null, thumbTwo: number | null): void {
+  private getThumbsPercentPositions(): IThumbsPositionsNew {
+    return {
+      thumbOne: this.calculateThumbPercentPosition(
+        this.thumbOne.getPosition(),
+        this.thumbOne.getSize()
+      ),
+      thumbTwo: this.thumbTwo
+        ? this.calculateThumbPercentPosition(this.thumbTwo.getPosition(), this.thumbTwo.getSize())
+        : null,
+    };
+  }
+
+  private notifyAboutThumbsDragged(thumbOne: number, thumbTwo: number | null): void {
     this.observer.notify('thumbIsDragged', {
       thumbOne,
       thumbTwo,
@@ -140,16 +157,20 @@ class SimpleJsSliderView implements ISimpleJsSliderView {
       left: left - thumbSize.width / 2,
       top: top - thumbSize.height / 2,
     };
+    const percentPosition = this.calculateThumbPercentPosition(position, this.thumbOne.getSize());
     // let thumbOne = this.thumbOneValue;
     // let thumbTwo = this.thumbTwoValue;
+    const thumbs = { ...this.getThumbsPercentPositions() };
 
     if (this.thumbTwoIsNearToClick(position)) {
-      this.thumbTwo?.moveTo(position);
+      thumbs.thumbTwo = percentPosition;
       // thumbTwo = this.thumbPositionToValue(this.positionByOrientation(position));
     } else {
-      this.thumbOne.moveTo(position);
+      thumbs.thumbOne = percentPosition;
       // thumbOne = this.thumbPositionToValue(this.positionByOrientation(position));
     }
+
+    this.notifyAboutThumbsDragged(thumbs.thumbOne, thumbs.thumbTwo);
 
     // this.setThumbsValues({ thumbOne, thumbTwo });
   }
@@ -171,14 +192,14 @@ class SimpleJsSliderView implements ISimpleJsSliderView {
     return false;
   }
 
-  private calculateThumbPercentPosition(thumb: Thumb | null): number | null {
-    if (thumb === null) {
-      return null;
-    }
+  private calculateThumbPercentPosition(position: IPosition, size: ISize): number {
+    // if (thumb === null) {
+    //   return null;
+    // }
 
     const sliderSize = this.slider.getSize();
-    const position = thumb.getPosition();
-    const size = thumb.getSize();
+    // const position = thumb.getPosition();
+    // const size = thumb.getSize();
 
     const percentPosition = {
       left: (position.left * 100) / (sliderSize.width - size.width),
