@@ -109,6 +109,9 @@ class SimpleJsSliderView implements ISimpleJsSliderView {
     this.scale?.observer.register('clickToScale', (args: IPosition) =>
       this.setThumbPositionOnClickPosition(args)
     );
+    this.track.observer.register('clickToTrack', (args: IPosition) =>
+      this.setThumbPositionOnClickPosition(args)
+    );
   }
 
   private updateThumbsPositions() {
