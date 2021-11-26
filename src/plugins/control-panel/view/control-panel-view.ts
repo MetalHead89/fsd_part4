@@ -57,13 +57,6 @@ class ControlPanelView {
     this.createPanel();
   }
 
-  // update(eventType: string): void {
-  //   if (eventType === 'controlPanelDataUpdated') {
-  //     this.notify('controlPanelDataUpdated');
-  //     this.switchOrientation();
-  //   }
-  // }
-
   setThumbsValues({ thumbOne, thumbTwo }: IThumbsValues): void {
     this.thumbOneValue.setValue(thumbOne);
     this.thumbTwoValue.setValue(thumbTwo);
@@ -202,32 +195,12 @@ class ControlPanelView {
     this.popUpsCheckbox.observer.register('controlPanelDataUpdated', this.notifyAboutChange);
     this.typeRadio.observer.register('controlPanelDataUpdated', this.notifyAboutChange);
     this.orientationRadio.observer.register('controlPanelDataUpdated', this.notifyAboutChange);
-
-    // this.min.register('controlPanelDataUpdated', this);
-    // this.max.register('controlPanelDataUpdated', this);
-    // this.step.register('controlPanelDataUpdated', this);
-    // this.typeRadio.register('controlPanelDataUpdated', this);
-    // this.orientationRadio.register('controlPanelDataUpdated', this);
-    // this.scaleCheckbox.register('controlPanelDataUpdated', this);
-    // this.popUpsCheckbox.register('controlPanelDataUpdated', this);
   }
 
   private notifyAboutChange() {
     this.switchOrientation();
     this.observer.notify('controlPanelDataUpdated');
   }
-
-  // private subscribeToEvents(): void {
-  //   this.thumbOneValue.register('controlPanelDataUpdated', this);
-  //   this.thumbTwoValue.register('controlPanelDataUpdated', this);
-  //   this.min.register('controlPanelDataUpdated', this);
-  //   this.max.register('controlPanelDataUpdated', this);
-  //   this.step.register('controlPanelDataUpdated', this);
-  //   this.typeRadio.register('controlPanelDataUpdated', this);
-  //   this.orientationRadio.register('controlPanelDataUpdated', this);
-  //   this.scaleCheckbox.register('controlPanelDataUpdated', this);
-  //   this.popUpsCheckbox.register('controlPanelDataUpdated', this);
-  // }
 
   private switchOrientation(): void {
     if (this.getOrientation() === 'horizontal') {

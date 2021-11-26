@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable comma-dangle */
 import { IObserverNew } from '../../../simple-js-slider/new-interfaces';
 import ObserverNew from '../../../simple-js-slider/observer/observer';
