@@ -14,13 +14,31 @@ class Scale extends UIControl {
     points.forEach((point) => this.addPoint(point));
   }
 
+  getPointSize(value: number): ISize {
+    this.addPoint({
+      position: { left: 0, top: 0 },
+      size: { width: 0, height: 0 },
+      value,
+    });
+
+    const scalePoint: HTMLDivElement | null = this.control.querySelector('.scale__point');
+
+    const pointSize = {
+      width: scalePoint?.offsetWidth || 0,
+      height: scalePoint?.offsetHeight || 0,
+    };
+
+    scalePoint?.remove();
+
+    return pointSize;
+  }
+
   private init(): void {
     this.handleScaleClick = this.handleScaleClick.bind(this);
     this.control.addEventListener('click', this.handleScaleClick);
   }
 
   private handleScaleClick(event: MouseEvent): void {
-    // this.setPosition({ left: event.clientX, top: event.clientY });
     const position = this.getPositionInsideParent({ left: event.clientX, top: event.clientY });
     this.observer.notify('clickToScale', position);
   }
@@ -55,25 +73,6 @@ class Scale extends UIControl {
     scalePoint.append(divisionMarker);
     scalePoint.append(divisionLabel);
     this.control.append(scalePoint);
-  }
-
-  getPointSize(value: number): ISize {
-    this.addPoint({
-      position: { left: 0, top: 0 },
-      size: { width: 0, height: 0 },
-      value,
-    });
-
-    const scalePoint: HTMLDivElement | null = this.control.querySelector('.scale__point');
-
-    const pointSize = {
-      width: scalePoint?.offsetWidth || 0,
-      height: scalePoint?.offsetHeight || 0,
-    };
-
-    scalePoint?.remove();
-
-    return pointSize;
   }
 }
 
