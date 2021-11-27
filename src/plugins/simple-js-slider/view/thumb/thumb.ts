@@ -26,8 +26,6 @@ class Thumb extends UIControl {
 
   protected setPosition(cursorPosition: IPosition): void {
     super.setPosition(cursorPosition);
-    // this.lastPosition.left -= this.shift.shiftX;
-    // this.lastPosition.top -= this.shift.shiftY;
   }
 
   private static disableSelection() {
