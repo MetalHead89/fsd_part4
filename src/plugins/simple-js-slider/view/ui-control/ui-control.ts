@@ -79,7 +79,6 @@ class UIControl {
     const positionInsideParent = { left, top };
 
     const parent: HTMLElement | null = this.control.parentElement;
-    // debugger;
     if (parent) {
       const parentCoords: DOMRect = parent.getBoundingClientRect();
       positionInsideParent.left -= parentCoords.left;
