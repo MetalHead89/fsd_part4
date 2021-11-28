@@ -1,13 +1,13 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable comma-dangle */
-import { IObserverNew } from '../../../simple-js-slider/new-interfaces';
+import { IObserver } from '../../../simple-js-slider/interfaces';
 import ObserverNew from '../../../simple-js-slider/observer/observer';
 import { IRadioParams } from '../../interfaces';
 
 class RadioButton {
   private control: HTMLDivElement;
   private radios: HTMLInputElement[];
-  observer: IObserverNew;
+  observer: IObserver;
 
   constructor(name: string, ...params: IRadioParams[]) {
     this.observer = new ObserverNew();

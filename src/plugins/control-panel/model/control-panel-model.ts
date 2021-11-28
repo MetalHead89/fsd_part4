@@ -1,11 +1,10 @@
-import { ISliderSettings } from '../../simple-js-slider/interfaces';
-import { IObserverNew } from '../../simple-js-slider/new-interfaces';
+import { ISliderSettings, IObserver } from '../../simple-js-slider/interfaces';
 import ObserverNew from '../../simple-js-slider/observer/observer';
 
 class ControlPanelModel {
-  observer: IObserverNew;
+  observer: IObserver;
   private slider: JQuery<HTMLElement>;
-  private sliderObserver: IObserverNew;
+  private sliderObserver: IObserver;
 
   constructor(slider: JQuery<HTMLElement>) {
     this.observer = new ObserverNew();

@@ -1,5 +1,9 @@
-import { IControllerParams, ISimpleJsSliderModel, ISimpleJsSliderView } from '../interfaces';
-import { IThumbsPositionsNew } from '../new-interfaces';
+import {
+  IControllerParams,
+  ISimpleJsSliderModel,
+  ISimpleJsSliderView,
+  IThumbsPositions,
+} from '../interfaces';
 
 class SimpleJsSliderController {
   private model: ISimpleJsSliderModel;
@@ -19,7 +23,7 @@ class SimpleJsSliderController {
   }
 
   private subscribeToEvents(): void {
-    this.view.observer.register('thumbIsDragged', (args: IThumbsPositionsNew) => {
+    this.view.observer.register('thumbIsDragged', (args: IThumbsPositions) => {
       this.model.updateThumbsValues(args);
     });
 
@@ -33,7 +37,7 @@ class SimpleJsSliderController {
   }
 
   private updateView(): void {
-    this.view.moveThumbs(this.model.getThumbsPositionsNew());
+    this.view.moveThumbs(this.model.getThumbsPositions());
     this.view.updateProgressBar();
   }
 

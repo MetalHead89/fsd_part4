@@ -12,6 +12,8 @@ import {
   IThumbsParams,
   IThumbsPositions,
   IThumbsValues,
+  IObserver,
+  IFullThumbsPositions,
 } from '../interfaces';
 
 import Slider from './slider/slider';
@@ -20,11 +22,10 @@ import Thumb from './thumb/thumb';
 import PopUp from './pop-up/pop-up';
 import ProgressBar from './progress-bar/progress-bar';
 import Scale from './scale/scale';
-import { IObserverNew, IThumbsPositionsNew } from '../new-interfaces';
 import ObserverNew from '../observer/observer';
 
 class SimpleJsSliderView implements ISimpleJsSliderView {
-  observer: IObserverNew;
+  observer: IObserver;
   private slider: Slider;
   private sliderWrapper: HTMLDivElement;
   private track: Track;
@@ -236,14 +237,14 @@ class SimpleJsSliderView implements ISimpleJsSliderView {
     return this.slider.getSize();
   }
 
-  getThumbsPositions(): IThumbsPositions {
+  getThumbsPositions(): IFullThumbsPositions {
     const thumbOne = this.thumbOne.getPosition();
     const thumbTwo = this.thumbTwo ? this.thumbTwo.getPosition() : null;
 
     return { thumbOne, thumbTwo };
   }
 
-  updateThumbs(thumbsPositions: IThumbsPositions): void {
+  updateThumbs(thumbsPositions: IFullThumbsPositions): void {
     this.thumbOne.moveTo(thumbsPositions.thumbOne);
     if (thumbsPositions.thumbTwo) {
       this.thumbTwo?.moveTo(thumbsPositions.thumbTwo);
@@ -289,7 +290,7 @@ class SimpleJsSliderView implements ISimpleJsSliderView {
     this.notifyAboutThumbsDragged(thumbs.thumbOne, thumbs.thumbTwo);
   }
 
-  private getThumbsPercentPositions(): IThumbsPositionsNew {
+  private getThumbsPercentPositions(): IThumbsPositions {
     return {
       thumbOne: this.calculateThumbPercentPosition(
         this.thumbOne.getPosition(),

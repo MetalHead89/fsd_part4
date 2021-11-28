@@ -1,4 +1,4 @@
-import { IObserverNew, IThumbsPositionsNew } from './new-interfaces';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 interface ISize {
   width: number;
@@ -28,12 +28,27 @@ interface IThumbsValues {
   thumbTwo: number;
 }
 
+interface IObserver {
+  register(event: string, func: (args?: any) => void): void;
+  unsubscribe(event: string): void;
+  notify(event: string, args?: any): void;
+}
+
+interface IObserversList {
+  [key: string]: ((args?: any) => void)[];
+}
+
+interface IThumbsPositions {
+  thumbOne: number;
+  thumbTwo: number | null;
+}
+
 interface IPosition {
   left: number;
   top: number;
 }
 
-interface IThumbsPositions {
+interface IFullThumbsPositions {
   thumbOne: IPosition;
   thumbTwo: IPosition | null;
 }
@@ -86,11 +101,11 @@ interface IFullPointParams {
 }
 
 interface ISimpleJsSliderModel {
-  observer: IObserverNew;
+  observer: IObserver;
   getSliderSettings(): ISliderSettings;
-  getObserver(): IObserverNew;
-  updateThumbsValues({ thumbOne, thumbTwo }: IThumbsPositionsNew): void;
-  getThumbsPositionsNew(): IThumbsParams;
+  getObserver(): IObserver;
+  updateThumbsValues({ thumbOne, thumbTwo }: IThumbsPositions): void;
+  getThumbsPositions(): IThumbsParams;
   getThumbValues(): IThumbsValues;
   getPointsParams(): IPointParams[];
   updateSliderSettings(settings: ISliderSettings): void;
@@ -101,7 +116,7 @@ interface ISimpleJsSliderModel {
 }
 
 interface ISimpleJsSliderView {
-  observer: IObserverNew;
+  observer: IObserver;
   moveThumbs({ thumbOne, thumbTwo }: IThumbsParams): void;
   updatePopUps(values: IThumbsValues): void;
   updateProgressBar(): void;
@@ -116,8 +131,8 @@ interface ISimpleJsSliderView {
   disableScale(): void;
   getThumbSize(): ISize;
   getSliderSize(): ISize;
-  getThumbsPositions(): IThumbsPositions;
-  updateThumbs(thumbsPositions: IThumbsPositions): void;
+  getThumbsPositions(): IFullThumbsPositions;
+  updateThumbs(thumbsPositions: IFullThumbsPositions): void;
   getTrackClickPosition(): IPosition;
   getScaleClickPosition(): IPosition;
 }
@@ -141,6 +156,7 @@ export {
   IThumbsValues,
   IPosition,
   IThumbsPositions,
+  IFullThumbsPositions,
   IProgressBarParams,
   IPopUpParams,
   IPopUps,
@@ -153,4 +169,6 @@ export {
   IPointParams,
   IFullPointParams,
   IThumbsParams,
+  IObserver,
+  IObserversList,
 };

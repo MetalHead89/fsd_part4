@@ -2,11 +2,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable comma-dangle */
 
-import { ISliderSettings } from './interfaces';
+import { ISliderSettings, IObserver } from './interfaces';
 import SimpleJsSliderModel from './model/simple-js-slider-model';
 import SimpleJsSliderController from './controller/simple-js-slider-controller';
 import SimpleJsSliderView from './view/simple-js-slider-view';
-import { IObserverNew } from './new-interfaces';
 
 (($) => {
   // Настройки плагина по умолчанию
@@ -50,7 +49,7 @@ import { IObserverNew } from './new-interfaces';
     updateSliderSettings(sliderSettings: ISliderSettings): void {
       $(this).data().model.updateSliderSettings(sliderSettings);
     },
-    getObserver(): IObserverNew {
+    getObserver(): IObserver {
       return $(this).data().model.getObserver();
     },
     // getModelSubject(): ISubject {

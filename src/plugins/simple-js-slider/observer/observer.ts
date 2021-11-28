@@ -1,6 +1,6 @@
-import { IObserverNew, IObserversList } from '../new-interfaces';
+import { IObserver, IObserversList } from '../interfaces';
 
-class ObserverNew implements IObserverNew {
+class ObserverNew implements IObserver {
   private observers: IObserversList;
 
   constructor() {
