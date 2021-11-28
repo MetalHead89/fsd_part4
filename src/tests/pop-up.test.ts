@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import PopUp from '../plugins/simple-js-slider/view/pop-up/pop-up';
+import PopUp from '../plugins/simple-js-slider/view/PopUp/PopUp';
 
 let popUp: PopUp;
 

@@ -16,13 +16,13 @@ import {
   IFullThumbsPositions,
 } from '../interfaces';
 
-import Slider from './slider/slider';
-import Track from './track/track';
-import Thumb from './thumb/thumb';
-import PopUp from './pop-up/pop-up';
-import ProgressBar from './progress-bar/progress-bar';
-import Scale from './scale/scale';
-import Observer from '../observer/observer';
+import Slider from './Slider/Slider';
+import Track from './Track/Track';
+import Thumb from './Thumb/Thumb';
+import PopUp from './PopUp/PopUp';
+import ProgressBar from './ProgressBar/ProgressBar';
+import Scale from './Scale/Scale';
+import Observer from '../observer/Observer';
 
 class SimpleJsSliderView implements ISimpleJsSliderView {
   observer: IObserver;

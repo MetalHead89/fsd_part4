@@ -2,7 +2,7 @@
 /* eslint-disable comma-dangle */
 
 import { IPosition } from '../../interfaces';
-import UIControl from '../ui-control/ui-control';
+import UIControl from '../UIControl/UIControl';
 
 class Thumb extends UIControl {
   private shift = { shiftX: 0, shiftY: 0 };

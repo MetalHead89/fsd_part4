@@ -6,7 +6,7 @@ import groupElements from './groupElements';
 import RadioButton from './RadioButton/RadioButton';
 import Checkbox from './Checkbox/Checkbox';
 import { IThumbsValues } from '../../simple-js-slider/interfaces';
-import Observer from '../../simple-js-slider/observer/observer';
+import Observer from '../../simple-js-slider/observer/Observer';
 
 class ControlPanelView {
   private sliderWrapper: HTMLDivElement;

@@ -1,4 +1,4 @@
-import Observer from '../../../simple-js-slider/observer/observer';
+import Observer from '../../../simple-js-slider/observer/Observer';
 
 class TextField {
   private control: HTMLDivElement;

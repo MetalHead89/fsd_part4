@@ -6,7 +6,7 @@
 // /* eslint-disable arrow-body-style */
 // /* eslint-disable comma-dangle */
 
-// import SimpleJsSliderView from '../plugins/simple-js-slider/view/simple-js-slider-view';
+// import SimpleJsSliderView from '../plugins/simple-js-slider/view/SimpleJsSliderView';
 
 // jest.mock('../plugins/simple-js-slider/view/slider/slider');
 // jest.mock('../plugins/simple-js-slider/view/track/track');

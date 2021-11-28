@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable comma-dangle */
 import { IObserver } from '../../../simple-js-slider/interfaces';
-import Observer from '../../../simple-js-slider/observer/observer';
+import Observer from '../../../simple-js-slider/observer/Observer';
 import { IRadioParams } from '../../interfaces';
 
 class RadioButton {

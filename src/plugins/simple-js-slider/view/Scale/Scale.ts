@@ -2,7 +2,7 @@
 /* eslint-disable comma-dangle */
 
 import { IFullPointParams, ISize } from '../../interfaces';
-import UIControl from '../ui-control/ui-control';
+import UIControl from '../UIControl/UIControl';
 
 class Scale extends UIControl {
   constructor(orientation?: string) {

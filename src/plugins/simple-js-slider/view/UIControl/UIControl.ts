@@ -1,5 +1,5 @@
 import { IPosition, ISize } from '../../interfaces';
-import Observer from '../../observer/observer';
+import Observer from '../../observer/Observer';
 
 class UIControl {
   observer: Observer;

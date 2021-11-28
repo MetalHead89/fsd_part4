@@ -1,12 +1,12 @@
-import UIControl from '../../ui-control/ui-control';
+import UIControl from '../../UIControl/UIControl';
 
 jest.mock('../../ui-control/ui-control');
 
-export default class ProgressBar extends UIControl {
+export default class PopUp extends UIControl {
   private TEST_OK = true;
 
   constructor() {
-    super('slider__progress-bar');
+    super('slider__pop-up');
   }
 
   update(): boolean {

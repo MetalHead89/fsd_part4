@@ -1,5 +1,5 @@
 import { ISliderMargins } from '../../interfaces';
-import UIControl from '../ui-control/ui-control';
+import UIControl from '../UIControl/UIControl';
 
 class Slider extends UIControl {
   constructor() {

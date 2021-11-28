@@ -7,13 +7,13 @@
 // /* eslint-disable dot-notation */
 // /* eslint-disable @typescript-eslint/no-explicit-any */
 
-// import SimpleJsSliderController from '../plugins/simple-js-slider/controller/simple-js-slider-controller';
+// import SimpleJsSliderController from '../plugins/simple-js-slider/controller/SimpleJsSliderController';
 // import { ISliderSettings } from '../plugins/simple-js-slider/interfaces';
-// import SimpleJsSliderModel from '../plugins/simple-js-slider/model/simple-js-slider-model';
-// import SimpleJsSliderView from '../plugins/simple-js-slider/view/simple-js-slider-view';
+// import SimpleJsSliderModel from '../plugins/simple-js-slider/model/SimpleJsSliderModel';
+// import SimpleJsSliderView from '../plugins/simple-js-slider/view/SimpleJsSliderView';
 
-// jest.mock('../plugins/simple-js-slider/model/simple-js-slider-model');
-// jest.mock('../plugins/simple-js-slider/view/simple-js-slider-view');
+// jest.mock('../plugins/simple-js-slider/model/SimpleJsSliderModel');
+// jest.mock('../plugins/simple-js-slider/view/SimpleJsSliderView');
 
 // let controller: SimpleJsSliderController;
 // let model: SimpleJsSliderModel;

@@ -1,5 +1,5 @@
 import { IProgressBarParams } from '../../interfaces';
-import UIControl from '../ui-control/ui-control';
+import UIControl from '../UIControl/UIControl';
 
 class ProgressBar extends UIControl {
   constructor() {

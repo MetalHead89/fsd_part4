@@ -6,9 +6,10 @@ import {
   IThumbsValues,
   IPointParams,
   IThumbsParams,
+  IObserver,
+  IThumbsPositions,
 } from '../interfaces';
-import { IObserver, IThumbsPositions } from '../interfaces';
-import Observer from '../observer/observer';
+import Observer from '../observer/Observer';
 
 class SimpleJsSliderModel implements ISimpleJsSliderModel {
   observer: IObserver;

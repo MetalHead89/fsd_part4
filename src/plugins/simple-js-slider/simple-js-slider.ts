@@ -3,9 +3,9 @@
 /* eslint-disable comma-dangle */
 
 import { ISliderSettings, IObserver } from './interfaces';
-import SimpleJsSliderModel from './model/simple-js-slider-model';
-import SimpleJsSliderController from './controller/simple-js-slider-controller';
-import SimpleJsSliderView from './view/simple-js-slider-view';
+import SimpleJsSliderModel from './model/SimpleJsSliderModel';
+import SimpleJsSliderController from './controller/SimpleJsSliderController';
+import SimpleJsSliderView from './view/SimpleJsSliderView';
 
 (($) => {
   // Настройки плагина по умолчанию

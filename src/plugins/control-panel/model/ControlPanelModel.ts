@@ -1,5 +1,5 @@
 import { ISliderSettings, IObserver } from '../../simple-js-slider/interfaces';
-import Observer from '../../simple-js-slider/observer/observer';
+import Observer from '../../simple-js-slider/observer/Observer';
 
 class ControlPanelModel {
   observer: IObserver;

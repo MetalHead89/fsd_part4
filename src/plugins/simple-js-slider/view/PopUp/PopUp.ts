@@ -1,5 +1,5 @@
 import { IPopUpParams, IPosition } from '../../interfaces';
-import UIControl from '../ui-control/ui-control';
+import UIControl from '../UIControl/UIControl';
 
 class PopUp extends UIControl {
   constructor(orientation?: string) {

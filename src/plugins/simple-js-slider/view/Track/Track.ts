@@ -1,4 +1,4 @@
-import UIControl from '../ui-control/ui-control';
+import UIControl from '../UIControl/UIControl';
 
 class Track extends UIControl {
   constructor() {

@@ -1,4 +1,4 @@
-import Observer from '../../../simple-js-slider/observer/observer';
+import Observer from '../../../simple-js-slider/observer/Observer';
 import { ICheckboxParams } from '../../interfaces';
 
 class Checkbox {

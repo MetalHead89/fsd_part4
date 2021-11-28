@@ -2,7 +2,7 @@
 // // /* eslint-disable comma-dangle */
 
 // import { ISliderSettings } from '../plugins/simple-js-slider/interfaces';
-// import SimpleJsSliderModel from '../plugins/simple-js-slider/model/simple-js-slider-model';
+// import SimpleJsSliderModel from '../plugins/simple-js-slider/model/SimpleJsSliderModel';
 
 // let settings: ISliderSettings;
 // let model: SimpleJsSliderModel;
