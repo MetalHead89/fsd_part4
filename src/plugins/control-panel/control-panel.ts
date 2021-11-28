@@ -3,9 +3,9 @@
 /* eslint-disable func-names */
 /* eslint-disable no-param-reassign */
 
-import ControlPanelView from './view/control-panel-view';
-import ControlPanelModel from './model/control-panel-model';
-import ControlPanelController from './controller/control-panel-controller';
+import ControlPanelView from './view/ControlPanelView';
+import ControlPanelModel from './model/ControlPanelModel';
+import ControlPanelController from './controller/ControlPanelController';
 
 (($) => {
   const methods: any = {

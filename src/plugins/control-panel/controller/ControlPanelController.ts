@@ -1,6 +1,6 @@
 import { ISliderSettings } from '../../simple-js-slider/interfaces';
-import ControlPanelModel from '../model/control-panel-model';
-import ControlPanelView from '../view/control-panel-view';
+import ControlPanelModel from '../model/ControlPanelModel';
+import ControlPanelView from '../view/ControlPanelView';
 
 class ControlPanelController {
   private view: ControlPanelView;

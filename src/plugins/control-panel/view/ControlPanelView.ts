@@ -1,10 +1,10 @@
 /* eslint-disable comma-dangle */
 
-import ControlPanel from './control-panel/control-panel';
-import TextField from './text-field/text-field';
-import groupElements from './group-elements';
-import RadioButton from './radio-button/radio-button';
-import Checkbox from './checkbox/checkbox';
+import ControlPanel from './ControlPanel/ControlPanel';
+import TextField from './TextField/TextField';
+import groupElements from './groupElements';
+import RadioButton from './RadioButton/RadioButton';
+import Checkbox from './Checkbox/Checkbox';
 import { IThumbsValues } from '../../simple-js-slider/interfaces';
 import Observer from '../../simple-js-slider/observer/observer';
 
