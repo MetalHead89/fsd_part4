@@ -56,8 +56,6 @@ class SimpleJsSliderController {
     } else {
       this.view.switchToVertical();
     }
-
-    this.model.setSliderSize(this.view.getSliderSize());
   }
 
   private updateSliderType(): void {

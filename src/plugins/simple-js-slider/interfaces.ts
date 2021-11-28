@@ -109,23 +109,23 @@ interface ISimpleJsSliderModel {
   getPointsParams(): IPointParams[];
   updateSliderSettings(settings: ISliderSettings): void;
 
-  subject: ISubject;
-  setSliderSize(size: ISize): void;
-  setThumbSize(size: ISize): void;
-  getMax(): number;
+  // subject: ISubject;
+  // setSliderSize(size: ISize): void;
+  // setThumbSize(size: ISize): void;
+  // getMax(): number;
   getType(): string;
   isScaleEnabled(): boolean;
   isPopUpsEnabled(): boolean;
-  refreshSliderState(settings: ISliderSettings): void;
-  getThumbsPositions(): IThumbsPositions;
-  updateThumbsState(positions: IThumbsPositions): void;
-  getProgressBarParams(): IProgressBarParams;
-  getPopUpsParams(): IPopUps;
-  getScalePoints(): IScalePointParams[];
-  setScalePointSize(size: ISize): void;
+  // refreshSliderState(settings: ISliderSettings): void;
+  // getThumbsPositions(): IThumbsPositions;
+  // updateThumbsState(positions: IThumbsPositions): void;
+  // getProgressBarParams(): IProgressBarParams;
+  // getPopUpsParams(): IPopUps;
+  // getScalePoints(): IScalePointParams[];
+  // setScalePointSize(size: ISize): void;
   getOrientation(): string;
-  setThumbPositionOnClickPosition(clickPosition: IPosition): void;
-  recalculateStep(): void;
+  // setThumbPositionOnClickPosition(clickPosition: IPosition): void;
+  // recalculateStep(): void;
 }
 
 interface ISimpleJsSliderView {
