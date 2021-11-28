@@ -13,6 +13,14 @@ class ControlPanelModel {
     this.subscribeToEvents();
   }
 
+  getSliderSettings(): ISliderSettings {
+    return this.slider.simpleJsSlider('getSliderSettings');
+  }
+
+  updateSliderPluginSettings(sliderSettings: ISliderSettings): void {
+    this.slider.simpleJsSlider('updateSliderSettings', sliderSettings);
+  }
+
   private subscribeToEvents() {
     this.sliderObserver.register('settingsIsUpdated', () => {
       this.observer.notify('sliderIsUpdated');
@@ -20,14 +28,6 @@ class ControlPanelModel {
     this.sliderObserver.register('modelIsUpdated', () => {
       this.observer.notify('sliderIsUpdated');
     });
-  }
-
-  getSliderSettings(): ISliderSettings {
-    return this.slider.simpleJsSlider('getSliderSettings');
-  }
-
-  updateSliderPluginSettings(sliderSettings: ISliderSettings): void {
-    this.slider.simpleJsSlider('updateSliderSettings', sliderSettings);
   }
 }
 
