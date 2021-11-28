@@ -8,7 +8,7 @@ import {
   IThumbsParams,
 } from '../interfaces';
 import { IObserver, IThumbsPositions } from '../interfaces';
-import ObserverNew from '../observer/observer';
+import Observer from '../observer/observer';
 
 class SimpleJsSliderModel implements ISimpleJsSliderModel {
   observer: IObserver;
@@ -23,7 +23,7 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
   private thumbTwoValue = 7;
 
   constructor(settings: ISliderSettings) {
-    this.observer = new ObserverNew();
+    this.observer = new Observer();
     this.updateSliderSettings(settings);
   }
 

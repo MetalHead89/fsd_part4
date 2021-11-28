@@ -6,7 +6,7 @@ import groupElements from './group-elements';
 import RadioButton from './radio-button/radio-button';
 import Checkbox from './checkbox/checkbox';
 import { IThumbsValues } from '../../simple-js-slider/interfaces';
-import ObserverNew from '../../simple-js-slider/observer/observer';
+import Observer from '../../simple-js-slider/observer/observer';
 
 class ControlPanelView {
   private sliderWrapper: HTMLDivElement;
@@ -20,10 +20,10 @@ class ControlPanelView {
   private orientationRadio: RadioButton;
   private scaleCheckbox: Checkbox;
   private popUpsCheckbox: Checkbox;
-  observer: ObserverNew;
+  observer: Observer;
 
   constructor(sliderWrapper: HTMLDivElement) {
-    this.observer = new ObserverNew();
+    this.observer = new Observer();
     this.controlPanel = new ControlPanel();
     this.sliderWrapper = sliderWrapper;
     this.thumbOneValue = new TextField('First thumb value');

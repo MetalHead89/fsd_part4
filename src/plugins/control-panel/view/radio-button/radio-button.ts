@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable comma-dangle */
 import { IObserver } from '../../../simple-js-slider/interfaces';
-import ObserverNew from '../../../simple-js-slider/observer/observer';
+import Observer from '../../../simple-js-slider/observer/observer';
 import { IRadioParams } from '../../interfaces';
 
 class RadioButton {
@@ -10,7 +10,7 @@ class RadioButton {
   observer: IObserver;
 
   constructor(name: string, ...params: IRadioParams[]) {
-    this.observer = new ObserverNew();
+    this.observer = new Observer();
     const uniqueName = RadioButton.generateName(name);
     this.control = document.createElement('div');
     this.control.classList.add('radio-button');

@@ -1,6 +1,6 @@
 import { IObserver, IObserversList } from '../interfaces';
 
-class ObserverNew implements IObserver {
+class Observer implements IObserver {
   private observers: IObserversList;
 
   constructor() {
@@ -26,4 +26,4 @@ class ObserverNew implements IObserver {
   }
 }
 
-export default ObserverNew;
+export default Observer;

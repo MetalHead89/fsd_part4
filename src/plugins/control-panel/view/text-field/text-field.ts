@@ -1,14 +1,14 @@
-import ObserverNew from '../../../simple-js-slider/observer/observer';
+import Observer from '../../../simple-js-slider/observer/observer';
 
 class TextField {
   private control: HTMLDivElement;
   private field: HTMLInputElement;
   private label: HTMLLabelElement;
   private value: number;
-  observer: ObserverNew;
+  observer: Observer;
 
   constructor(labelText: string) {
-    this.observer = new ObserverNew();
+    this.observer = new Observer();
     this.control = document.createElement('div');
     this.field = document.createElement('input');
     this.label = document.createElement('label');

@@ -22,7 +22,7 @@ import Thumb from './thumb/thumb';
 import PopUp from './pop-up/pop-up';
 import ProgressBar from './progress-bar/progress-bar';
 import Scale from './scale/scale';
-import ObserverNew from '../observer/observer';
+import Observer from '../observer/observer';
 
 class SimpleJsSliderView implements ISimpleJsSliderView {
   observer: IObserver;
@@ -37,7 +37,7 @@ class SimpleJsSliderView implements ISimpleJsSliderView {
   private scale: Scale | null;
 
   constructor(wrapper: HTMLDivElement) {
-    this.observer = new ObserverNew();
+    this.observer = new Observer();
     this.sliderWrapper = wrapper;
     this.slider = new Slider();
     this.track = new Track();
