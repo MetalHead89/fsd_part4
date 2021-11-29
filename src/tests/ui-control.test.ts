@@ -46,14 +46,16 @@ describe('Конструктор класса UIControl', () => {
   });
   test('Элемент UIControl должен содержать элемент с классом some-element_orientation_horizontal', () => {
     expect(
-      control['control'].classList.contains('some-element_orientation_horizontal'),
+      control['control'].classList.contains(
+        'some-element_orientation_horizontal'
+      )
     ).toBe(true);
   });
   test('Элемент UIControl должен содержать элемент с классом some-element_orientation_vertical', () => {
     control = new UIControl('some-element', 'vertical');
-    expect(control['control'].classList.contains('some-element_orientation_vertical')).toBe(
-      true,
-    );
+    expect(
+      control['control'].classList.contains('some-element_orientation_vertical')
+    ).toBe(true);
   });
 });
 
@@ -71,6 +73,21 @@ describe('Методы setPosition and getPosition класса UIControl', () =
     control['setPosition']({ left: 20, top: 10 });
     expect(control.getPosition().left).toBe(20);
     expect(control.getPosition().top).toBe(10);
+  });
+});
+
+describe('Метод getPositionInsideParent класса UIControl', () => {
+  test('Позиция элемента UIControl должна соответствовать переданному в метод объекту', () => {
+    expect(control['getPositionInsideParent']({ left: 60, top: 21 }).left).toBe(60);
+    expect(control['getPositionInsideParent']({ left: 60, top: 21 }).top).toBe(21);
+  });
+  test('Позиция элемента UIControl должна соответствовать переданному в метод объекту', () => {
+    const elementParrent = document.createElement('div');
+    elementParrent.style.left = '100px';
+    elementParrent.style.top = '40px';
+    elementParrent.append(control.getControl());
+    expect(control['getPositionInsideParent']({ left: 80, top: 20 }).left).toBe(80);
+    expect(control['getPositionInsideParent']({ left: 80, top: 20 }).top).toBe(20);
   });
 });
 
@@ -103,15 +120,17 @@ describe('Метод switchToHorizontal класса UIControl', () => {
   test('Элемент UIControl не должен содержать класс some-element_orientation_vertical', () => {
     control = new UIControl('some-element', 'vertical');
     control.switchToHorizontal();
-    expect(control['control'].classList.contains('some-element_orientation_vertical')).toBe(
-      false,
-    );
+    expect(
+      control['control'].classList.contains('some-element_orientation_vertical')
+    ).toBe(false);
   });
   test('Элемент UIControl должен содержать класс some-element_orientation_horizontal', () => {
     control = new UIControl('some-element', 'vertical');
     control.switchToHorizontal();
     expect(
-      control['control'].classList.contains('some-element_orientation_horizontal'),
+      control['control'].classList.contains(
+        'some-element_orientation_horizontal'
+      )
     ).toBe(true);
   });
 });
@@ -120,14 +139,16 @@ describe('Метод switchToVertical класса UIControl', () => {
   test('Элемент UIControl не должен содержать класс some-element_orientation_horizontal', () => {
     control.switchToVertical();
     expect(
-      control['control'].classList.contains('some-element_orientation_horizontal'),
+      control['control'].classList.contains(
+        'some-element_orientation_horizontal'
+      )
     ).toBe(false);
   });
   test('Элемент UIControl должен содержать класс some-element_orientation_vertical', () => {
     control.switchToVertical();
-    expect(control['control'].classList.contains('some-element_orientation_vertical')).toBe(
-      true,
-    );
+    expect(
+      control['control'].classList.contains('some-element_orientation_vertical')
+    ).toBe(true);
   });
 });
 
