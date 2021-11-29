@@ -30,7 +30,7 @@ interface IThumbsValues {
 
 interface IObserver {
   register(event: string, func: (args?: any) => void): void;
-  unsubscribe(event: string): void;
+  unsubscribe(event: string, func: (args?: any) => void): void;
   notify(event: string, args?: any): void;
 }
 
