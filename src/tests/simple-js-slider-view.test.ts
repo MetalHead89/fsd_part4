@@ -1,3 +1,289 @@
+/**
+ * @jest-environment jsdom
+ */
+
+/* eslint-disable dot-notation */
+
+import SimpleJsSliderView from '../plugins/simple-js-slider/view/SimpleJsSliderView';
+
+let wrapper: HTMLDivElement;
+let view: SimpleJsSliderView;
+
+beforeEach(() => {
+  wrapper = document.createElement('div');
+  view = new SimpleJsSliderView(wrapper);
+});
+
+describe('Метод moveThumbs класса SimpleJsSliderView', () => {
+  test('Метод moveTo класса Thumb должен быть вызван один раз', () => {
+    const thumbsParams = {
+      thumbOne: { position: 15, value: 30 },
+      thumbTwo: { position: 28, value: 30 },
+    };
+
+    const spy = spyOn(view['thumbOne'], 'moveTo');
+    view.moveThumbs({ ...thumbsParams });
+
+    expect(spy).toBeCalledTimes(1);
+  });
+
+  test('Метод moveTo класса Thumb должен быть вызван один раз', () => {
+    const thumbsParams = {
+      thumbOne: { position: 15, value: 30 },
+      thumbTwo: { position: 10, value: 30 },
+    };
+
+    const spy = spyOn(view['thumbTwo'], 'moveTo');
+    view.moveThumbs({ ...thumbsParams });
+
+    expect(spy).toBeCalledTimes(1);
+  });
+
+  test('Метод swapThumbs класса Thumb должен быть вызван 1 раз', () => {
+    const thumbsParams = {
+      thumbOne: { position: 15, value: 30 },
+      thumbTwo: { position: 10, value: 30 },
+    };
+
+    const spy = spyOn(view, 'swapThumbs');
+    view.moveThumbs({ ...thumbsParams });
+
+    expect(spy).toBeCalledTimes(1);
+  });
+
+  test('Метод swapThumbs класса Thumb не должен быть вызван', () => {
+    const thumbsParams = {
+      thumbOne: { position: 15, value: 30 },
+      thumbTwo: { position: 28, value: 30 },
+    };
+    view['thumbTwo'] = null;
+
+    const spy = spyOn(view, 'swapThumbs');
+    view.moveThumbs({ ...thumbsParams });
+
+    expect(spy).toBeCalledTimes(0);
+  });
+});
+
+describe('Метод updatePopUps класса SimpleJsSliderView', () => {
+  test('Метод update класса PopUp должен быть вызван один раз', () => {
+    const thumbsParams = {
+      thumbOne: 50,
+      thumbTwo: 50,
+    };
+
+    const spy = spyOn(view['popUpOne'], 'update');
+    view.updatePopUps({ ...thumbsParams });
+
+    expect(spy).toBeCalledTimes(1);
+  });
+
+  test('Метод update класса PopUp не должен быть вызван', () => {
+    const thumbsParams = {
+      thumbOne: 50,
+      thumbTwo: 50,
+    };
+    view['thumbOne'] = null;
+
+    const spy = spyOn(view['popUpOne'], 'update');
+    view.updatePopUps({ ...thumbsParams });
+
+    expect(spy).toBeCalledTimes(0);
+  });
+});
+
+describe('Метод updateProgressBar класса SimpleJsSliderView', () => {
+  test('Метод update класса ProgressBar должен быть вызван один раз', () => {
+    const spy = spyOn(view['progressBar'], 'update');
+    view.updateProgressBar();
+
+    expect(spy).toBeCalledTimes(1);
+  });
+
+  test('Метод update класса ProgressBar должен быть вызван один раз', () => {
+    view.switchToHorizontal();
+    view['thumbTwo'] = null;
+    const spy = spyOn(view['progressBar'], 'update');
+    view.updateProgressBar();
+
+    expect(spy).toBeCalledTimes(1);
+  });
+
+  test('Метод update класса ProgressBar должен быть вызван один раз', () => {
+    view.switchToVertical();
+    const spy = spyOn(view['progressBar'], 'update');
+    view.updateProgressBar();
+
+    expect(spy).toBeCalledTimes(1);
+  });
+});
+
+describe('Метод updateScale класса SimpleJsSliderView', () => {
+  test('Метод setMargins класса Slider должен быть вызван несколько раз', () => {
+    const pointsParams = [{ value: 20, position: 30 }];
+
+    const spy = spyOn(view['slider'], 'setMargins');
+    view.updateScale(pointsParams);
+
+    expect(spy).toBeCalled();
+  });
+
+  test('Метод setMargins класса Slider не должен быть вызван', () => {
+    const pointsParams = [{ value: 20, position: 30 }];
+    view['scale'] = null;
+
+    const spy = spyOn(view['slider'], 'setMargins');
+    view.updateScale(pointsParams);
+
+    expect(spy).not.toBeCalled();
+  });
+});
+
+describe('Метод switchToSingle класса SimpleJsSliderView', () => {
+  test('ThumbTwo должен быть null', () => {
+    view.switchToSingle();
+
+    expect(view['thumbTwo']).toBeNull();
+  });
+});
+
+describe('Метод switchToRange класса SimpleJsSliderView', () => {
+  test('ThumbTwo должен существовать', () => {
+    view.switchToSingle();
+    view.switchToRange();
+
+    expect(view['thumbTwo']).not.toBeNull();
+  });
+
+  test('ThumbTwo должен существовать', () => {
+    view.switchToRange();
+
+    expect(view['thumbTwo']).not.toBeNull();
+  });
+
+  test('ThumbTwo должен существовать', () => {
+    view['thumbTwo'] = null;
+    view['popUpOne'] = null;
+    view.switchToRange();
+
+    expect(view['thumbTwo']).not.toBeNull();
+  });
+});
+
+describe('Метод disablePopUps класса SimpleJsSliderView', () => {
+  test('PopUps должны быть отключены', () => {
+    view.disablePopUps();
+
+    expect(view['popUpOne']).toBeNull();
+    expect(view['popUpTwo']).toBeNull();
+  });
+});
+
+describe('Метод enablePopUps класса SimpleJsSliderView', () => {
+  test('PopUps должны существовать', () => {
+    view.disablePopUps();
+    view.enablePopUps();
+
+    expect(view['popUpOne']).not.toBeNull();
+    expect(view['popUpTwo']).not.toBeNull();
+  });
+
+  test('PopUps должны существовать', () => {
+    view.enablePopUps();
+
+    expect(view['popUpOne']).not.toBeNull();
+    expect(view['popUpTwo']).not.toBeNull();
+  });
+});
+
+describe('Метод enableScale класса SimpleJsSliderView', () => {
+  test('Scale должна существовать', () => {
+    view.enableScale();
+
+    expect(view['scale']).not.toBeNull();
+  });
+
+  test('Scale должна существовать', () => {
+    view['scale'] = null;
+    view.enableScale();
+
+    expect(view['scale']).not.toBeNull();
+  });
+});
+
+describe('Метод getThumbSize класса SimpleJsSliderView', () => {
+  test('Метод getThumbSize должен возвратить объект с размерами Thumb', () => {
+    expect(view.getThumbSize().height).toBe(0);
+  });
+});
+
+describe('Метод getSliderSize класса SimpleJsSliderView', () => {
+  test('Метод getSliderSize должен возвратить объект с размерами Slider', () => {
+    expect(view.getSliderSize().height).toBe(0);
+  });
+});
+
+describe('Метод getThumbsPositions класса SimpleJsSliderView', () => {
+  test('Метод getThumbsPositions класса Thumb должен быть вызван один раз', () => {
+    const spy = spyOn(view['thumbOne'], 'getPosition');
+    view.getThumbsPositions();
+
+    expect(spy).toBeCalledTimes(1);
+  });
+
+  test('Позиция thumbTwo должна быть null', () => {
+    view['thumbTwo'] = null;
+
+    expect(view.getThumbsPositions().thumbTwo).toBeNull();
+  });
+});
+
+describe('Метод updateThumbs класса SimpleJsSliderView', () => {
+  test('Метод moveTo класса Thumb должен быть вызван один раз', () => {
+    const thumbsParams = {
+      thumbOne: { left: 100, top: 50 },
+      thumbTwo: { left: 100, top: 50 },
+    };
+
+    const spy = spyOn(view['thumbOne'], 'moveTo');
+    view.updateThumbs(thumbsParams);
+
+    expect(spy).toBeCalledTimes(1);
+  });
+
+  test('Метод moveTo класса Thumb не должен быть вызван', () => {
+    const thumbsParams = {
+      thumbOne: { left: 100, top: 50 },
+      thumbTwo: null,
+    };
+
+    const spy = spyOn(view['thumbTwo'], 'moveTo');
+    view.updateThumbs(thumbsParams);
+
+    expect(spy).toBeCalledTimes(0);
+  });
+});
+
+describe('Метод getTrackClickPosition класса SimpleJsSliderView', () => {
+  test('Метод должен возвращать объект с позицией', () => {
+    expect(view.getTrackClickPosition().top).toBe(0);
+    expect(view.getTrackClickPosition().left).toBe(0);
+  });
+});
+
+describe('Метод getScaleClickPosition класса SimpleJsSliderView', () => {
+  test('Метод должен возвращать объект с позицией', () => {
+    expect(view.getScaleClickPosition().top).toBe(0);
+    expect(view.getScaleClickPosition().left).toBe(0);
+  });
+
+  test('Метод должен возвращать объект с позицией', () => {
+    view['scale'] = null;
+    expect(view.getScaleClickPosition().top).toBe(0);
+    expect(view.getScaleClickPosition().left).toBe(0);
+  });
+});
+
 // /**
 //  * @jest-environment jsdom
 //  */
