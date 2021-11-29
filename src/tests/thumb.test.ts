@@ -56,12 +56,6 @@ describe('Метод drag класса Thumb', () => {
     thumb['drag'](moveEvt);
     expect(spy).toBeCalledTimes(1);
   });
-  // test('Метод notify должен быть вызван один раз', () => {
-  //   const spy = spyOn<any>(thumb.subject, 'notify');
-  //   const moveEvt = new window.MouseEvent('pointermove') as PointerEvent;
-  //   thumb['drag'](moveEvt);
-  //   expect(spy).toBeCalledTimes(1);
-  // });
 });
 
 describe('Метод setPosition класса Thumb', () => {
