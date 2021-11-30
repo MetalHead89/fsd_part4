@@ -2,12 +2,12 @@
  * @jest-environment jsdom
  */
 
+// @ts-nocheck
 /* eslint-disable comma-dangle */
 /* eslint-disable dot-notation */
 /* eslint-disable no-return-assign */
 
 import SimpleJsSliderView from '../plugins/simple-js-slider/view/SimpleJsSliderView';
-import Slider from '../plugins/simple-js-slider/view/Slider/Slider';
 
 let wrapper: HTMLDivElement;
 let view: SimpleJsSliderView;
