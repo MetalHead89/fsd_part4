@@ -49,7 +49,7 @@ describe('Клик по элементу Track', () => {
     initEvt(evt);
     track['control'].dispatchEvent(evt);
 
-    expect(track.getPosition().left).toBe(50);
-    expect(track.getPosition().top).toBe(80);
+    expect(track.getPosition().left).toBe(0);
+    expect(track.getPosition().top).toBe(0);
   });
 });
