@@ -41,7 +41,7 @@ describe('Метод remove класса Observer', () => {
     expect(observer['observers'].thumbMove.length).toBe(1);
 
     observer.unsubscribe('thumbMove', func3);
-    expect(observer['observers'].thumbMove).toBe(undefined);
+    expect(observer['observers'].thumbMove.length).toBe(0);
   });
 });
 

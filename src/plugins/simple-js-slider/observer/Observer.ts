@@ -20,10 +20,6 @@ class Observer implements IObserver {
 
   unsubscribe(event: string, func: (args?: any) => void): void {
     this.observers[event] = this.observers[event].filter((f) => f !== func);
-
-    if (this.observers[event].length === 0) {
-      delete this.observers[event];
-    }
   }
 
   notify(event: string, args?: any): void {
