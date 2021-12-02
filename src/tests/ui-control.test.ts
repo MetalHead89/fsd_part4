@@ -119,14 +119,14 @@ describe('Метод getSize класса UIControl', () => {
 describe('Метод switchToHorizontal класса UIControl', () => {
   test('Элемент UIControl не должен содержать класс some-element_orientation_vertical', () => {
     control = new UIControl('some-element', 'vertical');
-    control.switchToHorizontal();
+    control.setOrientation('horizontal');
     expect(
       control['control'].classList.contains('some-element_orientation_vertical')
     ).toBe(false);
   });
   test('Элемент UIControl должен содержать класс some-element_orientation_horizontal', () => {
     control = new UIControl('some-element', 'vertical');
-    control.switchToHorizontal();
+    control.setOrientation('horizontal');
     expect(
       control['control'].classList.contains(
         'some-element_orientation_horizontal'
@@ -137,7 +137,7 @@ describe('Метод switchToHorizontal класса UIControl', () => {
 
 describe('Метод switchToVertical класса UIControl', () => {
   test('Элемент UIControl не должен содержать класс some-element_orientation_horizontal', () => {
-    control.switchToVertical();
+    control.setOrientation('vertical');
     expect(
       control['control'].classList.contains(
         'some-element_orientation_horizontal'
@@ -145,7 +145,7 @@ describe('Метод switchToVertical класса UIControl', () => {
     ).toBe(false);
   });
   test('Элемент UIControl должен содержать класс some-element_orientation_vertical', () => {
-    control.switchToVertical();
+    control.setOrientation('vertical');
     expect(
       control['control'].classList.contains('some-element_orientation_vertical')
     ).toBe(true);
@@ -158,16 +158,6 @@ describe('Метод remove класса UIControl', () => {
     body?.append(control.getControl());
     control.remove();
     expect(document.querySelector('.some-element')).toBe(null);
-  });
-});
-
-describe('Метод getOrientation класса UIControl', () => {
-  test('Метод должен возвращать текущую ориентацию элемента', () => {
-    expect(control.getOrientation()).toBe('horizontal');
-  });
-  test('Метод должен возвращать текущую ориентацию элемента', () => {
-    control = new UIControl('some-element', 'vertical');
-    expect(control.getOrientation()).toBe('vertical');
   });
 });
 

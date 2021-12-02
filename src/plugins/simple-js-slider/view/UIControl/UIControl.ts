@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 import { IPosition, ISize } from '../../interfaces';
 import Observer from '../../observer/Observer';
 
@@ -5,16 +6,19 @@ class UIControl {
   observer: Observer;
   protected control: HTMLDivElement;
   protected lastPosition: IPosition;
+  protected orientation: string;
+  protected name: string;
 
-  constructor(name: string, orientation?: string) {
+  constructor(name: string, orientation = 'horizontal') {
     const control = document.createElement('div');
     this.control = control;
     this.observer = new Observer();
     this.lastPosition = { left: 0, top: 0 };
-    const orientationClass = orientation
-      ? `${name}_orientation_${orientation}`
-      : `${name}_orientation_horizontal`;
-    this.control.classList.add(`${name}`, orientationClass);
+    this.orientation = orientation;
+    this.name = name;
+
+    this.control.classList.add(name);
+    this.setOrientation(orientation);
   }
 
   getPosition(): IPosition {
@@ -32,26 +36,22 @@ class UIControl {
     };
   }
 
-  switchToHorizontal(): void {
-    const mainClass = this.control.classList[0];
-    this.control.classList.remove(`${mainClass}_orientation_vertical`);
-    this.control.classList.add(`${mainClass}_orientation_horizontal`);
-  }
+  setOrientation(orientation: string): void {
+    this.orientation = orientation;
 
-  switchToVertical(): void {
-    const mainClass = this.control.classList[0];
-    this.control.classList.remove(`${mainClass}_orientation_horizontal`);
-    this.control.classList.add(`${mainClass}_orientation_vertical`);
+    const oldOrientationClasses = [...this.control.classList].filter(
+      (controlClass) => controlClass.includes('_orientation_')
+    );
+
+    oldOrientationClasses.forEach((controlClass) => {
+      this.control.classList.remove(controlClass);
+    });
+
+    this.control.classList.add(`${this.name}_orientation_${orientation}`);
   }
 
   remove(): void {
     this.control.remove();
-  }
-
-  getOrientation(): string {
-    const mainClass = this.control.classList[0];
-    const classWithOrientation = this.control.classList[1];
-    return classWithOrientation.replace(`${mainClass}_orientation_`, '');
   }
 
   getRect(): DOMRect {
@@ -59,7 +59,9 @@ class UIControl {
   }
 
   getStyle(styleName: string): string | undefined {
-    return document.defaultView?.getComputedStyle(this.control, null).getPropertyValue(styleName);
+    return document.defaultView
+      ?.getComputedStyle(this.control, null)
+      .getPropertyValue(styleName);
   }
 
   protected getPositionInsideParent({ left, top }: IPosition): IPosition {

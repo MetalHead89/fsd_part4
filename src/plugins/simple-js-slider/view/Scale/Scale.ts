@@ -21,7 +21,8 @@ class Scale extends UIControl {
       value,
     });
 
-    const scalePoint: HTMLDivElement | null = this.control.querySelector('.scale__point');
+    const scalePoint: HTMLDivElement | null =
+      this.control.querySelector('.scale__point');
 
     const pointSize = {
       width: scalePoint?.offsetWidth || 0,
@@ -39,19 +40,21 @@ class Scale extends UIControl {
   }
 
   private handleScaleClick(event: MouseEvent): void {
-    const position = this.getPositionInsideParent({ left: event.clientX, top: event.clientY });
+    const position = this.getPositionInsideParent({
+      left: event.clientX,
+      top: event.clientY,
+    });
     this.observer.notify('clickToScale', position);
   }
 
   private addPoint({ position, size, value }: IFullPointParams): void {
-    const orientation = this.getOrientation();
     const scalePoint: HTMLElement = document.createElement('div');
-    scalePoint.classList.add('scale__point', `scale__point_orientation_${orientation}`);
+    scalePoint.classList.add('scale__point');
     if (size.width > 0) {
       scalePoint.style.width = `${size.width}px`;
     }
 
-    if (orientation === 'horizontal') {
+    if (this.orientation === 'horizontal') {
       this.control.style.height = `${size.height}px`;
     } else {
       this.control.style.width = `${size.width}px`;
@@ -61,10 +64,7 @@ class Scale extends UIControl {
     divisionMarker.classList.add('scale__point-marker');
 
     const divisionLabel: HTMLElement = document.createElement('div');
-    divisionLabel.classList.add(
-      'scale__point-label',
-      `scale__point-label_orientation_${orientation}`
-    );
+    divisionLabel.classList.add('scale__point-label');
     divisionLabel.innerText = value.toString();
 
     scalePoint.style.left = `${position.left}px`;

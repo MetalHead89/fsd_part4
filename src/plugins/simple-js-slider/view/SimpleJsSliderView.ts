@@ -35,6 +35,7 @@ class SimpleJsSliderView implements ISimpleJsSliderView {
   private popUpTwo: PopUp | null;
   private progressBar: ProgressBar;
   private scale: Scale | null;
+  private orientation: string;
 
   constructor(wrapper: HTMLDivElement) {
     this.observer = new Observer();
@@ -47,6 +48,7 @@ class SimpleJsSliderView implements ISimpleJsSliderView {
     this.popUpTwo = new PopUp();
     this.progressBar = new ProgressBar();
     this.scale = new Scale();
+    this.orientation = 'horizontal';
 
     this.bindContext();
     this.init();
@@ -94,7 +96,6 @@ class SimpleJsSliderView implements ISimpleJsSliderView {
     const thumbTwoPosition = this.thumbTwo ? this.thumbTwo.getPosition() : null;
     const position = { left: 0, top: 0 };
     const size = this.slider.getSize();
-    const orientation = this.slider.getOrientation();
     let start = 0;
     let end = 0;
 
@@ -110,7 +111,7 @@ class SimpleJsSliderView implements ISimpleJsSliderView {
         this.sizeByOrientation(this.thumbOne.getSize());
     }
 
-    if (orientation === 'horizontal') {
+    if (this.orientation === 'horizontal') {
       position.left = start;
       size.width = end;
     } else {
@@ -150,28 +151,17 @@ class SimpleJsSliderView implements ISimpleJsSliderView {
     this.slider.setMargins(this.getMargins());
   }
 
-  switchToHorizontal(): void {
+  switchOrientation(orientation: string): void {
+    this.orientation = orientation;
     this.slider.resetMargins();
-    this.slider.switchToHorizontal();
-    this.track.switchToHorizontal();
-    this.thumbOne.switchToHorizontal();
-    this.thumbTwo?.switchToHorizontal();
-    this.popUpOne?.switchToHorizontal();
-    this.popUpTwo?.switchToHorizontal();
-    this.progressBar.switchToHorizontal();
-    this.scale?.switchToHorizontal();
-  }
-
-  switchToVertical(): void {
-    this.slider.resetMargins();
-    this.slider.switchToVertical();
-    this.track.switchToVertical();
-    this.thumbOne.switchToVertical();
-    this.thumbTwo?.switchToVertical();
-    this.popUpOne?.switchToVertical();
-    this.popUpTwo?.switchToVertical();
-    this.progressBar.switchToVertical();
-    this.scale?.switchToVertical();
+    this.slider.setOrientation(orientation);
+    this.track.setOrientation(orientation);
+    this.thumbOne.setOrientation(orientation);
+    this.thumbTwo?.setOrientation(orientation);
+    this.popUpOne?.setOrientation(orientation);
+    this.popUpTwo?.setOrientation(orientation);
+    this.progressBar.setOrientation(orientation);
+    this.scale?.setOrientation(orientation);
   }
 
   switchToSingle(): void {
@@ -183,11 +173,11 @@ class SimpleJsSliderView implements ISimpleJsSliderView {
 
   switchToRange(): void {
     if (this.thumbTwo === null) {
-      this.thumbTwo = new Thumb(this.slider.getOrientation());
+      this.thumbTwo = new Thumb(this.orientation);
       this.slider.append(this.thumbTwo.getControl());
 
       if (this.popUpOne) {
-        this.popUpTwo = new PopUp(this.slider.getOrientation());
+        this.popUpTwo = new PopUp(this.orientation);
         this.slider.append(this.popUpTwo.getControl());
       }
 
@@ -209,12 +199,12 @@ class SimpleJsSliderView implements ISimpleJsSliderView {
 
   enablePopUps(): void {
     if (this.popUpOne === null) {
-      this.popUpOne = new PopUp(this.slider.getOrientation());
+      this.popUpOne = new PopUp(this.orientation);
       this.slider.append(this.popUpOne.getControl());
     }
 
     if (this.thumbTwoIsWithoutPopup()) {
-      this.popUpTwo = new PopUp(this.slider.getOrientation());
+      this.popUpTwo = new PopUp(this.orientation);
       this.slider.append(this.popUpTwo.getControl());
     }
 
@@ -232,7 +222,7 @@ class SimpleJsSliderView implements ISimpleJsSliderView {
     if (this.scale) {
       this.scale?.remove();
     }
-    this.scale = new Scale(this.slider.getOrientation());
+    this.scale = new Scale(this.orientation);
     this.scale.observer.register('clickToScale', (args: IPosition) =>
       this.setThumbPositionOnClickPosition(args)
     );
@@ -274,8 +264,7 @@ class SimpleJsSliderView implements ISimpleJsSliderView {
   }
 
   private getFullPosition(position: number): IPosition {
-    const isOrientationHorizontal =
-      this.slider.getOrientation() === 'horizontal';
+    const isOrientationHorizontal = this.orientation === 'horizontal';
 
     return {
       left: isOrientationHorizontal ? position : 0,
@@ -428,7 +417,7 @@ class SimpleJsSliderView implements ISimpleJsSliderView {
   }
 
   private sizeByOrientation(size: ISize): number {
-    if (this.slider.getOrientation() === 'horizontal') {
+    if (this.orientation === 'horizontal') {
       return size.width;
     }
 
@@ -436,7 +425,7 @@ class SimpleJsSliderView implements ISimpleJsSliderView {
   }
 
   private positionByOrientation({ left, top }: IPosition): number {
-    if (this.slider.getOrientation() === 'horizontal') {
+    if (this.orientation === 'horizontal') {
       return left;
     }
 
@@ -516,7 +505,7 @@ class SimpleJsSliderView implements ISimpleJsSliderView {
     const popUpRect = this.popUpOne ? this.popUpOne.getRect() : null;
     const scaleRect = this.scale ? this.scale.getRect() : null;
 
-    if (this.slider.getOrientation() === 'horizontal') {
+    if (this.orientation === 'horizontal') {
       if (popUpRect) {
         margins.top += sliderRect.top - popUpRect.top;
       }

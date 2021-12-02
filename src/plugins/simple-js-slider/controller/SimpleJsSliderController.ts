@@ -55,11 +55,7 @@ class SimpleJsSliderController {
   }
 
   private updateSliderOrientation(): void {
-    if (this.model.getOrientation() === 'horizontal') {
-      this.view.switchToHorizontal();
-    } else {
-      this.view.switchToVertical();
-    }
+    this.view.switchOrientation(this.model.getOrientation());
   }
 
   private updateSliderType(): void {

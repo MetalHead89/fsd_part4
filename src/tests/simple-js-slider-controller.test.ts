@@ -70,9 +70,9 @@ describe('Метод subscribeToEvents класса SimpleJsSliderController', (
 });
 
 describe('Метод updateSliderOrientation класса SimpleJsSliderController', () => {
-  test('Метод switchToVertical должен быть вызван один раз', () => {
+  test('Метод switchOrientation должен быть вызван один раз', () => {
     model['orientation'] = 'vertical';
-    const spy = spyOn(view, 'switchToVertical');
+    const spy = spyOn(view, 'switchOrientation');
     controller['updateSliderOrientation']();
     expect(spy).toBeCalledTimes(1);
   });

@@ -32,6 +32,8 @@ describe('Метод moveThumbs класса SimpleJsSliderView', () => {
   });
 
   test('Метод moveTo класса Thumb должен быть вызван один раз', () => {
+    view.switchOrientation('vertical');
+
     const thumbsParams = {
       thumbOne: { position: 15, value: 30 },
       thumbTwo: { position: 10, value: 30 },
@@ -105,7 +107,7 @@ describe('Метод updateProgressBar класса SimpleJsSliderView', () => {
   });
 
   test('Метод update класса ProgressBar должен быть вызван один раз', () => {
-    view.switchToHorizontal();
+    view.switchOrientation('horizontal');
     view['thumbTwo'] = null;
     const spy = spyOn(view['progressBar'], 'update');
     view.updateProgressBar();
@@ -114,7 +116,7 @@ describe('Метод updateProgressBar класса SimpleJsSliderView', () => {
   });
 
   test('Метод update класса ProgressBar должен быть вызван один раз', () => {
-    view.switchToVertical();
+    view.switchOrientation('vertical');
     const spy = spyOn(view['progressBar'], 'update');
     view.updateProgressBar();
 
@@ -510,7 +512,7 @@ describe('Метод getMargins класса SimpleJsSliderView', () => {
   });
 
   test('Отступы должны корректно вычисляться', () => {
-    view.switchToVertical();
+    view.switchOrientation('vertical');
     view['slider'].getRect = jest
       .fn()
       .mockReturnValue({ top: 30, right: 10, bottom: 10, left: 30 });
@@ -528,7 +530,7 @@ describe('Метод getMargins класса SimpleJsSliderView', () => {
   });
 
   test('Отступы должны корректно вычисляться', () => {
-    view.switchToVertical();
+    view.switchOrientation('vertical');
     view['slider'].getRect = jest
       .fn()
       .mockReturnValue({ top: 30, right: 10, bottom: 10, left: 30 });
