@@ -48,10 +48,16 @@ import SimpleJsSliderView from './view/SimpleJsSliderView';
     },
     updateSliderSettings(sliderSettings: ISliderSettings): void {
       $(this).data().model.updateSliderSettings(sliderSettings);
-    }
+    },
+    register(callback: () => void): void {
+      $(this).data().model.register('modelIsUpdated', callback);
+    },
   };
 
-  $.fn.simpleJsSlider = function plug(action?: string | ISliderSettings, args?): any {
+  $.fn.simpleJsSlider = function plug(
+    action?: string | ISliderSettings,
+    args?
+  ): any {
     let method: any;
 
     if (typeof action === 'string' && methods[action]) {
@@ -59,7 +65,9 @@ import SimpleJsSliderView from './view/SimpleJsSliderView';
     } else if (typeof action === 'object' || !action) {
       method = methods.init.call(this, action);
     } else {
-      $.error(`Метод с именем ${action} не существует для jQuery.simpleJsSlider`);
+      $.error(
+        `Метод с именем ${action} не существует для jQuery.simpleJsSlider`
+      );
       method = this;
     }
 

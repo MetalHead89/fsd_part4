@@ -7,6 +7,7 @@ class ControlPanelModel extends Observer {
   constructor(slider: JQuery<HTMLElement>) {
     super();
     this.slider = slider;
+    this.bindContext();
     this.subscribeToEvents();
   }
 
@@ -18,13 +19,16 @@ class ControlPanelModel extends Observer {
     this.slider.simpleJsSlider('updateSliderSettings', sliderSettings);
   }
 
+  private handleSliderUpdate() {
+    this.notify('sliderIsUpdated');
+  }
+
+  private bindContext() {
+    this.handleSliderUpdate = this.handleSliderUpdate.bind(this);
+  }
+
   private subscribeToEvents() {
-    //   this.sliderObserver.register('settingsIsUpdated', () => {
-    //     this.notify('sliderIsUpdated');
-    //   });
-    //   this.sliderObserver.register('modelIsUpdated', () => {
-    //     this.notify('sliderIsUpdated');
-    //   });
+    this.slider.simpleJsSlider('register', this.handleSliderUpdate);
   }
 }
 
