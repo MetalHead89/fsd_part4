@@ -38,7 +38,7 @@ beforeEach(() => {
 describe('Клик по элементу Scale', () => {
   test('Метод notify объекта observer должен быть вызван один раз', () => {
     const evt = document.createEvent('MouseEvent');
-    const spy = spyOn<any>(scale.observer, 'notify');
+    const spy = spyOn<any>(scale, 'notify');
 
     initEvt(evt);
     scale['control'].dispatchEvent(evt);

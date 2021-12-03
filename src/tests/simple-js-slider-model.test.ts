@@ -39,12 +39,6 @@ describe('Метод updateThumbsValues класса SimpleJsSliderModel', () =>
   });
 });
 
-describe('Метод getObserver класса SimpleJsSliderModel', () => {
-  test('Должен возвратиться объект Observer', () => {
-    expect(model.getObserver()).toBe(model['observer']);
-  });
-});
-
 describe('Метод getSliderSettings класса SimpleJsSliderModel', () => {
   test('Должен возвращать объект с текущим состоянием слайдера', () => {
     const sliderSettings = model.getSliderSettings();

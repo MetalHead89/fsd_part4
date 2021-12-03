@@ -2,10 +2,13 @@
  * @jest-environment jsdom
  */
 
-// @ts-nocheck
 /* eslint-disable comma-dangle */
 /* eslint-disable dot-notation */
 /* eslint-disable no-return-assign */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable no-unused-expressions */
+/* eslint-disable object-curly-newline */
+// @ts-nocheck
 
 import SimpleJsSliderView from '../plugins/simple-js-slider/view/SimpleJsSliderView';
 
@@ -318,7 +321,7 @@ describe('Метод getThumbsPercentPositions класса SimpleJsSliderView',
 describe('Метод notifyAboutThumbsDragged класса SimpleJsSliderView', () => {
   test('Метод должен оповещать observer о передвижении Thumbs', () => {
     let notifyCounter = 0;
-    view.observer.register('thumbIsDragged', () => (notifyCounter += 1));
+    view.register('thumbIsDragged', () => (notifyCounter += 1));
     view['notifyAboutThumbsDragged'](20, 30);
     expect(notifyCounter).toBe(1);
   });
@@ -554,7 +557,7 @@ describe('Метод getMargins класса SimpleJsSliderView', () => {
 describe('Реакция на событие clickToScale', () => {
   test('Должен вызваться метод setThumbPositionOnClickPosition', () => {
     const spy = spyOn(view, 'setThumbPositionOnClickPosition');
-    view['scale'].observer.notify('clickToScale', { left: 50, top: 50 });
+    view['scale'].notify('clickToScale', { left: 50, top: 50 });
     expect(spy).toBeCalledTimes(1);
   });
 
@@ -562,7 +565,7 @@ describe('Реакция на событие clickToScale', () => {
     const spy = spyOn(view, 'setThumbPositionOnClickPosition');
     view.disableScale();
     view.enableScale();
-    view['scale'].observer.notify('clickToScale', { left: 50, top: 50 });
+    view['scale'].notify('clickToScale', { left: 50, top: 50 });
     expect(spy).toBeCalledTimes(1);
   });
 });
@@ -570,7 +573,7 @@ describe('Реакция на событие clickToScale', () => {
 describe('Реакция на событие clickToTrack', () => {
   test('Должен вызваться метод setThumbPositionOnClickPosition', () => {
     const spy = spyOn(view, 'setThumbPositionOnClickPosition');
-    view['track'].observer.notify('clickToTrack', { left: 50, top: 50 });
+    view['track'].notify('clickToTrack', { left: 50, top: 50 });
     expect(spy).toBeCalledTimes(1);
   });
 });

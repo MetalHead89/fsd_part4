@@ -37,7 +37,7 @@ beforeEach(() => {
 describe('Клик по элементу Track', () => {
   test('Метод notify должен быть вызван один раз', () => {
     const evt = document.createEvent('MouseEvent');
-    const spy = spyOn<any>(track.observer, 'notify');
+    const spy = spyOn<any>(track, 'notify');
 
     initEvt(evt);
     track['control'].dispatchEvent(evt);

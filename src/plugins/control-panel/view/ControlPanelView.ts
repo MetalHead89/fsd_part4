@@ -8,7 +8,7 @@ import Checkbox from './Checkbox/Checkbox';
 import { IThumbsValues } from '../../simple-js-slider/interfaces';
 import Observer from '../../simple-js-slider/observer/Observer';
 
-class ControlPanelView {
+class ControlPanelView extends Observer {
   private sliderWrapper: HTMLDivElement;
   private controlPanel: ControlPanel;
   private thumbOneValue: TextField;
@@ -20,10 +20,9 @@ class ControlPanelView {
   private orientationRadio: RadioButton;
   private scaleCheckbox: Checkbox;
   private popUpsCheckbox: Checkbox;
-  observer: Observer;
 
   constructor(sliderWrapper: HTMLDivElement) {
-    this.observer = new Observer();
+    super();
     this.controlPanel = new ControlPanel();
     this.sliderWrapper = sliderWrapper;
     this.thumbOneValue = new TextField('First thumb value');
@@ -186,20 +185,20 @@ class ControlPanelView {
   }
 
   private subscribeToEvents(): void {
-    this.thumbOneValue.observer.register('controlPanelDataUpdated', this.notifyAboutChange);
-    this.thumbTwoValue.observer.register('controlPanelDataUpdated', this.notifyAboutChange);
-    this.min.observer.register('controlPanelDataUpdated', this.notifyAboutChange);
-    this.max.observer.register('controlPanelDataUpdated', this.notifyAboutChange);
-    this.step.observer.register('controlPanelDataUpdated', this.notifyAboutChange);
-    this.scaleCheckbox.observer.register('controlPanelDataUpdated', this.notifyAboutChange);
-    this.popUpsCheckbox.observer.register('controlPanelDataUpdated', this.notifyAboutChange);
-    this.typeRadio.observer.register('controlPanelDataUpdated', this.notifyAboutChange);
-    this.orientationRadio.observer.register('controlPanelDataUpdated', this.notifyAboutChange);
+    this.thumbOneValue.register('controlPanelDataUpdated', this.notifyAboutChange);
+    this.thumbTwoValue.register('controlPanelDataUpdated', this.notifyAboutChange);
+    this.min.register('controlPanelDataUpdated', this.notifyAboutChange);
+    this.max.register('controlPanelDataUpdated', this.notifyAboutChange);
+    this.step.register('controlPanelDataUpdated', this.notifyAboutChange);
+    this.scaleCheckbox.register('controlPanelDataUpdated', this.notifyAboutChange);
+    this.popUpsCheckbox.register('controlPanelDataUpdated', this.notifyAboutChange);
+    this.typeRadio.register('controlPanelDataUpdated', this.notifyAboutChange);
+    this.orientationRadio.register('controlPanelDataUpdated', this.notifyAboutChange);
   }
 
   private notifyAboutChange() {
     this.switchOrientation();
-    this.observer.notify('controlPanelDataUpdated');
+    this.notify('controlPanelDataUpdated');
   }
 
   private switchOrientation(): void {

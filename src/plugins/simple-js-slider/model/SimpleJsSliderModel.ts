@@ -6,13 +6,11 @@ import {
   IThumbsValues,
   IPointParams,
   IThumbsParams,
-  IObserver,
   IThumbsPositions,
 } from '../interfaces';
 import Observer from '../observer/Observer';
 
-class SimpleJsSliderModel implements ISimpleJsSliderModel {
-  observer: IObserver;
+class SimpleJsSliderModel extends Observer implements ISimpleJsSliderModel {
   private orientation = 'horizontal';
   private type = 'range';
   private isScale = true;
@@ -24,7 +22,7 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
   private thumbTwoValue = 7;
 
   constructor(settings: ISliderSettings) {
-    this.observer = new Observer();
+    super();
     this.updateSliderSettings(settings);
   }
 
@@ -36,11 +34,7 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
     this.thumbTwoValue =
       thumbTwoPosition !== null ? this.getThumbValue(thumbTwoPosition) : this.thumbTwoValue;
 
-    this.observer.notify('modelIsUpdated');
-  }
-
-  getObserver(): IObserver {
-    return this.observer;
+    this.notify('modelIsUpdated');
   }
 
   getSliderSettings(): ISliderSettings {
@@ -72,7 +66,7 @@ class SimpleJsSliderModel implements ISimpleJsSliderModel {
       [this.thumbOneValue, this.thumbTwoValue] = [this.thumbTwoValue, this.thumbOneValue];
     }
 
-    this.observer.notify('settingsIsUpdated');
+    this.notify('settingsIsUpdated');
   }
 
   getThumbsPositions(): IThumbsParams {

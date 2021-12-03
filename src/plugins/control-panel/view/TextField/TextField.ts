@@ -1,14 +1,13 @@
 import Observer from '../../../simple-js-slider/observer/Observer';
 
-class TextField {
+class TextField extends Observer {
   private control: HTMLDivElement;
   private field: HTMLInputElement;
   private label: HTMLLabelElement;
   private value: number;
-  observer: Observer;
 
   constructor(labelText: string) {
-    this.observer = new Observer();
+    super();
     this.control = document.createElement('div');
     this.field = document.createElement('input');
     this.label = document.createElement('label');
@@ -51,7 +50,7 @@ class TextField {
       this.field.value = this.value.toString();
     } else {
       this.value = parseInt(this.field.value, 10);
-      this.observer.notify('controlPanelDataUpdated');
+      this.notify('controlPanelDataUpdated');
     }
   }
 

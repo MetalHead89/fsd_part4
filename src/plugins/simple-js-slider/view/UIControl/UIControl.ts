@@ -2,17 +2,16 @@
 import { IPosition, ISize } from '../../interfaces';
 import Observer from '../../observer/Observer';
 
-class UIControl {
-  observer: Observer;
+class UIControl extends Observer {
   protected control: HTMLDivElement;
   protected lastPosition: IPosition;
   protected orientation: string;
   protected name: string;
 
   constructor(name: string, orientation = 'horizontal') {
+    super();
     const control = document.createElement('div');
     this.control = control;
-    this.observer = new Observer();
     this.lastPosition = { left: 0, top: 0 };
     this.orientation = orientation;
     this.name = name;

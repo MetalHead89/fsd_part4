@@ -40,8 +40,8 @@ class ControlPanelController {
   }
 
   private subscribeToEvents(): void {
-    this.view.observer.register('controlPanelDataUpdated', this.updateSliderPluginSettings);
-    this.model.observer.register('sliderIsUpdated', this.updateView);
+    this.view.register('controlPanelDataUpdated', this.updateSliderPluginSettings);
+    this.model.register('sliderIsUpdated', this.updateView);
   }
 
   private updateSliderPluginSettings(): void {

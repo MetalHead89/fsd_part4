@@ -31,7 +31,6 @@ interface IThumbsValues {
 interface IObserver {
   register(event: string, func: (args?: any) => void): void;
   unsubscribe(event: string, func: (args?: any) => void): void;
-  notify(event: string, args?: any): void;
 }
 
 interface IObserversList {
@@ -101,9 +100,9 @@ interface IFullPointParams {
 }
 
 interface ISimpleJsSliderModel {
-  observer: IObserver;
+  register(event: string, func: (args?: any) => void): void;
+  unsubscribe(event: string, func: (args?: any) => void): void;
   getSliderSettings(): ISliderSettings;
-  getObserver(): IObserver;
   updateThumbsValues({ thumbOne, thumbTwo }: IThumbsPositions): void;
   getThumbsPositions(): IThumbsParams;
   getThumbValues(): IThumbsValues;
@@ -116,7 +115,8 @@ interface ISimpleJsSliderModel {
 }
 
 interface ISimpleJsSliderView {
-  observer: IObserver;
+  register(event: string, func: (args?: any) => void): void;
+  unsubscribe(event: string, func: (args?: any) => void): void;
   moveThumbs({ thumbOne, thumbTwo }: IThumbsParams): void;
   updatePopUps(values: IThumbsValues): void;
   updateProgressBar(): void;

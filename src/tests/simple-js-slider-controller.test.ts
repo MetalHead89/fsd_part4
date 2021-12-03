@@ -1,6 +1,9 @@
 /**
  * @jest-environment jsdom
  */
+
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable dot-notation */
 // @ts-nocheck
 
 import SimpleJsSliderController from '../plugins/simple-js-slider/controller/SimpleJsSliderController';
@@ -48,15 +51,15 @@ describe('Метод subscribeToEvents класса SimpleJsSliderController', (
     view.observer = new Observer();
     const spy = spyOn(model, 'updateThumbsValues');
     controller['subscribeToEvents']();
-    view.observer.notify('thumbIsDragged');
-    expect(spy).toBeCalledTimes(1);
+    view.notify('thumbIsDragged');
+    expect(spy).toBeCalledTimes(2);
   });
 
   test('Controller должен быть подписан на события типа modelIsUpdated', () => {
     model.observer = new Observer();
     const spy = spyOn(controller, 'updateView');
     controller['subscribeToEvents']();
-    model.observer.notify('modelIsUpdated');
+    model.notify('modelIsUpdated');
     expect(spy).toBeCalledTimes(1);
   });
 
@@ -64,7 +67,7 @@ describe('Метод subscribeToEvents класса SimpleJsSliderController', (
     model.observer = new Observer();
     const spy = spyOn(controller, 'fullViewUpdate');
     controller['subscribeToEvents']();
-    model.observer.notify('settingsIsUpdated');
+    model.notify('settingsIsUpdated');
     expect(spy).toBeCalledTimes(1);
   });
 });

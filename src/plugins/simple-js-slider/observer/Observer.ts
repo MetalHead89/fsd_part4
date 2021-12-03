@@ -22,7 +22,7 @@ class Observer implements IObserver {
     this.observers[event] = this.observers[event].filter((f) => f !== func);
   }
 
-  notify(event: string, args?: any): void {
+  protected notify(event: string, args?: any): void {
     if (this.observers[event]) {
       this.observers[event].forEach((func) => func(args));
     }

@@ -1,15 +1,12 @@
-import { ISliderSettings, IObserver } from '../../simple-js-slider/interfaces';
+import { ISliderSettings } from '../../simple-js-slider/interfaces';
 import Observer from '../../simple-js-slider/observer/Observer';
 
-class ControlPanelModel {
-  observer: IObserver;
+class ControlPanelModel extends Observer {
   private slider: JQuery<HTMLElement>;
-  private sliderObserver: IObserver;
 
   constructor(slider: JQuery<HTMLElement>) {
-    this.observer = new Observer();
+    super();
     this.slider = slider;
-    this.sliderObserver = this.slider.simpleJsSlider('getObserver');
     this.subscribeToEvents();
   }
 
@@ -22,12 +19,12 @@ class ControlPanelModel {
   }
 
   private subscribeToEvents() {
-    this.sliderObserver.register('settingsIsUpdated', () => {
-      this.observer.notify('sliderIsUpdated');
-    });
-    this.sliderObserver.register('modelIsUpdated', () => {
-      this.observer.notify('sliderIsUpdated');
-    });
+    //   this.sliderObserver.register('settingsIsUpdated', () => {
+    //     this.notify('sliderIsUpdated');
+    //   });
+    //   this.sliderObserver.register('modelIsUpdated', () => {
+    //     this.notify('sliderIsUpdated');
+    //   });
   }
 }
 

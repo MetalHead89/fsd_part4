@@ -1,16 +1,14 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable comma-dangle */
-import { IObserver } from '../../../simple-js-slider/interfaces';
 import Observer from '../../../simple-js-slider/observer/Observer';
 import { IRadioParams } from '../../interfaces';
 
-class RadioButton {
+class RadioButton extends Observer {
   private control: HTMLDivElement;
   private radios: HTMLInputElement[];
-  observer: IObserver;
 
   constructor(name: string, ...params: IRadioParams[]) {
-    this.observer = new Observer();
+    super();
     const uniqueName = RadioButton.generateName(name);
     this.control = document.createElement('div');
     this.control.classList.add('radio-button');
@@ -75,7 +73,7 @@ class RadioButton {
       }
     });
 
-    this.observer.notify('controlPanelDataUpdated');
+    this.notify('controlPanelDataUpdated');
   }
 
   private static generateName(name: string): string {

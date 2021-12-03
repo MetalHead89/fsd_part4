@@ -1,3 +1,5 @@
+/* eslint-disable object-curly-newline */
+
 import { ISliderMargins } from '../../interfaces';
 import UIControl from '../UIControl/UIControl';
 

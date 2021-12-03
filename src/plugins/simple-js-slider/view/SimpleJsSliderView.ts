@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /* eslint-disable operator-linebreak */
 /* eslint-disable comma-dangle */
 /* eslint-disable function-paren-newline */
@@ -12,7 +13,6 @@ import {
   IThumbsParams,
   IThumbsPositions,
   IThumbsValues,
-  IObserver,
   IFullThumbsPositions,
 } from '../interfaces';
 
@@ -24,8 +24,7 @@ import ProgressBar from './ProgressBar/ProgressBar';
 import Scale from './Scale/Scale';
 import Observer from '../observer/Observer';
 
-class SimpleJsSliderView implements ISimpleJsSliderView {
-  observer: IObserver;
+class SimpleJsSliderView extends Observer implements ISimpleJsSliderView {
   private slider: Slider;
   private sliderWrapper: HTMLDivElement;
   private track: Track;
@@ -38,7 +37,7 @@ class SimpleJsSliderView implements ISimpleJsSliderView {
   private orientation: string;
 
   constructor(wrapper: HTMLDivElement) {
-    this.observer = new Observer();
+    super();
     this.sliderWrapper = wrapper;
     this.slider = new Slider();
     this.track = new Track();
@@ -181,7 +180,7 @@ class SimpleJsSliderView implements ISimpleJsSliderView {
         this.slider.append(this.popUpTwo.getControl());
       }
 
-      this.thumbTwo?.observer.register(
+      this.thumbTwo?.register(
         'thumbIsDragged',
         this.updateThumbsPositions
       );
@@ -223,7 +222,7 @@ class SimpleJsSliderView implements ISimpleJsSliderView {
       this.scale?.remove();
     }
     this.scale = new Scale(this.orientation);
-    this.scale.observer.register('clickToScale', (args: IPosition) =>
+    this.scale.register('clickToScale', (args: IPosition) =>
       this.setThumbPositionOnClickPosition(args)
     );
     this.slider.append(this.scale.getControl());
@@ -279,18 +278,18 @@ class SimpleJsSliderView implements ISimpleJsSliderView {
   }
 
   private subscribeToEventsNew(): void {
-    this.thumbOne.observer.register(
+    this.thumbOne.register(
       'thumbIsDragged',
       this.updateThumbsPositions
     );
-    this.thumbTwo?.observer.register(
+    this.thumbTwo?.register(
       'thumbIsDragged',
       this.updateThumbsPositions
     );
-    this.scale?.observer.register('clickToScale', (args: IPosition) =>
+    this.scale?.register('clickToScale', (args: IPosition) =>
       this.setThumbPositionOnClickPosition(args)
     );
-    this.track.observer.register('clickToTrack', (args: IPosition) =>
+    this.track.register('clickToTrack', (args: IPosition) =>
       this.setThumbPositionOnClickPosition(args)
     );
   }
@@ -319,7 +318,7 @@ class SimpleJsSliderView implements ISimpleJsSliderView {
     thumbOne: number,
     thumbTwo: number | null
   ): void {
-    this.observer.notify('thumbIsDragged', {
+    this.notify('thumbIsDragged', {
       thumbOne,
       thumbTwo,
     });

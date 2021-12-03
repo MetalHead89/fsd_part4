@@ -13,7 +13,7 @@ class Track extends UIControl {
 
   private handleTrackClick(event: MouseEvent): void {
     const position = this.getPositionInsideParent({ left: event.clientX, top: event.clientY });
-    this.observer.notify('clickToTrack', position);
+    this.notify('clickToTrack', position);
   }
 }
 

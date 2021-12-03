@@ -48,9 +48,6 @@ import SimpleJsSliderView from './view/SimpleJsSliderView';
     },
     updateSliderSettings(sliderSettings: ISliderSettings): void {
       $(this).data().model.updateSliderSettings(sliderSettings);
-    },
-    getObserver(): IObserver {
-      return $(this).data().model.getObserver();
     }
   };
 

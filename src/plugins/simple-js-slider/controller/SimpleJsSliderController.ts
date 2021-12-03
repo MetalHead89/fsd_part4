@@ -23,12 +23,12 @@ class SimpleJsSliderController {
   }
 
   private subscribeToEvents(): void {
-    this.view.observer.register('thumbIsDragged', (args: IThumbsPositions) => {
+    this.view.register('thumbIsDragged', (args: IThumbsPositions) => {
       this.model.updateThumbsValues(args);
     });
 
-    this.model.observer.register('modelIsUpdated', this.updateView);
-    this.model.observer.register('settingsIsUpdated', this.fullViewUpdate);
+    this.model.register('modelIsUpdated', this.updateView);
+    this.model.register('settingsIsUpdated', this.fullViewUpdate);
   }
 
   private bindContext(): void {
