@@ -1,6 +1,7 @@
 import Observer from '../../../simple-js-slider/observer/Observer';
+import { PanelViewEvents } from '../../interfaces';
 
-class TextField extends Observer {
+class TextField extends Observer<PanelViewEvents> {
   private control: HTMLDivElement;
   private field: HTMLInputElement;
   private label: HTMLLabelElement;

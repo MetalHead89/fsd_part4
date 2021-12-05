@@ -1,7 +1,8 @@
 import { ISliderSettings } from '../../simple-js-slider/interfaces';
 import Observer from '../../simple-js-slider/observer/Observer';
+import { PanelModelEvents } from '../interfaces';
 
-class ControlPanelModel extends Observer {
+class ControlPanelModel extends Observer<PanelModelEvents> {
   private slider: JQuery<HTMLElement>;
 
   constructor(slider: JQuery<HTMLElement>) {

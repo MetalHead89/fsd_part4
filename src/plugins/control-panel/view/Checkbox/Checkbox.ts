@@ -1,7 +1,7 @@
 import Observer from '../../../simple-js-slider/observer/Observer';
-import { ICheckboxParams } from '../../interfaces';
+import { ICheckboxParams, PanelViewEvents } from '../../interfaces';
 
-class Checkbox extends Observer {
+class Checkbox extends Observer<PanelViewEvents> {
   private control: HTMLDivElement;
   private checkbox: HTMLInputElement;
   private label: HTMLLabelElement;

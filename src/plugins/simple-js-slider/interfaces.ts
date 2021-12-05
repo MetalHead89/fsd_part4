@@ -99,6 +99,18 @@ interface IFullPointParams {
   value: number;
 }
 
+type Subscriber<T> = <K extends keyof T>(args?: T[K]) => void;
+
+type ModelEvents = { modelIsUpdated: string; settingsIsUpdated: string };
+
+type ViewEvents = { thumbIsDragged: IThumbsPositions };
+
+type UIControlEvents = {
+  clickToScale: IPosition;
+  thumbIsDragged: string;
+  clickToTrack: IPosition;
+};
+
 interface ISimpleJsSliderModel {
   register(event: string, func: (args?: any) => void): void;
   unsubscribe(event: string, func: (args?: any) => void): void;
@@ -150,6 +162,10 @@ interface ISliderMargins {
 
 export {
   ISize,
+  ModelEvents,
+  ViewEvents,
+  UIControlEvents,
+  Subscriber,
   ISliderSettings,
   ISubjectEvents,
   IThumbsValues,

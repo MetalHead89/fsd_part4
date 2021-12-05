@@ -7,8 +7,9 @@ import RadioButton from './RadioButton/RadioButton';
 import Checkbox from './Checkbox/Checkbox';
 import { IThumbsValues } from '../../simple-js-slider/interfaces';
 import Observer from '../../simple-js-slider/observer/Observer';
+import { PanelViewEvents } from '../interfaces';
 
-class ControlPanelView extends Observer {
+class ControlPanelView extends Observer<PanelViewEvents> {
   private sliderWrapper: HTMLDivElement;
   private controlPanel: ControlPanel;
   private thumbOneValue: TextField;

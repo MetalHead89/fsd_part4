@@ -1,8 +1,9 @@
 /* eslint-disable comma-dangle */
-import { IPosition, ISize } from '../../interfaces';
+
+import { IPosition, ISize, UIControlEvents } from '../../interfaces';
 import Observer from '../../observer/Observer';
 
-class UIControl extends Observer {
+class UIControl extends Observer<UIControlEvents> {
   protected control: HTMLDivElement;
   protected lastPosition: IPosition;
   protected orientation: string;

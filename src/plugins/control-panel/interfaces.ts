@@ -1,3 +1,5 @@
+/* eslint-disable object-curly-newline */
+
 interface IRadioParams {
   labelText: string;
   value: string;
@@ -16,4 +18,7 @@ interface IGroupElements {
   elements: HTMLDivElement[];
 }
 
-export { IRadioParams, ICheckboxParams, IGroupElements };
+type PanelModelEvents = { sliderIsUpdated: string };
+type PanelViewEvents = { controlPanelDataUpdated: string };
+
+export { IRadioParams, ICheckboxParams, IGroupElements, PanelModelEvents, PanelViewEvents };

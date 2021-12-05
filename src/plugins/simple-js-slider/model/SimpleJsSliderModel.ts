@@ -7,10 +7,11 @@ import {
   IPointParams,
   IThumbsParams,
   IThumbsPositions,
+  ModelEvents,
 } from '../interfaces';
 import Observer from '../observer/Observer';
 
-class SimpleJsSliderModel extends Observer implements ISimpleJsSliderModel {
+class SimpleJsSliderModel extends Observer<ModelEvents> implements ISimpleJsSliderModel {
   private orientation = 'horizontal';
   private type = 'range';
   private isScale = true;

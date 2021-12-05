@@ -1,9 +1,9 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable comma-dangle */
 import Observer from '../../../simple-js-slider/observer/Observer';
-import { IRadioParams } from '../../interfaces';
+import { IRadioParams, PanelViewEvents } from '../../interfaces';
 
-class RadioButton extends Observer {
+class RadioButton extends Observer<PanelViewEvents> {
   private control: HTMLDivElement;
   private radios: HTMLInputElement[];
 
