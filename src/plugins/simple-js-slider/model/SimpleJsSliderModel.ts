@@ -35,7 +35,7 @@ class SimpleJsSliderModel extends Observer<ModelEvents> implements ISimpleJsSlid
     this.thumbTwoValue =
       thumbTwoPosition !== null ? this.getThumbValue(thumbTwoPosition) : this.thumbTwoValue;
 
-    this.notify('modelIsUpdated');
+    this.notify('modelIsUpdated', this.getSliderSettings());
   }
 
   getSliderSettings(): ISliderSettings {
@@ -67,7 +67,7 @@ class SimpleJsSliderModel extends Observer<ModelEvents> implements ISimpleJsSlid
       [this.thumbOneValue, this.thumbTwoValue] = [this.thumbTwoValue, this.thumbOneValue];
     }
 
-    this.notify('settingsIsUpdated');
+    this.notify('settingsIsUpdated', this.getSliderSettings());
   }
 
   getThumbsPositions(): IThumbsParams {
@@ -100,22 +100,6 @@ class SimpleJsSliderModel extends Observer<ModelEvents> implements ISimpleJsSlid
     }
 
     return pointsParams;
-  }
-
-  isScaleEnabled(): boolean {
-    return this.isScale;
-  }
-
-  isPopUpsEnabled(): boolean {
-    return this.isPopUps;
-  }
-
-  getType(): string {
-    return this.type;
-  }
-
-  getOrientation(): string {
-    return this.orientation;
   }
 
   private getCorrectValue(value: number): number {

@@ -12,24 +12,27 @@ class ControlPanelModel extends Observer<PanelModelEvents> {
     this.subscribeToEvents();
   }
 
-  getSliderSettings(): ISliderSettings {
-    return this.slider.simpleJsSlider('getSliderSettings');
-  }
-
   updateSliderPluginSettings(sliderSettings: ISliderSettings): void {
     this.slider.simpleJsSlider('updateSliderSettings', sliderSettings);
   }
 
-  private handleSliderUpdate() {
-    this.notify('sliderIsUpdated');
+  getSliderSettings(): ISliderSettings {
+    return this.slider.simpleJsSlider('getSliderSettings');
+  }
+
+  private handleSliderUpdate(settings: ISliderSettings) {
+    this.notify('sliderIsUpdated', settings);
   }
 
   private bindContext() {
     this.handleSliderUpdate = this.handleSliderUpdate.bind(this);
+    this.getSliderSettings = this.getSliderSettings.bind(this);
   }
 
   private subscribeToEvents() {
-    this.slider.simpleJsSlider('register', this.handleSliderUpdate);
+    this.slider.simpleJsSlider('register', (args: ISliderSettings) => {
+      this.handleSliderUpdate(args);
+    });
   }
 }
 

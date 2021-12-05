@@ -1,7 +1,7 @@
 import Observer from '../../../simple-js-slider/observer/Observer';
-import { ICheckboxParams, PanelViewEvents } from '../../interfaces';
+import { ICheckboxParams, PanelControlEvents } from '../../interfaces';
 
-class Checkbox extends Observer<PanelViewEvents> {
+class Checkbox extends Observer<PanelControlEvents> {
   private control: HTMLDivElement;
   private checkbox: HTMLInputElement;
   private label: HTMLLabelElement;
@@ -52,7 +52,7 @@ class Checkbox extends Observer<PanelViewEvents> {
   private handleCheckboxChange(): void {
     this.label.classList.toggle('checkbox__label_checked');
 
-    this.notify('controlPanelDataUpdated');
+    this.notify('PanelControlIsUpdated');
   }
 }
 

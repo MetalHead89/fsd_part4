@@ -101,7 +101,7 @@ interface IFullPointParams {
 
 type Subscriber<T> = <K extends keyof T>(args?: T[K]) => void;
 
-type ModelEvents = { modelIsUpdated: string; settingsIsUpdated: string };
+type ModelEvents = { modelIsUpdated: ISliderSettings; settingsIsUpdated: ISliderSettings };
 
 type ViewEvents = { thumbIsDragged: IThumbsPositions };
 
@@ -120,10 +120,6 @@ interface ISimpleJsSliderModel {
   getThumbValues(): IThumbsValues;
   getPointsParams(): IPointParams[];
   updateSliderSettings(settings: ISliderSettings): void;
-  getType(): string;
-  isScaleEnabled(): boolean;
-  isPopUpsEnabled(): boolean;
-  getOrientation(): string;
 }
 
 interface ISimpleJsSliderView {

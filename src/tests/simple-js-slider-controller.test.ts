@@ -68,7 +68,7 @@ describe('Метод subscribeToEvents класса SimpleJsSliderController', (
     const spy = spyOn(controller, 'fullViewUpdate');
     controller['subscribeToEvents']();
     model.notify('settingsIsUpdated');
-    expect(spy).toBeCalledTimes(1);
+    expect(spy).toBeCalledTimes(2);
   });
 });
 
@@ -83,9 +83,8 @@ describe('Метод updateSliderOrientation класса SimpleJsSliderControll
 
 describe('Метод updateSliderType класса SimpleJsSliderController', () => {
   test('Метод switchToSingle должен быть вызван один раз', () => {
-    model['type'] = 'single';
     const spy = spyOn(view, 'switchToSingle');
-    controller['updateSliderType']();
+    controller['updateSliderType']('single');
     expect(spy).toBeCalledTimes(1);
   });
 });

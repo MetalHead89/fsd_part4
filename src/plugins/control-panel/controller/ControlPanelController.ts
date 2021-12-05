@@ -16,48 +16,24 @@ class ControlPanelController {
   }
 
   private init(): void {
-    this.updateView();
+    this.updateView(this.model.getSliderSettings());
   }
 
-  private updateView(): void {
-    const sliderSettings: ISliderSettings = this.model.getSliderSettings();
-    this.view.setThumbsValues({
-      thumbOne: sliderSettings.thumbOneValue,
-      thumbTwo: sliderSettings.thumbTwoValue,
-    });
-    this.view.setMinValue(sliderSettings.min);
-    this.view.setMaxValue(sliderSettings.max);
-    this.view.setStep(sliderSettings.step);
-    this.view.setScaleState(sliderSettings.isScale);
-    this.view.setPopUpsState(sliderSettings.isPopUps);
-    this.view.setTypeRadio(sliderSettings.type);
-    this.view.setOrientationRadio(sliderSettings.orientation);
+  private updateView(settings: ISliderSettings): void {
+    this.view.updateView(settings);
   }
 
   private bindContext(): void {
-    this.updateSliderPluginSettings = this.updateSliderPluginSettings.bind(this);
     this.updateView = this.updateView.bind(this);
   }
 
   private subscribeToEvents(): void {
-    this.view.register('controlPanelDataUpdated', this.updateSliderPluginSettings);
-    this.model.register('sliderIsUpdated', this.updateView);
-  }
-
-  private updateSliderPluginSettings(): void {
-    const sliderSettings = {
-      orientation: this.view.getOrientation(),
-      type: this.view.getType(),
-      isScale: this.view.isScaleEnabled(),
-      isPopUps: this.view.isPopUpsEnabled(),
-      min: this.view.getMin(),
-      max: this.view.getMax(),
-      step: this.view.getStep(),
-      thumbOneValue: this.view.getThumbOneValue(),
-      thumbTwoValue: this.view.getThumbTwoValue(),
-    };
-
-    this.model.updateSliderPluginSettings(sliderSettings);
+    this.view.register('controlPanelDataUpdated', (args) => {
+      this.model.updateSliderPluginSettings(args as ISliderSettings);
+    });
+    this.model.register('sliderIsUpdated', (args) => {
+      this.updateView(args as ISliderSettings);
+    });
   }
 }
 

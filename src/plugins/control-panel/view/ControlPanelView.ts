@@ -5,7 +5,7 @@ import TextField from './TextField/TextField';
 import groupElements from './groupElements';
 import RadioButton from './RadioButton/RadioButton';
 import Checkbox from './Checkbox/Checkbox';
-import { IThumbsValues } from '../../simple-js-slider/interfaces';
+import { ISliderSettings, IThumbsValues } from '../../simple-js-slider/interfaces';
 import Observer from '../../simple-js-slider/observer/Observer';
 import { PanelViewEvents } from '../interfaces';
 
@@ -57,80 +57,51 @@ class ControlPanelView extends Observer<PanelViewEvents> {
     this.createPanel();
   }
 
-  setThumbsValues({ thumbOne, thumbTwo }: IThumbsValues): void {
+  updateView(settings: ISliderSettings): void {
+    this.setThumbsValues({
+      thumbOne: settings.thumbOneValue,
+      thumbTwo: settings.thumbTwoValue,
+    });
+    this.setMinValue(settings.min);
+    this.setMaxValue(settings.max);
+    this.setStep(settings.step);
+    this.setScaleState(settings.isScale);
+    this.setPopUpsState(settings.isPopUps);
+    this.setTypeRadio(settings.type);
+    this.setOrientationRadio(settings.orientation);
+  }
+
+  private setThumbsValues({ thumbOne, thumbTwo }: IThumbsValues): void {
     this.thumbOneValue.setValue(thumbOne);
     this.thumbTwoValue.setValue(thumbTwo);
   }
 
-  setMinValue(value: number): void {
+  private setMinValue(value: number): void {
     this.min.setValue(value);
   }
 
-  setMaxValue(value: number): void {
+  private setMaxValue(value: number): void {
     this.max.setValue(value);
   }
 
-  setStep(value: number): void {
+  private setStep(value: number): void {
     this.step.setValue(value);
   }
 
-  setScaleState(state: boolean): void {
+  private setScaleState(state: boolean): void {
     this.scaleCheckbox.setState(state);
   }
 
-  setPopUpsState(state: boolean): void {
+  private setPopUpsState(state: boolean): void {
     this.popUpsCheckbox.setState(state);
   }
 
-  setTypeRadio(value: string): void {
+  private setTypeRadio(value: string): void {
     this.typeRadio.switchTo(value);
   }
 
-  setOrientationRadio(value: string): void {
+  private setOrientationRadio(value: string): void {
     this.orientationRadio.switchTo(value);
-  }
-
-  getOrientation(): string {
-    return this.orientationRadio.getValue();
-  }
-
-  getType(): string {
-    return this.typeRadio.getValue();
-  }
-
-  isScaleEnabled(): boolean {
-    return this.scaleCheckbox.isEnabled();
-  }
-
-  isPopUpsEnabled(): boolean {
-    return this.popUpsCheckbox.isEnabled();
-  }
-
-  getMin(): number {
-    return this.min.getValue();
-  }
-
-  getMax(): number {
-    return this.max.getValue();
-  }
-
-  getStep(): number {
-    return this.step.getValue();
-  }
-
-  getThumbOneValue(): number {
-    return this.thumbOneValue.getValue();
-  }
-
-  getThumbTwoValue(): number {
-    return this.thumbTwoValue.getValue();
-  }
-
-  getThumbsValues(): IThumbsValues {
-    return {
-      thumbOne: this.thumbOneValue.getValue(),
-      thumbTwo: this.thumbTwoValue.getValue(),
-    };
   }
 
   private createPanel(): void {
@@ -186,20 +157,70 @@ class ControlPanelView extends Observer<PanelViewEvents> {
   }
 
   private subscribeToEvents(): void {
-    this.thumbOneValue.register('controlPanelDataUpdated', this.notifyAboutChange);
-    this.thumbTwoValue.register('controlPanelDataUpdated', this.notifyAboutChange);
-    this.min.register('controlPanelDataUpdated', this.notifyAboutChange);
-    this.max.register('controlPanelDataUpdated', this.notifyAboutChange);
-    this.step.register('controlPanelDataUpdated', this.notifyAboutChange);
-    this.scaleCheckbox.register('controlPanelDataUpdated', this.notifyAboutChange);
-    this.popUpsCheckbox.register('controlPanelDataUpdated', this.notifyAboutChange);
-    this.typeRadio.register('controlPanelDataUpdated', this.notifyAboutChange);
-    this.orientationRadio.register('controlPanelDataUpdated', this.notifyAboutChange);
+    this.thumbOneValue.register('PanelControlIsUpdated', this.notifyAboutChange);
+    this.thumbTwoValue.register('PanelControlIsUpdated', this.notifyAboutChange);
+    this.min.register('PanelControlIsUpdated', this.notifyAboutChange);
+    this.max.register('PanelControlIsUpdated', this.notifyAboutChange);
+    this.step.register('PanelControlIsUpdated', this.notifyAboutChange);
+    this.scaleCheckbox.register('PanelControlIsUpdated', this.notifyAboutChange);
+    this.popUpsCheckbox.register('PanelControlIsUpdated', this.notifyAboutChange);
+    this.typeRadio.register('PanelControlIsUpdated', this.notifyAboutChange);
+    this.orientationRadio.register('PanelControlIsUpdated', this.notifyAboutChange);
+  }
+
+  private getOrientation(): string {
+    return this.orientationRadio.getValue();
+  }
+
+  private getType(): string {
+    return this.typeRadio.getValue();
+  }
+
+  private isScaleEnabled(): boolean {
+    return this.scaleCheckbox.isEnabled();
+  }
+
+  private isPopUpsEnabled(): boolean {
+    return this.popUpsCheckbox.isEnabled();
+  }
+
+  private getMin(): number {
+    return this.min.getValue();
+  }
+
+  private getMax(): number {
+    return this.max.getValue();
+  }
+
+  private getStep(): number {
+    return this.step.getValue();
+  }
+
+  private getThumbOneValue(): number {
+    return this.thumbOneValue.getValue();
+  }
+
+  private getThumbTwoValue(): number {
+    return this.thumbTwoValue.getValue();
   }
 
   private notifyAboutChange() {
     this.switchOrientation();
-    this.notify('controlPanelDataUpdated');
+    this.notify('controlPanelDataUpdated', this.getPanelSettings());
+  }
+
+  private getPanelSettings(): ISliderSettings {
+    return {
+      orientation: this.getOrientation(),
+      type: this.getType(),
+      isScale: this.isScaleEnabled(),
+      isPopUps: this.isPopUpsEnabled(),
+      min: this.getMin(),
+      max: this.getMax(),
+      step: this.getStep(),
+      thumbOneValue: this.getThumbOneValue(),
+      thumbTwoValue: this.getThumbTwoValue(),
+    };
   }
 
   private switchOrientation(): void {

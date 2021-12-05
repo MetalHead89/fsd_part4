@@ -2,6 +2,7 @@ import {
   IControllerParams,
   ISimpleJsSliderModel,
   ISimpleJsSliderView,
+  ISliderSettings,
   IThumbsPositions,
 } from '../interfaces';
 
@@ -19,7 +20,7 @@ class SimpleJsSliderController {
   }
 
   private init(): void {
-    this.fullViewUpdate();
+    this.fullViewUpdate(this.model.getSliderSettings());
   }
 
   private subscribeToEvents(): void {
@@ -28,7 +29,7 @@ class SimpleJsSliderController {
     });
 
     this.model.register('modelIsUpdated', this.updateView);
-    this.model.register('settingsIsUpdated', this.fullViewUpdate);
+    this.model.register('settingsIsUpdated', (args: ISliderSettings) => this.fullViewUpdate(args));
   }
 
   private bindContext(): void {
@@ -45,29 +46,29 @@ class SimpleJsSliderController {
     this.view.updateScale(this.model.getPointsParams());
   }
 
-  private fullViewUpdate(): void {
-    this.updateSliderOrientation();
-    this.updateSliderType();
-    this.updatePopUpsState();
+  private fullViewUpdate(settings: ISliderSettings): void {
+    this.updateSliderOrientation(settings.orientation);
+    this.updateSliderType(settings.type);
+    this.updatePopUpsState(settings.isPopUps);
     this.updateView();
-    this.updateScaleState();
+    this.updateScaleState(settings.isScale);
     this.updateScale();
   }
 
-  private updateSliderOrientation(): void {
-    this.view.switchOrientation(this.model.getOrientation());
+  private updateSliderOrientation(orientation: string): void {
+    this.view.switchOrientation(orientation);
   }
 
-  private updateSliderType(): void {
-    if (this.model.getType() === 'single') {
+  private updateSliderType(type: string): void {
+    if (type === 'single') {
       this.view.switchToSingle();
     } else {
       this.view.switchToRange();
     }
   }
 
-  private updateScaleState() {
-    if (this.model.isScaleEnabled()) {
+  private updateScaleState(enabled: boolean) {
+    if (enabled) {
       this.view.enableScale();
       this.updateView();
     } else {
@@ -75,8 +76,8 @@ class SimpleJsSliderController {
     }
   }
 
-  private updatePopUpsState(): void {
-    if (this.model.isPopUpsEnabled()) {
+  private updatePopUpsState(enabled: boolean): void {
+    if (enabled) {
       this.view.enablePopUps();
     } else {
       this.view.disablePopUps();

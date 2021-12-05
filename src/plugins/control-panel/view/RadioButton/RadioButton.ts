@@ -1,9 +1,9 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable comma-dangle */
 import Observer from '../../../simple-js-slider/observer/Observer';
-import { IRadioParams, PanelViewEvents } from '../../interfaces';
+import { IRadioParams, PanelControlEvents } from '../../interfaces';
 
-class RadioButton extends Observer<PanelViewEvents> {
+class RadioButton extends Observer<PanelControlEvents> {
   private control: HTMLDivElement;
   private radios: HTMLInputElement[];
 
@@ -73,7 +73,7 @@ class RadioButton extends Observer<PanelViewEvents> {
       }
     });
 
-    this.notify('controlPanelDataUpdated');
+    this.notify('PanelControlIsUpdated');
   }
 
   private static generateName(name: string): string {

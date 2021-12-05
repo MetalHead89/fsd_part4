@@ -1,7 +1,7 @@
 import Observer from '../../../simple-js-slider/observer/Observer';
-import { PanelViewEvents } from '../../interfaces';
+import { PanelControlEvents } from '../../interfaces';
 
-class TextField extends Observer<PanelViewEvents> {
+class TextField extends Observer<PanelControlEvents> {
   private control: HTMLDivElement;
   private field: HTMLInputElement;
   private label: HTMLLabelElement;
@@ -51,7 +51,7 @@ class TextField extends Observer<PanelViewEvents> {
       this.field.value = this.value.toString();
     } else {
       this.value = parseInt(this.field.value, 10);
-      this.notify('controlPanelDataUpdated');
+      this.notify('PanelControlIsUpdated');
     }
   }
 
