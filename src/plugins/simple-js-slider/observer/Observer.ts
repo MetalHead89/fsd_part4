@@ -1,9 +1,6 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import { IObserver, Subscriber } from '../interfaces';
 
-import { Subscriber } from '../interfaces';
-
-class Observer<T extends Record<string, unknown>> {
+class Observer<T extends Record<string, unknown>> implements IObserver<T> {
   private observers: Record<keyof T, Subscriber<T>[]>;
 
   constructor() {
@@ -22,7 +19,7 @@ class Observer<T extends Record<string, unknown>> {
     this.observers[event] = this.observers[event].filter((f) => f !== func);
   }
 
-  notify<K extends keyof T>(event: K, args?: T[K]): void {
+  protected notify<K extends keyof T>(event: K, args: T[K]): void {
     if (this.observers[event]) {
       this.observers[event].forEach((func) => func(args));
     }

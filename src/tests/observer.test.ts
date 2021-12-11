@@ -60,17 +60,17 @@ describe('Метод notify класса Observer', () => {
     };
 
     observer.register('thumbMove', func1);
-    observer['notify']('thumbMove');
+    observer['notify']('thumbMove', '');
     expect(numberOfNotifiedObservers).toBe(1);
 
     numberOfNotifiedObservers = 0;
     observer.register('thumbMove', func2);
-    observer['notify']('thumbMove');
+    observer['notify']('thumbMove', '');
     expect(numberOfNotifiedObservers).toBe(2);
 
     numberOfNotifiedObservers = 0;
     observer.register('thumbMove', func3);
-    observer['notify']('thumbMove');
+    observer['notify']('thumbMove', '');
     expect(numberOfNotifiedObservers).toBe(3);
   });
 
@@ -91,7 +91,7 @@ describe('Метод notify класса Observer', () => {
     observer.register('thumbMove', func2);
     observer.register('thumbMove', func3);
 
-    observer['notify']('clickToScale');
+    observer['notify']('clickToScale', '');
     expect(numberOfNotifiedObservers).toBe(0);
   });
 });

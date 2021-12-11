@@ -51,7 +51,7 @@ class TextField extends Observer<PanelControlEvents> {
       this.field.value = this.value.toString();
     } else {
       this.value = parseInt(this.field.value, 10);
-      this.notify('PanelControlIsUpdated');
+      this.notify('PanelControlIsUpdated', '');
     }
   }
 

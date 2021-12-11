@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 interface ISize {
   width: number;
   height: number;
@@ -15,8 +13,6 @@ interface ISliderSettings {
   step: number;
   thumbOneValue: number;
   thumbTwoValue: number;
-  sliderSize?: ISize;
-  thumbSize?: ISize;
 }
 
 interface ISubjectEvents {
@@ -26,15 +22,6 @@ interface ISubjectEvents {
 interface IThumbsValues {
   thumbOne: number;
   thumbTwo: number;
-}
-
-interface IObserver {
-  register(event: string, func: (args?: any) => void): void;
-  unsubscribe(event: string, func: (args?: any) => void): void;
-}
-
-interface IObserversList {
-  [key: string]: ((args?: any) => void)[];
 }
 
 interface IThumbsPositions {
@@ -99,7 +86,7 @@ interface IFullPointParams {
   value: number;
 }
 
-type Subscriber<T> = <K extends keyof T>(args?: T[K]) => void;
+type Subscriber<T> = <K extends keyof T>(args: T[K]) => void;
 
 type ModelEvents = { modelIsUpdated: ISliderSettings; settingsIsUpdated: ISliderSettings };
 
@@ -111,9 +98,14 @@ type UIControlEvents = {
   clickToTrack: IPosition;
 };
 
-interface ISimpleJsSliderModel {
-  register(event: string, func: (args?: any) => void): void;
-  unsubscribe(event: string, func: (args?: any) => void): void;
+interface IObserver<T extends Record<string, unknown>> {
+  register<K extends keyof T>(event: K, func: Subscriber<T>): void;
+  unsubscribe<K extends keyof T>(event: K, func: Subscriber<T>): void;
+}
+
+interface ISimpleJsSliderModel extends IObserver<ModelEvents> {
+  register<K extends keyof ModelEvents>(event: K, func: Subscriber<ModelEvents>): void;
+  unsubscribe<K extends keyof ModelEvents>(event: K, func: Subscriber<ModelEvents>): void;
   getSliderSettings(): ISliderSettings;
   updateThumbsValues({ thumbOne, thumbTwo }: IThumbsPositions): void;
   getThumbsPositions(): IThumbsParams;
@@ -122,9 +114,9 @@ interface ISimpleJsSliderModel {
   updateSliderSettings(settings: ISliderSettings): void;
 }
 
-interface ISimpleJsSliderView {
-  register(event: string, func: (args?: any) => void): void;
-  unsubscribe(event: string, func: (args?: any) => void): void;
+interface ISimpleJsSliderView extends IObserver<ViewEvents> {
+  register<K extends keyof ViewEvents>(event: K, func: Subscriber<ViewEvents>): void;
+  unsubscribe<K extends keyof ViewEvents>(event: K, func: Subscriber<ViewEvents>): void;
   moveThumbs({ thumbOne, thumbTwo }: IThumbsParams): void;
   updatePopUps(values: IThumbsValues): void;
   updateProgressBar(): void;
@@ -181,5 +173,4 @@ export {
   IFullPointParams,
   IThumbsParams,
   IObserver,
-  IObserversList,
 };
