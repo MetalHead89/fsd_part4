@@ -6,15 +6,17 @@
   "extends": [
     "eslint:recommended",
     "airbnb-base",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["fsd"],
+  "plugins": ["fsd", "prettier"],
   "rules": {
+    "prettier/prettier": ["error"],
     "fsd/hof-name-prefix": "error",
     "fsd/no-heavy-constructor": "error",
     "fsd/jq-cache-dom-elements": "error",

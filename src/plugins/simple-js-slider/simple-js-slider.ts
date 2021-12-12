@@ -54,10 +54,7 @@ import SimpleJsSliderView from './view/SimpleJsSliderView';
     },
   };
 
-  $.fn.simpleJsSlider = function plug(
-    action?: string | ISliderSettings,
-    args?
-  ): any {
+  $.fn.simpleJsSlider = function plug(action?: string | ISliderSettings, args?): any {
     let method: any;
 
     if (typeof action === 'string' && methods[action]) {
@@ -65,9 +62,7 @@ import SimpleJsSliderView from './view/SimpleJsSliderView';
     } else if (typeof action === 'object' || !action) {
       method = methods.init.call(this, action);
     } else {
-      $.error(
-        `Метод с именем ${action} не существует для jQuery.simpleJsSlider`
-      );
+      $.error(`Метод с именем ${action} не существует для jQuery.simpleJsSlider`);
       method = this;
     }
 
