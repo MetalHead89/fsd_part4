@@ -1,6 +1,3 @@
-/* eslint-disable operator-linebreak */
-/* eslint-disable comma-dangle */
-
 import { IFullPointParams, ISize } from '../../interfaces';
 import UIControl from '../UIControl/UIControl';
 
@@ -21,8 +18,7 @@ class Scale extends UIControl {
       value,
     });
 
-    const scalePoint: HTMLDivElement | null =
-      this.control.querySelector('.scale__point');
+    const scalePoint: HTMLDivElement | null = this.control.querySelector('.scale__point');
 
     const pointSize = {
       width: scalePoint?.offsetWidth || 0,

@@ -1,5 +1,3 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable comma-dangle */
 import Observer from '../../../simple-js-slider/observer/Observer';
 import { IRadioParams, PanelControlEvents } from '../../interfaces';
 

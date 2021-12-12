@@ -15,6 +15,20 @@ interface ISliderSettings {
   thumbTwoValue: number;
 }
 
+type SimpleJSSliderActions = {
+  init: ISliderSettings;
+  getSliderSettings: string;
+  updateSliderSettings: ISliderSettings;
+  register: () => void;
+};
+
+type SimpleJSSliderAPIMethods = {
+  init(options: ISliderSettings): void;
+  getSliderSettings(): ISliderSettings;
+  updateSliderSettings(sliderSettings: ISliderSettings): void;
+  register(callback: () => void): void;
+};
+
 interface ISubjectEvents {
   [key: string]: () => void;
 }
@@ -173,4 +187,6 @@ export {
   IFullPointParams,
   IThumbsParams,
   IObserver,
+  SimpleJSSliderActions,
+  SimpleJSSliderAPIMethods,
 };

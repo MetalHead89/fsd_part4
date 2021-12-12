@@ -1,9 +1,3 @@
-/* eslint-disable indent */
-/* eslint-disable operator-linebreak */
-/* eslint-disable comma-dangle */
-/* eslint-disable function-paren-newline */
-/* eslint-disable implicit-arrow-linebreak */
-
 import {
   IPointParams,
   IPosition,

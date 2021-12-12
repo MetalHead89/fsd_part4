@@ -1,6 +1,3 @@
-/* eslint operator-linebreak: ["error", "after"] */
-/* eslint-disable comma-dangle */
-
 import { IPosition } from '../../interfaces';
 import UIControl from '../UIControl/UIControl';
 

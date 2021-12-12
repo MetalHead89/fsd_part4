@@ -1,5 +1,3 @@
-/* eslint-disable comma-dangle */
-
 import ControlPanel from './ControlPanel/ControlPanel';
 import TextField from './TextField/TextField';
 import groupElements from './groupElements';

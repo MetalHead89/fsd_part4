@@ -1,5 +1,3 @@
-/* eslint-disable operator-linebreak */
-
 import {
   ISimpleJsSliderModel,
   ISliderSettings,

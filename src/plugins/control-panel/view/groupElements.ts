@@ -1,10 +1,6 @@
 import { IGroupElements } from '../interfaces';
 
-function groupElements({
-  header,
-  wrapperClass,
-  elements,
-}: IGroupElements): HTMLDivElement {
+function groupElements({ header, wrapperClass, elements }: IGroupElements): HTMLDivElement {
   const wrapper: HTMLDivElement = document.createElement('div');
   wrapper.className = wrapperClass;
 

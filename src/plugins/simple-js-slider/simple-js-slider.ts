@@ -1,8 +1,4 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable comma-dangle */
-
-import { ISliderSettings, IObserver } from './interfaces';
+import { ISliderSettings, SimpleJSSliderActions, SimpleJSSliderAPIMethods } from './interfaces';
 import SimpleJsSliderModel from './model/SimpleJsSliderModel';
 import SimpleJsSliderController from './controller/SimpleJsSliderController';
 import SimpleJsSliderView from './view/SimpleJsSliderView';
@@ -54,7 +50,10 @@ import SimpleJsSliderView from './view/SimpleJsSliderView';
     },
   };
 
-  $.fn.simpleJsSlider = function plug(action?: string | ISliderSettings, args?): any {
+  $.fn.simpleJsSlider = function plug<K extends keyof SimpleJSSliderActions>(
+    action?: K,
+    args?: SimpleJSSliderActions[K]
+  ): SimpleJSSliderAPIMethods {
     let method: any;
 
     if (typeof action === 'string' && methods[action]) {

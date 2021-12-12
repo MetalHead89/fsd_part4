@@ -1,35 +1,13 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable func-names */
-/* eslint-disable no-param-reassign */
-
 import ControlPanelView from './view/ControlPanelView';
 import ControlPanelModel from './model/ControlPanelModel';
 import ControlPanelController from './controller/ControlPanelController';
 
 (($) => {
-  const methods: any = {
-    init(): void {
-      return this.each(function (this: HTMLDivElement) {
-        const view = new ControlPanelView(this);
-        const model = new ControlPanelModel($(this));
-        const controller = new ControlPanelController(view, model);
-      });
-    },
-  };
+  $.fn.controlPanel = function createPanel(): JQuery<HTMLElement> {
+    const view = new ControlPanelView(this.get(0) as HTMLDivElement);
+    const model = new ControlPanelModel(this);
+    const controller = new ControlPanelController(view, model);
 
-  $.fn.controlPanel = function (action?: string, args?): JQuery<HTMLElement> {
-    let method: any;
-
-    if (typeof action === 'string' && methods[action]) {
-      method = methods[action].call(this, args);
-    } else if (typeof action === 'object' || !action) {
-      method = methods.init.call(this, args);
-    } else {
-      $.error(`Метод с именем ${action} не существует для jQuery.controlPanel`);
-      method = this;
-    }
-
-    return method;
+    return this;
   };
 })(jQuery);

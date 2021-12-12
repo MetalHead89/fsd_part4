@@ -1,5 +1,3 @@
-/* eslint-disable object-curly-newline */
-
 import { ISliderSettings } from '../simple-js-slider/interfaces';
 
 interface IRadioParams {

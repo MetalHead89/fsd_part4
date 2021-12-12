@@ -15,21 +15,15 @@ class Demo {
   }
 
   private addEventListeners() {
-    this.handleAddNewSliderButtonClick =
-      this.handleAddNewSliderButtonClick.bind(this);
+    this.handleAddNewSliderButtonClick = this.handleAddNewSliderButtonClick.bind(this);
 
-    this.addNewSliderButton?.addEventListener(
-      'click',
-      this.handleAddNewSliderButtonClick
-    );
+    this.addNewSliderButton?.addEventListener('click', this.handleAddNewSliderButtonClick);
   }
 
   private handleRemoveSliderButtonClick(sliderWrapper: HTMLDivElement): void {
     sliderWrapper.remove();
     if (document.querySelectorAll('.slider-wrapper').length === 0) {
-      this.addNewSliderButton?.classList.add(
-        'add-new-slider-button_margin-top'
-      );
+      this.addNewSliderButton?.classList.add('add-new-slider-button_margin-top');
     }
   }
 
@@ -41,9 +35,7 @@ class Demo {
     this.helpImage?.remove();
     this.helpImage = null;
 
-    this.addNewSliderButton?.classList.remove(
-      'add-new-slider-button_margin-top'
-    );
+    this.addNewSliderButton?.classList.remove('add-new-slider-button_margin-top');
 
     const sliderWrapper = document.createElement('div');
     sliderWrapper.classList.add('slider-wrapper');

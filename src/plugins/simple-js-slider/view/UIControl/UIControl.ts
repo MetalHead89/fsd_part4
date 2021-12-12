@@ -1,5 +1,3 @@
-/* eslint-disable comma-dangle */
-
 import { IPosition, ISize, UIControlEvents } from '../../interfaces';
 import Observer from '../../observer/Observer';
 
@@ -39,8 +37,8 @@ class UIControl extends Observer<UIControlEvents> {
   setOrientation(orientation: string): void {
     this.orientation = orientation;
 
-    const oldOrientationClasses = [...this.control.classList].filter(
-      (controlClass) => controlClass.includes('_orientation_')
+    const oldOrientationClasses = [...this.control.classList].filter((controlClass) =>
+      controlClass.includes('_orientation_')
     );
 
     oldOrientationClasses.forEach((controlClass) => {
@@ -59,9 +57,7 @@ class UIControl extends Observer<UIControlEvents> {
   }
 
   getStyle(styleName: string): string | undefined {
-    return document.defaultView
-      ?.getComputedStyle(this.control, null)
-      .getPropertyValue(styleName);
+    return document.defaultView?.getComputedStyle(this.control, null).getPropertyValue(styleName);
   }
 
   protected getPositionInsideParent({ left, top }: IPosition): IPosition {
