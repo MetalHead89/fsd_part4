@@ -118,8 +118,6 @@ interface IObserver<T extends Record<string, unknown>> {
 }
 
 interface ISimpleJsSliderModel extends IObserver<ModelEvents> {
-  register<K extends keyof ModelEvents>(event: K, func: Subscriber<ModelEvents>): void;
-  unsubscribe<K extends keyof ModelEvents>(event: K, func: Subscriber<ModelEvents>): void;
   getSliderSettings(): ISliderSettings;
   updateThumbsValues({ thumbOne, thumbTwo }: IThumbsPositions): void;
   getThumbsPositions(): IThumbsParams;
@@ -129,8 +127,6 @@ interface ISimpleJsSliderModel extends IObserver<ModelEvents> {
 }
 
 interface ISimpleJsSliderView extends IObserver<ViewEvents> {
-  register<K extends keyof ViewEvents>(event: K, func: Subscriber<ViewEvents>): void;
-  unsubscribe<K extends keyof ViewEvents>(event: K, func: Subscriber<ViewEvents>): void;
   moveThumbs({ thumbOne, thumbTwo }: IThumbsParams): void;
   updatePopUps(values: IThumbsValues): void;
   updateProgressBar(): void;
