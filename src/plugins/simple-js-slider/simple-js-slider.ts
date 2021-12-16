@@ -66,20 +66,20 @@ import SimpleJsSliderView from './view/SimpleJsSliderView';
 
   $.fn.simpleJsSlider = function plug(
     action: keyof SimpleJSSliderAPIMethods = 'init',
-    args?: Parameters<SimpleJSSliderAPIMethods[typeof action]>[0]
+    options?: Parameters<SimpleJSSliderAPIMethods[typeof action]>[0]
   ): any {
     let method: void | ISliderSettings | JQuery<HTMLDivElement>;
 
-    if (action === 'init' && isSliderSettings(args)) {
-      method = methods[action].call(this, args);
+    if (action === 'init' && isSliderSettings(options)) {
+      method = methods[action].call(this, options);
     } else if (isSliderSettings(action)) {
       method = methods.init.call(this, action);
-    } else if (action === 'register' && typeof args === 'function') {
-      method = methods[action].call(this, args);
+    } else if (action === 'register' && typeof options === 'function') {
+      method = methods[action].call(this, options);
     } else if (action === 'getSliderSettings') {
       method = methods[action].call(this);
-    } else if (action === 'updateSliderSettings' && isSliderSettings(args)) {
-      method = methods[action].call(this, args);
+    } else if (action === 'updateSliderSettings' && isSliderSettings(options)) {
+      method = methods[action].call(this, options);
     } else {
       method = methods.init.call(this);
     }
