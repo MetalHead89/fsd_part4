@@ -1,4 +1,4 @@
-import { ISliderSettings, SimpleJSSliderActions, SimpleJSSliderAPIMethods } from './interfaces';
+import { ISliderSettings, SimpleJSSliderAPIMethods } from './interfaces';
 import SimpleJsSliderModel from './model/SimpleJsSliderModel';
 import SimpleJsSliderController from './controller/SimpleJsSliderController';
 import SimpleJsSliderView from './view/SimpleJsSliderView';
@@ -15,13 +15,27 @@ import SimpleJsSliderView from './view/SimpleJsSliderView';
     step: 1,
     thumbOneValue: 3,
     thumbTwoValue: 7,
-    sliderSize: { width: 500, height: 10 },
-    thumbSize: { width: 20, height: 20 },
   };
 
+  function isSliderSettings(value: unknown): value is ISliderSettings {
+    return (
+      typeof value === 'object' &&
+      value !== null &&
+      ('orientation' in value ||
+        'type' in value ||
+        'isScale' in value ||
+        'isPopUps' in value ||
+        'min' in value ||
+        'max' in value ||
+        'step' in value ||
+        'thumbOneValue' in value ||
+        'thumbTwoValue' in value)
+    );
+  }
+
   // API методы плагина
-  const methods: any = {
-    init(options: ISliderSettings): void {
+  const methods: SimpleJSSliderAPIMethods & ThisType<JQuery<HTMLDivElement>> = {
+    init(options?: ISliderSettings): JQuery<HTMLDivElement> {
       // Обновление настроек плагина в соответствии с полученными параметрами
       const settings: ISliderSettings = $.extend(defaultSettings, options);
 
@@ -50,19 +64,24 @@ import SimpleJsSliderView from './view/SimpleJsSliderView';
     },
   };
 
-  $.fn.simpleJsSlider = function plug<K extends keyof SimpleJSSliderActions>(
-    action?: K,
-    args?: SimpleJSSliderActions[K]
-  ): SimpleJSSliderAPIMethods {
-    let method: any;
+  $.fn.simpleJsSlider = function plug(
+    action: keyof SimpleJSSliderAPIMethods = 'init',
+    args?: Parameters<SimpleJSSliderAPIMethods[typeof action]>[0]
+  ): any {
+    let method: void | ISliderSettings | JQuery<HTMLDivElement>;
 
-    if (typeof action === 'string' && methods[action]) {
+    if (action === 'init' && isSliderSettings(args)) {
       method = methods[action].call(this, args);
-    } else if (typeof action === 'object' || !action) {
+    } else if (isSliderSettings(action)) {
       method = methods.init.call(this, action);
+    } else if (action === 'register' && typeof args === 'function') {
+      method = methods[action].call(this, args);
+    } else if (action === 'getSliderSettings') {
+      method = methods[action].call(this);
+    } else if (action === 'updateSliderSettings' && isSliderSettings(args)) {
+      method = methods[action].call(this, args);
     } else {
-      $.error(`Метод с именем ${action} не существует для jQuery.simpleJsSlider`);
-      method = this;
+      method = methods.init.call(this);
     }
 
     return method;
