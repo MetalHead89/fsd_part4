@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-param-reassign */
+
 import { ISliderSettings, SimpleJSSliderAPIMethods } from './interfaces';
 import SimpleJsSliderModel from './model/SimpleJsSliderModel';
 import SimpleJsSliderController from './controller/SimpleJsSliderController';
