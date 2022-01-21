@@ -1,3 +1,4 @@
+import { boundMethod } from 'autobind-decorator';
 import {
   IControllerParams,
   ISimpleJsSliderModel,
@@ -15,7 +16,6 @@ class SimpleJsSliderController {
     this.view = params.view;
 
     this.init();
-    this.bindContext();
     this.subscribeToEvents();
   }
 
@@ -32,11 +32,7 @@ class SimpleJsSliderController {
     this.model.register('settingsIsUpdated', (args: ISliderSettings) => this.fullViewUpdate(args));
   }
 
-  private bindContext(): void {
-    this.updateView = this.updateView.bind(this);
-    this.fullViewUpdate = this.fullViewUpdate.bind(this);
-  }
-
+  @boundMethod
   private updateView(): void {
     this.view.moveThumbs(this.model.getThumbsPositions());
     this.view.updateProgressBar();
@@ -46,6 +42,7 @@ class SimpleJsSliderController {
     this.view.updateScale(this.model.getPointsParams());
   }
 
+  @boundMethod
   private fullViewUpdate(settings: ISliderSettings): void {
     this.updateSliderOrientation(settings.orientation);
     this.updateSliderType(settings.type);

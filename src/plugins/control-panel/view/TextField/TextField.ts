@@ -1,3 +1,4 @@
+import { boundMethod } from 'autobind-decorator';
 import Observer from '../../../simple-js-slider/observer/Observer';
 import { PanelControlEvents } from '../../interfaces';
 
@@ -35,7 +36,6 @@ class TextField extends Observer<PanelControlEvents> {
 
     this.field.type = 'number';
     this.field.classList.add('text-field__input');
-    this.handleTextFieldBlur = this.handleTextFieldBlur.bind(this);
     this.field.addEventListener('blur', this.handleTextFieldBlur);
     this.field.onkeypress = TextField.removeNonDigitChar;
 
@@ -46,6 +46,7 @@ class TextField extends Observer<PanelControlEvents> {
     this.control.append(this.label);
   }
 
+  @boundMethod
   private handleTextFieldBlur() {
     if (this.field.value === '') {
       this.field.value = this.value.toString();

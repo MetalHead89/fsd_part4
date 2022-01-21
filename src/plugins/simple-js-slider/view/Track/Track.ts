@@ -1,3 +1,4 @@
+import { boundMethod } from 'autobind-decorator';
 import UIControl from '../UIControl/UIControl';
 
 class Track extends UIControl {
@@ -7,10 +8,10 @@ class Track extends UIControl {
   }
 
   private init(): void {
-    this.handleTrackClick = this.handleTrackClick.bind(this);
     this.control.addEventListener('click', this.handleTrackClick);
   }
 
+  @boundMethod
   private handleTrackClick(event: MouseEvent): void {
     const position = this.getPositionInsideParent({ left: event.clientX, top: event.clientY });
     this.notify('clickToTrack', position);

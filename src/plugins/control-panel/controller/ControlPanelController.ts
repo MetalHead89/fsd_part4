@@ -1,3 +1,4 @@
+import { boundMethod } from 'autobind-decorator';
 import { ISliderSettings } from '../../simple-js-slider/interfaces';
 import ControlPanelModel from '../model/ControlPanelModel';
 import ControlPanelView from '../view/ControlPanelView';
@@ -11,7 +12,6 @@ class ControlPanelController {
     this.model = model;
     this.init();
 
-    this.bindContext();
     this.subscribeToEvents();
   }
 
@@ -19,12 +19,9 @@ class ControlPanelController {
     this.updateView(this.model.getSliderSettings());
   }
 
+  @boundMethod
   private updateView(settings: ISliderSettings): void {
     this.view.updateView(settings);
-  }
-
-  private bindContext(): void {
-    this.updateView = this.updateView.bind(this);
   }
 
   private subscribeToEvents(): void {

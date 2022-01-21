@@ -1,3 +1,4 @@
+import { boundMethod } from 'autobind-decorator';
 import { IFullPointParams, ISize } from '../../interfaces';
 import UIControl from '../UIControl/UIControl';
 
@@ -31,10 +32,10 @@ class Scale extends UIControl {
   }
 
   private init(): void {
-    this.handleScaleClick = this.handleScaleClick.bind(this);
     this.control.addEventListener('click', this.handleScaleClick);
   }
 
+  @boundMethod
   private handleScaleClick(event: MouseEvent): void {
     const position = this.getPositionInsideParent({
       left: event.clientX,

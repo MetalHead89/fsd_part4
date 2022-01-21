@@ -1,3 +1,4 @@
+import { boundMethod } from 'autobind-decorator';
 import Observer from '../../../simple-js-slider/observer/Observer';
 import { IRadioParams, PanelControlEvents } from '../../interfaces';
 
@@ -48,7 +49,6 @@ class RadioButton extends Observer<PanelControlEvents> {
       radioButton.value = value;
       radioButton.checked = index === 0 || Boolean(checked);
       radioButton.classList.add('radio-button__radio-button');
-      this.handleRadioButtonChange = this.handleRadioButtonChange.bind(this);
       radioButton.addEventListener('change', this.handleRadioButtonChange);
       this.radios.push(radioButton);
 
@@ -60,6 +60,7 @@ class RadioButton extends Observer<PanelControlEvents> {
     });
   }
 
+  @boundMethod
   private handleRadioButtonChange(): void {
     this.radios.forEach((radio) => {
       const label = radio.parentElement;

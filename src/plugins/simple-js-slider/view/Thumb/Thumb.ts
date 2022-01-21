@@ -1,3 +1,4 @@
+import { boundMethod } from 'autobind-decorator';
 import { IPosition } from '../../interfaces';
 import UIControl from '../UIControl/UIControl';
 
@@ -9,8 +10,8 @@ class Thumb extends UIControl {
   constructor(orientation?: string) {
     super('thumb', orientation);
 
-    this.handleDocumentPointermove = this.drag.bind(this);
-    this.handleDocumentPointerup = this.endDrag.bind(this);
+    this.handleDocumentPointermove = this.drag;
+    this.handleDocumentPointerup = this.endDrag;
 
     this.init();
   }
@@ -36,7 +37,6 @@ class Thumb extends UIControl {
   }
 
   private init() {
-    this.handleThumbPointerdown = this.handleThumbPointerdown.bind(this);
     this.control.addEventListener('pointerdown', this.handleThumbPointerdown);
 
     this.disableDragAndDrop();
@@ -46,6 +46,7 @@ class Thumb extends UIControl {
     this.control.ondragstart = () => false;
   }
 
+  @boundMethod
   private handleThumbPointerdown(event: PointerEvent): void {
     Thumb.disableSelection();
 
@@ -64,6 +65,7 @@ class Thumb extends UIControl {
     this.shift.shiftY = cursorPosition.top - thumbPosition.top;
   }
 
+  @boundMethod
   private drag(event: PointerEvent): void {
     this.setPosition({
       left: event.clientX - this.shift.shiftX,
@@ -73,6 +75,7 @@ class Thumb extends UIControl {
     this.notify('thumbIsDragged', '');
   }
 
+  @boundMethod
   private endDrag(): void {
     this.shift = { shiftX: 0, shiftY: 0 };
     Thumb.enableSelection();

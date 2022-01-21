@@ -1,3 +1,5 @@
+import { boundMethod } from 'autobind-decorator';
+
 class Demo {
   private addNewSliderButton: HTMLDivElement | null = null;
   private helpImage: HTMLDivElement | null = null;
@@ -15,8 +17,6 @@ class Demo {
   }
 
   private addEventListeners() {
-    this.handleAddNewSliderButtonClick = this.handleAddNewSliderButtonClick.bind(this);
-
     this.addNewSliderButton?.addEventListener('click', this.handleAddNewSliderButtonClick);
   }
 
@@ -27,6 +27,7 @@ class Demo {
     }
   }
 
+  @boundMethod
   private handleAddNewSliderButtonClick(): void {
     if (this.buttonWrapper === null) {
       return;

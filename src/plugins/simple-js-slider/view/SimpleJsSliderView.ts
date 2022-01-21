@@ -1,3 +1,4 @@
+import { boundMethod } from 'autobind-decorator';
 import {
   IPointParams,
   IPosition,
@@ -44,7 +45,6 @@ class SimpleJsSliderView extends Observer<ViewEvents> implements ISimpleJsSlider
     this.scale = new Scale();
     this.orientation = 'horizontal';
 
-    this.bindContext();
     this.init();
     this.subscribeToEventsNew();
   }
@@ -250,11 +250,6 @@ class SimpleJsSliderView extends Observer<ViewEvents> implements ISimpleJsSlider
     };
   }
 
-  private bindContext(): void {
-    this.updateThumbsPositions = this.updateThumbsPositions.bind(this);
-    this.setThumbPositionOnClickPosition = this.setThumbPositionOnClickPosition.bind(this);
-  }
-
   private subscribeToEventsNew(): void {
     this.thumbOne.register('thumbIsDragged', this.updateThumbsPositions);
     this.thumbTwo?.register('thumbIsDragged', this.updateThumbsPositions);
@@ -266,6 +261,7 @@ class SimpleJsSliderView extends Observer<ViewEvents> implements ISimpleJsSlider
     );
   }
 
+  @boundMethod
   private updateThumbsPositions() {
     const thumbs = this.getThumbsPercentPositions();
     this.notifyAboutThumbsDragged(thumbs.thumbOne, thumbs.thumbTwo);
@@ -290,6 +286,7 @@ class SimpleJsSliderView extends Observer<ViewEvents> implements ISimpleJsSlider
     });
   }
 
+  @boundMethod
   private setThumbPositionOnClickPosition({ left, top }: IPosition): void {
     const thumbSize = this.thumbOne.getSize();
     const position = {
@@ -314,11 +311,11 @@ class SimpleJsSliderView extends Observer<ViewEvents> implements ISimpleJsSlider
       return (
         Math.abs(
           this.positionByOrientation(position) -
-            this.positionByOrientation(this.thumbTwo.getPosition())
+          this.positionByOrientation(this.thumbTwo.getPosition())
         ) <
         Math.abs(
           this.positionByOrientation(position) -
-            this.positionByOrientation(this.thumbOne.getPosition())
+          this.positionByOrientation(this.thumbOne.getPosition())
         )
       );
     }

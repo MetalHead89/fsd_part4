@@ -1,3 +1,4 @@
+import { boundMethod } from 'autobind-decorator';
 import Observer from '../../../simple-js-slider/observer/Observer';
 import { ICheckboxParams, PanelControlEvents } from '../../interfaces';
 
@@ -42,13 +43,13 @@ class Checkbox extends Observer<PanelControlEvents> {
     this.checkbox.name = name;
     this.checkbox.value = value;
     this.checkbox.classList.add('checkbox__check');
-    this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
     this.checkbox.addEventListener('change', this.handleCheckboxChange);
 
     this.label.append(this.checkbox);
     this.control.append(this.label);
   }
 
+  @boundMethod
   private handleCheckboxChange(): void {
     this.label.classList.toggle('checkbox__label_checked');
 

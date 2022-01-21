@@ -1,3 +1,4 @@
+import { boundMethod } from 'autobind-decorator';
 import ControlPanel from './ControlPanel/ControlPanel';
 import TextField from './TextField/TextField';
 import groupElements from './groupElements';
@@ -50,7 +51,6 @@ class ControlPanelView extends Observer<PanelViewEvents> {
       value: 'popUps',
     });
 
-    this.bindContext();
     this.subscribeToEvents();
     this.createPanel();
   }
@@ -150,10 +150,6 @@ class ControlPanelView extends Observer<PanelViewEvents> {
     this.sliderWrapper.append(this.controlPanel.getElement());
   }
 
-  private bindContext(): void {
-    this.notifyAboutChange = this.notifyAboutChange.bind(this);
-  }
-
   private subscribeToEvents(): void {
     this.thumbOneValue.register('PanelControlIsUpdated', this.notifyAboutChange);
     this.thumbTwoValue.register('PanelControlIsUpdated', this.notifyAboutChange);
@@ -202,6 +198,7 @@ class ControlPanelView extends Observer<PanelViewEvents> {
     return this.thumbTwoValue.getValue();
   }
 
+  @boundMethod
   private notifyAboutChange() {
     this.switchOrientation();
     this.notify('controlPanelDataUpdated', this.getPanelSettings());

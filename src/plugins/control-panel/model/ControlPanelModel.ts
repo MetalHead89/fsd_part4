@@ -1,3 +1,4 @@
+import { boundMethod } from 'autobind-decorator';
 import { ISliderSettings } from '../../simple-js-slider/interfaces';
 import Observer from '../../simple-js-slider/observer/Observer';
 import { PanelModelEvents } from '../interfaces';
@@ -8,7 +9,6 @@ class ControlPanelModel extends Observer<PanelModelEvents> {
   constructor(slider: JQuery<HTMLElement>) {
     super();
     this.slider = slider;
-    this.bindContext();
     this.subscribeToEvents();
   }
 
@@ -16,17 +16,14 @@ class ControlPanelModel extends Observer<PanelModelEvents> {
     this.slider.simpleJsSlider('updateSliderSettings', sliderSettings);
   }
 
+  @boundMethod
   getSliderSettings(): ISliderSettings {
     return this.slider.simpleJsSlider('getSliderSettings');
   }
 
+  @boundMethod
   private handleSliderUpdate(settings: ISliderSettings) {
     this.notify('sliderIsUpdated', settings);
-  }
-
-  private bindContext() {
-    this.handleSliderUpdate = this.handleSliderUpdate.bind(this);
-    this.getSliderSettings = this.getSliderSettings.bind(this);
   }
 
   private subscribeToEvents() {
