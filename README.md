@@ -171,16 +171,42 @@ Production сборка демо-страницы:
 
 #### Функции API
 
-| Функция API | Тип аргумента | Описание |
-|:-:|:-:|:-:|
-| getSettings | - | Возвращает объект с настройками слайдера |
-| updateSettings | - | Обновляет настройки слайдера |
-| register | - | Подписка на события слайдера |
-| unsubscribe | - | Отписка от событий слайдера |
+| Функция API | Описание |
+|:-:|:-:|
+| getSettings | Возвращает объект с настройками слайдера |
+| updateSettings | Обновляет настройки слайдера |
+| register | Подписка на события слайдера |
+| unsubscribe | Отписка от событий слайдера |
 
-Например, для того, чтобы получить текущие значения бегунков, необходимо выполнить следующую команду:
+**Примеры:**
 
-	$(sliderWrapper).simpleJsSlider(getThumbsValues);
+*Получение текущих настроек слайдера:*
+
+```
+$(sliderWrapper).simpleJsSlider('getSettings');
+```
+
+*Изменение текущих настроек слайдера:*
+
+```
+$(sliderWrapper).simpleJsSlider('updateSettings', sliderSettings);
+```
+
+где sliderSettings - объект с настройками слайдера
+
+*Подписка на обновление состояния слайдера*
+
+```
+this.slider.simpleJsSlider('register', (args: ISliderSettings) => {
+  callback(sliderState);
+});
+
+*Отписка от событий обновления состояния слайдера*
+
+```
+this.slider.simpleJsSlider('unsubscribe', (args: ISliderSettings) => {
+  callback(sliderState);
+});
 
 ## Архитектура
 
