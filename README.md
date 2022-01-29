@@ -200,7 +200,10 @@ $(sliderWrapper).simpleJsSlider('updateSettings', sliderSettings);
 this.slider.simpleJsSlider('register', (args: ISliderSettings) => {
   callback(sliderState);
 });
-'''
+```
+
+где callback - метод, который будет выполняться после того, как было изменено состояние слайдера;  
+sliderState - параметр, в который будет передано текущее состояние слайдера
 
 *Отписка от событий обновления состояния слайдера*
 
@@ -208,7 +211,9 @@ this.slider.simpleJsSlider('register', (args: ISliderSettings) => {
 this.slider.simpleJsSlider('unsubscribe', (args: ISliderSettings) => {
   callback(sliderState);
 });
-'''
+```
+
+где callback - метод, который выполняется после того, как было изменено состояние слайдера;
 
 ## Архитектура
 
