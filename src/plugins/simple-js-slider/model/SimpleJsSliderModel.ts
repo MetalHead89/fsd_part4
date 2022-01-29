@@ -22,7 +22,7 @@ class SimpleJsSliderModel extends Observer<ModelEvents> implements ISimpleJsSlid
 
   constructor(settings: ISliderSettings) {
     super();
-    this.updateSliderSettings(settings);
+    this.updateSettings(settings);
   }
 
   updateThumbsValues({ thumbOne, thumbTwo }: IThumbsPositions): void {
@@ -33,10 +33,10 @@ class SimpleJsSliderModel extends Observer<ModelEvents> implements ISimpleJsSlid
     this.thumbTwoValue =
       thumbTwoPosition !== null ? this.getThumbValue(thumbTwoPosition) : this.thumbTwoValue;
 
-    this.notify('modelIsUpdated', this.getSliderSettings());
+    this.notify('modelIsUpdated', this.getSettings());
   }
 
-  getSliderSettings(): ISliderSettings {
+  getSettings(): ISliderSettings {
     return {
       orientation: this.orientation,
       type: this.type,
@@ -50,7 +50,7 @@ class SimpleJsSliderModel extends Observer<ModelEvents> implements ISimpleJsSlid
     };
   }
 
-  updateSliderSettings(settings: ISliderSettings): void {
+  updateSettings(settings: ISliderSettings): void {
     this.orientation = settings.orientation;
     this.type = settings.type;
     this.isScale = settings.isScale;
@@ -65,7 +65,7 @@ class SimpleJsSliderModel extends Observer<ModelEvents> implements ISimpleJsSlid
       [this.thumbOneValue, this.thumbTwoValue] = [this.thumbTwoValue, this.thumbOneValue];
     }
 
-    this.notify('settingsIsUpdated', this.getSliderSettings());
+    this.notify('settingsIsUpdated', this.getSettings());
   }
 
   getThumbsPositions(): IThumbsParams {

@@ -17,9 +17,10 @@ interface ISliderSettings {
 
 type SimpleJSSliderAPIMethods = {
   init: (options?: ISliderSettings) => JQuery<HTMLDivElement>;
-  getSliderSettings: () => ISliderSettings;
-  updateSliderSettings: (sliderSettings: ISliderSettings) => void;
+  getSettings: () => ISliderSettings;
+  updateSettings: (sliderSettings: ISliderSettings) => void;
   register: (callback: () => void) => void;
+  unsubscribe: (callback: () => void) => void;
 };
 
 interface ISubjectEvents {
@@ -111,12 +112,12 @@ interface IObserver<T extends Record<string, unknown>> {
 }
 
 interface ISimpleJsSliderModel extends IObserver<ModelEvents> {
-  getSliderSettings(): ISliderSettings;
+  getSettings(): ISliderSettings;
   updateThumbsValues({ thumbOne, thumbTwo }: IThumbsPositions): void;
   getThumbsPositions(): IThumbsParams;
   getThumbValues(): IThumbsValues;
   getPointsParams(): IPointParams[];
-  updateSliderSettings(settingnulls: ISliderSettings): void;
+  updateSettings(settingnulls: ISliderSettings): void;
 }
 
 interface ISimpleJsSliderView extends IObserver<ViewEvents> {

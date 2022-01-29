@@ -16,7 +16,7 @@ class ControlPanelController {
   }
 
   private init(): void {
-    this.updateView(this.model.getSliderSettings());
+    this.updateView(this.model.getSettings());
   }
 
   @boundMethod

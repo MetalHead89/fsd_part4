@@ -21,7 +21,7 @@ beforeEach(() => {
   };
 
   model = new SimpleJsSliderModel(settings);
-  model.updateSliderSettings(settings);
+  model.updateSettings(settings);
 });
 
 describe('Метод updateThumbsValues класса SimpleJsSliderModel', () => {
@@ -39,9 +39,9 @@ describe('Метод updateThumbsValues класса SimpleJsSliderModel', () =>
   });
 });
 
-describe('Метод getSliderSettings класса SimpleJsSliderModel', () => {
+describe('Метод getSettings класса SimpleJsSliderModel', () => {
   test('Должен возвращать объект с текущим состоянием слайдера', () => {
-    const sliderSettings = model.getSliderSettings();
+    const sliderSettings = model.getSettings();
     expect(sliderSettings.isPopUps).toBe(true);
     expect(sliderSettings.isScale).toBe(true);
     expect(sliderSettings.type).toBe('range');
@@ -54,7 +54,7 @@ describe('Метод getSliderSettings класса SimpleJsSliderModel', () => 
   });
 });
 
-describe('Метод updateSliderSettings класса SimpleJsSliderModel', () => {
+describe('Метод updateSettings класса SimpleJsSliderModel', () => {
   test('Должен корректно обновлять состояние слайдера', () => {
     const sliderSettings = {
       orientation: 'vertical',
@@ -68,8 +68,8 @@ describe('Метод updateSliderSettings класса SimpleJsSliderModel', () 
       thumbTwoValue: 9,
     };
 
-    model.updateSliderSettings(sliderSettings);
-    const newSettings = model.getSliderSettings();
+    model.updateSettings(sliderSettings);
+    const newSettings = model.getSettings();
 
     expect(newSettings.isPopUps).toBe(false);
     expect(newSettings.isScale).toBe(false);
@@ -95,8 +95,8 @@ describe('Метод updateSliderSettings класса SimpleJsSliderModel', () 
       thumbTwoValue: 3,
     };
 
-    model.updateSliderSettings(sliderSettings);
-    const newSettings = model.getSliderSettings();
+    model.updateSettings(sliderSettings);
+    const newSettings = model.getSettings();
 
     expect(newSettings.thumbOneValue).toBe(3);
     expect(newSettings.thumbTwoValue).toBe(8);
@@ -115,9 +115,9 @@ describe('Метод updateSliderSettings класса SimpleJsSliderModel', () 
       thumbTwoValue: 3,
     };
 
-    model.updateSliderSettings(sliderSettings);
+    model.updateSettings(sliderSettings);
 
-    expect(model.getSliderSettings().thumbOneValue).toBe(2);
+    expect(model.getSettings().thumbOneValue).toBe(2);
   });
 
   test('Значение Thumb не может быть больше max', () => {
@@ -133,10 +133,10 @@ describe('Метод updateSliderSettings класса SimpleJsSliderModel', () 
       thumbTwoValue: 3,
     };
 
-    model.updateSliderSettings(sliderSettings);
+    model.updateSettings(sliderSettings);
 
-    expect(model.getSliderSettings().thumbOneValue).toBe(3);
-    expect(model.getSliderSettings().thumbTwoValue).toBe(20);
+    expect(model.getSettings().thumbOneValue).toBe(3);
+    expect(model.getSettings().thumbTwoValue).toBe(20);
   });
 
   test('Минимальное значение Thumb не может быть больше max', () => {
@@ -152,9 +152,9 @@ describe('Метод updateSliderSettings класса SimpleJsSliderModel', () 
       thumbTwoValue: 3,
     };
 
-    model.updateSliderSettings(sliderSettings);
+    model.updateSettings(sliderSettings);
 
-    expect(model.getSliderSettings().min).toBe(0);
+    expect(model.getSettings().min).toBe(0);
   });
 
   test('Максимальное значение Thumb не может быть больше min', () => {
@@ -170,9 +170,9 @@ describe('Метод updateSliderSettings класса SimpleJsSliderModel', () 
       thumbTwoValue: 3,
     };
 
-    model.updateSliderSettings(sliderSettings);
+    model.updateSettings(sliderSettings);
 
-    expect(model.getSliderSettings().max).toBe(10);
+    expect(model.getSettings().max).toBe(10);
   });
 
   test('Количество шагов Thumb не может превышать максимально возможное количество шагов', () => {
@@ -188,9 +188,9 @@ describe('Метод updateSliderSettings класса SimpleJsSliderModel', () 
       thumbTwoValue: 3,
     };
 
-    model.updateSliderSettings(sliderSettings);
+    model.updateSettings(sliderSettings);
 
-    expect(model.getSliderSettings().step).toBe(1);
+    expect(model.getSettings().step).toBe(1);
   });
 });
 

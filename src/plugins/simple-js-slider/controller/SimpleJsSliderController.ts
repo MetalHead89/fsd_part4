@@ -20,7 +20,7 @@ class SimpleJsSliderController {
   }
 
   private init(): void {
-    this.fullViewUpdate(this.model.getSliderSettings());
+    this.fullViewUpdate(this.model.getSettings());
   }
 
   private subscribeToEvents(): void {

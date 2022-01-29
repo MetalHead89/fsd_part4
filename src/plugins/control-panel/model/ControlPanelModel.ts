@@ -13,12 +13,12 @@ class ControlPanelModel extends Observer<PanelModelEvents> {
   }
 
   updateSliderPluginSettings(sliderSettings: ISliderSettings): void {
-    this.slider.simpleJsSlider('updateSliderSettings', sliderSettings);
+    this.slider.simpleJsSlider('updateSettings', sliderSettings);
   }
 
   @boundMethod
-  getSliderSettings(): ISliderSettings {
-    return this.slider.simpleJsSlider('getSliderSettings');
+  getSettings(): ISliderSettings {
+    return this.slider.simpleJsSlider('getSettings');
   }
 
   @boundMethod

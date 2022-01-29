@@ -56,13 +56,16 @@ import SimpleJsSliderView from './view/SimpleJsSliderView';
         $(this).data('model', model);
       });
     },
-    getSliderSettings(): ISliderSettings {
-      return $(this).data().model.getSliderSettings();
+    getSettings(): ISliderSettings {
+      return $(this).data().model.getSettings();
     },
-    updateSliderSettings(sliderSettings: ISliderSettings): void {
-      $(this).data().model.updateSliderSettings(sliderSettings);
+    updateSettings(sliderSettings: ISliderSettings): void {
+      $(this).data().model.updateSettings(sliderSettings);
     },
     register(callback: () => void): void {
+      $(this).data().model.register('modelIsUpdated', callback);
+    },
+    unsubscribe(callback: () => void): void {
       $(this).data().model.register('modelIsUpdated', callback);
     },
   };
@@ -79,9 +82,11 @@ import SimpleJsSliderView from './view/SimpleJsSliderView';
       method = methods.init.call(this, action);
     } else if (action === 'register' && typeof options === 'function') {
       method = methods[action].call(this, options);
-    } else if (action === 'getSliderSettings') {
+    } else if (action === 'unsubscribe' && typeof options === 'function') {
+      method = methods[action].call(this, options);
+    } else if (action === 'getSettings') {
       method = methods[action].call(this);
-    } else if (action === 'updateSliderSettings' && isSliderSettings(options)) {
+    } else if (action === 'updateSettings' && isSliderSettings(options)) {
       method = methods[action].call(this, options);
     } else {
       method = methods.init.call(this);
