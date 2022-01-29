@@ -200,6 +200,7 @@ $(sliderWrapper).simpleJsSlider('updateSettings', sliderSettings);
 this.slider.simpleJsSlider('register', (args: ISliderSettings) => {
   callback(sliderState);
 });
+'''
 
 *Отписка от событий обновления состояния слайдера*
 
@@ -207,6 +208,7 @@ this.slider.simpleJsSlider('register', (args: ISliderSettings) => {
 this.slider.simpleJsSlider('unsubscribe', (args: ISliderSettings) => {
   callback(sliderState);
 });
+'''
 
 ## Архитектура
 
