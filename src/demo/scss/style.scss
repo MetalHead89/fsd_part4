@@ -41,6 +41,7 @@ body {
   align-items: center;
   justify-content: center;
   user-select: none;
+  cursor: pointer;
 
   &:hover {
     background: rgba(240, 243, 243, 0.9);
