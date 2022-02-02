@@ -151,15 +151,15 @@ class ControlPanelView extends Observer<PanelViewEvents> {
   }
 
   private subscribeToEvents(): void {
-    this.thumbOneValue.register('PanelControlIsUpdated', this.notifyAboutChange);
-    this.thumbTwoValue.register('PanelControlIsUpdated', this.notifyAboutChange);
-    this.min.register('PanelControlIsUpdated', this.notifyAboutChange);
-    this.max.register('PanelControlIsUpdated', this.notifyAboutChange);
-    this.step.register('PanelControlIsUpdated', this.notifyAboutChange);
-    this.scaleCheckbox.register('PanelControlIsUpdated', this.notifyAboutChange);
-    this.popUpsCheckbox.register('PanelControlIsUpdated', this.notifyAboutChange);
-    this.typeRadio.register('PanelControlIsUpdated', this.notifyAboutChange);
-    this.orientationRadio.register('PanelControlIsUpdated', this.notifyAboutChange);
+    this.thumbOneValue.register('panelControlIsUpdated', this.notifyAboutChange);
+    this.thumbTwoValue.register('panelControlIsUpdated', this.notifyAboutChange);
+    this.min.register('panelControlIsUpdated', this.notifyAboutChange);
+    this.max.register('panelControlIsUpdated', this.notifyAboutChange);
+    this.step.register('panelControlIsUpdated', this.notifyAboutChange);
+    this.scaleCheckbox.register('panelControlIsUpdated', this.notifyAboutChange);
+    this.popUpsCheckbox.register('panelControlIsUpdated', this.notifyAboutChange);
+    this.typeRadio.register('panelControlIsUpdated', this.notifyAboutChange);
+    this.orientationRadio.register('panelControlIsUpdated', this.notifyAboutChange);
   }
 
   private getOrientation(): string {

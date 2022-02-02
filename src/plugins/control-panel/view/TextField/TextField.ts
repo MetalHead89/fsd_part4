@@ -37,7 +37,8 @@ class TextField extends Observer<PanelControlEvents> {
     this.field.type = 'number';
     this.field.classList.add('text-field__input');
     this.field.addEventListener('blur', this.handleTextFieldBlur);
-    this.field.onkeypress = TextField.removeNonDigitChar;
+    this.field.addEventListener('keyup', this.handleTextFieldKeyup);
+    this.field.addEventListener('keypress', TextField.removeNonDigitChar);
 
     this.label.classList.add('text-field__label');
     this.label.innerText = labelText;
@@ -48,11 +49,23 @@ class TextField extends Observer<PanelControlEvents> {
 
   @boundMethod
   private handleTextFieldBlur() {
+    this.changeText();
+  }
+
+  @boundMethod
+  private handleTextFieldKeyup(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.changeText();
+    }
+  }
+
+  @boundMethod
+  private changeText() {
     if (this.field.value === '') {
       this.field.value = this.value.toString();
     } else {
       this.value = parseInt(this.field.value, 10);
-      this.notify('PanelControlIsUpdated', '');
+      this.notify('panelControlIsUpdated', '');
     }
   }
 

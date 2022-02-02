@@ -61,9 +61,14 @@ class SimpleJsSliderModel extends Observer<ModelEvents> implements ISimpleJsSlid
     this.thumbOneValue = this.getCorrectValue(settings.thumbOneValue);
     this.thumbTwoValue = this.getCorrectValue(settings.thumbTwoValue);
 
-    if (this.thumbOneValue > this.thumbTwoValue) {
+    if (this.type === 'range' && this.thumbOneValue > this.thumbTwoValue) {
       [this.thumbOneValue, this.thumbTwoValue] = [this.thumbTwoValue, this.thumbOneValue];
     }
+
+    this.updateThumbsValues({
+      thumbOne: this.valueToPosition(this.thumbOneValue),
+      thumbTwo: this.valueToPosition(this.thumbTwoValue),
+    });
 
     this.notify('settingsIsUpdated', this.getSettings());
   }

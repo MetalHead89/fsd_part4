@@ -1,7 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-param-reassign */
 
-import { ISliderSettings, SimpleJSSliderAPIMethods } from './interfaces';
+import {
+  APIObserverArgs,
+  ISliderSettings,
+  ModelEvents,
+  SimpleJSSliderAPIMethods,
+} from './interfaces';
 import SimpleJsSliderModel from './model/SimpleJsSliderModel';
 import SimpleJsSliderController from './controller/SimpleJsSliderController';
 import SimpleJsSliderView from './view/SimpleJsSliderView';
@@ -36,6 +41,10 @@ import SimpleJsSliderView from './view/SimpleJsSliderView';
     );
   }
 
+  function isAPIObserverArgs(value: unknown): value is APIObserverArgs<ModelEvents> {
+    return typeof value === 'object' && value !== null && 'event' in value;
+  }
+
   // API методы плагина
   const methods: SimpleJSSliderAPIMethods & ThisType<JQuery<HTMLDivElement>> = {
     init(options?: ISliderSettings): JQuery<HTMLDivElement> {
@@ -62,11 +71,11 @@ import SimpleJsSliderView from './view/SimpleJsSliderView';
     updateSettings(sliderSettings: ISliderSettings): void {
       $(this).data().model.updateSettings(sliderSettings);
     },
-    register(callback: () => void): void {
-      $(this).data().model.register('modelIsUpdated', callback);
+    register(args: APIObserverArgs<ModelEvents>): void {
+      $(this).data().model.register(args.event, args.callback);
     },
-    unsubscribe(callback: () => void): void {
-      $(this).data().model.register('modelIsUpdated', callback);
+    unsubscribe(args: APIObserverArgs<ModelEvents>): void {
+      $(this).data().model.unsubscribe(args.event, args.callback);
     },
   };
 
@@ -80,9 +89,9 @@ import SimpleJsSliderView from './view/SimpleJsSliderView';
       method = methods[action].call(this, options);
     } else if (isSliderSettings(action)) {
       method = methods.init.call(this, action);
-    } else if (action === 'register' && typeof options === 'function') {
+    } else if (action === 'register' && isAPIObserverArgs(options)) {
       method = methods[action].call(this, options);
-    } else if (action === 'unsubscribe' && typeof options === 'function') {
+    } else if (action === 'unsubscribe' && isAPIObserverArgs(options)) {
       method = methods[action].call(this, options);
     } else if (action === 'getSettings') {
       method = methods[action].call(this);

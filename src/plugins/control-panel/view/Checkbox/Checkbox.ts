@@ -53,7 +53,7 @@ class Checkbox extends Observer<PanelControlEvents> {
   private handleCheckboxChange(): void {
     this.label.classList.toggle('checkbox__label_checked');
 
-    this.notify('PanelControlIsUpdated', '');
+    this.notify('panelControlIsUpdated', '');
   }
 }
 

@@ -15,14 +15,6 @@ interface ISliderSettings {
   thumbTwoValue: number;
 }
 
-type SimpleJSSliderAPIMethods = {
-  init: (options?: ISliderSettings) => JQuery<HTMLDivElement>;
-  getSettings: () => ISliderSettings;
-  updateSettings: (sliderSettings: ISliderSettings) => void;
-  register: (callback: () => void) => void;
-  unsubscribe: (callback: () => void) => void;
-};
-
 interface ISubjectEvents {
   [key: string]: () => void;
 }
@@ -106,6 +98,19 @@ type UIControlEvents = {
   clickToTrack: IPosition;
 };
 
+type APIObserverArgs<T> = {
+  event: keyof T;
+  callback: Subscriber<T>;
+};
+
+type SimpleJSSliderAPIMethods = {
+  init: (options?: ISliderSettings) => JQuery<HTMLDivElement>;
+  getSettings: () => ISliderSettings;
+  updateSettings: (sliderSettings: ISliderSettings) => void;
+  register: (args: APIObserverArgs<ModelEvents>) => void;
+  unsubscribe: (args: APIObserverArgs<ModelEvents>) => void;
+};
+
 interface IObserver<T extends Record<string, unknown>> {
   register<K extends keyof T>(event: K, func: Subscriber<T>): void;
   unsubscribe<K extends keyof T>(event: K, func: Subscriber<T>): void;
@@ -117,7 +122,7 @@ interface ISimpleJsSliderModel extends IObserver<ModelEvents> {
   getThumbsPositions(): IThumbsParams;
   getThumbValues(): IThumbsValues;
   getPointsParams(): IPointParams[];
-  updateSettings(settingnulls: ISliderSettings): void;
+  updateSettings(settings: ISliderSettings): void;
 }
 
 interface ISimpleJsSliderView extends IObserver<ViewEvents> {
@@ -158,6 +163,7 @@ export {
   ViewEvents,
   UIControlEvents,
   Subscriber,
+  APIObserverArgs,
   ISliderSettings,
   ISubjectEvents,
   IThumbsValues,

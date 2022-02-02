@@ -20,7 +20,7 @@ interface IGroupElements {
 
 type PanelModelEvents = { sliderIsUpdated: ISliderSettings };
 type PanelViewEvents = { controlPanelDataUpdated: ISliderSettings };
-type PanelControlEvents = { PanelControlIsUpdated: string };
+type PanelControlEvents = { panelControlIsUpdated: string };
 
 export {
   IRadioParams,

@@ -27,8 +27,18 @@ class ControlPanelModel extends Observer<PanelModelEvents> {
   }
 
   private subscribeToEvents() {
-    this.slider.simpleJsSlider('register', (args: ISliderSettings) => {
-      this.handleSliderUpdate(args);
+    this.slider.simpleJsSlider('register', {
+      event: 'settingsIsUpdated',
+      callback: (args: ISliderSettings) => {
+        this.handleSliderUpdate(args);
+      },
+    });
+
+    this.slider.simpleJsSlider('register', {
+      event: 'modelIsUpdated',
+      callback: (args: ISliderSettings) => {
+        this.handleSliderUpdate(args);
+      },
     });
   }
 }

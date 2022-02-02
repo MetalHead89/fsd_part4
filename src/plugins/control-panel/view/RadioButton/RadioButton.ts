@@ -72,7 +72,7 @@ class RadioButton extends Observer<PanelControlEvents> {
       }
     });
 
-    this.notify('PanelControlIsUpdated', '');
+    this.notify('panelControlIsUpdated', '');
   }
 
   private static generateName(name: string): string {
