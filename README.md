@@ -197,23 +197,32 @@ $(sliderWrapper).simpleJsSlider('updateSettings', sliderSettings);
 *Подписка на обновление состояния слайдера*
 
 ```
-this.slider.simpleJsSlider('register', (args: ISliderSettings) => {
-  callback(sliderState);
+$(sliderWrapper).simpleJsSlider('register', {
+  event: 'settingsIsUpdated',
+  callback: (sliderState: ISliderSettings) => {
+    handleSliderUpdate(sliderState);
+  },
 });
 ```
 
-где callback - метод, который будет выполняться после того, как было изменено состояние слайдера;  
+где event - событие на которое необходимо подписаться;
+callback - метод, который будет выполняться после того, как было изменено состояние слайдера;  
 sliderState - параметр, в который будет передано текущее состояние слайдера
 
 *Отписка от событий обновления состояния слайдера*
 
+
 ```
-this.slider.simpleJsSlider('unsubscribe', (args: ISliderSettings) => {
-  callback(sliderState);
+$(sliderWrapper).simpleJsSlider('unsubscribe', {
+  event: 'settingsIsUpdated',
+  callback: (sliderState: ISliderSettings) => {
+    handleSliderUpdate(sliderState);
+  },
 });
 ```
 
-где callback - метод, который выполняется после того, как было изменено состояние слайдера;
+где event - событие от которого необходимо отписаться;
+callback - метод, который не должен выполняться после того, как было изменено состояние слайдера;
 
 ## Архитектура
 
