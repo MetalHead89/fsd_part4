@@ -17,11 +17,6 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      'window.jQuery': 'jquery',
-    }),
     new StylelintPlugin({
       configFile: path.resolve(__dirname, '../stylelint.config.js'),
     }),
